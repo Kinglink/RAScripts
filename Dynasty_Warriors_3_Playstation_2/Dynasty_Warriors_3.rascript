@@ -1,7 +1,7 @@
 // Dynasty Warriors 3
 // #ID = 20722
 
-onePlayerString = "(1p)"
+onePlayerString = " (1p)"
 
 // Character enumeration
 ZhaoYun = 0x00
@@ -622,153 +622,6 @@ DifficultyLookup =
     0x02: "Hard"
 }
 
-
-TierOneWeapons = 
-[
-    IronSwordOwned,
-    BroadSwordOwned,
-    ScimitarOwned,
-    SpearOwned,
-    HalbredOwned,
-    HandAxeOwned,
-    ClubOwned,
-    TwinSabersOwned,
-    TwinRodsOwned,
-    MaceOwned,
-    WarFanOwned,
-    ChakramOwned,
-    BattleAxeOwned,
-    BronzeClawOwned,
-    IronFluteOwned,
-    IronRodOwned,
-    TonfaOwned,
-    DoubleVolugeOwned,
-    StaffOwned,
-    NanmanGauntletOwned,
-    BoomerangOwned,
-    TwinFansOwned,
-    BastardSwordOwned,
-    RapierOwned,
-]
-
-TierTwoWeapons = 
-[
-    SteelSwordOwned,
-    LongSwordOwned,
-    GreatScimitarOwned,
-    LongSpearOwned,
-    GreatHalbredOwned,
-    StrikeAxeOwned,
-    SpikedClubOwned,
-    WingSabersOwned,
-    SpiralRodsOwned,
-    GreatMaceOwned,
-    WarlordFanOwned,
-    CrescentChakramOwned,
-    WarAxeOwned,
-    SteelClawOwned,
-    SteelFluteOwned,
-    SteelRodOwned,
-    StuddedTonfaOwned,
-    StrikeVoulgeOwned,
-    MirageStaffOwned,
-    BeastGauntletOwned,
-    HawkBoomerangOwned,
-    VioletFansOwned,
-    GreatSwordOwned,
-    SwiftRapierOwned,
-]
-
-TierThreeWeapons = 
-[
-    DragonSpearOwned,
-    BlueDragonOwned,
-    SnakeBladeOwned,
-    KirinSwordOwned,
-    BullOwned,
-    BoneCrushedOwned,
-    ElderSwordOwned,
-    EagleOwned,
-    WolfSlayerOwned,
-    GoldenOrbOwned,
-    WhiteFeatherOwned,
-    SwordOfHeavenOwned,
-    SkyPiercerOwned,
-    LunaChakramOwned,
-    GoldDragonOwned,
-    LoneWolfOwned,
-    KingWolfOwned,
-    StarSwordOwned,
-    MasterSwordOwned,
-    SteelStallionOwned,
-    SageSwordOwned,
-    DemonSwordOwned,
-    DragonBladeOwned,
-    BlackFeatherOwned,
-    TigerHookOwned,
-    RiverMasterOwned,
-    VaporOwned,
-    StaffOfFireOwned,
-    DestroyerOwned,
-    PeacockClawOwned,
-    MoonFluteOwned,
-    ShadowRodOwned,
-    ConquerorOwned,
-    DoubleStarOwned,
-    StaffOfWindOwned,
-    BeastMasterOwned,
-    FireWheelOwned,
-    BeautyOwned,
-    GraceOwned,
-    HolyAvengerOwned,
-    CelestialBladeOwned,
-]
-
-TierFourWeapons = 
-[
-    FierceDragonOwned, 
-    BlueMoonDragonOwned, 
-    ViperBladeOwned, 
-    KirinFangOwned, 
-    MadBullOwned, 
-    StoneCrusherOwned, 
-    AncientsSwordOwned, 
-    FalconOwned, 
-    TigerSlayerOwned, 
-    GoldGlobeOwned, 
-    PeacockFeatherOwned, 
-    WrathOfHeavenOwned, 
-    SkyScorcherOwned, 
-    SolChakramOwned, 
-    GoldMoonDragonOwned, 
-    SavageWolfOwned, 
-    MasterWolfOwned, 
-    GrandStarOwned, 
-    GrandMasterOwned, 
-    SteelDragonOwned, 
-    OracleSwordOwned, 
-    DemonFangOwned, 
-    DragonBreathOwned, 
-    DarkFeatherOwned, 
-    WhiteTigerOwned, 
-    SeaMasterOwned, 
-    BlinkOwned, 
-    VolcanoStaffOwned, 
-    MarauderOwned, 
-    PeacockTalonOwned, 
-    DarkMoonFluteOwned, 
-    BlackShadowOwned, 
-    OverlordOwned, 
-    DoubleCometOwned, 
-    TornadoStaffOwned, 
-    KingOfBeastsOwned, 
-    MagmaWheelOwned, 
-    TrueBeautyOwned, 
-    TrueGraceOwned, 
-    FuXisSwordOwned, 
-    NuWasRapierOwned, 
-]
-
 // Helper function 
 function ContainsKey(dictionary, key_name)
 {
@@ -776,9 +629,6 @@ function ContainsKey(dictionary, key_name)
         if(key == key_name) return true
     return false
 }
-
-
-
 
 // $3ad288 (4-bit Low) Gameplay mode
 // 
@@ -2285,6 +2135,153 @@ function FuXisSwordOwned() => word(0x326106)
 //          See 0x003258fa for additional information
 function NuWasRapierOwned() => word(0x326116)
 
+// Needs to be here due to using the memory location names. 
+
+TierOneWeapons = 
+[
+    IronSwordOwned,
+    BroadSwordOwned,
+    ScimitarOwned,
+    SpearOwned,
+    HalbredOwned,
+    HandAxeOwned,
+    ClubOwned,
+    TwinSabersOwned,
+    TwinRodsOwned,
+    MaceOwned,
+    WarFanOwned,
+    ChakramOwned,
+    BattleAxeOwned,
+    BronzeClawOwned,
+    IronFluteOwned,
+    IronRodOwned,
+    TonfaOwned,
+    DoubleVolugeOwned,
+    StaffOwned,
+    NanmanGauntletOwned,
+    BoomerangOwned,
+    TwinFansOwned,
+    BastardSwordOwned,
+    RapierOwned,
+]
+
+TierTwoWeapons = 
+[
+    SteelSwordOwned,
+    LongSwordOwned,
+    GreatScimitarOwned,
+    LongSpearOwned,
+    GreatHalbredOwned,
+    StrikeAxeOwned,
+    SpikedClubOwned,
+    WingSabersOwned,
+    SpiralRodsOwned,
+    GreatMaceOwned,
+    WarlordFanOwned,
+    CrescentChakramOwned,
+    WarAxeOwned,
+    SteelClawOwned,
+    SteelFluteOwned,
+    SteelRodOwned,
+    StuddedTonfaOwned,
+    StrikeVoulgeOwned,
+    MirageStaffOwned,
+    BeastGauntletOwned,
+    HawkBoomerangOwned,
+    VioletFansOwned,
+    GreatSwordOwned,
+    SwiftRapierOwned,
+]
+
+TierThreeWeapons = 
+[
+    DragonSpearOwned,
+    BlueDragonOwned,
+    SnakeBladeOwned,
+    KirinSwordOwned,
+    BullOwned,
+    BoneCrushedOwned,
+    ElderSwordOwned,
+    EagleOwned,
+    WolfSlayerOwned,
+    GoldenOrbOwned,
+    WhiteFeatherOwned,
+    SwordOfHeavenOwned,
+    SkyPiercerOwned,
+    LunaChakramOwned,
+    GoldDragonOwned,
+    LoneWolfOwned,
+    KingWolfOwned,
+    StarSwordOwned,
+    MasterSwordOwned,
+    SteelStallionOwned,
+    SageSwordOwned,
+    DemonSwordOwned,
+    DragonBladeOwned,
+    BlackFeatherOwned,
+    TigerHookOwned,
+    RiverMasterOwned,
+    VaporOwned,
+    StaffOfFireOwned,
+    DestroyerOwned,
+    PeacockClawOwned,
+    MoonFluteOwned,
+    ShadowRodOwned,
+    ConquerorOwned,
+    DoubleStarOwned,
+    StaffOfWindOwned,
+    BeastMasterOwned,
+    FireWheelOwned,
+    BeautyOwned,
+    GraceOwned,
+    HolyAvengerOwned,
+    CelestialBladeOwned,
+]
+
+TierFourWeapons = 
+[
+    FierceDragonOwned, 
+    BlueMoonDragonOwned, 
+    ViperBladeOwned, 
+    KirinFangOwned, 
+    MadBullOwned, 
+    StoneCrusherOwned, 
+    AncientsSwordOwned, 
+    FalconOwned, 
+    TigerSlayerOwned, 
+    GoldGlobeOwned, 
+    PeacockFeatherOwned, 
+    WrathOfHeavenOwned, 
+    SkyScorcherOwned, 
+    SolChakramOwned, 
+    GoldMoonDragonOwned, 
+    SavageWolfOwned, 
+    MasterWolfOwned, 
+    GrandStarOwned, 
+    GrandMasterOwned, 
+    SteelDragonOwned, 
+    OracleSwordOwned, 
+    DemonFangOwned, 
+    DragonBreathOwned, 
+    DarkFeatherOwned, 
+    WhiteTigerOwned, 
+    SeaMasterOwned, 
+    BlinkOwned, 
+    VolcanoStaffOwned, 
+    MarauderOwned, 
+    PeacockTalonOwned, 
+    DarkMoonFluteOwned, 
+    BlackShadowOwned, 
+    OverlordOwned, 
+    DoubleCometOwned, 
+    TornadoStaffOwned, 
+    KingOfBeastsOwned, 
+    MagmaWheelOwned, 
+    TrueBeautyOwned, 
+    TrueGraceOwned, 
+    FuXisSwordOwned, 
+    NuWasRapierOwned, 
+]
 // $326158: (8-bit) Zhao Yun's Stored Unlocked Status (Assumed)
 //          
 //          Note: Zhao Yun will be unlocked, even if this is 0 if no other character is available
@@ -2754,6 +2751,14 @@ MemoryLocationOfFirstInStageGeneralKill = 0x3ad12f
 LengthOfKilledOfficerArray = 20
 SizeOfKilledGenerals = 1  // 1 byte
 
+
+// $5ff7b8: [8-bit] Stored value for the first General Killed for the first stage. This extends to the next 19 bytes for each additional named character killed. 
+//
+// 0xff if not set, 
+//
+// See 0x005ff7b7 for more information
+MemoryLocationOfPostGameGeneralKilledArrayFirstStage = 0x5ff7b8
+
 // 0x005ff7cc: (32-bit) The First Stage's KOs for the current musou mode.
 //
 // If the current player has beaten enough stages, this value will be set to what the main player has earned.  The second player KO total appears to be lost.  If the player hasn't beaten X stages this will be set to 0. 
@@ -2767,7 +2772,7 @@ MemoryLocationOfFirstStagesKOTotal = 0x5ff7cc
 // 
 // Note this can go stale on the main menu. 
 MemoryLocationOfSecondStagesKOTotal = 0x5ff7ec
-SizeOfStageDataForKOTotals = MemoryLocationOfSecondStagesKOTotal - MemoryLocationOfFirstStagesKOTotal
+SizeOfPostGameStageData = MemoryLocationOfSecondStagesKOTotal - MemoryLocationOfFirstStagesKOTotal
 
 // $382d90: (8-bit) Cutscene Index for Character Intro/Defeat scene. 
 // 
@@ -2847,7 +2852,7 @@ function FirstPlayerCharacterIndex() => byte(0x003ad178)
 // 0x01=Two Players are enabled
 function TwoPlayerIndicator() => byte(0x3ad1f8)
 
-// $18c0c (8-bit)Save  Indicator
+// $18c0c (8-bit) Save  Indicator
 // 
 // An indicator that gets set to 0x1 if and only if the game is either saving or loading the game.
 // 
@@ -2874,15 +2879,23 @@ function LoadGameIndicator() => byte(0x0036663c)
 VALUE_DESIRED_FOR_LOAD_GAME_PROTECTION = 0x00
 
 // $3661a4(16-bit) Timer for demo on the main menu.  
-
+//
 //This does not appear to be cleared in game, possibly reused, however it is set to 0x0395 every time you're in the demo 
-
-//Note: Currently only using it for real Presence.  
 function DemoTimerOnMainMenu() => byte(0x3661a4)
 
 DELAY_FOR_DEMO_MODE = 0x0395
 
-function inDemoCurrently() => DemoTimerOnMainMenu() == DELAY_FOR_DEMO_MODE
+// $36639c: (8-bit) Cycle frames for Press Start 
+//
+// Cycles between 0x00 and 0x7f and then resets to 0x00.  0x40 is at full visibility, 0x00 and 0x7f is at invisible. 
+//
+// Note: this will be left in what ever state the demo leaves it until the player enters a stage (Goes through the pre-stage screens and clicks "Start"
+function PressStartCycle() => byte(0x0036639c)
+
+// If this is a demo, it'll only be 0x00 for one frame.  There is A VERY small chance (1 in 128) that the demo ends on a 0x00.  
+// If so, this will break, but 1/128th of the time the press start screen might display the triggers is an acceptable loss.  
+// Other possibilities are a little flimsier, where as this can be verified to be true easier. 
+function inDemoCurrently() => PressStartCycle() != 0x00 || prev(PressStartCycle()) !=0x00
 
 // $36595c (8-bit) Main Menu detection
 // 
@@ -2907,6 +2920,19 @@ function SecretEndingIndentifier() => dword(0x366bcc)
 
 function isSecretEndingPlaying() => SecretEndingIndentifier() == 0x01b129e0
 
+// $365ce8: (8-bit) "FMV" cutscene indicator. 
+//
+// 0x00: Normal gameplay/menus.  In engine cutscenes also use 0x00
+// 0x01: FMV cutscenes, Before levels, and opening scenes, as well as anything in the movie menu. 
+//
+// Really only using to avoid add a value check to the Secret cutscene.
+//
+// NOTE: THis sometimes hits 0x01 when changing menus, likely because a FMV is quickly played there. 
+function FMVCutsceneIndicator() => byte(0x365ce8)
+
+FMV_CUTSCENE_INDICATOR_VALUE = 0x01
+
+function isFMVCutscenePlaying() => FMVCutsceneIndicator() == FMV_CUTSCENE_INDICATOR_VALUE
 
 // $620d83: (8-bit) End of Stage result 
 // 
@@ -3009,10 +3035,17 @@ function checkIfGeneralKilledByFirstPlayer(characterID)
     return possibleHits
 }
 
+function checkNumberGeneralKilledInternal(FirstGeneralMemoryLocation, targetGeneralIndex)
+{
+    // This should probably be a max of 20 for targetgeneralIndex but this will allow you to put any number in, you do you boo.
+    return byte(FirstGeneralMemoryLocation + (SizeOfKilledGenerals * targetGeneralIndex)) != NoGeneral 
+}
+
 function checkNumberGeneralKilled(index)  
 {
     // Note: this doesn't check less than.  You can do checkNumberGeneralKilled(3) && !checkNumberGeneralKilled(4)
-    return byte(MemoryLocationOfFirstInStageGeneralKill + (SizeOfKilledGenerals * index)) != NoGeneral 
+    // Retrofit this to use checkNumberGeneralKilledInternal, that's why it's a bit of a duplication
+    return checkNumberGeneralKilledInternal(MemoryLocationOfFirstInStageGeneralKill, index) 
 }
 
 // Note this is frames, not seconds. 
@@ -3046,7 +3079,7 @@ function itemJustUnlocked(itemMemoryLocation)
            itemNotUnlockedLastFrame(itemMemoryLocation)
 }
 
-VALUE_FOR_NORMAL_MODE = 0x02
+VALUE_FOR_NORMAL_MODE = 0x01
 VALUE_FOR_HARD_MODE = 0x02
 
 function normalOrHardCheck() => InGameDifficultySelection() >= VALUE_FOR_NORMAL_MODE
@@ -3188,7 +3221,8 @@ function createUnlockFourthWeaponAchievement(name, description, weaponIndex, ach
     // weaponMemoryLocation: 16-bit Memory location for the current weapon target
 
     targetTrigger = (MusouModeOrFreeMode()) &&
-                wonStageCheck() && 
+                trigger_when(wonStageCheck()) && 
+                !onMainMenu() &&
                 !isTwoPlayerMode() &&
                 saveProtection()
                 
@@ -3218,8 +3252,9 @@ function createUnlockRareItemAchievement(name, description, itemIndex, achieveme
     // points: How many points the achievement is worth
     // itemMemoryLocation: 8-bit Memory location for the current item target
     targetTrigger = MusouModeOrFreeMode() &&
-                    wonStageCheck() && 
+                    trigger_when(wonStageCheck()) && 
                     !isTwoPlayerMode() &&
+                    !onMainMenu() &&
                     saveProtection()
 
     possibleHits = false 
@@ -3275,11 +3310,11 @@ function characterDefinition(
         
         if(musouModeObject["name"] == "")
         {
-            musouModeObject["name"] = format("Missing Name {0} Beat Musou Mode ", name)
+            musouModeObject["name"] = format("Missing Name {0} Beat Musou Mode", name)
         }
         if(musouModeObject["description"] == "")
         {
-            musouModeObject["description"] = format("Beat {0}'s Musou Mode on any difficulty ", name)
+            musouModeObject["description"] = format("Beat {0}'s Musou Mode on any difficulty", name)
         }
         array_push(musouMode, musouModeObject)
 
@@ -3295,7 +3330,7 @@ function characterDefinition(
         
         if(hardMusouModeObject["name"] == "")
         {
-            hardMusouModeObject["name"] = format("Missing Name {0} Beat Hard Musou Mode ", name)
+            hardMusouModeObject["name"] = format("Missing Name {0} Beat Hard Musou Mode", name)
         }
         if(hardMusouModeObject["description"] == "")
         {
@@ -3470,7 +3505,7 @@ characterDefinition( characterIndex = MaChao,
 characterDefinition( characterIndex = HuangZhong, 
                      unlockMemoryLocation = HuangZhongUnlocked(), 
                      musouModeAchievementID = 370308, 
-                     musouModeName = "Marquis Gang",
+                     musouModeName = "Marquis Gang ",
                      hardMusouModeAchievementID = 370340, 
                      hardMusouModeName = "King of Hanzhong",
                      unlockAchievementID = 370435, 
@@ -3802,7 +3837,7 @@ createUnlockFourthWeaponAchievement("Fu Xi's Sword",
                                     "Unlock Fu Xi's Sword", 
                                     FuXisSword,
                                     370490)
-createUnlockFourthWeaponAchievement("Nu Wa's' Rapier", 
+createUnlockFourthWeaponAchievement("Nu Wa's Rapier", 
                                     "Unlock Nu Wa's Rapier", 
                                     NuWasRapier,
                                     370491)
@@ -3925,8 +3960,8 @@ achievement("Collect All Common Items",
 )
 
 // 1 Collect Minor items and get max levels of them. 
-achievement("They Can’t Handle Any More Power",
-            "Collect the strongest version of all common items", 
+achievement("[VOID] They Can’t Handle Any More Power",
+            "The level of grind on this is insane.  Collect the strongest version of all common items", 
             25,
             trigger = MusouModeOrFreeMode() &&
                       didntpreviouslyMaxItems(NormalItems) &&   // As long as we don't already have them all 
@@ -4205,7 +4240,8 @@ achievement("Nothing Gonna Stop Me [m]",
                       trigger_when(wonStageCheck()) &&
                       firstPlayerNoExperience() &&
                       !isTwoPlayerMode() &&
-                      saveProtection(),
+                      saveProtection() &&
+                      !inDemoCurrently(), // This shows up in demos if you set the difficulty to hard. 
             id = 370360
                       
 )
@@ -4270,10 +4306,11 @@ achievement("Diaochan Eclipses the Moon",
 // Nanman Jackpot - Defeat 7 Officers as Meng Huo during Battle of Nanman with the last being Zhuge Liang.
 // Meng Huo was famously captured by Zhuge Liang during the Southern Campaign (Battle of Nanman) Seven Times.
 achievement("Nanman Jackpot",
-            "Defeat exactly 7 Officers as Meng Huo during Battle of Nanman in Free Mode"  + onePlayerString, 
+            "Defeat exactly 7 Officers as Meng Huo during Battle of Nanman with the Nanman Forces"  + onePlayerString + " (Kills must be done by the player, bodyguard and other kills will not count)", 
             2,
             trigger = MusouModeOrFreeMode() &&
-                      checkStageID(BattleAtWuZhangPlainsStageID) &&
+                      checkStageID(NanmanCampaignStageID) &&
+                      checkFactionID(NanmanForcesFactionID) &&
                       checkFirstPlayerCharacterIndex(MengHuo) &&
                       !checkNumberGeneralKilled(8) && 
                       !onMainMenu() &&
@@ -4293,8 +4330,7 @@ achievement("The Fire Deity Incinerates Chi Bi",
                       checkFirstPlayerCharacterIndex(ZhuRong) &&
                       checkStageID(BattleOfChiBiStageID) &&
                       ( 
-                        checkFactionID(LiuBeiForcesFactionID) ||
-                        checkFactionID(SunQuanForcesFactionID)
+                        checkFactionID(AlliedForcesFactionID)
                       ) &&
                       !onMainMenu() &&
                       trigger_when(
@@ -4307,7 +4343,7 @@ achievement("The Fire Deity Incinerates Chi Bi",
 // He Dong What? - Complete The Battle of Changban (Liu Bei) as Dong Zhuo
 // Dong Zhuo I've had some trouble thinking of anything for him, so I came up with the idea of playing him during a stage that is the opposite of his personality of being the most evil guy. The Battle of Changban is the battle where Zhao Yun famously rescued Liu Shan from Cao Cao's army.
 achievement("He Dong What?",
-            "Complete The Battle of Chang Ban on Liu Bei's Side in Free Mode and save the heir while playing Dong Zhuo" + onePlayerString, 
+            "Complete The Battle of Chang Ban on Liu Bei's Side in Free Mode while playing Dong Zhuo" + onePlayerString, 
             2,
             trigger = MusouModeOrFreeMode() &&
                       checkFirstPlayerCharacterIndex(DongZhuo) &&
@@ -4339,28 +4375,31 @@ achievement("The Way of Peace",
 )
 
 achievement("I Brought You Into This World, Now I’m Taking You Out of It",
-            "Finish a Challenge mode Endurance with Fu Xi killing at least 1000 enemies" + onePlayerString, 
-            3,
+            "Finish a Challenge mode Endurance with Fu Xi or Nu Wa killing at least 1000 enemies" + onePlayerString, 
+            5,  // Grindy but not hard. 
             trigger = ChallengeModeOnly() &&
                       CurrentCutsceneLevelIndex() == ChallengeModeEnduranceLevelCutsceneID &&               
                       !onMainMenu() &&
                       trigger_when( 
                         firstPlayerKills() >= 1000 &&
                         wonStageCheck()) &&
-                      checkFirstPlayerCharacterIndex(FuXi) &&
+                      (
+                        checkFirstPlayerCharacterIndex(FuXi) ||
+                        checkFirstPlayerCharacterIndex(NuWa)
+                      ) &&
                       !isTwoPlayerMode(),
             id = 370369
 )
 
 
-achievement("Once the God of Creation, Now Destruction",
-            "Finish a Challenge mode Time Attack with Nu Wa in less than 5 minutes" + onePlayerString, 
-            1,
+achievement("Raining Death",
+            "Finish a Challenge mode Time Attack in less than 4 minutes" + onePlayerString, 
+            10, // Time attack time is VERY tight.  If you look up videos, be careful, XL has players gain levels, DW 3 does not.   This could even be 25.
             trigger = ChallengeModeOnly() &&
                       CurrentCutsceneLevelIndex() == ChallengeModeTimeAttackLevelCutsceneID &&               
                       !onMainMenu() &&
                       trigger_when( wonStageCheck() ) &&
-                      getFramesElapsed() <= (5 * 60) * 60 &&  // 5 minutes, 19 seconds.  But in frame time. 
+                      getFramesElapsed() <= (4 * 60) * 60 &&  // 4 minutes.  But in frame time. 
                       !isTwoPlayerMode(),
             id = 370370
 )
@@ -4392,7 +4431,7 @@ function CreateAchievementsForStage(stage, achievementID, killLeaderboardsID, fa
     // state: a dictionary of stage information. 
     
     achievement(format("Ultimate Challenge: {0}", StageLookup[stage["ID"]]), 
-                format("Beat {0} on hard difficulty without using an in game save.  This can Be done in Free mode" + onePlayerString, StageLookup[stage["ID"]]),
+                format("Beat {0} on hard difficulty without using an in-game save.  This can be done in Free mode" + onePlayerString, StageLookup[stage["ID"]]),
                 5, 
                 trigger =                                         MusouModeOrFreeMode() &&
                         hardModeCheck() &&
@@ -4457,7 +4496,7 @@ function CreateAchievementsForStageFaction(stage, factionID, achievementID, kill
         factionName = FactionNameLookup[factionID]
         factionForces = FactionForcesLookup[factionID]
         achievement( format("Ultimate Challenge: {0}({1})", StageLookup[stage["ID"]], factionName), 
-                    format("Beat {0} with the {1} on hard difficulty without using an in game save.  This can Be done in Free mode" + onePlayerString, StageLookup[stage["ID"]], factionForces),
+                    format("Beat {0} with the {1} on hard difficulty without using an in-game save.  This can be done in Free mode" + onePlayerString, StageLookup[stage["ID"]], factionForces),
                     5, 
                     trigger = MusouModeOrFreeMode() &&
                             hardModeCheck() &&
@@ -4551,27 +4590,29 @@ for stage in stageArray
     }
 }
 
-achievement( format("So That’s What Everyone Else Was Doing"), 
-            format("Play the secret ending for independent officers"),
+achievement( 
+            "So That’s What Everyone Else Was Doing", 
+            "Play the secret ending for independent officers",
             1, 
             // This could be harder, but really if this is playing in any format, this is the video, and I believe it only plays from opening edit. 
-            trigger = isSecretEndingPlaying(),
+            trigger = isSecretEndingPlaying() &&
+                      isFMVCutscenePlaying(),
             id = 370421
 )
 
 
 // “Beat a level without letting your health drop below 50 percent”  Could be done with UI elements, but considering using a pointer here just to demonstrate that, even if it’s a  less efficent way to do so. 
 achievement( format("None of You Are Even Half as Good as Me"), 
-             format("Beat a level with out letting your health drop below 50 percent on Normal or Hard" + onePlayerString),
+             format("Beat a level with out letting your health drop below 50 percent on Normal or Hard, or using an in-game save" + onePlayerString),
              3, 
              trigger = normalOrHardCheck() &&
-                       !onMainMenu() &&
                        trigger_when(wonStageCheck()) &&
                        !isTwoPlayerMode() &&
                        once(getFramesElapsed() == 1)  && // make sure 1 second has elapsed at some point. 
                        never(firstPlayerHalfHP()) &&
                        never(!(MusouModeOnly() || FreeModeOnly())) &&
-                       !inDemoCurrently(),
+                       never(onMainMenu()) &&
+                       !inDemoCurrently(), // This shows up in demos if you set the difficulty to hard or Normal. 
             id = 370422
                            
             )
@@ -4581,7 +4622,19 @@ function getMusouModeTotalKOs()
 {
     // IT's acceptable to look at stage 8,9,10 even if we only need 7, because all data is wiped between musous/loads
     // This will almost definitely not be above a word, but it's a dword space.
-    return sum_of(range(0, 10 - 1), target_index => dword(MemoryLocationOfFirstStagesKOTotal + SizeOfStageDataForKOTotals * target_index))
+    return sum_of(range(0, 10 - 1), target_index => dword(MemoryLocationOfFirstStagesKOTotal + SizeOfPostGameStageData * target_index))
+}
+
+function getMusouModeGeneralKills( musouStages )
+{
+    // This will find all the Generals killed 
+    // This must respect how ever many musou stages are complete.  Additional stages are all set to 0x00. 
+
+    
+   totalChecks = musouStages * 20
+   return tally_of(range(0, totalChecks - 1), totalChecks, targetGeneralIndex => checkNumberGeneralKilledInternal(MemoryLocationOfPostGameGeneralKilledArrayFirstStage + SizeOfPostGameStageData * (targetGeneralIndex / 20), 
+                                                                                 targetGeneralIndex % 20 ))
+       
 }
 
 leaderboard(
@@ -4601,9 +4654,31 @@ leaderboard(
     ),
     cancel = always_false(),
     submit = always_true(),
-    value = getMusouModeTotalKOs(),
+    value = measured(getMusouModeTotalKOs()),
     format = "VALUE",
     id = 82370
+)
+
+leaderboard(
+    title = format("Most General kills for a 7 Stage Musou Mode"),
+    description = format("Get the most total kills of general (or named units) across each stage of musou mode (No Sun Jian, Liu Bei, or Cao Cao, only first player kills are counted, duplicate kills in the same level are not counted.)"),
+    start = 
+    (
+        CurrentStagesCompleteMusouMode() == 7 && 
+        prev(CurrentStagesCompleteMusouMode()) == 6 &&
+        !checkFirstPlayerCharacterIndex(SunJian) &&
+        !checkFirstPlayerCharacterIndex(CaoCao) &&
+        !checkFirstPlayerCharacterIndex(LiuBei) &&
+        wonStageCheck() && 
+        !isTwoPlayerMode() &&
+        saveProtection() // Doubt this is needed, but why not? 
+        
+    ),
+    cancel = always_false(),
+    submit = always_true(),
+    value = measured(getMusouModeGeneralKills(7)),
+    format = "VALUE",
+    id = 82374
 )
 
 leaderboard(
@@ -4631,6 +4706,30 @@ leaderboard(
 )
 
 leaderboard(
+    title = format("Most General kills for a 10 Stage Musou Mode"),
+    description = format("Get the most total kills of general (or named units) across each stage of musou mode (No Sun Jian, Liu Bei, or Cao Cao, only first player kills are counted, duplicate kills in the same level are not counted.)"),
+    start = 
+    (
+        CurrentStagesCompleteMusouMode() == 10 && 
+        prev(CurrentStagesCompleteMusouMode()) == 9 &&
+        (
+            checkFirstPlayerCharacterIndex(SunJian) ||
+            checkFirstPlayerCharacterIndex(CaoCao) ||
+            checkFirstPlayerCharacterIndex(LiuBei) 
+        ) &&
+        wonStageCheck() && 
+        !isTwoPlayerMode() &&
+        saveProtection() // Doubt this is needed, but why not? 
+        
+    ),
+    cancel = always_false(),
+    submit = always_true(),
+    value = getMusouModeGeneralKills(10),
+    format = "VALUE",
+    id = 82375
+)
+
+leaderboard(
     title = format("Most kills in Challenge Mode Endurance"),
     description = format("Get the most kills in a single Challenge Mode Endurance run" + onePlayerString),
     start = 
@@ -4653,7 +4752,7 @@ leaderboard(
     start = 
     (
         ChallengeModeOnly() &&
-        CurrentCutsceneLevelIndex() == ChallengeModeEnduranceLevelCutsceneID &&               
+        CurrentCutsceneLevelIndex() == ChallengeModeTimeAttackLevelCutsceneID &&               
         justWonStageCheck() &&
         !isTwoPlayerMode()
         
@@ -4681,6 +4780,7 @@ leaderboard(
 rich_presence_conditional_display(GameplayMode() == MainMenu || isOptionMode(), "In Menus")
 
 // Demo check 
+// Note: This will misfire sometimes, due to watching a demo, however once the player enters the real game, this will be cleaned up. 
 rich_presence_conditional_display(inDemoCurrently(), "Watching Demos")
 
 // Versus mode             is playing Versus.
@@ -4765,7 +4865,6 @@ rich_presence_display("In Menus.") //Intentionally slightly different to say "is
 // Achievements written 
 //////////////////////////////
 
-// 1 Collect Minor items and get max levels of them. 
 
 // Diaochan Eclipses The Moon - Complete -Insert Night Time Stage- as Diaochan in Free Mode
 // Diaochan was part of the four great beauties of Ancient China and each had an idiom to their name with her's being "Diaochan eclipses the moon"
@@ -4806,9 +4905,16 @@ rich_presence_display("In Menus.") //Intentionally slightly different to say "is
 // “A better version of History”  Kill Shamoke with Gan Ning.  (Shamoke has been a focus of the fan community for a long time, if this can be in the game, well it’ll give true fans a chuckle I think) 
 // When I do another and make a special achievement for EVERY character, maybe. 
 
+// Guan Yu At Fan Castle cutscene.  There's a secret cutscene where Guan Yu references fighting himself. 
+// Problem is it's hard to identify the exact cutscene.  It's the opening cutscene, but if you choose Wei you get a normal Wei cutscene, 
+// and it's hard to differenciate those factions. They are both listed as "Allied Factions"  Also it's a one-off. 
+
 //////////////////////////////
 // Achievements killed
 //////////////////////////////
+
+// 1 Collect Minor items and get max levels of them. 
+// Tested, fully working, but holy crap, after playing a ton of levels I haven't maxed a single item yet.    For all 13?  Not fun. 
 
 // Full Musou mode low kill counts.   I wanted this so much, but you can't prove the player has beaten all the levels with out a second player.  
 // You'd have to force people to play the entire musou mode single player, no saving or loading, no deaths or failure.  That would suck.
@@ -4831,3 +4937,9 @@ rich_presence_display("In Menus.") //Intentionally slightly different to say "is
 
 // Missable achievements: Fourth Weapon (You can't unlock a fourth weapon), and beating hard mode with a 0 experience character.
 // Technically unlocking characters IS missable but only if you use a cheat code. 
+
+// Most (unique) Officers killed for 7 stage and 10 stage
+// Most average kills  in Challenge mode endurance.  (500 kills minimum)
+
+// Known bug:  Nothing Gonna Stop Me trigger can show up in the demo screens.  It has been dealt with EXCEPT when someone uses a fast restart (Start + select) and then the custscene demo comes up before the gameplay demo. 
+// Not fixing currently as it's unlikely to happen outside of a very specific set of steps, requiring hard mode and a fast restart, and will not be able to trigger there anyways. 
