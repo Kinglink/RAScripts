@@ -2896,6 +2896,7 @@ function PressStartCycle() => byte(0x0036639c)
 // If so, this will break, but 1/128th of the time the press start screen might display the triggers is an acceptable loss.  
 // Other possibilities are a little flimsier, where as this can be verified to be true easier. 
 function inDemoCurrently() => PressStartCycle() != 0x00 || prev(PressStartCycle()) !=0x00
+function inDemoRP() => PressStartCycle() != 0x00
 
 // $36595c (8-bit) Main Menu detection
 // 
@@ -2961,7 +2962,10 @@ function prevEndOfStagehit() => prev(endOfStageIndicator()) == VALUE_FOR_END_OF_
 function wonStageCheck() =>  currentFrameEndOfStageHit() && endOfStageResult()
 
 // For things like kill counts, that might be triggered just by being in the level  
-function justWonStageCheck() => wonStageCheck() && !prevEndOfStagehit() 
+// Don't use this for a trigger, instead use triggerJustWonStageCheck()
+function justWonStageCheck() => wonStageCheck() && !prevEndOfStagehit()
+
+function triggerJustWonStageCheck() => trigger_when(wonStageCheck()) && !prevEndOfStagehit() 
 
 function saveProtection() => SaveIndicator() != VALUE_FOR_SAVE_LOAD_OPERATION // && LoadGameIndicator() == VALUE_DESIRED_FOR_LOAD_GAME_PROTECTION   Removed because it blocks musou mode completion.    But also with new currentFrameEndOfStageHit is better than this. 
 
@@ -3221,7 +3225,7 @@ function createUnlockFourthWeaponAchievement(name, description, weaponIndex, ach
     // weaponMemoryLocation: 16-bit Memory location for the current weapon target
 
     targetTrigger = (MusouModeOrFreeMode()) &&
-                trigger_when(wonStageCheck()) && 
+                triggerJustWonStageCheck() && 
                 !onMainMenu() &&
                 !isTwoPlayerMode() &&
                 saveProtection()
@@ -3252,7 +3256,7 @@ function createUnlockRareItemAchievement(name, description, itemIndex, achieveme
     // points: How many points the achievement is worth
     // itemMemoryLocation: 8-bit Memory location for the current item target
     targetTrigger = MusouModeOrFreeMode() &&
-                    trigger_when(wonStageCheck()) && 
+                    triggerJustWonStageCheck() && 
                     !isTwoPlayerMode() &&
                     !onMainMenu() &&
                     saveProtection()
@@ -3504,7 +3508,7 @@ characterDefinition( characterIndex = MaChao,
                      hardMusouModeName = "Marquis Wei") // DW2 Unlock
 characterDefinition( characterIndex = HuangZhong, 
                      unlockMemoryLocation = HuangZhongUnlocked(), 
-                     musouModeAchievementID = 370308, 
+                     musouModeAchievementID = 370342, 
                      musouModeName = "Marquis Gang ",
                      hardMusouModeAchievementID = 370340, 
                      hardMusouModeName = "King of Hanzhong",
@@ -4237,7 +4241,7 @@ achievement("Nothing Gonna Stop Me [m]",
             trigger = MusouModeOrFreeMode() &&
                       hardModeCheck() &&
                       !onMainMenu() &&
-                      trigger_when(wonStageCheck()) &&
+                      triggerJustWonStageCheck() &&
                       firstPlayerNoExperience() &&
                       !isTwoPlayerMode() &&
                       saveProtection() &&
@@ -4261,7 +4265,7 @@ achievement("Pacifist ... Mostly",
 
 // “True Legend of the Three Kingdoms”  Beat 1000 enemies on a single level on Hard difficulty.
 achievement("True Legend of the Three Kingdoms",
-            "Earn 1000 Kills on Hard Mode" + onePlayerString, 
+            "Earn 1000 Kills on Hard Mode and finish the stage " + onePlayerString, 
             5,
             trigger = MusouModeOrFreeMode() &&
                       hardModeCheck() &&
@@ -4281,10 +4285,8 @@ achievement("All According to Wang Yun’s Plan",
                       checkFactionID(AlliedForcesFactionID) &&
                       !checkIfGeneralKilledByFirstPlayer(DiaoChan) &&
                       !onMainMenu() &&
-                      trigger_when( 
-                        checkIfGeneralKilledByFirstPlayer(DongZhuo) &&
-                        wonStageCheck()
-                        ) &&                       
+                      trigger_when(checkIfGeneralKilledByFirstPlayer(DongZhuo)) &&
+                      triggerJustWonStageCheck() && 
                       !isTwoPlayerMode(),
             id = 370363
 )
@@ -4298,7 +4300,7 @@ achievement("Diaochan Eclipses the Moon",
             trigger = MusouModeOrFreeMode() &&
                       checkStageID(BattleAtWuZhangPlainsStageID) &&
                       checkFirstPlayerCharacterIndex(DiaoChan) &&
-                      wonStageCheck()&&
+                      justWonStageCheck()&&
                       !isTwoPlayerMode(),
             id = 370365
 )
@@ -4314,9 +4316,8 @@ achievement("Nanman Jackpot",
                       checkFirstPlayerCharacterIndex(MengHuo) &&
                       !checkNumberGeneralKilled(8) && 
                       !onMainMenu() &&
-                      trigger_when( 
-                        checkNumberGeneralKilled(7) && 
-                        wonStageCheck()) &&
+                      trigger_when(checkNumberGeneralKilled(7)) && 
+                      triggerJustWonStageCheck() &&
                       !isTwoPlayerMode(),
             id = 370366
 )
@@ -4350,7 +4351,7 @@ achievement("He Dong What?",
                       checkStageID(BattleOfChangBanStageID) &&
                       checkFactionID(LiuBeiForcesFactionID) &&
                       !onMainMenu() &&
-                      trigger_when(wonStageCheck()) &&
+                      triggerJustWonStageCheck() &&
                       !isTwoPlayerMode(),
             id = 370364
 )
@@ -4368,8 +4369,9 @@ achievement("The Way of Peace",
                       !onMainMenu() &&
                       trigger_when(
                         firstPlayerKills() == 1 &&
-                        checkIfGeneralKilledByFirstPlayer(HeJin) &&
-                        wonStageCheck()) &&
+                        checkIfGeneralKilledByFirstPlayer(HeJin)
+                        ) &&
+                      triggerJustWonStageCheck() &&
                       !isTwoPlayerMode(),
             id = 370368
 )
@@ -4380,9 +4382,8 @@ achievement("I Brought You Into This World, Now I’m Taking You Out of It",
             trigger = ChallengeModeOnly() &&
                       CurrentCutsceneLevelIndex() == ChallengeModeEnduranceLevelCutsceneID &&               
                       !onMainMenu() &&
-                      trigger_when( 
-                        firstPlayerKills() >= 1000 &&
-                        wonStageCheck()) &&
+                      trigger_when(firstPlayerKills() >= 1000) &&
+                      triggerJustWonStageCheck() &&
                       (
                         checkFirstPlayerCharacterIndex(FuXi) ||
                         checkFirstPlayerCharacterIndex(NuWa)
@@ -4398,7 +4399,7 @@ achievement("Raining Death",
             trigger = ChallengeModeOnly() &&
                       CurrentCutsceneLevelIndex() == ChallengeModeTimeAttackLevelCutsceneID &&               
                       !onMainMenu() &&
-                      trigger_when( wonStageCheck() ) &&
+                      triggerJustWonStageCheck() &&
                       getFramesElapsed() <= (4 * 60) * 60 &&  // 4 minutes.  But in frame time. 
                       !isTwoPlayerMode(),
             id = 370370
@@ -4411,9 +4412,9 @@ function createNormalPlayStageAchievement(stage, factionID, achievementID)
     achievement( format("{0} ({1})", StageLookup[stage["ID"]], factionName), 
                 format("Complete {0} as the {1}", StageLookup[stage["ID"]], factionForces),
                 1, 
-                trigger = MusouModeOrFreeMode() &&
+                trigger = FreeModeOnly() &&
                         !onMainMenu() &&
-                        trigger_when(wonStageCheck()) &&
+                        triggerJustWonStageCheck() &&
                         checkStageID(stage["ID"]) &&
                         checkFactionID(factionID) &&
                         !isTwoPlayerMode(),
@@ -4435,7 +4436,7 @@ function CreateAchievementsForStage(stage, achievementID, killLeaderboardsID, fa
                 5, 
                 trigger =                                         MusouModeOrFreeMode() &&
                         hardModeCheck() &&
-                        trigger_when(wonStageCheck()) &&
+                        triggerJustWonStageCheck() &&
                         checkStageID(stage["ID"]) &&
                         !isTwoPlayerMode() &&
                         never(!(checkStageID(stage["ID"]))) &&
@@ -4500,7 +4501,7 @@ function CreateAchievementsForStageFaction(stage, factionID, achievementID, kill
                     5, 
                     trigger = MusouModeOrFreeMode() &&
                             hardModeCheck() &&
-                            trigger_when(wonStageCheck()) &&
+                            triggerJustWonStageCheck() &&
                             checkStageID(stage["ID"]) &&
                             checkFactionID(factionID) &&
                             !isTwoPlayerMode() &&
@@ -4606,7 +4607,7 @@ achievement( format("None of You Are Even Half as Good as Me"),
              format("Beat a level with out letting your health drop below 50 percent on Normal or Hard, or using an in-game save" + onePlayerString),
              3, 
              trigger = normalOrHardCheck() &&
-                       trigger_when(wonStageCheck()) &&
+                       triggerJustWonStageCheck() &&
                        !isTwoPlayerMode() &&
                        once(getFramesElapsed() == 1)  && // make sure 1 second has elapsed at some point. 
                        never(firstPlayerHalfHP()) &&
@@ -4795,8 +4796,23 @@ rich_presence_conditional_display(GameplayMode() == ChallengeMode, "{0} is testi
                                   rich_presence_lookup("Character", FirstPlayerCharacterIndex(), CharacterLookup), 
                                   rich_presence_lookup("ChallengeType", CurrentCutsceneLevelIndex(), ChallengeModeLookup))
 
+rich_presence_conditional_display(isTwoPlayerMode() && ((!isFactionLeader(FirstPlayerCharacterIndex()) && CurrentStagesCompleteMusouMode() == 7) || CurrentStagesCompleteMusouMode() == 10),
+                                  "{0} has finished their Musou Mode with some help from {1}",
+                                  rich_presence_lookup("Character", FirstPlayerCharacterIndex(), CharacterLookup),
+                                  rich_presence_lookup("Character", SecondPlayerCharacterIndex(), CharacterLookup))
+
+
+rich_presence_conditional_display(CurrentStagesCompleteMusouMode() == 10,
+                                  "{0} has finished their Musou Mode",
+                                  rich_presence_lookup("Character", FirstPlayerCharacterIndex(), CharacterLookup))
+
+rich_presence_conditional_display((!isFactionLeader(FirstPlayerCharacterIndex()) && CurrentStagesCompleteMusouMode() == 7),
+                                  "{0} has finished their Musou Mode",
+                                  rich_presence_lookup("Character", FirstPlayerCharacterIndex(), CharacterLookup))
+
+
 // stage won 2 player  But Stage ID is unknown.  Use prior.       1 Player character, and 2 player character has finished Stage name, difficulty.  
-rich_presence_conditional_display(MusouModeOrFreeMode() && wonStageCheck() && isTwoPlayerMode() && currentFrameEndOfStageHit(), "{0} and {1} has finished {2} ({3}):  Difficulty {4}",
+rich_presence_conditional_display(MusouModeOrFreeMode() && wonStageCheck() && isTwoPlayerMode() && currentFrameEndOfStageHit() && !isFMVCutscenePlaying(), "{0} and {1} has finished {2} ({3}):  Difficulty {4}",
                                   rich_presence_lookup("Character", FirstPlayerCharacterIndex(), CharacterLookup), 
                                   rich_presence_lookup("Character", SecondPlayerCharacterIndex(), CharacterLookup), 
                                   rich_presence_lookup("Stage", CurrentLevelPauseID(), StageLookup),
@@ -4804,15 +4820,24 @@ rich_presence_conditional_display(MusouModeOrFreeMode() && wonStageCheck() && is
                                   rich_presence_lookup("Difficulty", InGameDifficultySelection(), DifficultyLookup))
 
 // In stage 2 player       1 Player character, and 2 player character is fighting in Stage name, difficulty.  
-rich_presence_conditional_display(MusouModeOrFreeMode() && wonStageCheck() && isTwoPlayerMode(), "{0} and {1} is fighting through {2} ({3}):  Difficulty {4}",
+rich_presence_conditional_display(MusouModeOrFreeMode() && isTwoPlayerMode(), "{0} and {1} is fighting through {2} ({3}):  Difficulty {4}",
                                   rich_presence_lookup("Character", FirstPlayerCharacterIndex(), CharacterLookup), 
                                   rich_presence_lookup("Character", SecondPlayerCharacterIndex(), CharacterLookup), 
-                                  rich_presence_lookup("Stage", CurrentStageID(), StageLookup),
+                                  rich_presence_lookup("Stage", CurrentLevelPauseID(), StageLookup),
                                   rich_presence_lookup("Faction", CurrentPlayerFactionID(), FactionNameLookup),
                                   rich_presence_lookup("Difficulty", InGameDifficultySelection(), DifficultyLookup))
 
+
+// Full Musou Mode won 1 player      1 Player character has finished Stage name, difficulty.  
+rich_presence_conditional_display(MusouModeOrFreeMode() && wonStageCheck() && !isFMVCutscenePlaying(), "{0} has finished {1} ({2}):  Difficulty {3}",
+                                  rich_presence_lookup("Character", FirstPlayerCharacterIndex(), CharacterLookup), 
+                                  rich_presence_lookup("Stage", CurrentLevelPauseID(), StageLookup),
+                                  rich_presence_lookup("Faction", CurrentPlayerFactionID(), FactionNameLookup),
+                                  rich_presence_lookup("Difficulty", InGameDifficultySelection(), DifficultyLookup))
+
+
 // stage won 1 player      1 Player character has finished Stage name, difficulty.  
-rich_presence_conditional_display(MusouModeOrFreeMode() && wonStageCheck(), "{0} has finished {1} ({2}):  Difficulty {3}",
+rich_presence_conditional_display(MusouModeOrFreeMode() && wonStageCheck() && !isFMVCutscenePlaying(), "{0} has finished {1} ({2}):  Difficulty {3}",
                                   rich_presence_lookup("Character", FirstPlayerCharacterIndex(), CharacterLookup), 
                                   rich_presence_lookup("Stage", CurrentLevelPauseID(), StageLookup),
                                   rich_presence_lookup("Faction", CurrentPlayerFactionID(), FactionNameLookup),
@@ -4821,7 +4846,7 @@ rich_presence_conditional_display(MusouModeOrFreeMode() && wonStageCheck(), "{0}
 // In stage 1 player       1 Player character is fighting in Stage name, difficulty.  
 rich_presence_conditional_display(MusouModeOrFreeMode(), "{0} is fighting through {1} ({2}):  Difficulty {3}",
                                   rich_presence_lookup("Character", FirstPlayerCharacterIndex(), CharacterLookup), 
-                                  rich_presence_lookup("Stage", CurrentStageID(), StageLookup),
+                                  rich_presence_lookup("Stage", CurrentLevelPauseID(), StageLookup),
                                   rich_presence_lookup("Faction", CurrentPlayerFactionID(), FactionNameLookup),
                                   rich_presence_lookup("Difficulty", InGameDifficultySelection(), DifficultyLookup))
 
