@@ -743,6 +743,22 @@ function secondPlayerHalfHP() => word(offset_pointer(PointerToSecondPlayer, play
                                  word(offset_pointer(PointerToSecondPlayer, playerPointerOffsetToMaxHP)) / 2 
 
 
+// $3253a8: (16-bit)  Zhao Yun's stored Max Health  
+
+// Zhao Yun's Health will be defined by this when starting a Musou mode or Free mode.
+ZhaoYunHealthLocation = 0x3253a8
+
+// $3253aa: (16-bit)  Zhao Yun's stored Max Musou
+
+// Zhao Yun's Musou will be defined by this when starting a Musou mode or Free mode.
+ZhaoYunMusouLocation = 0x3253a8
+
+// $3253c8: (16-bit)  Guan Yu's stored Max Health  
+
+// The second in the array of characters health. 
+GuanYuHealthLocation = 0x3253c8
+
+SizeOfStoredCharacters = GuanYuHealthLocation - ZhaoYunHealthLocation
 
 // $3258CA: (16-bits) Wing boots Owned Indicator Stored Database
 //          
@@ -3990,18 +4006,18 @@ achievement("Collect All Common Items",
             id = 370358
 )
 
-// 1 Collect Minor items and get max levels of them. 
-achievement("[VOID] They Can’t Handle Any More Power",
-            "The level of grind on this is insane.  Collect the strongest version of all common items", 
-            25,
-            trigger = MusouModeOrFreeMode() &&
-                      didntpreviouslyMaxItems(NormalItems) &&   // As long as we don't already have them all 
-                      measured(ownAllMaxItems(NormalItems)) &&
-                      never(!wonStageCheck()) &&
-                      secondPlayerAllowed() &&
-                      saveProtection(),
-            id = 370359
-)
+// This has been replaced, but left the code idea here for subsets. 
+// achievement("[VOID] They Can’t Handle Any More Power",
+//             "The level of grind on this is insane.  Collect the strongest version of all common items", 
+//             25,
+//             trigger = MusouModeOrFreeMode() &&
+//                       didntpreviouslyMaxItems(NormalItems) &&   // As long as we don't already have them all 
+//                       measured(ownAllMaxItems(NormalItems)) &&
+//                       never(!wonStageCheck()) &&
+//                       secondPlayerAllowed() &&
+//                       saveProtection(),
+//             id = 370359
+// )
 
 
 stageArray = 
@@ -4277,22 +4293,41 @@ achievement("Nothing Gonna Stop Me [m]",
                       
 )
 
-// “Pacifist ... mostly" Beat a level killing only one major general”  (Code digging achievement, found a way to find out how many generals the player has killed) 
-// 1 kill 1 level can be done in Chi Bi, and many others.
-achievement("Pacifist ... Mostly",
-            "Beat any level with only 1 kill" + onePlayerString, 
-            1,
-            trigger = MusouModeOrFreeMode() &&
-                      justWonStageCheck() &&
-                      getFirstPlayerStageKillCount() <= 1 &&  // Maybe this should be 0 but at 1 it does a better test for JustWonStageCheck
-                      !isTwoPlayerMode(),
-            id = 370361
-                      
-)
+function createFeastAchievement()
+{
+    possibleHits = false
+    
+    for index in range(ZhaoYun, NuWa) // Anything more than this. and it's going to hit the location of the number of collected memory space. 
+    {
+        // get the locations we're going to hit. 
+        healthLocation = ZhaoYunHealthLocation + index * SizeOfStoredCharacters
+        musouLocation = ZhaoYunHealthLocation + index * SizeOfStoredCharacters
+
+        possibleHits = possibleHits || 
+            ( 
+                byte(healthLocation) == prev(byte(healthLocation)) + 20 &&
+                byte(musouLocation) == prev(byte(musouLocation)) + 20
+            )
+        
+    }
+    achievement("A feist fit for Xu Shu",
+        "Enjoy two dim sums and two musou wines in one stage and finish the stage.  Beware if you're already stuffed (max health or max musou), you won't be able to enjoy them" + onePlayerString, 
+        1,
+        trigger = MusouModeOrFreeMode() &&
+                  wonStageCheck() &&
+                  !isTwoPlayerMode() &&
+                  saveProtection() &&
+                  possibleHits,
+        id = 370361   
+    )
+}
+
+createFeastAchievement()
+
 
 // “True Legend of the Three Kingdoms”  Beat 1000 enemies on a single level on Hard difficulty.
 achievement("True Legend of the Three Kingdoms",
-            "Earn 1000 Kills on hard Mode and finish the stage" + onePlayerString, 
+            "Earn 1000 Kills on hard mode and finish the stage" + onePlayerString, 
             5,
             trigger = MusouModeOrFreeMode() &&
                       hardModeCheck() &&
@@ -4888,7 +4923,6 @@ rich_presence_display("In Menus.") //Intentionally slightly different to say "is
 
 // "The gang's all here."
 
-// “Pacifist ... mostly" Beat a level killing only one major general”  (Code digging achievement, found a way to find out how many generals the player has killed) 
 // 1 kill 1 level can be done in Chi Bi, and many others.
 
 // “True Legend of the Three Kingdoms”  Beat 1000 enemies on a single level on hard difficulty.
@@ -4967,6 +5001,9 @@ rich_presence_display("In Menus.") //Intentionally slightly different to say "is
 // Achievements killed
 //////////////////////////////
 
+// “Pacifist ... mostly" Beat a level killing only one major general”  (Code digging achievement, found a way to find out how many generals the player has killed) 
+// Same as Way of peace, but way of peace is better. 
+
 // 1 Collect Minor items and get max levels of them. 
 // Tested, fully working, but holy crap, after playing a ton of levels I haven't maxed a single item yet.    For all 13?  Not fun. 
 
@@ -4997,4 +5034,5 @@ rich_presence_display("In Menus.") //Intentionally slightly different to say "is
 
 // Known bug:  Nothing Gonna Stop Me trigger can show up in the demo screens.  It has been dealt with EXCEPT when someone uses a fast restart (Start + select) and then the custscene demo comes up before the gameplay demo. 
 // Not fixing currently as it's unlikely to happen outside of a very specific set of steps, requiring hard mode and a fast restart, and will not be able to trigger there anyways. 
+
 

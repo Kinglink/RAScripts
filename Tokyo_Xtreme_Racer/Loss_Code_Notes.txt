@@ -1,0 +1,649 @@
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Rolling Guy 1 (Rolling Guy Leader)
+Bit 1 Rolling Guy 2 (Rolling Guy 1)
+Bit 2 Rolling Guy 3 (Rolling Guy 2)
+Bit 3 Rolling Guy 4 (Rolling Guy 3)
+Bit 4 Rolling Guy 5 (Rolling Guy 4)
+Bit 5 Rolling Guy 6 (Rolling Guy 5)
+Bit 6 Happy Run (Little Gang Leader)
+Bit 7 Kiss My Bumper (Little Gang 1)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Talking Head (Little Gang 2)
+Bit 1 Mr. Thanks (Little Gang 3)
+Bit 2 Spring Bird (Little Gang 4)
+Bit 3 Lazy Butt (Little Gang 5)
+Bit 4 Old Star (SS Limited Leader)
+Bit 5 Heaven's Door (SS Limited 1)
+Bit 6 Black Rain (SS Limited 2)
+Bit 7 Red Thunder (SS Limited 3)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Sports Killer (SS Limited 4)
+Bit 1 New Star (SS Limited 5)
+Bit 2 Chemistry (SS Limited 6)
+Bit 3 Excite Carmine (SS Limited 7)
+Bit 4 Invincible Dinner (Knife and Forks Leader)
+Bit 5 Table Manner (Knife and Forks 1)
+Bit 6 Street Wine (Knife and Forks 2)
+Bit 7 Golden Cream Soup (Knife and Forks 3)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Midnight la Mode (Knife and Forks 4)
+Bit 1 4 Star Driver (Knife and Forks 5)
+Bit 2 Red Table Cloth (Knife and Forks 6)
+Bit 3 Sword of Dragon (Black Knights Leader)
+Bit 4 Dark Varlet (Black Knights 1)
+Bit 5 Dark Killer (Black Knights 2)
+Bit 6 Dark Eyes (Black Knights 3)
+Bit 7 Dark Crow (Black Knights 4)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Dark Cloud (Black Knights 5)
+Bit 1 Dark Miracle (Black Knights 6)
+Bit 2 Red Meteor (Fine Drive Leader)
+Bit 3 Sylvester (Fine Drive 1)
+Bit 4 Hell's Drifter (Fine Drive 2)
+Bit 5 King of 2000cc (Fine Drive 3)
+Bit 6 Drift King (Fine Drive 4)
+Bit 7 Funky Monkey (Fine Drive 5)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Natural Soldier (Fine Drive 6)
+Bit 1 Fire Bird (Fine Drive 7)
+Bit 2 Flying Sasuke (RATT Leader)
+Bit 3 Red Shadow (RATT 1)
+Bit 4 Thunder Bird (RATT 2)
+Bit 5 Rental Driver (RATT 3)
+Bit 6 Gamer Racer (RATT 4)
+Bit 7 Drift Queen (RATT 5)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Shocking Joe (Queen's Paradise Leader)
+Bit 1 Sunday Driver (Queen's Paradise 1)
+Bit 2 Balalaika Man (Queen's Paradise 2)
+Bit 3 Chopper (Queen's Paradise 3)
+Bit 4 Lucky Guy (Queen's Paradise 4)
+Bit 5 Ballad (Queen's Paradise 5)
+Bit 6 Mr. Mystery (Queen's Paradise 6)
+Bit 7 Lonely Jackal (RINGS Leader)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Shocking Slide Tail (RINGS 1)
+Bit 1 Meteor (RINGS 2)
+Bit 2 Tune Up Junky (RINGS 3)
+Bit 3 Silver Angel (RINGS 4)
+Bit 4 White Devil (RINGS 5)
+Bit 5 Flume (RINGS 6)
+Bit 6 Myna Bird (RINGS 7)
+Bit 7 Highway Prince (Curving Edge Leader)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Mr. Fire (Curving Edge 1)
+Bit 1 Wind of Night (Curving Edge 2)
+Bit 2 Professor Robledo (Curving Edge 3)
+Bit 3 Thunder Flare (Curving Edge 4)
+Bit 4 Road Killer (Curving Edge 5)
+Bit 5 Mr. Firm (Galaxy Racers Leader)
+Bit 6 Broken Arrow (Galaxy Racers 1)
+Bit 7 Lovely Erotica (Galaxy Racers 2)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Mr. Othello (Galaxy Racers 3)
+Bit 1 Sweet Honey (Galaxy Racers 4)
+Bit 2 Sabrina (Galaxy Racers 5)
+Bit 3 Bloody Rose (Max Racing Leader)
+Bit 4 Golden Beast (Max Racing 1)
+Bit 5 Crazy Hooligan (Max Racing 2)
+Bit 6 Blue Shadow (Max Racing 3)
+Bit 7 Dark Panther (Max Racing 4)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 High Speed Blue Thunder (Max Racing 5)
+Bit 1 High Speed White Blade (Max Racing 6)
+Bit 2 High Speed Blood Rain (Max Racing 7)
+Bit 3 300 Mile Red Ruby (Elegant Wild Leader)
+Bit 4 Deep Green (Elegant Wild 1)
+Bit 5 White Revolution (Elegant Wild 2)
+Bit 6 Hostman Hut (Elegant Wild 3)
+Bit 7 Black Cinderella (Elegant Wild 4)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Unfinish Yellow (Elegant Wild 5)
+Bit 1 Happy Chappy (Departures Leader)
+Bit 2 Night Killer (Departures 1)
+Bit 3 Sweet Surrender (Departures 2)
+Bit 4 Cool Sight (Departures 3)
+Bit 5 Great Finance (Departures 4)
+Bit 6 Up Beat (Departures 5)
+Bit 7 Crystal Prince (Departures 6)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Burning Mirage (Twister Leader)
+Bit 1 Smile (Twister 1)
+Bit 2 Sweet Blues (Twister 2)
+Bit 3 Blue Writer (Twister 3)
+Bit 4 Shooting Star (Twister 4)
+Bit 5 Baron (Twister 5)
+Bit 6 Rainy Day (Twister 6)
+Bit 7 Fire Revenge (Catz Leader)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Dark Mist (Catz 1)
+Bit 1 Highway Wall (Catz 2)
+Bit 2 Wine Chase (Catz 3)
+Bit 3 Firefighter (Catz 4)
+Bit 4 Fire Driver (Catz 5)
+Bit 5 Unlucky Duke (Catz 6)
+Bit 6 Hearing Master (The Road of Justice Leader)
+Bit 7 Highway Magician (The Road of Justice 1)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Fighting Master (The Road of Justice 2)
+Bit 1 Wall Street (The Road of Justice 3)
+Bit 2 Flame Canon (The Road of Justice 4)
+Bit 3 Shining (The Road of Justice 5)
+Bit 4 Happy Camper (The Road of Justice 6)
+Bit 5 Thunder Shift (Diamond Image Leader)
+Bit 6 Lone Wolf (Diamond Image 1)
+Bit 7 Spring Rain (Diamond Image 2)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Silver Bullet (Diamond Image 3)
+Bit 1 Troubleshooter (Diamond Image 4)
+Bit 2 Yellow Angel (Diamond Image 5)
+Bit 3 Hip Hop Red (Rhythm Box Leader)
+Bit 4 Jazz Green (Rhythm Box 1)
+Bit 5 Classical Blue (Rhythm Box 2)
+Bit 6 Stormy Calligrapher (Rhythm Box 3)
+Bit 7 Pink Groove (Rhythm Box 4)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Midnight Blue (Rhythm Box 5)
+Bit 1 Requiem (Wind Stars Leader)
+Bit 2 R Magic (Wind Stars 1)
+Bit 3 Diamond Dust (Wind Stars 2)
+Bit 4 Yellow Flare (Wind Stars 3)
+Bit 5 Mad Train (Wind Stars 4)
+Bit 6 Speedy Valkyrie (Wind Stars 5)
+Bit 7 Blue Star (Wind Stars 6)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Moody Queen (Wind Stars 7)
+Bit 1 Visual Driver (Harmonize Leader)
+Bit 2 Curve Block (Harmonize 1)
+Bit 3 Highway Silver Arrow (Harmonize 2)
+Bit 4 Aero Star (Harmonize 3)
+Bit 5 Water Drift (Harmonize 4)
+Bit 6 Brand New Thunder (Harmonize 5)
+Bit 7 Dream Light (Harmonize 6)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Revolution (Super Speed Wagon Leader)
+Bit 1 Magical (Super Speed Wagon 1)
+Bit 2 Belly-ache (Super Speed Wagon 2)
+Bit 3 Fruit Basket (Super Speed Wagon 3)
+Bit 4 Jumping (Super Speed Wagon 4)
+Bit 5 Shuffle (Super Speed Wagon 5)
+Bit 6 Blue Speed (Another Star Leader)
+Bit 7 Silver Speed (Another Star 1)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Lightning Bird (Another Star 2)
+Bit 1 Red Shut (Another Star 3)
+Bit 2 Battle Scratch (Another Star 4)
+Bit 3 Lightning Eyes (Another Star 5)
+Bit 4 U Violet (Another Star 6)
+Bit 5 Time is Money (Gesellschaft Leader)
+Bit 6 Lost Kid (Gesellschaft 1)
+Bit 7 Lone Survivor (Gesellschaft 2)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Cool Guy (Gesellschaft 3)
+Bit 1 Happy Extreme (Gesellschaft 4)
+Bit 2 Angry Princess (Gesellschaft 5)
+Bit 3 Wind Blade (Explosion Leader)
+Bit 4 Golden Fang (Explosion 1)
+Bit 5 Trouble Maker (Explosion 2)
+Bit 6 Silent Sense (Explosion 3)
+Bit 7 Blue Phoenix (Explosion 4)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Through Dog (Explosion 5)
+Bit 1 Spirit Crasher (Highway Outlaw Leader)
+Bit 2 Pride Killer (Highway Outlaw 1)
+Bit 3 Cold Prince (Highway Outlaw 2)
+Bit 4 Mad Driver (Highway Outlaw 3)
+Bit 5 Driving Sir (Highway Outlaw 4)
+Bit 6 Totem Pole (Highway Outlaw 5)
+Bit 7 Spiral (Highway Outlaw 6)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Drift Dancer (R.Gangs Leader)
+Bit 1 Street Dancer (R.Gangs 1)
+Bit 2 Hell's Bartender (R.Gangs 2)
+Bit 3 Professor Speedy (R.Gangs 3)
+Bit 4 Wind Impala (R.Gangs 4)
+Bit 5 Black Mirage (R.Gangs 5)
+Bit 6 Rain Drop (R.Gangs 6)
+Bit 7 Sonic Runner (Cupid Arrows Leader)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Mysterious Nymph (Cupid Arrows 1)
+Bit 1 Moon Light Child (Cupid Arrows 2)
+Bit 2 Cowboy Girl (Cupid Arrows 3)
+Bit 3 Silver Impact (Cupid Arrows 4)
+Bit 4 246 Heart Breaker (Cupid Arrows 5)
+Bit 5 Ion (Tokio Jungle Leader)
+Bit 6 MJ6feet6 (Tokio Jungle 1)
+Bit 7 Black Wind (Tokio Jungle 2)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 White Fox (Tokio Jungle 3)
+Bit 1 Salty Dog (Tokio Jungle 4)
+Bit 2 Slide Freek (Tokio Jungle 5)
+Bit 3 Driving Blue Wave (Tokio Jungle 6)
+Bit 4 Unstoppable Dream (TR Racing Leader)
+Bit 5 Lovely Girl (TR Racing 1)
+Bit 6 Rule Breaker (TR Racing 2)
+Bit 7 180 Master (TR Racing 3)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Dawn Shaker (TR Racing 4)
+Bit 1 Night Worker (TR Racing 5)
+Bit 2 Dancing Chaser (TR Racing 6)
+Bit 3 Car Maniac (Top Level Leader)
+Bit 4 Mystery Girl (Top Level 1)
+Bit 5 Red Tears (Top Level 2)
+Bit 6 Sir General (Top Level 3)
+Bit 7 Legendary Digger (Top Level 4)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Midnight Through (Top Level 5)
+Bit 1 Russian Blue (Top Level 6)
+Bit 2 Blue Meteor (Free Way Leader)
+Bit 3 Orange Head (Free Way 1)
+Bit 4 Silver Fox (Free Way 2)
+Bit 5 Nightmare (Free Way 3)
+Bit 6 Silent Reviver (Free Way 4)
+Bit 7 Ultimate Killer (Free Way 5)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Crystal Knight (Free Way 6)
+Bit 1 Speed Junky (Free Way 7)
+Bit 2 Highway Bomber (Free Way 8)
+Bit 3 Tobby (Dry Cruise Leader)
+Bit 4 Midnight Owl (Dry Cruise 1)
+Bit 5 Entrepreneur (Dry Cruise 2)
+Bit 6 Rain Master (Dry Cruise 3)
+Bit 7 Mr. Max (Dry Cruise 4)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Mr. Muscle (Dry Cruise 5)
+Bit 1 Angel Smile (Dry Cruise 6)
+Bit 2 Mr. Terminate (E.R.O. Leader)
+Bit 3 Non Stop Emotion (E.R.O. 1)
+Bit 4 Brand New Morning (E.R.O. 2)
+Bit 5 Cool B (E.R.O. 3)
+Bit 6 Star Holder (E.R.O. 4)
+Bit 7 Sentimental Flame (E.R.O. 5)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Strange Devil (E.R.O. 6)
+Bit 1 Texas' White Wolf (Team Alpha Leader)
+Bit 2 Gattling Gun (Team Alpha 1)
+Bit 3 Mike the Horseman (Team Alpha 2)
+Bit 4 Smiling Shadow (Team Alpha 3)
+Bit 5 Rock Spider (Team Alpha 4)
+Bit 6 Code F (Team Alpha 5)
+Bit 7 A+ Driver (True Ride Leader)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Large Impact (True Ride 1)
+Bit 1 Iron Blocker (True Ride 2)
+Bit 2 Genius Rookie (True Ride 3)
+Bit 3 Wolter Wolf (True Ride 4)
+Bit 4 Pink Lily (True Ride 5)
+Bit 5 Strike Star (True Ride 6)
+Bit 6 Sunny Dragon (True Ride 7)
+Bit 7 Killing Machine (Unlimited Leader)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Lone MONSTER (Unlimited 1)
+Bit 1 Scotch (Unlimited 2)
+Bit 2 Yesman (Unlimited 3)
+Bit 3 Daimajin (Unlimited 4)
+Bit 4 Spider (Unlimited 5)
+Bit 5 Sleepy Driver (Unlimited 6)
+Bit 6 Silver Prince (R.R. Leader)
+Bit 7 Turning Artist (R.R. 1)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Asphalt's Cry (R.R. 2)
+Bit 1 HIROSHI (R.R. 3)
+Bit 2 Dark Memory (R.R. 4)
+Bit 3 Risky Cat (R.R. 5)
+Bit 4 Black Bird (R.R. 6)
+Bit 5 High Speed Star (R.R. 7)
+Bit 6 Black Dragon (Thunder Dragoon Leader)
+Bit 7 White Dragon (Thunder Dragoon 1)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Yellow Dragon (Thunder Dragoon 2)
+Bit 1 Red Dragon (Thunder Dragoon 3)
+Bit 2 Green Dragon (Thunder Dragoon 4)
+Bit 3 Gray Dragon (Thunder Dragoon 5)
+Bit 4 Blue Dragon (Thunder Dragoon 6)
+Bit 5 Abf911 (Abflug SRT Leader)
+Bit 6 Dandy (Abflug SRT 1)
+Bit 7 Superman (Abflug SRT 2)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Teru (Abflug SRT 3)
+Bit 1 Horse Head (Abflug SRT 4)
+Bit 2 Speed Runner (Commander Leader)
+Bit 3 Mr. Japan (Commander 1)
+Bit 4 Shoe Keeper (Commander 2)
+Bit 5 Weak Arm (Commander 3)
+Bit 6 Girl Hunter (Commander 4)
+Bit 7 Pickle (Commander 5)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Rainbow Traveler (Commander 6)
+Bit 1 Swimmer (Commander 7)
+Bit 2 Yellow Voltage (Double Mind Leader)
+Bit 3 Dark Labyrinth (Double Mind 1)
+Bit 4 Blood (Double Mind 2)
+Bit 5 Gray Giant (Double Mind 3)
+Bit 6 Brown Giant (Double Mind 4)
+Bit 7 White Angel (Double Mind 5)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Gray Fairy (Double Mind 6)
+Bit 1 Jamz (APS Leader)
+Bit 2 Blocky Rider (APS 1)
+Bit 3 King (APS 2)
+Bit 4 Revived Wizard (APS 3)
+Bit 5 Shyxgirl (APS 4)
+Bit 6 Double Booking (APS 5)
+Bit 7 New Wind (APS 6)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Burning Leader (Fanatic Future Leader)
+Bit 1 Cool Looking (Fanatic Future 1)
+Bit 2 Mysterious Driver (Fanatic Future 2)
+Bit 3 Burning General (Fanatic Future 3)
+Bit 4 Intelligent Teacher (Fanatic Future 4)
+Bit 5 Larger than Life (Fanatic Future 5)
+Bit 6 Love Knuckle (Fanatic Future 6)
+Bit 7 Iceman (Speed Master Leader)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Crazy Moon (Speed Master 1)
+Bit 1 Visual Tail (Speed Master 2)
+Bit 2 Sunset Rider (Speed Master 3)
+Bit 3 White Witch (Speed Master 4)
+Bit 4 Pearl Kiss (Speed Master 5)
+Bit 5 Maniac Player (Speed Master 6)
+Bit 6 Black Angel (Speed Master 7)
+Bit 7 Unknown Hero (Speed Master 8)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Fast Beat (Speed Master 9)
+Bit 1 Lightning (Wanderers Leader)
+Bit 2 White Panther (Wanderers 1)
+Bit 3 Garage Door (Wanderers 2)
+Bit 4 Speed Drinker (Wanderers 3)
+Bit 5 Lonely Wolf (Wanderers 4)
+Bit 6 Steam Storm (Wanderers 5)
+Bit 7 Invincible Artist (Wanderers 6)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Lost Freak (Wanderers 7)
+Bit 1 Bloody Mary (Wanderers 8)
+Bit 2 Illusion B (Wanderers 9)
+Bit 3 Caffeine Addict (Wanderers 10)
+Bit 4 Magazine Freak (Wanderers 11)
+Bit 5 Machine of Inferno (Wanderers 12)
+Bit 6 Anguish Barbarian (Wanderers 13)
+Bit 7 Waist Master (Wanderers 14)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Master Position (Wanderers 15)
+Bit 1 Pretty Affair (Wanderers 16)
+Bit 2 Devil Driver (Wanderers 17)
+Bit 3 Street Gambler (Wanderers 18)
+Bit 4 Green Wild (Wanderers 19)
+Bit 5 Dark Desperado (Wanderers 20)
+Bit 6 Eternity (Wanderers 21)
+Bit 7 Mosquito Lemon (Wanderers 22)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Fearful Princess (Wanderers 23)
+Bit 1 Dumb yet Smart (Wanderers 24)
+Bit 2 Wild Heart (Wanderers 25)
+Bit 3 Road Master (Wanderers 26)
+Bit 4 Glamour Girl (Wanderers 27)
+Bit 5 God Year (Wanderers 28)
+Bit 6 Raspberry Kiss (Wanderers 29)
+Bit 7 Craft Man (Wanderers 30)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Cutie Pie (Wanderers 31)
+Bit 1 Storm Screamer (Wanderers 32)
+Bit 2 Uncrushable Alexander (Wanderers 33)
+Bit 3 Silver Ruler (Wanderers 34)
+Bit 4 Night Wolf (Wanderers 35)
+Bit 5 Max Energy (Wanderers 36)
+Bit 6 Jet Skater (Wanderers 37)
+Bit 7 Crying Baby (Wanderers 38)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Tomorrow Again (Wanderers 39)
+Bit 1 Healthy Hero (Wanderers 40)
+Bit 2 Late Night Cinderella (Wanderers 41)
+Bit 3 Unbalanced Heart (Wanderers 42)
+Bit 4 Toll Free (Wanderers 43)
+Bit 5 Madness (Wanderers 44)
+Bit 6 Technician Guy (Wanderers 45)
+Bit 7 Fast Phobe (Wanderers 46)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 ZERO (Wanderers 47)
+Bit 1 SPEED BOX (Wanderers 48)
+Bit 2 Mask (Wanderers 49)
+Bit 3 Windy Fanfare (Wanderers 50)
+Bit 4 Start Dash (Wanderers 51)
+Bit 5 Golden License (Wanderers 52)
+Bit 6 Iron Racer (Wanderers 53)
+Bit 7 Exotic Butterfly (Wanderers 54)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 King of Eden (Wanderers 55)
+Bit 1 Loyal Knight (Wanderers 56)
+Bit 2 Gentle Rain (Wanderers 57)
+Bit 3 Last Flight (Wanderers 58)
+Bit 4 Silent Barbarian (Wanderers 59)
+Bit 5 Traitor Jack knife  Traitor Jack Knife (13 Devils Leader)
+Bit 6 True Slide True Slide (13 Devils 1)
+Bit 7 Unhappy Angel  Dejected angel (13 Devils 2)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Hard Weapon Hard Weapon (13 Devils 3)
+Bit 1 Fallen Blade Fallen Blade (13 Devils 4)
+Bit 2 Blood Hound Blood Hound (13 Devils 5)
+Bit 3 Dark Producer  Dark Producer (13 Devils 6)
+Bit 4 Mr. Sitar  Mr. Sitar (13 Devils 7)
+Bit 5 Iron Heart  Iron Heart (13 Devils 8)
+Bit 6 Dying Star Dying Star-0 (13 Devils 9)
+Bit 7 Dreamy Ghost Dreamy Ghost (13 Devils 10)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 Tail Gunner  Tail Gunner (13 Devils 11)
+Bit 1 Shadow Eyes Shadow eyes icon (13 Devils 12)
+Bit 2 Speed King - [S1]  Tim2out571571 (13 Devils 13)
+Bit 3 Midnight Rose Midnight rose icon (The Zodiac Leader)
+Bit 4 Golden Wind  Golden wind icon (The Zodiac 1)
+Bit 5 Dark Ringleader  Dark ringleader icon (The Zodiac 2)
+Bit 6 Hard Lift  Hard lift icon (The Zodiac 3)
+Bit 7 Blue Pressure Blue pressure icon (The Zodiac 4)
+
+(8-bit) Location for marking losses against character
+
+Check 0x0037dca5 for more info
+
+Bit 0 No-Crown King  Nocrown king icon (The Zodiac 5)
+Bit 1 Crying Pluto  Crying pluto icon (The Zodiac 6)
+Bit 2 Red Devil  Red devil icon (The Zodiac 7)
+Bit 3 Queen's Knight Queens knight icon (The Zodiac 8)
+Bit 4 Purple Meteor Purple meteor icon (The Zodiac 9)
+Bit 5 Exotic Eve  Exotic eve (The Zodiac 10)
+Bit 6 White Charisma [S2]  White charisma icon (The Zodiac 11)
+Bit 7 Unknown - [U]  Devilz icon (Final Boss Leader)
