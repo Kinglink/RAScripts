@@ -742,6 +742,12 @@ function firstPlayerHalfHP() => 255 + word(offset_pointer(PointerToFirstPlayer, 
 function secondPlayerHalfHP() => word(offset_pointer(PointerToSecondPlayer, playerPointerOffsetToHP)) >
                                  word(offset_pointer(PointerToSecondPlayer, playerPointerOffsetToMaxHP)) / 2 
 
+playerPointerXPositionOffset = 0x51 
+playerPointerYPositionOffset = 0x55
+playerPointerZPositionOffset = 0x59
+function firstPlayerXPosition() => tbyte(offset_pointer(PointerToFirstPlayer, playerPointerXPositionOffset))
+function firstPlayerYPosition() => tbyte(offset_pointer(PointerToFirstPlayer, playerPointerYPositionOffset))
+function firstPlayerZPosition() => tbyte(offset_pointer(PointerToFirstPlayer, playerPointerZPositionOffset))
 
 // $3253a8: (16-bit)  Zhao Yun's stored Max Health  
 
@@ -751,7 +757,7 @@ ZhaoYunHealthLocation = 0x3253a8
 // $3253aa: (16-bit)  Zhao Yun's stored Max Musou
 
 // Zhao Yun's Musou will be defined by this when starting a Musou mode or Free mode.
-ZhaoYunMusouLocation = 0x3253a8
+ZhaoYunMusouLocation = 0x3253aa
 
 // $3253c8: (16-bit)  Guan Yu's stored Max Health  
 
@@ -2810,6 +2816,7 @@ SizeOfPostGameStageData = MemoryLocationOfSecondStagesKOTotal - MemoryLocationOf
 // 0x0b=Notice the wind as a Shu character in Chi Bi 
 function CutsceneIndex() => byte(0x382d90)
 
+VALUE_FOR_INTRO_SCENE = 0x03
 VALUE_FOR_CHIBI_FIRE_SCENE = 0x07 
 
 // $3659EC: (8-bit) Cutscene indicator
@@ -3280,7 +3287,7 @@ function createUnlockFourthWeaponAchievement(name, description, weaponIndex, ach
                             NumbeOfWeaponsCollectedInStage() >= (index + 1) &&
                             byte(MemoryLocationOfFirstInStageWeaponCollected + SizeOfInGameWeaponDrop * index) == weaponIndex
                         )
-    achievement(name + " [m]",
+    achievement(name,
                 description + onePlayerString, 
                 5,
                 trigger = targetTrigger && possibleHits,
@@ -4019,6 +4026,26 @@ achievement("Collect All Common Items",
 //             id = 370359
 // )
 
+XLocationForFanCastleWuStart = 0x46afc8
+YLocationForFanCastleWuStart = 0xc49600
+ZLocationForFanCastleWuStart = 0x46b798
+FramesForGuanYuEasterEgg = 700
+
+
+achievement("Guan Yu's most difficult enemy?",
+             "Watch the easter egg intro for Fan Castle", 
+             2,
+             trigger = FreeModeOnly() &&
+                       checkFirstPlayerCharacterIndex(GuanYu) &&
+                       checkStageID(BattleAtFanCastleStageID) &&
+                       checkFactionID(AlliedForcesFactionID) &&
+                       repeated(FramesForGuanYuEasterEgg, CutsceneIndicator() == VALUE_FOR_CUTSCENE_PLAYING && CutsceneIndex() == VALUE_FOR_INTRO_SCENE) &&
+                       firstPlayerXPosition() == XLocationForFanCastleWuStart &&  // Note the magic numbers used for the Guan Yu Achievement are just his location at the start of the stage if players choose the Wu Forces side.  
+                       firstPlayerYPosition() == YLocationForFanCastleWuStart &&  // This is to differenciate it from the Wei Forces side, which looks similar but play a different intro scene. 
+                       firstPlayerZPosition() == ZLocationForFanCastleWuStart &&
+                       never(onMainMenu()),
+             id = 370359
+)
 
 stageArray = 
 [
@@ -4278,7 +4305,7 @@ stageArray =
 ]
 
 // “Beat a Hard mode level with a rank 16 character”  (Missable, and will guard against 2p being above a rank 16 as well, you need to take a completely fresh character to beat this. ) 
-achievement("Nothing Gonna Stop Me [m]",
+achievement("Nothing Gonna Stop Me",
             "Beat a hard mode level with a character with no experience points and at rank 16" + onePlayerString, 
             3,
             trigger = MusouModeOrFreeMode() &&
@@ -4301,7 +4328,7 @@ function createFeastAchievement()
     {
         // get the locations we're going to hit. 
         healthLocation = ZhaoYunHealthLocation + index * SizeOfStoredCharacters
-        musouLocation = ZhaoYunHealthLocation + index * SizeOfStoredCharacters
+        musouLocation = ZhaoYunMusouLocation + index * SizeOfStoredCharacters
 
         possibleHits = possibleHits || 
             ( 
@@ -4310,9 +4337,9 @@ function createFeastAchievement()
             )
         
     }
-    achievement("A feist fit for Xu Shu",
+    achievement("A feast fit for Xu Shu",
         "Enjoy two dim sums and two musou wines in one stage and finish the stage.  Beware if you're already stuffed (max health or max musou), you won't be able to enjoy them" + onePlayerString, 
-        1,
+        2,
         trigger = MusouModeOrFreeMode() &&
                   wonStageCheck() &&
                   !isTwoPlayerMode() &&
@@ -4475,11 +4502,12 @@ function createNormalPlayStageAchievement(stage, factionID, achievementID)
                 format("Complete {0} as the {1}", StageLookup[stage["ID"]], factionForces),
                 1, 
                 trigger = FreeModeOnly() &&
-                        !onMainMenu() &&
+                        never(onMainMenu()) &&
                         triggerJustWonStageCheck() &&
                         checkStageID(stage["ID"]) &&
                         checkFactionID(factionID) &&
-                        !isTwoPlayerMode(),
+                        !isTwoPlayerMode() &&
+                        once(getFramesElapsed() > prev(getFramesElapsed())),
                 id = achievementID
                 )
                 
@@ -5034,5 +5062,6 @@ rich_presence_display("In Menus.") //Intentionally slightly different to say "is
 
 // Known bug:  Nothing Gonna Stop Me trigger can show up in the demo screens.  It has been dealt with EXCEPT when someone uses a fast restart (Start + select) and then the custscene demo comes up before the gameplay demo. 
 // Not fixing currently as it's unlikely to happen outside of a very specific set of steps, requiring hard mode and a fast restart, and will not be able to trigger there anyways. 
+
 
 
