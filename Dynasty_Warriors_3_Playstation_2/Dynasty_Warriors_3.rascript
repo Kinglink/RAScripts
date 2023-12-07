@@ -1,6 +1,8 @@
 // Dynasty Warriors 3
 // #ID = 20722
 
+// NOTE all code notes may change, please check RA for the latest code notes. 
+
 onePlayerString = " (1p)"
 
 // Character enumeration
@@ -305,7 +307,7 @@ CharacterLookup =
     DaQiao: "Da Qiao",
     XiaoQiao: "Xiao Qiao",
     FuXi: "Fu Xi",
-    NuWa: "Nuwa",
+    NuWa: "Nu Wa",
 }
 
 // Faction IDs
@@ -2967,6 +2969,28 @@ function justWonStageCheck() => wonStageCheck() && !prevEndOfStagehit()
 
 function triggerJustWonStageCheck() => trigger_when(wonStageCheck()) && !prevEndOfStagehit() 
 
+//  $365a80 (8-bit) Control values for parts of the game.  Certain values will trigger different events. 
+//
+// 04 is set when initial level loads in, but if set will create an infinite loop of videos playing. 
+// 24 then will set the game back to playing the main game. 
+//
+// (4-bit Upper) If this value has the bit 5 or bit 7 set, it appears the level ends.  If bit 5 is set, this becomes 5 (bit 6 gets set) and then bit 7 gets set.  Making it d, indicating loss, and thus game over. 
+//
+// However if this is set to or just bit 7 gets set to a "win" state. and the level is won. 
+//
+// Short version: 
+// 
+// Values: 
+// 0xc (0xc0)  Game is in post stage state., win or lose. 
+//
+// This gets cleared as a new stage is set up and properly cleared when starting a stage from the main menu. 
+function postStageIndicator() => byte(0x365a80)
+
+VALUE_FOR_POST_STAGE_RESULTS = 0xc0
+
+// NOTE: This doesn't say "Won" just post game
+function inPostStageScreen() => postStageIndicator() == VALUE_FOR_POST_STAGE_RESULTS
+
 function saveProtection() => SaveIndicator() != VALUE_FOR_SAVE_LOAD_OPERATION // && LoadGameIndicator() == VALUE_DESIRED_FOR_LOAD_GAME_PROTECTION   Removed because it blocks musou mode completion.    But also with new currentFrameEndOfStageHit is better than this. 
 
 VALUE_FOR_CHARACTER_LOCKED = 0x00
@@ -3226,9 +3250,11 @@ function createUnlockFourthWeaponAchievement(name, description, weaponIndex, ach
 
     targetTrigger = (MusouModeOrFreeMode()) &&
                 triggerJustWonStageCheck() && 
-                !onMainMenu() &&
                 !isTwoPlayerMode() &&
-                saveProtection()
+                saveProtection() &&
+                never(onMainMenu()) &&
+                once(getFramesElapsed() > prev(getFramesElapsed())) // This shows up when setting up a new musou round. 
+
                 
 
     possibleHits = false 
@@ -3258,8 +3284,9 @@ function createUnlockRareItemAchievement(name, description, itemIndex, achieveme
     targetTrigger = MusouModeOrFreeMode() &&
                     triggerJustWonStageCheck() && 
                     !isTwoPlayerMode() &&
-                    !onMainMenu() &&
-                    saveProtection()
+                    saveProtection() &&
+                    never(onMainMenu()) &&
+                    once(getFramesElapsed() > prev(getFramesElapsed())) // This shows up when setting up a new musou round. 
 
     possibleHits = false 
     for index in range(0,5) // Anything more than this. and it's going to hit the weapon's memory space
@@ -3338,7 +3365,7 @@ function characterDefinition(
         }
         if(hardMusouModeObject["description"] == "")
         {
-            hardMusouModeObject["description"] = format("Beat {0}'s entire Musou Mode on Hard difficulty in one session", name)
+            hardMusouModeObject["description"] = format("Beat {0}'s entire Musou Mode on hard difficulty in one session", name)
         }
         array_push(hardMusouMode, hardMusouModeObject)
     }
@@ -3653,7 +3680,7 @@ characterDefinition( characterIndex = NuWa,
                      unlockMemoryLocation = NuWaUnlocked(), 
                      unlockPoint = 5, musouModeAvailable = false,
                      unlockAchievementID = 370450, 
-                     unlockName="The Goddess Nuwa")
+                     unlockName="The Goddess Nu Wa")
 
 
 for musouObject in musouMode
@@ -3668,7 +3695,7 @@ for unlockObject in characterUnlock
 
 // FUTURETODO: Find a way to check save?  May not be important. 
 achievement("The gang's all here",
-            "Unlock Lu Xun, Da Qiao, Xu Zhu, Zhen Ji, Ma Chao and Wei Yan, either through completing one of each faction's musou modes, or having a DW 2 save file", 
+            "Unlock Lu Xun, Da Qiao, Xu Zhu, Zhen Ji, Ma Chao, and Wei Yan, either through completing one of each faction's musou modes, or having a DW 2 save file", 
                 0,
                 trigger = characterNowUnlocked(LuXunUnlocked()) && 
                           characterNowUnlocked(DaQiaoUnlocked()) && 
@@ -4240,12 +4267,12 @@ achievement("Nothing Gonna Stop Me [m]",
             3,
             trigger = MusouModeOrFreeMode() &&
                       hardModeCheck() &&
-                      !onMainMenu() &&
+                      never(onMainMenu()) &&
                       triggerJustWonStageCheck() &&
                       firstPlayerNoExperience() &&
                       !isTwoPlayerMode() &&
                       saveProtection() &&
-                      !inDemoCurrently(), // This shows up in demos if you set the difficulty to hard. 
+                      once(getFramesElapsed() > prev(getFramesElapsed())), // This shows up as you set up the next stage if you set the difficulty to hard in the previous one. 
             id = 370360
                       
 )
@@ -4265,7 +4292,7 @@ achievement("Pacifist ... Mostly",
 
 // “True Legend of the Three Kingdoms”  Beat 1000 enemies on a single level on Hard difficulty.
 achievement("True Legend of the Three Kingdoms",
-            "Earn 1000 Kills on Hard Mode and finish the stage " + onePlayerString, 
+            "Earn 1000 Kills on hard Mode and finish the stage" + onePlayerString, 
             5,
             trigger = MusouModeOrFreeMode() &&
                       hardModeCheck() &&
@@ -4591,8 +4618,7 @@ for stage in stageArray
     }
 }
 
-achievement( 
-            "So That’s What Everyone Else Was Doing", 
+achievement("So That’s What Everyone Else Was Doing", 
             "Play the secret ending for independent officers",
             1, 
             // This could be harder, but really if this is playing in any format, this is the video, and I believe it only plays from opening edit. 
@@ -4604,7 +4630,7 @@ achievement(
 
 // “Beat a level without letting your health drop below 50 percent”  Could be done with UI elements, but considering using a pointer here just to demonstrate that, even if it’s a  less efficent way to do so. 
 achievement( format("None of You Are Even Half as Good as Me"), 
-             format("Beat a level with out letting your health drop below 50 percent on Normal or Hard, or using an in-game save" + onePlayerString),
+             format("Beat a level with out letting your health drop below 50 percent on normal or hard, or using an in-game save" + onePlayerString),
              3, 
              trigger = normalOrHardCheck() &&
                        triggerJustWonStageCheck() &&
@@ -4796,23 +4822,26 @@ rich_presence_conditional_display(GameplayMode() == ChallengeMode, "{0} is testi
                                   rich_presence_lookup("Character", FirstPlayerCharacterIndex(), CharacterLookup), 
                                   rich_presence_lookup("ChallengeType", CurrentCutsceneLevelIndex(), ChallengeModeLookup))
 
-rich_presence_conditional_display(isTwoPlayerMode() && ((!isFactionLeader(FirstPlayerCharacterIndex()) && CurrentStagesCompleteMusouMode() == 7) || CurrentStagesCompleteMusouMode() == 10),
+rich_presence_conditional_display(MusouModeOnly() && 
+                                  isTwoPlayerMode() && 
+                                    (CurrentStagesCompleteMusouMode() == 10 || 
+                                         (!isFactionLeader(FirstPlayerCharacterIndex()) && 
+                                         CurrentStagesCompleteMusouMode() == 7)),
                                   "{0} has finished their Musou Mode with some help from {1}",
                                   rich_presence_lookup("Character", FirstPlayerCharacterIndex(), CharacterLookup),
                                   rich_presence_lookup("Character", SecondPlayerCharacterIndex(), CharacterLookup))
 
 
-rich_presence_conditional_display(CurrentStagesCompleteMusouMode() == 10,
-                                  "{0} has finished their Musou Mode",
-                                  rich_presence_lookup("Character", FirstPlayerCharacterIndex(), CharacterLookup))
-
-rich_presence_conditional_display((!isFactionLeader(FirstPlayerCharacterIndex()) && CurrentStagesCompleteMusouMode() == 7),
+rich_presence_conditional_display(MusouModeOnly() && 
+                                    (CurrentStagesCompleteMusouMode() == 10 || 
+                                        (!isFactionLeader(FirstPlayerCharacterIndex()) && 
+                                         CurrentStagesCompleteMusouMode() == 7)),
                                   "{0} has finished their Musou Mode",
                                   rich_presence_lookup("Character", FirstPlayerCharacterIndex(), CharacterLookup))
 
 
 // stage won 2 player  But Stage ID is unknown.  Use prior.       1 Player character, and 2 player character has finished Stage name, difficulty.  
-rich_presence_conditional_display(MusouModeOrFreeMode() && wonStageCheck() && isTwoPlayerMode() && currentFrameEndOfStageHit() && !isFMVCutscenePlaying(), "{0} and {1} has finished {2} ({3}):  Difficulty {4}",
+rich_presence_conditional_display(MusouModeOrFreeMode() && wonStageCheck() && isTwoPlayerMode() && currentFrameEndOfStageHit() && inPostStageScreen(), "{0} and {1} has finished {2} ({3}):  Difficulty {4}",
                                   rich_presence_lookup("Character", FirstPlayerCharacterIndex(), CharacterLookup), 
                                   rich_presence_lookup("Character", SecondPlayerCharacterIndex(), CharacterLookup), 
                                   rich_presence_lookup("Stage", CurrentLevelPauseID(), StageLookup),
@@ -4829,7 +4858,7 @@ rich_presence_conditional_display(MusouModeOrFreeMode() && isTwoPlayerMode(), "{
 
 
 // Full Musou Mode won 1 player      1 Player character has finished Stage name, difficulty.  
-rich_presence_conditional_display(MusouModeOrFreeMode() && wonStageCheck() && !isFMVCutscenePlaying(), "{0} has finished {1} ({2}):  Difficulty {3}",
+rich_presence_conditional_display(MusouModeOrFreeMode() && wonStageCheck() && inPostStageScreen(), "{0} has finished {1} ({2}):  Difficulty {3}",
                                   rich_presence_lookup("Character", FirstPlayerCharacterIndex(), CharacterLookup), 
                                   rich_presence_lookup("Stage", CurrentLevelPauseID(), StageLookup),
                                   rich_presence_lookup("Faction", CurrentPlayerFactionID(), FactionNameLookup),
@@ -4862,7 +4891,7 @@ rich_presence_display("In Menus.") //Intentionally slightly different to say "is
 // “Pacifist ... mostly" Beat a level killing only one major general”  (Code digging achievement, found a way to find out how many generals the player has killed) 
 // 1 kill 1 level can be done in Chi Bi, and many others.
 
-// “True Legend of the Three Kingdoms”  Beat 1000 enemies on a single level on Hard difficulty.
+// “True Legend of the Three Kingdoms”  Beat 1000 enemies on a single level on hard difficulty.
 
 //////////////////////////////
 // Achievement confirmed one of. 
@@ -4968,3 +4997,4 @@ rich_presence_display("In Menus.") //Intentionally slightly different to say "is
 
 // Known bug:  Nothing Gonna Stop Me trigger can show up in the demo screens.  It has been dealt with EXCEPT when someone uses a fast restart (Start + select) and then the custscene demo comes up before the gameplay demo. 
 // Not fixing currently as it's unlikely to happen outside of a very specific set of steps, requiring hard mode and a fast restart, and will not be able to trigger there anyways. 
+
