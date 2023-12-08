@@ -3108,6 +3108,8 @@ function FreeModeOnly() => GameplayMode() == FreeMode
 function ChallengeModeOnly() => GameplayMode() == ChallengeMode 
 function MusouModeOrFreeMode() => MusouModeOnly() || FreeModeOnly()
 
+// This makes sure it won't show up when setting up a new musou round or in demo
+function requireInGame() => never(onMainMenu()) && once(getFramesElapsed() > prev(getFramesElapsed()))
 
 VALUE_FOR_ITEM_LOCK = 0x19
 
@@ -3275,8 +3277,7 @@ function createUnlockFourthWeaponAchievement(name, description, weaponIndex, ach
                 triggerJustWonStageCheck() && 
                 !isTwoPlayerMode() &&
                 saveProtection() &&
-                never(onMainMenu()) &&
-                once(getFramesElapsed() > prev(getFramesElapsed())) // This shows up when setting up a new musou round. 
+                requireInGame() // This shows up when setting up a new musou round. 
 
                 
 
@@ -3308,8 +3309,7 @@ function createUnlockRareItemAchievement(name, description, itemIndex, achieveme
                     triggerJustWonStageCheck() && 
                     !isTwoPlayerMode() &&
                     saveProtection() &&
-                    never(onMainMenu()) &&
-                    once(getFramesElapsed() > prev(getFramesElapsed())) // This shows up when setting up a new musou round. 
+                    requireInGame()
 
     possibleHits = false 
     for index in range(0,5) // Anything more than this. and it's going to hit the weapon's memory space
@@ -4310,12 +4310,11 @@ achievement("Nothing Gonna Stop Me",
             3,
             trigger = MusouModeOrFreeMode() &&
                       hardModeCheck() &&
-                      never(onMainMenu()) &&
                       triggerJustWonStageCheck() &&
                       firstPlayerNoExperience() &&
                       !isTwoPlayerMode() &&
                       saveProtection() &&
-                      once(getFramesElapsed() > prev(getFramesElapsed())), // This shows up as you set up the next stage if you set the difficulty to hard in the previous one. 
+                      requireInGame(), // This shows up as you set up the next stage if you set the difficulty to hard in the previous one. 
             id = 370360
                       
 )
@@ -4373,10 +4372,10 @@ achievement("All According to Wang Yun’s Plan",
                       checkStageID(BattleAtHuLaoGateStageID) &&
                       checkFactionID(AlliedForcesFactionID) &&
                       !checkIfGeneralKilledByFirstPlayer(DiaoChan) &&
-                      !onMainMenu() &&
                       trigger_when(checkIfGeneralKilledByFirstPlayer(DongZhuo)) &&
                       triggerJustWonStageCheck() && 
-                      !isTwoPlayerMode(),
+                      !isTwoPlayerMode() &&
+                      requireInGame(),
             id = 370363
 )
 
@@ -4389,8 +4388,9 @@ achievement("Diaochan Eclipses the Moon",
             trigger = MusouModeOrFreeMode() &&
                       checkStageID(BattleAtWuZhangPlainsStageID) &&
                       checkFirstPlayerCharacterIndex(DiaoChan) &&
-                      justWonStageCheck()&&
-                      !isTwoPlayerMode(),
+                      triggerJustWonStageCheck()&&
+                      !isTwoPlayerMode() &&
+                      requireInGame(),
             id = 370365
 )
 
@@ -4404,10 +4404,10 @@ achievement("Nanman Jackpot",
                       checkFactionID(NanmanForcesFactionID) &&
                       checkFirstPlayerCharacterIndex(MengHuo) &&
                       !checkNumberGeneralKilled(8) && 
-                      !onMainMenu() &&
                       trigger_when(checkNumberGeneralKilled(7)) && 
                       triggerJustWonStageCheck() &&
-                      !isTwoPlayerMode(),
+                      !isTwoPlayerMode() &&
+                      requireInGame(),
             id = 370366
 )
 
@@ -4422,11 +4422,11 @@ achievement("The Fire Deity Incinerates Chi Bi",
                       ( 
                         checkFactionID(AlliedForcesFactionID)
                       ) &&
-                      !onMainMenu() &&
                       trigger_when(
                         CutsceneIndicator() == VALUE_FOR_CUTSCENE_PLAYING && 
                         CutsceneIndex() == VALUE_FOR_CHIBI_FIRE_SCENE) &&
-                      !isTwoPlayerMode(),
+                      !isTwoPlayerMode() &&
+                      requireInGame(),
             id = 370367
 )
 
@@ -4439,9 +4439,9 @@ achievement("He Dong What?",
                       checkFirstPlayerCharacterIndex(DongZhuo) &&
                       checkStageID(BattleOfChangBanStageID) &&
                       checkFactionID(LiuBeiForcesFactionID) &&
-                      !onMainMenu() &&
                       triggerJustWonStageCheck() &&
-                      !isTwoPlayerMode(),
+                      !isTwoPlayerMode() &&
+                      requireInGame(),
             id = 370364
 )
 
@@ -4455,13 +4455,13 @@ achievement("The Way of Peace",
                       checkStageID(YellowTurbanRebellionStageID) &&
                       checkFirstPlayerCharacterIndex(ZhangJiao) &&
                       firstPlayerKills() < 2 &&
-                      !onMainMenu() &&
                       trigger_when(
                         firstPlayerKills() == 1 &&
                         checkIfGeneralKilledByFirstPlayer(HeJin)
                         ) &&
                       triggerJustWonStageCheck() &&
-                      !isTwoPlayerMode(),
+                      !isTwoPlayerMode() &&
+                      requireInGame(),
             id = 370368
 )
 
@@ -4470,14 +4470,14 @@ achievement("I Brought You Into This World, Now I’m Taking You Out of It",
             5,  // Grindy but not hard. 
             trigger = ChallengeModeOnly() &&
                       CurrentCutsceneLevelIndex() == ChallengeModeEnduranceLevelCutsceneID &&               
-                      !onMainMenu() &&
                       trigger_when(firstPlayerKills() >= 1000) &&
                       triggerJustWonStageCheck() &&
                       (
                         checkFirstPlayerCharacterIndex(FuXi) ||
                         checkFirstPlayerCharacterIndex(NuWa)
                       ) &&
-                      !isTwoPlayerMode(),
+                      !isTwoPlayerMode() &&
+                      requireInGame(),
             id = 370369
 )
 
@@ -4487,10 +4487,10 @@ achievement("Raining Death",
             10, // Time attack time is VERY tight.  If you look up videos, be careful, XL has players gain levels, DW 3 does not.   This could even be 25.
             trigger = ChallengeModeOnly() &&
                       CurrentCutsceneLevelIndex() == ChallengeModeTimeAttackLevelCutsceneID &&               
-                      !onMainMenu() &&
                       triggerJustWonStageCheck() &&
                       getFramesElapsed() <= (4 * 60) * 60 &&  // 4 minutes.  But in frame time. 
-                      !isTwoPlayerMode(),
+                      !isTwoPlayerMode() &&
+                      requireInGame(),
             id = 370370
 )
 
@@ -4507,7 +4507,7 @@ function createNormalPlayStageAchievement(stage, factionID, achievementID)
                         checkStageID(stage["ID"]) &&
                         checkFactionID(factionID) &&
                         !isTwoPlayerMode() &&
-                        once(getFramesElapsed() > prev(getFramesElapsed())),
+                        requireInGame(),
                 id = achievementID
                 )
                 
