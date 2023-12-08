@@ -4026,23 +4026,37 @@ achievement("Collect All Common Items",
 //             id = 370359
 // )
 
-XLocationForFanCastleWuStart = 0x46afc8
-YLocationForFanCastleWuStart = 0xc49600
-ZLocationForFanCastleWuStart = 0x46b798
+// There's an easter egg for Guan Yu being on the Wu side and an intro for the level.  
+// However in code it's mostly the same for Wei.  The one difference is the starting position, so we check the starting position. 
+// BUT WAIT there's more trouble, because if you're riding a horse (Red hare, let's be honest) You won't be at the starting position I expect 
+// So we're going to give it an 0x100 buffer, more than enough for this to work, but that's what will help us trigger the easter egg. 
+function TestForGuanYuEasterEgg()
+{
+    XLocationForFanCastleWuStart = 0x46afc8
+    YLocationForFanCastleWuStart = 0xc49600
+    ZLocationForFanCastleWuStart = 0x46b798
+    MaximumOffset = 0x100
+    
+    return CutsceneIndicator() == VALUE_FOR_CUTSCENE_PLAYING && 
+           CutsceneIndex() == VALUE_FOR_INTRO_SCENE &&  // it's the intro we're looking for. 
+           firstPlayerXPosition() < XLocationForFanCastleWuStart + MaximumOffset &&  
+           firstPlayerXPosition() > XLocationForFanCastleWuStart - MaximumOffset &&  
+           firstPlayerYPosition() < YLocationForFanCastleWuStart + MaximumOffset &&  
+           firstPlayerYPosition() > YLocationForFanCastleWuStart - MaximumOffset &&  
+           firstPlayerZPosition() < ZLocationForFanCastleWuStart + MaximumOffset &&  
+           firstPlayerZPosition() > ZLocationForFanCastleWuStart - MaximumOffset
+}
 FramesForGuanYuEasterEgg = 700
 
 
-achievement("Guan Yu's most difficult enemy?",
+achievement("Guan Yu's Most Difficult Enemy?",
              "Watch the easter egg intro for Fan Castle", 
              2,
              trigger = FreeModeOnly() &&
                        checkFirstPlayerCharacterIndex(GuanYu) &&
                        checkStageID(BattleAtFanCastleStageID) &&
                        checkFactionID(AlliedForcesFactionID) &&
-                       repeated(FramesForGuanYuEasterEgg, CutsceneIndicator() == VALUE_FOR_CUTSCENE_PLAYING && CutsceneIndex() == VALUE_FOR_INTRO_SCENE) &&
-                       firstPlayerXPosition() == XLocationForFanCastleWuStart &&  // Note the magic numbers used for the Guan Yu Achievement are just his location at the start of the stage if players choose the Wu Forces side.  
-                       firstPlayerYPosition() == YLocationForFanCastleWuStart &&  // This is to differenciate it from the Wei Forces side, which looks similar but play a different intro scene. 
-                       firstPlayerZPosition() == ZLocationForFanCastleWuStart &&
+                       repeated(FramesForGuanYuEasterEgg, TestForGuanYuEasterEgg()) &&
                        never(onMainMenu()),
              id = 370359
 )
@@ -4336,7 +4350,7 @@ function createFeastAchievement()
             )
         
     }
-    achievement("A feast fit for Xu Shu",
+    achievement("A Feast Fit for Xu Shu",
         "Enjoy two dim sums and two musou wines in one stage and finish the stage.  Beware if you're already stuffed (max health or max musou), you won't be able to enjoy them" + onePlayerString, 
         2,
         trigger = MusouModeOrFreeMode() &&
