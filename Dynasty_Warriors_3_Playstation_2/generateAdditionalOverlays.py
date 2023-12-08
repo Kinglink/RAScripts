@@ -10,6 +10,9 @@ gold_overlay_path = "../Overlays/Gold Overlay.png"  # Replace with the path to y
 # Path to the silver overlay image
 silver_overlay_path = "../Overlays/Silver Overlay.png"  # Replace with the path to your silver overlay image
 
+# Path to the bronze overlay image
+bronze_overlay_path = "../Overlays/Bronze Overlay.png"  # Replace with the path to your silver overlay image
+
 # Directory to save the final compositions
 output_dir = "Output"
 
@@ -23,17 +26,21 @@ thousand_path = "Generated/Additional/1000.png"  # Replace with the path to your
 pacifist_path = "Generated/Additional/pacifist.png"  # Replace with the path to your pacifist overlay image
 
 diaochan_path = "Generated/Additional/DiaoChanCharacter.png"
+feast_path = "Generated/Additional/A feast for Xu Shu.png"
+guanyu_path = "Generated/Additional/Guan Yu Vs Guan Yu.png"
 food_path = "Generated/Additional/food.png"
-
 
 # Open the sky background image, gold overlay, silver overlay, class16 overlay, thousand overlay, and pacifist overlay
 sky_background = Image.open(sky_background_path)
 gold_overlay = Image.open(gold_overlay_path)
 silver_overlay = Image.open(silver_overlay_path)
+bronze_overlay = Image.open(bronze_overlay_path)
 class16_image = Image.open(class16_path)
 thousand_image = Image.open(thousand_path)
 pacifist_image = Image.open(pacifist_path)
 diaochan_image = Image.open(diaochan_path)
+feast_image = Image.open(feast_path)
+guanyu_image = Image.open(guanyu_path)
 food_image = Image.open(food_path)
 
 # Combine the images for the first composition (class16 overlay)
@@ -93,6 +100,7 @@ composition_food.save(output_path_food)
 composition_diaochan = Image.new("RGBA", sky_background.size)
 composition_diaochan.paste(sky_background, (0, 0))
 composition_diaochan.paste(diaochan_image, (0, 0), diaochan_image)
+composition_diaochan.paste(bronze_overlay, (0, 0), bronze_overlay)
 
 # Generate the output file name for the third composition, replacing spaces with underscores
 output_filename_diaochan = "diaochan_composition.png"
@@ -100,6 +108,32 @@ output_path_diaochan = os.path.join(output_dir, output_filename_diaochan)
 
 # Save the third composition with silver overlay
 composition_diaochan.save(output_path_diaochan)
+
+# Combine the images for the third composition (guanyu overlay)
+composition_guanyu = Image.new("RGBA", sky_background.size)
+composition_guanyu.paste(sky_background, (0, 0))
+composition_guanyu.paste(guanyu_image, (0, 0), guanyu_image)
+composition_guanyu.paste(bronze_overlay, (0, 0), bronze_overlay)
+
+# Generate the output file name for the third composition, replacing spaces with underscores
+output_filename_guanyu = "guanyu_composition.png"
+output_path_guanyu = os.path.join(output_dir, output_filename_guanyu)
+
+# Save the third composition with silver overlay
+composition_guanyu.save(output_path_guanyu)
+
+# Combine the images for the third composition (diaochan overlay)
+composition_feast = Image.new("RGBA", sky_background.size)
+composition_feast.paste(sky_background, (0, 0))
+composition_feast.paste(feast_image, (0, 0), feast_image)
+composition_feast.paste(bronze_overlay, (0, 0), bronze_overlay)
+
+# Generate the output file name for the third composition, replacing spaces with underscores
+output_filename_feast = "feast_composition.png"
+output_path_feast = os.path.join(output_dir, output_filename_feast)
+
+# Save the third composition with silver overlay
+composition_feast.save(output_path_feast)
 
 # Close the images
 sky_background.close()
