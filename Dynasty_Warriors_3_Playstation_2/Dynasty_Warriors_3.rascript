@@ -3776,7 +3776,7 @@ createUnlockFourthWeaponAchievement("Peacock Feather",
                                     PeacockFeather,
                                     370461)
 createUnlockFourthWeaponAchievement("Wrath of Heaven",
-                                    "Unlock Wrath Of Heaven", 
+                                    "Unlock Wrath of Heaven", 
                                     WrathOfHeaven,
                                     370462)
 createUnlockFourthWeaponAchievement("Sky Scorcher",
@@ -3872,7 +3872,7 @@ createUnlockFourthWeaponAchievement("Tornado Staff",
                                     TornadoStaff,
                                     370485)
 createUnlockFourthWeaponAchievement("King of Beasts",
-                                    "Unlock King Of Beasts", 
+                                    "Unlock King of Beasts", 
                                     KingOfBeasts,
                                     370486)
 createUnlockFourthWeaponAchievement("Magma Wheel",
@@ -3909,7 +3909,7 @@ createUnlockRareItemAchievement("Imperial Saddle",
                                  ImperialSaddle,
                                  370494)
 createUnlockRareItemAchievement("Art of War", 
-                                 "Unlock Art Of War", 
+                                 "Unlock Art of War", 
                                  ArtOfWar,
                                  370495)
 createUnlockRareItemAchievement("Bodyguard Manual", 
@@ -3917,7 +3917,7 @@ createUnlockRareItemAchievement("Bodyguard Manual",
                                  BodyguardManual,
                                  370496)
 createUnlockRareItemAchievement("Way of Musou", 
-                                 "Unlock Way Of Musou", 
+                                 "Unlock Way of Musou", 
                                  WayOfMusou,
                                  370497)
 createUnlockRareItemAchievement("Survival Guide", 
@@ -4320,7 +4320,7 @@ stageArray =
 
 // “Beat a Hard mode level with a rank 16 character”  (Missable, and will guard against 2p being above a rank 16 as well, you need to take a completely fresh character to beat this. ) 
 achievement("Nothing Gonna Stop Me",
-            "Beat a hard mode level with a character with no experience points and at rank 16" + onePlayerString, 
+            "Beat a hard mode level as a character with no experience points and at rank 16" + onePlayerString, 
             3,
             trigger = MusouModeOrFreeMode() &&
                       hardModeCheck() &&
@@ -4351,7 +4351,7 @@ function createFeastAchievement()
         
     }
     achievement("A Feast Fit for Xu Shu",
-        "Enjoy two dim sums and two musou wines in one stage and finish the stage.  Beware if you're already stuffed (max health or max musou), you won't be able to enjoy them" + onePlayerString, 
+        "Enjoy two dim sums and two musou wines in one stage and finish the stage.  Beware if you're already stuffed (near max health or max musou), you won't be able to enjoy them" + onePlayerString, 
         2,
         trigger = MusouModeOrFreeMode() &&
                   wonStageCheck() &&
@@ -4379,7 +4379,7 @@ achievement("True Legend of the Three Kingdoms",
 )
 
 achievement("All According to Wang Yun’s Plan",
-            "Kill Dong Zhuo at the Battle of Hu Lao Gate as Lu Bu, but avoid killing your love, Diaochan" + onePlayerString, 
+            "Kill Dong Zhuo at the Battle of Hu Lao Gate as Lu Bu, but avoid killing your love, Diao Chan" + onePlayerString, 
             2,
             trigger = MusouModeOrFreeMode() &&
                       checkFirstPlayerCharacterIndex(LuBu) &&
@@ -4396,8 +4396,8 @@ achievement("All According to Wang Yun’s Plan",
 
 // - Complete -Insert Night Time Stage- as Diaochan in Free Mode
 //Diaochan was part of the four great beauties of Ancient China and each had an idiom to their name with her's being "Diaochan eclipses the moon"
-achievement("Diaochan Eclipses the Moon",
-            "Complete Wu Zhang Plain on any side while playing Diaochan in Free Mode" + onePlayerString, 
+achievement("Diao Chan Eclipses the Moon",
+            "Complete Wu Zhang Plain on any side as Diao Chan in Free Mode" + onePlayerString, 
             3,
             trigger = MusouModeOrFreeMode() &&
                       checkStageID(BattleAtWuZhangPlainsStageID) &&
@@ -4428,7 +4428,7 @@ achievement("Nanman Jackpot",
 // The Fire Deity Incinerates Chi Bi - Trigger the flame attack in The Battle at Chi Bi as Zhurong
 // A key factor of The Battle of Chi Bi is the fire spreading through Cao Cao's ships.
 achievement("The Fire Deity Incinerates Chi Bi",
-            "Ignite Cao Cao's ships with Zhu Rong in Free Mode at The Battle of Chi Bi" + onePlayerString, 
+            "Ignite Cao Cao's ships as Zhu Rong in Free Mode at The Battle of Chi Bi" + onePlayerString, 
             1,
             trigger = MusouModeOrFreeMode() &&
                       checkFirstPlayerCharacterIndex(ZhuRong) &&
@@ -4480,7 +4480,7 @@ achievement("The Way of Peace",
 )
 
 achievement("I Brought You Into This World, Now I’m Taking You Out of It",
-            "Finish a Challenge mode Endurance with Fu Xi or Nu Wa killing at least 1000 enemies" + onePlayerString, 
+            "Finish a Challenge mode Endurance killing at least 1000 enemies as Fu Xi or Nu Wa " + onePlayerString, 
             5,  // Grindy but not hard. 
             trigger = ChallengeModeOnly() &&
                       CurrentCutsceneLevelIndex() == ChallengeModeEnduranceLevelCutsceneID &&               
@@ -4536,7 +4536,7 @@ function CreateAchievementsForStage(stage, achievementID, killLeaderboardsID, fa
     // state: a dictionary of stage information. 
     
     achievement(format("Ultimate Challenge: {0}", StageLookup[stage["ID"]]), 
-                format("Beat {0} on hard difficulty without using an in-game save.  This can be done in Free mode" + onePlayerString, StageLookup[stage["ID"]]),
+                format("Beat {0} on hard difficulty without using an in-game save. " + onePlayerString, StageLookup[stage["ID"]]),
                 5, 
                 trigger =                                         MusouModeOrFreeMode() &&
                         hardModeCheck() &&
