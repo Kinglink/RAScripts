@@ -3109,7 +3109,7 @@ function ChallengeModeOnly() => GameplayMode() == ChallengeMode
 function MusouModeOrFreeMode() => MusouModeOnly() || FreeModeOnly()
 
 // This makes sure it won't show up when setting up a new musou round or in demo
-function requireInGame() => never(onMainMenu()) && once(getFramesElapsed() > prev(getFramesElapsed()))
+function requireInGame() => !inDemoCurrently() && never(onMainMenu()) && once(getFramesElapsed() > prev(getFramesElapsed()))
 
 VALUE_FOR_ITEM_LOCK = 0x19
 
