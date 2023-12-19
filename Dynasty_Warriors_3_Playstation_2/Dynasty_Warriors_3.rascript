@@ -3,7 +3,9 @@
 
 // NOTE all code notes may change, please check RA for the latest code notes. 
 
-onePlayerString = " (1p)"
+onePlayerString = " [1P]"
+asASinglePlayerString = " as a single player"
+
 
 // Character enumeration
 ZhaoYun = 0x00
@@ -3199,7 +3201,7 @@ function createMusouModeAchievement(musouObject, hardMode = false)
     // hardMode: true if this is for hardmode, false otherwise. 
     // TODO : Need to check if two player mode is acceptable to devCompliance. 
     achievement(musouObject["name"],
-                musouObject["description"] + onePlayerString, 
+                musouObject["description"] + asASinglePlayerString, 
                 musouObject["points"],
                 trigger = MusouModeOnly() &&
                           musouComplete(musouObject["index"]) && 
@@ -3222,7 +3224,7 @@ function createHardMusouModeAchievement(musouObject)
     //      index:  Index of Character to check against
     targetMusouStages = numberofMusouStages(musouObject["index"])
     achievement(musouObject["name"],
-                musouObject["description"] + onePlayerString, 
+                musouObject["description"], 
                 musouObject["points"],
                 trigger = measured(tally_of(range(1,targetMusouStages), 
                                             targetMusouStages,  
@@ -3289,7 +3291,7 @@ function createUnlockFourthWeaponAchievement(name, description, weaponIndex, ach
                             byte(MemoryLocationOfFirstInStageWeaponCollected + SizeOfInGameWeaponDrop * index) == weaponIndex
                         )
     achievement(name,
-                description + onePlayerString, 
+                description + asASinglePlayerString, 
                 5,
                 trigger = targetTrigger && possibleHits,
                 id = achievementID 
@@ -3320,7 +3322,7 @@ function createUnlockRareItemAchievement(name, description, itemIndex, achieveme
                         )
     
     achievement(name,
-                description + onePlayerString, 
+                description + asASinglePlayerString, 
                 3,
                 trigger = targetTrigger && possibleHits,
                 id = achievementID
@@ -3337,7 +3339,7 @@ function characterDefinition(
                     musouModeAvailable = true,
                     musouModeName = "",
                     musouModeDescription = "",
-                    musouModePoints = 2,
+                    musouModePoints = 5,
                     musouModeAchievementID = 0,
                     hardMusouModeName = "",
                     hardMusouModeDescription = "",
@@ -3388,7 +3390,7 @@ function characterDefinition(
         }
         if(hardMusouModeObject["description"] == "")
         {
-            hardMusouModeObject["description"] = format("Beat {0}'s entire Musou Mode on hard difficulty in one session", name)
+            hardMusouModeObject["description"] = format("Beat {0}'s entire Musou Mode on hard difficulty{1} in one session", name, asASinglePlayerString)
         }
         array_push(hardMusouMode, hardMusouModeObject)
     }
@@ -3717,7 +3719,7 @@ for unlockObject in characterUnlock
     
 
 // FUTURETODO: Find a way to check save?  May not be important. 
-achievement("The gang's all here",
+achievement("The Gang's All Here",
             "Unlock Lu Xun, Da Qiao, Xu Zhu, Zhen Ji, Ma Chao, and Wei Yan, either through completing one of each faction's musou modes, or having a DW 2 save file", 
                 0,
                 trigger = characterNowUnlocked(LuXunUnlocked()) && 
@@ -4320,7 +4322,7 @@ stageArray =
 
 // “Beat a Hard mode level with a rank 16 character”  (Missable, and will guard against 2p being above a rank 16 as well, you need to take a completely fresh character to beat this. ) 
 achievement("Nothing Gonna Stop Me",
-            "Beat a hard mode level as a character with no experience points and at rank 16" + onePlayerString, 
+            "Beat a hard mode level as a character with no experience points and at rank 16" + asASinglePlayerString, 
             3,
             trigger = MusouModeOrFreeMode() &&
                       hardModeCheck() &&
@@ -4351,7 +4353,7 @@ function createFeastAchievement()
         
     }
     achievement("A Feast Fit for Xu Shu",
-        "Enjoy two dim sums and two musou wines in one stage and finish the stage.  Beware if you're already stuffed (near max health or max musou), you won't be able to enjoy them" + onePlayerString, 
+        "Enjoy two dim sums and two musou wines in one stage and finish the stage" + asASinglePlayerString + ".  Beware if you're already stuffed (near max health or max musou), you won't be able to enjoy them",
         2,
         trigger = MusouModeOrFreeMode() &&
                   wonStageCheck() &&
@@ -4367,7 +4369,7 @@ createFeastAchievement()
 
 // “True Legend of the Three Kingdoms”  Beat 1000 enemies on a single level on Hard difficulty.
 achievement("True Legend of the Three Kingdoms",
-            "Earn 1000 Kills on hard mode and finish the stage" + onePlayerString, 
+            "Earn 1000 Kills on hard mode and finish the stage" + asASinglePlayerString, 
             5,
             trigger = MusouModeOrFreeMode() &&
                       hardModeCheck() &&
@@ -4397,7 +4399,7 @@ achievement("All According to Wang Yun’s Plan",
 // - Complete -Insert Night Time Stage- as Diaochan in Free Mode
 //Diaochan was part of the four great beauties of Ancient China and each had an idiom to their name with her's being "Diaochan eclipses the moon"
 achievement("Diao Chan Eclipses the Moon",
-            "Complete Wu Zhang Plain on any side as Diao Chan in Free Mode" + onePlayerString, 
+            "Complete Wu Zhang Plain on any side as Diao Chan in Free Mode" + asASinglePlayerString, 
             3,
             trigger = MusouModeOrFreeMode() &&
                       checkStageID(BattleAtWuZhangPlainsStageID) &&
@@ -4411,7 +4413,7 @@ achievement("Diao Chan Eclipses the Moon",
 // Nanman Jackpot - Defeat 7 Officers as Meng Huo during Battle of Nanman with the last being Zhuge Liang.
 // Meng Huo was famously captured by Zhuge Liang during the Southern Campaign (Battle of Nanman) Seven Times.
 achievement("Nanman Jackpot",
-            "Defeat exactly 7 Officers as Meng Huo during Battle of Nanman with the Nanman Forces"  + onePlayerString + " (Kills must be done by the player, bodyguard and other kills will not count)", 
+            "Defeat exactly 7 Officers as Meng Huo during Battle of Nanman with the Nanman Forces"  + asASinglePlayerString + " (Kills must be done by the player, bodyguard and other kills will not count)", 
             2,
             trigger = MusouModeOrFreeMode() &&
                       checkStageID(NanmanCampaignStageID) &&
@@ -4428,7 +4430,7 @@ achievement("Nanman Jackpot",
 // The Fire Deity Incinerates Chi Bi - Trigger the flame attack in The Battle at Chi Bi as Zhurong
 // A key factor of The Battle of Chi Bi is the fire spreading through Cao Cao's ships.
 achievement("The Fire Deity Incinerates Chi Bi",
-            "Ignite Cao Cao's ships as Zhu Rong in Free Mode at The Battle of Chi Bi" + onePlayerString, 
+            "Ignite Cao Cao's ships as Zhu Rong in Free Mode at The Battle of Chi Bi" + asASinglePlayerString, 
             1,
             trigger = MusouModeOrFreeMode() &&
                       checkFirstPlayerCharacterIndex(ZhuRong) &&
@@ -4447,7 +4449,7 @@ achievement("The Fire Deity Incinerates Chi Bi",
 // He Dong What? - Complete The Battle of Changban (Liu Bei) as Dong Zhuo
 // Dong Zhuo I've had some trouble thinking of anything for him, so I came up with the idea of playing him during a stage that is the opposite of his personality of being the most evil guy. The Battle of Changban is the battle where Zhao Yun famously rescued Liu Shan from Cao Cao's army.
 achievement("He Dong What?",
-            "Complete The Battle of Chang Ban on Liu Bei's Side in Free Mode while playing Dong Zhuo" + onePlayerString, 
+            "Complete The Battle of Chang Ban on Liu Bei's Side in Free Mode while playing Dong Zhuo" + asASinglePlayerString, 
             2,
             trigger = MusouModeOrFreeMode() &&
                       checkFirstPlayerCharacterIndex(DongZhuo) &&
@@ -4463,7 +4465,7 @@ achievement("He Dong What?",
 // The Way of Peace - Complete The Yellow Turban stage as Zhang Jiao only defeating the necessary enemy generals
 // The book that is said to have inspired Zhang Jiao to start the Yellow Turban rebellion was called The Way of Peace
 achievement("The Way of Peace",
-            "Complete the Yellow Turban's Rebellion as Zhang Jiao in Free Mode only killing the necessary enemy general, and no one else" + onePlayerString, 
+            "Complete the Yellow Turban's Rebellion as Zhang Jiao in Free Mode only killing the necessary enemy general, and no one else" + asASinglePlayerString, 
             1,
             trigger = MusouModeOrFreeMode() &&
                       checkStageID(YellowTurbanRebellionStageID) &&
@@ -4480,7 +4482,7 @@ achievement("The Way of Peace",
 )
 
 achievement("I Brought You Into This World, Now I’m Taking You Out of It",
-            "Finish a Challenge mode Endurance killing at least 1000 enemies as Fu Xi or Nu Wa " + onePlayerString, 
+            "Finish a Challenge mode Endurance killing at least 1000 enemies as Fu Xi or Nu Wa " + asASinglePlayerString, 
             5,  // Grindy but not hard. 
             trigger = ChallengeModeOnly() &&
                       CurrentCutsceneLevelIndex() == ChallengeModeEnduranceLevelCutsceneID &&               
@@ -4497,7 +4499,7 @@ achievement("I Brought You Into This World, Now I’m Taking You Out of It",
 
 
 achievement("Raining Death",
-            "Finish a Challenge mode Time Attack in less than 4 minutes" + onePlayerString, 
+            "Finish a Challenge mode Time Attack in less than 4 minutes" + asASinglePlayerString, 
             10, // Time attack time is VERY tight.  If you look up videos, be careful, XL has players gain levels, DW 3 does not.   This could even be 25.
             trigger = ChallengeModeOnly() &&
                       CurrentCutsceneLevelIndex() == ChallengeModeTimeAttackLevelCutsceneID &&               
@@ -4513,7 +4515,7 @@ function createNormalPlayStageAchievement(stage, factionID, achievementID)
     factionName = FactionNameLookup[factionID]
     factionForces = FactionForcesLookup[factionID]
     achievement( format("{0} ({1})", StageLookup[stage["ID"]], factionName), 
-                format("Complete {0} as the {1}", StageLookup[stage["ID"]], factionForces),
+                format("Complete {0} as the {1}{2}", StageLookup[stage["ID"]], factionForces, asASinglePlayerString),
                 1, 
                 trigger = FreeModeOnly() &&
                         never(onMainMenu()) &&
@@ -4536,7 +4538,7 @@ function CreateAchievementsForStage(stage, achievementID, killLeaderboardsID, fa
     // state: a dictionary of stage information. 
     
     achievement(format("Ultimate Challenge: {0}", StageLookup[stage["ID"]]), 
-                format("Beat {0} on hard difficulty without using an in-game save. " + onePlayerString, StageLookup[stage["ID"]]),
+                format("Beat {0} on hard difficulty without using an in-game save" + asASinglePlayerString, StageLookup[stage["ID"]]),
                 5, 
                 trigger =                                         MusouModeOrFreeMode() &&
                         hardModeCheck() &&
@@ -4553,7 +4555,7 @@ function CreateAchievementsForStage(stage, achievementID, killLeaderboardsID, fa
 
     leaderboard(
         title = format("Most Kills on {0}",  StageLookup[stage["ID"]]),
-        description = format("Get the most kills on {0} and win the stage" + onePlayerString,  StageLookup[stage["ID"]]),
+        description = format("Get the most kills on {0} and win the stage" + asASinglePlayerString,  StageLookup[stage["ID"]]),
         start = 
         (
             MusouModeOrFreeMode() &&
@@ -4571,7 +4573,7 @@ function CreateAchievementsForStage(stage, achievementID, killLeaderboardsID, fa
 
     leaderboard(
         title = format("Fastest Run on Stage {0}", StageLookup[stage["ID"]]),
-        description = format("Get through the stage {0} the fastest" + onePlayerString,  StageLookup[stage["ID"]]),
+        description = format("Get through the stage {0} the fastest" + asASinglePlayerString,  StageLookup[stage["ID"]]),
         
         start  =
         (
@@ -4601,7 +4603,7 @@ function CreateAchievementsForStageFaction(stage, factionID, achievementID, kill
         factionName = FactionNameLookup[factionID]
         factionForces = FactionForcesLookup[factionID]
         achievement( format("Ultimate Challenge: {0}({1})", StageLookup[stage["ID"]], factionName), 
-                    format("Beat {0} with the {1} on hard difficulty without using an in-game save.  This can be done in Free mode" + onePlayerString, StageLookup[stage["ID"]], factionForces),
+                    format("Beat {0} with the {1} on hard difficulty without using an in-game save"+ asASinglePlayerString + ".  This can be done in Free mode", StageLookup[stage["ID"]], factionForces),
                     5, 
                     trigger = MusouModeOrFreeMode() &&
                             hardModeCheck() &&
@@ -4621,7 +4623,7 @@ function CreateAchievementsForStageFaction(stage, factionID, achievementID, kill
 
         leaderboard(
             title = format("Most Kills in {0} With {1}",  StageLookup[stage["ID"]], factionName),
-            description = format("Get the most kills on {0} on the {1} and win the stage" + onePlayerString,  StageLookup[stage["ID"]], factionForces),
+            description = format("Get the most kills on {0} on the {1} and win the stage" + asASinglePlayerString,  StageLookup[stage["ID"]], factionForces),
             start = 
             (
                 MusouModeOrFreeMode() &&
@@ -4640,7 +4642,7 @@ function CreateAchievementsForStageFaction(stage, factionID, achievementID, kill
 
         leaderboard(
             title = format("Fastest Run on Stage {0} With {1}", StageLookup[stage["ID"]], factionName),
-            description = format("Get through the stage {0} on the {1} the fastest" + onePlayerString,  StageLookup[stage["ID"]], factionForces),
+            description = format("Get through the stage {0} on the {1} the fastest" + asASinglePlayerString,  StageLookup[stage["ID"]], factionForces),
             
             start  =
             (
@@ -4707,7 +4709,7 @@ achievement("So That’s What Everyone Else Was Doing",
 
 // “Beat a level without letting your health drop below 50 percent”  Could be done with UI elements, but considering using a pointer here just to demonstrate that, even if it’s a  less efficent way to do so. 
 achievement( format("None of You Are Even Half as Good as Me"), 
-             format("Beat a level with out letting your health drop below 50 percent on normal or hard, or using an in-game save" + onePlayerString),
+             format("Beat a level with out letting your health drop below 50 percent on normal or hard, or using an in-game save" + asASinglePlayerString),
              3, 
              trigger = normalOrHardCheck() &&
                        triggerJustWonStageCheck() &&
@@ -4835,7 +4837,7 @@ leaderboard(
 
 leaderboard(
     title = format("Most kills in Challenge Mode Endurance"),
-    description = format("Get the most kills in a single Challenge Mode Endurance run" + onePlayerString),
+    description = format("Get the most kills in a single Challenge Mode Endurance run" + asASinglePlayerString),
     start = 
     (
         ChallengeModeOnly() &&
@@ -4852,7 +4854,7 @@ leaderboard(
 
 leaderboard(
     title = format("Fastest Time to Finish Challenge Mode Time Attack"),
-    description = format("Complete Challenge Mode's Time Attack as fast as possible" + onePlayerString),
+    description = format("Complete Challenge Mode's Time Attack as fast as possible" + asASinglePlayerString),
     start = 
     (
         ChallengeModeOnly() &&
