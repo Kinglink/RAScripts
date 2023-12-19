@@ -1,11 +1,12 @@
-// Longest battle?  
-// Shortest battle?  1 minute?  30 seconds? 
-// so random.
-
 // Clear an entire team in one daY? 
 
 // Beat an entire team with no losses? 
 // Done, day one rolling guys. 
+
+Reset on end of a day  
+mark No one on team is not beaten
+Check if entire team is beaten.
+Check if entire team has no losses and no draws.
 
 // 200 + MPH ticket. 
 
@@ -14,57 +15,86 @@
 
 // 10 wins in a day. 
 
+End of day, was there 10 wins? 
+
 // 20 wins in a day. 
 
+End of day, was there 20 wins? 
+
 // 20 wins in a day no losses, no ties. 
+End of day was there 20 wins, and no change of losses or draws? 
+
 // 10 unique wins in a day no losses? ) 
 
+End of day, no losses, no ties, and at least 20 bits have changed in wins? 
+
 // Max all improvements? 
+Meh
+
 // Unlock all improvements? (Distance) 
+Check distance current car has traveled (is that getable?) 
+
+
 // Buy X car. 
 // Probably buy a car over X price.
+See price change in car shop? 
+
 
 // Drive the AE86 against someone and win. 
 // which one? 
-
-// High life battle 
-// This is ... I don't know so random. 
+Win a race while driving a car? 
 
 // Low life battle 
+
+Win a race with less then X life left? 
 
 // Unlock the ability to buy all cars
 // 50 percent?  
 // 75 percent?
 // All non king cars? 
 
+10, 50, 75.  Remember not to count initial cars. 
+
 // Beat each leader and devil.  Also the zodiacs, and the devil. 
+Check if the beat X changes in game. 
 
 // Beat each set of 5 wanders?   Maybe 8? 
+Need to think more but this makes sense. 
 
 // Beat everyone.
+Beat FInal guy.  See above. 
 
 // Get a draw 
+Easy but let's do it. 
+Check if draw count changes, and in game. 
 
 // Break a certain speed. 
 // 150? 
 // 160 is certainly possible with speed King's car. 
 // 250 KPH = 155something MPH
+Need to calculate this, but just grab max speed. 
 
 // Machine guns, and siren. 
+Doesn't exist in this version of the game. 
 
 // Mirror ornaments
+Got it. 
 
 // Time attack
+Going to do 3 of them  C short course.  B After finishing speed king. 
 
-// 12 time trials?  36? 
+A End game. Full wangan. 
+
+Leaderboards for everything here. 
 
 // Watch the trailer for Fast and furious.
+
 
 /////////////////
 // NEEDS 
 ////////////////
 
-
-
+Purchase a car? 
+Watching trailer for Fast and furious? 
 
 Changing instruction 00189218 to subu s1,s1,v1  is easy mode. 
