@@ -19,6 +19,11 @@ function arcadeLevelIndex() => byte(0x044802)
 //          0x03 = Elevator Action (Arcade)
 function arcadeModeSwitch() => byte(0x19FD04)
 
+ARCADE_MODE_SWITCH_ELEVATOR_ACTION_RETURNS_VALUE = 0x00
+ARCADE_MODE_SWITCH_ELEVATOR_ACTION_ARCADE_VALUE = 0x03
+function elevatorActionReturns() => arcadeModeSwitch() == ARCADE_MODE_SWITCH_ELEVATOR_ACTION_RETURNS_VALUE
+function elevatorActionArcade() => arcadeModeSwitch() == ARCADE_MODE_SWITCH_ELEVATOR_ACTION_RETURNS_VALUE
+
 // $19FD24: (8-bit) Second player's Credits Remaining.
 //          
 //          0x04 = Normal gameplay.
@@ -26,6 +31,8 @@ function arcadeModeSwitch() => byte(0x19FD04)
 //          
 //          All other values probably means second player is active.
 function secondPlayerCreditsRemaining() => byte(0x19FD24)
+
+SECOND_PLAYER_CREDIT_REMAING_CORRECT_VALUE = 0x04
 
 // $19FD25: (8-bit) First Player Credits Remaining
 //          
@@ -44,6 +51,14 @@ function firstPlayerCreditsRemaining() => byte(0x19FD25)
 //          0x05 = Mission 6 Vermillion Sun
 function levelId() => byte(0x1A10F2)
 
+LEVEL_ONE = 0
+LEVEL_TWO = 1
+LEVEL_THREE = 2
+LEVEL_FOUR = 3
+LEVEL_FIVE = 4
+LEVEL_SIX = 5
+LEVEL_POSTGAME = 6 // only triggered when beating level 6, either way.
+
 // $1A110D: (8-bit) Game Level (Difficulty)
 //          
 //          0x00 = Easy
@@ -58,17 +73,21 @@ Hard = 0x02
 // Everyone
 function easyModeAndAbove() => true
 function normalModeAndAbove() => gameDifficulty() >= Normal
-function hardModeAndAbove() => gameDifficulty()  == Hard
+function hardMode() => gameDifficulty()  == Hard
 
 // $1A1162: (8-bit) Cheat mod option for Player Stock
 //          
 //          If this is set to any value other than 0x1 CHEATING!!!!!
 function playerStockOption() => byte(0x1A1162)
 
+REQUIRED_PLAYER_STOCK_SETTING = 0x1
+
 // $1A1164: (8-bit) Cheat mod option for Bomb Stock
 //          
 //          If this is set to any value other than 0x14 CHEATING!!!!!
 function bombStockOption() => byte(0x1A1164)
+
+REQUIRED_BOMB_STOCK_SETTING = 0x14
 
 // $1A1166: (8-bit) Violence mode
 //          
@@ -78,6 +97,9 @@ function bombStockOption() => byte(0x1A1164)
 //          
 //          Just adds more blood.
 function violenceMode() => byte(0x1A1166)
+
+ULTRA_VIOLENCE_OPTION_VALUE = 0x01
+function ultraViolence() => violenceMode() == ULTRA_VIOLENCE_OPTION_VALUE
 
 // $1A9C76: (8-bit) Blue door roulette Indicator.
 //          
@@ -90,17 +112,24 @@ function blueDoorIndicator() => byte(0x1A9C76)
 //          
 //          Appears to be a representation of the script for a level.   What it means will vary. But It's been tracked down on level 1 as needed
 //          
-//          0x00 = Start of level (always)
+//          0x00 = Start of level (always) 
 //          0x01 = Level 1 open first Red door.
 //          0x03 = Level 1 Big Gun shots
 //          0x04 = Level 1 Building collapses
-//          0x05 = Level 1 Gameplay resumes. .
+//          0x05 = Level 1 Gameplay resumes. . 
 //          
-//          Note 0x03 0x04 and 0x05 happen quickly after each other, but they're different parts of what ever appears to be the script. 0x05 on level 1 is a safe assumption that players will see, and can be used for the achievement in mind.
+//          Note 0x03 0x04 and 0x05 happen quickly after each other, but they're different parts of what ever appears to be the script. 0x05 on level 1 is a safe assumption that players will see, and can be used for the achievement in mind. 
 //          
 //          
 //          On Level 2. 0x04 is inside the aircraft, 0x05 and 0x06 is when the aircraft blows up and the player walks out of the aircraft.
-function levelScriptIndex() => byte(0x1ADE91)
+//          
+//          On Stage 6 after 0x04 (0x04 and 0x05) Caution will constantly play.  This is acceptable for no caution. 
+//          
+//          (For Stage 6 It appears to be 0x01 after first door, 0x02 after second, and 0x03 after third, but those values are probably not needed)
+function levelScriptIndex() => byte(0x1ADE90)
+
+LEVEL_ONE_SCRIPT_INDEX_END_CUTSCENE = 0x05
+STAGE_SIX_LEVEL_SCRIPT_INDEX_FINALE_BEGIN = 0x04
 
 // $1ADEA6: (16-bit) Time until Caution alarm.
 //          
@@ -114,6 +143,10 @@ function timeUntilCaution() => word(0x1ADEA6)
 //          0x00 = Jad the Taff
 function firstPlayerCharacterId() => byte(0x1B0648)
 
+Kart = 0x02
+Edie = 0x01
+Jad = 0x00
+
 // $1B064A: (8-bit) First player lives remaining
 //          
 //          (Always starts at 1 life, meaning two lives)
@@ -121,6 +154,8 @@ function firstPlayerCharacterId() => byte(0x1B0648)
 //          0x0 = No lives left (Check health)
 //          0x1 = Starting value (1 life remaining)
 function firstPlayerLivesRemaining() => byte(0x1B064A)
+
+MAX_LIVES = 1
 
 // $1B065A: (16-bit)  In Game Score
 //          
@@ -218,127 +253,398 @@ function initialEnemyAnimation() => word(0x1CB537)
 //          
 //          Character will fall if this isn't on the ground.
 function initialEnemyXPosition() => word(0x1CB570)
+function offsetInitialEnemyXPosition(index) => word(0x1CB570 + offsetMath(index))
 
 // $1CB574: (16-bit) Initial Enemy's Y position on the screen.
 //          
 //          Character will fall if this isn't on the ground.
 function initialEnemyYPosition() => word(0x1CB574)
-
+function offsetInitialEnemyYPosition(index) => word(0x1CB574 + offsetMath(index))
 // $1CB582: (8-bit) Initial Enemy's hp on the first level of the game.
 //          
 //          Likely reused, but an example of a NPC
+LOCATION_OF_FIRST_ENEMY_ARRAY_HP = 0x1CB582 
 function initialEnemyHP() => byte(0x1CB582)
+function offsetInitialEnemyHP(index) => byte(0x1CB582 + offsetMath(index))
 
-function cheatProtection() => true
 
 
+// $1ADEE8: (8-bit) Stage 6 Success check.
+//          
+//          This will be set to 0x02 if the player stops the bomb at the end of stage six (full success).  This gets set to 0x0c if the bomb blows up.
+function stage6FinaleCheck() => byte(0x1ADEE8)
+// These are not boolean values, 0 means it hasn't been finished. 
+STAGE_SIX_FINALE_SUCCESS_VALUE = 0x02
+STAGE_SIX_FINALE_FAILED_VALUE = 0x0c
+function stage6Success() =>  stage6FinaleCheck() == STAGE_SIX_FINALE_SUCCESS_VALUE
+function stage6Failed() =>  stage6FinaleCheck() == STAGE_SIX_FINALE_FAILED_VALUE
+
+// $19eab5: (8-bit) First stage started check
+// 
+// 0x01 = on Main menu, Character select, and initial briefing screen.
+// 0x00 = All Other times. 
+// 
+// This should be used to do a hit when the game started (After choosing your character).  For everything else please see First Player Joined at 0x1c9a0f
+function firstStageStartedCheck() => byte(0x19eab5)
+
+FIRST_STAGE_STARTED_CHECK_CHARACTER_SELECT = 0x01
+FIRST_STAGE_STARTED_CHECK_IN_GAME = 0x00
+
+function cheatProtection()
+{
+    // first the first player must be playing. 
+    return firstPlayerJoined() == 1  && 
+           // Second player must not, but the credit remaining value should be correct. 
+           secondPlayerCreditsRemaining() == SECOND_PLAYER_CREDIT_REMAING_CORRECT_VALUE &&
+           secondPlayerJoined() == 0 &&
+           // Secret Options must be correct. 
+           playerStockOption() == REQUIRED_PLAYER_STOCK_SETTING &&
+           bombStockOption() == REQUIRED_BOMB_STOCK_SETTING &&
+           // And just in case, the first player should never have more than 1 lives remaining. 
+           firstPlayerLivesRemaining() <= 1
+}
+
+
+function normalLevelAchievement(title, levelNumber, points)
+{
+    achievement(title = title,
+            description = format("Beat Stage {0} on normal or hard difficulty", levelNumber + 1),
+            points = points, 
+            trigger = elevatorActionReturns() &&
+                      cheatProtection() &&
+                      normalModeAndAbove() &&
+                      prev(levelId()) == levelNumber &&
+                      levelId() == levelNumber + 1
+            )
+}
+
+function hardLevelAchievement(title, levelNumber, points)
+{
+    achievement(title = title,
+            description = format("Beat Stage {0} on hard difficulty", levelNumber + 1),
+            points = points, 
+            trigger = elevatorActionReturns() &&
+                      cheatProtection() &&
+                      hardMode() &&
+                      prev(levelId()) == levelNumber &&
+                      levelId() == levelNumber + 1
+            )
+}
+
+function noDeathLevelAchievement(title, levelNumber, points)
+{
+    if (levelNumber != 0)
+    {
+        achievement(title = title, 
+                description = format("Beat Stage {0} on normal or hard difficulty with out losing a life", levelNumber + 1),
+                points = points, 
+                trigger = elevatorActionReturns() &&
+                          cheatProtection() &&
+                          normalModeAndAbove() &&
+                          once( prev(levelId()) == levelNumber - 1 &&
+                                levelId() == levelNumber ) &&
+                          never(firstPlayerLivesRemaining() != prev(firstPlayerLivesRemaining())) &&
+                          trigger_when( prev(levelId()) == levelNumber &&
+                                        levelId() == levelNumber + 1 )
+                )
+    }
+}
+
+function levelAchievement(title, levelNumber, normalPoints, hardPoints, immortalPoints) {
+    normalLevelAchievement(title, levelNumber, normalPoints)
+    hardLevelAchievement("Hard "+ title, levelNumber, hardPoints)
+    noDeathLevelAchievement("Immortal " + title, levelNumber, immortalPoints)
+}
+
+levelAchievement(title = "Red After Image", 
+                 levelNumber = LEVEL_ONE,
+                 normalPoints = 2,
+                 hardPoints = 2,
+                 immortalPoints = 2)
+levelAchievement(title = "Cross The Breeze", 
+                 levelNumber = LEVEL_TWO,
+                 normalPoints = 2,
+                 hardPoints = 3,
+                 immortalPoints = 4)
+levelAchievement(title = "Colors of Night", 
+                 levelNumber = LEVEL_THREE,
+                 normalPoints = 3,
+                 hardPoints = 4,
+                 immortalPoints = 5)
+levelAchievement(title = "Crimson Line", 
+                 levelNumber = LEVEL_FOUR,
+                 normalPoints = 4,
+                 hardPoints = 5,
+                 immortalPoints = 5)
+levelAchievement(title = "Under the Crack", 
+                 levelNumber = LEVEL_FIVE,
+                 normalPoints = 5,
+                 hardPoints = 5,
+                 immortalPoints = 10)
+
+// Level six will be different because you can win or lose.  
+// We'll give all the achievements per win and one on loss. 
+achievement(title = "Vermillion Sun",
+            description = "Beat Stage 6 and stop the missile on normal difficulty",
+            points = 10, 
+            trigger = elevatorActionReturns() &&
+                      cheatProtection() &&
+                      normalModeAndAbove() &&
+                      prev(levelId()) == LEVEL_SIX &&
+                      levelId() == LEVEL_POSTGAME &&
+                      stage6Success()
+            )
+
+achievement(title = "Hard Vermillion Sun",
+        description = "Beat Stage 6 and stop the missile on hard difficulty",
+        points = 10, 
+        trigger = elevatorActionReturns() &&
+                    cheatProtection() &&
+                    hardMode() &&
+                    prev(levelId()) == LEVEL_SIX &&
+                    levelId() == LEVEL_POSTGAME &&
+                    stage6Success()
+        )
+
+achievement(title = "Immortal Vermillion Sun",
+        description = "Beat Stage 6 on normal or hard difficulty with out losing a life",
+        points = 10, 
+        trigger = elevatorActionReturns() &&
+                    cheatProtection() &&
+                    normalModeAndAbove() &&
+                    once( prev(levelId()) == LEVEL_FIVE &&
+                        levelId() == LEVEL_SIX )&&
+                    never(firstPlayerLivesRemaining() != prev(firstPlayerLivesRemaining())) &&
+                    trigger_when(prev(levelId()) == LEVEL_SIX &&
+                                  levelId() == LEVEL_POSTGAME &&
+                                  stage6Success())
+        )
+
+achievement(title = "Your mission is Over ",
+            description = "Beat Stage 6 and fail to stop the bomb on normal or hard difficulty",
+            points = 10, 
+            trigger = elevatorActionReturns() &&
+                      cheatProtection() &&
+                      normalModeAndAbove() &&
+                      prev(levelId()) == LEVEL_SIX &&
+                      levelId() == LEVEL_POSTGAME &&
+                      stage6Failed()
+            )
+
+achievement(title = "Elevator Action Returns is so Easy",
+            description = "Beat Stage 6 on any difficulty",
+            points = 10, 
+            trigger = elevatorActionReturns() &&
+                      cheatProtection() &&
+                      easyModeAndAbove() &&
+                      prev(levelId()) == LEVEL_SIX &&
+                      levelId() == LEVEL_POSTGAME 
+            )
+
+
+function characterAchievement(character, characterName, title)
+{
+    achievement(title = title,
+            description = format("Finish the game on normal or hard difficulty while playing as {0}", characterName),
+            points = 3, 
+            trigger = elevatorActionReturns() &&
+                      cheatProtection() &&
+                      normalModeAndAbove() &&
+                      once(prev(firstStageStartedCheck()) == FIRST_STAGE_STARTED_CHECK_CHARACTER_SELECT &&
+                           firstStageStartedCheck() == FIRST_STAGE_STARTED_CHECK_IN_GAME) &&
+                      never(firstPlayerCharacterId() != character) &&
+                      trigger_when(prev(levelId()) == LEVEL_SIX &&
+                                   levelId() == LEVEL_POSTGAME)
+            )
+}
+
+characterAchievement(Kart, "Kart Bradfield", "Go Kart!")
+characterAchievement(Edie, "Edie Burret", "Fireball Edie")
+characterAchievement(Jad, "Jad the Taff", "More like Jad the Tank")
+
+achievement(title = "Not going to blue myself",
+        description = "Beat the game on normal or hard difficulty with out using a blue door.",
+        points = 5, 
+        trigger = elevatorActionReturns() &&
+                    cheatProtection() &&
+                    normalModeAndAbove() &&
+                    once( prev(firstPlayerJoined()) == 0 &&
+                        firstPlayerJoined() == 1 )&&
+                    never(blueDoorIndicator() != 0) &&
+                    trigger_when( prev(levelId()) == LEVEL_SIX &&
+                                  levelId() == LEVEL_POSTGAME)
+        )
+
+
+// This logic could be simplied to firstPlayerCreditsRemaining == 3 but we'll do it this way. 
+achievement(title = "Continues are for the weak",
+        description = "Beat Elevator Action Returns on normal or hard difficulty with out using a continue",
+        points = 10, 
+        trigger = elevatorActionReturns() &&
+                    cheatProtection() &&
+                    normalModeAndAbove() &&
+                    once( prev(firstPlayerJoined()) == 0 &&
+                        firstPlayerJoined() == 1 ) &&
+                    never(firstPlayerCreditsRemaining() != prev(firstPlayerCreditsRemaining())) &&
+                    trigger_when( prev(levelId()) == LEVEL_SIX &&
+                        levelId() == LEVEL_POSTGAME )
+        )
+
+achievement(title = "Invincible Red After Image",
+            description = "Finish level 1 with out taking any damage",
+            points = 3, 
+            trigger = elevatorActionReturns() &&
+                    cheatProtection() &&
+                    normalModeAndAbove() &&
+                    once( prev(firstStageStartedCheck()) == FIRST_STAGE_STARTED_CHECK_CHARACTER_SELECT &&
+                           firstStageStartedCheck() == FIRST_STAGE_STARTED_CHECK_IN_GAME ) &&
+                    never(firstPlayerHealth() != prev(firstPlayerHealth()) && prev(firstPlayerHealth()) != 0xff) &&
+                    trigger_when( prev(levelId()) == LEVEL_ONE &&
+                        levelId() == LEVEL_TWO )
+            )
+
+achievement(title = "Too fast for the alarm",
+        description = "Beat the game on normal or hard difficulty with out getting a caution before the final section",
+        points = 5, 
+        trigger = elevatorActionReturns() &&
+                    cheatProtection() &&
+                    normalModeAndAbove() &&
+                    once( prev(firstPlayerJoined()) == 0 &&
+                        firstPlayerJoined() == 1 )&&
+                    never(timeUntilCaution() == 0 && 
+                          (levelId() != 5 || 
+                           levelScriptIndex() < STAGE_SIX_LEVEL_SCRIPT_INDEX_FINALE_BEGIN)) &&
+                    trigger_when( prev(levelId()) == LEVEL_SIX &&
+                                  levelId() == LEVEL_POSTGAME)
+        )
+
+// This logic could be simplied to firstPlayerCreditsRemaining == 3 but we'll do it this way. 
+achievement(title = "No credit needed, 250k ",
+        description = "Earn 250,0000 points with out using a credit on normal or hard difficulty",
+        points = 5, 
+        trigger = elevatorActionReturns() &&
+                    cheatProtection() &&
+                    normalModeAndAbove() &&
+                    once( prev(firstPlayerJoined()) == 0 &&
+                        firstPlayerJoined() == 1 ) &&
+                    never(firstPlayerCreditsRemaining() != prev(firstPlayerCreditsRemaining())) &&
+                    trigger_when( inGameScore() >= 250 * 1000 )
+        )
+
+achievement(title = "Half a million points",
+        description = "Earn 500,0000 points any way you can on normal or hard difficulty",
+        points = 5, 
+        trigger = elevatorActionReturns() &&
+                    cheatProtection() &&
+                    normalModeAndAbove() &&
+                    once( prev(firstPlayerJoined()) == 0 &&
+                        firstPlayerJoined() == 1 ) &&
+                    never(firstPlayerCreditsRemaining() != prev(firstPlayerCreditsRemaining())) &&
+                    inGameScore() >= 500 * 1000 
+        )
+
+
+
+// A small hack for the absolute value function.   This moves the -c to be equal to 0 and moves the +c to 2*c. 
+function lessabs(a, b, c) => c + a - b <= 2 * c
+
+// Trust me on these locations (or look it up yourself) 
+SIZE_OF_ENEMY_OBJECT = 0x100
+LOCATION_OF_SECOND_ENEMY_ARRAY_HP = 0x1ae3a2  
+SIZE_OF_ENEMY_ARRAYS = 16
+TOTAL_ENEMY_OBJECTS = 32
+function offsetMath(index)
+{
+    if (index < SIZE_OF_ENEMY_ARRAYS)
+    {
+        return index * SIZE_OF_ENEMY_OBJECT
+    }
+    else
+    {
+        // Just use the HP location of the two to find the major offset, then use the minor offset to figure out where tehe exact data is. 
+        // Note this is the Offset, so it's applied to any element of the First enemy, and it'll be correct. 
+        return LOCATION_OF_SECOND_ENEMY_ARRAY_HP-LOCATION_OF_FIRST_ENEMY_ARRAY_HP + ((index-SIZE_OF_ENEMY_ARRAYS) * SIZE_OF_ENEMY_OBJECT)
+    }
+}
+                   
 achievement(
-    title = "Jump Kick Palooza", points = 2,
-    description = "Jump kick that mo fo right off the building!",
-    trigger = measured(tally(100, 
-                  (initialEnemyHP() == 255 && prev(initialEnemyHP()) != 255 && ((48 + initialEnemyXPosition() - firstPlayerXLocation())
-                   <= 96) && ((48 + initialEnemyYPosition() - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1CB682) == 255 && prev(byte(0x1CB682)) != 255 && ((48 + word(0x1CB670) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1CB674) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1CB782) == 255 && prev(byte(0x1CB782)) != 255 && ((48 + word(0x1CB770) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1CB774) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1CB882) == 255 && prev(byte(0x1CB882)) != 255 && ((48 + word(0x1CB870) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1CB874) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1CB982) == 255 && prev(byte(0x1CB982)) != 255 && ((48 + word(0x1CB970) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1CB974) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1CBA82) == 255 && prev(byte(0x1CBA82)) != 255 && ((48 + word(0x1CBA70) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1CBA74) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1CBB82) == 255 && prev(byte(0x1CBB82)) != 255 && ((48 + word(0x1CBB70) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1CBB74) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1CBC82) == 255 && prev(byte(0x1CBC82)) != 255 && ((48 + word(0x1CBC70) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1CBC74) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1CBD82) == 255 && prev(byte(0x1CBD82)) != 255 && ((48 + word(0x1CBD70) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1CBD74) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1CBE82) == 255 && prev(byte(0x1CBE82)) != 255 && ((48 + word(0x1CBE70) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1CBE74) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1CBF82) == 255 && prev(byte(0x1CBF82)) != 255 && ((48 + word(0x1CBF70) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1CBF74) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1CC082) == 255 && prev(byte(0x1CC082)) != 255 && ((48 + word(0x1CC070) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1CC074) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1CC182) == 255 && prev(byte(0x1CC182)) != 255 && ((48 + word(0x1CC170) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1CC174) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1CC282) == 255 && prev(byte(0x1CC282)) != 255 && ((48 + word(0x1CC270) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1CC274) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1CC382) == 255 && prev(byte(0x1CC382)) != 255 && ((48 + word(0x1CC370) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1CC374) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1CC482) == 255 && prev(byte(0x1CC482)) != 255 && ((48 + word(0x1CC470) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1CC474) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1AE4A2) == 255 && prev(byte(0x1AE4A2)) != 255 && ((48 + word(0x1AE490) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1AE494) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1AE5A2) == 255 && prev(byte(0x1AE5A2)) != 255 && ((48 + word(0x1AE590) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1AE594) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1AE6A2) == 255 && prev(byte(0x1AE6A2)) != 255 && ((48 + word(0x1AE690) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1AE694) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1AE7A2) == 255 && prev(byte(0x1AE7A2)) != 255 && ((48 + word(0x1AE790) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1AE794) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1AE8A2) == 255 && prev(byte(0x1AE8A2)) != 255 && ((48 + word(0x1AE890) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1AE894) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1AE9A2) == 255 && prev(byte(0x1AE9A2)) != 255 && ((48 + word(0x1AE990) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1AE994) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1AEAA2) == 255 && prev(byte(0x1AEAA2)) != 255 && ((48 + word(0x1AEA90) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1AEA94) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1AEBA2) == 255 && prev(byte(0x1AEBA2)) != 255 && ((48 + word(0x1AEB90) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1AEB94) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1AECA2) == 255 && prev(byte(0x1AECA2)) != 255 && ((48 + word(0x1AEC90) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1AEC94) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1AEDA2) == 255 && prev(byte(0x1AEDA2)) != 255 && ((48 + word(0x1AED90) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1AED94) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1AEEA2) == 255 && prev(byte(0x1AEEA2)) != 255 && ((48 + word(0x1AEE90) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1AEE94) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1AEFA2) == 255 && prev(byte(0x1AEFA2)) != 255 && ((48 + word(0x1AEF90) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1AEF94) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1AF0A2) == 255 && prev(byte(0x1AF0A2)) != 255 && ((48 + word(0x1AF090) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1AF094) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1AF1A2) == 255 && prev(byte(0x1AF1A2)) != 255 && ((48 + word(0x1AF190) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1AF194) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1AF2A2) == 255 && prev(byte(0x1AF2A2)) != 255 && ((48 + word(0x1AF290) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1AF294) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-                  (byte(0x1AF3A2) == 255 && prev(byte(0x1AF3A2)) != 255 && ((48 + word(0x1AF390) - firstPlayerXLocation())
-                   <= 96) && ((48 + word(0x1AF394) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255), 
-              byte(0x1AF4A2) == 255 && prev(byte(0x1AF4A2)) != 255 && ((48 + word(0x1AF490) -
-               firstPlayerXLocation()) <= 96) && ((48 + word(0x1AF494) - firstPlayerYLocation()) <= 96) && jumpingIndicator() == 255))
+    title = "Foot beats face", points = 10,
+    description = "Kill 50 human or animals with jump kicks in a single game on normal or hard difficulty. (Killing blow must be the jump kick)",
+    trigger = elevatorActionReturns() &&
+              cheatProtection() &&                         
+              never(firstPlayerJoined() == 0) &&                                    
+              measured(tally_of(range(0,TOTAL_ENEMY_OBJECTS-1), 50, index => offsetInitialEnemyHP(index) == 0xff &&
+                                                          prev(offsetInitialEnemyHP(index)) != 0xffff &&
+                                                          lessabs(offsetInitialEnemyXPosition(index), firstPlayerXLocation(), 0x30) &&
+                                                          lessabs(offsetInitialEnemyYPosition(index), firstPlayerYLocation(), 0x30) &&
+                                                          jumpingIndicator() == 0xff))
 )
 
-achievement(
-    title = "That's gotta hurt", points = 2,
-    description = "Squish an enemy!",
-    trigger = always_true() &&
-              ((initialEnemyHP() != 255 && initialEnemyAnimation() == 791) ||
-               (byte(0x1CB682) != 255 && word(0x1CB637) == 791) ||
-               (byte(0x1CB782) != 255 && word(0x1CB737) == 791) ||
-               (byte(0x1CB882) != 255 && word(0x1CB837) == 791) ||
-               (byte(0x1CB982) != 255 && word(0x1CB937) == 791) ||
-               (byte(0x1CBA82) != 255 && word(0x1CBA37) == 791) ||
-               (byte(0x1CBB82) != 255 && word(0x1CBB37) == 791) ||
-               (byte(0x1CBC82) != 255 && word(0x1CBC37) == 791) ||
-               (byte(0x1CBD82) != 255 && word(0x1CBD37) == 791) ||
-               (byte(0x1CBE82) != 255 && word(0x1CBE37) == 791) ||
-               (byte(0x1CBF82) != 255 && word(0x1CBF37) == 791) ||
-               (byte(0x1CC082) != 255 && word(0x1CC037) == 791) ||
-               (byte(0x1CC182) != 255 && word(0x1CC137) == 791) ||
-               (byte(0x1CC282) != 255 && word(0x1CC237) == 791) ||
-               (byte(0x1CC382) != 255 && word(0x1CC337) == 791) ||
-               (byte(0x1CC482) != 255 && word(0x1CC437) == 791) ||
-               (byte(0x1AE4A2) != 255 && word(0x1AE457) == 791) ||
-               (byte(0x1AE5A2) != 255 && word(0x1AE557) == 791) ||
-               (byte(0x1AE6A2) != 255 && word(0x1AE657) == 791) ||
-               (byte(0x1AE7A2) != 255 && word(0x1AE757) == 791) ||
-               (byte(0x1AE8A2) != 255 && word(0x1AE857) == 791) ||
-               (byte(0x1AE9A2) != 255 && word(0x1AE957) == 791) ||
-               (byte(0x1AEAA2) != 255 && word(0x1AEA57) == 791) ||
-               (byte(0x1AEBA2) != 255 && word(0x1AEB57) == 791) ||
-               (byte(0x1AECA2) != 255 && word(0x1AEC57) == 791) ||
-               (byte(0x1AEDA2) != 255 && word(0x1AED57) == 791) ||
-               (byte(0x1AEEA2) != 255 && word(0x1AEE57) == 791) ||
-               (byte(0x1AEFA2) != 255 && word(0x1AEF57) == 791) ||
-               (byte(0x1AF0A2) != 255 && word(0x1AF057) == 791) ||
-               (byte(0x1AF1A2) != 255 && word(0x1AF157) == 791) ||
-               (byte(0x1AF2A2) != 255 && word(0x1AF257) == 791) ||
-               (byte(0x1AF3A2) != 255 && word(0x1AF357) == 791) ||
-               (byte(0x1AF4A2) != 255 && word(0x1AF457) == 791))
-)
+achievement(title = "I Wouldn’t Want to Be the Guy Who Has to Clean That Up",
+            description = "Beat the game with violence option set to hard on either normal or hard difficulty",
+            points = 1, 
+            trigger = elevatorActionReturns() &&
+                      cheatProtection() &&
+                      normalModeAndAbove() &&
+                      prev(levelId()) == LEVEL_SIX &&
+                      levelId() == LEVEL_POSTGAME &&
+                      ultraViolence()
+            )
+
+achievement(title = "That wasn't in the original Elevator Action!",
+            description = "Meet the boss in a dramatic scene.",
+            points = 1, 
+            trigger = elevatorActionReturns() &&
+                      cheatProtection() &&
+                      levelId() == LEVEL_ONE &&
+                      prev(levelScriptIndex()) != LEVEL_ONE_SCRIPT_INDEX_END_CUTSCENE &&
+                      levelScriptIndex() == LEVEL_ONE_SCRIPT_INDEX_END_CUTSCENE
+            )
+
+achievement(title = "I didn't even realize I had bombs!",
+            description = "Beat the game with out using your bombs on either normal or hard difficulty",
+            points = 1, 
+            trigger = elevatorActionReturns() &&
+                    cheatProtection() &&
+                    normalModeAndAbove() &&
+                    once( prev(firstPlayerJoined()) == 0 &&
+                        firstPlayerJoined() == 1 )&&
+                    never(firstPlayerSecondaryWeaponLeft() < prev(firstPlayerSecondaryWeaponLeft())) &&
+                    trigger_when( prev(levelId()) == LEVEL_SIX &&
+                                  levelId() == LEVEL_POSTGAME)
+                
+            )
+                                                   
+// Removed Squish an enemy, most of the time enemies get squished randomly, and the player isn't even aware of it.   Could use the players X position to make sure he's in the elevator coming down but it's a bit too random anyways. 
+
+function arcadeNormalLevelAchievement(title, levelNumber, points)
+{
+    achievement(title = title,
+            description = format("Beat level {0} on the classic Elevator Action Arcade game", levelNumber + 1),
+            points = points, 
+            trigger = elevatorActionArcade() &&
+                      prev(arcadeLevelIndex()) == levelNumber &&
+                      arcadeLevelIndex() == levelNumber + 1
+            )
+}
+
+arcadeNormalLevelAchievement(title = "Remembering 1983",      
+                             levelNumber = 0, 
+                             points = 3)
+arcadeNormalLevelAchievement(title = "Remembering Taito", 
+                             levelNumber = 1, 
+                             points = 5)
+arcadeNormalLevelAchievement(title = "Remembering Toshio Kono", 
+                             levelNumber = 2, 
+                             points = 5)
+arcadeNormalLevelAchievement(title = "Remembering Otto", 
+                             levelNumber = 3, 
+                             points = 10)
+
+// leaderboards 1cc 
+// leaderboards highest score
+// leaderboard fastest clear overall? 
+// leaderboard fastest clear Hard? 
+// leaderboards highest score Original game
+// leaderboards 1cc Hard
+// leaderboards highest score Hard
