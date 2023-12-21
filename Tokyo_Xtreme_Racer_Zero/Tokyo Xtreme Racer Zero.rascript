@@ -1,5 +1,605 @@
-// Tokyo Xtreme Racer - Zero
+// Tokyo Xtreme Racer: Zero
 // #ID = 20774
+
+TeamInformation = 
+[
+    {
+        "TeamName": "Rolling Guy", 
+        "TeamLeader": "Rolling Guy 1",
+        "TeamLeaderID": 0
+        "LastMember": 5
+    },
+    {
+        "TeamName": "Little Gang",
+        "TeamLeader": "Happy Run",
+        "TeamLeaderID": 6,
+        "LastMember": 11
+    },
+    {
+        "TeamName": "SS Limited",
+        "TeamLeader": "Old Star",
+        "TeamLeaderID": 12,
+        "LastMember": 19
+    },
+    {
+        "TeamName": "Knife and Forks",
+        "TeamLeader": "Invincible Dinner",
+        "TeamLeaderID": 20,
+        "LastMember": 26
+    },
+    {
+        "TeamName": "Black Knights",
+        "TeamLeader": "Sword of Dragon",
+        "TeamLeaderID": 27,
+        "LastMember": 33
+    },
+    {
+        "TeamName": "Fine Drive",
+        "TeamLeader": "Red Meteor",
+        "TeamLeaderID": 34,
+        "LastMember": 41
+    },
+    {
+        "TeamName": "RATT",
+        "TeamLeader": "Flying Sasuke",
+        "TeamLeaderID": 42,
+        "LastMember": 47
+    },
+    {
+        "TeamName": "Queen's Paradise",
+        "TeamLeader": "Shocking Joe",
+        "TeamLeaderID": 48,
+        "LastMember": 54
+    },
+    {
+        "TeamName": "RINGS",
+        "TeamLeader": "Lonely Jackal",
+        "TeamLeaderID": 55,
+        "LastMember": 62
+    },
+    {
+        "TeamName": "Curving Edge",
+        "TeamLeader": "Highway Prince",
+        "TeamLeaderID": 63,
+        "LastMember": 68
+    },
+    {
+        "TeamName": "Galaxy Racers",
+        "TeamLeader": "Mr. Firm",
+        "TeamLeaderID": 69,
+        "LastMember": 74
+    },
+    {
+        "TeamName": "Max Racing",
+        "TeamLeader": "Bloody Rose",
+        "TeamLeaderID": 75,
+        "LastMember": 82
+    },
+    {
+        "TeamName": "Elegant Wild",
+        "TeamLeader": "300 Mile Red Ruby",
+        "TeamLeaderID": 83,
+        "LastMember": 88
+    },
+    {
+        "TeamName": "Departures",
+        "TeamLeader": "Happy Chappy",
+        "TeamLeaderID": 89,
+        "LastMember": 95
+    },
+    {
+        "TeamName": "Twister",
+        "TeamLeader": "Burning Mirage",
+        "TeamLeaderID": 96,
+        "LastMember": 102
+    },
+    {
+        "TeamName": "Catz",
+        "TeamLeader": "Fire Revenge",
+        "TeamLeaderID": 103,
+        "LastMember": 109
+    },
+    {
+        "TeamName": "The Road of Justice",
+        "TeamLeader": "Hearing Master",
+        "TeamLeaderID": 110,
+        "LastMember": 116
+    },
+    {
+        "TeamName": "Diamond Image",
+        "TeamLeader": "Thunder Shift",
+        "TeamLeaderID": 117,
+        "LastMember": 122
+    },
+    {
+        "TeamName": "Rhythm Box",
+        "TeamLeader": "Hip Hop Red",
+        "TeamLeaderID": 123,
+        "LastMember": 128
+    },
+    {
+        "TeamName": "Wind Stars",
+        "TeamLeader": "Requiem",
+        "TeamLeaderID": 129,
+        "LastMember": 136
+    },
+    {
+        "TeamName": "Harmonize",
+        "TeamLeader": "Visual Driver",
+        "TeamLeaderID": 137,
+        "LastMember": 143
+    },
+    {
+        "TeamName": "Super Speed Wagon",
+        "TeamLeader": "Revolution",
+        "TeamLeaderID": 144,
+        "LastMember": 149
+    },
+    {
+        "TeamName": "Another Star",
+        "TeamLeader": "Blue Speed",
+        "TeamLeaderID": 150,
+        "LastMember": 156
+    },
+    {
+        "TeamName": "Gesellschaft",
+        "TeamLeader": "Time is Money",
+        "TeamLeaderID": 157,
+        "LastMember": 162
+    },
+    {
+        "TeamName": "Explosion",
+        "TeamLeader": "Wind Blade",
+        "TeamLeaderID": 163,
+        "LastMember": 168
+    },
+    {
+        "TeamName": "Highway Outlaw",
+        "TeamLeader": "Spirit Crasher",
+        "TeamLeaderID": 169,
+        "LastMember": 175
+    },
+    {
+        "TeamName": "R.Gangs",
+        "TeamLeader": "Drift Dancer",
+        "TeamLeaderID": 176,
+        "LastMember": 182
+    },
+    {
+        "TeamName": "Cupid Arrows",
+        "TeamLeader": "Sonic Runner",
+        "TeamLeaderID": 183,
+        "LastMember": 188
+    },
+    {
+        "TeamName": "Tokio Jungle",
+        "TeamLeader": "Ion",
+        "TeamLeaderID": 189,
+        "LastMember": 195
+    },
+    {
+        "TeamName": "TR Racing",
+        "TeamLeader": "Unstoppable Dream",
+        "TeamLeaderID": 196,
+        "LastMember": 202
+    },
+    {
+        "TeamName": "Top Level",
+        "TeamLeader": "Car Maniac",
+        "TeamLeaderID": 203,
+        "LastMember": 209
+    },
+    {
+        "TeamName": "Free Way",
+        "TeamLeader": "Blue Meteor",
+        "TeamLeaderID": 210,
+        "LastMember": 218
+    },
+    {
+        "TeamName": "Dry Cruise",
+        "TeamLeader": "Tobby",
+        "TeamLeaderID": 219,
+        "LastMember": 225
+    },
+    {
+        "TeamName": "E.R.O.",
+        "TeamLeader": "Mr. Terminate",
+        "TeamLeaderID": 226,
+        "LastMember": 232
+    },
+    {
+        "TeamName": "Team Alpha",
+        "TeamLeader": "Texas' White Wolf",
+        "TeamLeaderID": 233,
+        "LastMember": 238
+    },
+    {
+        "TeamName": "True Ride",
+        "TeamLeader": "A+ Driver",
+        "TeamLeaderID": 239,
+        "LastMember": 246
+    },
+    {
+        "TeamName": "Unlimited",
+        "TeamLeader": "Killing Machine",
+        "TeamLeaderID": 247,
+        "LastMember": 253
+    },
+    {
+        "TeamName": "R.R.",
+        "TeamLeader": "Silver Prince",
+        "TeamLeaderID": 254,
+        "LastMember": 261
+    },
+    {
+        "TeamName": "Thunder Dragoon",
+        "TeamLeader": "Black Dragon",
+        "TeamLeaderID": 262,
+        "LastMember": 268
+    },
+    {
+        "TeamName": "Abflug SRT",
+        "TeamLeader": "Abf911",
+        "TeamLeaderID": 269,
+        "LastMember": 273
+    },
+    {
+        "TeamName": "Commander",
+        "TeamLeader": "Speed Runner",
+        "TeamLeaderID": 274,
+        "LastMember": 281
+    },
+    {
+        "TeamName": "Double Mind",
+        "TeamLeader": "Yellow Voltage",
+        "TeamLeaderID": 282,
+        "LastMember": 288
+    },
+    {
+        "TeamName": "APS",
+        "TeamLeader": "Jamz",
+        "TeamLeaderID": 289,
+        "LastMember": 295
+    },
+    {
+        "TeamName": "Fanatic Future",
+        "TeamLeader": "Burning Leader",
+        "TeamLeaderID": 296,
+        "LastMember": 302
+    },
+    {
+        "TeamName": "Speed Master",
+        "TeamLeader": "Iceman",
+        "TeamLeaderID": 303,
+        "LastMember": 312
+    }
+]
+
+EliteMembers
+[
+    {
+        "EliteName": "Traitor Jack knife",
+        "EliteID": 373
+    },
+    {
+        "EliteName": "True Slide",
+        "EliteID": 374
+    },
+    {
+        "EliteName": "Unhappy Angel",
+        "EliteID": 375
+    },
+    {
+        "EliteName": "Hard Weapon",
+        "EliteID": 376
+    },
+    {
+        "EliteName": "Fallen Blade",
+        "EliteID": 377
+    },
+    {
+        "EliteName": "Blood Hound",
+        "EliteID": 378
+    },
+    {
+        "EliteName": "Dark Producer",
+        "EliteID": 379
+    },
+    {
+        "EliteName": "Mr. Sitar",
+        "EliteID": 380
+    },
+    {
+        "EliteName": "Iron Heart",
+        "EliteID": 381
+    },
+    {
+        "EliteName": "Dying Star",
+        "EliteID": 382
+    },
+    {
+        "EliteName": "Dreamy Ghost",
+        "EliteID": 383
+    },
+    {
+        "EliteName": "Tail Gunner",
+        "EliteID": 384
+    },
+    {
+        "EliteName": "Shadow Eyes",
+        "EliteID": 385
+    },
+    {
+        "EliteName": "Speed King",
+        "EliteID": 386
+    },
+    {
+        "EliteName": "Midnight Rose",
+        "EliteID": 387
+    },
+    {
+        "EliteName": "Golden Wind",
+        "EliteID": 388
+    },
+    {
+        "EliteName": "Dark Ringleader",
+        "EliteID": 389
+    },
+    {
+        "EliteName": "Hard Lift",
+        "EliteID": 390
+    },
+    {
+        "EliteName": "Blue Pressure",
+        "EliteID": 391
+    },
+    {
+        "EliteName": "No-Crown King",
+        "EliteID": 392
+    },
+    {
+        "EliteName": "Crying Pluto",
+        "EliteID": 393
+    },
+    {
+        "EliteName": "Red Devil",
+        "EliteID": 394
+    },
+    {
+        "EliteName": "Queen's Knight",
+        "EliteID": 395
+    },
+    {
+        "EliteName": "Purple Meteor",
+        "EliteID": 396
+    },
+    {
+        "EliteName": "Exotic Eve",
+        "EliteID": 397
+    },
+    {
+        "EliteName": "White Charisma",
+        "EliteID": 398
+    },
+    {
+        "EliteName": "Unknown",
+        "EliteID": 399
+    }
+
+]
+
+
+// Need to verify if these values are correct
+Wanderers =
+[
+    {
+    "WanderGroupName": "First Group",
+    "Wanderers": [
+        "Lightning",
+        "White Panther",
+        "Garage Door",
+        "Speed Drinker",
+        "Lonely Wolf"
+    ],
+    "WanderersStart": 313,
+    "WanderersEnd": 317
+},
+{
+    "WanderGroupName": "Second Group",
+    "Wanderers": [
+        "Steam Storm",
+        "Invincible Artist",
+        "Lost Freak",
+        "Bloody Mary",
+        "Illusion B"
+    ],
+    "WanderersStart": 318,
+    "WanderersEnd": 322
+},
+{
+    "WanderGroupName": "Third Group",
+    "Wanderers": [
+        "Caffeine Addict",
+        "Magazine Freak",
+        "Machine of Inferno",
+        "Anguish Barbarian",
+        "Waist Master"
+    ],
+    "WanderersStart": 323,
+    "WanderersEnd": 327
+},
+{
+    "WanderGroupName": "Fourth Group",
+    "Wanderers": [
+        "Master Position",
+        "Pretty Affair",
+        "Devil Driver",
+        "Street Gambler",
+        "Green Wild"
+    ],
+    "WanderersStart": 328,
+    "WanderersEnd": 332
+},
+{
+    "WanderGroupName": "Fifth Group",
+    "Wanderers": [
+        "Dark Desperado",
+        "Eternity",
+        "Mosquito Lemon",
+        "Fearful Princess",
+        "Dumb yet Smart"
+    ],
+    "WanderersStart": 333,
+    "WanderersEnd": 337
+},
+{
+    "WanderGroupName": "Sixth Group",
+    "Wanderers": [
+        "Wild Heart",
+        "Road Master",
+        "Glamour Girl",
+        "God Year",
+        "Raspberry Kiss"
+    ],
+    "WanderersStart": 338,
+    "WanderersEnd": 342
+},
+{
+    "WanderGroupName": "Seventh Group",
+    "Wanderers": [
+        "Craft Man",
+        "Cutie Pie",
+        "Storm Screamer",
+        "Uncrushable Alexander",
+        "Silver Ruler"
+    ],
+    "WanderersStart": 343,
+    "WanderersEnd": 347
+},
+{
+    "WanderGroupName": "Eighth Group",
+    "Wanderers": [
+        "Night Wolf",
+        "Max Energy",
+        "Jet Skater",
+        "Crying Baby",
+        "Tomorrow Again"
+    ],
+    "WanderersStart": 348,
+    "WanderersEnd": 352
+},
+{
+    "WanderGroupName": "Ninth Group",
+    "Wanderers": [
+        "Healthy Hero",
+        "Late Night Cinderella",
+        "Unbalanced Heart",
+        "Toll Free",
+        "Madness"
+    ],
+    "WanderersStart": 353,
+    "WanderersEnd": 357
+},
+{
+    "WanderGroupName": "Tenth Group",
+    "Wanderers": [
+        "Technician Guy",
+        "Fast Phobe",
+        "ZERO",
+        "SPEED BOX",
+        "Mask"
+    ],
+    "WanderersStart": 358,
+    "WanderersEnd": 362
+},
+{
+    "WanderGroupName": "Eleventh Group",
+    "Wanderers": [
+        "Windy Fanfare",
+        "Start Dash",
+        "Golden License",
+        "Iron Racer",
+        "Exotic Butterfly"
+    ],
+    "WanderersStart": 363,
+    "WanderersEnd": 367
+},
+{
+    "WanderGroupName": "Twelfth Group",
+    "Wanderers": [
+        "King of Eden",
+        "Loyal Knight",
+        "Gentle Rain",
+        "Last Flight",
+        "Silent Barbarian"
+    ],
+    "WanderersStart": 368,
+    "WanderersEnd": 372
+}
+
+]
+
+//          314=Lightning (Wanderers Leader)
+//          315=White Panther (Wanderers 1)
+//          316=Garage Door (Wanderers 2)
+//          317=Speed Drinker (Wanderers 3)
+//          318=Lonely Wolf (Wanderers 4)
+//          319=Steam Storm (Wanderers 5)
+//          320=Invincible Artist (Wanderers 6)
+//          321=Lost Freak (Wanderers 7)
+//          322=Bloody Mary (Wanderers 8)
+//          323=Illusion B (Wanderers 9)
+//          324=Caffeine Addict (Wanderers 10)
+//          325=Magazine Freak (Wanderers 11)
+//          326=Machine of Inferno (Wanderers 12)
+//          327=Anguish Barbarian (Wanderers 13)
+//          328=Waist Master (Wanderers 14)
+//          329=Master Position (Wanderers 15)
+//          330=Pretty Affair (Wanderers 16)
+//          331=Devil Driver (Wanderers 17)
+//          332=Street Gambler (Wanderers 18)
+//          333=Green Wild (Wanderers 19)
+//          334=Dark Desperado (Wanderers 20)
+//          335=Eternity (Wanderers 21)
+//          336=Mosquito Lemon (Wanderers 22)
+//          337=Fearful Princess (Wanderers 23)
+//          338=Dumb yet Smart (Wanderers 24)
+//          339=Wild Heart (Wanderers 25)
+//          340=Road Master (Wanderers 26)
+//          341=Glamour Girl (Wanderers 27)
+//          342=God Year (Wanderers 28)
+//          343=Raspberry Kiss (Wanderers 29)
+//          344=Craft Man (Wanderers 30)
+//          345=Cutie Pie (Wanderers 31)
+//          346=Storm Screamer (Wanderers 32)
+//          347=Uncrushable Alexander (Wanderers 33)
+//          348=Silver Ruler (Wanderers 34)
+//          349=Night Wolf (Wanderers 35)
+//          350=Max Energy (Wanderers 36)
+//          351=Jet Skater (Wanderers 37)
+//          352=Crying Baby (Wanderers 38)
+//          353=Tomorrow Again (Wanderers 39)
+//          354=Healthy Hero (Wanderers 40)
+//          355=Late Night Cinderella (Wanderers 41)
+//          356=Unbalanced Heart (Wanderers 42)
+//          357=Toll Free (Wanderers 43)
+//          358=Madness (Wanderers 44)
+//          359=Technician Guy (Wanderers 45)
+//          360=Fast Phobe (Wanderers 46)
+//          361=ZERO (Wanderers 47)
+//          362=SPEED BOX (Wanderers 48)
+//          363=Mask (Wanderers 49)
+//          364=Windy Fanfare (Wanderers 50)
+//          365=Start Dash (Wanderers 51)
+//          366=Golden License (Wanderers 52)
+//          367=Iron Racer (Wanderers 53)
+//          368=Exotic Butterfly (Wanderers 54)
+//          369=King of Eden (Wanderers 55)
+//          370=Loyal Knight (Wanderers 56)
+//          371=Gentle Rain (Wanderers 57)
+//          372=Last Flight (Wanderers 58)
+//          373=Silent Barbarian (Wanderers 59)
+
 
 // $274270: (32-bytes)The player's current car's configuration.
 //          
@@ -1460,7 +2060,7 @@ function playersHealth() => dword(0x7508F8)
 // $7508FC: (32-bit) Enemy's Health in battle
 //          
 //          0x00 = death
-function Enemy's Health() => dword(0x7508FC)
+function enemysHealth() => dword(0x7508FC)
 
 // $750900: (32-bit) Time in battle  (Frame amount)
 //          
@@ -1498,3 +2098,90 @@ function timeTrialTime() => dword(0x750B20)
 //          0x0A = 0-400m on Oval
 //          0x0B = Oval
 function timetrialCourseIndex() => byte(0x750B32)
+
+
+// achievements
+// Beat an entire team with no losses? 
+// Done, day one rolling guys. 
+//
+//   Reset on end of a day  
+//   mark No one on team is not beaten
+//   Check if entire team is beaten.
+//   Check if entire team has no losses and no draws.
+
+
+
+// 200 + MPH ticket. 
+// Expensive ticket
+
+// 10 wins in a day. 
+//  End of day, was there 10 wins? 
+
+// 20 wins in a day. 
+//  End of day, was there 20 wins? 
+
+// 20 wins in a day no losses, no ties. 
+//  End of day was there 20 wins, and no change of losses or draws? 
+
+// 10 unique wins in a day no losses? ) 
+//  End of day, no losses, no ties, and at least 20 bits have changed in wins? 
+
+// Unlock all improvements? (Distance) 
+//  Check distance current car has traveled (is that getable?) 
+
+
+// Buy X car. 
+// Probably buy a car over X price.
+//  See price change in car shop? 
+
+// Drive the AE86 against someone and win. 
+// which one? 
+//  Win a race while driving a car? 
+
+// Low life battle 
+//  Win a race with less then X life left? 
+
+// Unlock the ability to buy all cars
+// 50 percent?  
+// 75 percent?
+// All non king cars? 
+
+//  10, 50, 75.  Remember not to count initial cars. 
+
+// Beat each leader and devil.  Also the zodiacs, and the devil. 
+//  Check if the beat X changes in game. 
+
+// Beat each set of 5 wanders?   Maybe 8? 
+//  Need to think more but this makes sense. 
+
+// Beat everyone.
+//  Beat FInal guy.  See above. 
+
+// Get a draw 
+//  Easy but let's do it. 
+//  Check if draw count changes, and in game. 
+
+// Break a certain speed. 
+// 250 KPH = 155something MPH
+//  Need to calculate this, but just grab max speed. 
+
+// Mirror ornaments
+//  Got it. 
+
+// Time attack
+// Going to do 3 of them  C short course.  B After finishing speed king. 
+//  A End game. Full wangan. 
+//  Leaderboards for everything here. 
+
+// Watch the trailer for Fast and furious.
+
+// Have a million dollars. 
+
+/////////////////
+// NEEDS 
+////////////////
+
+Purchase a car? 
+Watching trailer for Fast and furious? 
+
+Changing instruction 00189218 to subu s1,s1,v1  is easy mode. 
