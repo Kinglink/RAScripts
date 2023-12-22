@@ -22,7 +22,7 @@ function arcadeModeSwitch() => byte(0x19FD04)
 ARCADE_MODE_SWITCH_ELEVATOR_ACTION_RETURNS_VALUE = 0x00
 ARCADE_MODE_SWITCH_ELEVATOR_ACTION_ARCADE_VALUE = 0x03
 function elevatorActionReturns() => arcadeModeSwitch() == ARCADE_MODE_SWITCH_ELEVATOR_ACTION_RETURNS_VALUE
-function elevatorActionArcade() => arcadeModeSwitch() == ARCADE_MODE_SWITCH_ELEVATOR_ACTION_RETURNS_VALUE
+function elevatorActionArcade() => arcadeModeSwitch() == ARCADE_MODE_SWITCH_ELEVATOR_ACTION_ARCADE_VALUE
 
 // $19FD24: (8-bit) Second player's Credits Remaining.
 //          
@@ -130,11 +130,30 @@ function levelScriptIndex() => byte(0x1ADE90)
 
 LEVEL_ONE_SCRIPT_INDEX_END_CUTSCENE = 0x05
 STAGE_SIX_LEVEL_SCRIPT_INDEX_FINALE_BEGIN = 0x04
+STAGE_SIX_LEVEL_SCRIPT_INDEX_FINALE_END = 0x05
 
 // $1ADEA6: (16-bit) Time until Caution alarm.
 //          
 //          Starts at different times, but will trigger the caution when it hits 0x00.  Set 0x1adea8 to 0x13 and then resets self to 0x3b to create a cycle.
 function timeUntilCaution() => word(0x1ADEA6)
+
+// $1adea8 (16-bit) Caution cycle 
+//
+// Set to 0x13 to start a caution display from 0x1adea6
+//
+// This will display caution as it decrements (And a little bit after) Eventually this will reach 0xffff and go idle again. 
+// 
+// Decrements only when negative (bit 7 is not set) 
+function cautionCycle() => word(0x1ADEA8)
+
+// $1e95e2 (8-bit) Caution indicator
+// 
+// 0x00 = No Caution triggered.
+//
+// Any other value decrements until it his 0x00, but also means a caution has been triggered.   
+//
+// Does not trigger at the end of level 3. (silent trigger)  Does trigger at the end of level 6, but that's expected. 
+function cautionIndicator() => word(0x1e95e2)
 
 // $1B0648: (8-bit) Player 1 Character
 //          
@@ -165,7 +184,14 @@ MAX_LIVES = 1
 //          
 //          Not always writable, but is a correct representation of the score.
 //          0x1b0742 is similar, but disappears when restarting the game.
-function inGameScore() => word(0x1B065A)
+function inGameScoreLower16bit() => word(0x1B065A)
+
+// $1B0658: (16-bit)  In Game Score Upper 16-bit
+// 
+// Values are in hex. 
+function inGameScoreUpper16bit() => word(0x1b0658)
+
+function inGameScore() => inGameScoreLower16bit() + (inGameScoreUpper16bit() * 0x10000)
 
 // $1B0680: (8-bit) Jumping indicator
 //          
@@ -208,6 +234,8 @@ function specialAmmoRemaining() => byte(0x1B06B2)
 //          Kurt starts at 30 points.
 //          Edie starts at 28 points
 //          Jad starts at 38 points
+//
+//          Becomes 0xff on death.             
 function firstPlayerHealth() => byte(0x1B0746)
 
 // $1B0792: (8-bit) First player secondary weapon uses left
@@ -276,8 +304,10 @@ function stage6FinaleCheck() => byte(0x1ADEE8)
 // These are not boolean values, 0 means it hasn't been finished. 
 STAGE_SIX_FINALE_SUCCESS_VALUE = 0x02
 STAGE_SIX_FINALE_FAILED_VALUE = 0x0c
+STAGE_SIX_FINALE_NOT_FINISHED_VALUE = 0x00
 function stage6Success() =>  stage6FinaleCheck() == STAGE_SIX_FINALE_SUCCESS_VALUE
 function stage6Failed() =>  stage6FinaleCheck() == STAGE_SIX_FINALE_FAILED_VALUE
+function stage6NotFinished() =>  stage6FinaleCheck() == STAGE_SIX_FINALE_NOT_FINISHED_VALUE
 
 // $19eab5: (8-bit) First stage started check
 // 
@@ -470,7 +500,9 @@ achievement(title = "Not going to blue myself",
                     normalModeAndAbove() &&
                     once( prev(firstPlayerJoined()) == 0 &&
                         firstPlayerJoined() == 1 )&&
-                    never(blueDoorIndicator() != 0) &&
+                    never(blueDoorIndicator() != 0 && 
+                            (stage6NotFinished() || 
+                             levelId() != LEVEL_SIX)) &&
                     trigger_when( prev(levelId()) == LEVEL_SIX &&
                                   levelId() == LEVEL_POSTGAME)
         )
@@ -510,8 +542,8 @@ achievement(title = "Too fast for the alarm",
                     cheatProtection() &&
                     normalModeAndAbove() &&
                     once( prev(firstPlayerJoined()) == 0 &&
-                        firstPlayerJoined() == 1 )&&
-                    never(timeUntilCaution() == 0 && 
+                        firstPlayerJoined() == 1 ) &&
+                    never(cautionIndicator() != 0x0000 &&
                           (levelId() != 5 || 
                            levelScriptIndex() < STAGE_SIX_LEVEL_SCRIPT_INDEX_FINALE_BEGIN)) &&
                     trigger_when( prev(levelId()) == LEVEL_SIX &&
@@ -519,7 +551,7 @@ achievement(title = "Too fast for the alarm",
         )
 
 // This logic could be simplied to firstPlayerCreditsRemaining == 3 but we'll do it this way. 
-achievement(title = "No credit needed, 250k ",
+achievement(title = "No credit needed, 250k",
         description = "Earn 250,0000 points with out using a credit on normal or hard difficulty",
         points = 5, 
         trigger = elevatorActionReturns() &&
@@ -528,11 +560,12 @@ achievement(title = "No credit needed, 250k ",
                     once( prev(firstPlayerJoined()) == 0 &&
                         firstPlayerJoined() == 1 ) &&
                     never(firstPlayerCreditsRemaining() != prev(firstPlayerCreditsRemaining())) &&
-                    trigger_when( inGameScore() >= 250 * 1000 )
+                    trigger_when( prev(inGameScore()) < 250 * 1000 &&
+                                  inGameScore() >= 250 * 1000 )
         )
 
 achievement(title = "Half a million points",
-        description = "Earn 500,0000 points any way you can on normal or hard difficulty",
+        description = "Earn 500,0000 points on normal or hard difficulty",
         points = 5, 
         trigger = elevatorActionReturns() &&
                     cheatProtection() &&
@@ -540,6 +573,7 @@ achievement(title = "Half a million points",
                     once( prev(firstPlayerJoined()) == 0 &&
                         firstPlayerJoined() == 1 ) &&
                     never(firstPlayerCreditsRemaining() != prev(firstPlayerCreditsRemaining())) &&
+                    prev(inGameScore()) < 500 * 1000 &&
                     inGameScore() >= 500 * 1000 
         )
 
@@ -568,13 +602,13 @@ function offsetMath(index)
 }
                    
 achievement(
-    title = "Foot beats face", points = 10,
+    title = "Foot meet face", points = 10,
     description = "Kill 50 human or animals with jump kicks in a single game on normal or hard difficulty. (Killing blow must be the jump kick)",
     trigger = elevatorActionReturns() &&
               cheatProtection() &&                         
               never(firstPlayerJoined() == 0) &&                                    
               measured(tally_of(range(0,TOTAL_ENEMY_OBJECTS-1), 50, index => offsetInitialEnemyHP(index) == 0xff &&
-                                                          prev(offsetInitialEnemyHP(index)) != 0xffff &&
+                                                          prev(offsetInitialEnemyHP(index)) != 0xff &&
                                                           lessabs(offsetInitialEnemyXPosition(index), firstPlayerXLocation(), 0x30) &&
                                                           lessabs(offsetInitialEnemyYPosition(index), firstPlayerYLocation(), 0x30) &&
                                                           jumpingIndicator() == 0xff))
@@ -582,7 +616,7 @@ achievement(
 
 achievement(title = "I Wouldn’t Want to Be the Guy Who Has to Clean That Up",
             description = "Beat the game with violence option set to hard on either normal or hard difficulty",
-            points = 1, 
+            points = 3, 
             trigger = elevatorActionReturns() &&
                       cheatProtection() &&
                       normalModeAndAbove() &&
@@ -591,28 +625,18 @@ achievement(title = "I Wouldn’t Want to Be the Guy Who Has to Clean That Up",
                       ultraViolence()
             )
 
-achievement(title = "That wasn't in the original Elevator Action!",
-            description = "Meet the boss in a dramatic scene.",
-            points = 1, 
-            trigger = elevatorActionReturns() &&
-                      cheatProtection() &&
-                      levelId() == LEVEL_ONE &&
-                      prev(levelScriptIndex()) != LEVEL_ONE_SCRIPT_INDEX_END_CUTSCENE &&
-                      levelScriptIndex() == LEVEL_ONE_SCRIPT_INDEX_END_CUTSCENE
-            )
-
 achievement(title = "I didn't even realize I had bombs!",
             description = "Beat the game with out using your bombs on either normal or hard difficulty",
-            points = 1, 
+            points = 5, 
             trigger = elevatorActionReturns() &&
                     cheatProtection() &&
                     normalModeAndAbove() &&
                     once( prev(firstPlayerJoined()) == 0 &&
                         firstPlayerJoined() == 1 )&&
-                    never(firstPlayerSecondaryWeaponLeft() < prev(firstPlayerSecondaryWeaponLeft())) &&
+                    never(firstPlayerSecondaryWeaponLeft() < prev(firstPlayerSecondaryWeaponLeft()) && 
+                          firstPlayerHealth() != 0xff ) &&
                     trigger_when( prev(levelId()) == LEVEL_SIX &&
                                   levelId() == LEVEL_POSTGAME)
-                
             )
                                                    
 // Removed Squish an enemy, most of the time enemies get squished randomly, and the player isn't even aware of it.   Could use the players X position to make sure he's in the elevator coming down but it's a bit too random anyways. 
