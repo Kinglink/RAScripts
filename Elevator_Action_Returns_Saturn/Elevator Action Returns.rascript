@@ -83,6 +83,20 @@ LEVEL_FIVE = 4
 LEVEL_SIX = 5
 LEVEL_POSTGAME = 6 // only triggered when beating level 6, either way.
 
+// LevelNames
+LevelNameLookup =
+{
+    LEVEL_ONE: "Red After Image",
+    LEVEL_TWO: "Cross The Breeze",
+    LEVEL_THREE: "Colors of Night",
+    LEVEL_FOUR: "Under The Crack",
+    LEVEL_FIVE: "Crimson Line",
+    LEVEL_SIX: "Vermillion Sun",
+    LEVEL_POSTGAME: "PostGame"
+}
+
+
+
 // $1A110D: (8-bit) Game Level (Difficulty)
 //          
 //          0x00 = Easy
@@ -177,7 +191,7 @@ function cautionCycle() => word(0x1ADEA8)
 // Any other value decrements until it his 0x00, but also means a caution has been triggered.   
 //
 // Does not trigger at the end of level 3. (silent trigger)  Does trigger at the end of level 6, but that's expected. 
-function cautionIndicator() => word(0x1e95e2)
+function cautionIndicator() => byte(0x1e95e2)
 
 // $1B0648: (8-bit) Player 1 Character
 //          
@@ -200,7 +214,15 @@ function firstPlayerLivesRemaining() => byte(0x1B064A)
 
 MAX_LIVES = 1
 
-// $1B065A: (16-bit)  In Game Score
+// $1B0EF2: (8-bit) Second player lives remaining
+//          
+//          (Always starts at 1 life, meaning two lives)
+//          
+//          0x0 = No lives left (Check health)
+//          0x1 = Starting value (1 life remaining)
+function secondPlayerLivesRemaining() => byte(0x1B0EF2)
+
+// $1B065A: (16-bit)  In Game First Player Score Lower 16-bit
 //          
 //          Tens and Ones is number of Continues used (starts at 00 and increases to 01 on first death.
 //          
@@ -208,14 +230,36 @@ MAX_LIVES = 1
 //          
 //          Not always writable, but is a correct representation of the score.
 //          0x1b0742 is similar, but disappears when restarting the game.
-function inGameScoreLower16bit() => word(0x1B065A)
+function inGameFirstPlayerScoreLower16bit() => word(0x1B065A)
 
-// $1B0658: (16-bit)  In Game Score Upper 16-bit
+// $1B0658: (16-bit)  In Game First Player Score Upper 16-bit
 // 
 // Values are in hex. 
-function inGameScoreUpper16bit() => word(0x1b0658)
+function inGameFirstPlayerScoreUpper16bit() => word(0x1b0658)
 
-function inGameScore() => inGameScoreLower16bit() + (inGameScoreUpper16bit() * 0x10000)
+function inGameFirstPlayerScore() => inGameFirstPlayerScoreLower16bit() + (inGameFirstPlayerScoreUpper16bit() * 0x10000)
+
+
+
+// $1b0f02: (16-bit)  In Game Second Player Score Lower 16-bit
+//          
+//          Tens and Ones is number of Continues used (starts at 00 and increases to 01 on first death.
+//          
+//          Values are in hex.
+//          
+//          Not always writable, but is a correct representation of the score.
+//          0x1b0742 is similar, but disappears when restarting the game.
+function inGameSecondPlayerScoreLower16bit() => word(0x1B0F02)
+
+// $1b0f00: (16-bit)  In Game Second Player Score Upper 16-bit
+// 
+// Values are in hex. 
+function inGameSecondPlayerScoreUpper16bit() => word(0x1B0F00)
+
+function inGameSecondPlayerScore() => inGameSecondPlayerScoreLower16bit() + (inGameSecondPlayerScoreUpper16bit() * 0x10000)
+
+
+
 
 // $1B0680: (8-bit) Jumping indicator
 //          
@@ -461,12 +505,12 @@ levelAchievement(title = "Colors Of Night",
                  normalPoints = 3,
                  hardPoints = 4,
                  immortalPoints = 5)
-levelAchievement(title = "Crimson Line", 
+levelAchievement(title = "Under The Crack", 
                  levelNumber = LEVEL_FOUR,
                  normalPoints = 4,
                  hardPoints = 5,
                  immortalPoints = 5)
-levelAchievement(title = "Under The Crack", 
+levelAchievement(title = "Crimson Line", 
                  levelNumber = LEVEL_FIVE,
                  normalPoints = 5,
                  hardPoints = 5,
@@ -497,14 +541,14 @@ achievement(title = "Hard Vermillion Sun",
         )
 
 achievement(title = "Immortal Vermillion Sun",
-        description = "Beat Stage 6 on normal or hard difficulty with out losing a life",
+        description = "Beat Stage 6 and stop the missile on normal or hard difficulty with out losing a life",
         points = 10, 
         trigger = elevatorActionReturns() &&
                     cheatProtection() &&
                     normalDifficultyAndAbove() &&
                     once( prev(levelId()) == LEVEL_FIVE &&
                         levelId() == LEVEL_SIX )&&
-                    never(firstPlayerLivesRemaining() != prev(firstPlayerLivesRemaining())) &&
+                    never(firstPlayerLivesRemaining() != prev(firstPlayerLivesRemaining()) && stage6Failed()) &&
                     trigger_when(prev(levelId()) == LEVEL_SIX &&
                                   levelId() == LEVEL_POSTGAME &&
                                   stage6Success())
@@ -558,8 +602,10 @@ achievement(title = "Not Going to Blue Myself",
         trigger = elevatorActionReturns() &&
                     cheatProtection() &&
                     normalDifficultyAndAbove() &&
-                    once( prev(firstPlayerJoined()) == 0 &&
-                        firstPlayerJoined() == 1 )&&
+                    // Using this due to the fact blueDoorIndicator can be dirty when entering into a new game, but gets resolved
+                    // before the first briefing. 
+                    once( prev(firstStageStartedCheck()) == FIRST_STAGE_STARTED_CHECK_CHARACTER_SELECT &&
+                           firstStageStartedCheck() == FIRST_STAGE_STARTED_CHECK_IN_GAME )&&
                     never(blueDoorIndicator() != 0 && 
                             (stage6NotFinished() || 
                              (levelId() != LEVEL_SIX && 
@@ -604,7 +650,9 @@ achievement(title = "Too Fast for the Alarm",
                     normalDifficultyAndAbove() &&
                     once( prev(firstPlayerJoined()) == 0 &&
                         firstPlayerJoined() == 1 ) &&
-                    never(cautionIndicator() != 0x0000 &&
+                    // This was listed as a word, but sometimes the word length gets a random character in it 
+                    // (especially if the player lets the time run out when choosing a character (was highlighting Edie)) 
+                    never(cautionIndicator() != 0x00 &&
                           (levelId() != 5 || 
                            levelScriptIndex() < STAGE_SIX_LEVEL_SCRIPT_INDEX_FINALE_BEGIN)) &&
                     trigger_when( prev(levelId()) == LEVEL_SIX &&
@@ -621,8 +669,8 @@ achievement(title = "No Credit Needed, 250K",
                     once( prev(firstPlayerJoined()) == 0 &&
                         firstPlayerJoined() == 1 ) &&
                     never(firstPlayerCreditsRemaining() != prev(firstPlayerCreditsRemaining())) &&
-                    trigger_when( prev(inGameScore()) < 250 * 1000 &&
-                                  inGameScore() >= 250 * 1000 )
+                    trigger_when( prev(inGameFirstPlayerScore()) < 250 * 1000 &&
+                                  inGameFirstPlayerScore() >= 250 * 1000 )
         )
 
 achievement(title = "400k",
@@ -634,8 +682,8 @@ achievement(title = "400k",
                     once( prev(firstPlayerJoined()) == 0 &&
                         firstPlayerJoined() == 1 ) &&
                     never(firstPlayerCreditsRemaining() != prev(firstPlayerCreditsRemaining())) &&
-                    prev(inGameScore()) < 400 * 1000 &&
-                    inGameScore() >= 400 * 1000 
+                    prev(inGameFirstPlayerScore()) < 400 * 1000 &&
+                    inGameFirstPlayerScore() >= 400 * 1000 
         )
 
 
@@ -744,7 +792,7 @@ leaderboard(
     ),
     cancel = always_false(),
     submit = always_true(),
-    value = measured(inGameScore()),
+    value = measured(inGameFirstPlayerScore()),
     format = "VALUE"
 )
 
@@ -765,7 +813,7 @@ leaderboard(
     ),
     cancel = always_false(),
     submit = always_true(),
-    value = measured(inGameScore()),
+    value = measured(inGameFirstPlayerScore()),
     format = "VALUE"
 )
 
@@ -782,7 +830,7 @@ leaderboard(
     ),
     cancel = always_false(),
     submit = always_true(),
-    value = measured(inGameScore()),
+    value = measured(inGameFirstPlayerScore()),
     format = "VALUE"
 )
 
@@ -799,7 +847,7 @@ leaderboard(
     ),
     cancel = always_false(),
     submit = always_true(),
-    value = measured(inGameScore()),
+    value = measured(inGameFirstPlayerScore()),
     format = "VALUE"
 )
 
@@ -873,3 +921,42 @@ leaderboard(
     format = "FRAMES"
 )
 
+rich_presence_conditional_display(elevatorActionReturns() && firstPlayerJoined() == 0 && secondPlayerJoined() == 0, "Watching Elevator Action Returns")
+
+rich_presence_conditional_display(elevatorActionReturns() && firstPlayerJoined() == 1 && secondPlayerJoined() == 1, 
+                                 "Elevator Action Returns: Level: {0} 1P Score: {1} Lives: {2} Credits: {3} 2P Score: {4} Lives: {5} Credits: {6}",
+                                  rich_presence_lookup("LevelName", levelId(), LevelNameLookup), 
+                                  rich_presence_value("Score", inGameFirstPlayerScore()),
+                                  rich_presence_value("Number", firstPlayerLivesRemaining()+1),
+                                  rich_presence_value("Number", firstPlayerCreditsRemaining()),
+                                  rich_presence_value("Score", inGameSecondPlayerScore()),
+                                  rich_presence_value("Number", secondPlayerLivesRemaining()+1),
+                                  rich_presence_value("Number", secondPlayerCreditsRemaining())
+                                  )
+
+rich_presence_conditional_display(elevatorActionReturns() && firstPlayerJoined() == 1 && secondPlayerJoined() == 0, 
+                                 "Elevator Action Returns: Level: {0} 1P Score: {1} Lives: {2} Credits: {3}",
+                                  rich_presence_lookup("LevelName", levelId(), LevelNameLookup), 
+                                  rich_presence_value("Score", inGameFirstPlayerScore()),
+                                  rich_presence_value("Number", firstPlayerLivesRemaining()+1),
+                                  rich_presence_value("Number", firstPlayerCreditsRemaining())
+                                  )
+
+rich_presence_conditional_display(elevatorActionReturns() && firstPlayerJoined() == 1 && secondPlayerJoined() == 0, 
+                                 "Elevator Action Returns: Level: {0} 2P Score: {1} Lives: {2} Credits: {3}",
+                                  rich_presence_lookup("LevelName", levelId(), LevelNameLookup), 
+                                  rich_presence_value("Score", inGameSecondPlayerScore()),
+                                  rich_presence_value("Number", secondPlayerLivesRemaining()+1),
+                                  rich_presence_value("Number", secondPlayerCreditsRemaining())
+                                  )
+
+rich_presence_conditional_display(elevatorActionArcade() && arcadeLivesCount() == 00, "Watching the original Elevator Action")
+
+rich_presence_conditional_display(elevatorActionArcade() && arcadeLivesCount() != 00, 
+                                 "Elevator Action Arcade: Level {0} Score {1} Lives: {2}",
+                                  rich_presence_value("Number", arcadeLevelIndex()+1),
+                                  rich_presence_value("Score", arcadeScore()),
+                                  rich_presence_value("Number", arcadeLivesCount())
+                                  )
+
+rich_presence_display("Watch Elevator Action Returns.") // intentionally adding a period to signify a problem. 
