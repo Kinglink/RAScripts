@@ -52,6 +52,7 @@ Ideas for video.
 
 Talk about Kicking guards, and how I spent at least 5 hours working on just that.  Kept finding new enemy indexes.
 
+Strange 16-bit big endian scores and health.
 
 
 Achievement counts. 
@@ -74,3 +75,6 @@ Achievement counts.
 // 1 Ultra violence.
 // 1 Second door on first stage. 
 // 1 No Bombs? 
+
+
+// Additional musing.  Kind of thinking of taking out Kicking the guards, because it rarely gives an extra hit, but I'll leave it for now. 
