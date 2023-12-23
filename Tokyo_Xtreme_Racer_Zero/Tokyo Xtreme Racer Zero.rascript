@@ -6,7 +6,7 @@ TeamInformation =
     {
         "TeamName": "Rolling Guy", 
         "TeamLeader": "Rolling Guy 1",
-        "TeamLeaderID": 0
+        "TeamLeaderID": 0,
         "LastMember": 5
     },
     {
@@ -275,7 +275,252 @@ TeamInformation =
     }
 ]
 
-EliteMembers
+
+Wanderers = 
+[
+    {
+        "WandererName": "Lightning",
+        "WandererID": 313
+    },
+    {
+        "WandererName": "White Panther",
+        "WandererID": 314
+    },
+    {
+        "WandererName": "Garage Door",
+        "WandererID": 315
+    },
+    {
+        "WandererName": "Speed Drinker",
+        "WandererID": 316
+    },
+    {
+        "WandererName": "Lonely Wolf",
+        "WandererID": 317
+    },
+    {
+        "WandererName": "Steam Storm",
+        "WandererID": 318
+    },
+    {
+        "WandererName": "Invincible Artist",
+        "WandererID": 319
+    },
+    {
+        "WandererName": "Lost Freak",
+        "WandererID": 320
+    },
+    {
+        "WandererName": "Bloody Mary",
+        "WandererID": 321
+    },
+    {
+        "WandererName": "Illusion B",
+        "WandererID": 322
+    },
+    {
+        "WandererName": "Caffeine Addict",
+        "WandererID": 323
+    },
+    {
+        "WandererName": "Magazine Freak",
+        "WandererID": 324
+    },
+    {
+        "WandererName": "Machine of Inferno",
+        "WandererID": 325
+    },
+    {
+        "WandererName": "Anguish Barbarian",
+        "WandererID": 326
+    },
+    {
+        "WandererName": "Waist Master",
+        "WandererID": 327
+    },
+    {
+        "WandererName": "Master Position",
+        "WandererID": 328
+    },
+    {
+        "WandererName": "Pretty Affair",
+        "WandererID": 329
+    },
+    {
+        "WandererName": "Devil Driver",
+        "WandererID": 330
+    },
+    {
+        "WandererName": "Street Gambler",
+        "WandererID": 331
+    },
+    {
+        "WandererName": "Green Wild",
+        "WandererID": 332
+    },
+    {
+        "WandererName": "Dark Desperado",
+        "WandererID": 333
+    },
+    {
+        "WandererName": "Eternity",
+        "WandererID": 334
+    },
+    {
+        "WandererName": "Mosquito Lemon",
+        "WandererID": 335
+    },
+    {
+        "WandererName": "Fearful Princess",
+        "WandererID": 336
+    },
+    {
+        "WandererName": "Dumb yet Smart",
+        "WandererID": 337
+    },
+    {
+        "WandererName": "Wild Heart",
+        "WandererID": 338
+    },
+    {
+        "WandererName": "Road Master",
+        "WandererID": 339
+    },
+    {
+        "WandererName": "Glamour Girl",
+        "WandererID": 340
+    },
+    {
+        "WandererName": "God Year",
+        "WandererID": 341
+    },
+    {
+        "WandererName": "Raspberry Kiss",
+        "WandererID": 342
+    },
+    {
+        "WandererName": "Craft Man",
+        "WandererID": 343
+    },
+    {
+        "WandererName": "Cutie Pie",
+        "WandererID": 344
+    },
+    {
+        "WandererName": "Storm Screamer",
+        "WandererID": 345
+    },
+    {
+        "WandererName": "Uncrushable Alexander",
+        "WandererID": 346
+    },
+    {
+        "WandererName": "Silver Ruler",
+        "WandererID": 347
+    },
+    {
+        "WandererName": "Night Wolf",
+        "WandererID": 348
+    },
+    {
+        "WandererName": "Max Energy",
+        "WandererID": 349
+    },
+    {
+        "WandererName": "Jet Skater",
+        "WandererID": 350
+    },
+    {
+        "WandererName": "Crying Baby",
+        "WandererID": 351
+    },
+    {
+        "WandererName": "Tomorrow Again",
+        "WandererID": 352
+    },
+    {
+        "WandererName": "Healthy Hero",
+        "WandererID": 353
+    },
+    {
+        "WandererName": "Late Night Cinderella",
+        "WandererID": 354
+    },
+    {
+        "WandererName": "Unbalanced Heart",
+        "WandererID": 355
+    },
+    {
+        "WandererName": "Toll Free",
+        "WandererID": 356
+    },
+    {
+        "WandererName": "Madness",
+        "WandererID": 357
+    },
+    {
+        "WandererName": "Technician Guy",
+        "WandererID": 358
+    },
+    {
+        "WandererName": "Fast Phobe",
+        "WandererID": 359
+    },
+    {
+        "WandererName": "ZERO",
+        "WandererID": 360
+    },
+    {
+        "WandererName": "SPEED BOX",
+        "WandererID": 361
+    },
+    {
+        "WandererName": "Mask",
+        "WandererID": 362
+    },
+    {
+        "WandererName": "Windy Fanfare",
+        "WandererID": 363
+    },
+    {
+        "WandererName": "Start Dash",
+        "WandererID": 364
+    },
+    {
+        "WandererName": "Golden License",
+        "WandererID": 365
+    },
+    {
+        "WandererName": "Iron Racer",
+        "WandererID": 366
+    },
+    {
+        "WandererName": "Exotic Butterfly",
+        "WandererID": 367
+    },
+    {
+        "WandererName": "King of Eden",
+        "WandererID": 368
+    },
+    {
+        "WandererName": "Loyal Knight",
+        "WandererID": 369
+    },
+    {
+        "WandererName": "Gentle Rain",
+        "WandererID": 370
+    },
+    {
+        "WandererName": "Last Flight",
+        "WandererID": 371
+    },
+    {
+        "WandererName": "Silent Barbarian",
+        "WandererID": 372
+    }
+]
+
+EliteMembers = 
 [
     {
         "EliteName": "Traitor Jack knife",
@@ -387,219 +632,6 @@ EliteMembers
     }
 
 ]
-
-
-// Need to verify if these values are correct
-Wanderers =
-[
-    {
-    "WanderGroupName": "First Group",
-    "Wanderers": [
-        "Lightning",
-        "White Panther",
-        "Garage Door",
-        "Speed Drinker",
-        "Lonely Wolf"
-    ],
-    "WanderersStart": 313,
-    "WanderersEnd": 317
-},
-{
-    "WanderGroupName": "Second Group",
-    "Wanderers": [
-        "Steam Storm",
-        "Invincible Artist",
-        "Lost Freak",
-        "Bloody Mary",
-        "Illusion B"
-    ],
-    "WanderersStart": 318,
-    "WanderersEnd": 322
-},
-{
-    "WanderGroupName": "Third Group",
-    "Wanderers": [
-        "Caffeine Addict",
-        "Magazine Freak",
-        "Machine of Inferno",
-        "Anguish Barbarian",
-        "Waist Master"
-    ],
-    "WanderersStart": 323,
-    "WanderersEnd": 327
-},
-{
-    "WanderGroupName": "Fourth Group",
-    "Wanderers": [
-        "Master Position",
-        "Pretty Affair",
-        "Devil Driver",
-        "Street Gambler",
-        "Green Wild"
-    ],
-    "WanderersStart": 328,
-    "WanderersEnd": 332
-},
-{
-    "WanderGroupName": "Fifth Group",
-    "Wanderers": [
-        "Dark Desperado",
-        "Eternity",
-        "Mosquito Lemon",
-        "Fearful Princess",
-        "Dumb yet Smart"
-    ],
-    "WanderersStart": 333,
-    "WanderersEnd": 337
-},
-{
-    "WanderGroupName": "Sixth Group",
-    "Wanderers": [
-        "Wild Heart",
-        "Road Master",
-        "Glamour Girl",
-        "God Year",
-        "Raspberry Kiss"
-    ],
-    "WanderersStart": 338,
-    "WanderersEnd": 342
-},
-{
-    "WanderGroupName": "Seventh Group",
-    "Wanderers": [
-        "Craft Man",
-        "Cutie Pie",
-        "Storm Screamer",
-        "Uncrushable Alexander",
-        "Silver Ruler"
-    ],
-    "WanderersStart": 343,
-    "WanderersEnd": 347
-},
-{
-    "WanderGroupName": "Eighth Group",
-    "Wanderers": [
-        "Night Wolf",
-        "Max Energy",
-        "Jet Skater",
-        "Crying Baby",
-        "Tomorrow Again"
-    ],
-    "WanderersStart": 348,
-    "WanderersEnd": 352
-},
-{
-    "WanderGroupName": "Ninth Group",
-    "Wanderers": [
-        "Healthy Hero",
-        "Late Night Cinderella",
-        "Unbalanced Heart",
-        "Toll Free",
-        "Madness"
-    ],
-    "WanderersStart": 353,
-    "WanderersEnd": 357
-},
-{
-    "WanderGroupName": "Tenth Group",
-    "Wanderers": [
-        "Technician Guy",
-        "Fast Phobe",
-        "ZERO",
-        "SPEED BOX",
-        "Mask"
-    ],
-    "WanderersStart": 358,
-    "WanderersEnd": 362
-},
-{
-    "WanderGroupName": "Eleventh Group",
-    "Wanderers": [
-        "Windy Fanfare",
-        "Start Dash",
-        "Golden License",
-        "Iron Racer",
-        "Exotic Butterfly"
-    ],
-    "WanderersStart": 363,
-    "WanderersEnd": 367
-},
-{
-    "WanderGroupName": "Twelfth Group",
-    "Wanderers": [
-        "King of Eden",
-        "Loyal Knight",
-        "Gentle Rain",
-        "Last Flight",
-        "Silent Barbarian"
-    ],
-    "WanderersStart": 368,
-    "WanderersEnd": 372
-}
-
-]
-
-//          314=Lightning (Wanderers Leader)
-//          315=White Panther (Wanderers 1)
-//          316=Garage Door (Wanderers 2)
-//          317=Speed Drinker (Wanderers 3)
-//          318=Lonely Wolf (Wanderers 4)
-//          319=Steam Storm (Wanderers 5)
-//          320=Invincible Artist (Wanderers 6)
-//          321=Lost Freak (Wanderers 7)
-//          322=Bloody Mary (Wanderers 8)
-//          323=Illusion B (Wanderers 9)
-//          324=Caffeine Addict (Wanderers 10)
-//          325=Magazine Freak (Wanderers 11)
-//          326=Machine of Inferno (Wanderers 12)
-//          327=Anguish Barbarian (Wanderers 13)
-//          328=Waist Master (Wanderers 14)
-//          329=Master Position (Wanderers 15)
-//          330=Pretty Affair (Wanderers 16)
-//          331=Devil Driver (Wanderers 17)
-//          332=Street Gambler (Wanderers 18)
-//          333=Green Wild (Wanderers 19)
-//          334=Dark Desperado (Wanderers 20)
-//          335=Eternity (Wanderers 21)
-//          336=Mosquito Lemon (Wanderers 22)
-//          337=Fearful Princess (Wanderers 23)
-//          338=Dumb yet Smart (Wanderers 24)
-//          339=Wild Heart (Wanderers 25)
-//          340=Road Master (Wanderers 26)
-//          341=Glamour Girl (Wanderers 27)
-//          342=God Year (Wanderers 28)
-//          343=Raspberry Kiss (Wanderers 29)
-//          344=Craft Man (Wanderers 30)
-//          345=Cutie Pie (Wanderers 31)
-//          346=Storm Screamer (Wanderers 32)
-//          347=Uncrushable Alexander (Wanderers 33)
-//          348=Silver Ruler (Wanderers 34)
-//          349=Night Wolf (Wanderers 35)
-//          350=Max Energy (Wanderers 36)
-//          351=Jet Skater (Wanderers 37)
-//          352=Crying Baby (Wanderers 38)
-//          353=Tomorrow Again (Wanderers 39)
-//          354=Healthy Hero (Wanderers 40)
-//          355=Late Night Cinderella (Wanderers 41)
-//          356=Unbalanced Heart (Wanderers 42)
-//          357=Toll Free (Wanderers 43)
-//          358=Madness (Wanderers 44)
-//          359=Technician Guy (Wanderers 45)
-//          360=Fast Phobe (Wanderers 46)
-//          361=ZERO (Wanderers 47)
-//          362=SPEED BOX (Wanderers 48)
-//          363=Mask (Wanderers 49)
-//          364=Windy Fanfare (Wanderers 50)
-//          365=Start Dash (Wanderers 51)
-//          366=Golden License (Wanderers 52)
-//          367=Iron Racer (Wanderers 53)
-//          368=Exotic Butterfly (Wanderers 54)
-//          369=King of Eden (Wanderers 55)
-//          370=Loyal Knight (Wanderers 56)
-//          371=Gentle Rain (Wanderers 57)
-//          372=Last Flight (Wanderers 58)
-//          373=Silent Barbarian (Wanderers 59)
-
 
 // $274270: (32-bytes)The player's current car's configuration.
 //          
@@ -1782,6 +1814,8 @@ function winsInfo() => byte(0x37DCE5)
 //          Bit 7 Kiss My Bumper (Little Gang 1)
 function winsStart() => byte(0x37DCE6)
 
+function winsLocationPlusOffset(offset) => 0x37DCE6 + offset
+
 // $37DD66: (165-bit) Car Unlock array.
 //          
 //          Cars will unlock from this list, by setting the bit to true.  Some cars are available from the start, others will unlock as you beat their model in races.
@@ -1957,7 +1991,7 @@ function winsStart() => byte(0x37DCE6)
 function carUnlockArray() => byte(0x37DD66)
 
 // $37DD87: (8-bit signed) Current day of the Quest mode.
-function currentDayOffByOne)() => byte(0x37DD87)
+function currentDayOffByOne() => byte(0x37DD87)
 
 // $37DD88: (32-bit signed) Total money in Quest mode divided by 10s.
 //          
@@ -2016,7 +2050,7 @@ function currentGameMode() => byte(0x73FBBF)
 // $73FBF0: (8-bit) On front End indicator.
 //          
 //          0x00 = In Front end.
-//          0x00 = Driving or loading into the game.   Note this should not be used purely for "Driving"
+//          0x01 = Driving or loading into the game.   Note this should not be used purely for "Driving"
 //          
 //          Note: there's about 22766 values I found for this that are boolean (0x00 and 0x01) So if this proves wrong, start from scratch and try to find something better.  Only chose this one due to closeness to 0x0073fbbf
 function frontEndIndicator() => byte(0x73FBF0)
@@ -2048,8 +2082,14 @@ function inGameTripOdometer() => dword(0x742B68)
 // $74AF6C: (8-bit) Driving in Game
 //          
 //          0x00 = In Front end. or Loading.
-//          0x00 = Actually driving or paused while in game.
+//          0x01 = Actually driving or paused while in game.
 function inGameIndicator() => byte(0x74AF6C)
+
+IN_GAME_INDICATOR_FRONT_END = 0x00
+IN_GAME_INDICATOR_DRIVING = 0x01
+
+// This can set 3 in game.  Might be bit 0 but let's do not Front end. 
+function inGameDriving() => inGameIndicator() != IN_GAME_INDICATOR_FRONT_END
 
 // $7508F8: (32-bit) Player's Health in battle
 //          
@@ -2082,6 +2122,9 @@ function timeInBattle() => dword(0x750900)
 //          0x03 = Pause menu
 function postRaceScreen() => byte(0x750A80)
 
+TIME_TRIAL_TIMING = 0x01
+QUEST_MODE_POST_RACE = 0x01
+
 // $750B18: (8-bit) Ranking of Time Trial Course
 //          
 //          0x00 is first.
@@ -2099,6 +2142,88 @@ function timeTrialTime() => dword(0x750B20)
 //          0x0B = Oval
 function timetrialCourseIndex() => byte(0x750B32)
 
+// Helper function 
+function ContainsKey(dictionary, key_name)
+{
+    for key in dictionary 
+        if(key == key_name) return true
+    return false
+}
+
+function winAchievement(title, description, points, index)
+{
+    offset = index/8
+    
+    targetBit = index%8
+    targetLocation = winsLocationPlusOffset(offset) 
+    achievement(title = title,
+                description = description,
+                points = points,
+                trigger = prev(bit(targetBit, targetLocation )) == 0 &&
+                          bit(targetBit, targetLocation) == 1 &&  // Just Beat the value 
+                          postRaceScreen() == QUEST_MODE_POST_RACE && // Just finished a race
+                          inGameDriving()
+                )
+}
+
+
+function teamAchievements()
+{
+    for TeamInfo in TeamInformation 
+    {
+        points = 1
+        if( ContainsKey(TeamInfo,"points") )
+        {
+            points = TeamInfo["Points"]
+        }
+        winAchievement(title = TeamInfo["TeamName"],
+                    description = format("Beat {0} from {1} in Quest Mode", TeamInfo["TeamLeader"], TeamInfo["TeamName"]),
+                    points = points,
+                    index = TeamInfo["TeamLeaderID"]
+                    )
+    }
+    
+}
+
+function wanderersAchievements()
+{
+    for WandererInfo in Wanderers 
+    {
+        points = 1
+        if( ContainsKey(WandererInfo,"points") )
+        {
+            points = WandererInfo["Points"]
+        }
+        winAchievement(title = WandererInfo["WandererName"],
+                    description = format("Beat Wanderer {0} in Quest Mode", WandererInfo["WandererName"]),
+                    points = points,
+                    index = WandererInfo["WandererID"]
+                    )
+    }
+    
+}
+
+function eliteAchievements()
+{
+    for EliteInfo in EliteMembers 
+    {
+        points = 1
+        if( ContainsKey(EliteInfo,"points") )
+        {
+            points = WandererInfo["Points"]
+        }
+        winAchievement(title = EliteInfo["EliteName"],
+                    description = format("Beat {0} in Quest Mode", EliteInfo["EliteName"]),
+                    points = points,
+                    index = EliteInfo["EliteID"]
+                    )
+    }
+    
+}
+
+teamAchievements()
+wanderersAchievements()
+eliteAchievements()
 
 // achievements
 // Beat an entire team with no losses? 
@@ -2177,11 +2302,19 @@ function timetrialCourseIndex() => byte(0x750B32)
 
 // Have a million dollars. 
 
+
+100 Quick Races. 
+
 /////////////////
 // NEEDS 
 ////////////////
 
-Purchase a car? 
-Watching trailer for Fast and furious? 
+// Purchase a car? 
+// Watching trailer for Fast and furious? 
 
-Changing instruction 00189218 to subu s1,s1,v1  is easy mode. 
+// Changing instruction 00189218 to subu s1,s1,v1  is easy mode. 
+
+
+// Need to find what road I'm on. 
+
+// Determine if you won or lost in QR
