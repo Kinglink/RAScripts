@@ -899,6 +899,7 @@ leaderboard(
     submit =  prev(levelId()) == LEVEL_SIX &&
               levelId() == LEVEL_POSTGAME,
     value = measured(always_true(), when=!gameplayPaused()) && unless(gameplayPaused()),
+    lower_is_better = true,
     format = "FRAMES"
 )
 
@@ -918,6 +919,7 @@ leaderboard(
     submit =  prev(levelId()) == LEVEL_SIX &&
               levelId() == LEVEL_POSTGAME,
     value = measured(always_true(), when=!gameplayPaused()) && unless(gameplayPaused()),
+    lower_is_better = true,
     format = "FRAMES"
 )
 
