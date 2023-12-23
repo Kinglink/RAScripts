@@ -2,7 +2,6 @@
 
 import os
 import io
-import pyperclip
 from PIL import Image, ImageGrab
 
 def crop_center(img, crop_width, crop_height):

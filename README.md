@@ -8,4 +8,4 @@ I have no rights to any of the games listed here, and do not have permission to 
 
 RATools which is used to read the scripts as information and download links at https://docs.retroachievements.org/RATools/
 Some editing has been done by Krita(https://krita.org/en/).  However most files have been dumped directly from Ps2 Games (not included here as again I don't have the rights to the original textures).  Or screen shots taken from the games.  
-I use Python for most of the scripts here.  I don't have requirements files. But will assist if someone needs help using them.  Use python 2 and attempt to import all listed libraries. 
+I use Python for most of the scripts here.  I don't have requirements files. But will assist if someone needs help using them.  Use python 3 and attempt to import all listed libraries.   
