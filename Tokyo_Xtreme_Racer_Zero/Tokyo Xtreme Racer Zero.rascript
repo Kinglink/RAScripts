@@ -2418,13 +2418,6 @@ achievement(title = "You'll get them next time",
                       racesDrawnInNight() == 1  // I could check previous but there's really no way for someone to "win" a race automatically. 
            )
 
-achievement(title = "You'll get them next time",
-            description = "Earn your first Draw in Quest Mode",
-            points = 2,
-            trigger = questMode() &&
-                      inGameDriving() &&
-                      racesDrawnInNight() == 1  // I could check previous but there's really no way for someone to "win" a race automatically. 
-           )
 
 achievement( title = "No fuzzy dice?",
              description = "Get a mirror ornament for your car",
