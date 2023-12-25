@@ -2461,8 +2461,6 @@ achievement( title = "No fuzzy dice?",
 // Probably hard to do, hard to get. 
 
 
-// 100 Quick Races. 
-
 /////////////////
 // NEEDS 
 ////////////////
