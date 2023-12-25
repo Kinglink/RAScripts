@@ -1,3 +1,4 @@
+Remember each question should be checked individually. 
 
 Pre testing checklist 
 1. Has all code notes been uploaded?
@@ -8,6 +9,7 @@ Pre testing checklist
 6. Has all leaderboards been confirmed to be set properly (Less is more?) 
 7. Has Rich Presence been uploaded to the site? 
 8. Has all icons, title screens, cover art been generated properly?
+9. Are all point totals reasonable? 
 
 Release checklist. 
 1. Has a test plan been run against this set? (Test team or personal) 

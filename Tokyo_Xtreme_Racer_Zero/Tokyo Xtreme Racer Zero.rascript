@@ -657,6 +657,10 @@ function inGameCarConfiguration() => byte(0x274270)
 //          0x02 = C Class.
 function inGameCarClass() => byte(0x305654)
 
+CLASS_A = 0x00
+CLASS_B = 0x01
+CLASS_C = 0x02
+
 // $305674: (16-bit array) Class A Car indexes
 //          
 //          Number of cars at 0x0030b560
@@ -2011,7 +2015,7 @@ function winsLocationPlusOffset(offset) => 0x37DCE6 + offset
 //          0xa4 = R32RNK
 function carUnlockArray() => byte(0x37DD66)
 
-function carUnlockArrayPlusOffset(offset) => byte(0x37DD66+offset)
+function carUnlockArrayPlusOffset(offset) => 0x37DD66+offset
 
 TOTAL_CARS_TO_BUY = 0xa4 + 1
 INITIAL_CAR_SELECTION = 16*3  // able to buy 16 cars in each class at the beginning of the game. 
@@ -2051,7 +2055,7 @@ function racesLostInNight() => totalRacesLostQuestMode() - prevRacesLostQuestMod
 //          
 //          Previous Draws is located at 0x003115aC
 function totalRacesDrawnQuestMode() => dword(0x37DD98)
-function prevRacesDrawnQuestMode() => dword(0x003115a4)
+function prevRacesDrawnQuestMode() => dword(0x003115aC)
 
 function racesDrawnInNight() => totalRacesDrawnQuestMode() - prevRacesDrawnQuestMode()
 
@@ -2059,16 +2063,20 @@ function racesDrawnInNight() => totalRacesDrawnQuestMode() - prevRacesDrawnQuest
 //          
 //          When 0x0073fbbf is set to 06
 //          
-//          0x01 = The Fast and furious
-//          0x02 = Tokyo Hardcore: Night Warriors
+//          0x02 = The Fast and furious
+//          0x03 = Tokyo Hardcore: Night Warriors
 function whichMoviePlaying() => byte(0x73FBBC)
-
+FAST_AND_FURIOUS = 0x02
+TOKYO_HARDCORE_NIGHT_WARRIORS = 0x03
 // $73FBBE: (8-bit) Movie playing
 //          
 //          If set to 1 the game will play a movie rather than enter the game.
 //          
 //          Not too reliable, but interesting for sure.
 function isMoviePlaying() => byte(0x73FBBE)
+
+MOVIE_IS_PLAYING = 1
+function movieIsPlaying() => isMoviePlaying() == MOVIE_IS_PLAYING
 
 // $73FBBF: (8-bit) Mode of game/Main Menu Selection
 //          
@@ -2088,11 +2096,13 @@ function currentGameMode() => byte(0x73FBBF)
 QUEST_MODE = 0x00
 QUICK_RACE_MODE = 0x01
 TIME_ATTACK_MODE = 0x02
+SYSTEM_MODE = 0x05
 DVD_EXTRAS_MODE = 0x06
 
 function questMode() => currentGameMode() == QUEST_MODE
 function quickRaceMode() => currentGameMode() == QUICK_RACE_MODE
 function timeAttackMode() => currentGameMode() == TIME_ATTACK_MODE
+function systemMode() => currentGameMode() == SYSTEM_MODE
 function dvdExtrasMode() => currentGameMode() == DVD_EXTRAS_MODE
 
 // $73FBF0: (8-bit) On front End indicator.
@@ -2114,11 +2124,17 @@ function frontEndIndicator() => byte(0x73FBF0)
 //          0x03 = Part Shop
 //          0x04 = Car Shop
 //          0x05 = Rivals
-//          0x06= System
-//          0x07 Quit
+//          0x06 = System
+//          0x07 = Quit
 //          
 //          Note this value changes when entering a mode.  But can tell you which submode the player is in (or last visited.
 function questModeSubmenu() => byte(0x73FC48)
+
+CAR_SHOP_SUB_MENU = 0x04
+SYSTEM_QUEST_MODE_SUB_MENU = 0x06
+
+function inCarShop() => questModeSubmenu() == CAR_SHOP_SUB_MENU
+function inQuestSystemMenu() => questModeSubmenu() == SYSTEM_QUEST_MODE_SUB_MENU
 
 // $742B68: (32-bit) Trip odometer in game.
 //          
@@ -2176,6 +2192,7 @@ function postRaceScreen() => byte(0x750A80)
 
 TIME_TRIAL_TIMING = 0x01
 QUEST_MODE_POST_RACE = 0x01
+QUICK_RACE_MODE_POST_RACE = 0x01
 
 // $750B18: (8-bit) Ranking of Time Trial Course
 //          
@@ -2190,9 +2207,48 @@ function timeTrialTime() => dword(0x750B20)
 
 // $750B32: (8-bit) Course Number for Time Trial
 //          
+//          0x00 = Kanda Bridge(Kanjyo Inner)   CCW
+//          0x01 = Kanda Bridge(Kanjyo Outer)  CW
+//          0x02 = Ariake(Shinkanjyo CCW) 
+//          0x03 = Ariake(Shinkanjyo CW)
+//          0x04 = Daikoku Port (Wangan North bound)
+//          0x05 = Area 13 (Wangan South bound)  (Same as 0x04 in reverse, both sprints)
+//          0x06 = Suzugamori (Haneda South bound)
+//          0x07 = Shioiri (Haneda North bound)
+//          0x08 = Kanda Bridge (C-1 CCW)
+//          0x09 = Kanda Bridge (C-1 CW)
 //          0x0A = 0-400m on Oval
-//          0x0B = Oval
+//          0x0B = Oval 
 function timetrialCourseIndex() => byte(0x750B32)
+
+KANDA_BRIDGE_CCW = 0x00
+ARIAKE_CCW = 0x02
+AREA_13_SPRINT = 0x05
+SHIOIRI_SPRINT = 0x07
+KANDA_C1_CW = 0x09
+OVAL = 0x0B
+
+
+// $7508e4: (8-bit) Current Quick Race Round
+//
+// 0x00 = Round 1 
+// Increments all the way to 100 
+function quickRaceRound() => byte(0x7508e4)
+
+// $750b14: (8-bit) Quick Race Result Control Value. Quest Mode Result Value 
+// 
+// 0x00 = Win 
+// 0x01 = Loss
+// 0x02 = Draw
+// 
+// Draw is impossible in Quick Race.  Freezing this to 0x00 means you win every Quick Race  round.
+// Freezing this to 0x00 in Quest mode means the end of race SAYS you won, however you don't get credit, and rivals are marked as "Lost" after the round. 
+// 
+// Can be used in either game mode though. 
+function raceResult() => byte(0x7508e4)
+
+function quickRaceWon() => raceResult() == 0x00
+function questRaceWon() => raceResult() == 0x00
 
 // Helper function 
 function ContainsKey(dictionary, key_name)
@@ -2201,6 +2257,8 @@ function ContainsKey(dictionary, key_name)
         if(key == key_name) return true
     return false
 }
+
+function saveProtection() => !inQuestSystemMenu() && !systemMode()
 
 function winAchievement(title, description, points, index)
 {
@@ -2214,7 +2272,8 @@ function winAchievement(title, description, points, index)
                 trigger = prev(bit(targetBit, targetLocation )) == 0 &&
                           bit(targetBit, targetLocation) == 1 &&  // Just Beat the value 
                           postRaceScreen() == QUEST_MODE_POST_RACE && // Just finished a race
-                          inGameDriving()
+                          inGameDriving() &&
+                          questRaceWon() // unneeded, but extra safety.
                 )
 }
 
@@ -2335,8 +2394,9 @@ achievement(title = "A Perfect Night",
             points = 10,
             trigger = questMode() &&
                       previnGameDriving() &&
-                      !inGameDriving() &&
-                      racesWonInNight() >= 20 &&
+                      trigger_when( !inGameDriving() &&
+                                    racesWonInNight() >= 20 
+                      ) &&
                       racesLostInNight() == 0 &&
                       racesDrawnInNight() == 0
             )
@@ -2348,10 +2408,11 @@ function uniqueWinAchievement()
             points = 10,
             trigger = questMode() &&
                       !inGameDriving() &&
+                      never(!previnGameDriving()) &&
                       measured(tally_of(range(0,TOTAL_ENEMIES/8), 10, index => prev(bitcount(winsLocationPlusOffset(index))) != bitcount(winsLocationPlusOffset(index))), 
-                                when=previnGameDriving() && 
+                                when=previnGameDriving()) && 
                                 racesLostInNight() == 0 && 
-                                racesDrawnInNight() == 0)
+                                racesDrawnInNight() == 0
             )
 }
 uniqueWinAchievement()
@@ -2372,7 +2433,9 @@ achievement(title = "Crank up the Super Eurobeat",
             trigger = questMode() &&
                       inGameDriving() &&
                       drivingAE86() &&
-                      racesWonInNight() == 1  // I could check previous but there's really no way for someone to "win" a race automatically. 
+                      trigger_when(postRaceScreen() == QUEST_MODE_POST_RACE && // Just finished a race
+                                   questRaceWon() &&
+                                   racesWonInNight() == 1)  // I could check previous but there's really no way for someone to "win" a race automatically. 
            )
 
 function CarsToBuyAchievements(title, description, points, numberCarsToUnlock)
@@ -2382,7 +2445,7 @@ function CarsToBuyAchievements(title, description, points, numberCarsToUnlock)
             points = 10,
             trigger = inGameDriving() && // Probably will be questMode, but let's not make an assumption.
                       sum_of(range(0,TOTAL_CARS_TO_BUY/8), index => bitcount(carUnlockArrayPlusOffset(index))) >=numberCarsToUnlock&&
-                      sum_of(range(0,TOTAL_CARS_TO_BUY/8), index => bitcount(prev(carUnlockArrayPlusOffset(index)))) < numberCarsToUnlock
+                      sum_of(range(0,TOTAL_CARS_TO_BUY/8), index => prev(bitcount(carUnlockArrayPlusOffset(index)))) < numberCarsToUnlock
             )
 }
 
@@ -2426,20 +2489,133 @@ achievement( title = "No fuzzy dice?",
                        hasMirrorHanger()
             )
 
+achievement( title = "Hey Big Spender",
+             description = "Spend over $100,000 on a single car in the Car Shop in Quest Mode",
+             points = 3,
+             trigger = questMode() &&
+                       !inGameDriving() &&
+                       inCarShop() &&
+                       prev(totalMoneyQuestMode()) - totalMoneyQuestMode() >= 100000/10  // money is record in 10 dollar bills. 
+            )
 
+function TimeTrialAchievement(title, description, points, course, carClass, minutes, seconds = 0, centiseconds = 0)
+{
+    trigger = timeAttackMode() &&
+              timetrialCourseIndex() == course &&
+              postRaceScreen() == TIME_TRIAL_TIMING  &&
+              timeTrialTime() <= ((((minutes * 60) + seconds ) * 100) + centiseconds) * 10 &&
+              inGameCarClass() == carClass
+    
+    
+    achievement( title = title,
+             description = description,
+             points = points, 
+             trigger = trigger
+             )
+}
+
+
+TimeTrialAchievement( title = "Kanjyo Cruiser Challenge",
+                     description = "Finish the Kanda Bridge with an class C car in XXYYTime in Time Trial Mode",
+                     points = 5, 
+                     course = KANDA_BRIDGE_CCW, 
+                     carClass = CLASS_C,
+                     minutes = 10
+                    )
+
+TimeTrialAchievement( title = "Shinkanjyo Speedrun Supremacy",
+                      description = "Finish the Ariake course(Shinkanjyo CCW) with an class B car in XXYYTime in Time Trial Mode",
+                      points = 5, 
+                      course = ARIAKE_CCW, 
+                      carClass = CLASS_B,
+                      minutes = 15
+                    )
+
+TimeTrialAchievement( title = "Area 13 to Daikoku Dash",
+                      description = "Finish the Area 13 (Wangan Southbound) with an class B car in XXYYTime in Time Trial Mode",
+                      points = 5, 
+                      course = AREA_13_SPRINT, 
+                      carClass = CLASS_B,
+                      minutes = 5
+                    )
+                    
+
+TimeTrialAchievement( title = "Shioiri Sprint to Suzugamori",
+                      description = "Finish the Shioiri(Haneda Northbound) with an class A car in XXYYTime in Time Trial Mode",
+                      points = 5, 
+                      course = SHIOIRI_SPRINT, 
+                      carClass = CLASS_A,
+                      minutes = 5
+                    )
+
+TimeTrialAchievement( title = "Wangan Lightning Legend",
+                      description = "Finish the Kanda Bridge (C-1 CW) with an class A car in XXYYTime in Time Trial Mode",
+                      points = 5, 
+                      course = KANDA_C1_CW, 
+                      carClass = CLASS_A,
+                      minutes = 25
+                )
+
+TimeTrialAchievement( title = "Oval Overdrive",
+                      description = "Finish the Oval with an class A car in XXYYTime in Time Trial Mode",
+                      points = 5, 
+                      course = OVAL, 
+                      carClass = CLASS_A,
+                      minutes = 5
+                    )
+
+achievement( title = "Full Garage",
+             description = "Own 50 cars in Quest Mode",
+             points = 2, 
+             trigger = questMode() &&
+                       classACarsOwned() + classBCarsOwned() + classCCarsOwned() == 50 &&
+                       prev(classACarsOwned()) + prev(classBCarsOwned()) + prev(classCCarsOwned()) == 49 &&
+                       saveProtection()
+
+           )
+
+function QuickRaceAchievement( title, description, points, winCount)
+{
+    achievement( title = title,
+             description = description,
+             points = points, 
+             trigger = quickRaceMode() &&
+                       quickRaceRound() == winCount -1 &&
+                       quickRaceWon() && 
+                       postRaceScreen() == QUICK_RACE_MODE_POST_RACE
+
+             )
+}
+
+QuickRaceAchievement( title = "More Like Survival Mode", 
+                      description = "Beat round 10 in Quick Race mode.",
+                      points = 3,
+                      winCount = 10)
+QuickRaceAchievement( title = "Quarter Century Champion", 
+                      description = "Beat round 25 in Quick Race mode.",
+                      points = 5,
+                      winCount = 10)
+QuickRaceAchievement( title = "Halfway There", 
+                      description = "Beat round 50 in Quick Race mode.",
+                      points = 10,
+                      winCount = 10)
+QuickRaceAchievement( title = "Are We There Yet?", 
+                      description = "Beat round 75 in Quick Race mode.",
+                      points = 10,
+                      winCount = 10)
+QuickRaceAchievement( title = "Centurion Conqueror", 
+                      description = "Beat round 100 in Quick Race mode.",
+                      points = 25,
+                      winCount = 10)
+
+achievement(title = "Whose going to watch that?",
+            description = "Watch the Fast and the Furious trailer.",
+            points = 1,
+            trigger = dvdExtrasMode() &&
+                      movieIsPlaying() &&
+                      whichMoviePlaying() == FAST_AND_FURIOUS
+)
 // achievements
-
-// spend over 100,000 on a car.
-
-// Time attack
-// Going to do 3 of them  C short course.  B After finishing speed king. 
-//  A End game. Full wangan. 
-//  Leaderboards for everything here. 
-
-// Beat all 100 racers in QR 
-
-// Watch the trailer for Fast and furious.
-
 
 // On Hold 
 // Break a certain speed. 
