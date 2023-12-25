@@ -3390,7 +3390,7 @@ function characterDefinition(
         }
         if(hardMusouModeObject["description"] == "")
         {
-            hardMusouModeObject["description"] = format("Beat {0}'s entire Musou Mode on hard difficulty{1} in one session", name, asASinglePlayerString)
+            hardMusouModeObject["description"] = format("Beat every stage of {0}'s Musou Mode on hard difficulty{1} in one session", name, asASinglePlayerString)
         }
         array_push(hardMusouMode, hardMusouModeObject)
     }
