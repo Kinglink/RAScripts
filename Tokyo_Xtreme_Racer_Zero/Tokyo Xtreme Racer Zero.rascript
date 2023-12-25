@@ -633,6 +633,8 @@ EliteMembers =
 
 ]
 
+TOTAL_ENEMIES = 400
+
 // $274270: (32-bytes)The player's current car's configuration.
 //          
 //          Possibly bigger than 32 bytes.
@@ -842,6 +844,13 @@ function inGameCarClass() => byte(0x305654)
 //          Note: Values over 0xb0 appears to cause the game to have issues.
 function classACarIndexes() => word(0x305674)
 
+AE86L3 = 0x00 
+AE86T3 = 0x01
+AE86L2 = 0x02
+AE86T2 = 0x03
+
+
+
 // $3056D8: (16-bit array) Class B Car indexes
 //          
 //          Number of cars at 0x0030b562
@@ -957,6 +966,9 @@ function questModePrevRacesDrawn() => dword(0x3115AC)
 //          0x03 = Green Monster Chungus
 function mirrorHanger() => dword(0x375944)
 
+NO_MIRROR_HANGER = 0xffffffff
+function hasMirrorHanger() => mirrorHanger() != NO_MIRROR_HANGER
+
 // $375C0C: (16-bit) Car Index while driving
 //          
 //          Similar to 0x0375c0c, 0x37dc3c and 0x742b6e
@@ -964,10 +976,17 @@ function mirrorHanger() => dword(0x375944)
 //          See 0x00305674 for car index.
 function inGameCarIndex() => word(0x375C0C)
 
+function drivingAE86() => inGameCarIndex() == AE86L2 ||
+                          inGameCarIndex() == AE86L3 ||
+                          inGameCarIndex() == AE86T2 ||
+                          inGameCarIndex() == AE86T3
+
 // $37DC50: (Float) Displayed value of Max Speed at end of night.
 //          
 //          Starts at 0, and increases.  This gets multiplied by 3.6 and then multiplied by .6 (To convert to Mph?)
-function endOfNIghtMaxSpeed() => float(0x37DC50)
+function endOfNightMaxSpeed() => float(0x37DC50)
+
+function maxSpeedInMPH(speed) => endOfNightMaxSpeed() * 3.6 * 0.6
 
 // $37DC60: (32-bit) In game Total Odometer Value per car.
 //          
@@ -1396,6 +1415,8 @@ function lossesInfoOffByOne() => byte(0x37DCA5)
 //          Bit 6 Happy Run (Little Gang Leader)
 //          Bit 7 Kiss My Bumper (Little Gang 1)
 function lossesStart() => byte(0x37DCA6)
+
+function lossesLocationPlusOffset(offset) => 0x37DCA6 + offset
 
 // $37DCE5: [408-bit]  Off by 1 array note.  List of all Rival who has the player has beaten.
 //          
@@ -1990,6 +2011,14 @@ function winsLocationPlusOffset(offset) => 0x37DCE6 + offset
 //          0xa4 = R32RNK
 function carUnlockArray() => byte(0x37DD66)
 
+function carUnlockArrayPlusOffset(offset) => byte(0x37DD66+offset)
+
+TOTAL_CARS_TO_BUY = 0xa4 + 1
+INITIAL_CAR_SELECTION = 16*3  // able to buy 16 cars in each class at the beginning of the game. 
+TOTAL_CARS_TO_UNLOCK = TOTAL_CARS_TO_BUY - INITIAL_CAR_SELECTION   // 117
+QUARTER_OF_CARS_TO_UNLOCK = TOTAL_CARS_TO_UNLOCK / 4
+TENTH_OF_CARS_TO_UNLOCK = TOTAL_CARS_TO_UNLOCK / 10
+
 // $37DD87: (8-bit signed) Current day of the Quest mode.
 function currentDayOffByOne() => byte(0x37DD87)
 
@@ -2006,16 +2035,25 @@ function totalMoneyQuestMode() => dword(0x37DD88)
 //          
 //          Previous Wins is located at 0x003115a4
 function totalRacesWonQuestMode() => dword(0x37DD90)
+function prevRacesWonQuestMode() => dword(0x003115a4)
+
+function racesWonInNight() => totalRacesWonQuestMode() - prevRacesWonQuestMode()
 
 // $37DD94: (32-bit signed) Total Races lost in quest mode
 //          
 //          Previous Losses is located at 0x003115a8
 function totalRacesLostQuestMode() => dword(0x37DD94)
+function prevRacesLostQuestMode() => dword(0x003115a8)
+
+function racesLostInNight() => totalRacesLostQuestMode() - prevRacesLostQuestMode()
 
 // $37DD98: (32-bit signed) Total Races ending in a draw in quest mode
 //          
 //          Previous Draws is located at 0x003115aC
 function totalRacesDrawnQuestMode() => dword(0x37DD98)
+function prevRacesDrawnQuestMode() => dword(0x003115a4)
+
+function racesDrawnInNight() => totalRacesDrawnQuestMode() - prevRacesDrawnQuestMode()
 
 // $73FBBC: (8-bit) Movie playing in DVD Extras
 //          
@@ -2046,6 +2084,16 @@ function isMoviePlaying() => byte(0x73FBBE)
 //          0x05= System (Options)
 //          0x06= DVD Extras
 function currentGameMode() => byte(0x73FBBF)
+
+QUEST_MODE = 0x00
+QUICK_RACE_MODE = 0x01
+TIME_ATTACK_MODE = 0x02
+DVD_EXTRAS_MODE = 0x06
+
+function questMode() => currentGameMode() == QUEST_MODE
+function quickRaceMode() => currentGameMode() == QUICK_RACE_MODE
+function timeAttackMode() => currentGameMode() == TIME_ATTACK_MODE
+function dvdExtrasMode() => currentGameMode() == DVD_EXTRAS_MODE
 
 // $73FBF0: (8-bit) On front End indicator.
 //          
@@ -2079,6 +2127,9 @@ function questModeSubmenu() => byte(0x73FC48)
 //          Does not affect Odometer
 function inGameTripOdometer() => dword(0x742B68)
 
+// The factor that distances are multiplied by. 
+DISTANCE_FACTOR = 1612
+
 // $74AF6C: (8-bit) Driving in Game
 //          
 //          0x00 = In Front end. or Loading.
@@ -2090,6 +2141,7 @@ IN_GAME_INDICATOR_DRIVING = 0x01
 
 // This can set 3 in game.  Might be bit 0 but let's do not Front end. 
 function inGameDriving() => inGameIndicator() != IN_GAME_INDICATOR_FRONT_END
+function previnGameDriving() => prev(inGameIndicator()) != IN_GAME_INDICATOR_FRONT_END
 
 // $7508F8: (32-bit) Player's Health in battle
 //          
@@ -2225,92 +2277,196 @@ teamAchievements()
 wanderersAchievements()
 eliteAchievements()
 
+// Team in one day. 
+
+function teamInADayAchievement()
+{
+    // initial trigger is always false
+    triggerTeamConditions = always_false()
+    // go through each team. 
+    for TeamInfo in TeamInformation 
+    {
+        // Start a previous condition and a current condition. 
+        prevCondition = always_true()
+        currentCondition = always_true()
+        noLossCondition = always_true()
+        // cycle through each team member including the first and last.
+        for index in range(TeamInfo["TeamLeaderID"],TeamInfo["LastMember"])
+        {
+            // Calculate target Location(through offset) and bit
+            offset = index/8
+            targetBit = index%8
+            winTargetLocation = winsLocationPlusOffset(offset) 
+            lossTargetLocation = lossesLocationPlusOffset(offset)
+            // Previous condition anded with delta (prev) bit false. 
+            prevCondition = prevCondition && prev(bit(targetBit, winTargetLocation)) == 0
+            // current condition and with bit check true. 
+            currentCondition = currentCondition && bit(targetBit, winTargetLocation) == 1
+            noLossCondition = noLossCondition && bit(targetBit, lossTargetLocation) == 0
+        }
+        // trigger ored with (hit (once) on previous condition anded with current condition.)
+        triggerTeamConditions = triggerTeamConditions || (once(prevCondition) && currentCondition && noLossCondition)
+    }
+
+    // Trigger is wrapped in () and then anded with never(!inGameDriving())
+
+    achievement(title = "A Busy Night",
+                description = "Beat every single member of a team for the first time, including the leader, in a single night without ever losing or drawing in races against any of them  in Quest Mode",
+                points = 5,
+                trigger = questMode() &&
+                          never(!inGameDriving()) &&
+                          (triggerTeamConditions)
+                )
+}
+
+teamInADayAchievement()
+
+
+achievement(title = "A Great Night",
+            description = "Win at least 20 races in a single night and return to the garage in Quest Mode",
+            points = 3,
+            trigger = questMode() &&
+                      previnGameDriving() &&
+                      racesWonInNight() >= 20
+            )
+
+achievement(title = "A Perfect Night",
+            description = "Win at least 20 races in a single night with out losing or drawing a single race and return to the garage in Quest Mode",
+            points = 10,
+            trigger = questMode() &&
+                      previnGameDriving() &&
+                      !inGameDriving() &&
+                      racesWonInNight() >= 20 &&
+                      racesLostInNight() == 0 &&
+                      racesDrawnInNight() == 0
+            )
+
+function uniqueWinAchievement() 
+{
+    achievement(title = "A Unique Night",
+            description = "Beat 10 unique racers in a single night with out losing or drawing a single race for the entire night and return to the garage in Quest Mode",
+            points = 10,
+            trigger = questMode() &&
+                      !inGameDriving() &&
+                      measured(tally_of(range(0,TOTAL_ENEMIES/8), 10, index => prev(bitcount(winsLocationPlusOffset(index))) != bitcount(winsLocationPlusOffset(index))), 
+                                when=previnGameDriving() && 
+                                racesLostInNight() == 0 && 
+                                racesDrawnInNight() == 0)
+            )
+}
+uniqueWinAchievement()
+
+MAX_UPGRADE_DISTANCE = 1864
+MAX_UPGRADE_VALUES = DISTANCE_FACTOR * MAX_UPGRADE_DISTANCE
+achievement(title = "Now to build the ultimate car",
+            description = "Reach 1864 miles on a car and unlock the ability to buy all the best parts for the car",
+            points = 3,
+            trigger = inGameDriving() &&  // Note: can be done in any game mode. 
+                      inGameTripOdometer() >= MAX_UPGRADE_VALUES &&  
+                      prev(inGameTripOdometer()) < MAX_UPGRADE_VALUES
+            )
+
+achievement(title = "Crank up the Super Eurobeat",
+            description = "Drive an AE86 and beat someone on the road in Quest Mode",
+            points = 2,
+            trigger = questMode() &&
+                      inGameDriving() &&
+                      drivingAE86() &&
+                      racesWonInNight() == 1  // I could check previous but there's really no way for someone to "win" a race automatically. 
+           )
+
+function CarsToBuyAchievements(title, description, points, numberCarsToUnlock)
+{
+    achievement(title = title,
+            description = description,
+            points = 10,
+            trigger = inGameDriving() && // Probably will be questMode, but let's not make an assumption.
+                      sum_of(range(0,TOTAL_CARS_TO_BUY/8), index => bitcount(carUnlockArrayPlusOffset(index))) >=numberCarsToUnlock&&
+                      sum_of(range(0,TOTAL_CARS_TO_BUY/8), index => bitcount(prev(carUnlockArrayPlusOffset(index)))) < numberCarsToUnlock
+            )
+}
+
+CarsToBuyAchievements(title = "Neighborhood Lot", 
+                      description = "Be able to buy ten percent of the locked cars.",
+                      points = 2,
+                      numberCarsToUnlock = TENTH_OF_CARS_TO_UNLOCK
+                      )
+
+CarsToBuyAchievements(title = "CraigsList", 
+                      description = "Be able to buy twenty five percent of the locked cars.",
+                      points = 3,
+                      numberCarsToUnlock = QUARTER_OF_CARS_TO_UNLOCK
+                      )
+
+CarsToBuyAchievements(title = "Dealership", 
+                      description = "Be able to buy fifty percent of the locked cars.",
+                      points = 5,
+                      numberCarsToUnlock = QUARTER_OF_CARS_TO_UNLOCK * 2
+                      )
+
+CarsToBuyAchievements(title = "Online Auto Auction", 
+                      description = "Be able to buy seventy five percent of the locked cars.",
+                      points = 10,
+                      numberCarsToUnlock = QUARTER_OF_CARS_TO_UNLOCK * 3
+                      )
+
+achievement(title = "You'll get them next time",
+            description = "Earn your first Draw in Quest Mode",
+            points = 2,
+            trigger = questMode() &&
+                      inGameDriving() &&
+                      racesDrawnInNight() == 1  // I could check previous but there's really no way for someone to "win" a race automatically. 
+           )
+
+achievement(title = "You'll get them next time",
+            description = "Earn your first Draw in Quest Mode",
+            points = 2,
+            trigger = questMode() &&
+                      inGameDriving() &&
+                      racesDrawnInNight() == 1  // I could check previous but there's really no way for someone to "win" a race automatically. 
+           )
+
+achievement( title = "No fuzzy dice?",
+             description = "Get a mirror ornament for your car",
+             points = 1,
+             trigger = inGameDriving() &&
+                       hasMirrorHanger()
+            )
+
+
 // achievements
-// Beat an entire team with no losses? 
-// Done, day one rolling guys. 
-//
-//   Reset on end of a day  
-//   mark No one on team is not beaten
-//   Check if entire team is beaten.
-//   Check if entire team has no losses and no draws.
 
-
-
-// 200 + MPH ticket. 
-// Expensive ticket
-
-// 10 wins in a day. 
-//  End of day, was there 10 wins? 
-
-// 20 wins in a day. 
-//  End of day, was there 20 wins? 
-
-// 20 wins in a day no losses, no ties. 
-//  End of day was there 20 wins, and no change of losses or draws? 
-
-// 10 unique wins in a day no losses? ) 
-//  End of day, no losses, no ties, and at least 20 bits have changed in wins? 
-
-// Unlock all improvements? (Distance) 
-//  Check distance current car has traveled (is that getable?) 
-
-
-// Buy X car. 
-// Probably buy a car over X price.
-//  See price change in car shop? 
-
-// Drive the AE86 against someone and win. 
-// which one? 
-//  Win a race while driving a car? 
-
-// Low life battle 
-//  Win a race with less then X life left? 
-
-// Unlock the ability to buy all cars
-// 50 percent?  
-// 75 percent?
-// All non king cars? 
-
-//  10, 50, 75.  Remember not to count initial cars. 
-
-// Beat each leader and devil.  Also the zodiacs, and the devil. 
-//  Check if the beat X changes in game. 
-
-// Beat each set of 5 wanders?   Maybe 8? 
-//  Need to think more but this makes sense. 
-
-// Beat everyone.
-//  Beat FInal guy.  See above. 
-
-// Get a draw 
-//  Easy but let's do it. 
-//  Check if draw count changes, and in game. 
-
-// Break a certain speed. 
-// 250 KPH = 155something MPH
-//  Need to calculate this, but just grab max speed. 
-
-// Mirror ornaments
-//  Got it. 
+// spend over 100,000 on a car.
 
 // Time attack
 // Going to do 3 of them  C short course.  B After finishing speed king. 
 //  A End game. Full wangan. 
 //  Leaderboards for everything here. 
 
+// Beat all 100 racers in QR 
+
 // Watch the trailer for Fast and furious.
 
-// Have a million dollars. 
+
+// On Hold 
+// Break a certain speed. 
+// 250 KPH = 155something MPH
+//  Need to calculate this, but just grab max speed. 
+
+// For the moment, I'm not comfortable with how the game presents speeds.  I could find values that work for this but I would not be able to be very confident that it won't break. 
+
+// 200 + MPH ticket. 
+// Expensive ticket
+
+// Probably hard to do, hard to get. 
 
 
-100 Quick Races. 
+// 100 Quick Races. 
 
 /////////////////
 // NEEDS 
 ////////////////
 
-// Purchase a car? 
-// Watching trailer for Fast and furious? 
 
 // Changing instruction 00189218 to subu s1,s1,v1  is easy mode. 
 
@@ -2318,3 +2474,5 @@ eliteAchievements()
 // Need to find what road I'm on. 
 
 // Determine if you won or lost in QR
+
+// Subset idea. No losses. 
