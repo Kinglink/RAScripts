@@ -642,20 +642,18 @@ TOTAL_ENEMIES = 400
 //          See 0x00309620 for information on each value,  (technically starting at 0x00309634)
 function inGameCarConfiguration() => byte(0x274270)
 
-// $305654: (8-bit) Current Car Class
-//          
-//          Front end Car class. Remains the same in gam as well.
-//          
-//          Changes based on what car class you're looking at when buying a car, but will revert to your current car when leaving that.
-//          
-//          Works in Time Trial, as well as Quest.
-//          
-//          There are multiple other options for this if it proves untrue, however this will work both in the front end and in game.
-//          
+// $305670: (8-bit) Current Car Class In Game
+// 
+//          Changes based on what car class you're driving 
+//
+//          Appears to work for Front end even with out the Car Shop./ 
+//
+//          Works in Time Trial
+//
 //          0x00 = A Class
 //          0x01 = B Class
 //          0x02 = C Class.
-function inGameCarClass() => byte(0x305654)
+function inGameCarClass() => byte(0x305670)
 
 CLASS_A = 0x00
 CLASS_B = 0x01
@@ -2026,6 +2024,176 @@ TENTH_OF_CARS_TO_UNLOCK = TOTAL_CARS_TO_UNLOCK / 10
 // $37DD87: (8-bit signed) Current day of the Quest mode.
 function currentDayOffByOne() => byte(0x37DD87)
 
+CarLookup =
+{
+
+    0x00:"AE86L3",
+    0x01:"AE86T3",
+    0x02:"AE86L2",
+    0x03:"AE86T2",
+    0x04:"SW20GT",
+    0x05:"SW20G",
+    0x06:"A80RZ",
+    0x07:"A80SZ",
+    0x08:"A80RZM",
+    0x09:"A80SZM",
+    0x0a:"XE10RS",
+    0x0b:"XE10AS",
+    0x0c:"100TV",
+    0x0d:"100TVM",
+    0x0e:"100MV",
+    0x0f:"100MVM",
+    0x10:"S13K",
+    0x11:"S13Q",
+    0x12:"PS13K",
+    0x13:"PS13Q",
+    0x14:"PS13KK",
+    0x15:"S14K",
+    0x16:"S14Q",
+    0x17:"S14KM",
+    0x18:"S14QM",
+    0x19:"S15R",
+    0x1a:"S15S",
+    0x1b:"RPS13X",
+    0x1c:"RPS133",
+    0x1d:"R32RV2",
+    0x1e:"R32RN",
+    0x1f:"R32GTM",
+    0x20:"R33RV",
+    0x21:"R33RVM",
+    0x22:"R34RV",
+    0x23:"R34RVM",
+    0x24:"R34GT",
+    0x25:"R34GTM",
+    0x26:"Z32VS",
+    0x27:"Z32ZX",
+    0x28:"Y33CV",
+    0x29:"Y33GTU",
+    0x2a:"QX7",
+    0x2b:"QX7A",
+    0x2c:"QW",
+    0x2d:"MH5",
+    0x2e:"MH8",
+    0x2f:"ML3",
+    0x30:"ML5",
+    0x31:"RPT6",
+    0x32:"RPT7",
+    0x33:"CE9A",
+    0x34:"CN9A",
+    0x35:"CP9A5",
+    0x36:"CP9A6",
+    0x37:"CP9A6M",
+    0x38:"FC3E3",
+    0x39:"FC3X",
+    0x3a:"FD3RS",
+    0x3b:"FD3RZ",
+    0x3c:"GC8K",
+    0x3d:"GC8S4",
+    0x3e:"GC8C4",
+    0x3f:"GC8S5",
+    0x40:"GC8C5",
+    0x41:"GC8S6",
+    0x42:"GC8C6",
+    0x43:"GF8W4",
+    0x44:"GF8W5",
+    0x45:"GF8W6",
+    0x46:"JS4",
+    0x47:"JS4L",
+    0x48:"964T",
+    0x49:"964C2",
+    0x4a:"S30Z",
+    0x4b:"S30Z6",
+    0x4c:"AE111RL",
+    0x4d:"AE111RT",
+    0x4e:"UZZ30",
+    0x4f:"JZZ30",
+    0x50:"NB8RS",
+    0x51:"NB8RSM",
+    0x52:"QW3",
+    0x53:"ST205",
+    0x54:"ST202",
+    0x55:"Z15AM",
+    0x56:"Z15A",
+    0x57:"Z16A",
+    0x58:"DE3A",
+    0x59:"N15N1",
+    0x5a:"BE5",
+    0x5b:"BH5B",
+    0x5c:"T231",
+    0x5d:"W30",
+    0x5e:"Y34CV",
+    0x5f:"Y34GU",
+    0x60:"E36",
+    0x61:"N5S16M",
+    0x62:"N5S16",
+    0x63:"C34M",
+    0x64:"C34",
+    0x65:"S161V",
+    0x66:"S161VM",
+    0x67:"ML11",
+    0x68:"ML11C",
+    0x69:"4K1",
+    0x6a:"4E1",
+    0x6b:"YT1",
+    0x6c:"PG6SA",
+    0x6d:"EA11R",
+    0x6e:"EA21R",
+    0x6f:"JCESE",
+    0x70:"A31C",
+    0x71:"RF2",
+    0x72:"A187",
+    0x73:"RX3",
+    0x74:"KPGC10",
+    0x75:"R30M",
+    0x76:"R30",
+    0x77:"SAGTX",
+    0x78:"VGTS",
+    0x79:"S30ZX",
+    0x7a:"4BV",
+    0x7b:"4BU",
+    0x7c:"D32AGS",
+    0x7d:"ECGT",
+    0x7e:"089G",
+    0x7f:"NCP35",
+    0x80:"UCF308",
+    0x81:"A70GTA",
+    0x82:"A70TTR",
+    0x83:"CT9A",
+    0x84:"TAGDA",
+    0x85:"TASTI",
+    0x86:"CBAEP",
+    0x87:"100TVK",
+    0x88:"JS4X",
+    0x89:"JZZ30K",
+    0x8a:"Z15AMK",
+    0x8b:"RPT7B",
+    0x8c:"A70GTK",
+    0x8d:"R34RKK",
+    0x8e:"Y34GUK",
+    0x8f:"UZZ30K",
+    0x90:"R34RK",
+    0x91:"Z32VSK",
+    0x92:"A80RZK",
+    0x93:"FD3RK",
+    0x94:"NCP35K",
+    0x95:"S15RK",
+    0x96:"R33RK",
+    0x97:"FD3RKK",
+    0x98:"S13KKK",
+    0x99:"Z32ZXK",
+    0x9a:"S14KMK",
+    0x9b:"Y33CVK",
+    0x9c:"S161VK",
+    0x9d:"A80RK",
+    0x9e:"FC3E3K",
+    0x9f:"Z16AK",
+    0xa0:"RPT6B",
+    0xa1:"PS13XK",
+    0xa2:"S15RKK",
+    0xa3:"JCESEK",
+    0xa4:"R32RNK"
+}
+
 // $37DD88: (32-bit signed) Total money in Quest mode divided by 10s.
 //          
 //          0x1 = 10 dollars, 0x10 = 160 dollars
@@ -2091,19 +2259,59 @@ function movieIsPlaying() => isMoviePlaying() == MOVIE_IS_PLAYING
 //          0x04= Versus
 //          0x05= System (Options)
 //          0x06= DVD Extras
+//          0x08= Main Menu
 function currentGameMode() => byte(0x73FBBF)
 
 QUEST_MODE = 0x00
 QUICK_RACE_MODE = 0x01
 TIME_ATTACK_MODE = 0x02
+FREE_RUN_MODE = 0x03
+VERSUS_MODE = 0x04
 SYSTEM_MODE = 0x05
 DVD_EXTRAS_MODE = 0x06
+MAIN_MENU = 0x08
+
+GameModeLookup =
+{
+    QUEST_MODE:"Quest Mode",
+    QUICK_RACE_MODE:"Quick Race",
+    TIME_ATTACK_MODE:"Time Attack",
+    SYSTEM_MODE:"System",
+    DVD_EXTRAS_MODE:"DVD Extras",
+    MAIN_MENU: "Main"
+}
 
 function questMode() => currentGameMode() == QUEST_MODE
 function quickRaceMode() => currentGameMode() == QUICK_RACE_MODE
 function timeAttackMode() => currentGameMode() == TIME_ATTACK_MODE
 function systemMode() => currentGameMode() == SYSTEM_MODE
 function dvdExtrasMode() => currentGameMode() == DVD_EXTRAS_MODE
+function mainMenu() => drivingGameMode() == MAIN_MENU
+
+// $305630: (8-bit) Driving Game Mode
+// 
+//          Game mode that will be valid while in game (Driving around)
+// 
+//          Potential alternate at 0x37dc36 if this won't work, but these two appear to be in sync. 
+// 
+//          DO NOT USE IN FRONT END.
+// 
+//          0x00= Quest
+//          0x01= Quick Race
+//          0x02= Time Attack 
+//          0x03= Free Run
+//          0x04= Versus
+function drivingGameMode() => byte(0x305630)
+
+DEMO_MODE = 0x08   // Observed behavior. 
+
+function questModeDriving() => drivingGameMode() == QUEST_MODE
+function quickRaceModeDriving() => drivingGameMode() == QUICK_RACE_MODE
+function timeAttackModeDriving() => drivingGameMode() == TIME_ATTACK_MODE
+function freeRunModeDriving() => drivingGameMode() == FREE_RUN_MODE
+function versusModeDriving() => drivingGameMode() == VERSUS_MODE
+function demoMode() => drivingGameMode() == DEMO_MODE
+
 
 // $73FBF0: (8-bit) On front End indicator.
 //          
@@ -2156,7 +2364,7 @@ IN_GAME_INDICATOR_FRONT_END = 0x00
 IN_GAME_INDICATOR_DRIVING = 0x01
 
 // This can set 3 in game.  Might be bit 0 but let's do not Front end. 
-function inGameDriving() => inGameIndicator() != IN_GAME_INDICATOR_FRONT_END
+function inGameDriving() => inGameIndicator() != IN_GAME_INDICATOR_FRONT_END 
 function previnGameDriving() => prev(inGameIndicator()) != IN_GAME_INDICATOR_FRONT_END
 
 // $7508F8: (32-bit) Player's Health in battle
@@ -2203,9 +2411,15 @@ function timeTrialCourseRanking() => byte(0x750B18)
 // $750B20: (32-bit) Time in Time Trials in Milliseconds
 //          
 //          0x010000 for instance is 1048576 which is 17 minutes, 28 seconds 576 miliseconds
-function timeTrialTime() => dword(0x750B20)
+// Removed due to delayed use. 
+function UNUSED_timeTrialTime() => dword(0x750B20)
 
-// $750B32: (8-bit) Course Number for Time Trial
+// $629350: (32-bit) Lap Time in Time Trial in Milliseconds
+//
+//          Should work in race, and in post race screen. 
+function timeTrialTime() => dword(0x629350)
+
+// $37dc8e: (8-bit) Course Number for Time Trial
 //          
 //          0x00 = Kanda Bridge(Kanjyo Inner)   CCW
 //          0x01 = Kanda Bridge(Kanjyo Outer)  CW
@@ -2219,21 +2433,27 @@ function timeTrialTime() => dword(0x750B20)
 //          0x09 = Kanda Bridge (C-1 CW)
 //          0x0A = 0-400m on Oval
 //          0x0B = Oval 
-function timetrialCourseIndex() => byte(0x750B32)
+function timetrialCourseIndex() => byte(0x0037dc8e)
 
 KANDA_BRIDGE_CCW = 0x00
+KANDA_BRIDGE_CW = 0x01
 ARIAKE_CCW = 0x02
+ARIAKE_CW = 0x03
+DAIKOKU_SPRINT = 0x04
 AREA_13_SPRINT = 0x05
+SUZUGAMORI_SPRINT = 0x06
 SHIOIRI_SPRINT = 0x07
+KANDA_C1_CCW = 0x08
 KANDA_C1_CW = 0x09
+ZERO_TO_400M = 0x0A
 OVAL = 0x0B
 
 
-// $7508e4: (8-bit) Current Quick Race Round
+// $7508e4: (16-bit) Current Quick Race Round
 //
 // 0x00 = Round 1 
 // Increments all the way to 100 
-function quickRaceRound() => byte(0x7508e4)
+function quickRaceRound() => word(0x7508e4)
 
 // $750b14: (8-bit) Quick Race Result Control Value. Quest Mode Result Value 
 // 
@@ -2245,10 +2465,158 @@ function quickRaceRound() => byte(0x7508e4)
 // Freezing this to 0x00 in Quest mode means the end of race SAYS you won, however you don't get credit, and rivals are marked as "Lost" after the round. 
 // 
 // Can be used in either game mode though. 
-function raceResult() => byte(0x7508e4)
+function raceResult() => byte(0x750b14)
 
 function quickRaceWon() => raceResult() == 0x00
 function questRaceWon() => raceResult() == 0x00
+
+// $6293aa:(8-bit) Index of Location on highway.
+//
+// Appears to be an index of the location of the driver on the Highway system.  However 0x006293ac is the ASCII text for the section.  For RP use 0x006293ac. 
+function highwayLocationIndex() => byte(0x006293aa)
+
+// Unfortunately our RP script won't let us read a ASCII string, so let's use this. 
+// All names are taken from 0x003015D0.  Thanks Disassembly!
+
+HighwayLocationArray = 
+[
+    "Kasumigaseki",
+    "Miyakezaka JCT",
+    "Daikancyo",
+    "Kitanomaru",
+    "Takehashi JCT",
+    "Kanda Bridge",
+    "Kanda Bridge JCT",
+    "Gofuku Bridge",
+    "Edo Bridge",
+    "Edo Bridge JCT",
+    "Takaracyo",
+    "Kyo Bridge",
+    "Kyo Bridge JCT",
+    "Shintomicyo",
+    "Ginza",
+    "Shiodome JCT",
+    "Hamasaki Bridge JCT",
+    "Shiba Park",
+    "Ichino Bridge JCT",
+    "Iikura",
+    "Tanimachi JCT",
+    "Tokiwa Bridge",
+    "Yaesu Parking",
+    "Marunouchi",
+    "West Ginza JCT",
+    "West Ginza",
+    "Shinkyo Bridge",
+    "East Ginza",
+    "Tuchi Bridge",
+    "Shin Bridge",
+    "Shiodome",
+    "Hakozaki",
+    "Hakozaki JCT",
+    "Fukuzumi",
+    "Kiba",
+    "Shiohama",
+    "Eda River",
+    "Tatsumi JCT",
+    "Ariake",
+    "Ariake JCT",
+    "Daiba",
+    "Shibaura JCT",
+    "Area 13",
+    "Ooi",
+    "Ooi JCT",
+    "South Ooi",
+    "Tokai JCT",
+    "Central Airport",
+    "Wagan I-8",
+    "Ukishima",
+    "East Oogijima",
+    "Daikoku JCT",
+    "Daikoku",
+    "Namamugi JCT",
+    "Shioiri",
+    "Asada",
+    "Hamakawasaki",
+    "Daishi",
+    "Haneda",
+    "Airport West",
+    "Showajima JCT",
+    "Heiwajima",
+    "Suzugamori",
+    "Katsuura",
+    "Shibaura",
+    "Hamamachi"
+]
+
+HighwayLocationLookup =
+{
+    0x00: "Kasumigaseki",
+    0x01: "Miyakezaka JCT",
+    0x02: "Daikancyo",
+    0x03: "Kitanomaru",
+    0x04: "Takehashi JCT",
+    0x05: "Kanda Bridge",
+    0x06: "Kanda Bridge JCT",
+    0x07:"Gofuku Bridge",
+    0x08:"Edo Bridge",
+    0x09:"Edo Bridge JCT",
+    0x0A:"Takaracyo",
+    0x0B:"Kyo Bridge",
+    0x0C:"Kyo Bridge JCT",
+    0x0D: "Shintomicyo",
+    0x0E: "Ginza",
+    0x0F: "Shiodome JCT",
+    0x10: "Hamasaki Bridge JCT",
+    0x11: "Shiba Park",
+    0x12: "Ichino Bridge JCT",
+    0x13: "Iikura",
+    0x14: "Tanimachi JCT",
+    0x15: "Tokiwa Bridge",
+    0x16: "Yaesu Parking",
+    0x17: "Marunouchi",
+    0x18: "West Ginza JCT",
+    0x19: "West Ginza",
+    0x1A: "Shinkyo Bridge",
+    0x1B: "East Ginza",
+    0x1C: "Tuchi Bridge",
+    0x1D: "Shin Bridge",
+    0x1E: "Shiodome",
+    0x1F: "Hakozaki",
+    0x20: "Hakozaki JCT",
+    0x21: "Fukuzumi",
+    0x22: "Kiba",
+    0x23: "Shiohama",
+    0x24: "Eda River",
+    0x25: "Tatsumi JCT",
+    0x26: "Ariake",
+    0x27: "Ariake JCT",
+    0x28: "Daiba",
+    0x29: "Shibaura JCT",
+    0x2A: "Area 13",
+    0x2B: "Ooi",
+    0x2C: "Ooi JCT",
+    0x2D: "South Ooi",
+    0x2E: "Tokai JCT",
+    0x2F: "Central Airport",
+    0x30: "Wagan I-8",
+    0x31: "Ukishima",
+    0x32: "East Oogijima",
+    0x33: "Daikoku JCT",
+    0x34: "Daikoku",
+    0x35: "Namamugi JCT",
+    0x36: "Shioiri",
+    0x37: "Asada",
+    0x38: "Hamakawasaki",
+    0x39: "Daishi",
+    0x3A: "Haneda",
+    0x3B: "Airport West",
+    0x3C: "Showajima JCT",
+    0x3D: "Heiwajima",
+    0x3E: "Suzugamori",
+    0x3F: "Katsuura",
+    0x40: "Shibaura",
+    0x41: "Hamamachi"
+}
 
 // Helper function 
 function ContainsKey(dictionary, key_name)
@@ -2272,7 +2640,9 @@ function winAchievement(title, description, points, index)
                 trigger = prev(bit(targetBit, targetLocation )) == 0 &&
                           bit(targetBit, targetLocation) == 1 &&  // Just Beat the value 
                           postRaceScreen() == QUEST_MODE_POST_RACE && // Just finished a race
+                          questModeDriving() &&
                           inGameDriving() &&
+                          !demoMode() &&
                           questRaceWon() // unneeded, but extra safety.
                 )
 }
@@ -2374,7 +2744,8 @@ function teamInADayAchievement()
                 points = 5,
                 trigger = questMode() &&
                           never(!inGameDriving()) &&
-                          (triggerTeamConditions)
+                          (triggerTeamConditions) &&
+                          racesWonInNight() >= 1 // Make sure they've won at least one race.  
                 )
 }
 
@@ -2386,13 +2757,14 @@ achievement(title = "A Great Night",
             points = 3,
             trigger = questMode() &&
                       previnGameDriving() &&
+                      !inGameDriving() &&
                       racesWonInNight() >= 20
             )
 
 achievement(title = "A Perfect Night",
             description = "Win at least 20 races in a single night with out losing or drawing a single race and return to the garage in Quest Mode",
             points = 10,
-            trigger = questMode() &&
+            trigger = questModeDriving() &&
                       previnGameDriving() &&
                       trigger_when( !inGameDriving() &&
                                     racesWonInNight() >= 20 
@@ -2412,7 +2784,8 @@ function uniqueWinAchievement()
                       measured(tally_of(range(0,TOTAL_ENEMIES/8), 10, index => prev(bitcount(winsLocationPlusOffset(index))) != bitcount(winsLocationPlusOffset(index))), 
                                 when=previnGameDriving()) && 
                                 racesLostInNight() == 0 && 
-                                racesDrawnInNight() == 0
+                                racesDrawnInNight() == 0 &&
+                                racesWonInNight() >= 10 // Found issue where players can reset and get this, so let's confirm they won at least the expected amount. 
             )
 }
 uniqueWinAchievement()
@@ -2422,7 +2795,8 @@ MAX_UPGRADE_VALUES = DISTANCE_FACTOR * MAX_UPGRADE_DISTANCE
 achievement(title = "Now to build the ultimate car",
             description = "Reach 1864 miles on a car and unlock the ability to buy all the best parts for the car",
             points = 3,
-            trigger = inGameDriving() &&  // Note: can be done in any game mode. 
+            trigger = inGameDriving()  &&  // Note: can be done in any game mode. 
+                      !demoMode() && // This actually does trigger in Demo Mode. (ugh)
                       inGameTripOdometer() >= MAX_UPGRADE_VALUES &&  
                       prev(inGameTripOdometer()) < MAX_UPGRADE_VALUES
             )
@@ -2430,8 +2804,9 @@ achievement(title = "Now to build the ultimate car",
 achievement(title = "Crank up the Super Eurobeat",
             description = "Drive an AE86 and beat someone on the road in Quest Mode",
             points = 2,
-            trigger = questMode() &&
-                      inGameDriving() &&
+            trigger = questModeDriving() &&
+                      inGameDriving() &&  
+                      !demoMode() && 
                       drivingAE86() &&
                       trigger_when(postRaceScreen() == QUEST_MODE_POST_RACE && // Just finished a race
                                    questRaceWon() &&
@@ -2440,12 +2815,14 @@ achievement(title = "Crank up the Super Eurobeat",
 
 function CarsToBuyAchievements(title, description, points, numberCarsToUnlock)
 {
+    targetCarCount = numberCarsToUnlock + INITIAL_CAR_SELECTION
     achievement(title = title,
             description = description,
             points = 10,
             trigger = inGameDriving() && // Probably will be questMode, but let's not make an assumption.
-                      sum_of(range(0,TOTAL_CARS_TO_BUY/8), index => bitcount(carUnlockArrayPlusOffset(index))) >=numberCarsToUnlock&&
-                      sum_of(range(0,TOTAL_CARS_TO_BUY/8), index => prev(bitcount(carUnlockArrayPlusOffset(index)))) < numberCarsToUnlock
+                      !demoMode() && 
+                      sum_of(range(0,TOTAL_CARS_TO_BUY/8), index => bitcount(carUnlockArrayPlusOffset(index))) >= targetCarCount&&
+                      sum_of(range(0,TOTAL_CARS_TO_BUY/8), index => prev(bitcount(carUnlockArrayPlusOffset(index)))) < targetCarCount
             )
 }
 
@@ -2476,7 +2853,7 @@ CarsToBuyAchievements(title = "Online Auto Auction",
 achievement(title = "You'll get them next time",
             description = "Earn your first Draw in Quest Mode",
             points = 2,
-            trigger = questMode() &&
+            trigger = questModeDriving() &&
                       inGameDriving() &&
                       racesDrawnInNight() == 1  // I could check previous but there's really no way for someone to "win" a race automatically. 
            )
@@ -2486,6 +2863,7 @@ achievement( title = "No fuzzy dice?",
              description = "Get a mirror ornament for your car",
              points = 1,
              trigger = inGameDriving() &&
+                       !demoMode() && 
                        hasMirrorHanger()
             )
 
@@ -2498,12 +2876,13 @@ achievement( title = "Hey Big Spender",
                        prev(totalMoneyQuestMode()) - totalMoneyQuestMode() >= 100000/10  // money is record in 10 dollar bills. 
             )
 
-function TimeTrialAchievement(title, description, points, course, carClass, minutes, seconds = 0, centiseconds = 0)
+function TimeTrialAchievement(title, description, points, course, carClass, minutes, seconds = 0, milliseconds = 0)
 {
-    trigger = timeAttackMode() &&
+    trigger = inGameDriving() &&
+              timeAttackModeDriving() &&
               timetrialCourseIndex() == course &&
-              postRaceScreen() == TIME_TRIAL_TIMING  &&
-              timeTrialTime() <= ((((minutes * 60) + seconds ) * 100) + centiseconds) * 10 &&
+              trigger_when( postRaceScreen() == TIME_TRIAL_TIMING ) &&
+              timeTrialTime() <= (((minutes * 60) + seconds ) * 1000) + milliseconds &&
               inGameCarClass() == carClass
     
     
@@ -2516,52 +2895,57 @@ function TimeTrialAchievement(title, description, points, course, carClass, minu
 
 
 TimeTrialAchievement( title = "Kanjyo Cruiser Challenge",
-                     description = "Finish the Kanda Bridge with an class C car in XXYYTime in Time Trial Mode",
+                     description = "Finish the Kanda Bridge with an class C car in 4 minutes and 10 seconds in Time Trial Mode",
                      points = 5, 
                      course = KANDA_BRIDGE_CCW, 
                      carClass = CLASS_C,
-                     minutes = 10
+                     minutes = 4,
+                     seconds = 10
                     )
 
 TimeTrialAchievement( title = "Shinkanjyo Speedrun Supremacy",
-                      description = "Finish the Ariake course(Shinkanjyo CCW) with an class B car in XXYYTime in Time Trial Mode",
+                      description = "Finish the Ariake course(Shinkanjyo CCW) with an class B car in 4 minutes and 25 seconds in Time Trial Mode",
                       points = 5, 
                       course = ARIAKE_CCW, 
                       carClass = CLASS_B,
-                      minutes = 15
+                      minutes = 4,
+                      seconds = 25
                     )
 
 TimeTrialAchievement( title = "Area 13 to Daikoku Dash",
-                      description = "Finish the Area 13 (Wangan Southbound) with an class B car in XXYYTime in Time Trial Mode",
+                      description = "Finish the Area 13 (Wangan Southbound) with an class B car in 5 Minutes and 20 seconds in Time Trial Mode",
                       points = 5, 
                       course = AREA_13_SPRINT, 
                       carClass = CLASS_B,
-                      minutes = 5
+                      minutes = 5,
+                      seconds = 20
                     )
                     
 
 TimeTrialAchievement( title = "Shioiri Sprint to Suzugamori",
-                      description = "Finish the Shioiri(Haneda Northbound) with an class A car in XXYYTime in Time Trial Mode",
+                      description = "Finish the Shioiri(Haneda Northbound) with an class A car in 2 Minutes and 30 seconds in Time Trial Mode",
                       points = 5, 
                       course = SHIOIRI_SPRINT, 
                       carClass = CLASS_A,
-                      minutes = 5
+                      minutes = 2,
+                      seconds = 30
                     )
 
 TimeTrialAchievement( title = "Wangan Lightning Legend",
-                      description = "Finish the Kanda Bridge (C-1 CW) with an class A car in XXYYTime in Time Trial Mode",
+                      description = "Finish the Kanda Bridge (C-1 CW) with an class A car in 15 Minutesin Time Trial Mode",
                       points = 5, 
                       course = KANDA_C1_CW, 
                       carClass = CLASS_A,
-                      minutes = 25
+                      minutes = 15
                 )
 
 TimeTrialAchievement( title = "Oval Overdrive",
-                      description = "Finish the Oval with an class A car in XXYYTime in Time Trial Mode",
+                      description = "Finish the Oval with an class A car in 1 minute and 10 seconds in Time Trial Mode",
                       points = 5, 
                       course = OVAL, 
                       carClass = CLASS_A,
-                      minutes = 5
+                      minutes = 1,
+                      seconds = 10
                     )
 
 achievement( title = "Full Garage",
@@ -2579,8 +2963,9 @@ function QuickRaceAchievement( title, description, points, winCount)
     achievement( title = title,
              description = description,
              points = points, 
-             trigger = quickRaceMode() &&
-                       quickRaceRound() == winCount -1 &&
+             trigger = inGameDriving() &&
+                       quickRaceModeDriving() &&
+                       quickRaceRound() == (winCount - 1) &&
                        quickRaceWon() && 
                        postRaceScreen() == QUICK_RACE_MODE_POST_RACE
 
@@ -2594,19 +2979,19 @@ QuickRaceAchievement( title = "More Like Survival Mode",
 QuickRaceAchievement( title = "Quarter Century Champion", 
                       description = "Beat round 25 in Quick Race mode.",
                       points = 5,
-                      winCount = 10)
+                      winCount = 25)
 QuickRaceAchievement( title = "Halfway There", 
                       description = "Beat round 50 in Quick Race mode.",
                       points = 10,
-                      winCount = 10)
+                      winCount = 50)
 QuickRaceAchievement( title = "Are We There Yet?", 
                       description = "Beat round 75 in Quick Race mode.",
                       points = 10,
-                      winCount = 10)
+                      winCount = 75)
 QuickRaceAchievement( title = "Centurion Conqueror", 
                       description = "Beat round 100 in Quick Race mode.",
                       points = 25,
-                      winCount = 10)
+                      winCount = 100)
 
 achievement(title = "Whose going to watch that?",
             description = "Watch the Fast and the Furious trailer.",
@@ -2615,6 +3000,117 @@ achievement(title = "Whose going to watch that?",
                       movieIsPlaying() &&
                       whichMoviePlaying() == FAST_AND_FURIOUS
 )
+
+TimeTrialCourseLookup =
+{
+    KANDA_BRIDGE_CCW: "Kanda Bridge(Kanjyo Inner)",
+    KANDA_BRIDGE_CW: "Kanda Bridge(Kanjyo Outer)",
+    ARIAKE_CCW: "Ariake(Shinkanjyo CCW)",
+    ARIAKE_CW: "Ariake(Shinkanjyo CW)",
+    DAIKOKU_SPRINT: "Daikoku Port (Wangan North bound)",
+    AREA_13_SPRINT: "Area 13 (Wangan South bound)",
+    SUZUGAMORI_SPRINT: "Suzugamori (Haneda South bound)",
+    SHIOIRI_SPRINT: "Shioiri (Haneda North bound)",
+    KANDA_C1_CCW: "Kanda Bridge (C-1 CCW)",
+    KANDA_C1_CW: "Kanda Bridge (C-1 CW)",
+    ZERO_TO_400M: "0-400m on Oval",
+    OVAL: "Oval"
+}
+
+function timeTrialLeaderboard( title, description, courseId, carClass) 
+{
+    leaderboard(title = title,
+                description = description,
+                start = inGameDriving() &&
+                        timeAttackModeDriving() &&
+                        timetrialCourseIndex() == courseId &&
+                        postRaceScreen() == TIME_TRIAL_TIMING &&
+                        inGameCarClass() == carClass,
+                cancel = always_false(),
+                submit = always_true(),
+                value = timeTrialTime()/10,
+                format = "MILLISECS", // This is mislabeled, it's centiseconds
+                lower_is_better = true
+                )
+}
+
+function timeTrialLeaderboardCourseHelper(courseId)
+{
+    courseName = TimeTrialCourseLookup[courseId]
+    timeTrialLeaderboard( title = format("{0} Class A", courseName ),
+                          description = format("Register the fastest time on {0} with a Class A car in Time Trial mode", courseName),
+                          courseId = courseId,
+                          carClass = CLASS_A
+                        )
+    timeTrialLeaderboard( title = format("{0} Class B", courseName ),
+                          description = format("Register the fastest time on {0} with a Class B car in Time Trial mode", courseName),
+                          courseId = courseId,
+                          carClass = CLASS_B
+                        )
+    timeTrialLeaderboard( title = format("{0} Class C", courseName ),
+                          description = format("Register the fastest time on {0} with a Class C car in Time Trial mode", courseName),
+                          courseId = courseId,
+                          carClass = CLASS_C
+                        )
+}
+
+for key in TimeTrialCourseLookup
+{
+    timeTrialLeaderboardCourseHelper(key)
+}
+
+// Rich presence
+// If watching Fast and Furious.  State they are getting HYPED!
+rich_presence_conditional_display(dvdExtrasMode() &&
+                                  movieIsPlaying() &&
+                                  whichMoviePlaying() == FAST_AND_FURIOUS, 
+                                  "is getting hyped watching the greatest trailer of all time.")
+
+// If not driving. State which mode they are in. 
+rich_presence_conditional_display(!inGameDriving(), 
+                                  "is in the {0} menus",
+                                  rich_presence_lookup("ModeLookup", currentGameMode(), GameModeLookup)
+                                  ) 
+
+rich_presence_conditional_display(inGameDriving() && demoMode(), 
+                                  "is watching the demos"
+                                  ) 
+
+// If Driving in Quest Mode.  State where they are cruising and which car
+rich_presence_conditional_display(inGameDriving() && questModeDriving(), 
+                                  "is driving a {0} around {1} in Quest mode",
+                                  rich_presence_lookup("CarLookup", inGameCarIndex(), CarLookup),
+                                  rich_presence_lookup("HighWayLocationLookup", highwayLocationIndex(), HighwayLocationLookup)
+                                  ) 
+
+// If driving in Time Trial.  State Which course they are driving and which car
+rich_presence_conditional_display(inGameDriving() && timeAttackModeDriving(), 
+                                  "is running Time Trials for {0} while driving {1}",
+                                  rich_presence_lookup("TimeTrialCourseLookup", timetrialCourseIndex(), TimeTrialCourseLookup),
+                                  rich_presence_lookup("CarLookup", inGameCarIndex(), CarLookup)
+                                  ) 
+
+
+// If Driving Quick Race.  State which round, which area, and which car
+rich_presence_conditional_display(inGameDriving() && quickRaceModeDriving(), 
+                                  "is in round {0} of Quick Race while driving {1} around {2}",
+                                  rich_presence_value("Number", quickRaceRound() +1),
+                                  rich_presence_lookup("CarLookup", inGameCarIndex(), CarLookup),
+                                  rich_presence_lookup("HighWayLocationLookup", highwayLocationIndex(), HighwayLocationLookup)
+                                  ) 
+
+// If driving Free Run, say car and where
+rich_presence_conditional_display(inGameDriving() && freeRunModeDriving(), 
+                                  "is just practicing in Free Run while driving {0} around {1}",
+                                  rich_presence_lookup("CarLookup", inGameCarIndex(), CarLookup),
+                                  rich_presence_lookup("HighWayLocationLookup", highwayLocationIndex(), HighwayLocationLookup)
+                                  ) 
+
+// If driving Versus, just say that. 
+rich_presence_conditional_display(inGameDriving() && versusModeDriving(), 
+                                  "is playing Versus with friends"
+                                  ) 
+rich_presence_display("Playing Tokyo Xtreme Racer..")
 // achievements
 
 // On Hold 
