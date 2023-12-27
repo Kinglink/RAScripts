@@ -2752,7 +2752,7 @@ function teamInADayAchievement()
 teamInADayAchievement()
 
 
-achievement(title = "A Great Night",
+achievement(title = "A Long Night",
             description = "Win at least 20 races in a single night and return to the garage in Quest Mode",
             points = 3,
             trigger = questMode() &&
@@ -2762,13 +2762,12 @@ achievement(title = "A Great Night",
             )
 
 achievement(title = "A Perfect Night",
-            description = "Win at least 20 races in a single night with out losing or drawing a single race and return to the garage in Quest Mode",
+            description = "Win at least 10 races in a single night with out losing or drawing a single race in Quest Mode",
             points = 10,
             trigger = questModeDriving() &&
                       previnGameDriving() &&
-                      trigger_when( !inGameDriving() &&
-                                    racesWonInNight() >= 20 
-                      ) &&
+                      inGameDriving()  &&
+                      measured(racesWonInNight() >= 10 ) &&
                       racesLostInNight() == 0 &&
                       racesDrawnInNight() == 0
             )
@@ -2776,15 +2775,12 @@ achievement(title = "A Perfect Night",
 function uniqueWinAchievement() 
 {
     achievement(title = "A Unique Night",
-            description = "Beat 10 unique racers in a single night with out losing or drawing a single race for the entire night and return to the garage in Quest Mode",
+            description = "Beat 10 unique racers in a single night in Quest Mode",
             points = 10,
             trigger = questMode() &&
-                      !inGameDriving() &&
                       never(!previnGameDriving()) &&
                       measured(tally_of(range(0,TOTAL_ENEMIES/8), 10, index => prev(bitcount(winsLocationPlusOffset(index))) != bitcount(winsLocationPlusOffset(index))), 
-                                when=previnGameDriving()) && 
-                                racesLostInNight() == 0 && 
-                                racesDrawnInNight() == 0 &&
+                                when=inGameDriving()) && 
                                 racesWonInNight() >= 10 // Found issue where players can reset and get this, so let's confirm they won at least the expected amount. 
             )
 }
@@ -2947,16 +2943,6 @@ TimeTrialAchievement( title = "Oval Overdrive",
                       minutes = 1,
                       seconds = 10
                     )
-
-achievement( title = "Full Garage",
-             description = "Own 50 cars in Quest Mode",
-             points = 2, 
-             trigger = questMode() &&
-                       classACarsOwned() + classBCarsOwned() + classCCarsOwned() == 50 &&
-                       prev(classACarsOwned()) + prev(classBCarsOwned()) + prev(classCCarsOwned()) == 49 &&
-                       saveProtection()
-
-           )
 
 function QuickRaceAchievement( title, description, points, winCount)
 {
@@ -3122,6 +3108,18 @@ rich_presence_display("Playing Tokyo Xtreme Racer..")
 
 // 200 + MPH ticket. 
 // Expensive ticket
+
+// Full Garage 
+// Killed because it's repetative as shit, but also not really fun or interesting. 
+//achievement( title = "Full Garage",
+//             description = "Own 50 cars in Quest Mode",
+//             points = 2, 
+//             trigger = questMode() &&
+////                       classACarsOwned() + classBCarsOwned() + classCCarsOwned() == 50 &&
+//                       prev(classACarsOwned()) + prev(classBCarsOwned()) + prev(classCCarsOwned()) == 49 &&
+//                       saveProtection()
+//           )
+//
 
 // Probably hard to do, hard to get. 
 
