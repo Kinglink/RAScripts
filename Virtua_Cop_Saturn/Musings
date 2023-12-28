@@ -76,19 +76,15 @@ Beat Mirror Mode.
 
 Reach 5x Multiplier
 
-Finish Stage 1 with at least 70 percent accuracy
-
-Finish Stage 2 with at least 70 percent accuracy (Does this reset?) 
-
-Finish stage 3 with 70 percent accuracy
-
 Unlock Gun Cheat, but then tell them they can't use it. 
 
 Beat the game on Very Hard
 
 beat training mode. 
+    Level 8, when the success indicator flips from 0 to 1.
 
 Beat each enemy in Vs. Training
+    Calculate this by checking Hits Vs Hits after time hits 0xff
 
 
 
@@ -104,34 +100,58 @@ Best Training score.
 
 Best Vs Training score (does that reset?) 
 
+Best score Controller. 
+
 
 
 Needs
 
-Vs. Training vs. normal training (value appears to be 5 for level for both)
+X How to confirm "Won game" Because each level can be played in any order
 
-Confirm winning training 8 reports 8 even though seven appear.
+x Vs. Training vs. normal training (value appears to be 5 for level for both)
 
-Find out when boss starts 
+X Confirm winning training 8 reports 8 even though seven appear.
+    It does not.  Going to do hits vs hit math. 
+
+
+
+X Find out when boss starts   (Looks like boss health) 
 
 Find out when innocent hurt.
 
 Figure out "Player 2" has played. 
 
-Trigger for fourth boss? 
+X Trigger for fourth boss? 
+
+Double check "Fighting" secret boss, versus normal. 
 
 Confirm values for ranking mode? 
+    Can't remember what I'm supposed to confirm. 
 
 Unlock Gun Cheat value?
 
-Need to get "Win" in Levels/stages. 
+X Need to get "Win" in Levels/stages. 
 
-Need to get accuracy in arcade mode. 
+X Need to get accuracy in arcade mode.   CAn't get it but it's worthless as continue resets it. 
 
-Confirm Accuracy doesn't change on continue. 
+X Confirm Accuracy doesn't change on continue.  (It does) 
 
-Confirm accuracy is only for the current level. 
+X Confirm accuracy is only for the current level. 
 
 Ranking Score
 
 Value for triggering End Normal Training/Vs. Training. 
+
+Killed Achievements 
+
+Controller Vs Gun? 
+
+
+Can't do accuracy unless limited to only Ranking mode. 
+
+Finish Stage 1 with at least 70 percent accuracy
+
+Finish Stage 2 with at least 70 percent accuracy (Does this reset?) 
+
+Finish stage 3 with 70 percent accuracy
+
