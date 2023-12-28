@@ -5,11 +5,21 @@ Pre testing checklist
 2. Has all achievements been uploaded with badges to unofficial?
 3. Has all achievements names been confirmed to conform to wrtiting requirements?
 4. Has all types of achievemetns been spot checked for positive unlocks? 
-5. Has all leaderboards been spot checked for positive commits?
+5. Has all leaderboards (or types) been spot checked for positive commits?
 6. Has all leaderboards been confirmed to be set properly (Less is more?) 
 7. Has Rich Presence been uploaded to the site? 
 8. Has all icons, title screens, cover art been generated properly?
 9. Are all point totals reasonable? 
+10. Have all achievements been ordered as desired and tagged correctly.
+
+Pushing to unofficial.
+1. Push all code notes 
+2. Publish all achievements to unofficial. 
+3. Check all badges on website.
+4. Publish all Leaderboards.
+5. Reorder achievements
+6. Tag all achievements with missing/progression
+
 
 Release checklist. 
 1. Has a test plan been run against this set? (Test team or personal) 
