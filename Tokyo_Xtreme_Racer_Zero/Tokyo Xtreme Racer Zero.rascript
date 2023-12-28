@@ -7,271 +7,316 @@ TeamInformation =
         "TeamName": "Rolling Guy", 
         "TeamLeader": "Rolling Guy 1",
         "TeamLeaderID": 0,
-        "LastMember": 5
+        "LastMember": 5,
+        "Points":2
     },
     {
         "TeamName": "Little Gang",
         "TeamLeader": "Happy Run",
         "TeamLeaderID": 6,
-        "LastMember": 11
+        "LastMember": 11,
+        "Points":2
     },
     {
         "TeamName": "SS Limited",
         "TeamLeader": "Old Star",
         "TeamLeaderID": 12,
-        "LastMember": 19
+        "LastMember": 19,
+        "Points":4
     },
     {
         "TeamName": "Knife and Forks",
         "TeamLeader": "Invincible Dinner",
         "TeamLeaderID": 20,
-        "LastMember": 26
+        "LastMember": 26,
+        "Points":2
     },
     {
         "TeamName": "Black Knights",
         "TeamLeader": "Sword of Dragon",
         "TeamLeaderID": 27,
-        "LastMember": 33
+        "LastMember": 33,
+        "Points":5
     },
     {
         "TeamName": "Fine Drive",
         "TeamLeader": "Red Meteor",
         "TeamLeaderID": 34,
-        "LastMember": 41
+        "LastMember": 41,
+        "Points":4
     },
     {
         "TeamName": "RATT",
         "TeamLeader": "Flying Sasuke",
         "TeamLeaderID": 42,
-        "LastMember": 47
+        "LastMember": 47,
+        "Points":2
     },
     {
         "TeamName": "Queen's Paradise",
         "TeamLeader": "Shocking Joe",
         "TeamLeaderID": 48,
-        "LastMember": 54
+        "LastMember": 54,
+        "Points":3
     },
     {
         "TeamName": "RINGS",
         "TeamLeader": "Lonely Jackal",
         "TeamLeaderID": 55,
-        "LastMember": 62
+        "LastMember": 62,
+        "Points":5
     },
     {
         "TeamName": "Curving Edge",
         "TeamLeader": "Highway Prince",
         "TeamLeaderID": 63,
-        "LastMember": 68
+        "LastMember": 68,
+        "Points":2
     },
     {
         "TeamName": "Galaxy Racers",
         "TeamLeader": "Mr. Firm",
         "TeamLeaderID": 69,
-        "LastMember": 74
+        "LastMember": 74,
+        "Points":2
     },
     {
         "TeamName": "Max Racing",
         "TeamLeader": "Bloody Rose",
         "TeamLeaderID": 75,
-        "LastMember": 82
+        "LastMember": 82,
+        "Points":2
     },
     {
         "TeamName": "Elegant Wild",
         "TeamLeader": "300 Mile Red Ruby",
         "TeamLeaderID": 83,
-        "LastMember": 88
+        "LastMember": 88,
+        "Points":3
     },
     {
         "TeamName": "Departures",
         "TeamLeader": "Happy Chappy",
         "TeamLeaderID": 89,
-        "LastMember": 95
+        "LastMember": 95,
+        "Points":4
     },
     {
         "TeamName": "Twister",
         "TeamLeader": "Burning Mirage",
         "TeamLeaderID": 96,
-        "LastMember": 102
+        "LastMember": 102,
+        "Points":4
     },
     {
         "TeamName": "Catz",
         "TeamLeader": "Fire Revenge",
         "TeamLeaderID": 103,
-        "LastMember": 109
+        "LastMember": 109,
+        "Points":5
     },
     {
         "TeamName": "The Road of Justice",
         "TeamLeader": "Hearing Master",
         "TeamLeaderID": 110,
-        "LastMember": 116
+        "LastMember": 116,
+        "Points":5
     },
     {
         "TeamName": "Diamond Image",
         "TeamLeader": "Thunder Shift",
         "TeamLeaderID": 117,
-        "LastMember": 122
+        "LastMember": 122,
+        "Points":2
     },
     {
         "TeamName": "Rhythm Box",
         "TeamLeader": "Hip Hop Red",
         "TeamLeaderID": 123,
-        "LastMember": 128
+        "LastMember": 128,
+        "Points":2
     },
     {
         "TeamName": "Wind Stars",
         "TeamLeader": "Requiem",
         "TeamLeaderID": 129,
-        "LastMember": 136
+        "LastMember": 136,
+        "Points":2
     },
     {
         "TeamName": "Harmonize",
         "TeamLeader": "Visual Driver",
         "TeamLeaderID": 137,
-        "LastMember": 143
+        "LastMember": 143,
+        "Points":3
     },
     {
         "TeamName": "Super Speed Wagon",
         "TeamLeader": "Revolution",
         "TeamLeaderID": 144,
-        "LastMember": 149
+        "LastMember": 149,
+        "Points":5
     },
     {
         "TeamName": "Another Star",
         "TeamLeader": "Blue Speed",
         "TeamLeaderID": 150,
-        "LastMember": 156
+        "LastMember": 156,
+        "Points":5
     },
     {
         "TeamName": "Gesellschaft",
         "TeamLeader": "Time is Money",
         "TeamLeaderID": 157,
-        "LastMember": 162
+        "LastMember": 162,
+        "Points":4
     },
     {
         "TeamName": "Explosion",
         "TeamLeader": "Wind Blade",
         "TeamLeaderID": 163,
-        "LastMember": 168
+        "LastMember": 168,
+        "Points":3
     },
     {
         "TeamName": "Highway Outlaw",
         "TeamLeader": "Spirit Crasher",
         "TeamLeaderID": 169,
-        "LastMember": 175
+        "LastMember": 175,
+        "Points":4
     },
     {
         "TeamName": "R.Gangs",
         "TeamLeader": "Drift Dancer",
         "TeamLeaderID": 176,
-        "LastMember": 182
+        "LastMember": 182,
+        "Points":2
     },
     {
         "TeamName": "Cupid Arrows",
         "TeamLeader": "Sonic Runner",
         "TeamLeaderID": 183,
-        "LastMember": 188
+        "LastMember": 188,
+        "Points":2
     },
     {
         "TeamName": "Tokio Jungle",
         "TeamLeader": "Ion",
         "TeamLeaderID": 189,
-        "LastMember": 195
+        "LastMember": 195,
+        "Points":3
     },
     {
         "TeamName": "TR Racing",
         "TeamLeader": "Unstoppable Dream",
         "TeamLeaderID": 196,
-        "LastMember": 202
+        "LastMember": 202,
+        "Points":5
     },
     {
         "TeamName": "Top Level",
         "TeamLeader": "Car Maniac",
         "TeamLeaderID": 203,
-        "LastMember": 209
+        "LastMember": 209,
+        "Points":4
     },
     {
         "TeamName": "Free Way",
         "TeamLeader": "Blue Meteor",
         "TeamLeaderID": 210,
-        "LastMember": 218
+        "LastMember": 218,
+        "Points":5
     },
     {
         "TeamName": "Dry Cruise",
         "TeamLeader": "Tobby",
         "TeamLeaderID": 219,
-        "LastMember": 225
+        "LastMember": 225,
+        "Points":2
     },
     {
         "TeamName": "E.R.O.",
         "TeamLeader": "Mr. Terminate",
         "TeamLeaderID": 226,
-        "LastMember": 232
+        "LastMember": 232,
+        "Points":4
     },
     {
         "TeamName": "Team Alpha",
         "TeamLeader": "Texas' White Wolf",
         "TeamLeaderID": 233,
-        "LastMember": 238
+        "LastMember": 238,
+        "Points":3
     },
     {
         "TeamName": "True Ride",
         "TeamLeader": "A+ Driver",
         "TeamLeaderID": 239,
-        "LastMember": 246
+        "LastMember": 246,
+        "Points":4
     },
     {
         "TeamName": "Unlimited",
         "TeamLeader": "Killing Machine",
         "TeamLeaderID": 247,
-        "LastMember": 253
+        "LastMember": 253,
+        "Points":4
     },
     {
         "TeamName": "R.R.",
         "TeamLeader": "Silver Prince",
         "TeamLeaderID": 254,
-        "LastMember": 261
+        "LastMember": 261,
+        "Points":4
     },
     {
         "TeamName": "Thunder Dragoon",
         "TeamLeader": "Black Dragon",
         "TeamLeaderID": 262,
-        "LastMember": 268
+        "LastMember": 268,
+        "Points":4
     },
     {
         "TeamName": "Abflug SRT",
         "TeamLeader": "Abf911",
         "TeamLeaderID": 269,
-        "LastMember": 273
+        "LastMember": 273,
+        "Points":5
     },
     {
         "TeamName": "Commander",
         "TeamLeader": "Speed Runner",
         "TeamLeaderID": 274,
-        "LastMember": 281
+        "LastMember": 281,
+        "Points":4
     },
     {
         "TeamName": "Double Mind",
         "TeamLeader": "Yellow Voltage",
         "TeamLeaderID": 282,
-        "LastMember": 288
+        "LastMember": 288,
+        "Points":4
     },
     {
         "TeamName": "APS",
         "TeamLeader": "Jamz",
         "TeamLeaderID": 289,
-        "LastMember": 295
+        "LastMember": 295,
+        "Points":4
     },
     {
         "TeamName": "Fanatic Future",
         "TeamLeader": "Burning Leader",
         "TeamLeaderID": 296,
-        "LastMember": 302
+        "LastMember": 302,
+        "Points":4
     },
     {
         "TeamName": "Speed Master",
         "TeamLeader": "Iceman",
         "TeamLeaderID": 303,
-        "LastMember": 312
+        "LastMember": 312,
+        "Points":5
     }
 ]
 
@@ -300,7 +345,8 @@ Wanderers =
     },
     {
         "WandererName": "Steam Storm",
-        "WandererID": 318
+        "WandererID": 318,
+        "Points":3
     },
     {
         "WandererName": "Invincible Artist",
@@ -340,7 +386,8 @@ Wanderers =
     },
     {
         "WandererName": "Master Position",
-        "WandererID": 328
+        "WandererID": 328,
+        "Points":2
     },
     {
         "WandererName": "Pretty Affair",
@@ -348,11 +395,13 @@ Wanderers =
     },
     {
         "WandererName": "Devil Driver",
-        "WandererID": 330
+        "WandererID": 330,
+        "Points":2
     },
     {
         "WandererName": "Street Gambler",
-        "WandererID": 331
+        "WandererID": 331,
+        "Points":3
     },
     {
         "WandererName": "Green Wild",
@@ -384,7 +433,8 @@ Wanderers =
     },
     {
         "WandererName": "Road Master",
-        "WandererID": 339
+        "WandererID": 339,
+        "Points":2
     },
     {
         "WandererName": "Glamour Girl",
@@ -404,7 +454,8 @@ Wanderers =
     },
     {
         "WandererName": "Cutie Pie",
-        "WandererID": 344
+        "WandererID": 344,
+        "Points":3
     },
     {
         "WandererName": "Storm Screamer",
@@ -412,7 +463,8 @@ Wanderers =
     },
     {
         "WandererName": "Uncrushable Alexander",
-        "WandererID": 346
+        "WandererID": 346,
+        "Points":2
     },
     {
         "WandererName": "Silver Ruler",
@@ -420,7 +472,8 @@ Wanderers =
     },
     {
         "WandererName": "Night Wolf",
-        "WandererID": 348
+        "WandererID": 348,
+        "Points":2
     },
     {
         "WandererName": "Max Energy",
@@ -436,7 +489,8 @@ Wanderers =
     },
     {
         "WandererName": "Tomorrow Again",
-        "WandererID": 352
+        "WandererID": 352,
+        "Points":2
     },
     {
         "WandererName": "Healthy Hero",
@@ -444,7 +498,8 @@ Wanderers =
     },
     {
         "WandererName": "Late Night Cinderella",
-        "WandererID": 354
+        "WandererID": 354,
+        "Points":2
     },
     {
         "WandererName": "Unbalanced Heart",
@@ -468,7 +523,8 @@ Wanderers =
     },
     {
         "WandererName": "ZERO",
-        "WandererID": 360
+        "WandererID": 360,
+        "Points":3
     },
     {
         "WandererName": "SPEED BOX",
@@ -480,11 +536,13 @@ Wanderers =
     },
     {
         "WandererName": "Windy Fanfare",
-        "WandererID": 363
+        "WandererID": 363,
+        "Points":3
     },
     {
         "WandererName": "Start Dash",
-        "WandererID": 364
+        "WandererID": 364,
+        "Points":3
     },
     {
         "WandererName": "Golden License",
@@ -508,7 +566,8 @@ Wanderers =
     },
     {
         "WandererName": "Gentle Rain",
-        "WandererID": 370
+        "WandererID": 370,
+        "Points":2
     },
     {
         "WandererName": "Last Flight",
@@ -560,75 +619,93 @@ EliteMembers =
     },
     {
         "EliteName": "Dying Star",
-        "EliteID": 382
+        "EliteID": 382,
+        "Points":10
     },
     {
         "EliteName": "Dreamy Ghost",
-        "EliteID": 383
+        "EliteID": 383,
+        "Points":10
     },
     {
         "EliteName": "Tail Gunner",
-        "EliteID": 384
+        "EliteID": 384,
+        "Points":10
     },
     {
         "EliteName": "Shadow Eyes",
-        "EliteID": 385
+        "EliteID": 385,
+        "Points":10
     },
     {
         "EliteName": "Speed King",
-        "EliteID": 386
+        "EliteID": 386,
+        "Points":25
     },
     {
         "EliteName": "Midnight Rose",
-        "EliteID": 387
+        "EliteID": 387,
+        "Points":10
     },
     {
         "EliteName": "Golden Wind",
-        "EliteID": 388
+        "EliteID": 388,
+        "Points":10
     },
     {
         "EliteName": "Dark Ringleader",
-        "EliteID": 389
+        "EliteID": 389,
+        "Points":10
     },
     {
         "EliteName": "Hard Lift",
-        "EliteID": 390
+        "EliteID": 390,
+        "Points":10
     },
     {
         "EliteName": "Blue Pressure",
-        "EliteID": 391
+        "EliteID": 391,
+        "Points":10
     },
     {
         "EliteName": "No-Crown King",
-        "EliteID": 392
+        "EliteID": 392,
+        "Points":10
     },
     {
         "EliteName": "Crying Pluto",
-        "EliteID": 393
+        "EliteID": 393,
+        "Points":10
     },
     {
         "EliteName": "Red Devil",
-        "EliteID": 394
+        "EliteID": 394,
+        "Points":10
     },
     {
         "EliteName": "Queen's Knight",
-        "EliteID": 395
+        "EliteID": 395,
+        "Points":10
     },
     {
         "EliteName": "Purple Meteor",
-        "EliteID": 396
+        "EliteID": 396,
+        "Points":10
     },
     {
         "EliteName": "Exotic Eve",
-        "EliteID": 397
+        "EliteID": 397,
+        "Points":10
     },
     {
         "EliteName": "White Charisma",
-        "EliteID": 398
+        "EliteID": 398,
+        "Points":10
     },
     {
         "EliteName": "Unknown",
-        "EliteID": 399
+        "EliteID": 399,
+        "Points":50
     }
 
 ]
@@ -2653,7 +2730,7 @@ function teamAchievements()
     for TeamInfo in TeamInformation 
     {
         points = 1
-        if( ContainsKey(TeamInfo,"points") )
+        if( ContainsKey(TeamInfo,"Points") )
         {
             points = TeamInfo["Points"]
         }
@@ -2671,7 +2748,7 @@ function wanderersAchievements()
     for WandererInfo in Wanderers 
     {
         points = 1
-        if( ContainsKey(WandererInfo,"points") )
+        if( ContainsKey(WandererInfo,"Points") )
         {
             points = WandererInfo["Points"]
         }
@@ -2688,10 +2765,10 @@ function eliteAchievements()
 {
     for EliteInfo in EliteMembers 
     {
-        points = 1
-        if( ContainsKey(EliteInfo,"points") )
+        points = 5
+        if( ContainsKey(EliteInfo,"Points") )
         {
-            points = WandererInfo["Points"]
+            points = EliteInfo["Points"]
         }
         winAchievement(title = EliteInfo["EliteName"],
                     description = format("Beat {0} in Quest Mode", EliteInfo["EliteName"]),
@@ -2788,7 +2865,7 @@ uniqueWinAchievement()
 
 MAX_UPGRADE_DISTANCE = 1864
 MAX_UPGRADE_VALUES = DISTANCE_FACTOR * MAX_UPGRADE_DISTANCE
-achievement(title = "Now to build the ultimate car",
+achievement(title = "Now to Build the Ultimate Car",
             description = "Reach 1864 miles on a car and unlock the ability to buy all the best parts for the car",
             points = 3,
             trigger = inGameDriving()  &&  // Note: can be done in any game mode. 
@@ -2823,30 +2900,30 @@ function CarsToBuyAchievements(title, description, points, numberCarsToUnlock)
 }
 
 CarsToBuyAchievements(title = "Neighborhood Lot", 
-                      description = "Be able to buy ten percent of the locked cars.",
+                      description = "Be able to buy ten percent of the locked cars",
                       points = 2,
                       numberCarsToUnlock = TENTH_OF_CARS_TO_UNLOCK
                       )
 
 CarsToBuyAchievements(title = "CraigsList", 
-                      description = "Be able to buy twenty five percent of the locked cars.",
+                      description = "Be able to buy twenty five percent of the locked cars",
                       points = 3,
                       numberCarsToUnlock = QUARTER_OF_CARS_TO_UNLOCK
                       )
 
 CarsToBuyAchievements(title = "Dealership", 
-                      description = "Be able to buy fifty percent of the locked cars.",
+                      description = "Be able to buy fifty percent of the locked cars",
                       points = 5,
                       numberCarsToUnlock = QUARTER_OF_CARS_TO_UNLOCK * 2
                       )
 
 CarsToBuyAchievements(title = "Online Auto Auction", 
-                      description = "Be able to buy seventy five percent of the locked cars.",
+                      description = "Be able to buy seventy five percent of the locked cars",
                       points = 10,
                       numberCarsToUnlock = QUARTER_OF_CARS_TO_UNLOCK * 3
                       )
 
-achievement(title = "You'll get them next time",
+achievement(title = "You’ll Get Them Next Time",
             description = "Earn your first Draw in Quest Mode",
             points = 2,
             trigger = questModeDriving() &&
@@ -2855,7 +2932,7 @@ achievement(title = "You'll get them next time",
            )
 
 
-achievement( title = "No fuzzy dice?",
+achievement( title = "No Fuzzy Dice?",
              description = "Get a mirror ornament for your car",
              points = 1,
              trigger = inGameDriving() &&
@@ -2959,28 +3036,28 @@ function QuickRaceAchievement( title, description, points, winCount)
 }
 
 QuickRaceAchievement( title = "More Like Survival Mode", 
-                      description = "Beat round 10 in Quick Race mode.",
+                      description = "Beat round 10 in Quick Race mode",
                       points = 3,
                       winCount = 10)
 QuickRaceAchievement( title = "Quarter Century Champion", 
-                      description = "Beat round 25 in Quick Race mode.",
+                      description = "Beat round 25 in Quick Race mode",
                       points = 5,
                       winCount = 25)
 QuickRaceAchievement( title = "Halfway There", 
-                      description = "Beat round 50 in Quick Race mode.",
+                      description = "Beat round 50 in Quick Race mode",
                       points = 10,
                       winCount = 50)
 QuickRaceAchievement( title = "Are We There Yet?", 
-                      description = "Beat round 75 in Quick Race mode.",
+                      description = "Beat round 75 in Quick Race mode",
                       points = 10,
                       winCount = 75)
 QuickRaceAchievement( title = "Centurion Conqueror", 
-                      description = "Beat round 100 in Quick Race mode.",
+                      description = "Beat round 100 in Quick Race mode",
                       points = 25,
                       winCount = 100)
 
-achievement(title = "Whose going to watch that?",
-            description = "Watch the Fast and the Furious trailer.",
+achievement(title = "Whose Going to Watch That?",
+            description = "Watch the Fast and the Furious trailer",
             points = 1,
             trigger = dvdExtrasMode() &&
                       movieIsPlaying() &&
