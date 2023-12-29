@@ -90,13 +90,9 @@ Leaderboards
 
 Best Score Normal or harder
 
-Best score on Very Hard or harder
+Best score on Hard or harder
 
-Best Training score. 
-
-Best Vs Training score (does that reset?) 
-
-Best score Controller. 
+Best Arcade Score on Ranking Mode
 
 
 
@@ -161,4 +157,13 @@ Leaderboards Best ranking Score.
 
 // Don't know where this is properly calculated.
 
+
+// Best Training score. 
+    Not sure when it's marked as "Done" would make it with that. 
+
+// Best Vs Training score (does that reset?) 
+    Same problem, don't know when it's actually done. 
+
+// Best score Controller. 
+    Originally felt like controller can't be returned to, however players can go to mouse and then controller.  So it's hard to capture, and people will cheat it. 
 
