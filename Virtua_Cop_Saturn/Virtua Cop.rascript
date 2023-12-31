@@ -1,18 +1,33 @@
 // Virtua Cop
 // #ID = 14569
 
-defaultOptionsSinglePlayerTag = "(Default Options and Single Player only, no Gun Select)"
+defaultOptionsSinglePlayerTag = " (Default Options and Single Player only, no Gun Select)"
 
-// $157884: (8-bit) Training Level Selection
+// $157884: (8-bit) Training Level Selection  (Stage select detection)
 //          
-//          0x01 = Main Menu
-//          0x02 = Exercise
-//          0x04 = Training
+//          0x01 = Main Menu 
+//          0x02 = Exercise or Arcade Stage Select
+//          0x04 = Training or Arcade
 //          0x09 = Vs Play
-//          0x0c = Training Menu
+//          0x0c = Training Menu 
 //          
 //          If setting this to 0x09, when selecting exercise, you go to Vs. Player
 function trainingLevelSelection() => byte(0x157884)
+
+TRAINING_EXERCISE = 0x02
+TRAINING_VS_PLAYER = 0x09
+MAIN_MENU_SELECTION = 0x01
+ARCADE_STAGE_SELECT = 0x02
+ARCADE_MAIN_GAMEPLAY = 0x04
+
+function trainingExerciseMode() => trainingLevelSelection() == TRAINING_EXERCISE
+function trainingVsPlayerMode() => trainingLevelSelection() == TRAINING_VS_PLAYER
+function arcadeModeStageSelect() => trainingLevelSelection() == ARCADE_STAGE_SELECT
+function trainingModeStageSelect() => trainingLevelSelection() == ARCADE_STAGE_SELECT
+function arcadeModeMainGameplay() => trainingLevelSelection() == ARCADE_MAIN_GAMEPLAY
+function arcadeLevelStarted() => arcadeModeMainGameplay() && prev(trainingLevelSelection()) == ARCADE_STAGE_SELECT
+function onMainMenuSelection() => trainingLevelSelection() == MAIN_MENU_SELECTION
+function becomeMainMenuSelection() => trainingLevelSelection() == MAIN_MENU_SELECTION && prev(trainingLevelSelection()) != MAIN_MENU_SELECTION
 
 // $1578B2: (8-bit) Innocents hit in current continue
 function innocentsHitP1() => byte(0x1578B2)
@@ -36,6 +51,7 @@ NOT_ON_MAIN_MENU_INDICATOR = 0x01
 function onMainMenu() => mainMenuIndicator() == MAIN_MENU_INDICATOR
 function notOnMainMenu() => mainMenuIndicator() == NOT_ON_MAIN_MENU_INDICATOR
 function justLeftMainMenu() => prev(mainMenuIndicator()) == MAIN_MENU_INDICATOR && notOnMainMenu()
+function justEnteredMainMenu() => prev(mainMenuIndicator()) == NOT_ON_MAIN_MENU_INDICATOR && onMainMenu()
 
 // $1578DD: (8-bit) 1P Credits
 //          
@@ -59,6 +75,13 @@ SECOND_LEVEL = 0x01
 THIRD_LEVEL = 0x02
 TRAINING_LEVEL = 0x05
 
+LevelNameLookup =
+{
+    FIRST_LEVEL: "Arms Black Market",
+    SECOND_LEVEL: "Underground Weapon Storage",
+    THIRD_LEVEL: "Gang Headquarters"
+}
+
 // $1578EA: (8-bit) Scene ID
 //          
 //          Which scene in the Stage is it.
@@ -72,6 +95,7 @@ function sceneId() => byte(0x1578EA)
 
 FIRST_SCENE = 0x00
 FINAL_SCENE = 0x02  // ALL scene ends on scene 3 (0x02)
+FINAL_TRAINING_SCENE = 0x07
 
 
 // $157900: (8-bit) 1P Joined
@@ -79,6 +103,8 @@ FINAL_SCENE = 0x02  // ALL scene ends on scene 3 (0x02)
 //          0x00 = Not in Game  (front end or
 //          0x01 = In Game
 function player1Joined() => byte(0x157900)
+
+// Discovered this gets set to true and stays true for 
 
 PLAYER_JOINED_VALUE = 0x01
 
@@ -93,9 +119,10 @@ function overlayP1() => byte(0x157910)
 
 PRESS_START_OVERLAY_ID = 0x01
 PLAYER_NOT_JOINED_VALUE = 0x00
-function firstPlayerPlaying() => overlayP1() >= PRESS_START_OVERLAY_ID && player1Joined() == PLAYER_JOINED_VALUE
-function firstPlayerJustJoined() => player1Joined() == PLAYER_JOINED_VALUE && prev(player1Joined()) == PLAYER_NOT_JOINED_VALUE
-function firstPlayerJustLeft() => player1Joined() == PLAYER_NOT_JOINED_VALUE && prev(player1Joined()) == PLAYER_JOINED_VALUE
+function firstPlayerPlaying() => overlayP1() > PRESS_START_OVERLAY_ID
+function firstPlayerJustJoined() => prev(overlayP1()) <= PRESS_START_OVERLAY_ID && overlayP1() > PRESS_START_OVERLAY_ID
+function firstPlayerJustLeft() => overlayP1() <= PRESS_START_OVERLAY_ID && prev(overlayP1()) > PRESS_START_OVERLAY_ID
+
 // $157913: (8-bit) 1P Life
 //          
 //          How many hits the first played can take.
@@ -113,12 +140,12 @@ function upperScoreBitsP1() => word(0x157920)
 //          Lower 16-bits of the player 1's score. Upper bits at 0x157920
 function lowerScoreBitsP1() => word(0x157922)
 
-function player1Score() => upperScoreBitsP1() * 2^16 + lowerScoreBits()
-
+function player1Score() => (upperScoreBitsP1() * 0x10000 + lowerScoreBitsP1())
+    
 // $157932: (8-bit) Hits in Training mode
 //          
 //          Does not appear to be the same as the arcade game.
-function hitsTrainingMode() => byte(0x157932)
+function hitsP1() => byte(0x157932)
 
 // $157935: (8-bit) 1P Score Multiplier
 //          
@@ -157,7 +184,7 @@ function upperScoreP2() => word(0x157960)
 //          Lower 16-bits of the player 2's score. Upper bits at 0x157960
 function lowerScoreP2() => word(0x157962)
 
-function player1Score() => upperScoreP2() * 2^16 + lowerScoreP2()
+function player2Score() => upperScoreP2() * 0x10000 + lowerScoreP2()
 
 // $157972: (8-bit) P2 Hits (or Opponent in Training)
 function hitsP2() => byte(0x157972)
@@ -262,6 +289,12 @@ function arcadeMode() => mainMenuOptionSelected() == ARCADE_MODE && firstPlayerP
 function trainingMode() => mainMenuOptionSelected() == TRAINING_MODE && firstPlayerPlaying()
 function rankingMode() => mainMenuOptionSelected() == RANKING_MODE && firstPlayerPlaying()
 function arcadeOrRanking() => arcadeMode() || rankingMode()
+
+arcadeRankingLookup =
+{
+    ARCADE_MODE: "Arcade Mode",
+    RANKING_MODE: "Ranking Mode",
+}
 
 // $16A93A: (8-bit) Bosses Health
 //          
@@ -377,7 +410,7 @@ trainingVersusOpponentLookup =
 function timerInTrainingMode() => byte(0x16B90E)
 
 TRAINING_TIME_OVER = 0xff
-function endOfTraining() => prev(timerInTrainingMode()) == 0x00 && timerInTrainingMode == TRAINING_TIME_OVER
+function endOfTraining() => prev(timerInTrainingMode()) == 0x00 && timerInTrainingMode() == TRAINING_TIME_OVER
 
 // $16B911: (8-bit) Training Exercise Success Indicator
 //          
@@ -390,6 +423,18 @@ TRAINING_SUCCESS = 0x01
 
 function trainingExerciseJustWon() => prev(trainingExerciseSuccessIndicator()) == 0 && trainingExerciseSuccessIndicator() == TRAINING_SUCCESS
 
+// $50060: (8-bit) Demo Video Indicator 
+// 
+//         0x00 = Normal
+//         0x06 = Video playing
+//
+//         This is one of many static values for the FMV.
+function demoVideoIndicator() => byte(0x50060)
+
+DEMO_FMV_PLAYING = 0x06
+
+function demoPlaying() => demoVideoIndicator() == DEMO_FMV_PLAYING
+
 // This is required by almost any achievement 
 function validOptions() => optionLife1P() <= DEFAULT_LIFE_OPTION &&
                            optionGunLooseness1P() <= DEFAULT_GUN_LOOSENESS &&
@@ -398,16 +443,19 @@ function validOptions() => optionLife1P() <= DEFAULT_LIFE_OPTION &&
 
 function startedGame() => once(justLeftMainMenu()) &&
                           once(firstPlayerJustJoined()) &&
-                          never(onMainMenu() || 
+                          never(justEnteredMainMenu() || 
+                                becomeMainMenuSelection() ||
                                 secondPlayerPlaying() || 
                                 firstPlayerJustLeft())
 
 function startedLevel(targetLevelId) => once(levelId() == targetLevelId && 
                                              sceneId() == FIRST_SCENE &&
                                              notOnMainMenu()) &&
+                                        once(arcadeLevelStarted()) &&
                                         firstPlayerPlaying() && // this might be duplicate. 
                                         never(levelId() != targetLevelId ||
-                                             onMainMenu() || 
+                                             justEnteredMainMenu() || 
+                                             becomeMainMenuSelection() ||
                                              secondPlayerPlaying() || 
                                              !firstPlayerPlaying() )
 
@@ -441,9 +489,9 @@ function stageAchievement(title, description, points, targetLevelId)
     achievement( title = title,
                   description = description + defaultOptionsSinglePlayerTag,
                   points = points,
-                  trigger = arcadeOrRanking() &&
+                  trigger = arcadeOrRanking() && 
                             normalAchievementLocks() &&
-                            beatLevel(targetLevelId)
+                            beatLevel(targetLevelId)  // Note: this does StartedLevel (This note is so I don't forget)
                        
     )
 }
@@ -484,7 +532,7 @@ innocentsAchievement( title = "Hero of the People: Arms Black Market",
                   targetLevelId = FIRST_LEVEL
 )
 
-innocentsAchievement( title = "Hero of the People:Underground Weapon Storage",
+innocentsAchievement( title = "Hero of the People: Underground Weapon Storage",
                   description = "Beat Stage 2 with out shooting any hostages",
                   points = 4,
                   targetLevelId = SECOND_LEVEL
@@ -505,7 +553,8 @@ function bossAchievement(title, description, points, targetLevelId)
                             normalAchievementLocks() &&
                             once(NormalBossStarted() && levelId() == targetLevelId) && 
                             never(levelId() != targetLevelId ||
-                                  onMainMenu() || 
+                                  justEnteredMainMenu() || 
+                                  becomeMainMenuSelection() ||
                                   secondPlayerPlaying() || 
                                   !firstPlayerPlaying() ||
                                   p1TookDamage()) &&                                            
@@ -532,27 +581,29 @@ bossAchievement( title = "Boss of Nothing",
 )
 
 
-achievement( title = "The real boss found",
+achievement( title = "The Real Boss Found",
                   description = "Beat the 'Secret' fourth boss" + defaultOptionsSinglePlayerTag,
                   points = 10,
                   trigger = arcadeOrRanking() &&
                             normalAchievementLocks() &&
-                            once(SecretBossStarted() && levelId() == 3) && 
-                            never(levelId() != 3 ||
-                                  onMainMenu() || 
+                            once(SecretBossStarted() && levelId() == THIRD_LEVEL) && 
+                            never(levelId() != THIRD_LEVEL ||
+                                  justEnteredMainMenu() || 
+                                  becomeMainMenuSelection() ||
                                   secondPlayerPlaying() || 
                                   !firstPlayerPlaying()) &&                                            
                             trigger_when( BossDefeated())
 )
 
-achievement( title = "Perfect Fang",
+achievement( title = "DeFanged",
                   description = "Beat the 'Secret' fourth boss without taking any damage" + defaultOptionsSinglePlayerTag,
                   points = 10,
                   trigger = arcadeOrRanking() &&
                             normalAchievementLocks() &&
-                            once(SecretBossStarted() && levelId() == 3) && 
-                            never(levelId() != 3 ||
-                                  onMainMenu() || 
+                            once(SecretBossStarted() && levelId() == THIRD_LEVEL) && 
+                            never(levelId() != THIRD_LEVEL ||
+                                  justEnteredMainMenu() || 
+                                  becomeMainMenuSelection() ||
                                   secondPlayerPlaying() || 
                                   !firstPlayerPlaying() ||
                                   p1TookDamage()) &&                                            
@@ -596,7 +647,7 @@ finishAchievement( title = "Big Boss?",
                   targetMemory = level3Complete()
 )
 
-achievement( title = "Grade me, bro",
+achievement( title = "Grade Me, Bro",
              description = "Beat the 'Secret' Ranking Mode" + defaultOptionsSinglePlayerTag,
              points = 10,
              trigger = rankingMode() &&
@@ -637,16 +688,16 @@ multiplierAchievement( title = "Getting Started",
                        targetMultiplier = 2 
 )
 
-multiplierAchievement( title = "Careful shooting",
+multiplierAchievement( title = "Careful Shooting",
                        description = "Reach a 5x multiplier" + defaultOptionsSinglePlayerTag,
                        points = 10,
                        targetMultiplier = 5
 )
 
 achievement( title = "Master",
-             description = "Beat Virtua Cop on Hard or higher difficulty mode" + defaultOptionsSinglePlayerTag,
+             description = "Beat Virtua Cop on hard or higher difficulty mode" + defaultOptionsSinglePlayerTag,
              points = 10,
-             trigger = arcadeOrRanking() &&
+             trigger = arcadeMode() &&
                        hardDifficulty() &&
                        normalAchievementLocks() &&
                        startedGame() && 
@@ -654,32 +705,169 @@ achievement( title = "Master",
                        prev(numberLevelsComplete()) == 2 
 )
 
-// Sharpshooter
-// beat training mode. 
-//     Level 8, when the success indicator flips from 0 to 1.
-// 
-// Better shot than X  (Wait which was better? vs Rage)
-// Beat each enemy in Vs. Training
-//     Calculate this by checking Hits Vs Hits after time hits 0xff
-// 
-// 
-// 
-// Leaderboards
-// 
-// Best Score Normal or harder
-// 
-// Best score on Very Hard or harder
-// 
-// Best (Arcade) Score on Ranking Mode 
-// 
-// 
-// REAL Presence
-// Ranking Mode or Arcade Mode 
-// 
-// 2P 
-// 
-// 1P 
-// 
-// Training Exercise
-// 
-// Training Versus
+achievement( title = "Sharpshooter",
+             description = "Beat all 8 training missions" + defaultOptionsSinglePlayerTag,
+             points = 10,
+             trigger = trainingMode() &&
+                       trainingExerciseMode() &&
+                       sceneId() == FINAL_TRAINING_SCENE &&
+                       trainingExerciseJustWon() 
+)
+
+
+function vsPlayerachievement(title, description, points, characterId)
+{
+    achievement( title = title,
+             description = description + defaultOptionsSinglePlayerTag,
+             points = points,
+             trigger = trainingMode() &&
+                       trainingVsPlayerMode() &&
+                       trainingVersusOpponent() == characterId &&
+                       endOfTraining() &&
+                       hitsP1() > hitsP2()
+    )
+}
+
+vsPlayerachievement( title = "Every Shot You Take",
+                     description = "Beat The Police Officer in Training Vs. Play",
+                     points = 3,
+                     characterId = VS_POLICE
+)
+
+vsPlayerachievement( title = "I Wear Sunglasses at night",
+                     description = "Beat Tom in Training Vs. Play",
+                     points = 3,
+                     characterId = VS_TOM
+)
+
+vsPlayerachievement( title = "So I Can, So I Can",
+                     description = "Beat Jack in Training Vs. Play",
+                     points = 3,
+                     characterId = VS_JACK
+)
+
+vsPlayerachievement( title = "Don’t Be Afraid of the Guy in Shades",
+                     description = "Beat Terry in Training Vs. Play",
+                     points = 5,
+                     characterId = VS_TERRY
+)
+
+vsPlayerachievement( title = "A Big Black Wild Gorilla",
+                     description = "Beat Kong in Training Vs. Play",
+                     points = 5,
+                     characterId = VS_KONG
+)
+
+vsPlayerachievement( title = "And What a Dreadful Mighty Killer",
+                     description = "Beat King in Training Vs. Play",
+                     points = 5,
+                     characterId = VS_KING
+)
+
+vsPlayerachievement( title = "Buy a Gun (Like a Boss)",
+                     description = "Beat Boss in Training Vs. Play",
+                     points = 10,
+                     characterId = VS_BOSS
+)
+
+vsPlayerachievement( title = "I’m Asking Him to Change His Ways",
+                     description = "Beat Smarty in Training Vs. Play",
+                     points = 10,
+                     characterId = VS_SMARTY
+)
+
+vsPlayerachievement( title = "I’m Starting with the Man in the Mirror",
+                     description = "Beat yourself in Training Vs. Play",
+                     points = 10,
+                     characterId = VS_RAGE
+)
+
+
+function arcadeLeaderboardStartLogic() => arcadeOrRanking() &&
+                                          normalAchievementLocks() &&
+                                          startedGame() &&
+                                          ((numberLevelsComplete() == 3 && 
+                                                prev(numberLevelsComplete()) == 2) ||
+                                           (lifeP1() == 0 && 
+                                                prev(lifeP1()) == 1)
+                                          )
+
+function arcadeLeaderboardCancelLogic() => always_false()
+                                            
+function arcadeLeaderboardSubmitLogic() => always_true()
+
+leaderboard(
+    title = format("Arcade Score Normal"),
+    description = format("Get the most points in the arcade or ranking mode (Default or harder settings and single player)"),
+    start = arcadeLeaderboardStartLogic(),
+    cancel = arcadeLeaderboardCancelLogic(),
+    submit = arcadeLeaderboardSubmitLogic(),
+    value = player1Score(),
+    format = "VALUE"
+)
+
+leaderboard(
+    title = format("Arcade Score Hard"),
+    description = format("Get the most points in the arcade on hard difficulty (Default or harder settings and single player)"),
+    start = arcadeLeaderboardStartLogic() && 
+            arcadeMode() &&
+            hardDifficulty(),  
+    cancel = arcadeLeaderboardCancelLogic(),
+    submit = arcadeLeaderboardSubmitLogic(),
+    value = player1Score(),
+    format = "VALUE"
+)
+
+leaderboard(
+    title = format("Ranking Score"),
+    description = format("Get the most points in ranking mode (Default or harder settings and single player)"),
+    start = arcadeLeaderboardStartLogic() && 
+            rankingMode(),  
+    cancel = arcadeLeaderboardCancelLogic(),
+    submit = arcadeLeaderboardSubmitLogic(),
+    value = player1Score(),
+    format = "VALUE"
+)
+
+rich_presence_conditional_display(demoPlaying(), "Watching Virtua Cop FMV")
+
+rich_presence_conditional_display(onMainMenu() || onMainMenuSelection(), "On the Main Menu")
+
+rich_presence_conditional_display(arcadeOrRanking() && firstPlayerPlaying() && secondPlayerPlaying(), 
+                                 "{0}: Level: {1} 1P: {2} P2:{3}",
+                                  rich_presence_lookup("ModeLookup", mainMenuOptionSelected(), arcadeRankingLookup), 
+                                  rich_presence_lookup("LevelNameLookup", levelId(), LevelNameLookup), 
+                                  rich_presence_value("Score", player1Score()),
+                                  rich_presence_value("Score", player2Score())
+                                  )
+
+rich_presence_conditional_display(arcadeOrRanking() && secondPlayerPlaying(), 
+                                 "{0}: Level: {1} P2: {2}",
+                                  rich_presence_lookup("ModeLookup", mainMenuOptionSelected(), arcadeRankingLookup), 
+                                  rich_presence_lookup("LevelNameLookup", levelId(), LevelNameLookup), 
+                                  rich_presence_value("Score", player2Score())
+                                  )
+
+rich_presence_conditional_display(arcadeOrRanking() && firstPlayerPlaying(), 
+                                 "{0}: Level: {1} 1P: {2}",
+                                  rich_presence_lookup("ModeLookup", mainMenuOptionSelected(), arcadeRankingLookup), 
+                                  rich_presence_lookup("LevelNameLookup", levelId(), LevelNameLookup), 
+                                  rich_presence_value("Score", player1Score())
+                                  )                                  
+
+rich_presence_conditional_display(trainingMode() && trainingModeStageSelect(), 
+                                 "Training Mode Stage Select")                                  
+
+rich_presence_conditional_display(trainingMode() && trainingExerciseMode(), 
+                                 "Training Mode Exercise: Level: {0}",
+                                  rich_presence_value("Number", sceneId())
+                                  )        
+                                  
+rich_presence_conditional_display(trainingMode() && trainingVsPlayerMode(), 
+                                 "Training Mode Vs Play Opponent: {0} Hits: {1} vs {2}",
+                                  rich_presence_lookup("OpponentLookup", trainingVersusOpponent(), trainingVersusOpponentLookup),
+                                  rich_presence_value("Number", hitsP1()),
+                                  rich_presence_value("Number", hitsP2())
+                                  )                                           
+
+rich_presence_display("Watch Virtua Cop.") // intentionally adding a period to signify a problem. 
