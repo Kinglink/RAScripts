@@ -1,0 +1,15 @@
+Hello! 
+
+My name is Kinglink and this is my patch for Tokyo Xtreme Racer 3.  
+
+Patch File: Tokyo Xtreme Racer 3 (USA).iso
+CRC-32: a0b96c06
+MD5: 054c01f5ca1a069a339b8c127b848ff0
+
+When this patch is applied, Exotic Butterfly and Whirlwind Fanfare's requirements will be approximetly 100 times lower (200k for Exotic Butterfly, 1 million for Whirlwind Fanfare)  Other than that, this game should work exactly the same as the original.  Save files for both versions will work the same as well. 
+
+20 years later and the game is now finally completable for the US version!  This version will be able to be used with Retroachievment's Achievement Set as well. 
+
+Unlimited amounts of thanks goes out to Souzooka and Searo for opening my eyes to the fact I could create patches.
+
+Have a great day.
