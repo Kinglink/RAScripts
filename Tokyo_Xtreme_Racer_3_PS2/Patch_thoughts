@@ -1,0 +1,29 @@
+There is two possibilities for Whirlwind Fanfare 
+
+
+First there's a simple bitshift. at 00255C20 srl v0,v0,0x0D  If you make that 0x0A that's divided by 8.  if it's 0x09 it's divided by 16.
+
+
+was D1B71758 
+
+
+Ok here's the goal. 
+
+00255C00 li v0,0xD1B71759
+
+will be divided by 128 * 100 and become
+
+00255C00 li B5601430
+
+00255C20 will be reduced to v0,v0, 0x06
+421302
+
+Which is a bit shift of 7 which is 128
+
+This should create the reduction of 100x 
+
+
+0x255c00 becomes 60B5
+0x255c04 becomes 3014
+0x255c20 becomes 8211
+
