@@ -1,36 +1,37 @@
-Solar Gem 
-Moon Stone
-Power Bracer
-Himiko's Rune
-Vixen Tail
-Tengu Sandals
-Hare Greaves
-Kappa Amulet
-Wind Gloves
-Cloak of Might
-Demon Staff
-Serpent Bracer
-Saddle
-Arabian Saddle
-Matsukaze Saddle
-Horse Armor
-Warrior's Tale
-Battle Drum
-Gold Incense
-War Rations
-Guiding Doll
-Healing Balm
-Hachiman Bell
-Lantern
-Element Rune
-Ninja Suit
-The Kage Scroll
-War Baton
-Book of Healing
-Sheild Wall 
-Golden Rune
-Book of Earth
-Book of Water
-Book of Fire
-Book of Wind
-Book of Air 
+0x00 = Solar Gem
+0x01 = Moon Stone
+0x02 = Power Bracer
+0x03 = Himiko's Rune
+0x04 = Vixen Tail
+0x05 = Tengu Sandals
+0x06 = Hare Greaves
+0x07 = Kappa Amulet
+0x08 = Wind Gloves
+0x09 = Cloak of Might
+0x0A = Demon Staff
+0x0B = Serpent Bracer
+0x0C = Saddle
+0x0D = Arabian Saddle
+0x0E = Matsukaze Saddle
+0x0F = Horse Armor
+0x10 = Warrior's Tale
+0x11 = Battle Drum
+0x12 = Gold Incense
+0x13 = War Rations
+0x14 = Guiding Doll
+0x15 = Healing Balm
+0x16 = Hachiman Bell
+0x17 = Lantern
+0x18 = Element Rune
+0x19 = Ninja Suit
+0x1A = The Kage Scroll
+0x1B = War Baton
+0x1C = Book of Healing
+0x1D = Shield Wall
+0x1E = Golden Rune
+0x1F = Book of Earth
+0x20 = Book of Water
+0x21 = Book of Fire
+0x22 = Book of Wind
+0x23 = Book of Air
+0x24 = no item. 
