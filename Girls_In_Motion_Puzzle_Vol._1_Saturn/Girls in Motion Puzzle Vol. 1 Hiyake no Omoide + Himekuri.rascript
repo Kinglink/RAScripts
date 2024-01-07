@@ -1089,14 +1089,18 @@ timeRequirements =
     4: {"minutes": 3, "seconds": 30 , "string": "three minutes and thirty seconds", "points": 10},
 }
 
+
+NumberLookup =
+{
+    1:"I",
+    2:"II",
+    3:"III",
+    4:"IV",
+}
+
 for targetSceneId in range(1,4)
 {
-    letterIs = ""
-    for id in range(1,targetSceneId)
-    {
-        letterIs = letterIs + "I"
-    }
-    achievement(title = format("Perfection {0}", letterIs),
+    achievement(title = format("Perfection {0}", NumberLookup[targetSceneId]),
             description = format("Complete a scene {0} puzzles for any woman with out making a mistake or discarding a tile. No Practice mode.", targetSceneId),
             points = 5,                
             trigger = moviePuzzleMode() &&
@@ -1111,7 +1115,7 @@ for targetSceneId in range(1,4)
                       practiceModeCheck()
             )
             
-    achievement(title = format("Jigsaw Race {0}", letterIs),
+    achievement(title = format("Jigsaw Race {0}", NumberLookup[targetSceneId]),
             description = format("Complete a scene {0} puzzles in under {1}. No Practice mode.", targetSceneId, timeRequirements[targetSceneId]["string"]),
             points = timeRequirements[targetSceneId]["points"],
             trigger = moviePuzzleMode() &&
@@ -1126,7 +1130,7 @@ for targetSceneId in range(1,4)
                 start = moviePuzzleMode() &&
                         inMoviePuzzle() &&
                         sceneId() == targetSceneId - 1 &&
-                        trigger_when(moviePuzzleComplete()) &&
+                        moviePuzzleComplete() &&
                         practiceModeCheck(),
                 cancel = always_false(),
                 submit = always_true(),
@@ -1145,12 +1149,7 @@ vsCPUInfo =
 
 for id in [VS_1_ROUND_VALUE, VS_3_ROUND_VALUE, VS_5_ROUND_VALUE]
 {
-    letterIs = ""
-    for id in range(0,id)
-    {
-        letterIs = letterIs + "I"
-    }
-    achievement(title = format("Easy Peasy {0}", letterIs),
+    achievement(title = format("Easy Peasy {0}", NumberLookup[id + 1]),
             description = format("Complete a VS CPU 1 best ouf of {0}.", vsCPUInfo[id]["string"]),
             points = vsCPUInfo[id]["points1"],                
             trigger = vsPuzzleMode() &&
@@ -1158,7 +1157,7 @@ for id in [VS_1_ROUND_VALUE, VS_3_ROUND_VALUE, VS_5_ROUND_VALUE]
                       vsCPUInfo[id]["vsCheck"]
             )
     
-    achievement(title = format("The Real Deal {0}", letterIs),
+    achievement(title = format("The Real Deal {0}", NumberLookup[id + 1]),
             description = format("Complete a VS CPU 2 best ouf of {0}.", vsCPUInfo[id]["string"]),
             points = vsCPUInfo[id]["points2"],                
             trigger = vsPuzzleMode() &&
@@ -1213,14 +1212,12 @@ rich_presence_conditional_display(moviePuzzleMode() && inMoviePuzzle(),
                                   rich_presence_value("Number", sceneId()+1))
 
 rich_presence_conditional_display(vsPuzzleMode(), 
-                                  "VS Puzzle Mode: {0} {1} P1 Score:  P2 Score",
+                                  "VS Puzzle Mode: {0} {1}",
                                   rich_presence_lookup("vsPuzzleLookup", vsMenuSelection(), vsPuzzleLookup),
-                                  rich_presence_lookup("vsRoundCountLookup", vsModeRoundCount(), vsRoundCountLookup),
-                                  rich_presence_value("Number", player1Wins()),
-                                  rich_presence_value("Number", player2Wins()))
+                                  rich_presence_lookup("vsRoundCountLookup", vsModeRoundCount(), vsRoundCountLookup))
 
 
-rich_presence_conditional_display(mainMenuSelection() == MAIN_MENU_CALENDAR_VALUE(), 
+rich_presence_conditional_display(mainMenuCalendarChoice(), 
                                   "Himekuri Mode: Playing {0} {1}, unlocked {2}/366", 
                                   rich_presence_lookup("MonthLookup", currentMonth(), monthLookup), 
                                   rich_presence_value("Number", currentDate()),
