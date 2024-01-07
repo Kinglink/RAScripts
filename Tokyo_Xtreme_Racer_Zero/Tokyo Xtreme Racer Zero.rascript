@@ -2817,7 +2817,7 @@ function teamInADayAchievement()
     // Trigger is wrapped in () and then anded with never(!inGameDriving())
 
     achievement(title = "A Busy Night",
-                description = "Beat every single member of a team for the first time, including the leader, in a single night without ever losing or drawing in races against any of them  in Quest Mode",
+                description = "Beat every single member of a team for the first time including the leader in a single night without ever losing or drawing in races against any of them  in Quest Mode",
                 points = 5,
                 trigger = questMode() &&
                           never(!inGameDriving()) &&
@@ -2843,8 +2843,8 @@ achievement(title = "A Perfect Night",
             points = 10,
             trigger = questModeDriving() &&
                       previnGameDriving() &&
-                      inGameDriving()  &&
-                      measured(racesWonInNight() >= 10 ) &&
+                      measured(racesWonInNight() >= 10, 
+                               when=inGameDriving()  ) &&
                       racesLostInNight() == 0 &&
                       racesDrawnInNight() == 0
             )
@@ -2870,8 +2870,8 @@ achievement(title = "Now to Build the Ultimate Car",
             points = 3,
             trigger = inGameDriving()  &&  // Note: can be done in any game mode. 
                       !demoMode() && // This actually does trigger in Demo Mode. (ugh)
-                      inGameTripOdometer() >= MAX_UPGRADE_VALUES &&  
-                      prev(inGameTripOdometer()) < MAX_UPGRADE_VALUES
+                      inGameTotalOdometer() >= MAX_UPGRADE_VALUES &&  
+                      prev(inGameTotalOdometer()) < MAX_UPGRADE_VALUES
             )
 
 achievement(title = "Crank up the Super Eurobeat",
@@ -3005,7 +3005,7 @@ TimeTrialAchievement( title = "Shioiri Sprint to Suzugamori",
                     )
 
 TimeTrialAchievement( title = "Wangan Lightning Legend",
-                      description = "Finish the Kanda Bridge (C-1 CW) with an class A car in 15 Minutesin Time Trial Mode",
+                      description = "Finish the Kanda Bridge (C-1 CW) with an class A car in 15 Minutes in Time Trial Mode",
                       points = 5, 
                       course = KANDA_C1_CW, 
                       carClass = CLASS_A,
@@ -3049,11 +3049,11 @@ QuickRaceAchievement( title = "Halfway There",
                       winCount = 50)
 QuickRaceAchievement( title = "Are We There Yet?", 
                       description = "Beat round 75 in Quick Race mode",
-                      points = 10,
+                      points = 25,
                       winCount = 75)
 QuickRaceAchievement( title = "Centurion Conqueror", 
                       description = "Beat round 100 in Quick Race mode",
-                      points = 25,
+                      points = 50,
                       winCount = 100)
 
 achievement(title = "Whose Going to Watch That?",
