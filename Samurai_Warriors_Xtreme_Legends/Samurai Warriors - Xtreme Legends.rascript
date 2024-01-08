@@ -1,6 +1,18 @@
 // Samurai Warriors - Xtreme Legends
 // #ID = 20790
 
+// Helper Functions
+function pointer_plus_offset(Pointer, Offset) => (pointer() + offset)
+
+function bitOffset(InitialOffset, BitValue)
+{
+    offset = BitValue / 8
+    
+    targetBit = BitValue % 8
+    targetLocation = InitialOffset+offset
+    return bit(targetBit, targetLocation)
+}
+
 // $4F8530: (32-bit) Pointer to First Player information
 //          
 //          May be duplicated by 0x51c498, 0x69ecb0, check those if this proves untrue.
@@ -16,12 +28,16 @@ function pointerToFirstPlayerObject() => word(0x4F8530)
 //          0x00= Player one controls the second player
 //          0x01 = Second player's inputs accepted
 function secondPlayerController() => byte(0x4F8585)
+SECOND_PLAYER_CONTROLLER_ENABLE = 0x01
 
 // $4F8586: (8-bit) Second Player animation Control
 //          
 //          0x00= Player one controls the second player
 //          0x01 = Second player's animation is frozen.
 function secondPlayerAnimation() => byte(0x4F8586)
+SECOND_PLAYER_ANIMATION_CONTROL = 0x01
+
+function isSecondPlayerActive() => secondPlayerController() == SECOND_PLAYER_CONTROLLER_ENABLE || secondPlayerAnimation() == SECOND_PLAYER_ANIMATION_CONTROL
 
 // $4FF7E4: (352-bit) Yukimura Sanada's stats
 //          
@@ -81,7 +97,9 @@ function arrayOfCharacterStats() => dword(0x4FF7E4)
 //          0x22 = Book of Wind
 //          0x23 = Book of Air
 //          0x24 = no item.
-function yukimura items() => byte(0x4FF822)
+YUKIMURA_ITEM_LOCATION = 0x4FF822
+KEIJI_MAEDE_ITEM_LOCATION = 0x4FF89E
+function yukimura items() => byte(YUKIMURA_ITEM_LOCATION)
 
 // $4FF827: (384-bit) Yukimura's Skills.
 //          
@@ -98,60 +116,101 @@ function yukimurasStoredSkills() => byte(0x4FF827)
 function yukimurasStoredLevel() => byte(0x4FF857)
 
 // $4FF89E: (40-bit) Keiji's Maeda's equipped items
-function keijiMaedaItems() => byte(0x4FF89E)
+KEIJI_MAEDE_ITEM_LOCATION = 0x4FF89E
+function keijiMaedaItems() => byte(KEIJI_MAEDE_ITEM_LOCATION)
+
+OFFSET_FOR_EACH_CHARACTER_STATS = KEIJI_MAEDE_ITEM_LOCATION - YUKIMURA_ITEM_LOCATION
+
 
 // $500155: (8-bit) Musket for New Officer 1
 //          
 //          Given by Magouchi
-function newOfficerMusketSkill() => byte(0x500155)
+MEMORY_LOCATION_OF_NEW_OFFICER_MUSKET_SKILL = 0x500155
+function newOfficerMusketSkill() => byte(MEMORY_LOCATION_OF_NEW_OFFICER_MUSKET_SKILL)
 
-// $500156: (40-bit)Array of weapons for first New Officer
-function newOfficerArrayWeaponsFirstOfficer() => byte(0x500156)
+// $500156: (40-bit)Array of items for first New Officer
+ARRAY_OF_FIRST_NEW_OFFICER_ITEMS = 0x500156
+function newOfficerArrayItemsFirstOfficer() => byte(ARRAY_OF_FIRST_NEW_OFFICER_ITEMS)
 
 // $50015E: (8-bit) Frenzy Skill for New Officer 1
 //          
 //          Given by Ranmaru
-function newOfficerFrenzySkill() => byte(0x50015E)
+MEMORY_LOCATION_OF_NEW_OFFICER_FRENZY_SKILL = 0x50015E
+function newOfficerFrenzySkill() => byte(MEMORY_LOCATION_OF_NEW_OFFICER_FRENZY_SKILL)
 
 // $50015F: (8-Bit) Reach for New Officer 1
 //          
 //          Given by Keiji Maeda
-function newOfficerReachSkill() => byte(0x50015F)
+MEMORY_LOCATION_OF_NEW_OFFICER_REACH_SKILL = 0x50015F
+function newOfficerReachSkill() => byte(MEMORY_LOCATION_OF_NEW_OFFICER_REACH_SKILL)
 
 // $500160: (8-bit) Rage skill for New Officer 1
 //          
 //          Date Masamune gives you the skill
-function newOfficerRageSkill() => byte(0x500160)
+MEMORY_LOCATION_OF_NEW_OFFICER_RAGE_SKILL = 0x500160
+function newOfficerRageSkill() => byte(MEMORY_LOCATION_OF_NEW_OFFICER_RAGE_SKILL)
 
 // $500166: (8-bit) Drive skill for New Officer.
 //          
 //          Given by Okuni
-function newOfficerDriveSkill() => byte(0x500166)
+MEMORY_LOCATION_OF_NEW_OFFICER_DRIVE_SKILL = 0x500166
+function newOfficerDriveSkill() => byte(MEMORY_LOCATION_OF_NEW_OFFICER_DRIVE_SKILL)
 
 // $500169: (8-bit) Focus skill for New Officer 1
 //          
-//          Kunoichi gives you the ability.
-function newOfficerFocusSkill() => byte(0x500169)
+//          Kunoichi gives you the ability
+MEMORY_LOCATION_OF_NEW_OFFICER_FOCUS_SKILL = 0x500169
+function newOfficerFocusSkill() => byte(MEMORY_LOCATION_OF_NEW_OFFICER_FOCUS_SKILL)
 
 // $50016A: (8-bit) Forttitude Skill for New Officer 1
 //          
-//          Dokkimaru gives yyou this
-function newOfficerFortitudeSkill() => byte(0x50016A)
+//          Dokkimaru gives you this
+MEMORY_LOCATION_OF_NEW_OFFICER_FORTITUDE_SKILL = 0x50016A
+function newOfficerFortitudeSkill() => byte(MEMORY_LOCATION_OF_NEW_OFFICER_FORTITUDE_SKILL)
 
 // $50016B: (8-bit) New Officer's Discern skill
 //          
 //          Goemon  gives this.
-function newOfficerDiscernSkill() => byte(0x50016B)
+MEMORY_LOCATION_OF_NEW_OFFICER_DISCERN_SKILL = 0x50016B
+function newOfficerDiscernSkill() => byte(MEMORY_LOCATION_OF_NEW_OFFICER_DISCERN_SKILL)
 
 // $5001D2: (40-bit)Array of weapons for second New Officer
-function newOfficerArrayWeaponsSecondOfficer() => byte(0x5001D2)
+ARRAY_OF_SECOND_NEW_OFFICER_ITEMS = 0x5001D2
+function newOfficerArrayWeaponsSecondOfficer() => byte(ARRAY_OF_SECOND_NEW_OFFICER_ITEMS)
+
+SIZE_OF_NEW_OFFICER_OBJECT = ARRAY_OF_SECOND_NEW_OFFICER_ITEMS - ARRAY_OF_FIRST_NEW_OFFICER_ITEMS
+
+TOTAL_NEW_OFFICERS = 15
+function newOfficerOffsetHelper(Location) => byte(ARRAY_OF_FIRST_NEW_OFFICER_ITEMS - Location + (SIZE_OF_NEW_OFFICER_OBJECT * index)
+function newOfficerAnyOfHelper(Location) => any_of(range(0,TOTAL_NEW_OFFICERS), index => newOfficerOffsetHelper(Location) == 0x1 &&
+                                                                                          prev(newOfficerOffsetHelper(Location)) == 0x0)
+function newOfficerMusketUnlock() =>  newOfficerAnyOfHelper(MEMORY_LOCATION_OF_NEW_OFFICER_MUSKET_SKILL)
+function newOfficerFrenzyUnlock() =>  newOfficerAnyOfHelper(MEMORY_LOCATION_OF_NEW_OFFICER_FRENZY_SKILL)
+function newOfficerReachUnlock() =>  newOfficerAnyOfHelper(MEMORY_LOCATION_OF_NEW_OFFICER_REACH_SKILL)
+function newOfficerRageUnlock() =>  newOfficerAnyOfHelper(MEMORY_LOCATION_OF_NEW_OFFICER_RAGE_SKILL)
+function newOfficerDriveUnlock() =>  newOfficerAnyOfHelper(MEMORY_LOCATION_OF_NEW_OFFICER_DRIVE_SKILL)
+function newOfficerFocusUnlock() =>  newOfficerAnyOfHelper(MEMORY_LOCATION_OF_NEW_OFFICER_FOCUS_SKILL)
+function newOfficerFortitudeUnlock() =>  newOfficerAnyOfHelper(MEMORY_LOCATION_OF_NEW_OFFICER_FORTITUDE_SKILL)
+function newOfficerDiscernUnlock() =>  newOfficerAnyOfHelper(MEMORY_LOCATION_OF_NEW_OFFICER_DISCERN_SKILL)
+
+// $5013b1 (4-bit Lowt) New Officers Face Unlocks
+// 
+// Each bit is a new face.  Eventually this becomes 0x0f 
+function newOfficerFaces() => byte(0x5013b1)
+
+FULL_FACE_UNLOCK_VALUE = 0x0f
+FULL_FACE_UNLOCK_PREV_VALUE = 0x07
+
+function newOfficerFaceUnlock => newOfficerFaces() == FULL_FACE_UNLOCK_VALUE && 
+                                 prev(newOfficerFaces()) == FULL_FACE_UNLOCK_PREV_VALUE
 
 // $50125C: (8-bit) Solar Gem Item Power
 //          
 //          Does not appear to unlock the item, but once unlocked shows the Life Power
 //          
 //          See 0x0050134e for the unlock array
-function solarGemPower() => byte(0x50125C)
+MEMORY_LOCATION_SOLAR_GEM_POWER = 0x50125C
+function solarGemPower() => byte(MEMORY_LOCATION_SOLAR_GEM_POWER)
 
 // $50125D: (8-bit) Moon Stone Item Power
 //          
@@ -235,7 +294,15 @@ function serpentBracerPower() => byte(0x501267)
 //          Does not appear to unlock the item, but once unlocked shows the Horse Power Power (Called just Power, assuming it's horse power)
 //          
 //          See 0x0050134e for the unlock array
-function saddlePower() => byte(0x501268)
+MEMORY_LOCATION_SADDLE_POWER = 0x501268
+function saddlePower() => byte(MEMORY_LOCATION_SADDLE_POWER)
+
+MEMORY_LOCATION_SOLAR_GEM_POWER
+MEMORY_LOCATION_SADDLE_POWER
+function itemsReachedAtXPower(PowerLevel) => all_of(range(MEMORY_LOCATION_SOLAR_GEM_POWER,MEMORY_LOCATION_SADDLE_POWER), 
+                                                        index => byte(index) >= PowerLevel) &&
+                                             any_of(range(MEMORY_LOCATION_SOLAR_GEM_POWER,MEMORY_LOCATION_SADDLE_POWER), 
+                                                        index => byte(index) < PowerLevel)
 
 // $50134E: (8-bit)(Bitfield)  Item Owned Bitfield (1 of 5)
 //          
@@ -247,7 +314,8 @@ function saddlePower() => byte(0x501268)
 //          Bit 5=Tengu Sandals
 //          Bit 6=Hare Greaves
 //          Bit 7=Kappa Amulet
-function itemOwnedBitfield1() => byte(0x50134E)
+INITIAL_LOCATION_ITEM_OWNED_BITFIELD = 0x50134E
+function itemOwnedBitfield1() => byte(INITIAL_LOCATION_ITEM_OWNED_BITFIELD)
 
 // $50134F: (8-bit)(Bitfield) Item Owned Bitfield (2 of 5)
 //          
@@ -295,9 +363,89 @@ function itemOwnedBitfield4() => byte(0x501351)
 //          Other values are not used.
 function itemOwnedBitfield5() => byte(0x501352)
 
+SOLAR_GEM = 0x00
+MOON_STONE = 0x01
+POWER_BRACER = 0x02
+HIMIKOS_RUNE = 0x03
+VIXEN_TAIL = 0x04
+TENGU_SANDALS = 0x05
+HARE_GREAVES = 0x06
+KAPPA_AMULET = 0x07
+WIND_GLOVES = 0x08
+CLOAK_OF_)MIGHT = 0x09
+DEMON_STAFF = 0x0a
+SERPENT_BRACER = 0x0b
+SADDLE = 0x0c
+ARABIAN_SADDLE = 0x0d
+MATSUKAZE_SADDLE = 0x0e
+HORSE_ARMOR = 0x0f
+WARRIORS_TALE = 0x10
+BATTLE_DRUM = 0x11
+GOLD_INCENSE = 0x12
+WAR_RATIONS = 0x13
+GUIDING_DOLL = 0x14
+HEALING_BALM = 0x15
+HACHIMAN_BELL = 0x16
+LANTERN = 0x17
+ELEMENT_RUNE = 0x18
+NINJA_SUIT = 0x19
+KAGE_SCROLL = 0x1a
+WAR_BATON = 0x1b
+BOOK_OF_HEALING = 0x1c
+SHEILD_WALL = 0x1d
+GOLDEN_RUNE = 0x1e
+BOOK_OF_EARTH = 0x1f
+BOOK_OF_WATER = 0x20
+BOOK_OF_FIRE = 0x21
+BOOK_OF_WIND = 0x22
+BOOK_OF_AIR = 0x23
+INVALID_ITEM = 0x024
 
-// Samurai Warriors - Xtreme Legends
-// #ID = 20790
+itemLookup=
+{
+    SOLAR_GEM : "Solar Gem", 
+    MOON_STONE : "Moon Stone", 
+    POWER_BRACER : "Power Bracer", 
+    HIMIKOS_RUNE : "Himiko's Rune", 
+    VIXEN_TAIL : "Vixen Tail", 
+    TENGU_SANDALS : "Tengu Sandals", 
+    HARE_GREAVES : "Hare Greaves", 
+    KAPPA_AMULET : "Kappa Amulet", 
+    WIND_GLOVES : "Wind Gloves", 
+    CLOAK_OF_ : "Cloak of Might", 
+    DEMON_STAFF : "Demon Staff", 
+    SERPENT_BRACER : "Serpent Bracer", 
+    SADDLE : "Saddle", 
+    ARABIAN_SADDLE : "Arabian Saddle", 
+    MATSUKAZE_SADDLE : "Matsukaze Saddle", 
+    HORSE_ARMOR : "Horse Armor", 
+    WARRIORS_TALE : "Warrior's Tale", 
+    BATTLE_DRUM : "Battle Drum", 
+    GOLD_INCENSE : "Gold Incense", 
+    WAR_RATIONS : "War Rations", 
+    GUIDING_DOLL : "Guiding Doll", 
+    HEALING_BALM : "Healing Balm", 
+    HACHIMAN_BELL : "Hachiman Bell", 
+    LANTERN : "Lantern", 
+    ELEMENT_RUNE : "Element Rune", 
+    NINJA_SUIT : "Ninja Suit", 
+    KAGE_SCROLL : "The Kage Scroll", 
+    WAR_BATON : "War Baton", 
+    BOOK_OF_HEALING : "Book of Healing", 
+    SHEILD_WALL : "Sheild Wall", 
+    GOLDEN_RUNE : "Golden Rune", 
+    BOOK_OF_EARTH : "Book of Earth", 
+    BOOK_OF_WATER : "Book of Water", 
+    BOOK_OF_FIRE : "Book of Fire", 
+    BOOK_OF_WIND : "Book of Wind", 
+    BOOK_OF_AIR : "Book of Air", 
+    INVALID_ITEM : "None"
+}
+
+function justOwnedAllCommonItems() => all_of(range(SOLAR_GEM,SADDLE), 
+                                                        index => bitOffset(INITIAL_LOCATION_ITEM_OWNED_BITFIELD, index) == 1) &&
+                                             any_of(range(MEMORY_LOCATION_SOLAR_GEM_POWER,MEMORY_LOCATION_SADDLE_POWER), 
+                                                        index => prev(bitOffset(INITIAL_LOCATION_ITEM_OWNED_BITFIELD, index)) == 0)
 
 // $5015F8: (8-bit)(bitfield) Completed Missions for Kenshin Uesugi's The Battle of Anegawa
 //          
@@ -328,11 +476,9 @@ function completeOichiBattleOfAnegawa() => byte(0x5015FC)
 //          bit5 = The Second Shot
 //          bit6 = Go if you want
 //          bit7 = Talent
-function compelteMagioichiBattleOfEchizen() => byte(0x501600)
+function completeMagioichiBattleOfEchizen() => byte(0x501600)
 
 // $501604: (8-bit)(bitfield) Completed Missions for Noh's The Battle of Anegawa
-//          
-//          see 0x00501604
 //          
 //          bit0 = Vanguard
 //          bit1 = Asakura's Fall
@@ -420,7 +566,7 @@ function completeNobunagaBattleOfIse() => byte(0x50161C)
 //          bit5 = Surrender
 //          bit6 = Life is Power
 //          bit7 = Pesants' Escape
-function completeMitsuhideBattleOfISe() => byte(0x501620)
+function completeMitsuhideBattleOfIse() => byte(0x501620)
 
 // $501624: (8-bit)(bitfield) Completed Missions for Goemon Ishikawa's Crossing Iga
 //          
@@ -443,7 +589,7 @@ function completeGoemonCrossingIga() => byte(0x501624)
 //          bit5 = Greatest Obstacle
 function completeDanceofIse() => byte(0x501628)
 
-// $50162C: (8-bit)(bitfield) Completed Missions for Okuni's Dance of Kyoto
+// $50162C: (8-bit)(bitfield) Completed Missions for Okuni's Dance of Ise
 //          
 //          bit0 = One Mind, One Body
 //          bit1 = !! UNUSED !!
@@ -453,7 +599,7 @@ function completeDanceofIse() => byte(0x501628)
 //          bit5 = Mitsuhide, my Love
 //          bit6 = Greatest Obstacle
 //          bit7= Hanzo, my Love
-function completeOkuniDanceOfKyoto() => byte(0x50162C)
+function completeOkuniDanceOfIse() => byte(0x50162C)
 
 // $501630: (8-bit)(bitfield) Completed Missions for Magoichi Saika's The Battle of Ise
 //          
@@ -728,8 +874,9 @@ function completeKenshinKawanakajimaShowdown() => byte(0x501684)
 //          bit7 = Kenshin, my Love
 //          bit8 = Love's Retreat
 //          bit9 = Three's a Crowd
-//          bit10 = ???
-//          bit11 = ???
+//          bit10 = Yukimura, My Love 
+//          bit11 = !UNUSED!
+//          bit12 = By force, then
 function completeOkuniDanceOfKawanakima() => word(0x501688)
 
 // $50168C: (16-bit)(bitfield) Completed Missions for Kuniochi's The Battle of Kawanakajima
@@ -821,7 +968,6 @@ function completeTadakatsuBattleOfKawanakajira() => byte(0x5016A4)
 //          bit3 = Unwanteds
 //          bit4 = Miscreants
 //          bit5 = Go Away
-//          bit6 = !!UNUSED!!
 function completeKeijiDanceOfKyoto() => byte(0x5016A8)
 
 // $5016AC: (8-bit)(bitfield) Completed Missions for Nobunaga Oda's Betrayal at Honnouji
@@ -910,7 +1056,7 @@ function completeOkuniDanceAtKyoto() => byte(0x5016C4)
 //          bit4 = Farewell to Arms
 function completeMagoichiSkirmishAtKyoto() => byte(0x5016C8)
 
-// $5016CC: (8-bit)(bitfield) Completed Missions for Masamune Date's Attak on Honnouji
+// $5016CC: (8-bit)(bitfield) Completed Missions for Masamune Date's Attack on Honnouji
 //          
 //          bit0 = Endgame
 //          bit1 = Ambition or Justice?
@@ -1235,7 +1381,7 @@ function completeInaBattleOfYamasaki() => byte(0x50173C)
 //          
 //          
 //          Additional Missions available at 0x00517ac
-function completeSiegeOfAzuchi() => byte(0x501740)
+function completeYukimuraSiegeOfAzuchiCAstle() => byte(0x501740)
 
 // $501744: (16-bit)(bitfield) Completed Missions for Nobunaga Oda 's Retaking of Azuchi Castle
 //          
@@ -1251,7 +1397,7 @@ function completeSiegeOfAzuchi() => byte(0x501740)
 //          bit7 = Desperation
 //          bit8 = Dangerous Woman
 //          bit9 = Unforgivable
-function completeNobunagaRetakingAzuchi() => word(0x501744)
+function completeNobunagaRetakingAzuchiPart1() => word(0x501744)
 
 // $501748: (8-bit)(bitfield) Completed Missions for Mitsuhide Akechi 's Defense of Azuchi Castle
 //          
@@ -1288,7 +1434,7 @@ function completeOichiSiegeOfAzuchiCastlePart1() => byte(0x50174C)
 //          bit4 = The Race is On
 //          
 //          4 missing missions
-function completeShingenSiegeOfAzuchiCastle() => byte(0x501750)
+function completeShingenSiegeOfAzuchiCastlePart1() => byte(0x501750)
 
 // $501754: (8-bit)(bitfield) Completed Missions for Hideyoshi Hashiba's Siege of Azuchi Castle
 //          
@@ -1301,7 +1447,7 @@ function completeShingenSiegeOfAzuchiCastle() => byte(0x501750)
 //          bit4 = Conclusion - Friend
 //          bit5 = The Warrior's Way
 //          bit6 = Foolish Thoughts
-function completeHideyoshiSiegeOfAzuchiCastle() => byte(0x501754)
+function completeHideyoshiSiegeOfAzuchiCastlePart1() => byte(0x501754)
 
 // $501758: (8-bit)(bitfield) Completed Missions for Nobunaga Oda's Defense of Gifu Castle
 //          
@@ -1343,7 +1489,7 @@ function completeKenshinSiegeOfGifuCastlePart1() => word(0x501760)
 
 // $501764: (8-bit)(bitfield) Completed Missions for Oichi's Siege of Inabayama Castle
 //          
-//          continued at
+//          continued at 0x5017E4
 //          
 //          bit0 = One Night Castle
 //          bit1 = Get the Lumber
@@ -1355,7 +1501,7 @@ function completeKenshinSiegeOfGifuCastlePart1() => word(0x501760)
 //          bit7 = Gods and Demons
 //          
 //          4 additional missions, not located yet.
-function completeOichiSiegeOfInabayamaCastle() => byte(0x501764)
+function completeOichiSiegeOfInabayamaCastlePart1() => byte(0x501764)
 
 // $501768: (8-bit)(bitfield) Completed Missions for Noh's Siege of Inabayama Castle
 //          
@@ -1428,8 +1574,6 @@ function completeKenshinSeigeOfUedaPart1() => byte(0x501778)
 //          bit4 = Badger Hunt
 //          bit5 = Stop Yukimura
 //          bit6 = Plan Continues
-//          
-//          Missing 8 achievements
 function completeNewOfficerSiegeOfUedaCastlePart1() => byte(0x50177C)
 
 // $501780: (8-bit)(bitfield) Completed Missions for Yoshimoto Imagawa's Siege of Ueda Castle
@@ -1444,7 +1588,7 @@ function completeNewOfficerSiegeOfUedaCastlePart1() => byte(0x50177C)
 //          bit5 = Surrounded
 //          bit6 = The Raging Rodent
 //          bit7 = The Theory of Evolution
-function YoshimotoSiegeOfUedaCastle() => byte(0x501780)
+function completeYoshimotoSiegeOfUedaCastlePart1() => byte(0x501780)
 
 // $501784: (8-bit)(bitfield) Completed Missions for Ina's Defense of Ueda Castle
 //          
@@ -1496,8 +1640,11 @@ function completeOkuniDanceOfOsaka() => byte(0x501790)
 //          bit5 = !! Unused !!
 //          bit6 = Withering Hope
 //          bit7 = !! Unused !!
+//          bit8 = Threat
+//          bit9 = Secret Passage
+//          bit10 = !! Unused !!
+//          bit11 = Might as well 
 //          
-//          Missing 3
 function completeKunioichiSiegeOfOsaka() => byte(0x501794)
 
 // $501798: (8-bit)(bitfield) Completed Missions for Hanzo Hattori's Siege of Osaka - Summer
@@ -1513,10 +1660,10 @@ function completeKunioichiSiegeOfOsaka() => byte(0x501794)
 //          bit6 = Withering Hope
 //          bit7 = Legendary Maneuver
 //          
-//          4 missing
+//          
 function completeHanzoSiegeOfOsakaSummerPart1() => byte(0x501798)
 
-// $50179C: (16-bit)(bitfield) Completed Missions for Yukimura Sanada's Siege of Osaka - Summer
+// $50179C: (16-bit)(bitfield) Completed Missions for New Officer's Siege of Osaka - Summer
 //          
 //          bit0 = Power of Sanada
 //          bit1 = Cannon
@@ -1529,9 +1676,8 @@ function completeHanzoSiegeOfOsakaSummerPart1() => byte(0x501798)
 //          bit8 = !! UNUSED !!
 //          bit9 = !! UNUSED !!
 //          bit10 = To the Death
-//          
-//          1 missing
-function completeYukimuraSiegeOfOsakaSummer() => word(0x50179C)
+//        
+function completeNewOfficerSiegeOfOsakaSummerUpper() => word(0x50179C)
 
 // $5017A0: (8-bit)(bitfield) Completed Missions for New Officer's Siege of Osaka - Summer
 //          
@@ -1544,8 +1690,7 @@ function completeYukimuraSiegeOfOsakaSummer() => word(0x50179C)
 //          bit4 = Just in time
 //          bit5 = Sanada-Maru
 //          
-//          4 missing
-function completeNewOfficerSiegeOfOsakaSummerPart() => byte(0x5017A0)
+function completeNewOfficerSiegeOfOsakaSummerLowerPart1() => byte(0x5017A0)
 
 // $5017A4: (8-bit)(bitfield) Completed Missions for Hideyoshi Hashiba's The Saika Campaign
 //          
@@ -1555,7 +1700,6 @@ function completeNewOfficerSiegeOfOsakaSummerPart() => byte(0x5017A0)
 //          bit3 = Fasting
 //          bit4 = Hideyoshi the Hero
 //          bit5 = Finish Strongly
-//          4 missing
 function completeHideyoshiTheSaikaCampaign() => byte(0x5017A4)
 
 // $5017A8: (8-bit)(bitfield) Completed Missions for Ina's Siege of Osaka Castle
@@ -1581,7 +1725,7 @@ function completeInaSiegeOfOsakaCastlePart1() => byte(0x5017A8)
 //          bit2 = !! UNUSED!!
 //          bit3 = Squire
 //          bit4 = Demon Lord
-function completeYukimuraRetakingOfAzuchiCastle() => byte(0x5017AC)
+function completeYukimuraSiegeOfAzuchiCastlePart2() => byte(0x5017AC)
 
 // $5017B0: (16-bit)(bitfield) Completed Missions for Nobunaga Oda 's Retaking of Azuchi Castle
 //          
@@ -1591,7 +1735,7 @@ function completeYukimuraRetakingOfAzuchiCastle() => byte(0x5017AC)
 //          bit1 = More Desperation
 //          bit2 = Solitude
 //          bit3 = Two Monsters
-function completeNobunagaRetakingOfAzuchiCastle() => word(0x5017B0)
+function completeNobunagaRetakingOfAzuchiCastlePart2() => word(0x5017B0)
 
 // $5017B4: (8-bit)(bitfield) Completed Missions for Goemon Ishikawa's Dance of Azuchi Castle
 //          
@@ -1639,14 +1783,14 @@ function completeOkuniDanceOfAzuchiCastle() => byte(0x5017C0)
 //          bit4 = Gentleman
 function completeMagoichiAzuchiInfiltration() => byte(0x5017C4)
 
-// $5017C8: (8-bit)(bitfield) Completed Missions for Shingen Takeda's Siege of Azuchi Castle
+// $5017C8: (8-bit)(bitfield) Completed Missions for Shingen Takeda's Siege of Azuchi Castle Part 2 
 //          
 //          bit0 = Princess
 //          bit1 = Brute
 //          bit2 = !!UNUSED
 //          bit3 = Squire
 //          bit4 = Demon Lord
-function completeShingenSiegeOfAzuchiCastle() => byte(0x5017C8)
+function completeShingenSiegeOfAzuchiCastlePart2() => byte(0x5017C8)
 
 // $5017CC: (8-bit)(bitfield) Completed Missions for Noh's Azuchi Infiltration
 //          
@@ -1676,7 +1820,7 @@ function completeRanmaruDefenseOfAzuchiCastle() => byte(0x5017D0)
 //          bit2 = Companions
 //          bit3 = Creation
 //          bit4 = Farewell
-function completeHideyoshiSiegeOfAzuchiCastlePar2() => byte(0x5017D4)
+function completeHideyoshiSiegeOfAzuchiCastlePart2() => byte(0x5017D4)
 
 // $5017D8: (8-bit)(bitfield) Completed Missions for Mitsuhide Akechi's Gifu Infiltration
 //          
@@ -1736,7 +1880,7 @@ function completeKunoichiGifuInfilitration() => byte(0x5017E8)
 //          bit1 = Clever Tactician
 //          bit2 = A Stern Man
 //          bit3 = Way of the Viper
-function completeSiegeOfInabayamaCastlePart2() => byte(0x5017EC)
+function completeNohSiegeOfInabayamaCastlePart2() => byte(0x5017EC)
 
 // $5017F0: (8-bit)(bitfield) Completed Missions for Noh's Gifu Infiltration
 //          
@@ -1922,7 +2066,7 @@ function completeShingenOdawaraInfiltration() => byte(0x501830)
 //          bit1 = Love...?
 //          bit2 = Personal Challenge
 //          bit3 = Battle between Men
-function MasamuneOdawaraCampaign() => byte(0x501834)
+function completeMasamuneOdawaraCampaign() => byte(0x501834)
 
 // $501838: (8-bit)(bitfield) Completed Missions for Yoshimoto Imagawa's Odawara Infiltration
 //          
@@ -1937,91 +2081,91 @@ function completeYoshimotoOdawaraInfiltration() => byte(0x501838)
 //          
 //          Mission number is as follows (names are not recorded right now)
 //          
-//          0x00 = Yukimura's First Mission
-//          0x01 = Yukimura's Second Mission
-//          0x02 = Yukimura's Third Mission Upper Path
-//          0x03 = Yukimura's Fourth Mission Upper Path
-//          0x04 = Yukimura's Fifth Mission Upper Path
-//          0x05 = Yukimura's Third Mission Lower Path
-//          0x06 = Yukimura's Fourth Mission Lower Path
-//          0x07 = Yukimura's Fifth Mission Lower Path
-//          0x08 = Keiji's First Mission
-//          0x09 = Keiji's Second Mission
-//          0x0A = Keiji's Third Mission
-//          0x0B = Keiji's Fourth Mission
-//          0x0C = Keiji's Fifth Mission
-//          0x0D = Nobunaga's First Mission
-//          0x0E = Nobunaga's Second Mission
-//          0x0F = Nobunaga's Third Mission Upper Path
-//          0x10 = Nobunaga's Fourth Mission Upper Path
-//          0x11 = Nobunaga's Fifth Mission Upper Path
-//          0x12 = Nobunaga's Third Mission Lower Path
-//          0x13 = Nobunaga's Fourth Mission Lower Path
-//          0x14 = Nobunaga's Fifth Mission Lower Path
-//          0x15 = Mitsuhide's First Mission
-//          0x16 = Mitsuhide's Second Mission
-//          0x17 = Mitsuhide's Third Mission
-//          0x18 = Mitsuhide's Fourth Mission Upper Path
-//          0x19 = Mitsuhide's Fifth Mission Upper Path
-//          0x1A = Mitsuhide's Fourth Mission Lower Path
-//          0x1B = Mitsuhide's Fifth Mission Lower Path
-//          0x1C = Goemon's First Mission
-//          0x1D = Goemon's Second Mission
-//          0x1E = Goemon's Third Mission Upper Path
-//          0x1F = Goemon's Fourth Mission Lower Path
-//          0x20 = Goemon's Fifth Mission Upper Path
-//          0x21 = Goemon's Third Mission Lower Path
-//          0x22 = Goemon's Fourth Mission Lower Path
-//          0x23 = Goemon's Fifth Mission Lower Path
-//          0x24 = Kenshin's First Mission
-//          0x25 = Kenshin's Second Mission
-//          0x26 = Kenshin's Third Mission
-//          0x27 = Kenshin's Fourth Mission
-//          0x28 = Kenshin's Fifth Mission Upper Path
-//          0x29 = Kenshin's Fifth Mission Lower Path
-//          0x2A = Oichi's First Mission
-//          0x2B = Oichi's Second Mission
-//          0x2C = Oichi's Third Mission
-//          0x2D = Oichi's Fourth Mission Upper Path
-//          0x2E = Oichi's Fifth Mission Upper Path
-//          0x2F = Oichi's Fourth Mission Lower Path
-//          0x30 = Oichi's Fifth Mission Lower Path
-//          0x31 = Okuni's First Mission
-//          0x32 = Okuni's Second Mission
-//          0x33 = Okuni's Third Mission
-//          0x34 = Okuni's Fourth Mission
-//          0x35 = Okuni's Fifth Mission
-//          0x36 = Kunoichi's First Mission
-//          0x37 = Kunoichi's Second Missions
-//          0x38 = Kunoichi's Third Mission
-//          0x39 = Kunoichi's Fourth Mission
-//          0x3A = Kunoichi's Fifth Mission Upper Path
-//          0x3B = Kunoichi's Fifth Mission Lower Path
-//          0x3C = Magoichi's First Mission
-//          0x3D = Magoichi's Second Mission
-//          0x3E = Magoichi's Third Mission
-//          0x3F = Magoichi's Fourth Mission
-//          0x40 = Magoichi's Fifth Mission
-//          0x41 = Shingen's First Mission
-//          0x42 = Shingen's Second Mission
-//          0x43 = Shingen's Third Mission
-//          0x44 = Shingen's Fourth Mission
-//          0x45 = Shingen's Fifth Mission Upper Path
-//          0x46 = Shingen's Fifth Mission Lower Path
-//          0x47 = Masamune's First Mission
-//          0x48 = Masamune's Second Mission
-//          0x49 = Masamune's Third Mission
-//          0x4A = Masamune's Fourth Mission
-//          0x4B = Masamune's Fifth Mission Upper Path
-//          0x4C = Masamune's Fifth Mission Lower Path
-//          0x4D = Noh's First Mission
-//          0x4E = Noh's Second Mission
-//          0x4F = Noh's Third Mission
-//          0x50 = Noh's (Fourth Mission Upper Path)
-//          0x51 = Noh's Retaking of Azuchi Castle (Fifth Mission Upper Path
+//          0x00 = Yukimura's The Battle of Kawanakajima (First Mission)
+//          0x01 = Yukimura's The Battle of Mikatagahara (Second Mission)
+//          0x02 = Yukimura's The Battle of Nagashino (Third Mission Upper Path)
+//          0x03 = Yukimura's Defense of Ueda Castle (Fourth Mission Upper Path)
+//          0x04 = Yukimura's Siege of Osaka - Summer (Fifth Mission Upper Path)
+//          0x05 = Yukimura's The Battle of Nagashino (Third Mission Lower Path)
+//          0x06 = Yukimura's Siege of Azuchi Castle (Fourth Mission Lower Path)
+//          0x07 = Yukimura's The Battle of Yamasaki (Fifth Mission Lower Path)
+//          0x08 = Keiji's The Battle of Ise (First Mission)
+//          0x09 = Keiji's The Battle of Nagashino (Second Mission)
+//          0x0A = Keiji's Dance of Kyoto (Third Mission)
+//          0x0B = Keiji's Odawara Infiltration (Fourth Mission)
+//          0x0C = Keiji's Kawanakajima Challenge (Fifth Mission)
+//          0x0D = Nobunaga's The Battle of Okehazama (First Mission)
+//          0x0E = Nobunaga's The Battle of Ise (Second Mission)
+//          0x0F = Nobunaga's The Battle of Nagashino (Third Mission Upper Path)
+//          0x10 = Nobunaga's Betrayal At Honnouji (Fourth Mission Upper Path)
+//          0x11 = Nobunaga's Retaking Azuchi Castle (Fifth Mission Upper Path)
+//          0x12 = Nobunaga's The Battle of Nagashino (Third Mission Lower Path)
+//          0x13 = Nobunaga's Defense of Gifu Castle (Fourth Mission Lower Path)
+//          0x14 = Nobunaga's The Battle of Yamasaki (Fifth Mission Lower Path)
+//          0x15 = Mitsuhide's Defense of Inabayama Castle (First Mission)
+//          0x16 = Mitsuhide's The Battle of Ise (Second Mission)
+//          0x17 = Mitsuhide's Betrayal at Honnouji (Third Mission)
+//          0x18 = Mitsuhide's The Battle of Yamasaki (Fourth Mission Upper Path)
+//          0x19 = Mitsuhide's Gifu Infiltration (Fifth Mission Upper Path)
+//          0x1A = Mitsuhide's Defense of Azuchi Castle (Fourth Mission Lower Path)
+//          0x1B = Mitsuhide's The Battle of Yamasaki (Fifth Mission Lower Path)
+//          0x1C = Goemon's Gifu Infiltration (First Mission)
+//          0x1D = Goemon's Dance of Kyoto (Second Mission)
+//          0x1E = Goemon's Crossing Iga (Third Mission Upper Path)
+//          0x1F = Goemon's Osaka Intrusion (Fourth Mission Lower Path)
+//          0x20 = Goemon's Goemon the Wild (Fifth Mission Upper Path)
+//          0x21 = Goemon's Dance of Osaka (Third Mission Lower Path)
+//          0x22 = Goemon's Dance of Ise (Fourth Mission Lower Path)
+//          0x23 = Goemon's Dance of Azuchi Castle (Fifth Mission Lower Path)
+//          0x24 = Kenshin's The Battle of Kawanakajima (First Mission)
+//          0x25 = Kenshin's Odawara Infiltration (Second Mission)
+//          0x26 = Kenshin's Siege of Ueda Castle (Third Mission)
+//          0x27 = Kenshin's Siege of Gifu Castle (Fourth Mission)
+//          0x28 = Kenshin's Kawanakajima Showdown (Fifth Mission Upper Path)
+//          0x29 = Kenshin's The Battle of Anegawa (Fifth Mission Lower Path)
+//          0x2A = Oichi's The Battle of Okehazama (First Mission)
+//          0x2B = Oichi's Siege of Inabayama Castle (Second Mission)
+//          0x2C = Oichi's The Battle of Anegawa (Third Mission)
+//          0x2D = Oichi's Azuchi Infiltration (Fourth Mission Upper Path)
+//          0x2E = Oichi's Betrayal at Honnouji (Fifth Mission Upper Path)
+//          0x2F = Oichi's Siege of Azuchi Castle (Fourth Mission Lower Path)
+//          0x30 = Oichi's The Battle of Honnouji (Fifth Mission Lower Path)
+//          0x31 = Okuni's Dance of Kyoto (First Mission)
+//          0x32 = Okuni's Dance of Osaka (Second Mission)
+//          0x33 = Okuni's Dance of Ise (Third Mission)
+//          0x34 = Okuni's Dance of Kawanakajima (Fourth Mission)
+//          0x35 = Okuni's Dance of Azuchi Castle (Fifth Mission)
+//          0x36 = Kunoichi's The Battle of Kawanakajima (First Mission)
+//          0x37 = Kunoichi's The Battle of Mikatagahara (Second Missions)
+//          0x38 = Kunoichi's Gifu Infiltration (Third Mission)
+//          0x39 = Kunoichi's Rescue at Ueda Castle (Fourth Mission)
+//          0x3A = Kunoichi's Siege of Osaka - Summer (Fifth Mission Upper Path)
+//          0x3B = Kunoichi's Odawara Infiltration (Fifth Mission Lower Path)
+//          0x3C = Magoichi's The Battle of Ise (First Mission)
+//          0x3D = Magoichi's Yamasaki Crossfire (Second Mission)
+//          0x3E = Magoichi's The Battle of Echizen (Third Mission)
+//          0x3F = Magoichi's Skirmish at Kyoto (Fourth Mission)
+//          0x40 = Magoichi's Azuchi Infiltration (Fifth Mission)
+//          0x41 = Shingen's The Battle of Kawanakajima (First Mission)
+//          0x42 = Shingen's Odawara Infiltration (Second Mission)
+//          0x43 = Shingen's The Battle of Nagashino (Third Mission)
+//          0x44 = Shingen's Siege of Azuchi Castle (Fourth Mission)
+//          0x45 = Shingen's The Battle of Yamasaki (Fifth Mission Upper Path)
+//          0x46 = Shingen's Kawanakajima Showdown (Fifth Mission Lower Path)
+//          0x47 = Masamune's Kawanakajima Campaign (First Mission)
+//          0x48 = Masamune's Okehazama Campaign (Second Mission)
+//          0x49 = Masamune's Ise Campaign (Third Mission)
+//          0x4A = Masamune's Nagashino Campaign(Fourth Mission)
+//          0x4B = Masamune's Attack on Honnouji (Fifth Mission Upper Path)
+//          0x4C = Masamune's Odawara Campaign (Fifth Mission Lower Path)
+//          0x4D = Noh's The Battle of Okehazama (First Mission)
+//          0x4E = Noh's Siege of Inabayama Castle (Second Mission)
+//          0x4F = Noh's The Battle of Anegawa (Third Mission)
+//          0x50 = Noh's Betrayal at Honnouji (Fourth Mission Upper Path)
+//          0x51 = Noh's Gifu Infiltration (Fifth Mission Upper Path)
 //          0x52 = Noh's Betrayal at Honnouji (Fourth Mission Lower Mission)
 //          0x53 = Noh's Azuchi Infiltration (Fifth Mission Lower Path)
-//          0x54 = Hanzo's(The Battle of Okehazama (First Mission)
+//          0x54 = Hanzo's The Battle of Okehazama (First Mission)
 //          0x55 = Hanzo's The Battle of Mikatagahara (Second Mission)
 //          0x56 = Hanzo's Crossing Iga (Third Mission)
 //          0x57 = Hanzo's Ueda Infiltration (Fourth Mission)
@@ -2082,6 +2226,749 @@ function completeYoshimotoOdawaraInfiltration() => byte(0x501838)
 //          0X8e = Gold Rush
 function currentMissionID() => byte(0x521210)
 
+
+YUKIMURA_BATTLE_OF_KAWANAKAJIMA = 0x00
+YUKIMURA_BATTLE_OF_MIKATAGAHARA = 0x01
+YUKIMURA_BATTLE_OF_NAGASHINO_UPPER = 0x02
+YUKIMURA_DEFENSE_OF_UEDA_CASTLE = 0x03
+YUKIMURA_SIEGE_OF_OSAKA_SUMMER "= 0x04
+YUKIMURA_BATTLE_OF_NAGASHINO_LOWER = 0x05
+YUKIMURA_SIEGE_OF_AZUCHI_CASTLE = 0x06
+YUKIMURA_BATTLE_OF_YAMASAKI = 0x07
+KEIJI_BATTLE_OF_ISE = 0x08
+KEIJI_BATTLE_OF_NAGASHINO = 0x09
+KEIJI_DANCE_OF_KYOTO = 0x0A
+KEIJI_ODAWARA_INFILTRATION = 0x0B
+KEIJI_KAWANAKAJIMA = 0x0C
+NOBUNAGA_BATTLE_OF_OKEHAZAMA = 0x0D
+NOBUNAGA_BATTLE_OF_ISE = 0x0E
+NOBUNAGA_BATTLE_OF_NAGASHINO_UPPER = 0x0F
+NOBUNAGA_BETRAYAL_AT_HONNOUJI = 0x10
+NOBUNAGA_RETAKING_AZUCHI_CASTLE = 0x11
+NOBUNAGA_BATTLE_OF_NAGASHINO_LOWER = 0x12
+NOBUNAGA_DEFENSE_OF_GIFU_CASTLE = 0x13
+NOBUNAGA_BATTLE_OF_YAMASAKI = 0x14
+MITSUHIDE_DEFENSE_OF_INABAYAM_CASTLE = 0x15
+MITSUHIDE_BATTLE_OF_ISE = 0x16
+MITSUHIDE_BETRAYAL_AT_HONNOUJI = 0x17
+MITSUHIDE_BATTLE_OF_YAMASAKI_UPPER = 0x18
+MITSUHIDE_GIFU_INFILTRATION = 0x19
+MITSUHIDE_DEFENSE_OF_AZUCHI_CASTLE = 0x1A
+MITSUHIDE_BATTLE_OF_YAMASAKI_LOWER = 0x1B
+GOEMON_GIFU_INFILTRATION = 0x1C
+GOEMON_DANCE_OF_KYOTO = 0x1D
+GOEMON_CROSSING_IGA = 0x1E
+GOEMON_OSAKA_INTRUSION = 0x1F
+GOEMON_GOEMON_THE_WILD = 0x20
+GOEMON_DANCE_OF_OSAKA = 0x21
+GOEMON_DANCE_OF_ISE = 0x22
+GOEMON_DANCE_OF_AZUCHI_CASTLE = 0x23
+KENSHIN_BATTLE_OF_KAWANAKAJIMA = 0x24
+KENSHIN_ODAWARA_INFILTRATION = 0x25
+KENSHIN_SIEGE_OF_UEDA = 0x26
+KENSHIN_SIEGE_OF_GIFU_CASTLE = 0x27
+KENSHIN_KAWANAKAJIMA_SHOWDOWN = 0x28
+KENSHIN_BATTLE_OF_ANEGAWA = 0x29
+OICHI_BATTLE_OF_OKEHAZAMA = 0x2A
+OICHI_SIEGE_OF_INABAYAMA_CASTLE = 0x2B
+OICHI_BATTLE_OF_ANEGAWA = 0x2C
+OICHI_AZUCHI_INFILTRATION = 0x2D
+OICHI_BETRAYAL_AT_HONNOUJI = 0x2E
+OICHI_SIEGE_OF_AZUCHI_CASTLE = 0x2F
+OICHI_BATTLE_OF_HONNOUJI = 0x30
+OKUNI_DANCE_OF_KYOTO = 0x31
+OKUNI_DANCE_OF_OSAKA = 0x32
+OKUNI_DANCE_OF_ISE = 0x33
+OKUNI_DANCE_OF_KAWANAKAJIMA = 0x34
+OKUNI_DANCE_OF_AZUCHI_CASTLE = 0x35
+KUNOICHI_BATTLE_OF_KAWANAKAJIMA = 0x36
+KUNOICHI_BATTLE_OF_MIKATAGAHARA = 0x37
+KUNOICHI_GIFU_INFILTRATION = 0x38
+KUNOICHI_RESCUE_AT_UEDA_CASTLE = 0x39
+KUNOICHI_SIEGE_OF_OSAKA_SUMMER = 0x3A
+KUNOICHI_ODWARA_INFILTRATION = 0x3B
+MAGOICHI_BATTLE_OF_ISE = 0x3C
+MAGOICHI_YAMASAKI_CROSSFIRE = 0x3D
+MAGOICHI_BATTLE_OF_ECHIZEN = 0x3E
+MAGOICHI_SKIRMISH_AT_KYOTO = 0x3F
+MAGOICHI_AZUCHI_INFILTRATION = 0x40
+SHINGEN_BATTLE_OF_KAWANKAJIMA = 0x41
+SHINGEN_ODAWARA_INFILTRATION = 0x42
+SHINGEN_BATTLE_OF_NAGASHINO = 0x43
+SHINGEN_SIEGE_OF_AZUCHI_CASTLE = 0x44
+SHINGEN_BATTLE_OF_YAMASAKI = 0x45
+SHINGEN_KAWANAKAJIMA_SHOWDOWN = 0x46
+MASAMUNE_KAWANAKAJIMA_CAMPAIGN = 0x47
+MASAMUNE_OKEHAZAMA_CAMPAIGN = 0x48
+MASAMUNE_ISE_CAMPAIGN = 0x49
+MASAMUNE_NAGASHINO_CAMPAIGN = 0x4A
+MASAMUNE_ATTACK_ON_HONNOUJI = 0x4B
+MASAMUNE_ODAWARA_CAMPAIGN = 0x4C
+NOH_BATTLE_OF_OKEHAZAMA = 0x4D
+NOH_SIEGE_OF_INABAYAMA_CASTLE = 0x4E
+NOH_BATTLE_OF_ANEGAWA = 0x4F
+NOH_BETRAYAL_AT_HONNOUJI_UPPER = 0x50
+NOH_GIFU_INFILTRATION = 0x51
+NOH_BETRAYAL_AT_HONNOUJI_LOWER = 0x52
+NOH_AZUCHI_INFILTRATION = 0x53
+HANZO_BATTLE_OF_OKEHAZAMA = 0x54
+HANZO_BATTLE_OF_MIKATAGAHARA = 0x55
+HANZO_CROSSING_IGA = 0x56
+HANZO_UEDA_INFILTRATION = 0x57
+HANZO_SIEGE_OF_OSAKA = 0x58
+HANZO_OSAKA_INFILTRATION = 0x59
+RANMARU_DEFENSE_OF_INABAYAMA_CASTLE = 0x5A
+RANMARU_BATTLE_OF_ISE = 0x5B
+RANMARU_BETRAYAL_AT_HONNOUJI = 0x5C
+RANMARU_BATTLE_OF_ANEGAWA = 0x5D
+RANMARU_GIFU_INFILTRATION = 0x5E
+RANMARU_DEFENSE_OF_AZUCHI_CASTLE = 0x5F
+HIDEYOSHI_SIEGE_OF_INABAYAMA_CASTLE = 0x60
+HIDEYOSHI_RETREAT_AT_KANEGASAKI = 0x61
+HIDEYOSHI_SAIKA_CAMPAIGN = 0x62
+HIDEYOSHI_BATTLE_OF_YAMASAKI = 0x63
+HIDEYOSHI_BATTLE_OF_KOMAKI_NAGAKUTE = 0x64
+HIDEYOSHI_BETRAYAL_AT_HONNOUJI = 0x65
+HIDEYOSHI_SIEGE_OF_AZUCHI_CASTLE = 0x66
+YOSHIMOTO_BATTLE_OF_OKEHAZAMA = 0x67
+YOSHIMOTO_ODAWARA_INFILTRATION = 0x68
+YOSHIMOTO_BATTLE_OF_KAWANAKAJIMA = 0x69
+YOSHIMOTO_BATTLE_OF_KOMAKI_NAGAKUTE = 0x6A
+YOSHIMOTO_KEMARI_IN_THE_CAPITAL = 0x6B
+YOSHIMOTO_SIEGE_OF_UEDA_CASTLE = 0x6C
+YOSHIMOTO_STRUGGLE_AT_HONNOUJI = 0x6D
+TADAKATSU_BATTLE_OF_OKEHAZAMA = 0x6E
+TADAKATSU_RETREAT_AT_KANEGASAKI = 0x6F
+TADAKATSU_BATTLE_OF_MIKATAGAHARA = 0x70
+TADAKATSU_CROSSING_IGA = 0x71
+TADAKATSU_THE_BATTLE_OF_KOMAKI_NAGAKUTE = 0x72
+TADAKATSU_BATTLE_OF_KAWANAKAJIMA = 0x73
+TADAKATSU_BATTLE_OF_YAMASAKI = 0x74
+INA_RETREAT_AT_KANEGASAKI = 0x75
+INA_BATTLE_OF_MIKATAGAHARA = 0x76
+INA_CROSSING_IGA = 0x77
+INA_BATTLE_OF_KOMAKI_NAGAKUTE = 0x78
+INA_DEFENSE_OF_UEDA_CASTLE = 0x79
+INA_BATTLE_OF_YAMASAKI = 0x7A
+INA_SIEGE_OF_OSAKA_CASTLE = 0x7B
+NEW_OFFICER_BATTLE_OF_OKEHAZAMA = 0x7C
+NEW_OFFICER_BATTLE_OF_KAWANAKAJIMA = 0x7D
+NEW_OFFICER_BATTLE_OF_NAGASAHINO = 0x7E
+NEW_OFFICER_SIEGE_OF_UEDA = 0x7F
+NEW_OFFICER_SIEGE_OF_OSAKA_SUMMER_UPPER = 0x80
+NEW_OFFICER_SIEGE_OF_OSAKA_SUMMER_UPPER = 0x81
+MELEE_MISSION = 0x82
+COMBO_MISSION = 0x83 
+MUSOU_MISSION = 0x84
+ARCHERY_MISSION = 0x85
+DEFLECT_MISSION = 0x87
+BURST_MISSION = 0x88
+RIDING_MISSION = 0x8A
+DEEP_ABYSS = 0x8C
+HIGH_TOWER = 0x8D
+GOLD_RUSH = 0x8E 
+
+LevelLookup =
+{
+    YUKIMURA_BATTLE_OF_KAWANAKAJIMA: "Yukimura's The Battle of Kawanakajima",
+    YUKIMURA_BATTLE_OF_MIKATAGAHARA: "Yukimura's The Battle of Mikatagahara",
+    YUKIMURA_BATTLE_OF_NAGASHINO_UPPER: "Yukimura's The Battle of Nagashino (Upper Path)" ,
+    YUKIMURA_DEFENSE_OF_UEDA_CASTLE: "Yukimura's Defense of Ueda Castle",
+    YUKIMURA_SIEGE_OF_OSAKA_SUMMER: "Yukimura's Siege of Osaka - Summe,
+    YUKIMURA_BATTLE_OF_NAGASHINO_LOWER: "Yukimura's The Battle of Nagashino (Lower Path)",
+    YUKIMURA_SIEGE_OF_AZUCHI_CASTLE: "Yukimura's Siege of Azuchi Castle",
+    YUKIMURA_BATTLE_OF_YAMASAKI: "Yukimura's The Battle of Yamasaki",
+    KEIJI_BATTLE_OF_ISE: "Keiji's The Battle of Ise",
+    KEIJI_BATTLE_OF_NAGASHINO: "Keiji's The Battle of Nagashino",
+    KEIJI_DANCE_OF_KYOTO: "Keiji's Dance of Kyoto",
+    KEIJI_ODAWARA_INFILTRATION: "Keiji's Odawara Infiltration",
+    KEIJI_KAWANAKAJIMA_CHALENGE: "Keiji's Kawanakajima Challenge",
+    NOBUNAGA_BATTLE_OF_OKEHAZAMA: "Nobunaga's The Battle of Okehazama",
+    NOBUNAGA_BATTLE_OF_ISE: "Nobunaga's The Battle of Ise",
+    NOBUNAGA_BATTLE_OF_NAGASHINO_UPPER: "Nobunaga's The Battle of Nagashino (Upper Path)",
+    NOBUNAGA_BETRAYAL_AT_HONNOUJI: "Nobunaga's Betrayal At Honnouji",
+    NOBUNAGA_RETAKING_AZUCHI_CASTLE: "Nobunaga's Retaking Azuchi Castle",
+    NOBUNAGA_BATTLE_OF_NAGASHINO_LOWER: "Nobunaga's The Battle of Nagashino (LowerPath)",
+    NOBUNAGA_DEFENSE_OF_GIFU_CASTLE: "Nobunaga's Defense of Gifu Castle",
+    NOBUNAGA_BATTLE_OF_YAMASAKI: "Nobunaga's The Battle of Yamasaki",
+    MITSUHIDE_DEFENSE_OF_INABAYAM_CASTLE: "Mitsuhide's Defense of Inabayama Castle",
+    MITSUHIDE_BATTLE_OF_ISE: "Mitsuhide's The Battle of Ise",
+    MITSUHIDE_BETRAYAL_AT_HONNOUJI: "Mitsuhide's Betrayal at Honnouji",
+    MITSUHIDE_BATTLE_OF_YAMASAKI_UPPER: "Mitsuhide's The Battle of Yamasaki(Upper Path)" ,
+    MITSUHIDE_GIFU_INFILTRATION: "Mitsuhide's Gifu Infiltration",
+    MITSUHIDE_DEFENSE_OF_AZUCHI_CASTLE: "Mitsuhide's Defense of Azuchi Castle",
+    MITSUHIDE_BATTLE_OF_YAMASAKI_LOWER: "Mitsuhide's The Battle of Yamasaki(Lower Path)",
+    GOEMON_GIFU_INFILTRATION: "Goemon's Gifu Infiltration",
+    GOEMON_DANCE_OF_KYOTO: "Goemon's Dance of Kyoto",
+    GOEMON_CROSSING_IGA: "Goemon's Crossing Iga",
+    GOEMON_OSAKA_INTRUSION: "Goemon's Osaka Intrusion",
+    GOEMON_GOEMON_THE_WILD: "Goemon's Goemon the Wild",
+    GOEMON_DANCE_OF_OSAKA: "Goemon's Dance of Osaka",
+    GOEMON_DANCE_OF_ISE: "Goemon's Dance of Ise",
+    GOEMON_DANCE_OF_AZUCHI_CASTLE: "Goemon's Dance of Azuchi Castle",
+    KENSHIN_BATTLE_OF_KAWANAKAJIMA: "Kenshin's The Battle of Kawanakajima",
+    KENSHIN_ODAWARA_INFILTRATION: "Kenshin's Odawara Infiltration",
+    KENSHIN_SIEGE_OF_UEDA: "Kenshin's Siege of Ueda Castle",
+    KENSHIN_SIEGE_OF_GIFU_CASTLE: "Kenshin's Siege of Gifu Castle",
+    KENSHIN_KAWANAKAJIMA_SHOWDOWN: "Kenshin's Kawanakajima Showdown",
+    KENSHIN_BATTLE_OF_ANEGAWA: "Kenshin's The Battle of Anegawa",
+    OICHI_BATTLE_OF_OKEHAZAMA: "Oichi's The Battle of Okehazama",
+    OICHI_SIEGE_OF_INABAYAMA_CASTLE: "Oichi's Siege of Inabayama Castle",
+    OICHI_BATTLE_OF_ANEGAWA: "Oichi's The Battle of Anegawa",
+    OICHI_AZUCHI_INFILTRATION: "Oichi's Azuchi Infiltration",
+    OICHI_BETRAYAL_AT_HONNOUJI: "Oichi's Betrayal at Honnouji",
+    OICHI_SIEGE_OF_AZUCHI_CASTLE: "Oichi's Siege of Azuchi Castle",
+    OICHI_BATTLE_OF_HONNOUJI: "Oichi's The Battle of Honnouji",
+    OKUNI_DANCE_OF_KYOTO: "Okuni's Dance of Kyoto",
+    OKUNI_DANCE_OF_OSAKA: "Okuni's Dance of Osaka",
+    OKUNI_DANCE_OF_ISE: "Okuni's Dance of Ise",
+    OKUNI_DANCE_OF_KAWANAKAJIMA: "Okuni's Dance of Kawanakajima",
+    OKUNI_DANCE_OF_AZUCHI_CASTLE: "Okuni's Dance of Azuchi Castle",
+    KUNOICHI_BATTLE_OF_KAWANAKAJIMA: "Kunoichi's The Battle of Kawanakajima",
+    KUNOICHI_BATTLE_OF_MIKATAGAHARA: "Kunoichi's The Battle of Mikatagahara",
+    KUNOICHI_GIFU_INFILTRATION: "Kunoichi's Gifu Infiltration",
+    KUNOICHI_RESCUE_AT_UEDA_CASTLE: "Kunoichi's Rescue at Ueda Castle",
+    KUNOICHI_SIEGE_OF_OSAKA_SUMMER: "Kunoichi's Siege of Osaka - Summer",
+    KUNOICHI_ODWARA_INFILTRATION: "Kunoichi's Odawara Infiltration",
+    MAGOICHI_BATTLE_OF_ISE: "Magoichi's The Battle of Ise",
+    MAGOICHI_YAMASAKI_CROSSFIRE: "Magoichi's Yamasaki Crossfire",
+    MAGOICHI_BATTLE_OF_ECHIZEN: "Magoichi's The Battle of Echizen",
+    MAGOICHI_SKIRMISH_AT_KYOTO: "Magoichi's Skirmish at Kyoto",
+    MAGOICHI_AZUCHI_INFILTRATION: "Magoichi's Azuchi Infiltration",
+    SHINGEN_BATTLE_OF_KAWANKAJIMA: "Shingen's The Battle of Kawanakajima",
+    SHINGEN_ODAWARA_INFILTRATION: "Shingen's Odawara Infiltration",
+    SHINGEN_BATTLE_OF_NAGASHINO: "Shingen's The Battle of Nagashino",
+    SHINGEN_SIEGE_OF_AZUCHI_CASTLE: "Shingen's Siege of Azuchi Castle",
+    SHINGEN_BATTLE_OF_YAMASAKI: "Shingen's The Battle of Yamasaki",
+    SHINGEN_KAWANAKAJIMA_SHOWDOWN: "Shingen's Kawanakajima Showdown",
+    MASAMUNE_KAWANAKAJIMA_CAMPAIGN: "Masamune's Kawanakajima Campaign",
+    MASAMUNE_OKEHAZAMA_CAMPAIGN: "Masamune's Okehazama Campaign",
+    MASAMUNE_ISE_CAMPAIGN: "Masamune's Ise Campaign",
+    MASAMUNE_NAGASHINO_CAMPAIGN: "Masamune's Nagashino Campaign",
+    MASAMUNE_ATTACK_ON_HONNOUJI: "Masamune's Attack on Honnouji",
+    MASAMUNE_ODAWARA_CAMPAIGN: "Masamune's Odawara Campaign",
+    NOH_BATTLE_OF_OKEHAZAMA: "Noh's The Battle of Okehazama",
+    NOH_SIEGE_OF_INABAYAMA_CASTLE: "Noh's Siege of Inabayama Castle",
+    NOH_BATTLE_OF_ANEGAWA: "Noh's The Battle of Anegawa",
+    NOH_BETRAYAL_AT_HONNOUJI_UPPER: "Noh's Betrayal at Honnouji(Upper Path)",
+    NOH_GIFU_INFILTRATION: "Noh's Gifu Infiltration",
+    NOH_BETRAYAL_AT_HONNOUJI_LOWER: "Noh's Betrayal at Honnouji(Lower Path)",
+    NOH_AZUCHI_INFILTRATION: "Noh's Azuchi Infiltration",
+    HANZO_BATTLE_OF_OKEHAZAMA: "Hanzo's The Battle of Okehazama|,
+    HANZO_BATTLE_OF_MIKATAGAHARA: "Hanzo's The Battle of Mikatagahara",
+    HANZO_CROSSING_IGA: "Hanzo's Crossing Iga",
+    HANZO_UEDA_INFILTRATION: "Hanzo's Ueda Infiltration",
+    HANZO_SIEGE_OF_OSAKA: "Hanzo's Siege of Osaka - Summer",
+    HANZO_OSAKA_INFILTRATION: "Hanzo's Osaka Infiltration",
+    RANMARU_DEFENSE_OF_INABAYAMA_CASTLE: "Ranmaru's Defense of Inabayama Castle",
+    RANMARU_BATTLE_OF_ISE: "Ranmaru's The Battle of Ise",
+    RANMARU_BETRAYAL_AT_HONNOUJI: "Ranmaru's Betrayal at Honnouji",
+    RANMARU_BATTLE_OF_ANEGAWA: "Ranmaru's The Battle of Anegawa",
+    RANMARU_GIFU_INFILTRATION: "Ranmaru's Gifu Infiltration",
+    RANMARU_DEFENSE_OF_AZUCHI_CASTLE: "Ranmaru's Defense of Azuchi Castle",
+    HIDEYOSHI_SIEGE_OF_INABAYAMA_CASTLE: "Hideyoshi's Siege of Inabayama Castle",
+    HIDEYOSHI_RETREAT_AT_KANEGASAKI: "Hideyoshi's Retreat at Kanegasaki",
+    HIDEYOSHI_SAIKA_CAMPAIGN:"Hideyoshi's The Saika Campaign",
+    HIDEYOSHI_BATTLE_OF_YAMASAKI: "Hideyoshi's The Battle of Yamasaki",
+    HIDEYOSHI_BATTLE_OF_KOMAKI_NAGAKUTE: "Hideyoshi's The Battle of Komaki-Nagakute",
+    HIDEYOSHI_BETRAYAL_AT_HONNOUJI: "Hideyoshi's Betrayal at Honnouji",
+    HIDEYOSHI_SIEGE_OF_AZUCHI_CASTLE:" Hideyoshi's Siege of Azuchi Castle",
+    YOSHIMOTO_BATTLE_OF_OKEHAZAMA: "Yoshimoto's The Battle of Okehazama",
+    YOSHIMOTO_ODAWARA_INFILTRATION: "Yoshimoto's Odawara Infiltration",
+    YOSHIMOTO_BATTLE_OF_KAWANAKAJIMA: "Yoshimoto's The Battle of Kawanakajima",
+    YOSHIMOTO_BATTLE_OF_KOMAKI_NAGAKUTE: "Yoshimoto's The Battle of Komaki-Nagakute",
+    YOSHIMOTO_KEMARI_IN_THE_CAPITAL: "Yoshimoto's Kemari in the Capital",
+    YOSHIMOTO_SIEGE_OF_UEDA_CASTLE: " Yoshimoto's Siege of Ueda Castle",
+    YOSHIMOTO_STRUGGLE_AT_HONNOUJI: "Yoshimoto's Struggle at Honnouji",
+    TADAKATSU_BATTLE_OF_OKEHAZAMA: "Tadakatsu's The Battle of Okehazama",
+    TADAKATSU_RETREAT_AT_KANEGASAKI: "Tadakatsu's Retreat at Kanegasaki",
+    TADAKATSU_BATTLE_OF_MIKATAGAHARA: "Tadakatsu's The Battle of Mikatagahara",
+    TADAKATSU_CROSSING_IGA: "Tadakatsu's Crossing Iga",
+    TADAKATSU_THE_BATTLE_OF_KOMAKI_NAGAKUTE: "Tadakatsu's The Battle of Komaki-Nagakute",
+    TADAKATSU_BATTLE_OF_KAWANAKAJIMA: "Tadakatsu's The Battle of Kawanakajima",
+    TADAKATSU_BATTLE_OF_YAMASAKI: "Tadakatsu's The Battle of Yamasaki",
+    INA_RETREAT_AT_KANEGASAKI: "Ina's Retreat at Kanegasaki",
+    INA_BATTLE_OF_MIKATAGAHARA: "Ina's The Battle of Mikatagahara",
+    INA_CROSSING_IGA: "Ina's Crossing Iga",
+    INA_BATTLE_OF_KOMAKI_NAGAKUTE: "Ina's The Battle of Komaki-Nagakute",
+    INA_DEFENSE_OF_UEDA_CASTLE: "Ina's Defense Of Ueda Castle",
+    INA_BATTLE_OF_YAMASAKI: "Ina's The Battle of Yamasaki",
+    INA_SIEGE_OF_OSAKA_CASTLE: "Ina's Siege of Osaka Castle",
+    NEW_OFFICER_BATTLE_OF_OKEHAZAMA: "New Officer's The Battle of Okehazama",
+    NEW_OFFICER_BATTLE_OF_KAWANAKAJIMA: "New Officer's The Battle of Kawanakajima",
+    NEW_OFFICER_BATTLE_OF_NAGASAHINO: "New Officer's The Battle of Nagashino",
+    NEW_OFFICER_SIEGE_OF_UEDA: "New Officer's Siege of Ueda",
+    NEW_OFFICER_SIEGE_OF_OSAKA_SUMMER_UPPER: "New Officer's Siege Of Osaka - Summer (Upper Path)",
+    NEW_OFFICER_SIEGE_OF_OSAKA_SUMMER_UPPER: "New Officer's Siege Of Osaka - Summer (Lower Path)",
+    MELEE_MISSION: "Melee Mission",
+    COMBO_MISSION: "Combo Mission",
+    MUSOU_MISSION: "Musou Mission",
+    ARCHERY_MISSION: "Archery Mission",
+    DEFLECT_MISSION: "Deflect Mission",
+    BURST_MISSION: "Burst Mission",
+    RIDING_MISSION: "Riding Mission",
+    DEEP_ABYSS: "Deep Abyss",
+    HIGH_TOWER: "High Tower",
+    GOLD_RUSH: "Gold Rush",
+}
+
+MISSION_INFO = "Mission info"
+EXTENDED_MISSION_INFO = "Mission info"
+EXPECTED_VALUE = "Expected Value"
+EXTENDED_EXPECTED_VALUE = "Expected Value"
+POINTS = "POINTS"
+
+BIT1_FULL = 0x03
+BIT2_FULL = 0x07
+BIT3_FULL = 0x0f
+BIT4_FULL = 0x1f
+BIT5_FULL = 0x3f
+BIT6_FULL = 0x7f
+BIT7_FULL = 0xff
+BIT8_FULL = 0x1ff
+BIT9_FULL = 0x3ff
+BIT10_FULL = 0x7ff
+BIT11_FULL = 0xfff
+BIT12_FULL = 0x1fff
+BIT0 = 1
+BIT1 = 2
+BIT2 = 4
+BIT3 = 8
+BIT4 = 16
+BIT5 = 32
+BIT6 = 64
+BIT7 = 128
+BIT8 = 256
+BIT9 = 512
+BIT10 = 1024
+BIT11 = 2048
+
+
+LevelInfo =
+{
+    YUKIMURA_BATTLE_OF_KAWANAKAJIMA: { MISSION_INFO: completeYukimuraBattleOfKawankajima, 
+                                       EXPECTED_VALUE: BIT8_FULL - BIT3-
+                                                       BIT5 - BIT6, 
+                                       POINTS: 5},
+    YUKIMURA_BATTLE_OF_MIKATAGAHARA: { MISSION_INFO: completeYukimuraBattleOfMikatagahara, 
+                                       EXPECTED_VALUE: BIT5_FULL, 
+                                       POINTS: 5},
+    YUKIMURA_BATTLE_OF_NAGASHINO_UPPER: { MISSION_INFO: completeYukimuraBattleOfNagashino, 
+                                       EXPECTED_VALUE: BIT5_FULL, 
+                                       POINTS: 5},
+    YUKIMURA_DEFENSE_OF_UEDA_CASTLE: { MISSION_INFO: completeYukimuraDefenseOfUedaCastle, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    YUKIMURA_SIEGE_OF_OSAKA_SUMMER: { MISSION_INFO: completeYukimuraSiegeOfOsaka, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    YUKIMURA_BATTLE_OF_NAGASHINO_LOWER: { MISSION_INFO: completeYukimuraBattleOfNagashinoSecond, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    YUKIMURA_SIEGE_OF_AZUCHI_CASTLE: { MISSION_INFO: completeYukimuraSiegeOfAzuchiCastle, 
+                                       EXPECTED_VALUE: BIT7_FULL - BIT1 -
+                                                       BIT2 - BIT3 - BIT4, 
+                                       EXTENDED_MISSION_INFO: completeYukimuraSiegeOfAzuchiCastlePart2,
+                                       EXTENDED_EXPECTED_VALUE: BIT4_FULL - BIT2,
+                                       POINTS: 5},
+    YUKIMURA_BATTLE_OF_YAMASAKI: { MISSION_INFO: completeYukimuraBattleOfYamasaki, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    KEIJI_BATTLE_OF_ISE: { MISSION_INFO: completeKeijiBattleOfIse, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    KEIJI_BATTLE_OF_NAGASHINO: { MISSION_INFO: completeKeijiBattleOfNagashino, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    KEIJI_DANCE_OF_KYOTO: { MISSION_INFO: completeKeijiDanceOfKyoto, 
+                                       EXPECTED_VALUE: BIT5_FULL, 
+                                       POINTS: 5},
+    KEIJI_ODAWARA_INFILTRATION: { MISSION_INFO: completeKeijiOdawaraInfiltration, 
+                                       EXPECTED_VALUE: BIT11_FULL, 
+                                       POINTS: 5},
+    KEIJI_KAWANAKAJIMA_CHALENGE: { MISSION_INFO: completeKiejiKawanakajimaChallenge, 
+                                       EXPECTED_VALUE: BIT2_FULL, 
+                                       POINTS: 5},
+    NOBUNAGA_BATTLE_OF_OKEHAZAMA: { MISSION_INFO: completeNobunagaBattleofOkehazama, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    NOBUNAGA_BATTLE_OF_ISE: { MISSION_INFO: completeNobunagaBattleOfIse, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    NOBUNAGA_BATTLE_OF_NAGASHINO_UPPER: { MISSION_INFO: completeNobunagaBattleOfNagahino, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    NOBUNAGA_BETRAYAL_AT_HONNOUJI: { MISSION_INFO: completeNobunagaBetrayalAtHonnouji, 
+                                       EXPECTED_VALUE: BIT3_FULL, 
+                                       POINTS: 5},
+    NOBUNAGA_RETAKING_AZUCHI_CASTLE: { MISSION_INFO: completeNobunagaRetakingAzuchiPart1, 
+                                       EXPECTED_VALUE: BIT9_FULL, 
+                                       EXTENDED_MISSION_INFO: completeNobunagaRetakingOfAzuchiCastlePart2,
+                                       EXTENDED_EXPECTED_VALUE: BIT3_FULL,
+                                       POINTS: 5},
+    NOBUNAGA_BATTLE_OF_NAGASHINO_LOWER: { MISSION_INFO: completeNobunagaBattleOfNagashinoSecond, 
+                                       EXPECTED_VALUE: BIT5_FULL, 
+                                       POINTS: 5},
+    NOBUNAGA_DEFENSE_OF_GIFU_CASTLE: { MISSION_INFO: completeNobunagaDefenseOfGifuCastle, 
+                                       EXPECTED_VALUE: BIT7_FULL - BIT3, 
+                                       POINTS: 5},
+    NOBUNAGA_BATTLE_OF_YAMASAKI: { MISSION_INFO: completeNobunagaBattleOfYamasaki, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    MITSUHIDE_DEFENSE_OF_INABAYAM_CASTLE: { MISSION_INFO: completeMitsuhideDefenseOfInabayamaCastl, 
+                                       EXPECTED_VALUE: BIT4_FULL, 
+                                       POINTS: 5},
+    MITSUHIDE_BATTLE_OF_ISE: { MISSION_INFO: completeMitsuhideBattleOfIse, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    MITSUHIDE_BETRAYAL_AT_HONNOUJI: { MISSION_INFO: completeMitsuhideBetrayalAtHonnouji, 
+                                       EXPECTED_VALUE: BIT4_FULL, 
+                                       POINTS: 5},
+    MITSUHIDE_BATTLE_OF_YAMASAKI_UPPER: { MISSION_INFO: completeMitsuhideBattleOfYamasaki, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    MITSUHIDE_GIFU_INFILTRATION: { MISSION_INFO: completeMitsuhideGifuIniltration, 
+                                       EXPECTED_VALUE: BIT4_FULL, 
+                                       POINTS: 5},
+    MITSUHIDE_DEFENSE_OF_AZUCHI_CASTLE: { MISSION_INFO: completeMitsuhideDefenseOfAzuchiCastle, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    MITSUHIDE_BATTLE_OF_YAMASAKI_LOWER: { MISSION_INFO: completeNobunagaBattleOfYamasakiSecond, 
+                                       EXPECTED_VALUE: BIT5_FULL, 
+                                       POINTS: 5},
+    GOEMON_GIFU_INFILTRATION: { MISSION_INFO: completeGoemonGifuInfiltration, 
+                                       EXPECTED_VALUE: BIT5_FULL, 
+                                       POINTS: 5},
+    GOEMON_DANCE_OF_KYOTO: { MISSION_INFO: completeGoemonDanceOfKyoto, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    GOEMON_CROSSING_IGA: { MISSION_INFO: completeGoemonCrossingIga, 
+                                       EXPECTED_VALUE: BIT6_FULL - BIT3, 
+                                       POINTS: 5},
+    GOEMON_OSAKA_INTRUSION: { MISSION_INFO: completeGoemonIshikawaOsakaIntrusion, 
+                                       EXPECTED_VALUE: BIT5_FULL, 
+                                       POINTS: 5},
+    GOEMON_GOEMON_THE_WILD: { MISSION_INFO: completeGoemonGoemonTheWild, 
+                                       EXPECTED_VALUE: BIT5_FULL, 
+                                       POINTS: 5},
+    GOEMON_DANCE_OF_OSAKA: { MISSION_INFO: completeGoemonDanceOfOsaka, 
+                                       EXPECTED_VALUE: BIT3_FULL, 
+                                       POINTS: 5},
+    GOEMON_DANCE_OF_ISE: { MISSION_INFO: completeDanceofIse, 
+                                       EXPECTED_VALUE: BIT5_FULL - BIT3, 
+                                       POINTS: 5},
+    GOEMON_DANCE_OF_AZUCHI_CASTLE: { MISSION_INFO: completeGoemonDanceOfAzuchiCastle, 
+                                       EXPECTED_VALUE: BIT4_FULL, 
+                                       POINTS: 5},
+    KENSHIN_BATTLE_OF_KAWANAKAJIMA: { MISSION_INFO: completeKenshinBattleOfKawanakajima, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    KENSHIN_ODAWARA_INFILTRATION: { MISSION_INFO: completeKenshinOdawaraInfiltration, 
+                                       EXPECTED_VALUE: BIT3_FULL, 
+                                       POINTS: 5},
+    KENSHIN_SIEGE_OF_UEDA: { MISSION_INFO: completeKenshinSeigeOfUedaPart1, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       EXTENDED_MISSION_INFO: completeKenshinSiegeOfUedaCastlePart2,
+                                       EXTENDED_EXPECTED_VALUE: BIT4_FULL,
+                                       POINTS: 5},
+    KENSHIN_SIEGE_OF_GIFU_CASTLE: { MISSION_INFO: completeKenshinSiegeOfGifuCastlePart1, 
+                                       EXPECTED_VALUE: BIT10_FULL, 
+                                       EXTENDED_MISSION_INFO: completeKenshinSiegeOfGifuCastlePart2,
+                                       EXTENDED_EXPECTED_VALUE: BIT3_FULL,
+                                       POINTS: 5},
+    KENSHIN_KAWANAKAJIMA_SHOWDOWN: { MISSION_INFO: completeKenshinKawanakajimaShowdown, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    KENSHIN_BATTLE_OF_ANEGAWA: { MISSION_INFO: completeKenshinBattleOfAnegawa, 
+                                       EXPECTED_VALUE: BIT5_FULL, 
+                                       POINTS: 5},
+    OICHI_BATTLE_OF_OKEHAZAMA: { MISSION_INFO: completeOichiBattleOfOkehazama, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    OICHI_SIEGE_OF_INABAYAMA_CASTLE: { MISSION_INFO: completeOichiSiegeOfInabayamaCastlePart1, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       EXTENDED_MISSION_INFO: completeOichiSiegeOfInabayamaCastlePart2,
+                                       EXTENDED_EXPECTED_VALUE: BIT3_FULL,
+                                       POINTS: 5},
+    OICHI_BATTLE_OF_ANEGAWA: { MISSION_INFO: completeOichiBattleOfAnegawa, 
+                                       EXPECTED_VALUE: BIT4_FULL, 
+                                       POINTS: 5},
+    OICHI_AZUCHI_INFILTRATION: { MISSION_INFO: completeOichiAzuchiInfiltration, 
+                                       EXPECTED_VALUE: BIT4_FULL, 
+                                       POINTS: 5},
+    OICHI_BETRAYAL_AT_HONNOUJI: { MISSION_INFO: completeOichiBetrayalAtHonnouji, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    OICHI_SIEGE_OF_AZUCHI_CASTLE: { MISSION_INFO: completeOichiSiegeOfAzuchiCastlePart1, 
+                                       EXPECTED_VALUE: BIT7_FULL,
+                                       EXTENDED_MISSION_INFO: completeOichiSiegeOfAzuchiCastlePart2,
+                                       EXTENDED_EXPECTED_VALUE: BIT3_FULL, 
+                                       POINTS: 5},
+    OICHI_BATTLE_OF_HONNOUJI: { MISSION_INFO: completeOichiBattleAtHonnouji, 
+                                       EXPECTED_VALUE: BIT9_FULL, 
+                                       POINTS: 5},
+    OKUNI_DANCE_OF_KYOTO: { MISSION_INFO: completeOkuniDanceOfKyoto, 
+                                       EXPECTED_VALUE: BIT6_FULL - BIT0, 
+                                       POINTS: 5},
+    OKUNI_DANCE_OF_OSAKA: { MISSION_INFO: completeOkuniDanceOfOsaka, 
+                                       EXPECTED_VALUE: BIT3_FULL, 
+                                       POINTS: 5},
+    OKUNI_DANCE_OF_ISE: { MISSION_INFO: completeOkuniDanceOfKyoto, 
+                                       EXPECTED_VALUE: BIT7_FULL - BIT1, 
+                                       POINTS: 5},
+    OKUNI_DANCE_OF_KAWANAKAJIMA: { MISSION_INFO: completeOkuniDanceOfKawanakima, 
+                                       EXPECTED_VALUE: BIT12_FULL, 
+                                       POINTS: 5},
+    OKUNI_DANCE_OF_AZUCHI_CASTLE: { MISSION_INFO: completeOkuniDanceOfAzuchiCastle, 
+                                       EXPECTED_VALUE: BIT4_FULL, 
+                                       POINTS: 5},
+    KUNOICHI_BATTLE_OF_KAWANAKAJIMA: { MISSION_INFO: completeKuniochiBattleOfKawanakajima, 
+                                       EXPECTED_VALUE: BIT8_FULL, 
+                                       POINTS: 5},
+    KUNOICHI_BATTLE_OF_MIKATAGAHARA: { MISSION_INFO: completeKunioichiBattleOfMikatagahara, 
+                                       EXPECTED_VALUE: BIT5_FULL, 
+                                       POINTS: 5},
+    KUNOICHI_GIFU_INFILTRATION: { MISSION_INFO: completeKunoichiGifuInfilitration, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    KUNOICHI_RESCUE_AT_UEDA_CASTLE: { MISSION_INFO: completeKunoichiRescueAtUedaCastle, 
+                                       EXPECTED_VALUE: BIT4_FULL, 
+                                       POINTS: 5},
+    KUNOICHI_SIEGE_OF_OSAKA_SUMMER: { MISSION_INFO: completeKunioichiSiegeOfOsaka, 
+                                       EXPECTED_VALUE: BIT11_FULL - BIT5 -
+                                                       BIT7 - BIT10, 
+                                       POINTS: 5},
+    KUNOICHI_ODWARA_INFILTRATION: { MISSION_INFO: completeKunoichiOdawaraInfiltration, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    MAGOICHI_BATTLE_OF_ISE: { MISSION_INFO: completeMagoichiBattleofIse, 
+                                       EXPECTED_VALUE: BIT5_FULL, 
+                                       POINTS: 5},
+    MAGOICHI_YAMASAKI_CROSSFIRE: { MISSION_INFO: completeMagoichiYamasakiCrossfire, 
+                                       EXPECTED_VALUE: BIT5_FULL, 
+                                       POINTS: 5},
+    MAGOICHI_BATTLE_OF_ECHIZEN: { MISSION_INFO: completeMagioichiBattleOfEchizen, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    MAGOICHI_SKIRMISH_AT_KYOTO: { MISSION_INFO: completeMagoichiSkirmishAtKyoto, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    MAGOICHI_AZUCHI_INFILTRATION: { MISSION_INFO: completeMagoichiAzuchiInfiltration, 
+                                       EXPECTED_VALUE: BIT4_FULL, 
+                                       POINTS: 5},
+    SHINGEN_BATTLE_OF_KAWANKAJIMA: { MISSION_INFO: completeShingenBattleOfKawankajima, 
+                                       EXPECTED_VALUE: BIT3_FULL, 
+                                       POINTS: 5},
+    SHINGEN_ODAWARA_INFILTRATION: { MISSION_INFO: completeShingenOdawaraInfiltration, 
+                                       EXPECTED_VALUE: BIT4_FULL, 
+                                       POINTS: 5},
+    SHINGEN_BATTLE_OF_NAGASHINO: { MISSION_INFO: completeShingenBattleOfNagashino, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    SHINGEN_SIEGE_OF_AZUCHI_CASTLE: { MISSION_INFO: completeShingenSiegeOfAzuchiCastlePart1(), 
+                                       EXPECTED_VALUE: BIT4_FULL, 
+                                       EXTENDED_MISSION_INFO: completeShingenSiegeOfAzuchiCastlePart2,
+                                       EXTENDED_EXPECTED_VALUE: BIT4_FULL - BIT2,
+                                       POINTS: 5},
+    SHINGEN_BATTLE_OF_YAMASAKI: { MISSION_INFO: completeShingenBattleOfYamasaki, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    SHINGEN_KAWANAKAJIMA_SHOWDOWN: { MISSION_INFO: completeShingenKawanakijimaShowdown, 
+                                       EXPECTED_VALUE: BIT9_FULL, 
+                                       POINTS: 5},
+    MASAMUNE_KAWANAKAJIMA_CAMPAIGN: { MISSION_INFO: completeMasamuneKawanakjimaCampaign, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    MASAMUNE_OKEHAZAMA_CAMPAIGN: { MISSION_INFO: completeMasaumeOkehazamaCampaign, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    MASAMUNE_ISE_CAMPAIGN: { MISSION_INFO: completeMasaumeIseCampaign, 
+                                       EXPECTED_VALUE: BIT8_FULL, 
+                                       POINTS: 5},
+    MASAMUNE_NAGASHINO_CAMPAIGN: { MISSION_INFO: completeMasamuneNagashinoCampaign, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    MASAMUNE_ATTACK_ON_HONNOUJI: { MISSION_INFO: completeMasamuneAttackOnHonnouji, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    MASAMUNE_ODAWARA_CAMPAIGN: { MISSION_INFO: completeMasamuneOdawaraCampaign, 
+                                       EXPECTED_VALUE: BIT3_FULL, 
+                                       POINTS: 5},
+    NOH_BATTLE_OF_OKEHAZAMA: { MISSION_INFO: completeNohBattleOfOkehazama, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    NOH_SIEGE_OF_INABAYAMA_CASTLE: { MISSION_INFO: completeNohSiegeOfInabayamaPart1, 
+                                       EXPECTED_VALUE: BIT5_FULL, 
+                                       EXTENDED_MISSION_INFO: completeNohSiegeOfInabayamaCastlePart2,
+                                       EXTENDED_EXPECTED_VALUE: BIT3_FULL,
+                                       POINTS: 5},
+    NOH_BATTLE_OF_ANEGAWA: { MISSION_INFO: completeNohBattleOfAnegawa, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    NOH_BETRAYAL_AT_HONNOUJI_UPPER: { MISSION_INFO: completeNohBetrayalAtHonnouji, 
+                                       EXPECTED_VALUE: BIT5_FULL, 
+                                       POINTS: 5},
+    NOH_GIFU_INFILTRATION: { MISSION_INFO: completeNohGifuInfiltration, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    NOH_BETRAYAL_AT_HONNOUJI_LOWER: { MISSION_INFO: completeNohBetrayalAtHonnoujiSecond, 
+                                       EXPECTED_VALUE: BIT3_FULL, 
+                                       POINTS: 5},
+    NOH_AZUCHI_INFILTRATION: { MISSION_INFO: completeNohAzuchiInfiltration, 
+                                       EXPECTED_VALUE: BIT4_FULL, 
+                                       POINTS: 5},
+    HANZO_BATTLE_OF_OKEHAZAMA: { MISSION_INFO: completeHanzoBattleOfOkehazama, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    HANZO_BATTLE_OF_MIKATAGAHARA: { MISSION_INFO: completeHanzoBattleOfMikatagahara, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTSf: 5},
+    HANZO_CROSSING_IGA: { MISSION_INFO: completeHanzoCrossingIga, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    HANZO_UEDA_INFILTRATION: { MISSION_INFO: completeHanzoUedaInfiltration, 
+                                       EXPECTED_VALUE: BIT4_FULL, 
+                                       POINTS: 5},
+    HANZO_SIEGE_OF_OSAKA: { MISSION_INFO: completeHanzoSiegeOfOsakaSummerPart2, 
+                                       EXPECTED_VALUE: BIT3_FULL, 
+                                       POINTS: 5},
+    HANZO_OSAKA_INFILTRATION: { MISSION_INFO: completeHanzoOsakaInfiltration, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    RANMARU_DEFENSE_OF_INABAYAMA_CASTLE: { MISSION_INFO: completeRanmaruDefenseOfInabayamaCastle, 
+                                       EXPECTED_VALUE: BIT4_FULL, 
+                                       POINTS: 5},
+    RANMARU_BATTLE_OF_ISE: { MISSION_INFO: completeRanmaruBattleOfIse, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    RANMARU_BETRAYAL_AT_HONNOUJI: { MISSION_INFO: completeRanmaruBetrayalAtHonnouji, 
+                                       EXPECTED_VALUE: BIT5_FULL, 
+                                       POINTS: 5},
+    RANMARU_BATTLE_OF_ANEGAWA: { MISSION_INFO: completeRanmaruBattleOfAnegawa, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    RANMARU_GIFU_INFILTRATION: { MISSION_INFO: completeRanmaruGifuInfiltration, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    RANMARU_DEFENSE_OF_AZUCHI_CASTLE: { MISSION_INFO: completeRanmaruDefenseOfAzuchiCastle, 
+                                       EXPECTED_VALUE: BIT5_FULL - bit0, 
+                                       POINTS: 5},
+    HIDEYOSHI_SIEGE_OF_INABAYAMA_CASTLE: { MISSION_INFO: completeHideyoshiSiegeOfInabayamaCastle, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       EXTENDED_MISSION_INFO: completeHideyoshiSiegeInabayamaCastlePa2,
+                                       EXTENDED_EXPECTED_VALUE: BIT4_FULL,
+                                       POINTS: 5},
+    HIDEYOSHI_RETREAT_AT_KANEGASAKI: { MISSION_INFO: completeHideyoshiRetreatAtKanegasaki, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    HIDEYOSHI_SAIKA_CAMPAIGN: { MISSION_INFO: completeHideyoshiTheSaikaCampaign, 
+                                       EXPECTED_VALUE: BIT5_FULL, 
+                                       POINTS: 5},
+    HIDEYOSHI_BATTLE_OF_YAMASAKI: { MISSION_INFO: completeHideyoshiBattleOfYamasaki, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    HIDEYOSHI_BATTLE_OF_KOMAKI_NAGAKUTE: { MISSION_INFO: completeHideyoshiTheBattleOfKomakiNagaku, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    HIDEYOSHI_BETRAYAL_AT_HONNOUJI: { MISSION_INFO: completeHideyoshiBetrayalAtHonnouji, 
+                                       EXPECTED_VALUE: BIT5_FULL, 
+                                       POINTS: 5},
+    HIDEYOSHI_SIEGE_OF_AZUCHI_CASTLE: { MISSION_INFO: completeHideyoshiSiegeOfAzuchiCastlePart1,
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       EXTENDED_MISSION_INFO: completeHideyoshiSiegeOfAzuchiCastlePart2,
+                                       EXTENDED_EXPECTED_VALUE: BIT4_FULL,
+                                       POINTS: 5},
+    YOSHIMOTO_BATTLE_OF_OKEHAZAMA: { MISSION_INFO: completeYoshimotoBattleOfOkehazama, 
+                                       EXPECTED_VALUE: BIT4_FULL, 
+                                       POINTS: 5},
+    YOSHIMOTO_ODAWARA_INFILTRATION: { MISSION_INFO: completeYoshimotoOdawaraInfiltration, 
+                                       EXPECTED_VALUE: BIT4_FULL, 
+                                       POINTS: 5},
+    YOSHIMOTO_BATTLE_OF_KAWANAKAJIMA: { MISSION_INFO: completeYoshimotoBattleOfKawanakajima, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    YOSHIMOTO_BATTLE_OF_KOMAKI_NAGAKUTE: { MISSION_INFO: completeYoshimotoBattleOfKomaki, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    YOSHIMOTO_KEMARI_IN_THE_CAPITAL: { MISSION_INFO: completeYoshimotoKemariInTheCapital, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    YOSHIMOTO_SIEGE_OF_UEDA_CASTLE: { MISSION_INFO: completeYoshimotoSiegeOfUedaCastlePart1, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       EXTENDED_MISSION_INFO: completeYoshimotoSiegeOfUedaCastlePart2,
+                                       EXTENDED_EXPECTED_VALUE: BIT5_FULL,
+                                       POINTS: 5},
+    YOSHIMOTO_STRUGGLE_AT_HONNOUJI: { MISSION_INFO: completeYoshimotoStruggleAtHonnouji, 
+                                       EXPECTED_VALUE: BIT4_FULL, 
+                                       POINTS: 5},
+    TADAKATSU_BATTLE_OF_OKEHAZAMA: { MISSION_INFO: completeTadakatsuBattleOfOkehazama, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    TADAKATSU_RETREAT_AT_KANEGASAKI: { MISSION_INFO: completeTadakatsuRetreatAtKanegasaki, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    TADAKATSU_BATTLE_OF_MIKATAGAHARA: { MISSION_INFO: completeTadakatsuBattleOfMikatagahara, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    TADAKATSU_CROSSING_IGA: { MISSION_INFO: completeTadakatsuCrossingIge, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    TADAKATSU_THE_BATTLE_OF_KOMAKI_NAGAKUTE: { MISSION_INFO: completeTadakatsuBattleOfKomaki, 
+                                       EXPECTED_VALUE: BIT9_FULL, 
+                                       POINTS: 5},
+    TADAKATSU_BATTLE_OF_KAWANAKAJIMA: { MISSION_INFO: completeTadakatsuBattleOfKawanakajira, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    TADAKATSU_BATTLE_OF_YAMASAKI: { MISSION_INFO: completeTadatsuBattleOfYamasaki, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    INA_RETREAT_AT_KANEGASAKI: { MISSION_INFO: completeInaRetreateAtKanegasaki, 
+                                       EXPECTED_VALUE: BIT5_FULL, 
+                                       POINTS: 5},
+    INA_BATTLE_OF_MIKATAGAHARA: { MISSION_INFO: completeInaBattleOfMikatagahara, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    INA_CROSSING_IGA: { MISSION_INFO: completeInaCrossingIga, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    INA_BATTLE_OF_KOMAKI_NAGAKUTE: { MISSION_INFO: completeInaBattleOfKomaki, 
+                                       EXPECTED_VALUE: BIT9_FULL, 
+                                       POINTS: 5},
+    INA_DEFENSE_OF_UEDA_CASTLE: { MISSION_INFO: completeInaDefenseOfUedaCastle, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    INA_BATTLE_OF_YAMASAKI: { MISSION_INFO: completeInaBattleOfYamasaki, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       POINTS: 5},
+    INA_SIEGE_OF_OSAKA_CASTLE: { MISSION_INFO: completeInaSiegeOfOsakaCastlePart1, 
+                                       EXPECTED_VALUE: BIT7_FULL, 
+                                       EXTENDED_MISSION_INFO: completeInaSiegeOfOsakaCastlePart2,
+                                       EXTENDED_EXPECTED_VALUE: BIT7_FULL,
+                                       POINTS: 5},
+    NEW_OFFICER_BATTLE_OF_OKEHAZAMA: { MISSION_INFO: completeNewOfficerBattleOfOkehazama, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       POINTS: 5},
+    NEW_OFFICER_BATTLE_OF_KAWANAKAJIMA: { MISSION_INFO: completeNewOfficerBattleOfKawanakajima, 
+                                       EXPECTED_VALUE: BIT4_FULL - BIT1, 
+                                       POINTS: 5},
+    NEW_OFFICER_BATTLE_OF_NAGASAHINO: { MISSION_INFO: completeNewOfficerBattleOfNagashino, 
+                                       EXPECTED_VALUE: BIT4_FULL, 
+                                       POINTS: 5},
+    NEW_OFFICER_SIEGE_OF_UEDA: { MISSION_INFO: completeNewOfficerSiegeOfUedaCastlePart1, 
+                                       EXPECTED_VALUE: BIT6_FULL, 
+                                       EXTENDED_MISSION_INFO: completeNewOfficerSiegeOfUedaCastlePart2,
+                                       EXTENDED_EXPECTED_VALUE: BIT7_FULL,
+                                       POINTS: 5},
+    NEW_OFFICER_SIEGE_OF_OSAKA_SUMMER_UPPER: { MISSION_INFO: completeNewOfficerSiegeOfOsakaSummerUpper, 
+                                       EXPECTED_VALUE: BIT10_FULL - BIT5 -
+                                                       BIT8 - BIT9, 
+                                       POINTS: 5},
+    NEW_OFFICER_SIEGE_OF_OSAKA_SUMMER_UPPER: { MISSION_INFO: completeNewOfficerSiegeOfOsakaSummerLowerPart1, 
+                                       EXPECTED_VALUE: BIT5_FULL - BIT0 - BIT2, 
+                                       EXTENDED_MISSION_INFO: completeNewOfficerSiegeOfOsakaSummerPar2,
+                                       EXTENDED_EXPECTED_VALUE: BIT3_FULL,
+                                       POINTS: 5},
+}
 // $521218: (8-bit) High Tower and Abyss Level count
 //          
 //          0x00 = First floor.
@@ -2281,3 +3168,13 @@ function newOfficerBurstProgression() => dword(0x6D71A0)
 //          
 //          Numnbers in between are floored (0x02 = Novice) Any number higher than 0x06 is expert
 function newOfficerRidingProgression() => dword(0x6D71A8)
+
+
+
+// Need character ID. 
+
+// Need to make sure where the Level is for the New Officers. 
+
+// 4 face unlocks for New Officer
+
+// Keiji Finishes his Musou on the same stage, how do we get movie id?   Same with Okuni  Probably WIn state + movie playing id. 
