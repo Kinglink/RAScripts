@@ -146,6 +146,49 @@ function ultraViolence() => violenceMode() == ULTRA_VIOLENCE_OPTION_VALUE
 //          Note this will be set back to 0x00 at other times.  However it appears to only be not 0x00 when in the roulette wheels.
 function blueDoorIndicator() => byte(0x1A9C76)
 
+// $1a9ce3: (8-bit) Blue Doors Result Part 1
+//          
+//          0x52 = Points
+//          0x53 = Bombs
+//          0x54 = Life
+function blueDoorPointIndicatorPart1() => byte(0x1a9ce3)
+
+BLUE_DOOR_POINT_RESULT_PART_1_VALUE = 0x52
+
+// $1a0a9b: (8-bit) Blue Door Result Part 2
+// 
+//          0xe1 = Point
+//          Other values not tested at this point. 
+function blueDoorPointIndicatorPart2() => byte(0x1a0a9b)
+
+BLUE_DOOR_POINT_RESULT_PART_2_VALUE = 0xe1
+
+// $1c5284: (8-bit) Blue Door Result Part 3
+// 
+//          0xe0 = Point
+//          Other values not tested at this point. 
+function blueDoorPointIndicatorPart3() => byte(0x1c5284)
+
+BLUE_DOOR_POINT_RESULT_PART_3_VALUE = 0xe0
+
+// $1c5290: (8-bit) Blue Door Result Part 4
+// 
+//          0xe0 = Point
+//          Other values not tested at this point. 
+function blueDoorPointIndicatorPart4() => byte(0x1c5290)
+
+BLUE_DOOR_POINT_RESULT_PART_4_VALUE = 0xe0
+
+function pointsRouletteResult() =>  blueDoorPointIndicatorPart1() == BLUE_DOOR_POINT_RESULT_PART_1_VALUE &&
+                                    blueDoorPointIndicatorPart2() == BLUE_DOOR_POINT_RESULT_PART_2_VALUE &&
+                                    blueDoorPointIndicatorPart3() == BLUE_DOOR_POINT_RESULT_PART_3_VALUE &&
+                                    blueDoorPointIndicatorPart4() == BLUE_DOOR_POINT_RESULT_PART_4_VALUE &&
+                                    ( prev(blueDoorPointIndicatorPart1()) != BLUE_DOOR_POINT_RESULT_PART_1_VALUE || 
+                                      prev(blueDoorPointIndicatorPart2()) != BLUE_DOOR_POINT_RESULT_PART_2_VALUE || 
+                                      prev(blueDoorPointIndicatorPart3()) != BLUE_DOOR_POINT_RESULT_PART_3_VALUE || 
+                                      prev(blueDoorPointIndicatorPart4()) != BLUE_DOOR_POINT_RESULT_PART_4_VALUE 
+                                    )
+
 // $1ADE91: (8-bit) Level Script Index
 //          
 //          Appears to be a representation of the script for a level.   What it means will vary. But It's been tracked down on level 1 as needed
@@ -167,6 +210,14 @@ function blueDoorIndicator() => byte(0x1A9C76)
 function levelScriptIndex() => byte(0x1ADE90)
 
 LEVEL_ONE_SCRIPT_INDEX_END_CUTSCENE = 0x05
+// Elevator section on level 3. 
+LEVEL_THREE_PREV_GO_UP_ELEVATOR = 0x06
+LEVEL_THREE_GO_UP_ELEVATOR = 0x06
+LEVEL_THREE_GO_UP_ELEVATOR_END = 0x07
+LEVEL_FIVE_STARTING_SCRIPT = 0x00
+LEVEL_FIVE_LAUNCHER_WEAPON_CHOICE_ONE = 0x6
+LEVEL_FIVE_LAUNCHER_WEAPON_CHOICE_TWO = 0x7
+
 STAGE_SIX_LEVEL_SCRIPT_INDEX_FINALE_BEGIN = 0x04
 STAGE_SIX_LEVEL_SCRIPT_INDEX_FINALE_END = 0x05
 
@@ -286,6 +337,8 @@ function firstPlayerYLocation() => word(0x1B0684)
 //          Note setting to 0x03 warps the player out of the level?  WUTTTTT
 function specialAmmoType() => byte(0x1B06B0)
 
+NORMAL_WEAPON = 0x00
+
 // $1B06B2: (8-bit) Special ammo remaining
 //          
 //          0x1b06b0 will be the type of ammo.
@@ -313,6 +366,21 @@ function firstPlayerHealth() => byte(0x1B0746)
 //          
 //          Note this can increase above the starting count.
 function firstPlayerSecondaryWeaponLeft() => byte(0x1B0792)
+
+function playerUsedBomb() => firstPlayerSecondaryWeaponLeft() < prev(firstPlayerSecondaryWeaponLeft())
+
+// $1b089e: (8-bit) Bullets fired.
+// 
+//          Bullets fired,
+//
+//          Note: Rockets are not bullets. -==
+//
+//          Resets to 0x0 after 0xf
+function bulletsFired() => byte(0x1b089e)
+
+// special Ammo can change on death, or picking up a new weapon. 
+function playerUsedGun() => specialAmmoRemaining() + 1 == prev(specialAmmoRemaining()) ||
+                                  bulletsFired() > prev(bulletsFired())
 
 // $1C5E99: (8-bit) Elevator Action Arcade Difficulty selector
 //          
@@ -467,7 +535,7 @@ function hardLevelAchievement(title, levelNumber, points)
 
 function noDeathLevelAchievement(title, levelNumber, points)
 {
-    if (levelNumber != 0)
+    if (levelNumber != LEVEL_ONE)
     {
         achievement(title = title, 
                 description = format("Beat Stage {0} on normal or hard difficulty with out losing a life", levelNumber + 1),
@@ -576,11 +644,12 @@ achievement(title = "Elevator Action Returns Is So Easy",
             )
 
 
-function characterAchievement(character, characterName, title)
+function characterAchievement(character, characterName, title, achievement_id, no_continue_title, no_continue_id)
 {
     achievement(title = title,
             description = format("Finish the game on normal or hard difficulty while playing as {0}", characterName),
             points = 3, 
+            id = achievement_id,
             trigger = elevatorActionReturns() &&
                       cheatProtection() &&
                       normalDifficultyAndAbove() &&
@@ -590,11 +659,48 @@ function characterAchievement(character, characterName, title)
                       trigger_when(prev(levelId()) == LEVEL_SIX &&
                                    levelId() == LEVEL_POSTGAME)
             )
+
+    // This logic could be simplied to firstPlayerCreditsRemaining == 3 but we'll do it this way. 
+    if (no_continue_id == -1)
+    {
+        achievement(title = no_continue_title,
+            description = format("Finish the game on normal or hard difficulty with out using a continue while playing as {0}", characterName),
+            points = 10, 
+            trigger = elevatorActionReturns() &&
+                        cheatProtection() &&
+                        normalDifficultyAndAbove() &&
+                        once( prev(firstPlayerJoined()) == 0 &&
+                            firstPlayerJoined() == 1 ) &&
+                        firstPlayerCharacterId() == character &&
+                        never(firstPlayerCreditsRemaining() != prev(firstPlayerCreditsRemaining())) &&
+                        trigger_when( prev(levelId()) == LEVEL_SIX &&
+                            levelId() == LEVEL_POSTGAME )
+       )
+ 
+    }
+    else
+    {
+        achievement(title = no_continue_title,
+            description = format("Finish the game on normal or hard difficulty with out using a continue while playing as {0}", characterName),
+            points = 10, 
+            id = no_continue_id,
+            trigger = elevatorActionReturns() &&
+                        cheatProtection() &&
+                        normalDifficultyAndAbove() &&
+                        once( prev(firstPlayerJoined()) == 0 &&
+                            firstPlayerJoined() == 1 ) &&
+                        firstPlayerCharacterId() == character &&
+                        never(firstPlayerCreditsRemaining() != prev(firstPlayerCreditsRemaining())) &&
+                        trigger_when( prev(levelId()) == LEVEL_SIX &&
+                            levelId() == LEVEL_POSTGAME )
+        )
+    }
+    
 }
 
-characterAchievement(Kart, "Kart Bradfield", "Go Kart!")
-characterAchievement(Edie, "Edie Burret", "Fireball Edie")
-characterAchievement(Jad, "Jad the Taff", "More like Jad the Tank")
+characterAchievement(Kart, "Kart Bradfield", "Go Kart!", 382689, "Kart Master", 382693)
+characterAchievement(Edie, "Edie Burret", "Fireball Edie", 382690, "Endless Edie", -1)
+characterAchievement(Jad, "Jad the Taff", "You Taffer!", 382691, "More like Jad the Tank", -1)
 
 achievement(title = "Not Going to Blue Myself",
         description = "Beat the game on normal or hard difficulty with out using a blue door.",
@@ -615,19 +721,7 @@ achievement(title = "Not Going to Blue Myself",
         )
 
 
-// This logic could be simplied to firstPlayerCreditsRemaining == 3 but we'll do it this way. 
-achievement(title = "Continues Are for the Weak",
-        description = "Beat Elevator Action Returns on normal or hard difficulty with out using a continue",
-        points = 10, 
-        trigger = elevatorActionReturns() &&
-                    cheatProtection() &&
-                    normalDifficultyAndAbove() &&
-                    once( prev(firstPlayerJoined()) == 0 &&
-                        firstPlayerJoined() == 1 ) &&
-                    never(firstPlayerCreditsRemaining() != prev(firstPlayerCreditsRemaining())) &&
-                    trigger_when( prev(levelId()) == LEVEL_SIX &&
-                        levelId() == LEVEL_POSTGAME )
-        )
+
 
 achievement(title = "Invincible Red After Image",
             description = "Finish level 1 with out taking any damage",
@@ -673,17 +767,25 @@ achievement(title = "No Credit Needed, 250K",
                                   inGameFirstPlayerScore() >= 250 * 1000 )
         )
 
-achievement(title = "400k",
-        description = "Earn 400,0000 points on normal or hard difficulty",
-        points = 5, 
+achievement(title = "Half a million",
+        description = "Earn 500,0000 points on normal or hard difficulty",
+        points = 10, 
+        id = 382669,
         trigger = elevatorActionReturns() &&
                     cheatProtection() &&
                     normalDifficultyAndAbove() &&
-                    once( prev(firstPlayerJoined()) == 0 &&
-                        firstPlayerJoined() == 1 ) &&
-                    never(firstPlayerCreditsRemaining() != prev(firstPlayerCreditsRemaining())) &&
-                    prev(inGameFirstPlayerScore()) < 400 * 1000 &&
-                    inGameFirstPlayerScore() >= 400 * 1000 
+                    prev(inGameFirstPlayerScore()) < 500 * 1000 &&
+                    inGameFirstPlayerScore() >= 500 * 1000 
+        )
+
+achievement(title = "Bingo!",
+        description = "Earn the maximum score on normal or hard difficulty",
+        points = 25, 
+        trigger = elevatorActionReturns() &&
+                    cheatProtection() &&
+                    normalDifficultyAndAbove() &&
+                    prev(inGameFirstPlayerScore()) < 9999990 &&
+                    inGameFirstPlayerScore() >= 9999990 
         )
 
 
@@ -715,7 +817,7 @@ achievement(
     description = "Kill a human or animal with a jump kick in a single game on normal or hard difficulty. (Killing blow must be the jump kick)",
     trigger = elevatorActionReturns() &&
               cheatProtection() &&                         
-              never(firstPlayerJoined() == 0) &&                                    
+              firstPlayerJoined() == 1 &&                                    
               any_of(range(0,TOTAL_ENEMY_OBJECTS-1), index => offsetInitialEnemyHP(index) == 0xff &&
                                                      prev(offsetInitialEnemyHP(index)) != 0xff &&
                                                      lessabs(offsetInitialEnemyXPosition(index), firstPlayerXLocation(), 0x30) &&
@@ -742,7 +844,7 @@ achievement(title = "I Didn’t Even Realize I Had Bombs",
                     normalDifficultyAndAbove() &&
                     once( prev(firstPlayerJoined()) == 0 &&
                         firstPlayerJoined() == 1 )&&
-                    never(firstPlayerSecondaryWeaponLeft() < prev(firstPlayerSecondaryWeaponLeft()) && 
+                    never(playerUsedBomb() && 
                           firstPlayerHealth() != 0xff ) &&
                     trigger_when( prev(levelId()) == LEVEL_SIX &&
                                   levelId() == LEVEL_POSTGAME)
@@ -774,6 +876,71 @@ arcadeNormalLevelAchievement(title = "Remembering Otto",
                              levelNumber = 3, 
                              points = 10)
 
+// 5 point items. 
+// track if we get 5 items through the four trigger values. if we see those 5 times in level one, we won. 
+achievement(title ="Roulette Master",
+            description="Collect a point items from each of the five blue doors in level 1 on Normal or hard difficulty",
+            points = 5,
+            trigger = elevatorActionReturns() &&
+                    cheatProtection() &&
+                    normalDifficultyAndAbove() &&
+                    never(firstPlayerJoined() == 0 || levelId() != LEVEL_ONE ) &&
+                    measured(repeated(5, pointsRouletteResult()))
+            )
+
+// Stage 3.  No damage on go up.   While Script is 0x06  No loss of life. 
+achievement(title = "Bullet Cabinet",
+            description = "Ride the up elevator in Level 3 with out taking any damage on normal or hard difficulty",
+            points = 3, 
+            trigger = elevatorActionReturns() &&
+                      cheatProtection() &&
+                      normalDifficultyAndAbove() &&
+                      once( levelId() == LEVEL_THREE && 
+                            prev(levelScriptIndex()) == LEVEL_THREE_PREV_GO_UP_ELEVATOR &&
+                            levelScriptIndex() == LEVEL_THREE_GO_UP_ELEVATOR ) &&
+                      never(firstPlayerHealth() != prev(firstPlayerHealth()) && 
+                            prev(firstPlayerHealth()) != 0xff ||
+                            levelId() != LEVEL_THREE)  &&
+                      trigger_when( levelId() == LEVEL_THREE && 
+                            prev(levelScriptIndex()) == LEVEL_THREE_GO_UP_ELEVATOR &&
+                            levelScriptIndex() == LEVEL_THREE_GO_UP_ELEVATOR_END )
+            )
+
+// Stage 5 always have a weapon. 
+// Start at beginning of stage five. 
+//     One you have a weapon you can't not have a weapon. 
+//     Can't be beyond script 1 with out a weapon. 
+achievement(title = "On-Site Procurement",
+            description = "Grabbing a launcher or machine gun at the beginning of level 5, finish the level with out running out of ammo on normal or hard difficulty, swapping weapons is allowed",
+            points = 5, 
+            trigger = elevatorActionReturns() &&
+                      cheatProtection() &&
+                      normalDifficultyAndAbove() &&
+                      once( levelId() == LEVEL_FIVE && 
+                            levelScriptIndex() == LEVEL_FIVE_STARTING_SCRIPT &&
+                            specialAmmoType() != NORMAL_WEAPON ) &&
+                      never(specialAmmoType() == NORMAL_WEAPON ||
+                            (levelId() != LEVEL_FIVE  &&
+                             levelId() != LEVEL_SIX))  &&
+                      trigger_when( prev(levelId()) == LEVEL_FIVE &&
+                          levelId() == LEVEL_SIX )
+            )
+
+
+// Stage 5 Script 6 or 7.  Get Launcher weapon or increase bullet count
+achievement(title = "More Destruction, More Fun",
+            description = "Grab the launcher or machine gun near the end of level 5 on normal or hard difficulty",
+            points = 3, 
+            trigger = elevatorActionReturns() &&
+                      cheatProtection() &&
+                      normalDifficultyAndAbove() &&
+                      levelId() == LEVEL_FIVE && 
+                      (levelScriptIndex() == LEVEL_FIVE_LAUNCHER_WEAPON_CHOICE_ONE || 
+                       levelScriptIndex() == LEVEL_FIVE_LAUNCHER_WEAPON_CHOICE_TWO) &&
+                      ((specialAmmoType() != prev(specialAmmoType()) &&
+                        specialAmmoType() != NORMAL_WEAPON) ||
+                       specialAmmoRemaining() > prev(specialAmmoRemaining()))
+            )
 
 leaderboard(
     title = format("1 Credit High Score"),
@@ -962,3 +1129,4 @@ rich_presence_conditional_display(elevatorActionArcade() && arcadeLivesCount() !
                                   )
 
 rich_presence_display("Watch Elevator Action Returns.") // intentionally adding a period to signify a problem. 
+
