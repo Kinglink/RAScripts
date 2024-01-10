@@ -779,13 +779,13 @@ achievement(title = "Half a million",
         )
 
 achievement(title = "Bingo!",
-        description = "Earn the maximum score on normal or hard difficulty",
+        description = "Earn the original arcade's maximum score on normal or hard difficulty",
         points = 25, 
         trigger = elevatorActionReturns() &&
                     cheatProtection() &&
                     normalDifficultyAndAbove() &&
-                    prev(inGameFirstPlayerScore()) < 9999990 &&
-                    inGameFirstPlayerScore() >= 9999990 
+                    prev(inGameFirstPlayerScore()) < 999900 &&
+                    inGameFirstPlayerScore() >= 999900 
         )
 
 
