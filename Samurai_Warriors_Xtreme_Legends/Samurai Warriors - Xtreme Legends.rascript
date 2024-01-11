@@ -200,6 +200,146 @@ function newOfficerFocusUnlock() =>  newOfficerAnyOfHelper(MEMORY_LOCATION_OF_NE
 function newOfficerFortitudeUnlock() =>  newOfficerAnyOfHelper(MEMORY_LOCATION_OF_NEW_OFFICER_FORTITUDE_SKILL)
 function newOfficerDiscernUnlock() =>  newOfficerAnyOfHelper(MEMORY_LOCATION_OF_NEW_OFFICER_DISCERN_SKILL)
 
+
+// $500b24: (8-bit) Yukimura's First Owned Weapon  ID
+//          
+//          Weapons are 28-bytes long. 
+//          
+//          0x00 = Yukimura's Sickle Spear (1st)
+//          0x01 = Yukimura's Cross Spear (2nd)
+//          0x02 = Yukimura's Lunar Spear (3rd)
+//          0x03 = Yukimura's Kouryuga (4th)
+//          0x04 = Yukimura's Susano (5th)
+//          0x05 = Yukimura's Rakan (6th)
+//          0x06 = Keiji Maeda's Double Pike (1st)
+//          0x07 = Keiji Maeda's Koto Pike (2nd)
+//          0x08 = Keiji Maeda's Crimson Pike (3rd)
+//          0x09 = Keiji Maeda's Kagura (4th)
+//          0x0A = Keiji Maeda's Izanagi (5th)
+//          0x0B = Keiji Maeda's Ni-Oh Pike (6th)
+//          0x0C = Nobunaga's Kumo-giri (1st)
+//          0x0D = Nobunaga's Oni-giri (2nd)
+//          0x0E = Nobunaga's Hasebe (3rd)
+//          0x0F = Nobunaga's Muramasa (4th)
+//          0x10 = Nobunaga's Orochi (5th)
+//          0x11 = Nobunaga's Dai-Rokuten (6th)
+//          0x12 = Mitsuhide's Nameless (1st)
+//          0x13 = Mitsuhide's Masterpiece (2nd)
+//          0x14 = Mitsuhide's Chikakage (3rd)
+//          0x15 = Mitsuhide's Juzumaru (4th)
+//          0x16 = Mitsuhide's Futsu-Mitama (5th)
+//          0x17 = Mitsuhide's Rasetsu (6th)
+//          0x18 = Goemon's Stone Splitter (1st)
+//          0x19 = Goemon's Rock Crusher (2nd)
+//          0x1A = Goemon's Bond Breaker (3rd)
+//          0x1B = Goemon's Kai-Basara (4th)
+//          0x1C = Goemon's Takemikazuchi (5th)
+//          0x1D = Goemon's Obliterator (6th)
+//          0x1E = Kenshin's Wave Blade (1st)
+//          0x1F = Kenshin's Shichitsuka (2nd)
+//          0x20 = Kenshin's Seven Spirits (3rd)
+//          0x21 = Kenshin's Ichimonji (4th)
+//          0x22 = Kenshin's Murakumo (5th)
+//          0x23 = Kenshin's Bishamonten (6th)
+//          0x24 = Oichi's Ume (1st)
+//          0x25 = Oichi's Fuji (2nd)
+//          0x26 = Oichi's Yuri (3rd)
+//          0x27 = Oichi's Sumire (4th)
+//          0x28 = Oichi's Sakura (5th)
+//          0x29 = Oichi's Kiku (6th)
+//          0x2A = Okuni's Ban-Gasa (1st)
+//          0x2B = Okuni's Mai-Gasa (2nd)
+//          0x2C = Okuni's Butoh-Gasa (3rd)
+//          0x2D = Okuni's Gekka (4th)
+//          0x2E = Okuni's Hikage (6th)
+//          0x2F = Okuni's Kishouten (6th)
+//          0x30 = Kunoichi's Dagger (1st)
+//          0x31 = Kunoichi's Whirlwind (2nd)
+//          0x32 = Kunoichi's Cyclone (3rd)
+//          0x33 = Kunoichi's Shiranui (4th)
+//          0x34 = Kunoichi's Kushinada (5th)
+//          0x35 = Kunoichi's Kokuanten (6th)
+//          0x36 = Magoichi's Sakai Musket (1st)
+//          0x37 = Magoichi's Tanegashima (2nd)
+//          0x38 = Magoichi's Kunitomo (3rd)
+//          0x39 = Magoichi's Gokuraku (4th)
+//          0x3A = Magoichi's Gokuen (5th)
+//          0x3B = Magoichi's Yatagarasu (6th)
+//          0x3C = Shingen's War Fan (1st)
+//          0x3D = Shingen's Shogun Fan (2nd)
+//          0x3E = Shingen's Furinkazan (3rd)
+//          0x3F = Shingen's Kokushimusou (4th)
+//          0x40 = Shingen's Kourin (5th)
+//          0x41 = Shingen's Shinju (6th)
+//          0x42 = Masamune's Oak Sword (1st)
+//          0x43 = Masamune's Mauler Blade (2nd)
+//          0x44 = Masamune's Divine Spruce (3rd)
+//          0x45 = Masamune's Bontenmaru (4th)
+//          0x46 = Masamune's Mikaboshi (5th)
+//          0x47 = Masamune's Ashura (6th)
+//          0x48 = Noh's Tokage (1st)
+//          0x49 = Noh's Kamakiri (2nd)
+//          0x4A = Noh's Kumo (3rd)
+//          0x4B = Noh's Mukade (4th)
+//          0x4C = Noh's Hiruko (5th)
+//          0x4D = Noh's Mamushi (6th)
+//          0x4E = Hanzo's Kusarigama (1st)
+//          0x4F = Hanzo's Iga-Gama (2nd)
+//          0x50 = Hanzo's Kubinagi (3rd)
+//          0x51 = Hanzo's Hiryuu (4th)
+//          0x52 = Hanzo's Yamikiba (5th)
+//          0x53 = Hanzo's Marishiten (6th)
+//          0x54 = Ranmaru's Nodachi (1st)
+//          0x55 = Ranmaru's Zamba (2nd)
+//          0x56 = Ranmaru's Yukimitsu (3rd)
+//          0x57 = Ranmaru's Tomonari (4th)
+//          0x58 = Ranmaru's Kamudo (5th)
+//          0x59 = Ranmaru's Gohotendo (6th)
+//          0x5A = Hideyoshi's Sansetsukon (1st)
+//          0x5B = Hideyoshi's Steel Sansetsu (2nd)
+//          0x5C = Hideyoshi's Great Sansetsu (3rd)
+//          0x5D = Hideyoshi's Shouki (4th)
+//          0x5E = Hideyoshi's Mihashira (5th)
+//          0x5F = Hideyoshi's Monju (6th)
+//          0x60 = Yoshimoto's Leather Kemari (1st)
+//          0x61 = Yoshimoto's Cloth Kemari (2nd)
+//          0x62 = Yoshimoto's Silk Kemari (3rd)
+//          0x63 = Yoshimoto's Champion Kemari (4th)
+//          0x64 = Yoshimoto's Velvet Kemari (5th)
+//          0x65 = Yoshimoto's Phoenix Kemari (6th)
+//          0x66 = Tadakatsu's Iron Spear (1st)
+//          0x67 = Tadakatsu's Great Spear (2nd)
+//          0x68 = Tadakatsu's Tiger Slayer (3rd)
+//          0x69 = Tadakatsu's Bukotsu (4th)
+//          0x6A = Tadakatsu's Arahabaki (5th)
+//          0x6B = Tadakatsu's Emma (6th)
+//          0x6C = Ina's Bow (1st)
+//          0x6D = Ina's Long Bow (2nd)
+//          0x6E = Ina's Great Bow (3rd)
+//          0x6F = Ina's Yoichi Bow (4th)
+//          0x70 = Ina's Omoikane (5th)
+//          0x71 = Ina's Aisen (6th)
+//          0x72 = Sword's Katana (1st)
+//          0x73 = Sword's Ishi-Kiri (2nd)
+//          0x74 = Sword's Doudanuki (3rd)
+//          0x75 = Sword's Kanemitsu (4th)
+//          0x76 = Sword's Douji-Kiri (5th)
+//          0x77 = Sword's Munechika (6th)
+//          0x78 = Spear's Spear (1st)
+//          0x79 = Spear's Great Spear (2nd)
+//          0x7A = Spear's Piercer (3rd)
+//          0x7B = Spear's Nihon-Gou (4th)
+//          0x7C = Spear's Tombo-Giri (5th)
+//          0x7D = Spear's Otegine (6th)
+//          0x7E = Naginata Officer's Polearm (1st)
+//          0x7F = Naginata Officer's Naginata (2nd)
+//          0x80 = Naginata Officer's Onitake (3rd)
+//          0x81 = Naginata Officer's Tomoe (4th)
+//          0x82 = Naginata Officer's Benkei (5th)
+//          0x83 = Naginata Officer's Goryo (6th)
+//          0x84 = No Weapon
+// Only represented here for Data 
+
 // $5013b1 (4-bit Lowt) New Officers Face Unlocks
 // 
 // Each bit is a new face.  Eventually this becomes 0x0f 
@@ -3130,6 +3270,199 @@ endingDescriptionLookup =
     NEW_OFFICER_SECOND: "New Officer's second ending"
 }
 
+SUSANO = 0x04
+RAKAN = 0x05
+IZANAGI = 0x0A
+NI_OH_PIKE = 0x0B
+OROCHI = 0x10
+DAI_ROKUTEN = 0x11
+FUTSU_MITAMA = 0x16
+RASETSU = 0x17
+TAKEMIKAZUCHI = 0x1C
+OBLITERATOR = 0x1D
+MURAKUMO = 0x22
+BISHAMONTEN = 0x23
+SAKURA = 0x28
+KIKU = 0x29
+HIKAGE = 0x2E
+KISHOUTEN = 0x2F
+KUSHINADA = 0x34
+KOKUANTEN = 0x35
+GOKUEN = 0x3A
+YATAGARASU = 0x3B
+KOURIN = 0x40
+SHINJU = 0x41
+MIKABOSHI = 0x46
+ASHURA = 0x47
+HIRUKO = 0x4C
+MAMUSHI = 0x4D
+YAMIKIBA = 0x52
+MARISHITEN = 0x53
+KAMUDO = 0x58
+GOHOTENDO = 0x59
+MIHASHIRA = 0x5E
+MONJU = 0x5F
+VELVET_KEMARI = 0x64
+PHOENIX_KEMARI = 0x65
+ARAHABAKI = 0x6A
+EMMA = 0x6B
+OMOIKANE = 0x70
+AISEN = 0x71
+DOUJI_KIRI = 0x76
+MUNECHIKA = 0x77
+TOMBO_GIRI = 0x7C
+OTEGINE = 0x7D
+BENKEI = 0x82
+GORYO = 0x83
+
+fifthWeapons = 
+[
+    SUSANO,
+    IZANAGI,
+    OROCHI,
+    FUTSU_MITAMA,
+    TAKEMIKAZUCHI,
+    MURAKUMO,
+    SAKURA,
+    HIKAGE,
+    KUSHINADA,
+    GOKUEN,
+    KOURIN,
+    MIKABOSHI,
+    HIRUKO,
+    YAMIKIBA,
+    KAMUDO,
+    MIHASHIRA,
+    VELVET_KEMARI,
+    ARAHABAKI,
+    OMOIKANE,
+    DOUJI_KIRI,
+    TOMBO_GIRI,
+    BENKEI
+]
+
+sixthWeapons =
+[
+    RAKAN,
+    NI_OH_PIKE,
+    DAI_ROKUTEN,
+    RASETSU,
+    OBLITERATOR,
+    BISHAMONTEN,
+    KIKU,
+    KISHOUTEN,
+    KOKUANTEN,
+    YATAGARASU,
+    SHINJU,
+    ASHURA,
+    MAMUSHI,
+    MARISHITEN,
+    GOHOTENDO,
+    MONJU,
+    PHOENIX_KEMARI,
+    EMMA,
+    AISEN,
+    MUNECHIKA,
+    OTEGINE,
+    GORYO
+]
+
+weaponNameLookup=
+{
+    SUSANO: "Susano",
+    IZANAGI: "Izanagi",
+    OROCHI: "Orochi",
+    FUTSU_MITAMA: "Futsu-Mitama",
+    TAKEMIKAZUCHI: "Takemikazuchi",
+    MURAKUMO: "Murakumo",
+    SAKURA: "Sakura",
+    HIKAGE: "Hikage",
+    KUSHINADA: "Kushinada",
+    GOKUEN: "Gokuen",
+    KOURIN: "Kourin",
+    MIKABOSHI: "Mikaboshi",
+    HIRUKO: "Hiruko",
+    YAMIKIBA: "Yamikiba",
+    KAMUDO: "Kamudo",
+    MIHASHIRA: "Mihashira",
+    VELVET_KEMARI: "Velvet Kemari",
+    ARAHABAKI: "Arahabaki",
+    OMOIKANE: "Omoikane",
+    DOUJI_KIRI: "Douji-Kiri",
+    TOMBO_GIRI: "Tombo-Giri",
+    BENKEI: "Benkei",
+    RAKAN: "Rakan",
+    NI_OH_PIKE: "Ni-Oh Pike",
+    DAI_ROKUTEN: "Dai-Rokuten",
+    RASETSU: "Rasetsu",
+    OBLITERATOR: "Obliterator",
+    BISHAMONTEN: "Bishamonten",
+    KIKU: "Kiku",
+    KISHOUTEN: "Kishouten",
+    KOKUANTEN: "Kokuanten",
+    YATAGARASU: "Yatagarasu",
+    SHINJU: "Shinju",
+    ASHURA: "Ashura",
+    MAMUSHI: "Mamushi",
+    MARISHITEN: "Marishiten",
+    GOHOTENDO: "Gohotendo",
+    MONJU: "Monju",
+    PHOENIX_KEMARI: "Phoenix Kemari",
+    EMMA: "Emma",
+    AISEN: "Aisen",
+    MUNECHIKA: "Munechika",
+    OTEGINE: "Otegine",
+    GORYO: "Goryo"
+}
+
+weaponDescriptionLookup=
+{
+    SUSANO: "Yukimura Sanada's Susano",
+    IZANAGI: "Keiji Maeda's Izanagi",
+    OROCHI: "Nobunaga Oda's Orochi",
+    FUTSU_MITAMA: "Mitsuhide Akechi's Futsu-Mitama",
+    TAKEMIKAZUCHI: "Goemon Ishikawa's Takemikazuchi",
+    MURAKUMO: "Kenshin Uesugi's Murakumo",
+    SAKURA: "Oichi's Sakura",
+    HIKAGE: "Okuni's Hikage",
+    KUSHINADA: "Kunoichi's Kushinada",
+    GOKUEN: "Magoichi Saika's Gokuen",
+    KOURIN: "Shingen Takeda's Kourin",
+    MIKABOSHI: "Masamune Date's Mikaboshi",
+    HIRUKO: "Noh's Hiruko",
+    YAMIKIBA: "Hanzo Hattori's Yamikiba",
+    KAMUDO: "Ranmaru Mori's Kamudo",
+    MIHASHIRA: "Hideyoshi Hashiba's Mihashira",
+    VELVET_KEMARI: "Yoshimoto Imagawa's Velvet Kemari",
+    ARAHABAKI: "Tadakatsu Honda's Arahabaki",
+    OMOIKANE: "Ina's Omoikane",
+    DOUJI_KIRI: "Sword Officer's Douji-Kiri",
+    TOMBO_GIRI: "Spear Officer's Tombo-Giri",
+    BENKEI: "Naginata Officer's Benkei",
+    RAKAN: "Yukimura Sanada's Rakan",
+    NI_OH_PIKE: "Keiji Maeda's Ni-Oh Pike",
+    DAI_ROKUTEN: "Nobunaga Oda's Dai-Rokuten",
+    RASETSU: "Mitsuhide Akechi's Rasetsu",
+    OBLITERATOR: "Goemon Ishikawa's Obliterator",
+    BISHAMONTEN: "Kenshin Uesugi's Bishamonten",
+    KIKU: "Oichi's Kiku",
+    KISHOUTEN: "Okuni's Kishouten",
+    KOKUANTEN: "Kunoichi's Kokuanten",
+    YATAGARASU: "Magoichi Saika's Yatagarasu",
+    SHINJU: "Shingen Takeda's Shinju",
+    ASHURA: "Masamune Date's Ashura",
+    MAMUSHI: "Noh's Mamushi",
+    MARISHITEN: "Hanzo Hattori's Marishiten",
+    GOHOTENDO: "Ranmaru Mori's Gohotendo",
+    MONJU: "Hideyoshi Hashiba's Monju",
+    PHOENIX_KEMARI: "Yoshimoto Imagawa's Phoenix Kemari",
+    EMMA: "Tadakatsu Honda's Emma",
+    AISEN: "Ina's Aisen",
+    MUNECHIKA: "Sword Officer's Munechika",
+    OTEGINE: "Spear Officer's Otegine",
+    GORYO: "Naginata Officer's Goryo"
+}
+
 // $521218: (8-bit) High Tower and Abyss Level count
 //          
 //          0x00 = First floor.
@@ -3144,7 +3477,7 @@ function secondPlayerIndicator() => byte(0x521294)
 //          
 //          Likely followed by a 32-bit for power.
 //          
-//          Then followed by up to 7 additional items.  Note 0x24 is "No Weapon
+//          Then followed by up to 7 additional items.  Note 0x24 is "No item"
 MEMORY_LOCATION_OF_DROPPED_ITEM = 0x5212A8
 function firstDroppedItem() => dword(MEMORY_LOCATION_OF_DROPPED_ITEM)
 
@@ -3156,7 +3489,7 @@ function itemHasDropped(targetId) => any_of(range(0, NUM_DROPPED_ITEMS - 1), ind
 //          
 //          There's 20 bytes between objects
 //          
-//          Then followed by up to 7 additional weaponsNote 0x84 is "No Weapon
+//          Then followed by up to 7 additional weaponsNote 0x84 is "No Weapon"
 MEMORY_LOCATION_OF_DROPPED_WEAPON = 0x5212E8
 function firstDroppedWeapon() => dword(MEMORY_LOCATION_OF_DROPPED_WEAPON)
 
@@ -3523,6 +3856,61 @@ for key in range(OKUNI_NOBUNAGA_ENDING, OKUNI_KENSHIN_ENDING)
 {
     endingAchievement(key = key, points = 2)
 }
+
+function weaponAchievement(key, points, difficulty)
+{
+    achievement( title = weaponNameLookup[key],
+                 description = format("Obtain {0} in Story Mode or Free Mode", weaponDescriptionLookup[key]),
+                 points = points,
+                 trigger = musouOrFreeMode() &&
+                           weaponHasDropped(key) &&
+                           !isSecondPlayerActive() &&
+                           difficulty &&
+                           trigger_when(playerjustWonStage())
+    )   
+}
+
+
+for key in fifthWeapons
+{
+    weaponAchievement(key = key, points = 5, difficulty = hardDifficulty())
+}
+
+for key in sixthWeapons
+{
+    weaponAchievement(key = key, points = 10, difficulty = chaosDifficulty())
+}
+
+// Each character achievement "earn 6th weapon on Chaos Difficulty, 
+// 
+// each character earning the fifth on hard.    Seriously the game is NOT that hard. 
+// 
+// One of every skill on a single character?
+// 
+// Max level all characters?
+// 
+// Finish every stages on hardest mode, 1 sitting? Maybe.
+// 
+// Get all common items
+// 
+// Get all rare items
+// 
+// PAcifist (no kills) 
+// 
+// Level 50+ common items. 
+// 
+// All characters level 20.
+// 
+// Beat the leaderboards for Challenges.
+// 
+// Beat leaderboards for Survival. 
+// 
+// New Officer find special characters/skills
+// 
+// Face Unlocks
+// 
+// 6 new officer skills hit expert.
+
 // Need character ID. 
 
 // Need to make sure where the exp Level is for the New Officers. 
