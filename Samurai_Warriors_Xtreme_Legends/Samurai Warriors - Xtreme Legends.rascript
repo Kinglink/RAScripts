@@ -2973,6 +2973,163 @@ LevelInfo =
                                        POINTS: 5},
 }
 
+YUKIMURA_FIRST_ENDING =  0x00 
+KEIJI_FIRST_ENDING =  0x01 
+NOBUNAGA_FIRST_ENDING =  0x02 
+MITSUHIDE_FIRST_ENDING =  0x03 
+GOEMON_FIRST_ENDING =  0x04 
+KENSHIN_FIRST_ENDING =  0x05 
+OICHI_FIRST_ENDING =  0x06 
+OKUNI_FIRST_ENDING =  0x07 
+KUNOICHI_FIRST_ENDING =  0x08 
+MAGOICHI_FIRST_ENDING =  0x09 
+SHINGEN_FIRST_ENDING =  0x0a 
+MASAMUNE_FIRST_ENDING =  0x0b 
+NOH_FIRST_ENDING =  0x0c 
+HANZO_FIRST_ENDING =  0x0d 
+RANMARU_FIRST_ENDING =  0x0e 
+HIDEYOSHI_FIRST_ENDING =  0x0f 
+YOSHIMOTO_FIRST_ENDING =  0x10 
+TADAKTSU_FIRST_ENDING =  0x11 
+INA_FIRST_ENDING =  0x12 
+YUKIMURA_SECOND_ENDING =  0x13 
+KENJI_SECOND_ENDING =  0x14 
+NOBUNAGA_SECOND_ENDING =  0x15 
+MITSUHIDE_SECOND_ENDING =  0x16 
+GOEMON_SECOND_ENDING =  0x17 
+KENSHIN_SECOND_ENDING =  0x18 
+OICHI_SECOND_ENDING =  0x19 
+OKUNI_SECOND_ENDING =  0x1a 
+KUNOICHI_SECOND_ENDING =  0x1b 
+MAGOICHI_SECOND_ENDING =  0x1c 
+SHINGEN_SECOND_ENDING =  0x1d 
+MASAMUNE_SECOND_ENDING =  0x1e 
+NOH_SECOND_ENDING =  0x1f 
+HANZO_SECOND_ENDING =  0x20 
+RANMARU_SECOND_ENDING =  0x21 
+HIDEYOSHI_SECOND_ENDING =  0x22 
+YOSHIMOTO_SECOND_ENDING =  0x23 
+TADAKTSU_SECOND_ENDING =  0x24 
+INA_SECOND_ENDING =  0x25 
+OKUNI_NOBUNAGA_ENDING = 0x26 
+OKUNI_NOH_ENDING = 0x27 
+OKUNI_MAGOICHI_ENDING = 0x28 
+OKUNI_MITSUHIDE_ENDING = 0x29 
+OKUNI_RANMARU_ENDING = 0x2a 
+OKUNI_HANZO_ENDING = 0x2b 
+OKUNI_YUKIMURA_ENDING = 0x2c 
+OKUNI_SHINGEN_ENDING = 0x2d 
+OKUNI_KENSHIN_ENDING = 0x2e 
+NEW_OFFICER_FIRST = 0x2f 
+NEW_OFFICER_SECOND = 0x30 
+NO_ENDING = 0x03b
+
+endingNameLookup =
+{
+    YUKIMURA_FIRST_ENDING:  "True Warrior",
+    KEIJI_FIRST_ENDING:  "Favored By Heavens",
+    NOBUNAGA_FIRST_ENDING: "Destruction",
+    MITSUHIDE_FIRST_ENDING:  "White Blade",
+    GOEMON_FIRST_ENDING:  "Hail to the King",
+    KENSHIN_FIRST_ENDING:   "Friend and Foe",
+    OICHI_FIRST_ENDING:  "Hand in Hand",
+    OKUNI_FIRST_ENDING:  "Grand Finale",
+    KUNOICHI_FIRST_ENDING:  "Flower of the Night",
+    MAGOICHI_FIRST_ENDING:  "Way of the Gun",
+    SHINGEN_FIRST_ENDING:  "Triumph",
+    MASAMUNE_FIRST_ENDING:  "Ambition",
+    NOH_FIRST_ENDING:  "True Love",
+    HANZO_FIRST_ENDING: "Fade to Shadow",
+    RANMARU_FIRST_ENDING:  "The Next Life",
+    HIDEYOSHI_FIRST_ENDING:  "The Mighty Conqueror",
+    YOSHIMOTO_FIRST_ENDING:  "The Mighty Warrior",
+    TADAKTSU_FIRST_ENDING:  "Loyalty",
+    INA_FIRST_ENDING:  "Something to Protect",
+    YUKIMURA_SECOND_ENDING: "Endless Battle",
+    KENJI_SECOND_ENDING:  "War is but a Dream",
+    NOBUNAGA_SECOND_ENDING:  "Tainted Hands",
+    MITSUHIDE_SECOND_ENDING:  "End to Madness",
+    GOEMON_SECOND_ENDING:  "Thieves, There will always be",
+    KENSHIN_SECOND_ENDING:   "Ode to a Nemesis",
+    OICHI_SECOND_ENDING:  "Requiem for the Fallen",
+    OKUNI_SECOND_ENDING:  "The Dance of War",
+    KUNOICHI_SECOND_ENDING:  "Once a Ninja...",
+    MAGOICHI_SECOND_ENDING:  "Farewell to Arms",
+    SHINGEN_SECOND_ENDING:  "Sundown",
+    MASAMUNE_SECOND_ENDING:  "Victim of the Times",
+    NOH_SECOND_ENDING:  "The Demon's Wife",
+    HANZO_SECOND_ENDING: "Shadow in the Distance",
+    RANMARU_SECOND_ENDING:  "True Intent",
+    HIDEYOSHI_SECOND_ENDING:  "A Dream within a Dream",
+    YOSHIMOTO_SECOND_ENDING:  "Way of the Warrior",
+    TADAKTSU_SECOND_ENDING:  "The Impartial Spear",
+    INA_SECOND_ENDING:  "Precious Life",
+    OKUNI_NOBUNAGA_ENDING: "Dreams and Illusions (Nobunaga)",
+    OKUNI_NOH_ENDING: "Dreams and Illusions (Noh)",
+    OKUNI_MAGOICHI_ENDING:  "Dreams and Illusions (Magoichi)",
+    OKUNI_MITSUHIDE_ENDING:  "Dreams and Illusions (Mitsuhide)",
+    OKUNI_RANMARU_ENDING:  "Dreams and Illusions (Ranmaru)",
+    OKUNI_HANZO_ENDING:  "Dreams and Illusions (Hanzo)",
+    OKUNI_YUKIMURA_ENDING: "Dreams and Illusions (Yukimura)",
+    OKUNI_SHINGEN_ENDING:  "Dreams and Illusions (Shingen)",
+    OKUNI_KENSHIN_ENDING:  "Dreams and Illusions (Kenshin)",
+    NEW_OFFICER_FIRST: "Way of The Samurai",
+    NEW_OFFICER_SECOND: "Guardian of the East"
+}
+
+endingDescriptionLookup =
+{
+    YUKIMURA_FIRST_ENDING: "Yukimura Sanada's first ending" ,
+    KEIJI_FIRST_ENDING: "Keiji Maeda's first ending" ,
+    NOBUNAGA_FIRST_ENDING: "Nobunaga Oda's first ending" ,
+    MITSUHIDE_FIRST_ENDING: "Mitsuhide Akechi's first ending" ,
+    GOEMON_FIRST_ENDING: "Goemon Ishikawa's first ending" ,
+    KENSHIN_FIRST_ENDING: "Kenshin Uesugi's first ending" ,
+    OICHI_FIRST_ENDING: "Oichi's first ending" ,
+    OKUNI_FIRST_ENDING: "Okuni's first ending" ,
+    KUNOICHI_FIRST_ENDING: "Kunoichi's first ending" ,
+    MAGOICHI_FIRST_ENDING: "Magoichi Saika's first ending" ,
+    SHINGEN_FIRST_ENDING: "Shingen Takeda's first ending" ,
+    MASAMUNE_FIRST_ENDING: "Masamune Date's first ending" ,
+    NOH_FIRST_ENDING: "Noh's first ending" ,
+    HANZO_FIRST_ENDING: "Hanzo Hattori's first ending" ,
+    RANMARU_FIRST_ENDING: "Ranmaru Mori's first ending" ,
+    HIDEYOSHI_FIRST_ENDING: "Hideyoshi Hashiba's first ending" ,
+    YOSHIMOTO_FIRST_ENDING: "Yoshimoto Imagawa's first ending" ,
+    TADAKTSU_FIRST_ENDING: "Tadaktsu Honda's first ending" ,
+    INA_FIRST_ENDING: "Ina's first ending" ,
+    YUKIMURA_SECOND_ENDING: "Yukimura Sanada's second ending",
+    KENJI_SECOND_ENDING: "Kenji Maeda's second ending",
+    NOBUNAGA_SECOND_ENDING: "Nobunaga Oda's second ending",
+    MITSUHIDE_SECOND_ENDING: "Mitsuhide Akechi's second ending",
+    GOEMON_SECOND_ENDING: "Goemon Ishikawa's second ending",
+    KENSHIN_SECOND_ENDING: "Kenshin Uesugi's second ending",
+    OICHI_SECOND_ENDING: "Oichi's second ending",
+    OKUNI_SECOND_ENDING: "Okuni's second ending",
+    KUNOICHI_SECOND_ENDING: "Kunoichi's second ending",
+    MAGOICHI_SECOND_ENDING: "Magoichi Saika's second ending",
+    SHINGEN_SECOND_ENDING: "Shingen Takeda's second ending",
+    MASAMUNE_SECOND_ENDING: "Masamune Date's second ending",
+    NOH_SECOND_ENDING: "Noh's second ending",
+    HANZO_SECOND_ENDING: "Hanzo Hattori's second ending",
+    RANMARU_SECOND_ENDING: "Ranmaru Mori's second ending",
+    HIDEYOSHI_SECOND_ENDING: "Hideyoshi Hashiba's second ending",
+    YOSHIMOTO_SECOND_ENDING: "Yoshimoto Imagawa's second ending",
+    TADAKTSU_SECOND_ENDING: "Tadaktsu Honda's second ending",
+    INA_SECOND_ENDING: "Ina's second ending",
+    OKUNI_NOBUNAGA_ENDING: "Okuni's alternate endings with Nobunaga",
+    OKUNI_NOH_ENDING: "Okuni's alternate endings with Noh",
+    OKUNI_MAGOICHI_ENDING: "Okuni's alternate endings with Magoichi",
+    OKUNI_MITSUHIDE_ENDING: "Okuni's alternate endings with Mitsuhide",
+    OKUNI_RANMARU_ENDING: "Okuni's alternate endings with Ranmaru",
+    OKUNI_HANZO_ENDING: "Okuni's alternate endings with Hanzo",
+    OKUNI_YUKIMURA_ENDING: "Okuni's alternate endings with Yukimura",
+    OKUNI_SHINGEN_ENDING: "Okuni's alternate endings with Shingen",
+    OKUNI_KENSHIN_ENDING: "Okuni's alternate endings with Kenshin",
+    NEW_OFFICER_FIRST: "New Officer's first ending",
+    NEW_OFFICER_SECOND: "New Officer's second ending"
+}
+
 // $521218: (8-bit) High Tower and Abyss Level count
 //          
 //          0x00 = First floor.
@@ -3012,6 +3169,38 @@ function weaponHasDropped(targetId) => any_of(range(0, NUM_DROPPED_WEAPON - 1), 
 //          Used for New Officer's Combo training
 function comboTrainingScore() => byte(0x52140C)
 
+
+// $5211f0: (8-bit) Mode Select
+//          
+//          0x00 = Musou Mode
+//          0x01 = Free Mode
+//          0x02 = New Officer Mode
+//          0x03 = Challenge Mode
+//          0x04 = Versus Mode
+//          0x05 = Survival Mode
+//          0x08 = Main menu/OptionMenu
+//          
+//          Note this is set to the real value when in demo mode
+function modeSelect() => byte(0x5211f0)
+
+MUSOU_MODE = 0x00
+FREE_MODE = 0x01
+NEW_OFFICER_MODE = 0x02
+CHALLENGE_MODE =  0x03
+VERSUS_MODE = 0x04
+SURVIVAL_MODE = 0x05
+MAIN_MENU = 0x08
+OPTION_MENU = 0x08
+
+function musouMode() => modeSelect() == MUSOU_MODE
+function freeMode() => modeSelect() == FREE_MODE
+function newOfficerMode() => modeSelect() == NEW_OFFICER_MODE
+function challengeMode() => modeSelect() == CHALLENGE_MODE
+function versusMode() => modeSelect() == VERSUS_MODE
+function survivalMode() => modeSelect() == SURVIVAL_MODE
+function optionMenu() => modeSelect() == OPTION_MENU
+function musouOrFreeMode() => musouMode() || freeMode()
+
 // $521430: (8-bit) Gameplay indicator
 //          
 //          0x0c = In game  (Or demo)
@@ -3036,6 +3225,71 @@ function playerjustWonSurvival() => prev( gameplayIndicator()) == IN_GAME &&
                                       gameplayIndicator() == MID_LEVEL_FINISH ) 
 function playerJustFinishedMission() => prev( gameplayIndicator()) == IN_GAME && 
                                         gameplayIndicator() != IN_GAME
+
+// $521260: (8-bit) Ending movie to play.
+//          
+//          This gets set at the same frame the Gameplay indicator is set to 0x00 to indicate the player has won the level. 
+//          
+//          0x00 = Yukimura 1 "True Warrior
+//          0x01 = Keiji 1 "Favored By Heavens"
+//          0x02 = Nobunaga 1"Destruction"
+//          0x03 = Mitsuhide 1 "White Blade"
+//          0x04 = Goemon 1 "Hail to the King"
+//          0x05 = Kenshin 1  "Friend and Foe"
+//          0x06 = Oichi 1 "Hand in Hand"
+//          0x07 = Okuni 1 "Grand Finale"
+//          0x08 = Kunoichi 1 "Flower of the Night"
+//          0x09 = Magoichi 1 "Way of the Gun"
+//          0x0a = Shingen 1 "Triumph"
+//          0x0b = Masamune 1 "Ambition"
+//          0x0c = Noh 1 "True Love"
+//          0x0d =- Hnazo 1 "Fade to Shadow"
+//          0x0e = "Ranmaru 1 "The Next Life"
+//          0x0f = Hideyoshi 1 "The Mighty Conqueror"
+//          0x10 = Yoshimoto 1 "The Mighty Warrior"
+//          0x11 = Tadaktsu 1 "Loyalty"
+//          0x12 = Ina 1 "Something to Protect"
+//          0x13 = Yukimura 2 :"Endless Battle"
+//          0x14 = Kenji 2 "War is but a Dream"
+//          0x15 = Nobunaga 2 "Tainted Hands"
+//          0x16 = Mitsuhide 2 "End to Madness"
+//          0x17 = Goemon 2 "Thieves, There will always be"
+//          0x18 = Kenshin 2  "Ode to a Nemesis"
+//          0x19 = Oichi 2 "Requiem for the Fallen"
+//          0x1a = Okuni 2 "The Dance of War"
+//          0x1b = Kunoichi 2 "Once a Ninja..."
+//          0x1c = Magoichi 2 "Farewell to Arms"
+//          0x1d = Shingen 2 "Sundown"
+//          0x1e = Masamune 2 "Victim of the Times"
+//          0x1f = Noh 2 "The Demon's Wife"
+//          0x20 =- Hnazo 2 "Shadow in the Distance"
+//          0x21 = "Ranmaru 2 "True Intent"
+//          0x22 = Hideyoshi 2 "A Dream within a Dream"
+//          0x23 = Yoshimoto 2 "Way of the Warrior"
+//          0x24 = Tadaktsu 2 "The Impartial Spear"
+//          0x25 = Ina 2 "Precious Life"
+//          0x26 = Okuni/Nobunaga "Dreams and Illusions"
+//          0x27 = Okuni/Noh "Dreams and Illusions"
+//          0x28 = Okuni/Magoichi "Dreams and Illusions"
+//          0x29 = Okuni/Mitsuhide "Dreams and Illusions"
+//          0x2a = Okuni/Ranmaru "Dreams and Illusions"
+//          0x2b = Okuni/Hanzo "Dreams and Illusions"
+//          0x2c = Okuni/Yukimura "Dreams and Illusions"
+//          0x2d = Okuni/Shingen "Dreams and Illusions"
+//          0x2e = Okuni/Kenshin "Dreams and Illusions"
+//          0x2f = New Officer 1 "Way of The Samurai
+//          0x30 = New Officer 2 "Guardian of the East
+//          0x3b = No Ending to show.
+//          
+//          Any number between 0x031 and 0x3a shows the same video as "Guardian of the East"
+function endingMovieToPlay() => byte(0x521260)
+
+NO_ENDING = 0x3b
+
+function endingMovieTrigger(targetId) => playerjustWonStage() && 
+                                         prev(endingMovieToPlay()) == NO_ENDING &&
+                                         endingMovieToPlay() == targetId
+
 
 // $521438: (32-bit) Time spent in a level.
 //          
@@ -3089,7 +3343,7 @@ function firstPlayerKoCount() => word(0x52D6B0)
 //          Hugh Tower 30
 
 // $695D6C: (32-bit) Save.load indicator Part 1
-//          
+//          NOTE THIS HAS BEEN PROVEN FALSE ON BOOTUP
 //          Check 0x00695d6c, 0x00695d70, 0x00695d74 (All 32-bit numbers technically)
 //          
 //          0x00 = Initial Save Load on boot up
@@ -3101,7 +3355,7 @@ SAVE_PROTECTION_PART_1_BOOTUP = 0x02
 SAVE_PROTECTION_PART_1_OPTIONS = 0x01
 
 // $695D70: (32-bit) Save.load indicator Part 2
-//          
+//          NOTE THIS HAS BEEN PROVEN FALSE ON BOOTUP
 //          Check 0x00695d6c, 0x00695d70, 0x00695d74 (All 32-bit numbers technically)
 //          
 //          0x01 = Initial Save Load on boot up
@@ -3113,7 +3367,7 @@ SAVE_PROTECTION_PART_2_BOOTUP = 0x01
 SAVE_PROTECTION_PART_2_OPTIONS = 0x02
 
 // $695D74: (32-bit) Save.load indicator Part 1
-//          
+//          NOTE THIS HAS BEEN PROVEN TO BE FALSE ON BOOTUP
 //          Check 0x00695d6c, 0x00695d70, 0x00695d74 (All 32-bit numbers technically)
 //          
 //          0x02 = Initial Save Load on boot up
@@ -3123,15 +3377,6 @@ function saveLoadIndicatorPart3() => dword(0x695D74)
 
 SAVE_PROTECTION_PART_3_BOOTUP = 0x02
 SAVE_PROTECTION_PART_3_OPTIONS = 0x03
-
-function saveProtection() => ( !( saveLoadIndicatorPart1() == SAVE_PROTECTION_PART_1_BOOTUP &&
-                                  saveLoadIndicatorPart2() == SAVE_PROTECTION_PART_2_BOOTUP &&
-                                  saveLoadIndicatorPart3() == SAVE_PROTECTION_PART_3_BOOTUP) &&
-                               !( saveLoadIndicatorPart1() == SAVE_PROTECTION_PART_1_OPTIONS &&
-                                  saveLoadIndicatorPart2() == SAVE_PROTECTION_PART_2_OPTIONS &&
-                                  saveLoadIndicatorPart3() == SAVE_PROTECTION_PART_3_OPTIONS)
-                             )
-
 
 // $6D7188: (32-bit) New Officer's Melee's Progression
 //          
@@ -3218,6 +3463,13 @@ function newOfficerBurstProgression() => dword(0x6D71A0)
 //          Numnbers in between are floored (0x02 = Novice) Any number higher than 0x06 is expert
 function newOfficerRidingProgression() => dword(0x6D71A8)
 
+// On bootup time spent in level is 0.  Should never be 0 after a level. 
+// NOTE: On bootup the game is set to Musou mode. 
+function saveProtection() => !optionMenu() && timeSpentInLevelinFrames() != 00
+
+
+
+
 
 function missionAchievement(key)
 {
@@ -3233,9 +3485,10 @@ function missionAchievement(key)
                       )
     }
     achievement( title = LevelLookup[key],
-                 description = format("Complete every mission in {0}", LevelLookup[key]),
+                 description = format("Complete every mission in {0} in Story Mode or Free Mode", LevelLookup[key]),
                  points = levelInfo[POINTS],
-                 trigger = comparision
+                 trigger = comparision &&
+                           saveProtection()
     )   
 }
 
@@ -3244,11 +3497,34 @@ for key in LevelInfo
     missionAchievement(key)
 }
 
+function endingAchievement(key, points)
+{
+    achievement( title = endingNameLookup[key],
+                 description = format("Reach {0} in Story Mode or Free Mode", endingDescriptionLookup[key]),
+                 points = points,
+                 trigger = musouOrFreeMode() &&
+                           endingMovieTrigger(key) &&
+                           !isSecondPlayerActive()
+    )   
+}
 
 
+for key in range(YUKIMURA_FIRST_ENDING, INA_SECOND_ENDING)
+{
+    endingAchievement(key = key, points = 5)
+}
+for key in [NEW_OFFICER_FIRST, NEW_OFFICER_SECOND] 
+{
+    endingAchievement(key = key, points = 5)
+}
 
+
+for key in range(OKUNI_NOBUNAGA_ENDING, OKUNI_KENSHIN_ENDING)
+{
+    endingAchievement(key = key, points = 2)
+}
 // Need character ID. 
 
-// Need to make sure where the Level is for the New Officers. 
+// Need to make sure where the exp Level is for the New Officers. 
 
-// Keiji Finishes his Musou on the same stage, how do we get movie id?   Same with Okuni  Probably WIn state + movie playing id. 
+
