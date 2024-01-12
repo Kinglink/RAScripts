@@ -120,14 +120,19 @@ function yukimuraItems() => byte(YUKIMURA_ITEM_LOCATION)
 function yukimurasStoredSkills() => byte(0x4FF827)
 
 // $4FF857: (8-bit) Yukimura's Stored Level
-function yukimurasStoredLevel() => byte(0x4FF857)
+MEMORY_LOCATION_OF_OFFICER_LEVEL = 0x4FF857
+function yukimurasStoredLevel() => byte(MEMORY_LOCATION_OF_OFFICER_LEVEL)
 
 // $4FF89E: (40-bit) Keiji's Maeda's equipped items
 KEIJI_MAEDE_ITEM_LOCATION = 0x4FF89E
 function keijiMaedaItems() => byte(KEIJI_MAEDE_ITEM_LOCATION)
 
 OFFSET_FOR_EACH_CHARACTER_STATS = KEIJI_MAEDE_ITEM_LOCATION - YUKIMURA_ITEM_LOCATION
+function officerOffsetHelper(location, index) => byte(location + (SIZE_OF_NEW_OFFICER_OBJECT * index))
 
+function officersLevel20Check() => all_of(range(0,TOTAL_NEW_OFFICERS), index => officerOffsetHelper(MEMORY_LOCATION_OF_OFFICER_LEVEL, index) == 20)
+function officersWasLevel19Check() => any_of(range(0,TOTAL_NEW_OFFICERS), index => prev(officerOffsetHelper(MEMORY_LOCATION_OF_OFFICER_LEVEL, index)) == 19)
+                                    
 
 // $500155: (8-bit) Musket for New Officer 1
 //          
@@ -181,6 +186,9 @@ function newOfficerFortitudeSkill() => byte(MEMORY_LOCATION_OF_NEW_OFFICER_FORTI
 MEMORY_LOCATION_OF_NEW_OFFICER_DISCERN_SKILL = 0x50016B
 function newOfficerDiscernSkill() => byte(MEMORY_LOCATION_OF_NEW_OFFICER_DISCERN_SKILL)
 
+// $50018b: (8-bit) Level for New Officer 1 
+MEMORY_LOCATION_OF_NEW_OFFICER_LEVEL = 0x050018b
+
 // $5001D2: (40-bit)Array of weapons for second New Officer
 ARRAY_OF_SECOND_NEW_OFFICER_ITEMS = 0x5001D2
 function newOfficerArrayWeaponsSecondOfficer() => byte(ARRAY_OF_SECOND_NEW_OFFICER_ITEMS)
@@ -188,9 +196,9 @@ function newOfficerArrayWeaponsSecondOfficer() => byte(ARRAY_OF_SECOND_NEW_OFFIC
 SIZE_OF_NEW_OFFICER_OBJECT = ARRAY_OF_SECOND_NEW_OFFICER_ITEMS - ARRAY_OF_FIRST_NEW_OFFICER_ITEMS
 
 TOTAL_NEW_OFFICERS = 15
-function newOfficerOffsetHelper(Location) => byte(ARRAY_OF_FIRST_NEW_OFFICER_ITEMS - Location + (SIZE_OF_NEW_OFFICER_OBJECT * index))
-function newOfficerAnyOfHelper(Location) => any_of(range(0,TOTAL_NEW_OFFICERS), index => newOfficerOffsetHelper(Location) == 0x1 &&
-                                                                                          prev(newOfficerOffsetHelper(Location)) == 0x0)
+function newOfficerOffsetHelper(Location, index) => byte(Location + (SIZE_OF_NEW_OFFICER_OBJECT * index))
+function newOfficerAnyOfHelper(Location) => any_of(range(0,TOTAL_NEW_OFFICERS), index => newOfficerOffsetHelper(Location, index) == 0x1 &&
+                                                                                          prev(newOfficerOffsetHelper(Location, index)) == 0x0)
 function newOfficerMusketUnlock() =>  newOfficerAnyOfHelper(MEMORY_LOCATION_OF_NEW_OFFICER_MUSKET_SKILL)
 function newOfficerFrenzyUnlock() =>  newOfficerAnyOfHelper(MEMORY_LOCATION_OF_NEW_OFFICER_FRENZY_SKILL)
 function newOfficerReachUnlock() =>  newOfficerAnyOfHelper(MEMORY_LOCATION_OF_NEW_OFFICER_REACH_SKILL)
@@ -199,7 +207,11 @@ function newOfficerDriveUnlock() =>  newOfficerAnyOfHelper(MEMORY_LOCATION_OF_NE
 function newOfficerFocusUnlock() =>  newOfficerAnyOfHelper(MEMORY_LOCATION_OF_NEW_OFFICER_FOCUS_SKILL)
 function newOfficerFortitudeUnlock() =>  newOfficerAnyOfHelper(MEMORY_LOCATION_OF_NEW_OFFICER_FORTITUDE_SKILL)
 function newOfficerDiscernUnlock() =>  newOfficerAnyOfHelper(MEMORY_LOCATION_OF_NEW_OFFICER_DISCERN_SKILL)
-
+function newOfficersLevel20Check() => any_of(range(0,TOTAL_NEW_OFFICERS), index => newOfficerOffsetHelper(MEMORY_LOCATION_OF_NEW_OFFICER_LEVEL, index) == 20)
+function newOfficerJustLevel19Check() => any_of(range(0,TOTAL_NEW_OFFICERS), index => newOfficerOffsetHelper(MEMORY_LOCATION_OF_NEW_OFFICER_LEVEL, index) == 20 &&
+                                                                                      prev(newOfficerOffsetHelper(MEMORY_LOCATION_OF_NEW_OFFICER_LEVEL, index)) == 19)
+                                                                                          
+                                                                                          
 
 // $500b24: (8-bit) Yukimura's First Owned Weapon  ID
 //          
@@ -2370,6 +2382,41 @@ function completeYoshimotoOdawaraInfiltration() => byte(0x501838)
 function currentMissionID() => byte(0x521210)
 
 
+YUKIMURA = 0x00 
+KEIJI = 0x01 
+NOBUNAGA = 0x02 
+MITSUHIDE = 0x03 
+GOEMON = 0x04 
+KENSHIN = 0x05 
+OICHI = 0x06 
+OKUNI = 0x07 
+KUNOICHI = 0x08 
+MAGOICHI = 0x09 
+SHINGEN = 0x0A 
+MASAMUNE = 0x0B 
+NOH = 0x0C 
+HANZO = 0x0D 
+RANMARU = 0x0E 
+HIDEYOSHI = 0x0F 
+YOSHIMOTO = 0x10 
+TADAKATSU = 0x11 
+INA = 0x12 
+NEW_OFFICER01 = 0x13 
+NEW_OFFICER02 = 0x14 
+NEW_OFFICER03 = 0x15 
+NEW_OFFICER04 = 0x16 
+NEW_OFFICER05 = 0x17 
+NEW_OFFICER06 = 0x18 
+NEW_OFFICER07 = 0x19 
+NEW_OFFICER08 = 0x1A 
+NEW_OFFICER09 = 0x1B 
+NEW_OFFICER10 = 0x1C 
+NEW_OFFICER11 = 0x1D 
+NEW_OFFICER12 = 0x1E 
+NEW_OFFICER13 = 0x1F 
+NEW_OFFICER14 = 0x20 
+NEW_OFFICER15 = 0x21 
+
 YUKIMURA_BATTLE_OF_KAWANAKAJIMA = 0x00
 YUKIMURA_BATTLE_OF_MIKATAGAHARA = 0x01
 YUKIMURA_BATTLE_OF_NAGASHINO_UPPER = 0x02
@@ -2510,6 +2557,108 @@ RIDING_MISSION = 0x8A
 DEEP_ABYSS = 0x8C
 HIGH_TOWER = 0x8D
 GOLD_RUSH = 0x8E 
+
+
+CharacterNameLookup =
+{
+    YUKIMURA:"Yukimura Sanada",
+    KEIJI: "Keiji Maeda",
+    NOBUNAGA: "Nobunaga Oda",
+    MITSUHIDE: "Mitsuhide Akechi",
+    GOEMON: "Goemon Ishikawa",
+    KENSHIN: "Kenshin Uesagi",
+    OICHI: "Oichi",
+    OKUNI: "Okuni",
+    KUNOICHI: "Kunoichi",
+    MAGOICHI: "Magoichi Saika",
+    SHINGEN: "Shingen Takeda",
+    MASAMUNE: "Masamune Date",
+    NOH: "Noh",
+    HANZO: "Hanzo Hattori",
+    RANMARU: "Ranmaru Mori",
+    HIDEYOSHI: "Hideyoshi Hashiba",
+    YOSHIMOTO: "Yoshimoto Imagawa",
+    TADAKATSU: "Tadakatsu Honda",
+    INA: "Ina",
+    NEW_OFFICER01: "New Officer",
+    NEW_OFFICER02: "New Officer",
+    NEW_OFFICER03: "New Officer",
+    NEW_OFFICER04: "New Officer",
+    NEW_OFFICER05: "New Officer",
+    NEW_OFFICER06: "New Officer",
+    NEW_OFFICER07: "New Officer",
+    NEW_OFFICER08: "New Officer",
+    NEW_OFFICER09: "New Officer",
+    NEW_OFFICER10: "New Officer",
+    NEW_OFFICER11: "New Officer",
+    NEW_OFFICER12: "New Officer",
+    NEW_OFFICER13: "New Officer",
+    NEW_OFFICER14: "New Officer",
+    NEW_OFFICER15: "New Officer"
+}
+
+FIRST = "First"
+LAST = "Last"
+LevelLineup = 
+{
+    YUKIMURA: {FIRST: YUKIMURA_BATTLE_OF_KAWANAKAJIMA,
+               LAST: YUKIMURA_BATTLE_OF_YAMASAKI
+              },
+    KEIJI: {FIRST: KEIJI_BATTLE_OF_ISE,
+               LAST: KEIJI_KAWANAKAJIMA_CHALLENGE
+              },
+    NOBUNAGA: {FIRST: NOBUNAGA_BATTLE_OF_OKEHAZAMA,
+               LAST: NOBUNAGA_BATTLE_OF_YAMASAKI
+              },
+    MITSUHIDE: {FIRST: MITSUHIDE_DEFENSE_OF_INABAYAM_CASTLE,
+               LAST: MITSUHIDE_BATTLE_OF_YAMASAKI_LOWER
+              },
+    GOEMON: {FIRST: GOEMON_GIFU_INFILTRATION,
+               LAST: GOEMON_DANCE_OF_AZUCHI_CASTLE
+              },
+    OICHI: {FIRST: OICHI_BATTLE_OF_OKEHAZAMA,
+               LAST: OICHI_BATTLE_OF_HONNOUJI
+              },
+    OKUNI: {FIRST: OKUNI_DANCE_OF_KYOTO,
+               LAST: OKUNI_DANCE_OF_AZUCHI_CASTLE
+              },
+    KUNOICHI: {FIRST: KUNOICHI_BATTLE_OF_KAWANAKAJIMA,
+               LAST: KUNOICHI_ODWARA_INFILTRATION
+              },
+    MAGOICHI: {FIRST: MAGOICHI_BATTLE_OF_ISE,
+               LAST: MAGOICHI_AZUCHI_INFILTRATION
+              },
+    SHINGEN: {FIRST: SHINGEN_BATTLE_OF_KAWANKAJIMA,
+               LAST: SHINGEN_KAWANAKAJIMA_SHOWDOWN
+              },
+    MASAMUNE: {FIRST: MASAMUNE_KAWANAKAJIMA_CAMPAIGN,
+               LAST: MASAMUNE_ODAWARA_CAMPAIGN
+              },
+    NOH: {FIRST: NOH_BATTLE_OF_OKEHAZAMA,
+               LAST: NOH_AZUCHI_INFILTRATION
+              },
+    HANZO: {FIRST: HANZO_BATTLE_OF_OKEHAZAMA,
+               LAST: HANZO_OSAKA_INFILTRATION
+              },
+    RANMARU: {FIRST: RANMARU_DEFENSE_OF_INABAYAMA_CASTLE,
+               LAST: RANMARU_DEFENSE_OF_AZUCHI_CASTLE
+              },
+    HIDEYOSHI: {FIRST: HIDEYOSHI_SIEGE_OF_INABAYAMA_CASTLE,
+               LAST: HIDEYOSHI_SIEGE_OF_AZUCHI_CASTLE
+              },
+    YOSHIMOTO: {FIRST: YOSHIMOTO_BATTLE_OF_OKEHAZAMA,
+               LAST: YOSHIMOTO_STRUGGLE_AT_HONNOUJI
+              },
+    TADAKATSU: {FIRST: TADAKATSU_BATTLE_OF_OKEHAZAMA,
+               LAST: TADAKATSU_BATTLE_OF_YAMASAKI
+              },
+    INA: {FIRST: INA_RETREAT_AT_KANEGASAKI,
+               LAST: INA_SIEGE_OF_OSAKA_CASTLE
+              },
+    NEW_OFFICER01: {FIRST: NEW_OFFICER_BATTLE_OF_OKEHAZAMA,
+               LAST: NEW_OFFICER_SIEGE_OF_OSAKA_SUMMER_LOWER
+              },
+}
 
 LevelLookup =
 {
@@ -3112,6 +3261,8 @@ LevelInfo =
                                        EXTENDED_EXPECTED_VALUE: BIT3_FULL,
                                        POINTS: 5},
 }
+
+
 
 YUKIMURA_FIRST_ENDING =  0x00 
 KEIJI_FIRST_ENDING =  0x01 
@@ -3881,16 +4032,42 @@ for key in sixthWeapons
     weaponAchievement(key = key, points = 10, difficulty = chaosDifficulty())
 }
 
-// Each character achievement "earn 6th weapon on Chaos Difficulty, 
-// 
-// each character earning the fifth on hard.    Seriously the game is NOT that hard. 
-// 
-// One of every skill on a single character?
-// 
-// Max level all characters?
-// 
-// Finish every stages on hardest mode, 1 sitting? Maybe.
-// 
+achievement( title = "Top-Tier Officers",
+             description = "Reach level 20 with all your officers and one of the new officers",
+             points = 10,
+             trigger = officersLevel20Check() && 
+                       newOfficersLevel20Check() &&
+                       (newOfficerJustLevel19Check() || 
+                        officersWasLevel19Check()) &&
+                       !optionMenu()  
+            )
+
+
+function chaosAchievement(key) 
+{
+    achievement(title = format("Chaos Mode: {0}" , CharacterNameLookup[key]),
+                description = "Beat each of {0}'s story scenarios on Chaos Difficulty in one session in story mode or free mode" , 
+                points = 10,
+                trigger = measured(tally_of(range(LevelLineup[key][FIRST],LevelLineup[key][LAST]), 
+                                            LevelLineup[key][LAST]-LevelLineup[key][FIRST] + 1,  
+                                            index => once( CurrentStageID() == index && 
+                                                 playerjustWonStage() &&
+                                                 musouOrFreeMode() &&
+                                                 chaosDifficulty() &&
+                                                 !isSecondPlayerActive() &&
+                                                 saveProtection()
+                                                 )
+                                           )
+                                  )
+                )
+}
+
+for key in LevelLineup
+{
+    chaosAchievement(key)
+}
+
+
 // Get all common items
 // 
 // Get all rare items
@@ -3911,8 +4088,11 @@ for key in sixthWeapons
 // 
 // 6 new officer skills hit expert.
 
+// One of every skill on a single character?
+
 // Need character ID. 
 
 // Need to make sure where the exp Level is for the New Officers. 
+
 
 
