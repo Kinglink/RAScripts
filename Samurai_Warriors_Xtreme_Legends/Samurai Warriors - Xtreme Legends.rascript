@@ -599,10 +599,57 @@ itemLookup=
     INVALID_ITEM : "None"
 }
 
-function justOwnedAllCommonItems() => all_of(range(SOLAR_GEM,SADDLE), 
-                                                        index => bitOffset(INITIAL_LOCATION_ITEM_OWNED_BITFIELD, index) == 1) &&
-                                             any_of(range(MEMORY_LOCATION_SOLAR_GEM_POWER,MEMORY_LOCATION_SADDLE_POWER), 
-                                                        index => prev(bitOffset(INITIAL_LOCATION_ITEM_OWNED_BITFIELD, index)) == 0)
+commonItems =
+[
+    SOLAR_GEM,
+    MOON_STONE,
+    POWER_BRACER,
+    HIMIKOS_RUNE,
+    VIXEN_TAIL,
+    TENGU_SANDALS,
+    HARE_GREAVES,
+    KAPPA_AMULET,
+    WIND_GLOVES,
+    CLOAK_OF_MIGHT,
+    DEMON_STAFF,
+    SERPENT_BRACER,
+    SADDLE
+]
+
+rareItems = 
+[
+    ARABIAN_SADDLE,
+    MATSUKAZE_SADDLE,
+    HORSE_ARMOR,
+    WARRIORS_TALE,
+    BATTLE_DRUM,
+    GOLD_INCENSE,
+    WAR_RATIONS,
+    GUIDING_DOLL,
+    HEALING_BALM,
+    HACHIMAN_BELL,
+    LANTERN,
+    ELEMENT_RUNE,
+    NINJA_SUIT,
+    KAGE_SCROLL,
+    WAR_BATON,
+    BOOK_OF_HEALING,
+    SHEILD_WALL,
+    GOLDEN_RUNE,
+    BOOK_OF_EARTH,
+    BOOK_OF_WATER,
+    BOOK_OF_FIRE,
+    BOOK_OF_WIND,
+    BOOK_OF_AIR
+]
+
+function justOwnedAllCommonItems() => all_of(commonItems, 
+                                             index => bitOffset(INITIAL_LOCATION_ITEM_OWNED_BITFIELD, index) == 1) &&
+                                      any_of(commonItems, 
+                                             index => prev(bitOffset(INITIAL_LOCATION_ITEM_OWNED_BITFIELD, index)) == 0)
+
+function justUnlockItem(key) => bitOffset(INITIAL_LOCATION_ITEM_OWNED_BITFIELD, key) == 1 &&
+                                prev(bitOffset(INITIAL_LOCATION_ITEM_OWNED_BITFIELD, key)) == 0
 
 // $5015F8: (8-bit)(bitfield) Completed Missions for Kenshin Uesugi's The Battle of Anegawa
 //          
@@ -2379,8 +2426,48 @@ function completeYoshimotoOdawaraInfiltration() => byte(0x501838)
 //          0x8c = Survival Mode
 //          0x8d = High Tower
 //          0X8e = Gold Rush
-function currentMissionID() => byte(0x521210)
+// Also known as Scenario
+function currentScenarioId() => byte(0x521210)
 
+// $5211f4: (8-bit) Character Id 
+//          
+//          Controls name on the pause menu 
+//          
+//          0x00 = YUKIMURA 
+//          0x01 = KEIJI 
+//          0x02 = NOBUNAGA 
+//          0x03 = MITSUHIDE 
+//          0x04 = GOEMON 
+//          0x05 = KENSHIN 
+//          0x06 = OICHI 
+//          0x07 = OKUNI 
+//          0x08 = KUNOICHI 
+//          0x09 = MAGOICHI 
+//          0x0A = SHINGEN 
+//          0x0B = MASAMUNE 
+//          0x0C = NOH 
+//          0x0D = HANZO 
+//          0x0E = RANMARU 
+//          0x0F = HIDEYOSHI 
+//          0x10 = YOSHIMOTO 
+//          0x11 = TADAKATSU 
+//          0x12 = INA 
+//          0x13 = NEW_OFFICER01 
+//          0x14 = NEW_OFFICER02 
+//          0x15 = NEW_OFFICER03 
+//          0x16 = NEW_OFFICER04 
+//          0x17 = NEW_OFFICER05 
+//          0x18 = NEW_OFFICER06 
+//          0x19 = NEW_OFFICER07 
+//          0x1A = NEW_OFFICER08 
+//          0x1B = NEW_OFFICER09 
+//          0x1C = NEW_OFFICER10 
+//          0x1D = NEW_OFFICER11 
+//          0x1E = NEW_OFFICER12 
+//          0x1F = NEW_OFFICER13 
+//          0x20 = NEW_OFFICER14 
+//          0x21 = NEW_OFFICER15 
+function characterId() => byte(0x005211f4)
 
 YUKIMURA = 0x00 
 KEIJI = 0x01 
@@ -2792,17 +2879,18 @@ LevelLookup =
     NEW_OFFICER_SIEGE_OF_UEDA: "New Officer's Siege of Ueda",
     NEW_OFFICER_SIEGE_OF_OSAKA_SUMMER_UPPER: "New Officer's Siege Of Osaka - Summer (Upper Path)",
     NEW_OFFICER_SIEGE_OF_OSAKA_SUMMER_LOWER: "New Officer's Siege Of Osaka - Summer (Lower Path)",
-    MELEE_MISSION: "Melee Mission",
-    COMBO_MISSION: "Combo Mission",
-    MUSOU_MISSION: "Musou Mission",
-    ARCHERY_MISSION: "Archery Mission",
-    DEFLECT_MISSION: "Deflect Mission",
-    BURST_MISSION: "Burst Mission",
-    RIDING_MISSION: "Riding Mission",
+    MELEE_MISSION: "Melee",
+    COMBO_MISSION: "Combo",
+    MUSOU_MISSION: "Musou",
+    ARCHERY_MISSION: "Archery",
+    DEFLECT_MISSION: "Deflect",
+    BURST_MISSION: "Burst",
+    RIDING_MISSION: "Riding",
     DEEP_ABYSS: "Deep Abyss",
     HIGH_TOWER: "High Tower",
     GOLD_RUSH: "Gold Rush",
 }
+
 
 MISSION_INFO = "Mission info"
 EXTENDED_MISSION_INFO = "Extra Mission info"
@@ -3318,10 +3406,10 @@ NO_ENDING = 0x03b
 endingNameLookup =
 {
     YUKIMURA_FIRST_ENDING:  "True Warrior",
-    KEIJI_FIRST_ENDING:  "Favored By Heavens",
+    KEIJI_FIRST_ENDING:  "Favored by the Heavens",
     NOBUNAGA_FIRST_ENDING: "Destruction",
     MITSUHIDE_FIRST_ENDING:  "White Blade",
-    GOEMON_FIRST_ENDING:  "Hail to the King",
+    GOEMON_FIRST_ENDING:  "Hail to the King!",
     KENSHIN_FIRST_ENDING:   "Friend and Foe",
     OICHI_FIRST_ENDING:  "Hand in Hand",
     OKUNI_FIRST_ENDING:  "Grand Finale",
@@ -3364,7 +3452,7 @@ endingNameLookup =
     OKUNI_YUKIMURA_ENDING: "Dreams and Illusions (Yukimura)",
     OKUNI_SHINGEN_ENDING:  "Dreams and Illusions (Shingen)",
     OKUNI_KENSHIN_ENDING:  "Dreams and Illusions (Kenshin)",
-    NEW_OFFICER_FIRST: "Way of The Samurai",
+    NEW_OFFICER_FIRST: "The Way of The Samurai",
     NEW_OFFICER_SECOND: "Guardian of the East"
 }
 
@@ -3707,7 +3795,7 @@ function playerjustWonStage() => prev( gameplayIndicator()) == IN_GAME &&
 function playerjustWonSurvival() => prev( gameplayIndicator()) == IN_GAME && 
                                     ( gameplayIndicator() == WON_STAGE ||
                                       gameplayIndicator() == MID_LEVEL_FINISH ) 
-function playerJustFinishedMission() => prev( gameplayIndicator()) == IN_GAME && 
+function playerJustFinishedChallenge() => prev( gameplayIndicator()) == IN_GAME && 
                                         gameplayIndicator() != IN_GAME
 
 // $521260: (8-bit) Ending movie to play.
@@ -3727,8 +3815,8 @@ function playerJustFinishedMission() => prev( gameplayIndicator()) == IN_GAME &&
 //          0x0a = Shingen 1 "Triumph"
 //          0x0b = Masamune 1 "Ambition"
 //          0x0c = Noh 1 "True Love"
-//          0x0d =- Hnazo 1 "Fade to Shadow"
-//          0x0e = "Ranmaru 1 "The Next Life"
+//          0x0d = Hanzo 1 "Fade to Shadow"
+//          0x0e = Ranmaru 1 "The Next Life"
 //          0x0f = Hideyoshi 1 "The Mighty Conqueror"
 //          0x10 = Yoshimoto 1 "The Mighty Warrior"
 //          0x11 = Tadaktsu 1 "Loyalty"
@@ -3746,8 +3834,8 @@ function playerJustFinishedMission() => prev( gameplayIndicator()) == IN_GAME &&
 //          0x1d = Shingen 2 "Sundown"
 //          0x1e = Masamune 2 "Victim of the Times"
 //          0x1f = Noh 2 "The Demon's Wife"
-//          0x20 =- Hnazo 2 "Shadow in the Distance"
-//          0x21 = "Ranmaru 2 "True Intent"
+//          0x20 = Hanzo 2 "Shadow in the Distance"
+//          0x21 = Ranmaru 2 "True Intent"
 //          0x22 = Hideyoshi 2 "A Dream within a Dream"
 //          0x23 = Yoshimoto 2 "Way of the Warrior"
 //          0x24 = Tadaktsu 2 "The Impartial Spear"
@@ -3951,11 +4039,25 @@ function newOfficerRidingProgression() => dword(0x6D71A8)
 // NOTE: On bootup the game is set to Musou mode. 
 function saveProtection() => !optionMenu() && timeSpentInLevelinFrames() != 00
 
+arrayOfNewOfficerSkills =
+[
+    newOfficerMeleeProgression(),
+    newOfficerComboProgression(),
+    newOfficerMusouProgression(),
+    newOfficerArcheryProgression(),
+    newOfficerDeflectProgression(),
+    newOfficerBurstProgression(),
+    newOfficerRidingProgression(),
+]
+
+function newOfficerSixExpertcheck() => tally_of(arrayOfNewOfficerSkills,
+                                              6,  
+                                              index => once( index >= 6  && index < 0xff)
+                                           )
 
 
 
-
-function missionAchievement(key)
+function scenarioAchievementAndLeaderboards(key)
 {
     levelInfo = LevelInfo[key]
     comparision = levelInfo[MISSION_INFO] & levelInfo[EXPECTED_VALUE] == levelInfo[EXPECTED_VALUE] &&
@@ -3974,11 +4076,81 @@ function missionAchievement(key)
                  trigger = comparision &&
                            saveProtection()
     )   
+    
+    leaderboard(
+        title = format("Most Kills on {0}",  LevelLookup[key]),
+        description = format("Get the most kills on {0} and win the scenario",  LevelLookup[key]),
+        start = 
+        (
+            musouOrFreeMode() &&
+            currentScenarioId() == key &&
+            !isSecondPlayerActive() &&
+            playerjustWonStage()
+
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = firstPlayerKoCount(),
+        format = "VALUE"
+    )
+
+    leaderboard(
+        title = format("Fastest Run on {0}", LevelLookup[key]),
+        description = format("Get through the scenario {0} the fastest", LevelLookup[key]),
+        
+        start  =
+        (
+            musouOrFreeMode() &&
+            currentScenarioId() == key &&
+            !isSecondPlayerActive() &&
+            playerjustWonStage()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = timeSpentInLevelinFrames(),
+        format = "FRAMES", 
+        lower_is_better = true 
+    )
+    leaderboard(
+        title = format("Chaos: Most Kills on {0}",  LevelLookup[key]),
+        description = format("Get the most kills on {0} and win the scenario on chaos difficulty",  LevelLookup[key]),
+        start = 
+        (
+            musouOrFreeMode() &&
+            currentScenarioId() == key &&
+            !isSecondPlayerActive() &&
+            playerjustWonStage() &&
+            chaosDifficulty()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = firstPlayerKoCount(),
+        format = "VALUE"
+    )
+
+    leaderboard(
+        title = format("Chaos: Fastest Run on {0}", LevelLookup[key]),
+        description = format("Get through the scenario {0} the fastest on chaos difficulty", LevelLookup[key]),
+        
+        start  =
+        (
+            musouOrFreeMode() &&
+            currentScenarioId() == key &&
+            !isSecondPlayerActive() &&
+            playerjustWonStage() &&
+            chaosDifficulty()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = timeSpentInLevelinFrames(),
+        format = "FRAMES", 
+        lower_is_better = true 
+    )
 }
 
 for key in LevelInfo
 {
-    missionAchievement(key)
+    scenarioAchievementAndLeaderboards(key)
 }
 
 function endingAchievement(key, points)
@@ -4046,11 +4218,11 @@ achievement( title = "Top-Tier Officers",
 function chaosAchievement(key) 
 {
     achievement(title = format("Chaos Mode: {0}" , CharacterNameLookup[key]),
-                description = "Beat each of {0}'s story scenarios on Chaos Difficulty in one session in story mode or free mode" , 
+                description = "Beat each of {0}'s story scenarios on Chaos Difficulty in one session in Story Mode or Free Mode" , 
                 points = 10,
                 trigger = measured(tally_of(range(LevelLineup[key][FIRST],LevelLineup[key][LAST]), 
                                             LevelLineup[key][LAST]-LevelLineup[key][FIRST] + 1,  
-                                            index => once( CurrentStageID() == index && 
+                                            index => once( currentScenarioId() == index && 
                                                  playerjustWonStage() &&
                                                  musouOrFreeMode() &&
                                                  chaosDifficulty() &&
@@ -4067,32 +4239,341 @@ for key in LevelLineup
     chaosAchievement(key)
 }
 
+achievement( title = "Commons Collection", 
+             description = "Collect Every Common item",
+             points = 5, 
+             trigger = justOwnedAllCommonItems() &&
+                       saveProtection()
+            )
 
-// Get all common items
-// 
-// Get all rare items
-// 
-// PAcifist (no kills) 
-// 
-// Level 50+ common items. 
-// 
-// All characters level 20.
-// 
-// Beat the leaderboards for Challenges.
-// 
-// Beat leaderboards for Survival. 
-// 
-// New Officer find special characters/skills
-// 
-// Face Unlocks
-// 
-// 6 new officer skills hit expert.
+achievement( title = "Commons Champion", 
+             description = "Get Every Common item to have at least 50 item power",
+             points = 5, 
+             trigger = itemsReachedAtXPower(50) &&
+                       saveProtection()
+            )
+
+function musouRareItemAchievement(key) 
+{
+    achievement(title = itemLookup[key],
+                description = format("Obtain {0} in Story Mode or Free Mode", itemLookup[key]),
+                points = 5,
+                trigger = itemHasDropped(key) &&
+                          !isSecondPlayerActive() &&
+                          saveProtection() &&
+                          musouOrFreeMode() &&
+                          trigger_when(playerjustWonStage())
+                )
+}
+
+function oneTimeMission(key) 
+{
+    achievement(title = itemLookup[key],
+                description = format("Obtain {0} for the first time in New Officer Mode", itemLookup[key]),
+                points = 5,
+                trigger = justUnlockItem(key) &&
+                          newOfficerMode()
+                )
+}
+
+function oneTimeSurvival(key) 
+{
+    achievement(title = itemLookup[key],
+                description = format("Obtain {0} for the first time in Survival Mode", itemLookup[key]),
+                points = 5,
+                trigger = justUnlockItem(key) &&
+                          survivalMode()
+                )
+}
+
+function survivalRareItemAchievement(key) 
+{
+    achievement(title = itemLookup[key],
+                description = format("Obtain {0} in Story Mode or Free Mode", itemLookup[key]),
+                points = 5,
+                trigger = itemHasDropped(key) &&
+                          !isSecondPlayerActive() &&
+                          saveProtection() &&
+                          survivalMode()
+                )
+}
+
+function versusRareItemAchievement(key) 
+{
+    achievement(title = itemLookup[key],
+                description = format("Obtain {0} in Versus Mode", itemLookup[key]),
+                points = 5,
+                trigger = itemHasDropped(key) &&
+                          !isSecondPlayerActive() &&
+                          saveProtection() &&
+                          survivalMode()
+                )
+}
+
+
+musouRareItemAchievement(ARABIAN_SADDLE)
+musouRareItemAchievement(MATSUKAZE_SADDLE)
+musouRareItemAchievement(HORSE_ARMOR)
+musouRareItemAchievement(WARRIORS_TALE)
+musouRareItemAchievement(BATTLE_DRUM)
+musouRareItemAchievement(GOLD_INCENSE)
+oneTimeMission(WAR_RATIONS)
+musouRareItemAchievement(GUIDING_DOLL)
+survivalRareItemAchievement(HEALING_BALM)
+musouRareItemAchievement(HACHIMAN_BELL)
+musouRareItemAchievement(LANTERN)
+musouRareItemAchievement(ELEMENT_RUNE)
+musouRareItemAchievement(NINJA_SUIT)
+musouRareItemAchievement(KAGE_SCROLL)
+versusRareItemAchievement(WAR_BATON)
+musouRareItemAchievement(BOOK_OF_HEALING)
+musouRareItemAchievement(NINJA_SUIT)
+musouRareItemAchievement(SHEILD_WALL)
+oneTimeSurvival(GOLDEN_RUNE)
+survivalRareItemAchievement(BOOK_OF_EARTH)
+survivalRareItemAchievement(BOOK_OF_WATER)
+survivalRareItemAchievement(BOOK_OF_FIRE)
+survivalRareItemAchievement(BOOK_OF_WIND)
+survivalRareItemAchievement(BOOK_OF_AIR)
+
+achievement( title = "Pacifist",
+                description = "Complete a scenario with out killing anyone in Story Mode or Free Mode",
+                points = 3,
+                trigger = musouOrFreeMode() &&
+                        !isSecondPlayerActive() &&
+                        firstPlayerKoCount() == 0 &&
+                        playerjustWonStage()
+)
+
+function missionLeaderboardAchievementAndLeaderboard(missionId, title, description, target, value)
+{
+    achievement( title = title,
+                description = description,
+                points = 5,
+                trigger = challengeMode() &&
+                          currentScenarioId() == missionId &&
+                          !isSecondPlayerActive() &&
+                          target > value &&
+                          playerJustFinishedChallenge()
+    )
+
+    leaderboard(
+        title = format("Best Score on {0}", LevelLookup[missionId]),
+        description = format("Get the highest score on {0} challenge", LevelLookup[missionId]),
+        
+        start  =
+        (
+            challengeMode() &&
+            currentScenarioId() == missionId &&
+            !isSecondPlayerActive() &&
+            playerJustFinishedChallenge()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = target,
+        format = "VALUE" 
+    )
+}
+
+function missionLeaderboardAchievementAndLeaderboardLesser(missionId, title, description, target, value)
+{
+    achievement( title = title,
+                description = description,
+                points = 5,
+                trigger = challengeMode() &&
+                          currentScenarioId() == missionId &&
+                          !isSecondPlayerActive() &&
+                          target <= value &&
+                          playerJustFinishedChallenge()
+    )
+
+    leaderboard(
+        title = format("Fastest Run on {0}", LevelLookup[missionId]),
+        description = format("Get through the {0} challenge the fastest", LevelLookup[missionId]),
+        
+        start  =
+        (
+            challengeMode() &&
+            currentScenarioId() == missionId &&
+            !isSecondPlayerActive() &&
+            playerJustFinishedChallenge()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = timeSpentInLevelinFrames(),
+        format = "FRAMES", 
+        lower_is_better = true 
+    )
+}
+
+missionLeaderboardAchievementAndLeaderboard(missionId = MELEE_MISSION,
+                              title = "Melee Master",
+                              description = "Earn more than 514 KOs for Melee in Challenge Mode", 
+                              target = firstPlayerKoCount(),
+                              value = 514)
+missionLeaderboardAchievementAndLeaderboard(missionId = COMBO_MISSION,
+                              title = "Combo Champion",
+                              description = "Earn more than 113 points for Combo in Challenge Mode", 
+                              target = comboTrainingScore(),
+                              value = 113)
+missionLeaderboardAchievementAndLeaderboard(missionId = MUSOU_MISSION,
+                              title = "Musou Maniac",
+                              description = "Earn more than 702 KOs for Musous in Challenge Mode", 
+                              target = firstPlayerKoCount(),
+                              value = 113)
+missionLeaderboardAchievementAndLeaderboard(missionId = ARCHERY_MISSION,
+                              title = "Archery Ace",
+                              description = "Earn more than 41 Kos for Archery in Challenge Mode", 
+                              target = firstPlayerKoCount(),
+                              value = 41)
+missionLeaderboardAchievementAndLeaderboard(missionId = DEFLECT_MISSION,
+                              title = "Deflect Demon",
+                              description = "Earn more than 74 Kos for Archery in Challenge Mode", 
+                              target = firstPlayerKoCount(),
+                              value = 74)
+missionLeaderboardAchievementAndLeaderboard(missionId = DEFLECT_MISSION,
+                              title = "Deflect Demon",
+                              description = "Earn more than 74 Kos for Archery in Challenge Mode", 
+                              target = firstPlayerKoCount(),
+                              value = 74)
+missionLeaderboardAchievementAndLeaderboardLesser(missionId = BURST_MISSION,
+                              title = "Blazing Burst",
+                              description = "Finish Burst in Challenge Mode with 1'09'26 still on the clock", 
+                              target = timeSpentInLevelinFrames(),
+                              value = (2*60*60) - (((1 * 60 + 9) * 60) +26) )
+
+missionLeaderboardAchievementAndLeaderboardLesser(missionId = RIDING_MISSION,
+                              title = "Rapid Riding",
+                              description = "Finish Burst in Challenge Mode with 1'12'00 still on the clock", 
+                              target = timeSpentInLevelinFrames(),
+                              value = ((4*60 + 30 )*60) - (((1 * 60 + 9) * 60) +26) )
+
+function survivalLeaderboardAchievement(missionId, title, description, target, value)
+{
+    achievement( title = title,
+                description = description,
+                points = 5,
+                trigger = survivalMode() &&
+                          !isSecondPlayerActive() &&
+                          target > value &&
+                          playerjustWonSurvival()
+    )
+
+    leaderboard(
+        title = format("Best Score on {0}", LevelLookup[missionId]),
+        description = format("Get the highest score on {0} challenge", LevelLookup[missionId]),
+        
+        start  =
+        (
+            survivalMode() &&
+            currentScenarioId() == missionId &&
+            !isSecondPlayerActive() &&
+            playerjustWonSurvival()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = target,
+        format = "VALUE" 
+    )
+}
+
+survivalLeaderboardAchievement(missionId = GOLD_RUSH,
+                              title = "Godly Gold Rush",
+                              description = "Survive Gold Rush in Survival Mode with 7000G ", 
+                              target = goldInGoldRush(),
+                              value = ((4*60 + 30 )*60) - (((1 * 60 + 9) * 60) +26)  )
+survivalLeaderboardAchievement(missionId = DEEP_ABYSS,
+                              title = "Godly Gold Rush",
+                              description = "Finish Deep Abyss in Survival Mode with 2000 KOs", 
+                              target = firstPlayerKoCount(),
+                              value = 2000)
+survivalLeaderboardAchievement(missionId = HIGH_TOWER,
+                              title = "Holy High Tower",
+                              description = "Finish High Tower in Survival Mode with over 30 floor complete", 
+                              target = survivalFloorLevel(),
+                              value = 30)
+
+function newOfficerAchievement(title, description, target)
+{
+    achievement( title = title,
+                description = description,
+                points = 5,
+                trigger = newOfficerMode() &&
+                          target
+                )
+}
+
+newOfficerAchievement(title = "Musket Mastery",
+                      description = "Learn the Musket Skill from Magoichi Saika in New Officer Mode",
+                      target = newOfficerMusketUnlock())
+newOfficerAchievement(title = "Fulfilling Frenzy",
+                      description = "Learn the Frenzy Skill from Ranmaru Mori in New Officer Mode",
+                      target = newOfficerFrenzyUnlock())
+newOfficerAchievement(title = "Reliable Reach ",
+                      description = "Learn the Reach Skill from Kenji Maeda in New Officer Mode",
+                      target = newOfficerReachUnlock())
+newOfficerAchievement(title = "Robust Rage",
+                      description = "Learn the Rage Skill from Masamune Date in New Officer Mode",
+                      target = newOfficerRageUnlock())
+newOfficerAchievement(title = "Dynamic Drive",
+                      description = "Learn the Drive Skill from Okuni in New Officer Mode",
+                      target = newOfficerDriveUnlock())
+newOfficerAchievement(title = "Full Focus",
+                      description = "Learn the Focus Skill from Kunoichi in New Officer Mode",
+                      target = newOfficerFocusUnlock())
+newOfficerAchievement(title = "Flourishing Fortitude",
+                      description = "Learn the Fortitude Skill from Dokkimaru in New Officer Mode",
+                      target = newOfficerFortitudeUnlock())
+newOfficerAchievement(title = "Diligent Discern",
+                      description = "Learn the Frenzy Skill from Ranmaru Mori in New Officer Mode",
+                      target = newOfficerDiscernUnlock())
+
+achievement(title = "Visage Variety",
+            description = "Unlock four additional faces for your new officer",
+            points = 5,
+            trigger = newOfficerMode() &&
+                      newOfficerFaceUnlock()
+)
+
+achievement(title = "Steller Student",
+            description = "Reach expert tier for six of the classes for a New Officer",
+            points = 10,
+            trigger = newOfficerMode() && 
+                      newOfficerSixExpertcheck() &&
+                      never(!newOfficerMode()) 
+            )
+
+rich_presence_conditional_display(optionMenu(), "In The Menus")
+
+rich_presence_conditional_display(versusMode(), "In Versus Mode")
+
+rich_presence_conditional_display(challengeMode(), "Challenge Mode: {0} attempting {1}",
+                                  rich_presence_lookup("CharacterNameLookup", characterId(), CharacterNameLookup), 
+                                  rich_presence_lookup("LevelLookup", currentScenarioId(), LevelLookup))
+
+
+rich_presence_conditional_display(survivalMode(), "Survival Mode: {0} attempting {1}",
+                                  rich_presence_lookup("CharacterNameLookup", characterId(), CharacterNameLookup), 
+                                  rich_presence_lookup("LevelLookup", currentScenarioId(), LevelLookup))
+
+
+rich_presence_conditional_display(newOfficerMode(), "New Officer Mode: Creating a new character")
+
+rich_presence_conditional_display(musouMode(), "Story Mode: {0} playing through {1}",
+                                  rich_presence_lookup("CharacterNameLookup", characterId(), CharacterNameLookup), 
+                                  rich_presence_lookup("LevelLookup", currentScenarioId(), LevelLookup))
+
+
+rich_presence_conditional_display(freeMode(), "Free Mode: {0} playing through {1}",
+                                  rich_presence_lookup("CharacterNameLookup", characterId(), CharacterNameLookup), 
+                                  rich_presence_lookup("LevelLookup", currentScenarioId(), LevelLookup))
+
+// Unknown 
+rich_presence_display("In Menus.") //Intentionally slightly different to say "issue with RP, with out saying issue with RP"
+
 
 // One of every skill on a single character?
 
-// Need character ID. 
-
-// Need to make sure where the exp Level is for the New Officers. 
 
 
 
