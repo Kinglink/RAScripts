@@ -3452,7 +3452,7 @@ endingNameLookup =
     OKUNI_YUKIMURA_ENDING: "Dreams and Illusions (Yukimura)",
     OKUNI_SHINGEN_ENDING:  "Dreams and Illusions (Shingen)",
     OKUNI_KENSHIN_ENDING:  "Dreams and Illusions (Kenshin)",
-    NEW_OFFICER_FIRST: "The Way of The Samurai",
+    NEW_OFFICER_FIRST: "Way of The Samurai",
     NEW_OFFICER_SECOND: "Guardian of the East"
 }
 
@@ -4056,7 +4056,6 @@ function newOfficerSixExpertcheck() => tally_of(arrayOfNewOfficerSkills,
                                            )
 
 
-
 function scenarioAchievementAndLeaderboards(key)
 {
     levelInfo = LevelInfo[key]
@@ -4070,7 +4069,7 @@ function scenarioAchievementAndLeaderboards(key)
                         prev(levelInfo[EXTENDED_MISSION_INFO]) & levelInfo[EXTENDED_EXPECTED_VALUE] != levelInfo[EXTENDED_EXPECTED_VALUE]
                       )
     }
-    achievement( title = LevelLookup[key],
+    achievement( title = format("{0} Missions", LevelLookup[key]),
                  description = format("Complete every mission in {0} in Story Mode or Free Mode", LevelLookup[key]),
                  points = levelInfo[POINTS],
                  trigger = comparision &&
@@ -4148,10 +4147,7 @@ function scenarioAchievementAndLeaderboards(key)
     )
 }
 
-for key in LevelInfo
-{
-    scenarioAchievementAndLeaderboards(key)
-}
+
 
 function endingAchievement(key, points)
 {
@@ -4180,6 +4176,31 @@ for key in range(OKUNI_NOBUNAGA_ENDING, OKUNI_KENSHIN_ENDING)
     endingAchievement(key = key, points = 2)
 }
 
+
+function chaosAchievement(key) 
+{
+    achievement(title = format("Chaos Mode: {0}" , CharacterNameLookup[key]),
+                description = format("Beat each of {0}'s story scenarios on Chaos Difficulty in one session in Story Mode or Free Mode", CharacterNameLookup[key] ), 
+                points = 10,
+                trigger = measured(tally_of(range(LevelLineup[key][FIRST],LevelLineup[key][LAST]), 
+                                            LevelLineup[key][LAST]-LevelLineup[key][FIRST] + 1,  
+                                            index => once( currentScenarioId() == index && 
+                                                 playerjustWonStage() &&
+                                                 musouOrFreeMode() &&
+                                                 chaosDifficulty() &&
+                                                 !isSecondPlayerActive() &&
+                                                 saveProtection()
+                                                 )
+                                           )
+                                  )
+                )
+}
+
+for key in LevelLineup
+{
+    chaosAchievement(key)
+}
+
 function weaponAchievement(key, points, difficulty)
 {
     achievement( title = weaponNameLookup[key],
@@ -4204,6 +4225,7 @@ for key in sixthWeapons
     weaponAchievement(key = key, points = 10, difficulty = chaosDifficulty())
 }
 
+
 achievement( title = "Top-Tier Officers",
              description = "Reach level 20 with all your officers and one of the new officers",
              points = 10,
@@ -4215,29 +4237,6 @@ achievement( title = "Top-Tier Officers",
             )
 
 
-function chaosAchievement(key) 
-{
-    achievement(title = format("Chaos Mode: {0}" , CharacterNameLookup[key]),
-                description = "Beat each of {0}'s story scenarios on Chaos Difficulty in one session in Story Mode or Free Mode" , 
-                points = 10,
-                trigger = measured(tally_of(range(LevelLineup[key][FIRST],LevelLineup[key][LAST]), 
-                                            LevelLineup[key][LAST]-LevelLineup[key][FIRST] + 1,  
-                                            index => once( currentScenarioId() == index && 
-                                                 playerjustWonStage() &&
-                                                 musouOrFreeMode() &&
-                                                 chaosDifficulty() &&
-                                                 !isSecondPlayerActive() &&
-                                                 saveProtection()
-                                                 )
-                                           )
-                                  )
-                )
-}
-
-for key in LevelLineup
-{
-    chaosAchievement(key)
-}
 
 achievement( title = "Commons Collection", 
              description = "Collect Every Common item",
@@ -4335,6 +4334,13 @@ survivalRareItemAchievement(BOOK_OF_WATER)
 survivalRareItemAchievement(BOOK_OF_FIRE)
 survivalRareItemAchievement(BOOK_OF_WIND)
 survivalRareItemAchievement(BOOK_OF_AIR)
+
+
+
+for key in LevelInfo
+{
+    scenarioAchievementAndLeaderboards(key)
+}
 
 achievement( title = "Pacifist",
                 description = "Complete a scenario with out killing anyone in Story Mode or Free Mode",
@@ -4573,6 +4579,7 @@ rich_presence_display("In Menus.") //Intentionally slightly different to say "is
 
 
 // One of every skill on a single character?
+
 
 
 
