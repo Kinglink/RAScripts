@@ -459,7 +459,7 @@ function saddlePower() => byte(MEMORY_LOCATION_SADDLE_POWER)
 function itemsReachedAtXPower(PowerLevel) => all_of(range(MEMORY_LOCATION_SOLAR_GEM_POWER,MEMORY_LOCATION_SADDLE_POWER), 
                                                         index => byte(index) >= PowerLevel) &&
                                              any_of(range(MEMORY_LOCATION_SOLAR_GEM_POWER,MEMORY_LOCATION_SADDLE_POWER), 
-                                                        index => byte(index) < PowerLevel)
+                                                        index => prev(byte(index)) < PowerLevel)
 
 // $50134E: (8-bit)(Bitfield)  Item Owned Bitfield (1 of 5)
 //          
@@ -4326,7 +4326,6 @@ musouRareItemAchievement(NINJA_SUIT)
 musouRareItemAchievement(KAGE_SCROLL)
 versusRareItemAchievement(WAR_BATON)
 musouRareItemAchievement(BOOK_OF_HEALING)
-musouRareItemAchievement(NINJA_SUIT)
 musouRareItemAchievement(SHEILD_WALL)
 oneTimeSurvival(GOLDEN_RUNE)
 survivalRareItemAchievement(BOOK_OF_EARTH)
@@ -4434,12 +4433,7 @@ missionLeaderboardAchievementAndLeaderboard(missionId = ARCHERY_MISSION,
                               value = 41)
 missionLeaderboardAchievementAndLeaderboard(missionId = DEFLECT_MISSION,
                               title = "Deflect Demon",
-                              description = "Earn more than 74 Kos for Archery in Challenge Mode", 
-                              target = firstPlayerKoCount(),
-                              value = 74)
-missionLeaderboardAchievementAndLeaderboard(missionId = DEFLECT_MISSION,
-                              title = "Deflect Demon",
-                              description = "Earn more than 74 Kos for Archery in Challenge Mode", 
+                              description = "Earn more than 74 Kos for Deflect in Challenge Mode", 
                               target = firstPlayerKoCount(),
                               value = 74)
 missionLeaderboardAchievementAndLeaderboardLesser(missionId = BURST_MISSION,
@@ -4489,7 +4483,7 @@ survivalLeaderboardAchievement(missionId = GOLD_RUSH,
                               target = goldInGoldRush(),
                               value = ((4*60 + 30 )*60) - (((1 * 60 + 9) * 60) +26)  )
 survivalLeaderboardAchievement(missionId = DEEP_ABYSS,
-                              title = "Godly Gold Rush",
+                              title = "Devilish Deep Abyss",
                               description = "Finish Deep Abyss in Survival Mode with 2000 KOs", 
                               target = firstPlayerKoCount(),
                               value = 2000)
