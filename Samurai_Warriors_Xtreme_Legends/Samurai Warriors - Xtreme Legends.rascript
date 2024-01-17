@@ -34,8 +34,9 @@ function pointerToFirstPlayerObject() => word(0x4F8530)
 //          
 //          0x00= Player one controls the second player
 //          0x01 = Second player's inputs accepted
-function secondPlayerController() => byte(0x4F8585)
-SECOND_PLAYER_CONTROLLER_ENABLE = 0x01
+// THIS HAS BEEN PROVEN FALSE, Don't Use
+//function secondPlayerController() => byte(0x4F8585)
+// SECOND_PLAYER_CONTROLLER_ENABLE = 0x01
 
 // $4F8586: (8-bit) Second Player animation Control
 //          
@@ -44,7 +45,7 @@ SECOND_PLAYER_CONTROLLER_ENABLE = 0x01
 function secondPlayerAnimation() => byte(0x4F8586)
 SECOND_PLAYER_ANIMATION_CONTROL = 0x01
 
-function isSecondPlayerActive() => secondPlayerController() == SECOND_PLAYER_CONTROLLER_ENABLE || secondPlayerAnimation() == SECOND_PLAYER_ANIMATION_CONTROL
+function isSecondPlayerActive() => secondPlayerAnimation() == SECOND_PLAYER_ANIMATION_CONTROL
 
 // $4FF7E4: (352-bit) Yukimura Sanada's stats
 //          
@@ -3732,8 +3733,13 @@ function itemHasDropped(targetId) => any_of(range(0, NUM_DROPPED_ITEMS - 1), ind
 MEMORY_LOCATION_OF_DROPPED_WEAPON = 0x5212E8
 function firstDroppedWeapon() => dword(MEMORY_LOCATION_OF_DROPPED_WEAPON)
 
+
+// 521308: (8-bit) Weapon ID for second character 
+MEMORY_LOCATION_OF_SECOND_DROPPED_WEAPON = 0x521308
+
+
 NUM_DROPPED_WEAPON = 8
-SIZE_OF_DROPPED_WEAPON = 20
+SIZE_OF_DROPPED_WEAPON = MEMORY_LOCATION_OF_SECOND_DROPPED_WEAPON - MEMORY_LOCATION_OF_DROPPED_WEAPON
 function weaponHasDropped(targetId) => any_of(range(0, NUM_DROPPED_WEAPON - 1), index => byte(MEMORY_LOCATION_OF_DROPPED_WEAPON + (index * SIZE_OF_DROPPED_WEAPON )) == targetId )
 
 // $52140C: (8-bit) Actual Value of Points
@@ -3875,19 +3881,18 @@ function timeSpentInLevelinFrames() => dword(0x521438)
 //          Does not appear to be the "real value"
 function goldInGoldRush() => word(0x521668)
 
-// $52533D: (8-bit) In-Game Difficulty
+// $521230: (8-bit) In-Game Difficulty
 //          
+//          Changing this will change what your "Difficulty" is on your in game save. 
 //          0x01 = Novice
 //          0x02 = Easy
 //          0x03 = Normal
 //          0x04 = Hard
 //          0x05 = Chaos
-//          
-//          If this is ever shown to be false, check 0x005255dd
-function inGameDifficulty() => byte(0x52533D)
+function inGameDifficulty() => byte(0x521230)
 
-HARD_DIFFICULTY = 0x04
-CHAOS_DIFFICULTY = 0x05
+HARD_DIFFICULTY = 0x03
+CHAOS_DIFFICULTY = 0x04
 
 function hardDifficulty() => inGameDifficulty() >= HARD_DIFFICULTY
 function chaosDifficulty() => inGameDifficulty() >= CHAOS_DIFFICULTY
@@ -4201,10 +4206,11 @@ for key in LevelLineup
     chaosAchievement(key)
 }
 
-function weaponAchievement(key, points, difficulty)
+function weaponAchievement(key, points, difficulty, difficultyString)
 {
+    
     achievement( title = weaponNameLookup[key],
-                 description = format("Obtain {0} in Story Mode or Free Mode", weaponDescriptionLookup[key]),
+                 description = format("Obtain {0} on {1} in Story Mode or Free Mode", weaponDescriptionLookup[key], difficultyString),
                  points = points,
                  trigger = musouOrFreeMode() &&
                            weaponHasDropped(key) &&
@@ -4214,15 +4220,14 @@ function weaponAchievement(key, points, difficulty)
     )   
 }
 
-
 for key in fifthWeapons
 {
-    weaponAchievement(key = key, points = 5, difficulty = hardDifficulty())
+    weaponAchievement(key = key, points = 5, difficulty = hardDifficulty(), difficultyString = "hard difficulty")
 }
 
 for key in sixthWeapons
 {
-    weaponAchievement(key = key, points = 10, difficulty = chaosDifficulty())
+    weaponAchievement(key = key, points = 10, difficulty = chaosDifficulty(), difficultyString = "chaos difficulty")
 }
 
 
