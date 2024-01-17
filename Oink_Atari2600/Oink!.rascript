@@ -8,8 +8,12 @@
 //        0x02 = Game Mode 3 (Two Player, Wolf Controlled by other controller
 function gameMode() => byte(0x000000)
 
-SINGLE_PLAYER_VALUE == 0x0
+SINGLE_PLAYER_VALUE = 0x0
 function singlePlayer() => gameMode() == SINGLE_PLAYER_VALUE
+TWO_VS_CPU_VALUE = 0x1
+TWO_VS_PLAYER_VALUE = 0x2
+function twoVsCpuMode() => gameMode() == TWO_VS_CPU_VALUE
+function twoVsPlayerMode() => gameMode() == TWO_VS_PLAYER_VALUE
 
 // $0007: (8-bit) Lives Left/Stage
 //        
@@ -19,7 +23,10 @@ function singlePlayer() => gameMode() == SINGLE_PLAYER_VALUE
 function livesLeft() => byte(0x000007)
 
 FIRST_LIFE_VALUE = 0x02
+SECOND_LIFE_VALUE = 0x01
 function firstLife() => livesLeft() == FIRST_LIFE_VALUE
+function justLostFirstLife() => prev(livesLeft()) == FIRST_LIFE_VALUE &&
+                                livesLeft() == SECOND_LIFE_VALUE
 
 // $003D: (8-bit) Pig X Position
 //        
@@ -41,73 +48,167 @@ DIFFICULTY_A_REQUIREMENT_VALUE = 0x32
 //        0x0 = Game started
 //        0x4 = Displaying Game Mode, waiting for game start
 //        0x8 = Demo Started
-function gameState() => upper4(0x000050)
+function gameState() => high4(0x000050)
 
 GAME_STARTED_VALUE = 0x0
-
+DEMO_STARTED_VALUE = 0x8
 function noDemo() => gameState() == GAME_STARTED_VALUE 
+function inDemo() => gameState() == DEMO_STARTED_VALUE
 
 // $0054: (8-bit) 0000XX BCD values for score.
 function scoreTensOnes() => byte(0x000054)
+function scoreTens()=> high4(0x000054)
+function scoreOnes()=> low4(0x000054)
 
 // $0056: (8-bit) 00XX00 BCD values for Score
 function scoreHundredsThousands() => byte(0x000056)
+function scoreThousands() => high4(0x000056)
+function scoreHundreds() => low4(0x000056)
 
 // $0058: (8-bit) XX0000 BCD Value for Bits
 function scoreTenThousands() => byte(0x000058)
+function scoreTenThousand() => low4(0x000058)
+function scoreHundredThousand() => high4(0x000058)
 
-function actualScore() => (BCD(scoreTenThousands()) * 10000) + (BCD(scoreHundredsThousands()) * 100)  + BCD(scoreTenOnes())
+function actualScore() => (bcd(scoreTenThousands()) * 10000) + (bcd(scoreHundredsThousands()) * 100)  + bcd(scoreTensOnes())
 
-function prevScore() => (BCD(prev(scoreTenThousands())) * 10000) + (BCD(prev(scoreHundredsThousands())) * 100)  + BCD(prev(scoreTenOnes()))
+function prevScore() => (prev(scoreHundredThousand()) * 100000) + 
+                        (prev(scoreTenThousand()) * 10000) + 
+                        (prev(scoreThousands()) * 1000)  + 
+                        (prev(scoreHundreds()) * 100)  + 
+                        (prev(scoreTens()) * 10)  + 
+                        prev(scoreOnes())
 
-function difficultyBDetection() => actualScore() > prevScore() && pigYPosition() > DIFFICULTY_A_REQUIREMENT_VALUE
+// $005E: (8-bit) Game over Indicator
+//
+//        Cycles between different numbers when pigs walk on the stage and die.  
+//
+//        0xe6 when game is over. 
+function gameOverIndicator() => byte(0x005E)
+
+GAME_OVER_VALUE = 0xE6
+function isGameOver() => gameOverIndicator() == GAME_OVER_VALUE
+
+function gameOverFirstLife() => isGameOver() && firstLife()
+
+function difficultyBDetection() => actualScore() > prevScore() && pigYPosition() < DIFFICULTY_A_REQUIREMENT_VALUE
+
+function requirementsForAllAchievements() => noDemo() && singlePlayer()
+
+function oneLifeAchievement(title, description, points, target)
+{
+    achievement(title = title,
+                description = description,
+                points = points,
+                trigger = requirementsForAllAchievements() &&
+                          prevScore() < target &&
+                          actualScore() > target &&
+                          firstLife()
+    )
+}
+
+function fullGameAchievement(title, description, points, target)
+{
+    achievement(title = title,
+                description = description,
+                points = points,
+                trigger = requirementsForAllAchievements() &&
+                          prevScore() < target &&
+                          actualScore() > target
+    )
+}
+
+function difficultyAAchievement(title, description, points, target)
+{
+    achievement(title = title,
+                description = description,
+                points = points,
+                trigger = requirementsForAllAchievements() &&
+                          trigger_when(prevScore() < target &&
+                                       actualScore() > target) &&
+                          once(actualScore() == 0) &&
+                          never(difficultyBDetection()) 
+    )
+}
+
+fullGameAchievement("Holding the Wall", "Earn 10,000 points in Game Mode 1", 2, 10000)
+fullGameAchievement("Oinkers", "Earn 25,000 points to earn your Activision Badge in Game Mode 1", 5, 25000)
+fullGameAchievement("Swine Savant", "Earn 100,000 points in Game Mode 1", 25, 100000 ) 
+
+oneLifeAchievement("Even Straw Can Stop A Wolf", "Earn 10,000 points in a single life in Game Mode 1", 3, 10000 ) 
+oneLifeAchievement("Expert Oinkers", "Earn 25,000 points in a single life in Game Mode 1", 10, 25000 ) 
+oneLifeAchievement("Solo Swine Savant", "Earn 100,000 points in a single life in Game Mode 1", 25, 100000 ) 
+
+difficultyAAchievement("Hogwall Hero", "Earn 1,000 with both difficulty switches set to A in Game Mode 1", 5, 1000)
+difficultyAAchievement("Superior Swine", "Earn 5,000 with both difficulty switches set to A in Game Mode 1", 10, 5000)
+difficultyAAchievement("Perfect Porker", "Earn 10,000 with both difficulty switches set to A in Game Mode 1", 25, 10000)
 
 
-10k in one life achievement.
 
-25k in 3 lives achievement
-
-100k in 3 lives achievement
-10k in 3 lives achievement
-
-1k on Difficulty A 
-10k on Difficulty A 
-
-Leaderboard  
-
-One Life Difficulty A 
-One Life Difficulty B 
-Difficulty A 
-Difficulty B 
-
-Real presence 
-
-
-
-achievement(
-    title = "Score +100 Level 1", points = 1,
-    description = "Score +100 Level 1",
-    id = 210833, badge = "00000", published = "4/12/2022 9:51:59 PM", modified = "4/14/2022 7:07:02 PM",
-    trigger = gameMode() == 0 && prev(scoreHundredsThousands()) == 0 && scoreHundredsThousands() == 1
+leaderboard(
+    title = "Highest Score",
+    description = "Get the highest score in Game Mode 1",
+    start  = once(actualScore() == 0) &&
+             isGameOver() &&
+             never(!requirementsForAllAchievements()),
+    cancel = always_false(),
+    submit = always_true(),
+    value = actualScore(),
+    format = "SCORE"
 )
 
-achievement(
-    title = "Score +1000", points = 1,
-    description = "Score +1000",
-    id = 210834, badge = "00000", published = "4/12/2022 9:52:05 PM", modified = "4/12/2022 9:52:05 PM",
-    trigger = scoreHundredsThousands() == 16
+leaderboard(
+    title = "Highest Score One Life",
+    description = "Get the highest score in Game Mode 1",
+    start  = once(actualScore() == 0) &&
+             (justLostFirstLife() || 
+              gameOverFirstLife() )&&
+             never(!requirementsForAllAchievements()),
+    cancel = always_false(),
+    submit = always_true(),
+    value = actualScore(),
+    format = "SCORE"
 )
 
-achievement(
-    title = "Score +500 Level 1", points = 2,
-    description = "Score +500 Level 1",
-    id = 210835, badge = "00000", published = "4/12/2022 9:52:10 PM", modified = "4/17/2022 12:56:03 AM",
-    trigger = scoreHundredsThousands() == 5 && prev(scoreHundredsThousands()) == 4 && gameMode() == 0
+leaderboard(
+    title = "Highest Score Hard Difficulty",
+    description = "Get the highest score in Game Mode 1 with both Difficulties set to A",
+    start  = once(actualScore() == 0) &&
+             isGameOver() &&
+             never(difficultyBDetection() || 
+             !requirementsForAllAchievements()),
+    cancel = always_false(),
+    submit = always_true(),
+    value = actualScore(),
+    format = "SCORE"
 )
 
-achievement(
-    title = "Score +1000 Level 1", points = 3,
-    description = "Score +1000 Level 1",
-    id = 211699, badge = "00000", published = "4/17/2022 12:56:28 AM", modified = "4/17/2022 12:56:28 AM",
-    trigger = scoreHundredsThousands() == 16 && prev(scoreHundredsThousands()) == 9 && gameMode() == 0
+leaderboard(
+    title = "Highest Score One Life Hard Difficulty",
+    description = "Get the highest score in Game Mode 1 with both Difficulties set to A",
+    start  = once(actualScore() == 0) &&
+             (justLostFirstLife() || 
+              gameOverFirstLife() )&&
+             never(difficultyBDetection() || 
+             !requirementsForAllAchievements()),
+    cancel = always_false(),
+    submit = always_true(),
+    value = actualScore(),
+    format = "SCORE"
+)
+
+
+rich_presence_conditional_display(inDemo(), "Watching the demo")
+
+rich_presence_conditional_display(singlePlayer() && noDemo(), "Lives: {0}, Score: {1}",
+                                  rich_presence_value("Number", livesLeft()),
+                                  rich_presence_value("Score", actualScore())
+)
+
+rich_presence_conditional_display(twoVsCpuMode() && noDemo(), "Playing Two Player VS CPU")
+
+rich_presence_conditional_display(twoVsPlayerMode() && noDemo(), "Playing Two Player VS Player")
+
+rich_presence_display( "Considering game mode {0}",
+    rich_presence_value("Number", gameMode() + 1)
 )
