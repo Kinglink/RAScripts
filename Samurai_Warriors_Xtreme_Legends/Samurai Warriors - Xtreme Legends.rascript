@@ -1,6 +1,8 @@
 // Samurai Warriors - Xtreme Legends
 // #ID = 20790
 
+ONE_PLAYER_STRING = " (1p)"
+
 // Helper Functions
 function pointer_plus_offset(Pointer, Offset) => (pointer() + offset)
 
@@ -122,6 +124,7 @@ function yukimurasStoredSkills() => byte(0x4FF827)
 
 // $4FF857: (8-bit) Yukimura's Stored Level
 MEMORY_LOCATION_OF_OFFICER_LEVEL = 0x4FF857
+
 function yukimurasStoredLevel() => byte(MEMORY_LOCATION_OF_OFFICER_LEVEL)
 
 // $4FF89E: (40-bit) Keiji's Maeda's equipped items
@@ -131,8 +134,10 @@ function keijiMaedaItems() => byte(KEIJI_MAEDE_ITEM_LOCATION)
 OFFSET_FOR_EACH_CHARACTER_STATS = KEIJI_MAEDE_ITEM_LOCATION - YUKIMURA_ITEM_LOCATION
 function officerOffsetHelper(location, index) => byte(location + (SIZE_OF_NEW_OFFICER_OBJECT * index))
 
-function officersLevel20Check() => all_of(range(0,TOTAL_NEW_OFFICERS), index => officerOffsetHelper(MEMORY_LOCATION_OF_OFFICER_LEVEL, index) == 20)
-function officersWasLevel19Check() => any_of(range(0,TOTAL_NEW_OFFICERS), index => prev(officerOffsetHelper(MEMORY_LOCATION_OF_OFFICER_LEVEL, index)) == 19)
+RANK_20_VALUE = 19
+RANK_19_VALUE = 18
+function officersLevel20Check() => all_of(range(0,LAST_OFFICIAL_OFFICER), index => officerOffsetHelper(MEMORY_LOCATION_OF_OFFICER_LEVEL, index) == RANK_20_VALUE)
+function officersWasLevel19Check() => any_of(range(0,LAST_OFFICIAL_OFFICER), index => prev(officerOffsetHelper(MEMORY_LOCATION_OF_OFFICER_LEVEL, index)) == RANK_19_VALUE)
                                     
 
 // $500155: (8-bit) Musket for New Officer 1
@@ -208,11 +213,24 @@ function newOfficerDriveUnlock() =>  newOfficerAnyOfHelper(MEMORY_LOCATION_OF_NE
 function newOfficerFocusUnlock() =>  newOfficerAnyOfHelper(MEMORY_LOCATION_OF_NEW_OFFICER_FOCUS_SKILL)
 function newOfficerFortitudeUnlock() =>  newOfficerAnyOfHelper(MEMORY_LOCATION_OF_NEW_OFFICER_FORTITUDE_SKILL)
 function newOfficerDiscernUnlock() =>  newOfficerAnyOfHelper(MEMORY_LOCATION_OF_NEW_OFFICER_DISCERN_SKILL)
-function newOfficersLevel20Check() => any_of(range(0,TOTAL_NEW_OFFICERS), index => newOfficerOffsetHelper(MEMORY_LOCATION_OF_NEW_OFFICER_LEVEL, index) == 20)
-function newOfficerJustLevel19Check() => any_of(range(0,TOTAL_NEW_OFFICERS), index => newOfficerOffsetHelper(MEMORY_LOCATION_OF_NEW_OFFICER_LEVEL, index) == 20 &&
-                                                                                      prev(newOfficerOffsetHelper(MEMORY_LOCATION_OF_NEW_OFFICER_LEVEL, index)) == 19)
+
+function newOfficersLevel20Check() => any_of(range(0,TOTAL_NEW_OFFICERS), index => newOfficerOffsetHelper(MEMORY_LOCATION_OF_NEW_OFFICER_LEVEL, index) == RANK_20_VALUE)
+function newOfficerJustLevel19Check() => any_of(range(0,TOTAL_NEW_OFFICERS), index => newOfficerOffsetHelper(MEMORY_LOCATION_OF_NEW_OFFICER_LEVEL, index) == RANK_20_VALUE &&
+                                                                                      prev(newOfficerOffsetHelper(MEMORY_LOCATION_OF_NEW_OFFICER_LEVEL, index)) == RANK_19_VALUE)
                                                                                           
-                                                                                          
+// $50133d: (8-bit Bitfield) Owned Weapon Indicator (1 of 17)
+// 
+//          Bit 0 = Yukimura's Sickle Spear (1st)
+//          Bit 1 = Yukimura's Cross Spear (2nd)
+//          Bit 2 = Yukimura's Lunar Spear (3rd)
+//          Bit 3 = Yukimura's Kouryuga (4th)
+//          Bit 4 = Yukimura's Susano (5th)
+//          Bit 5 = Yukimura's Rakan (6th)
+//          Bit 6 = Keiji Maeda's Double Pike (1st)
+//          Bit 7 = Keiji Maeda's Koto Pike (2nd)       
+MEMORY_LOCATION_OF_OWNED_WEAPONS = 0x50133d
+
+function everOwnedWeapon(weaponId) => bitOffset(MEMORY_LOCATION_OF_OWNED_WEAPONS, weaponId) == 1
 
 // $500b24: (8-bit) Yukimura's First Owned Weapon  ID
 //          
@@ -660,7 +678,7 @@ function justUnlockItem(key) => bitOffset(INITIAL_LOCATION_ITEM_OWNED_BITFIELD, 
 //          bit3 = Forest
 //          bit4 = Fire
 //          bit5 = Mountain
-function completeKenshinBattleOfAnegawa() => byte(0x5015F8)
+function completeKenshinBattleOfAnegawa() => 0x5015F8
 
 // $5015FC: (8-bit)(bitfield) Completed Missions for Oichi's The Battle of Anegawa
 //          
@@ -669,7 +687,7 @@ function completeKenshinBattleOfAnegawa() => byte(0x5015F8)
 //          bit2 = Sister-In-Law
 //          bit3 = Three Mino Generals
 //          bit4 = Brother and Sister
-function completeOichiBattleOfAnegawa() => byte(0x5015FC)
+function completeOichiBattleOfAnegawa() => 0x5015FC
 
 // $501600: (8-bit)(bitfield) Completed Missions for Magoichi Saika's The Battle of Echizen
 //          
@@ -681,7 +699,7 @@ function completeOichiBattleOfAnegawa() => byte(0x5015FC)
 //          bit5 = The Second Shot
 //          bit6 = Go if you want
 //          bit7 = Talent
-function completeMagioichiBattleOfEchizen() => byte(0x501600)
+function completeMagioichiBattleOfEchizen() => 0x501600
 
 // $501604: (8-bit)(bitfield) Completed Missions for Noh's The Battle of Anegawa
 //          
@@ -692,7 +710,7 @@ function completeMagioichiBattleOfEchizen() => byte(0x501600)
 //          bit4 = Side Attack
 //          bit5 = The Weak and the Strong
 //          bit6 = Tearful Revolution
-function completeNohBattleOfAnegawa() => byte(0x501604)
+function completeNohBattleOfAnegawa() => 0x501604
 
 // $501608: (8-bit)(bitfield) Completed Missions for Ranmaru Mori's The Battle of Anegawa
 //          
@@ -704,7 +722,7 @@ function completeNohBattleOfAnegawa() => byte(0x501604)
 //          bit5 = Query
 //          bit6 = Doubt
 //          bit7 = Sorrow
-function completeRanmaruBattleOfAnegawa() => byte(0x501608)
+function completeRanmaruBattleOfAnegawa() => 0x501608
 
 // $50160C: (8-bit)(bitfield) Completed Missions for Hideyoshi Hashiba Retreat at Kanegasaki
 //          
@@ -715,7 +733,7 @@ function completeRanmaruBattleOfAnegawa() => byte(0x501608)
 //          bit4 = Monkey Business
 //          bit5 = Ready, Aim Fire
 //          bit6 = Against the Wall
-function completeHideyoshiRetreatAtKanegasaki() => byte(0x50160C)
+function completeHideyoshiRetreatAtKanegasaki() => 0x50160C
 
 // $501610: (8-bit)(bitfield) Completed Missions for Tadakatsu Honda's Retreat at Kanegasaki
 //          
@@ -726,7 +744,7 @@ function completeHideyoshiRetreatAtKanegasaki() => byte(0x50160C)
 //          bit4 = Reckless
 //          bit5 = Carelessness Ahead
 //          bit6 = Running Earnestly
-function completeTadakatsuRetreatAtKanegasaki() => byte(0x501610)
+function completeTadakatsuRetreatAtKanegasaki() => 0x501610
 
 // $501614: (8-bit)(bitfield) Completed Missions Ina's Retreat at Kanegasaki
 //          
@@ -737,7 +755,7 @@ function completeTadakatsuRetreatAtKanegasaki() => byte(0x501610)
 //          bit3 = Fear of Ambush
 //          bit4 = Reversal of Fortune
 //          bit5 = A Way Out
-function completeInaRetreateAtKanegasaki() => byte(0x501614)
+function completeInaRetreateAtKanegasaki() => 0x501614
 
 // $501618: (8-bit)(bitfield) Completed Missions for Keiji Maeda's The Battle of Ise
 //          
@@ -749,7 +767,7 @@ function completeInaRetreateAtKanegasaki() => byte(0x501614)
 //          bit5 = Surrender
 //          bit6 = Life is Power
 //          bit7 = Peasant's Escape
-function completeKeijiBattleOfIse() => byte(0x501618)
+function completeKeijiBattleOfIse() => 0x501618
 
 // $50161C: (8-bit)(bitfield) Complete Missions for Nobunaga Oda's The Battle of Ise
 //          
@@ -760,7 +778,7 @@ function completeKeijiBattleOfIse() => byte(0x501618)
 //          bit4 = Occupation
 //          bit5 = No Surrender
 //          bit6 = Destroy and Create
-function completeNobunagaBattleOfIse() => byte(0x50161C)
+function completeNobunagaBattleOfIse() => 0x50161C
 
 // $501620: (8-bit)(bitfield) Completed Missions for Mitsuhide Akechi's The Battle of Ise
 //          
@@ -772,7 +790,7 @@ function completeNobunagaBattleOfIse() => byte(0x50161C)
 //          bit5 = Surrender
 //          bit6 = Life is Power
 //          bit7 = Pesants' Escape
-function completeMitsuhideBattleOfIse() => byte(0x501620)
+function completeMitsuhideBattleOfIse() => 0x501620
 
 // $501624: (8-bit)(bitfield) Completed Missions for Goemon Ishikawa's Crossing Iga
 //          
@@ -783,7 +801,7 @@ function completeMitsuhideBattleOfIse() => byte(0x501620)
 //          bit4 = No Escape
 //          bit5 = Lonely Guy
 //          bit6 = The Real Shadow
-function completeGoemonCrossingIga() => byte(0x501624)
+function completeGoemonCrossingIga() => 0x501624
 
 // $501628: (8-bit)(bitfield) Completed Missions for Goemon Ishikawa's Dance of Ise
 //          
@@ -794,7 +812,7 @@ function completeGoemonCrossingIga() => byte(0x501624)
 //          bit4 = Thinking Ahead
 //          bit5 = !!UNUSED!!
 //          bit6 = Greatest Obstacle
-function completeGoemonDanceofIse() => byte(0x501628)
+function completeGoemonDanceofIse() => 0x501628
 
 // $50162C: (8-bit)(bitfield) Completed Missions for Okuni's Dance of Ise
 //          
@@ -806,7 +824,7 @@ function completeGoemonDanceofIse() => byte(0x501628)
 //          bit5 = Mitsuhide, my Love
 //          bit6 = Greatest Obstacle
 //          bit7= Hanzo, my Love
-function completeOkuniDanceOfIse() => byte(0x50162C)
+function completeOkuniDanceOfIse() => 0x50162C
 
 // $501630: (8-bit)(bitfield) Completed Missions for Magoichi Saika's The Battle of Ise
 //          
@@ -816,7 +834,7 @@ function completeOkuniDanceOfIse() => byte(0x50162C)
 //          bit3 = Retreat
 //          bit4 = Safety
 //          bit5 = The Preview
-function completeMagoichiBattleofIse() => byte(0x501630)
+function completeMagoichiBattleofIse() => 0x501630
 
 // $501634: (16-bit)(bitfield) Completed Missions for Masamune Date's Ise Campaign
 //          
@@ -831,7 +849,7 @@ function completeMagoichiBattleofIse() => byte(0x501630)
 //          bit8 = Peasants approaching
 //          
 //          Note it's one bit in the next byte.
-function completeMasaumeIseCampaign() => word(0x501634)
+function completeMasaumeIseCampaign() => 0x501634
 
 // $501638: (8-bit)(bitfield) Completed Missions for Hanzo Hattori's Crossing Iga
 //          
@@ -842,7 +860,7 @@ function completeMasaumeIseCampaign() => word(0x501634)
 //          bit4 = Subterfuge
 //          bit5 = Beckoning
 //          bit6 = Compatriots
-function completeHanzoCrossingIga() => byte(0x501638)
+function completeHanzoCrossingIga() => 0x501638
 
 // $50163C: (8-bit)(bitfield) Completed Missions for Ranmaru Mori's The Battle of Ise
 //          
@@ -853,7 +871,7 @@ function completeHanzoCrossingIga() => byte(0x501638)
 //          bit4 = Occupation
 //          bit5 = No Surrender
 //          bit6 = Destroy and Create
-function completeRanmaruBattleOfIse() => byte(0x50163C)
+function completeRanmaruBattleOfIse() => 0x50163C
 
 // $501640: (8-bit)(bitfield) Completed Missions for Tadakatsu Honda's Crossing Iga
 //          
@@ -864,7 +882,7 @@ function completeRanmaruBattleOfIse() => byte(0x50163C)
 //          bit4 = Welcome Home
 //          bit5 = Rear Guard
 //          bit6 = Lord Hunting
-function completeTadakatsuCrossingIge() => byte(0x501640)
+function completeTadakatsuCrossingIge() => 0x501640
 
 // $501644: (8-bit)(bitfield) Completed Missions for Ina's Crossing Iga
 //          
@@ -876,7 +894,7 @@ function completeTadakatsuCrossingIge() => byte(0x501640)
 //          bit5 = All's Well
 //          bit6 = Drastic Measures
 //          bit7 = Crimson Sea
-function completeInaCrossingIga() => byte(0x501644)
+function completeInaCrossingIga() => 0x501644
 
 // $501648: (8-bit)(bitfield) Completed Missions for Hideyoshi Hashiba The battle of Komaki-Nagakute
 //          
@@ -888,7 +906,7 @@ function completeInaCrossingIga() => byte(0x501644)
 //          bit5 = History Repeats Itself
 //          bit6 = The Enemy Moves
 //          bit7 = Penetrating the Shadows
-function completeHideyoshiTheBattleOfKomakiNagaku() => byte(0x501648)
+function completeHideyoshiTheBattleOfKomakiNagaku() => 0x501648
 
 // $50164C: (8-bit)(bitfield) Completed Missions for Yoshimoto Imagawa's The Battle of Komaki- Nagakute
 //          
@@ -899,7 +917,7 @@ function completeHideyoshiTheBattleOfKomakiNagaku() => byte(0x501648)
 //          bit4 = On to Komakiyama
 //          bit5 = The Mysterious Komakiyama Castle
 //          bit6 = The End is Near
-function completeYoshimotoBattleOfKomaki() => byte(0x50164C)
+function completeYoshimotoBattleOfKomaki() => 0x50164C
 
 // $501650: (8-bit)(bitfield) Completed Missions for Tadakatsu Honda's The Battle of Komaki-Nagakute
 //          
@@ -913,7 +931,7 @@ function completeYoshimotoBattleOfKomaki() => byte(0x50164C)
 //          bit5 = Winner Takes All
 //          bit6 = Pincher in Pursuit
 //          bit7 = Hanging Out to Dry
-function completeTadakatsuBattleOfKomaki() => byte(0x501650)
+function completeTadakatsuBattleOfKomaki() => 0x501650
 
 // $501654: (16-bit)(bitfield) Completed Missions for Ina's The Battle of Komaki-Nagakute
 //          
@@ -927,7 +945,7 @@ function completeTadakatsuBattleOfKomaki() => byte(0x501650)
 //          bit7 = Strategist Vs Tactician
 //          bit8 = Tadakatsu Honda the Man
 //          bit9 = Nobukatsu Oda the Man
-function completeInaBattleOfKomaki() => word(0x501654)
+function completeInaBattleOfKomaki() => 0x501654
 
 // $501658: (8-bit)(bitfield) Completed Missions for Nobunaga Oda's The Battle of Okehazama
 //          
@@ -939,7 +957,7 @@ function completeInaBattleOfKomaki() => word(0x501654)
 //          bit5 = All will be mine
 //          bit6 = The Imagawa
 //          bit7 = Faster than Shadow
-function completeNobunagaBattleofOkehazama() => byte(0x501658)
+function completeNobunagaBattleofOkehazama() => 0x501658
 
 // $50165C: (8-bit)(bitfield) Completed Missions for Oichi's The Battle of Okehazama
 //          
@@ -953,7 +971,7 @@ function completeNobunagaBattleofOkehazama() => byte(0x501658)
 //          bit5 = All will be mine
 //          bit6 = The Imagawa
 //          bit7 = Faster than Shadow
-function completeOichiBattleOfOkehazama() => byte(0x50165C)
+function completeOichiBattleOfOkehazama() => 0x50165C
 
 // $501660: (8-bit)(bitfield) Completed Missions for Masamune Date's Okehazama Campaign
 //          
@@ -964,7 +982,7 @@ function completeOichiBattleOfOkehazama() => byte(0x50165C)
 //          bit4 = Surpass Nobunaga!
 //          bit5 = Sister
 //          bit6 = Whirlwind
-function completeMasaumeOkehazamaCampaign() => byte(0x501660)
+function completeMasaumeOkehazamaCampaign() => 0x501660
 
 // $501664: (8-bit)(bitfield) Completed Missions for Noh's The Battle of Okehazama
 //          
@@ -976,7 +994,7 @@ function completeMasaumeOkehazamaCampaign() => byte(0x501660)
 //          bit5 = All will be Mine
 //          bit6 = The Imagawa
 //          bit7 = Faster than Shadow
-function completeNohBattleOfOkehazama() => byte(0x501664)
+function completeNohBattleOfOkehazama() => 0x501664
 
 // $501668: (8-bit)(bitfield) Completed Missions for Hanzo Hattori's The Battle of Okehazama
 //          
@@ -989,7 +1007,7 @@ function completeNohBattleOfOkehazama() => byte(0x501664)
 //          bit4 = Finale
 //          bit5 = Obliteration
 //          bit6 = Shadow Path
-function completeHanzoBattleOfOkehazama() => byte(0x501668)
+function completeHanzoBattleOfOkehazama() => 0x501668
 
 // $50166C: (8-bit)(bitfield) Completed Missions for New Officer's The Battle of Okehazama
 //          
@@ -1000,7 +1018,7 @@ function completeHanzoBattleOfOkehazama() => byte(0x501668)
 //          bit4 = No Escape
 //          bit5 = Momentum
 //          bit6 = Viper's Fangs
-function completeNewOfficerBattleOfOkehazama() => byte(0x50166C)
+function completeNewOfficerBattleOfOkehazama() => 0x50166C
 
 // $501670: (8-bit)(bitfield) Completed Missions for Yoshimoto Imagawa's The Battle of Okehazama
 //          
@@ -1009,7 +1027,7 @@ function completeNewOfficerBattleOfOkehazama() => byte(0x50166C)
 //          bit2 = The Underdog
 //          bit3 = A Shadowy Attack
 //          bit4 = The Demon and Me
-function completeYoshimotoBattleOfOkehazama() => byte(0x501670)
+function completeYoshimotoBattleOfOkehazama() => 0x501670
 
 // $501674: (8-bit)(bitfield) Completed Missions for Tadakatsu Honda's The Battle of Okehazama
 //          
@@ -1020,7 +1038,7 @@ function completeYoshimotoBattleOfOkehazama() => byte(0x501670)
 //          bit4 = A Troubled Future
 //          bit5 = The Main Camp In Danger
 //          bit6 = Forget about Appearances
-function completeTadakatsuBattleOfOkehazama() => byte(0x501674)
+function completeTadakatsuBattleOfOkehazama() => 0x501674
 
 // $501678: (16-bit)(bitfield) Completed Missions for Yukimura's The Battle of Kaawanakajima
 //          Correct value appears to be 0x197
@@ -1036,14 +1054,14 @@ function completeTadakatsuBattleOfOkehazama() => byte(0x501674)
 //          bit8 = Peril
 //          
 //          What a strange bitfield.
-function completeYukimuraBattleOfKawankajima() => word(0x501678)
+function completeYukimuraBattleOfKawankajima() => 0x501678
 
 // $50167C: (8-bit)(bitfield) Completed Missions for Keiji Maeda's Kawanakajima Challenge
 //          
 //          bit0 = The Great Keiji
 //          bit1 = The Yukimura Kid
 //          bit2 = Love is Blind
-function completeKiejiKawanakajimaChallenge() => byte(0x50167C)
+function completeKiejiKawanakajimaChallenge() => 0x50167C
 
 // $501680: (8-bit)(bitfield) Completed Missions for Kenshin Uesugi's The Battle of Kawanakajima
 //          
@@ -1055,7 +1073,7 @@ function completeKiejiKawanakajimaChallenge() => byte(0x50167C)
 //          bit5 = The tide must flow
 //          bit6 = Flanked
 //          bit7 = Parting Shot
-function completeKenshinBattleOfKawanakajima() => byte(0x501680)
+function completeKenshinBattleOfKawanakajima() => 0x501680
 
 // $501684: (8-bit)(bitfield) Completed Missions for Kenshin Uesugi's Kawanakajima Showdown
 //          
@@ -1067,7 +1085,7 @@ function completeKenshinBattleOfKawanakajima() => byte(0x501680)
 //          bit5 = Retreat for now
 //          bit6 = Last Charge
 //          bit7 = Mt. Chausu
-function completeKenshinKawanakajimaShowdown() => byte(0x501684)
+function completeKenshinKawanakajimaShowdown() => 0x501684
 
 // $501688: (16-bit)(bitfield) Completed Missions for Okuni's Dance of Kawanakima
 //          
@@ -1084,7 +1102,7 @@ function completeKenshinKawanakajimaShowdown() => byte(0x501684)
 //          bit10 = Yukimura, My Love 
 //          bit11 = !UNUSED!
 //          bit12 = By force, then
-function completeOkuniDanceOfKawanakima() => word(0x501688)
+function completeOkuniDanceOfKawanakima() => 0x501688
 
 // $50168C: (16-bit)(bitfield) Completed Missions for Kuniochi's The Battle of Kawanakajima
 //          
@@ -1099,7 +1117,7 @@ function completeOkuniDanceOfKawanakima() => word(0x501688)
 //          bit6 = Save Yukimura
 //          bit7 = Power
 //          bit8 = Peril
-function completeKuniochiBattleOfKawanakajima() => word(0x50168C)
+function completeKuniochiBattleOfKawanakajima() => 0x50168C
 
 // $501690: (8-bit)(bitfield) Completed Missions for Shingen Takeda's The Battle of Kawanakajima
 //          
@@ -1107,7 +1125,7 @@ function completeKuniochiBattleOfKawanakajima() => word(0x50168C)
 //          bit1 = Defend the Camp
 //          bit2 = Kenshin
 //          bit3 = Tide has not changed
-function completeShingenBattleOfKawankajima() => byte(0x501690)
+function completeShingenBattleOfKawankajima() => 0x501690
 
 // $501694: (16-bit)(bitfield) Completed Missions for Shingen Takeda's Kawanakjima Showdown
 //          
@@ -1121,7 +1139,7 @@ function completeShingenBattleOfKawankajima() => byte(0x501690)
 //          bit7 = The Wild One
 //          bit8 = Lone Charge
 //          bit9 = Last Gamble
-function completeShingenKawanakijimaShowdown() => word(0x501694)
+function completeShingenKawanakijimaShowdown() => 0x501694
 
 // $501698: (8-bit)(bitfield) Completed Missions for Masamune Date's Kawanakjima Campaign
 //          
@@ -1133,7 +1151,7 @@ function completeShingenKawanakijimaShowdown() => word(0x501694)
 //          bit5 = The Dragon awaits
 //          bit6 = Dragon Hunt
 //          bit7 = Fake Pincer
-function completeMasamuneKawanakjimaCampaign() => byte(0x501698)
+function completeMasamuneKawanakjimaCampaign() => 0x501698
 
 // $50169C: (8-bit)(bitfield) Completed Missions for New Officer's The Battle of Kawanakajima
 //          
@@ -1142,7 +1160,7 @@ function completeMasamuneKawanakjimaCampaign() => byte(0x501698)
 //          bit2 = Kenshin
 //          bit3 = Tide has not changed
 //          bit4 = Save Yukimura
-function completeNewOfficerBattleOfKawanakajima() => byte(0x50169C)
+function completeNewOfficerBattleOfKawanakajima() => 0x50169C
 
 // $5016A0: (8-bit)(bitfield) Completed Missions for Yoshimoto Imagawa's The Battle of Kawanakajjima
 //          
@@ -1154,7 +1172,7 @@ function completeNewOfficerBattleOfKawanakajima() => byte(0x50169C)
 //          bit5 = Wicked Ways
 //          bit6 = Firm Resistance
 //          bit7 = Bonds of Evil
-function completeYoshimotoBattleOfKawanakajima() => byte(0x5016A0)
+function completeYoshimotoBattleOfKawanakajima() => 0x5016A0
 
 // $5016A4: (8-bit)(bitfield) Completed Missions for Tadakatsu Honda's The Battle of Kawanakajira
 //          
@@ -1166,7 +1184,7 @@ function completeYoshimotoBattleOfKawanakajima() => byte(0x5016A0)
 //          bit5 = Uesugi on the Move
 //          bit6 = A Time for Vengeance
 //          bit7 = Waves of Anger
-function completeTadakatsuBattleOfKawanakajira() => byte(0x5016A4)
+function completeTadakatsuBattleOfKawanakajira() => 0x5016A4
 
 // $5016A8: (8-bit)(bitfield) Completed Missions for Keiji Maeda's Dance of Kyoto
 //          
@@ -1176,7 +1194,7 @@ function completeTadakatsuBattleOfKawanakajira() => byte(0x5016A4)
 //          bit3 = Unwanteds
 //          bit4 = Miscreants
 //          bit5 = Go Away
-function completeKeijiDanceOfKyoto() => byte(0x5016A8)
+function completeKeijiDanceOfKyoto() => 0x5016A8
 
 // $5016AC: (8-bit)(bitfield) Completed Missions for Nobunaga Oda's Betrayal at Honnouji
 //          
@@ -1184,7 +1202,7 @@ function completeKeijiDanceOfKyoto() => byte(0x5016A8)
 //          bit1 = Viper's Fangs
 //          bit2 = Sacrifice
 //          bit3 = Traitor
-function completeNobunagaBetrayalAtHonnouji() => byte(0x5016AC)
+function completeNobunagaBetrayalAtHonnouji() => 0x5016AC
 
 // $5016B0: (8-bit)(bitfield) Completed Missions for Mitsuhide Akechi's  Betrayal at Honnouji
 //          
@@ -1193,7 +1211,7 @@ function completeNobunagaBetrayalAtHonnouji() => byte(0x5016AC)
 //          bit2 = Promise to the Dead
 //          bit3 = Innocence Lost
 //          bit4 = The Enemy
-function completeMitsuhideBetrayalAtHonnouji() => byte(0x5016B0)
+function completeMitsuhideBetrayalAtHonnouji() => 0x5016B0
 
 // $5016B4: (8-bit)(bitfield) Completed Missions for Goemon Ishikawa's Dance of Kyoto
 //          
@@ -1204,7 +1222,7 @@ function completeMitsuhideBetrayalAtHonnouji() => byte(0x5016B0)
 //          bit4 = Elusive, Finale
 //          bit5 = Uninvited Guests
 //          bit6 = The Cycle ends
-function completeGoemonDanceOfKyoto() => byte(0x5016B4)
+function completeGoemonDanceOfKyoto() => 0x5016B4
 
 // $5016B8: (8-bit)(bitfield) Completed Missions for Goemon Ishikawa's Goemon the Wild
 //          
@@ -1214,7 +1232,7 @@ function completeGoemonDanceOfKyoto() => byte(0x5016B4)
 //          bit3 = Help from my friends
 //          bit4 = For Love
 //          bit5 = Good Grief
-function completeGoemonGoemonTheWild() => byte(0x5016B8)
+function completeGoemonGoemonTheWild() => 0x5016B8
 
 // $5016BC: (8-bit)(bitfield) Completed Missions for Oichi's Betrayal at Honnouji
 //          
@@ -1226,7 +1244,7 @@ function completeGoemonGoemonTheWild() => byte(0x5016B8)
 //          bit5 = Escape Southeast
 //          bit6 = Escape Northeast
 //          bit7 = Score to Settle
-function completeOichiBetrayalAtHonnouji() => byte(0x5016BC)
+function completeOichiBetrayalAtHonnouji() => 0x5016BC
 
 // $5016C0: (16-bit)(bitfield) Completed Missions for Oichi's The Battle at Honnouji
 //          
@@ -1240,7 +1258,7 @@ function completeOichiBetrayalAtHonnouji() => byte(0x5016BC)
 //          bit7 = The Badger
 //          bit8 = I will stop you!
 //          bit9 = Thank you and goodbye
-function completeOichiBattleAtHonnouji() => word(0x5016C0)
+function completeOichiBattleAtHonnouji() => 0x5016C0
 
 // $5016C4: (8-bit)(bitfield) Completed Missions for Okuni's Dance of Kyoto
 //          
@@ -1253,7 +1271,7 @@ function completeOichiBattleAtHonnouji() => word(0x5016C0)
 //          bit4 = Elusive, Finale
 //          bit5 = Uninvited Guests
 //          bit6 = The Cycle ends
-function completeOkuniDanceOfKyoto() => byte(0x5016C4)
+function completeOkuniDanceOfKyoto() => 0x5016C4
 
 // $5016C8: (8-bit)(bitfield) Completed Missions for Magoichi Saika's Skirmish at Kyoto
 //          
@@ -1262,7 +1280,7 @@ function completeOkuniDanceOfKyoto() => byte(0x5016C4)
 //          bit2 = The Third Shot
 //          bit3 = Beginning of the End
 //          bit4 = Farewell to Arms
-function completeMagoichiSkirmishAtKyoto() => byte(0x5016C8)
+function completeMagoichiSkirmishAtKyoto() => 0x5016C8
 
 // $5016CC: (8-bit)(bitfield) Completed Missions for Masamune Date's Attack on Honnouji
 //          
@@ -1273,7 +1291,7 @@ function completeMagoichiSkirmishAtKyoto() => byte(0x5016C8)
 //          bit4 = Rebellion
 //          bit5 = Wavering Blade
 //          bit6 = You cannot escape!
-function completeMasamuneAttackOnHonnouji() => byte(0x5016CC)
+function completeMasamuneAttackOnHonnouji() => 0x5016CC
 
 // $5016D0: (8-bit)(bitfield) Completed Missions for Noh's Betrayal at Honnouji
 //          
@@ -1283,7 +1301,7 @@ function completeMasamuneAttackOnHonnouji() => byte(0x5016CC)
 //          bit3 = Tragedy continues
 //          bit4 = Naivete
 //          bit5 = Impatience brings Death
-function completeNohBetrayalAtHonnouji() => byte(0x5016D0)
+function completeNohBetrayalAtHonnouji() => 0x5016D0
 
 // $5016D4: (8-bit)(bitfield) Completed Missions for Noh's Betrayal at Honnouji (Second)
 //          
@@ -1291,7 +1309,7 @@ function completeNohBetrayalAtHonnouji() => byte(0x5016D0)
 //          bit1 = Protector of Love
 //          bit2 = The Long Path
 //          bit3 = Thorns
-function completeNohBetrayalAtHonnoujiSecond() => byte(0x5016D4)
+function completeNohBetrayalAtHonnoujiSecond() => 0x5016D4
 
 // $5016D8: (8-bit)(bitfield) Completed Missions for Ranmaru Mori's Betrayal at Honnouji
 //          
@@ -1301,7 +1319,7 @@ function completeNohBetrayalAtHonnoujiSecond() => byte(0x5016D4)
 //          bit3 = Blade of Judgment
 //          bit4 = Trap
 //          bit5 = Retribution
-function completeRanmaruBetrayalAtHonnouji() => byte(0x5016D8)
+function completeRanmaruBetrayalAtHonnouji() => 0x5016D8
 
 // $5016DC: (8-bit)(bitfield) Completed Missions for Hideyoshi Hashiba's Betrayal at Honnouji
 //          
@@ -1311,7 +1329,7 @@ function completeRanmaruBetrayalAtHonnouji() => byte(0x5016D8)
 //          bit3 = Honnouji in Flames
 //          bit4 = A Monkey's Love
 //          bit5 = No Going Back
-function completeHideyoshiBetrayalAtHonnouji() => byte(0x5016DC)
+function completeHideyoshiBetrayalAtHonnouji() => 0x5016DC
 
 // $5016E0: (8-bit)(bitfield) Completed Missions for Yoshimoto Imagawa's Kemari in the Capital
 //          
@@ -1323,7 +1341,7 @@ function completeHideyoshiBetrayalAtHonnouji() => byte(0x5016DC)
 //          bit5 = Is the Betrayal Real?
 //          bit6 = Red and White
 //          bit7 = The Final Battle
-function completeYoshimotoKemariInTheCapital() => byte(0x5016E0)
+function completeYoshimotoKemariInTheCapital() => 0x5016E0
 
 // $5016E4: (8-bit)(bitfield) Completed Missions for Yoshimoto Imagawa's Struggle at Honnouji
 //          
@@ -1332,7 +1350,7 @@ function completeYoshimotoKemariInTheCapital() => byte(0x5016E0)
 //          bit2 = Trials of the One Eyed Dragon
 //          bit3 = Trials of the Demon
 //          bit4 = Screams within Honnouji
-function completeYoshimotoStruggleAtHonnouji() => byte(0x5016E4)
+function completeYoshimotoStruggleAtHonnouji() => 0x5016E4
 
 // $5016E8: (8-bit)(bitfield) Completed Missions for Yukimura's The Battle of Mikatagahara
 //          
@@ -1343,7 +1361,7 @@ function completeYoshimotoStruggleAtHonnouji() => byte(0x5016E4)
 //          bit4 = Assassination
 //          bit5 = !!UNUSED!!
 //          bit6 = Last Stand
-function completeYukimuraBattleOfMikatagahara() => byte(0x5016E8)
+function completeYukimuraBattleOfMikatagahara() => 0x5016E8
 
 // $5016EC: (8-bit)(bitfield) Completed Missions for Yukimura's The Battle of Nagashino
 //          
@@ -1353,7 +1371,7 @@ function completeYukimuraBattleOfMikatagahara() => byte(0x5016E8)
 //          bit3 = Spear and Musket
 //          bit4 = Rain of Fire
 //          bit5 = Blue Bullet
-function completeYukimuraBattleOfNagashino() => byte(0x5016EC)
+function completeYukimuraBattleOfNagashino() => 0x5016EC
 
 // $5016F0: (8-bit)(bitfield) Completed Missions for Yukimura's The Battle of Nagashino (Second)
 //          
@@ -1365,7 +1383,7 @@ function completeYukimuraBattleOfNagashino() => byte(0x5016EC)
 //          bit5 = Champions
 //          bit6 = Raw Power
 //          bit7 = Tiger and Demon
-function completeYukimuraBattleOfNagashinoSecond() => byte(0x5016F0)
+function completeYukimuraBattleOfNagashinoSecond() => 0x5016F0
 
 // $5016F4: (16-bit)(bitfield) Completed Missions for Keiji Maeda's The Battle of Nagashino
 //          
@@ -1378,7 +1396,7 @@ function completeYukimuraBattleOfNagashinoSecond() => byte(0x5016F0)
 //          bit6 = Barricade
 //          bit7 = Young Tiger
 //          bit8 = Go Home
-function completeKeijiBattleOfNagashino() => word(0x5016F4)
+function completeKeijiBattleOfNagashino() => 0x5016F4
 
 // $5016F8: (8-bit)(bitfield) Completed Missions for Nobunaga Oda's The Battle of Nagashino
 //          
@@ -1389,7 +1407,7 @@ function completeKeijiBattleOfNagashino() => word(0x5016F4)
 //          bit4 = Katsuyori
 //          bit5 = Sound of Terror
 //          bit6 = Barricade
-function completeNobunagaBattleOfNagahino() => byte(0x5016F8)
+function completeNobunagaBattleOfNagahino() => 0x5016F8
 
 // $5016FC: (8-bit)(bitfield) Completed Missions for Nobunaga Oda's The Battle of Nagashino (Second)
 //          
@@ -1399,7 +1417,7 @@ function completeNobunagaBattleOfNagahino() => byte(0x5016F8)
 //          bit3 = Withdrawal
 //          bit4 = Crumbling
 //          bit5 = Friendly Fire
-function completeNobunagaBattleOfNagashinoSecond() => byte(0x5016FC)
+function completeNobunagaBattleOfNagashinoSecond() => 0x5016FC
 
 // $501700: (8-bit)(bitfield) Completed Missions for Kuniochi's The battle of Mikatagahara
 //          
@@ -1409,7 +1427,7 @@ function completeNobunagaBattleOfNagashinoSecond() => byte(0x5016FC)
 //          bit3 = Harsh Lesson
 //          bit4 = Ninja's Pride
 //          bit5 = Last stand
-function completeKunioichiBattleOfMikatagahara() => byte(0x501700)
+function completeKunioichiBattleOfMikatagahara() => 0x501700
 
 // $501704: (8-bit)(bitfield) Completed Missions for Shingen Takeda's The Battle of Nagashino
 //          
@@ -1421,7 +1439,7 @@ function completeKunioichiBattleOfMikatagahara() => byte(0x501700)
 //          bit5 = Champion
 //          bit6 = Raw Power
 //          bit7 = Tiger devours Demon
-function completeShingenBattleOfNagashino() => byte(0x501704)
+function completeShingenBattleOfNagashino() => 0x501704
 
 // $501708: (8-bit)(bitfield) Completed Missions for Masamune Date's Nagashino Campaign
 //          
@@ -1432,7 +1450,7 @@ function completeShingenBattleOfNagashino() => byte(0x501704)
 //          bit4 = The Rear Guardian
 //          bit5 = Old Soldier
 //          bit6 = Foolish Badger
-function completeMasamuneNagashinoCampaign() => byte(0x501708)
+function completeMasamuneNagashinoCampaign() => 0x501708
 
 // $50170C: (8-bit)(bitfield) Completed Missions for Hanzo Hattorii's The battle of Mikatagahara
 //          
@@ -1444,7 +1462,7 @@ function completeMasamuneNagashinoCampaign() => byte(0x501708)
 //          bit5 = Falcon's Nest
 //          bit6 = Tombo-Giri
 //          bit7 = Our Mikawa
-function completeHanzoBattleOfMikatagahara() => byte(0x50170C)
+function completeHanzoBattleOfMikatagahara() => 0x50170C
 
 // $501710: (8-bit)(bitfield) Completed Missions for New Officer's The battle of Nagashino
 //          
@@ -1453,7 +1471,7 @@ function completeHanzoBattleOfMikatagahara() => byte(0x50170C)
 //          bit2 = Counterattack
 //          bit3 = Spear and Musket
 //          bit4 = Rain of Fire
-function completeNewOfficerBattleOfNagashino() => byte(0x501710)
+function completeNewOfficerBattleOfNagashino() => 0x501710
 
 // $501714: (8-bit)(bitfield) Completed Missions for Tadakatsu Honda's The battle of Mikatagahara
 //          
@@ -1464,7 +1482,7 @@ function completeNewOfficerBattleOfNagashino() => byte(0x501710)
 //          bit4 = On Wings of a Crane
 //          bit5 = The Will to Power
 //          bit6 = Capture the Ruler
-function completeTadakatsuBattleOfMikatagahara() => byte(0x501714)
+function completeTadakatsuBattleOfMikatagahara() => 0x501714
 
 // $501718: (8-bit)(bitfield) Completed Missions for Ina's The battle of Mikatagahara
 //          
@@ -1476,7 +1494,7 @@ function completeTadakatsuBattleOfMikatagahara() => byte(0x501714)
 //          bit5 = Spread Your Wings
 //          bit6 = Preparing to Withdraw
 //          bit7 = Withdrawing the Withdrawal
-function completeInaBattleOfMikatagahara() => byte(0x501718)
+function completeInaBattleOfMikatagahara() => 0x501718
 
 // $50171C: (8-bit)(bitfield) Completed Missions for Yukimura Sanada's The battle of Yamasaki
 //          
@@ -1487,7 +1505,7 @@ function completeInaBattleOfMikatagahara() => byte(0x501718)
 //          bit4 = Stop the Pincer
 //          bit5 = Keiji, once again
 //          bit6 = Cave Assau
-function completeYukimuraBattleOfYamasaki() => byte(0x50171C)
+function completeYukimuraBattleOfYamasaki() => 0x50171C
 
 // $501720: (8-bit)(bitfield) Completed Missions for Nobunaga Oda's The battle of Yamasaki
 //          
@@ -1498,7 +1516,7 @@ function completeYukimuraBattleOfYamasaki() => byte(0x50171C)
 //          bit4 = Cruel Fate
 //          bit5 = Road to Victory
 //          bit6 = Enemy in the Fog
-function completeNobunagaBattleOfYamasaki() => byte(0x501720)
+function completeNobunagaBattleOfYamasaki() => 0x501720
 
 // $501724: (8-bit)(bitfield) Completed Missions for Mitsuhide Akechi's The battle of Yamasaki
 //          
@@ -1510,7 +1528,7 @@ function completeNobunagaBattleOfYamasaki() => byte(0x501720)
 //          bit5 = Tragedy of War
 //          bit6 = Clear the Cave
 //          bit7 = Monkey Tactics
-function completeMitsuhideBattleOfYamasaki() => byte(0x501724)
+function completeMitsuhideBattleOfYamasaki() => 0x501724
 
 // $501728: (8-bit)(bitfield) Completed Missions for Nobunaga Oda's The battle of Yamasaki (Second)
 //          
@@ -1520,7 +1538,7 @@ function completeMitsuhideBattleOfYamasaki() => byte(0x501724)
 //          bit3 = Avenger
 //          bit4 = Reason
 //          bit5 = Nobunaga advances
-function completeNobunagaBattleOfYamasakiSecond() => byte(0x501728)
+function completeNobunagaBattleOfYamasakiSecond() => 0x501728
 
 // $50172C: (8-bit)(bitfield) Completed Missions for Magoichi Saika's Yamasaki Crossfire
 //          
@@ -1530,7 +1548,7 @@ function completeNobunagaBattleOfYamasakiSecond() => byte(0x501728)
 //          bit3 = Ambush Party
 //          bit4 = Cease resistance?
 //          bit5 = Reason to fight
-function completeMagoichiYamasakiCrossfire() => byte(0x50172C)
+function completeMagoichiYamasakiCrossfire() => 0x50172C
 
 // $501730: (8-bit)(bitfield) Completed Missions for Shingen Takeda's The Battle of Yamasaki
 //          
@@ -1542,7 +1560,7 @@ function completeMagoichiYamasakiCrossfire() => byte(0x50172C)
 //          bit5 = Keiji, once again
 //          bit6 = Cave Assault
 //          bit7 = Artistic Battle
-function completeShingenBattleOfYamasaki() => byte(0x501730)
+function completeShingenBattleOfYamasaki() => 0x501730
 
 // $501734: (8-bit)(bitfield) Completed Missions for Hideyoshi Hashiba's The battle of Yamasaki
 //          
@@ -1554,7 +1572,7 @@ function completeShingenBattleOfYamasaki() => byte(0x501730)
 //          bit5 = The General of Mt. Ten-oh
 //          bit6 = To Be Taken Seriously
 //          bit7 = Until We Meet Again
-function completeHideyoshiBattleOfYamasaki() => byte(0x501734)
+function completeHideyoshiBattleOfYamasaki() => 0x501734
 
 // $501738: (8-bit)(bitfield) Completed Missions for Tadakatsu Honda's The battle of Yamasaki
 //          
@@ -1565,7 +1583,7 @@ function completeHideyoshiBattleOfYamasaki() => byte(0x501734)
 //          bit4 = A Warrior from the North
 //          bit5 = A Squire from the South
 //          bit6 = Soul Searching
-function completeTadatsuBattleOfYamasaki() => byte(0x501738)
+function completeTadatsuBattleOfYamasaki() => 0x501738
 
 // $50173C: (8-bit)(bitfield) Completed Missions for Tadakatsu Honda's The battle of Yamasaki
 //          
@@ -1577,7 +1595,7 @@ function completeTadatsuBattleOfYamasaki() => byte(0x501738)
 //          bit5 = Rodent Infestation
 //          bit6 = Can't Wait on Luck
 //          bit7 = Mitsuhide Returns
-function completeInaBattleOfYamasaki() => byte(0x50173C)
+function completeInaBattleOfYamasaki() => 0x50173C
 
 // $501740: (8-bit)(bitfield) Completed Missions for Yukimura Sanada's Siege of Azuchi Castle
 //          
@@ -1592,7 +1610,7 @@ function completeInaBattleOfYamasaki() => byte(0x50173C)
 //          
 //          
 //          Additional Missions available at 0x00517ac
-function completeYukimuraSiegeOfAzuchiCastle() => byte(0x501740)
+function completeYukimuraSiegeOfAzuchiCastle() => 0x501740
 
 // $501744: (16-bit)(bitfield) Completed Missions for Nobunaga Oda 's Retaking of Azuchi Castle
 //          
@@ -1608,7 +1626,7 @@ function completeYukimuraSiegeOfAzuchiCastle() => byte(0x501740)
 //          bit7 = Desperation
 //          bit8 = Dangerous Woman
 //          bit9 = Unforgivable
-function completeNobunagaRetakingAzuchiPart1() => word(0x501744)
+function completeNobunagaRetakingAzuchiPart1() => 0x501744
 
 // $501748: (8-bit)(bitfield) Completed Missions for Mitsuhide Akechi 's Defense of Azuchi Castle
 //          
@@ -1620,7 +1638,7 @@ function completeNobunagaRetakingAzuchiPart1() => word(0x501744)
 //          bit5 = Moth to a Flame
 //          bit6 = Nothing Sacred
 //          bit7 = Demon's March
-function completeMitsuhideDefenseOfAzuchiCastle() => byte(0x501748)
+function completeMitsuhideDefenseOfAzuchiCastle() => 0x501748
 
 // $50174C: (8-bit)(bitfield) Completed Missions for Oichi 's Siege of Azuchi Castle
 //          
@@ -1634,7 +1652,7 @@ function completeMitsuhideDefenseOfAzuchiCastle() => byte(0x501748)
 //          bit5 = Pressure
 //          bit6 = The Shield
 //          bit7 = Azai victorious?
-function completeOichiSiegeOfAzuchiCastlePart1() => byte(0x50174C)
+function completeOichiSiegeOfAzuchiCastlePart1() => 0x50174C
 
 // $501750: (8-bit)(bitfield) Completed Missions for Shingen Takeda 's Siege of Azuchi Castle
 //          
@@ -1645,7 +1663,7 @@ function completeOichiSiegeOfAzuchiCastlePart1() => byte(0x50174C)
 //          bit4 = The Race is On
 //          
 //          4 missing missions
-function completeShingenSiegeOfAzuchiCastlePart1() => byte(0x501750)
+function completeShingenSiegeOfAzuchiCastlePart1() => 0x501750
 
 // $501754: (8-bit)(bitfield) Completed Missions for Hideyoshi Hashiba's Siege of Azuchi Castle
 //          
@@ -1658,7 +1676,7 @@ function completeShingenSiegeOfAzuchiCastlePart1() => byte(0x501750)
 //          bit4 = Conclusion - Friend
 //          bit5 = The Warrior's Way
 //          bit6 = Foolish Thoughts
-function completeHideyoshiSiegeOfAzuchiCastlePart1() => byte(0x501754)
+function completeHideyoshiSiegeOfAzuchiCastlePart1() => 0x501754
 
 // $501758: (8-bit)(bitfield) Completed Missions for Nobunaga Oda's Defense of Gifu Castle
 //          
@@ -1670,7 +1688,7 @@ function completeHideyoshiSiegeOfAzuchiCastlePart1() => byte(0x501754)
 //          bit5 = War God's Army
 //          bit6 = Luring Kenshin
 //          bit7 = White Fangs
-function completeNobunagaDefenseOfGifuCastle() => byte(0x501758)
+function completeNobunagaDefenseOfGifuCastle() => 0x501758
 
 // $50175C: (8-bit)(bitfield) Completed Missions for Mitsuhide Akechi's Defense of Inabayama Castle
 //          
@@ -1679,7 +1697,7 @@ function completeNobunagaDefenseOfGifuCastle() => byte(0x501758)
 //          bit2 = Resolution
 //          bit3 = Prove Yourself
 //          bit4 = Hanbei's Revolt
-function completeMitsuhideDefenseOfInabayamaCastl() => byte(0x50175C)
+function completeMitsuhideDefenseOfInabayamaCastl() => 0x50175C
 
 // $501760: (16-bit)(bitfield) Completed Missions for Kenshin Uesugi's Siege of Gifu Castle
 //          
@@ -1696,7 +1714,7 @@ function completeMitsuhideDefenseOfInabayamaCastl() => byte(0x50175C)
 //          bit8 = No contest
 //          bit9 = Castle occupied!
 //          bit10 = Sweep
-function completeKenshinSiegeOfGifuCastlePart1() => word(0x501760)
+function completeKenshinSiegeOfGifuCastlePart1() => 0x501760
 
 // $501764: (8-bit)(bitfield) Completed Missions for Oichi's Siege of Inabayama Castle
 //          
@@ -1708,7 +1726,7 @@ function completeKenshinSiegeOfGifuCastlePart1() => word(0x501760)
 //          bit3 = Ploy uncovered
 //          bit4 = Reckless Charge
 //          bit5 = Path of Thorns
-function completeOichiSiegeOfInabayamaCastlePart1() => byte(0x501764)
+function completeOichiSiegeOfInabayamaCastlePart1() => 0x501764
 
 // $501768: (8-bit)(bitfield) Completed Missions for Noh's Siege of Inabayama Castle
 //          
@@ -1720,7 +1738,7 @@ function completeOichiSiegeOfInabayamaCastlePart1() => byte(0x501764)
 //          bit3 = Ploy uncovered
 //          bit4 = Reckless Charge
 //          bit5 = Path of Thorns
-function completeNohSiegeOfInabayamaPart1() => byte(0x501768)
+function completeNohSiegeOfInabayamaPart1() => 0x501768
 
 // $50176C: (8-bit)(bitfield) Completed Missions for Ranmaru Mori's Defense of Inabayama Castle
 //          
@@ -1729,7 +1747,7 @@ function completeNohSiegeOfInabayamaPart1() => byte(0x501768)
 //          bit2 = Resolution
 //          bit3 = Prove Yourself
 //          bit4 = Hanbei's Revolt
-function completeRanmaruDefenseOfInabayamaCastle() => byte(0x50176C)
+function completeRanmaruDefenseOfInabayamaCastle() => 0x50176C
 
 // $501770: (8-bit)(bitfield) Completed Missions for Hideyoshi Hashiba's Siege of Inabayama Castle
 //          
@@ -1743,7 +1761,7 @@ function completeRanmaruDefenseOfInabayamaCastle() => byte(0x50176C)
 //          bit5 = Be a Hero!
 //          bit6 = The Raging Rodent
 //          bit7 = The Theory of Evolution
-function completeHideyoshiSiegeOfInabayamaCastle() => byte(0x501770)
+function completeHideyoshiSiegeOfInabayamaCastle() => 0x501770
 
 // $501774: (8-bit)(bitfield) Completed Missions for Yukimura Sanada's Defense of Ueda Castle
 //          
@@ -1754,7 +1772,7 @@ function completeHideyoshiSiegeOfInabayamaCastle() => byte(0x501770)
 //          bit4 = Assassin
 //          bit5 = Father
 //          bit6 = Brother
-function completeYukimuraDefenseOfUedaCastle() => byte(0x501774)
+function completeYukimuraDefenseOfUedaCastle() => 0x501774
 
 // $501778: (8-bit)(bitfield) Completed Missions for Kenshin Uesugi's Siege of Ueda Castle
 //          
@@ -1768,7 +1786,7 @@ function completeYukimuraDefenseOfUedaCastle() => byte(0x501774)
 //          bit5 = Relentless
 //          bit6 = I see you, Nemesis
 //          bit7 = Inside the Castle
-function completeKenshinSeigeOfUedaPart1() => byte(0x501778)
+function completeKenshinSeigeOfUedaPart1() => 0x501778
 
 // $50177C: (8-bit)(bitfield) Completed Missions for New Officer's Siege of Ueda Castle
 //          
@@ -1781,7 +1799,7 @@ function completeKenshinSeigeOfUedaPart1() => byte(0x501778)
 //          bit4 = Badger Hunt
 //          bit5 = Stop Yukimura
 //          bit6 = Plan Continues
-function completeNewOfficerSiegeOfUedaCastlePart1() => byte(0x50177C)
+function completeNewOfficerSiegeOfUedaCastlePart1() => 0x50177C
 
 // $501780: (8-bit)(bitfield) Completed Missions for Yoshimoto Imagawa's Siege of Ueda Castle
 //          
@@ -1793,7 +1811,7 @@ function completeNewOfficerSiegeOfUedaCastlePart1() => byte(0x50177C)
 //          bit3 = Where There's Smoke
 //          bit4 = Old Friends
 //          bit5 = Surrounded
-function completeYoshimotoSiegeOfUedaCastlePart1() => byte(0x501780)
+function completeYoshimotoSiegeOfUedaCastlePart1() => 0x501780
 
 // $501784: (8-bit)(bitfield) Completed Missions for Ina's Defense of Ueda Castle
 //          
@@ -1803,7 +1821,7 @@ function completeYoshimotoSiegeOfUedaCastlePart1() => byte(0x501780)
 //          bit3 = A Messy Situation
 //          bit4 = Ina's Last Bow
 //          bit5 = The Princess Trials
-function completeInaDefenseOfUedaCastle() => byte(0x501784)
+function completeInaDefenseOfUedaCastle() => 0x501784
 
 // $501788: (8-bit)(bitfield) Completed Missions for Yukimura Sanada's Siege of Osaka - Summer
 //          
@@ -1815,7 +1833,7 @@ function completeInaDefenseOfUedaCastle() => byte(0x501784)
 //          bit5 = Burning Soul
 //          bit6 = Withering Hope
 //          bit7 = Legendary Maneuver
-function completeYukimuraSiegeOfOsaka() => byte(0x501788)
+function completeYukimuraSiegeOfOsaka() => 0x501788
 
 // $50178C: (8-bit)(bitfield) Completed Missions for Goemon Ishikawa's Dance of Osaka
 //          
@@ -1823,7 +1841,7 @@ function completeYukimuraSiegeOfOsaka() => byte(0x501788)
 //          bit1 = Playtime is not over
 //          bit2 = Forbidden Love
 //          bit3 = Repel the Invader
-function completeGoemonDanceOfOsaka() => byte(0x50178C)
+function completeGoemonDanceOfOsaka() => 0x50178C
 
 // $501790: (8-bit)(bitfield) Completed Missions for Okuni's Dance of Osaka
 //          
@@ -1831,7 +1849,7 @@ function completeGoemonDanceOfOsaka() => byte(0x50178C)
 //          bit1 = Playtime is not over
 //          bit2 = Forbidden Love
 //          bit3 = Repel the Invader
-function completeOkuniDanceOfOsaka() => byte(0x501790)
+function completeOkuniDanceOfOsaka() => 0x501790
 
 // $501794: (16-bit)(bitfield) Completed Missions for Kunoichi's Siege of Osaka - Summer
 //          
@@ -1848,7 +1866,7 @@ function completeOkuniDanceOfOsaka() => byte(0x501790)
 //          bit10 = !! Unused !!
 //          bit11 = Might as well 
 //          
-function completeKunioichiSiegeOfOsaka() => word(0x501794)
+function completeKunioichiSiegeOfOsaka() => 0x501794
 
 // $501798: (8-bit)(bitfield) Completed Missions for Hanzo Hattori's Siege of Osaka - Summer
 //          
@@ -1864,7 +1882,7 @@ function completeKunioichiSiegeOfOsaka() => word(0x501794)
 //          bit7 = Legendary Maneuver
 //          
 //          
-function completeHanzoSiegeOfOsakaSummerPart1() => byte(0x501798)
+function completeHanzoSiegeOfOsakaSummerPart1() => 0x501798
 
 // $50179C: (16-bit)(bitfield) Completed Missions for New Officer's Siege of Osaka - Summer
 //          
@@ -1880,7 +1898,7 @@ function completeHanzoSiegeOfOsakaSummerPart1() => byte(0x501798)
 //          bit9 = !! UNUSED !!
 //          bit10 = To the Death
 //        
-function completeNewOfficerSiegeOfOsakaSummerUpper() => word(0x50179C)
+function completeNewOfficerSiegeOfOsakaSummerUpper() => 0x50179C
 
 // $5017A0: (8-bit)(bitfield) Completed Missions for New Officer's Siege of Osaka - Summer
 //          
@@ -1893,7 +1911,7 @@ function completeNewOfficerSiegeOfOsakaSummerUpper() => word(0x50179C)
 //          bit4 = Just in time
 //          bit5 = Sanada-Maru
 //          
-function completeNewOfficerSiegeOfOsakaSummerLowerPart1() => byte(0x5017A0)
+function completeNewOfficerSiegeOfOsakaSummerLowerPart1() => 0x5017A0
 
 // $5017A4: (8-bit)(bitfield) Completed Missions for Hideyoshi Hashiba's The Saika Campaign
 //          
@@ -1903,7 +1921,7 @@ function completeNewOfficerSiegeOfOsakaSummerLowerPart1() => byte(0x5017A0)
 //          bit3 = Fasting
 //          bit4 = Hideyoshi the Hero
 //          bit5 = Finish Strongly
-function completeHideyoshiTheSaikaCampaign() => byte(0x5017A4)
+function completeHideyoshiTheSaikaCampaign() => 0x5017A4
 
 // $5017A8: (8-bit)(bitfield) Completed Missions for Ina's Siege of Osaka Castle
 //          
@@ -1917,7 +1935,7 @@ function completeHideyoshiTheSaikaCampaign() => byte(0x5017A4)
 //          bit5 = Osaka Castle before Monkeys
 //          bit6 = The Coming Evil
 //          bit7 = The Sound of Muskets
-function completeInaSiegeOfOsakaCastlePart1() => byte(0x5017A8)
+function completeInaSiegeOfOsakaCastlePart1() => 0x5017A8
 
 // $5017AC: (8-bit)(bitfield) Completed Missions for Yukimura Sanad's Siege of Azuchi Castle Part 2
 //          
@@ -1928,7 +1946,7 @@ function completeInaSiegeOfOsakaCastlePart1() => byte(0x5017A8)
 //          bit2 = !! UNUSED!!
 //          bit3 = Squire
 //          bit4 = Demon Lord
-function completeYukimuraSiegeOfAzuchiCastlePart2() => byte(0x5017AC)
+function completeYukimuraSiegeOfAzuchiCastlePart2() => 0x5017AC
 
 // $5017B0: (16-bit)(bitfield) Completed Missions for Nobunaga Oda 's Retaking of Azuchi Castle
 //          
@@ -1938,7 +1956,7 @@ function completeYukimuraSiegeOfAzuchiCastlePart2() => byte(0x5017AC)
 //          bit1 = More Desperation
 //          bit2 = Solitude
 //          bit3 = Two Monsters
-function completeNobunagaRetakingOfAzuchiCastlePart2() => word(0x5017B0)
+function completeNobunagaRetakingOfAzuchiCastlePart2() => 0x5017B0
 
 // $5017B4: (8-bit)(bitfield) Completed Missions for Goemon Ishikawa's Dance of Azuchi Castle
 //          
@@ -1947,7 +1965,7 @@ function completeNobunagaRetakingOfAzuchiCastlePart2() => word(0x5017B0)
 //          bit2 = Food and Shelter
 //          bit3 = Lineage
 //          bit4 = Escort
-function completeGoemonDanceOfAzuchiCastle() => byte(0x5017B4)
+function completeGoemonDanceOfAzuchiCastle() => 0x5017B4
 
 // $5017B8: (8-bit)(bitfield) Completed Missions for Oichi's Azuchi Infiltration
 //          
@@ -1956,7 +1974,7 @@ function completeGoemonDanceOfAzuchiCastle() => byte(0x5017B4)
 //          bit2 = Triple Threat 2
 //          bit3 = Fight with no Glory
 //          bit4 = My Brother and Mitsuhide
-function completeOichiAzuchiInfiltration() => byte(0x5017B8)
+function completeOichiAzuchiInfiltration() => 0x5017B8
 
 // $5017BC: (8-bit)(bitfield) Completed Missions for Oichi's Siege of Azuchi Castle Part 2
 //          
@@ -1966,7 +1984,7 @@ function completeOichiAzuchiInfiltration() => byte(0x5017B8)
 //          bit1 = Self Sacrifice
 //          bit2 = Disruptive Monkey
 //          bit3 = Between Siblings
-function completeOichiSiegeOfAzuchiCastlePart2() => byte(0x5017BC)
+function completeOichiSiegeOfAzuchiCastlePart2() => 0x5017BC
 
 // $5017C0: (8-bit)(bitfield) Completed Missions for Okuni's Dance of Azuchi Castle
 //          
@@ -1975,7 +1993,7 @@ function completeOichiSiegeOfAzuchiCastlePart2() => byte(0x5017BC)
 //          bit2 = Spare Time
 //          bit3 = Lineage
 //          bit4 = Choice
-function completeOkuniDanceOfAzuchiCastle() => byte(0x5017C0)
+function completeOkuniDanceOfAzuchiCastle() => 0x5017C0
 
 // $5017C4: (8-bit)(bitfield) Completed Missions for Magoichi Saika's Azuchi Infiltration
 //          
@@ -1984,7 +2002,7 @@ function completeOkuniDanceOfAzuchiCastle() => byte(0x5017C0)
 //          bit2 = Chivalry
 //          bit3 = Last Scuffle
 //          bit4 = Gentleman
-function completeMagoichiAzuchiInfiltration() => byte(0x5017C4)
+function completeMagoichiAzuchiInfiltration() => 0x5017C4
 
 // $5017C8: (8-bit)(bitfield) Completed Missions for Shingen Takeda's Siege of Azuchi Castle Part 2 
 //          
@@ -1993,7 +2011,7 @@ function completeMagoichiAzuchiInfiltration() => byte(0x5017C4)
 //          bit2 = !!UNUSED
 //          bit3 = Squire
 //          bit4 = Demon Lord
-function completeShingenSiegeOfAzuchiCastlePart2() => byte(0x5017C8)
+function completeShingenSiegeOfAzuchiCastlePart2() => 0x5017C8
 
 // $5017CC: (8-bit)(bitfield) Completed Missions for Noh's Azuchi Infiltration
 //          
@@ -2002,7 +2020,7 @@ function completeShingenSiegeOfAzuchiCastlePart2() => byte(0x5017C8)
 //          bit2 = Intruder!
 //          bit3 = Tokugawa Menace
 //          bit4 = The interloper
-function completeNohAzuchiInfiltration() => byte(0x5017CC)
+function completeNohAzuchiInfiltration() => 0x5017CC
 
 // $5017D0: (8-bit)(bitfield) Completed Missions for Ranmaru Mori's Defense of Azuchi Castle
 //          
@@ -2012,7 +2030,7 @@ function completeNohAzuchiInfiltration() => byte(0x5017CC)
 //          bit3 = Null
 //          bit4 = Life
 //          bit5 = Chaos
-function completeRanmaruDefenseOfAzuchiCastle() => byte(0x5017D0)
+function completeRanmaruDefenseOfAzuchiCastle() => 0x5017D0
 
 // $5017D4: (8-bit)(bitfield) Completed Missions for Hideyoshi Hashiba's  Siege of Azuchi Castle part 2
 //          
@@ -2023,7 +2041,7 @@ function completeRanmaruDefenseOfAzuchiCastle() => byte(0x5017D0)
 //          bit2 = Companions
 //          bit3 = Creation
 //          bit4 = Farewell
-function completeHideyoshiSiegeOfAzuchiCastlePart2() => byte(0x5017D4)
+function completeHideyoshiSiegeOfAzuchiCastlePart2() => 0x5017D4
 
 // $5017D8: (8-bit)(bitfield) Completed Missions for Mitsuhide Akechi's Gifu Infiltration
 //          
@@ -2032,7 +2050,7 @@ function completeHideyoshiSiegeOfAzuchiCastlePart2() => byte(0x5017D4)
 //          bit2 = Beautiful Prey
 //          bit3 = Trespass
 //          bit4 = Conviction
-function completeMitsuhideGifuIniltration() => byte(0x5017D8)
+function completeMitsuhideGifuIniltration() => 0x5017D8
 
 // $5017DC: (8-bit)(bitfield) Completed Missions for Goemon Ishikawa's Gifu Infiltration
 //          
@@ -2042,7 +2060,7 @@ function completeMitsuhideGifuIniltration() => byte(0x5017D8)
 //          bit3 = Wife and Brat
 //          bit4 = Silent Treatment
 //          bit5 = Popular Guy
-function completeGoemonGifuInfiltration() => byte(0x5017DC)
+function completeGoemonGifuInfiltration() => 0x5017DC
 
 // $5017E0: (8-bit)(bitfield) Completed Missions for Kenshin Uesugi's Siege of Gifu Castle Part 2
 //          
@@ -2052,7 +2070,7 @@ function completeGoemonGifuInfiltration() => byte(0x5017DC)
 //          bit1 = Second Floor
 //          bit2 = Third Floor
 //          bit3 = Fourth Floor
-function completeKenshinSiegeOfGifuCastlePart2() => byte(0x5017E0)
+function completeKenshinSiegeOfGifuCastlePart2() => 0x5017E0
 
 // $5017E4: (8-bit)(bitfield) Completed Missions for Oichi's Siege of Inabayama Castle Part 2
 //          
@@ -2062,7 +2080,7 @@ function completeKenshinSiegeOfGifuCastlePart2() => byte(0x5017E0)
 //          bit1 = Clever Tactician
 //          bit2 = A Stern Man
 //          bit3 = Way of the Viper
-function completeOichiSiegeOfInabayamaCastlePart2() => byte(0x5017E4)
+function completeOichiSiegeOfInabayamaCastlePart2() => 0x5017E4
 
 // $5017E8: (8-bit)(bitfield) Completed Missions for Kunoichi's Gifu Infiltration
 //          
@@ -2073,7 +2091,7 @@ function completeOichiSiegeOfInabayamaCastlePart2() => byte(0x5017E4)
 //          bit4 = Goemon Explosion
 //          bit5 = Ultimate Ninja
 //          bit6 = Lies, Tears and Revenge
-function completeKunoichiGifuInfilitration() => byte(0x5017E8)
+function completeKunoichiGifuInfilitration() => 0x5017E8
 
 // $5017EC: (8-bit)(bitfield) Completed Missions for Noh's Siege of Inabayama Castle Part 2
 //          
@@ -2083,7 +2101,7 @@ function completeKunoichiGifuInfilitration() => byte(0x5017E8)
 //          bit1 = Clever Tactician
 //          bit2 = A Stern Man
 //          bit3 = Way of the Viper
-function completeNohSiegeOfInabayamaCastlePart2() => byte(0x5017EC)
+function completeNohSiegeOfInabayamaCastlePart2() => 0x5017EC
 
 // $5017F0: (8-bit)(bitfield) Completed Missions for Noh's Gifu Infiltration
 //          
@@ -2095,7 +2113,7 @@ function completeNohSiegeOfInabayamaCastlePart2() => byte(0x5017EC)
 //          bit5 = Gates of Chaos
 //          bit6 = Principle and Conviction
 //          bit7 = Because...
-function completeNohGifuInfiltration() => byte(0x5017F0)
+function completeNohGifuInfiltration() => 0x5017F0
 
 // $5017F4: (8-bit)(bitfield) Completed Missions for Ranmaru Mori's Gifu Infiltration
 //          
@@ -2106,7 +2124,7 @@ function completeNohGifuInfiltration() => byte(0x5017F0)
 //          bit4 = Persistence
 //          bit5 = Wild One
 //          bit6 = Friend and Foe
-function completeRanmaruGifuInfiltration() => byte(0x5017F4)
+function completeRanmaruGifuInfiltration() => 0x5017F4
 
 // $5017F8: (8-bit)(bitfield) Completed Missions for Hideyoshi Hashibai's Siege of Inabayama Castle Part 2
 //          
@@ -2117,7 +2135,7 @@ function completeRanmaruGifuInfiltration() => byte(0x5017F4)
 //          bit2 = The Threads of Fate
 //          bit3 = On the Brink
 //          bit4 = Near Death
-function completeHideyoshiSiegeInabayamaCastlePa2() => byte(0x5017F8)
+function completeHideyoshiSiegeInabayamaCastlePa2() => 0x5017F8
 
 // $5017FC: (8-bit)(bitfield) Completed Missions for Kenshin Uesugi's Siege of Ueda Castle Part 2
 //          
@@ -2128,7 +2146,7 @@ function completeHideyoshiSiegeInabayamaCastlePa2() => byte(0x5017F8)
 //          bit2 = Younger Sanada
 //          bit3 = Brothers
 //          bit4 = Sanada Patriarch
-function completeKenshinSiegeOfUedaCastlePart2() => byte(0x5017FC)
+function completeKenshinSiegeOfUedaCastlePart2() => 0x5017FC
 
 // $501800: (8-bit)(bitfield) Completed Missions for Kunoichi's Rescue at Ueda Castle
 //          
@@ -2137,7 +2155,7 @@ function completeKenshinSiegeOfUedaCastlePart2() => byte(0x5017FC)
 //          bit2 = Reach for Tomorrow
 //          bit3 = End is near
 //          bit4 = Iga Illusion
-function completeKunoichiRescueAtUedaCastle() => byte(0x501800)
+function completeKunoichiRescueAtUedaCastle() => 0x501800
 
 // $501804: (8-bit)(bitfield) Completed Missions for Hanzo Hattori's Ueda Infiltration
 //          
@@ -2146,7 +2164,7 @@ function completeKunoichiRescueAtUedaCastle() => byte(0x501800)
 //          bit2 = Confirmation
 //          bit3 = Unbreakable
 //          bit4 = Secrecy
-function completeHanzoUedaInfiltration() => byte(0x501804)
+function completeHanzoUedaInfiltration() => 0x501804
 
 // $501808: (8-bit)(bitfield) Completed Missions for New Officer's Siege of Ueda Castle Part 2
 //          
@@ -2160,7 +2178,7 @@ function completeHanzoUedaInfiltration() => byte(0x501804)
 //          bit5 = Sixth Time
 //          bit6 = Tokugawa Rule
 //          bit7 = Sanada Rule
-function completeNewOfficerSiegeOfUedaCastlePart2() => byte(0x501808)
+function completeNewOfficerSiegeOfUedaCastlePart2() => 0x501808
 
 // $50180C: (8-bit)(bitfield) Completed Missions for Yoshimoto Imagawa's Siege of Ueda Castle Part 2
 //          
@@ -2172,7 +2190,7 @@ function completeNewOfficerSiegeOfUedaCastlePart2() => byte(0x501808)
 //          bit3 = The Two Warriors
 //          bit4 = The Mirage
 //          bit5 = Under Pressure
-function completeYoshimotoSiegeOfUedaCastlePart2() => byte(0x50180C)
+function completeYoshimotoSiegeOfUedaCastlePart2() => 0x50180C
 
 // $501810: (8-bit)(bitfield) Completed Missions for Goemon Ishikawa's Osaka Intrusion
 //          
@@ -2182,7 +2200,7 @@ function completeYoshimotoSiegeOfUedaCastlePart2() => byte(0x50180C)
 //          bit3 = Shake the Castle
 //          bit4 = Burning Spirit
 //          bit5 = No Cannons Allowed
-function completeGoemonIshikawaOsakaIntrusion() => byte(0x501810)
+function completeGoemonIshikawaOsakaIntrusion() => 0x501810
 
 // $501814: (8-bit)(bitfield) Completed Missions for Hanzo Hattori's Siege of Osaka - Summer
 //          
@@ -2192,7 +2210,7 @@ function completeGoemonIshikawaOsakaIntrusion() => byte(0x501810)
 //          bit1 = Muddle
 //          bit2 = True Ninja
 //          bit3 = Ruse
-function completeHanzoSiegeOfOsakaSummerPart2() => byte(0x501814)
+function completeHanzoSiegeOfOsakaSummerPart2() => 0x501814
 
 // $501818: (8-bit)(bitfield) Completed Missions for Hanzo Hattori's Osaka Infiltration
 //          
@@ -2203,7 +2221,7 @@ function completeHanzoSiegeOfOsakaSummerPart2() => byte(0x501814)
 //          bit4 = Battle Royale
 //          bit5 = Light and Shadow
 //          bit6 = The Darkness
-function completeHanzoOsakaInfiltration() => byte(0x501818)
+function completeHanzoOsakaInfiltration() => 0x501818
 
 // $50181C: (8-bit)(bitfield) Completed Missions for New Officer's Siege of Osaka - Summer Part 2
 //          
@@ -2213,7 +2231,7 @@ function completeHanzoOsakaInfiltration() => byte(0x501818)
 //          bit1 = Muddle
 //          bit2 = True Ninja
 //          bit3 = Ruse
-function completeNewOfficerSiegeOfOsakaSummerPar2() => byte(0x50181C)
+function completeNewOfficerSiegeOfOsakaSummerPar2() => 0x50181C
 
 // $501820: (8-bit)(bitfield) Completed Missions for Ina's Siege of Osaka Castle Part 2
 //          
@@ -2227,13 +2245,13 @@ function completeNewOfficerSiegeOfOsakaSummerPar2() => byte(0x50181C)
 //          bit5 = Kunoichi's Last Dance
 //          bit6 = Dancing Monkeys
 //          bit7 = A Duet with Father
-function completeInaSiegeOfOsakaCastlePart2() => byte(0x501820)
+function completeInaSiegeOfOsakaCastlePart2() => 0x501820
 
 // $501824: (8-bit)(bitfield) Completed Missions for Keiji Maeda's Odawara Infiltration
 //          
 //          bit0 = Babysitting
 //          bit1 = Serious Warrior
-function completeKeijiOdawaraInfiltration() => byte(0x501824)
+function completeKeijiOdawaraInfiltration() => 0x501824
 
 // $501828: (8-bit)(bitfield) Completed Missions for Kenshin Uesugi's Odawara Infiltration
 //          
@@ -2241,7 +2259,7 @@ function completeKeijiOdawaraInfiltration() => byte(0x501824)
 //          bit1 = Stalling
 //          bit2 = Appearances
 //          bit3 = Aftermath
-function completeKenshinOdawaraInfiltration() => byte(0x501828)
+function completeKenshinOdawaraInfiltration() => 0x501828
 
 // $50182C: (8-bit)(bitfield) Completed Missions for Kunoichi's Odawara Infiltration
 //          
@@ -2252,7 +2270,7 @@ function completeKenshinOdawaraInfiltration() => byte(0x501828)
 //          bit4 = Hi, I'm an assassin
 //          bit5 = Got me but Good
 //          bit6 = 5 seconds to Detonation!
-function completeKunoichiOdawaraInfiltration() => byte(0x50182C)
+function completeKunoichiOdawaraInfiltration() => 0x50182C
 
 // $501830: (8-bit)(bitfield) Completed Missions for Shingen Takeda's Odawara Infiltration
 //          
@@ -2261,7 +2279,7 @@ function completeKunoichiOdawaraInfiltration() => byte(0x50182C)
 //          bit2 = From the North
 //          bit3 = The Nemesis cometh
 //          bit4 = People are the Walls
-function completeShingenOdawaraInfiltration() => byte(0x501830)
+function completeShingenOdawaraInfiltration() => 0x501830
 
 // $501834: (8-bit)(bitfield) Completed Missions for Masamune Date's Odawara Campaign
 //          
@@ -2269,7 +2287,7 @@ function completeShingenOdawaraInfiltration() => byte(0x501830)
 //          bit1 = Love...?
 //          bit2 = Personal Challenge
 //          bit3 = Battle between Men
-function completeMasamuneOdawaraCampaign() => byte(0x501834)
+function completeMasamuneOdawaraCampaign() => 0x501834
 
 // $501838: (8-bit)(bitfield) Completed Missions for Yoshimoto Imagawa's Odawara Infiltration
 //          
@@ -2278,7 +2296,7 @@ function completeMasamuneOdawaraCampaign() => byte(0x501834)
 //          bit2 = Kemari for Kids
 //          bit3 = Read My Lips
 //          bit4 = Beatuiful yet Irrational
-function completeYoshimotoOdawaraInfiltration() => byte(0x501838)
+function completeYoshimotoOdawaraInfiltration() => 0x501838
 
 // $521210: (8-bit) Current Mission ID
 //          
@@ -2504,6 +2522,7 @@ NEW_OFFICER12 = 0x1E
 NEW_OFFICER13 = 0x1F 
 NEW_OFFICER14 = 0x20 
 NEW_OFFICER15 = 0x21 
+LAST_OFFICIAL_OFFICER = INA
 
 YUKIMURA_BATTLE_OF_KAWANAKAJIMA = 0x00
 YUKIMURA_BATTLE_OF_MIKATAGAHARA = 0x01
@@ -2687,64 +2706,88 @@ CharacterNameLookup =
 
 FIRST = "First"
 LAST = "Last"
+ID = "ID"
 LevelLineup = 
 {
     YUKIMURA: {FIRST: YUKIMURA_BATTLE_OF_KAWANAKAJIMA,
-               LAST: YUKIMURA_BATTLE_OF_YAMASAKI
+               LAST: YUKIMURA_BATTLE_OF_YAMASAKI,
+              ID: 388570
               },
     KEIJI: {FIRST: KEIJI_BATTLE_OF_ISE,
-               LAST: KEIJI_KAWANAKAJIMA_CHALLENGE
+               LAST: KEIJI_KAWANAKAJIMA_CHALLENGE,
+              ID: 388571
               },
     NOBUNAGA: {FIRST: NOBUNAGA_BATTLE_OF_OKEHAZAMA,
-               LAST: NOBUNAGA_BATTLE_OF_YAMASAKI
+               LAST: NOBUNAGA_BATTLE_OF_YAMASAKI,
+              ID: 388572
               },
     MITSUHIDE: {FIRST: MITSUHIDE_DEFENSE_OF_INABAYAM_CASTLE,
-               LAST: MITSUHIDE_BATTLE_OF_YAMASAKI_LOWER
+               LAST: MITSUHIDE_BATTLE_OF_YAMASAKI_LOWER,
+              ID: 388573
               },
     GOEMON: {FIRST: GOEMON_GIFU_INFILTRATION,
-               LAST: GOEMON_DANCE_OF_AZUCHI_CASTLE
+               LAST: GOEMON_DANCE_OF_AZUCHI_CASTLE,
+              ID: 388574
+              },
+    KENSHIN: {FIRST: KENSHIN_BATTLE_OF_KAWANAKAJIMA,
+              LAST: KENSHIN_BATTLE_OF_ANEGAWA,
+              ID: 388650
               },
     OICHI: {FIRST: OICHI_BATTLE_OF_OKEHAZAMA,
-               LAST: OICHI_BATTLE_OF_HONNOUJI
+               LAST: OICHI_BATTLE_OF_HONNOUJI,
+              ID: 388575
               },
     OKUNI: {FIRST: OKUNI_DANCE_OF_KYOTO,
-               LAST: OKUNI_DANCE_OF_AZUCHI_CASTLE
+               LAST: OKUNI_DANCE_OF_AZUCHI_CASTLE,
+              ID: 388576
               },
     KUNOICHI: {FIRST: KUNOICHI_BATTLE_OF_KAWANAKAJIMA,
-               LAST: KUNOICHI_ODWARA_INFILTRATION
+               LAST: KUNOICHI_ODWARA_INFILTRATION,
+              ID: 388577
               },
     MAGOICHI: {FIRST: MAGOICHI_BATTLE_OF_ISE,
-               LAST: MAGOICHI_AZUCHI_INFILTRATION
+               LAST: MAGOICHI_AZUCHI_INFILTRATION,
+              ID: 388578
               },
     SHINGEN: {FIRST: SHINGEN_BATTLE_OF_KAWANKAJIMA,
-               LAST: SHINGEN_KAWANAKAJIMA_SHOWDOWN
+               LAST: SHINGEN_KAWANAKAJIMA_SHOWDOWN,
+              ID: 388579
               },
     MASAMUNE: {FIRST: MASAMUNE_KAWANAKAJIMA_CAMPAIGN,
-               LAST: MASAMUNE_ODAWARA_CAMPAIGN
+               LAST: MASAMUNE_ODAWARA_CAMPAIGN,
+              ID: 388580
               },
     NOH: {FIRST: NOH_BATTLE_OF_OKEHAZAMA,
-               LAST: NOH_AZUCHI_INFILTRATION
+               LAST: NOH_AZUCHI_INFILTRATION,
+              ID: 388581
               },
     HANZO: {FIRST: HANZO_BATTLE_OF_OKEHAZAMA,
-               LAST: HANZO_OSAKA_INFILTRATION
+               LAST: HANZO_OSAKA_INFILTRATION,
+              ID: 388582
               },
     RANMARU: {FIRST: RANMARU_DEFENSE_OF_INABAYAMA_CASTLE,
-               LAST: RANMARU_DEFENSE_OF_AZUCHI_CASTLE
+               LAST: RANMARU_DEFENSE_OF_AZUCHI_CASTLE,
+              ID: 388583
               },
     HIDEYOSHI: {FIRST: HIDEYOSHI_SIEGE_OF_INABAYAMA_CASTLE,
-               LAST: HIDEYOSHI_SIEGE_OF_AZUCHI_CASTLE
+               LAST: HIDEYOSHI_SIEGE_OF_AZUCHI_CASTLE,
+              ID: 388584
               },
     YOSHIMOTO: {FIRST: YOSHIMOTO_BATTLE_OF_OKEHAZAMA,
-               LAST: YOSHIMOTO_STRUGGLE_AT_HONNOUJI
+               LAST: YOSHIMOTO_STRUGGLE_AT_HONNOUJI,
+              ID: 388585
               },
     TADAKATSU: {FIRST: TADAKATSU_BATTLE_OF_OKEHAZAMA,
-               LAST: TADAKATSU_BATTLE_OF_YAMASAKI
+               LAST: TADAKATSU_BATTLE_OF_YAMASAKI,
+              ID: 388586
               },
     INA: {FIRST: INA_RETREAT_AT_KANEGASAKI,
-               LAST: INA_SIEGE_OF_OSAKA_CASTLE
+               LAST: INA_SIEGE_OF_OSAKA_CASTLE,
+              ID: 388587
               },
     NEW_OFFICER01: {FIRST: NEW_OFFICER_BATTLE_OF_OKEHAZAMA,
-               LAST: NEW_OFFICER_SIEGE_OF_OSAKA_SUMMER_LOWER
+               LAST: NEW_OFFICER_SIEGE_OF_OSAKA_SUMMER_LOWER,
+              ID: 388588
               },
 }
 
@@ -3555,6 +3598,79 @@ OTEGINE = 0x7D
 BENKEI = 0x82
 GORYO = 0x83
 
+FIFTH = "Fifth"
+SIXTH = "Sixth"
+
+WeaponList = 
+{
+    YUKIMURA: {FIFTH: SUSANO,
+               SIXTH: RAKAN
+              },
+    KEIJI: {FIFTH: IZANAGI,
+               SIXTH: NI_OH_PIKE
+              },
+    NOBUNAGA: {FIFTH: OROCHI,
+               SIXTH: DAI_ROKUTEN
+              },
+    MITSUHIDE: {FIFTH: FUTSU_MITAMA,
+               SIXTH: RASETSU
+              },
+    GOEMON: {FIFTH: TAKEMIKAZUCHI,
+               SIXTH: OBLITERATOR
+              },
+    KENSHIN: {FIFTH: MURAKUMO,
+               SIXTH: BISHAMONTEN
+              },
+    OICHI: {FIFTH: SAKURA,
+               SIXTH: KIKU
+              },
+    OKUNI: {FIFTH: HIKAGE,
+               SIXTH: KISHOUTEN
+              },
+    KUNOICHI: {FIFTH: KUSHINADA,
+               SIXTH: KOKUANTEN
+              },
+    MAGOICHI: {FIFTH: GOKUEN,
+               SIXTH: YATAGARASU
+              },
+    SHINGEN: {FIFTH: KOURIN,
+               SIXTH: SHINJU
+              },
+    MASAMUNE: {FIFTH: MIKABOSHI,
+               SIXTH: ASHURA
+              },
+    NOH: {FIFTH: HIRUKO,
+               SIXTH: MAMUSHI
+              },
+    HANZO: {FIFTH: YAMIKIBA,
+               SIXTH: MARISHITEN
+              },
+    RANMARU: {FIFTH: KAMUDO,
+               SIXTH: GOHOTENDO
+              },
+    HIDEYOSHI: {FIFTH: MIHASHIRA,
+               SIXTH: MONJU
+              },
+    YOSHIMOTO: {FIFTH: VELVET_KEMARI,
+               SIXTH: PHOENIX_KEMARI
+              },
+    TADAKATSU: {FIFTH: ARAHABAKI,
+               SIXTH: EMMA
+              },
+    INA: {FIFTH: OMOIKANE,
+               SIXTH: AISEN
+              },
+    NEW_OFFICER01: {FIFTH: DOUJI_KIRI,
+               SIXTH: MUNECHIKA
+              }, // Sword
+    NEW_OFFICER02: {FIFTH: TOMBO_GIRI,
+               SIXTH: OTEGINE
+              }, // Spear
+    NEW_OFFICER03: {FIFTH: BENKEI,
+               SIXTH: GORYO
+              }, // Naginata
+}
+
 fifthWeapons = 
 [
     SUSANO,
@@ -3795,12 +3911,13 @@ function gameplayIndicator() => byte(0x521430)
 
 WON_STAGE = 0x0
 IN_GAME = 0x0c 
-MID_LEVEL_FINISH = 0x08
+LOST_GAME = 0x01
 function playerjustWonStage() => prev( gameplayIndicator()) == IN_GAME && 
                                  gameplayIndicator() == WON_STAGE
-function playerjustWonSurvival() => prev( gameplayIndicator()) == IN_GAME && 
-                                    ( gameplayIndicator() == WON_STAGE ||
-                                      gameplayIndicator() == MID_LEVEL_FINISH ) 
+function playerjustWonSurvival() => prev( gameplayIndicator()) == IN_GAME &&
+                                    gameplayIndicator() == WON_STAGE 
+function playerjustFinishedHighTower() => prev( gameplayIndicator()) == IN_GAME && 
+                                     gameplayIndicator() == LOST_GAME 
 function playerJustFinishedChallenge() => prev( gameplayIndicator()) == IN_GAME && 
                                         gameplayIndicator() != IN_GAME
 
@@ -3863,10 +3980,24 @@ function playerJustFinishedChallenge() => prev( gameplayIndicator()) == IN_GAME 
 function endingMovieToPlay() => byte(0x521260)
 
 NO_ENDING = 0x3b
+FIRST_OKUNI_ALT_ENDING = 0x26
+LAST_OKUNI_ALT_ENDING = 0x2e
 
-function endingMovieTrigger(targetId) => playerjustWonStage() && 
-                                         prev(endingMovieToPlay()) == NO_ENDING &&
-                                         endingMovieToPlay() == targetId
+
+// Okuni's ending are a little different and trigger earlier. 
+function endingMovieTrigger(targetId) 
+{
+    retValue =  playerjustWonStage() && endingMovieToPlay() == targetId
+    if (targetId >= FIRST_OKUNI_ALT_ENDING  && targetId <= LAST_OKUNI_ALT_ENDING)
+    {
+        return retValue && prior(endingMovieToPlay()) == NO_ENDING 
+    }
+    else
+    {
+        return retValue && prev(endingMovieToPlay()) == NO_ENDING 
+    }
+}
+                                        
 
 
 // $521438: (32-bit) Time spent in a level.
@@ -4058,32 +4189,76 @@ arrayOfNewOfficerSkills =
 function newOfficerSixExpertcheck() => tally_of(arrayOfNewOfficerSkills,
                                               6,  
                                               index => once( index >= 6  && index < 0xff)
-                                           )
+        )
 
+function power(value, powerValue)
+{
+    returnValue = 1
+    if (powerValue >= 1)
+    {
+        for index in range(1,powerValue)
+        {
+            returnValue = returnValue * value
+        }
+    }
+    return returnValue
+}
+
+function maxBitcount(value)
+{
+    for bitCount in range(0,32)
+    {
+        if(power(2,bitCount) > value)
+        {
+            return bitCount
+        }
+    }
+    return 32
+}
 
 function scenarioAchievementAndLeaderboards(key)
 {
     levelInfo = LevelInfo[key]
-    comparision = levelInfo[MISSION_INFO] & levelInfo[EXPECTED_VALUE] == levelInfo[EXPECTED_VALUE] &&
-                  prev(levelInfo[MISSION_INFO]) & levelInfo[EXPECTED_VALUE] != levelInfo[EXPECTED_VALUE]
+    measured_conditions = []
+    
+    for index in range(0, maxBitcount(levelInfo[EXPECTED_VALUE]))
+    {
+        targetValue = power(2, index)
+        if ( targetValue & levelInfo[EXPECTED_VALUE] != 0 ) 
+        {
+            array_push(measured_conditions, bitOffset(levelInfo[MISSION_INFO], index))
+        }         
+    }
+                  
+    comparision = prev(word(levelInfo[MISSION_INFO])) & levelInfo[EXPECTED_VALUE] != levelInfo[EXPECTED_VALUE]
     if (ContainsKey(levelInfo, EXTENDED_MISSION_INFO))
     {
-        comparision = levelInfo[MISSION_INFO] & levelInfo[EXPECTED_VALUE] == levelInfo[EXPECTED_VALUE] &&
-                      levelInfo[EXTENDED_MISSION_INFO] & levelInfo[EXTENDED_EXPECTED_VALUE] == levelInfo[EXTENDED_EXPECTED_VALUE] &&
-                      ( prev(levelInfo[MISSION_INFO]) & levelInfo[EXPECTED_VALUE] != levelInfo[EXPECTED_VALUE] ||
-                        prev(levelInfo[EXTENDED_MISSION_INFO]) & levelInfo[EXTENDED_EXPECTED_VALUE] != levelInfo[EXTENDED_EXPECTED_VALUE]
-                      )
+        index = 0  
+        
+        for index in range(0, maxBitcount(levelInfo[EXTENDED_EXPECTED_VALUE]))
+        {
+            targetValue = power(2, index)
+            if ( targetValue & levelInfo[EXTENDED_EXPECTED_VALUE] != 0 ) 
+            {
+                array_push(measured_conditions, bitOffset(levelInfo[EXTENDED_MISSION_INFO], index))
+            }         
+        }
+
+        comparision = ( prev(word(levelInfo[MISSION_INFO])) & levelInfo[EXPECTED_VALUE] != levelInfo[EXPECTED_VALUE] ||
+                        prev(word(levelInfo[EXTENDED_MISSION_INFO])) & levelInfo[EXTENDED_EXPECTED_VALUE] != levelInfo[EXTENDED_EXPECTED_VALUE] )
     }
     achievement( title = format("{0} Missions", LevelLookup[key]),
                  description = format("Complete every mission in {0} in Story Mode or Free Mode", LevelLookup[key]),
                  points = levelInfo[POINTS],
                  trigger = comparision &&
+                           measured(tally_of(measured_conditions, length(measured_conditions), bitValue => once(bitValue == 1))) &&
                            saveProtection()
+                           
     )   
     
     leaderboard(
         title = format("Most Kills on {0}",  LevelLookup[key]),
-        description = format("Get the most kills on {0} and win the scenario",  LevelLookup[key]),
+        description = format("Get the most kills on {0} and win the scenario" + ONE_PLAYER_STRING,  LevelLookup[key]),
         start = 
         (
             musouOrFreeMode() &&
@@ -4100,7 +4275,7 @@ function scenarioAchievementAndLeaderboards(key)
 
     leaderboard(
         title = format("Fastest Run on {0}", LevelLookup[key]),
-        description = format("Get through the scenario {0} the fastest", LevelLookup[key]),
+        description = format("Get through the scenario {0} the fastest" + ONE_PLAYER_STRING, LevelLookup[key]),
         
         start  =
         (
@@ -4117,7 +4292,7 @@ function scenarioAchievementAndLeaderboards(key)
     )
     leaderboard(
         title = format("Chaos: Most Kills on {0}",  LevelLookup[key]),
-        description = format("Get the most kills on {0} and win the scenario on chaos difficulty",  LevelLookup[key]),
+        description = format("Get the most kills on {0} and win the scenario on chaos difficulty" + ONE_PLAYER_STRING,  LevelLookup[key]),
         start = 
         (
             musouOrFreeMode() &&
@@ -4134,7 +4309,7 @@ function scenarioAchievementAndLeaderboards(key)
 
     leaderboard(
         title = format("Chaos: Fastest Run on {0}", LevelLookup[key]),
-        description = format("Get through the scenario {0} the fastest on chaos difficulty", LevelLookup[key]),
+        description = format("Get through the scenario {0} the fastest on chaos difficulty" + ONE_PLAYER_STRING, LevelLookup[key]),
         
         start  =
         (
@@ -4157,7 +4332,7 @@ function scenarioAchievementAndLeaderboards(key)
 function endingAchievement(key, points)
 {
     achievement( title = endingNameLookup[key],
-                 description = format("Reach {0} in Story Mode or Free Mode", endingDescriptionLookup[key]),
+                 description = format("Reach {0} in Story Mode or Free Mode" + ONE_PLAYER_STRING, endingDescriptionLookup[key]),
                  points = points,
                  trigger = musouOrFreeMode() &&
                            endingMovieTrigger(key) &&
@@ -4185,19 +4360,20 @@ for key in range(OKUNI_NOBUNAGA_ENDING, OKUNI_KENSHIN_ENDING)
 function chaosAchievement(key) 
 {
     achievement(title = format("Chaos Mode: {0}" , CharacterNameLookup[key]),
-                description = format("Beat each of {0}'s story scenarios on Chaos Difficulty in one session in Story Mode or Free Mode", CharacterNameLookup[key] ), 
-                points = 10,
+                description = format("Beat each of {0}'s story scenarios on Chaos Difficulty in one session in Story Mode" + ONE_PLAYER_STRING, CharacterNameLookup[key] ), 
+                points = 25,
                 trigger = measured(tally_of(range(LevelLineup[key][FIRST],LevelLineup[key][LAST]), 
                                             LevelLineup[key][LAST]-LevelLineup[key][FIRST] + 1,  
                                             index => once( currentScenarioId() == index && 
                                                  playerjustWonStage() &&
-                                                 musouOrFreeMode() &&
+                                                 musouMode() &&
                                                  chaosDifficulty() &&
                                                  !isSecondPlayerActive() &&
                                                  saveProtection()
                                                  )
                                            )
-                                  )
+                                  ),
+                id = LevelLineup[key][ID]
                 )
 }
 
@@ -4206,30 +4382,44 @@ for key in LevelLineup
     chaosAchievement(key)
 }
 
-function weaponAchievement(key, points, difficulty, difficultyString)
+function weaponAchievement(key)
 {
+    record = WeaponList[key]
+    ownerName = CharacterNameLookup[key]
+    fifthId = record[FIFTH]
+    fifthName = weaponNameLookup[fifthId]
+    fifthDescription = weaponDescriptionLookup[fifthId]
+    sixthId = record[SIXTH]
+    sixthName = weaponNameLookup[sixthId]
+    sixthDescription = weaponDescriptionLookup[sixthId]
     
-    achievement( title = weaponNameLookup[key],
-                 description = format("Obtain {0} on {1} in Story Mode or Free Mode", weaponDescriptionLookup[key], difficultyString),
-                 points = points,
+    achievement( title = fifthName,
+                 description = format("Obtain {0} on hard difficulty in Story Mode or Free Mode before obtaining {1}" + ONE_PLAYER_STRING, fifthDescription, sixthName),
+                 points = 5,
                  trigger = musouOrFreeMode() &&
-                           weaponHasDropped(key) &&
+                           weaponHasDropped(fifthId) &&
                            !isSecondPlayerActive() &&
-                           difficulty &&
+                           hardDifficulty() &&
+                           trigger_when(playerjustWonStage()) &&
+                           !everOwnedWeapon(sixthId)
+
+    )   
+    
+    achievement( title = sixthName,
+                 description = format("Obtain {0} on chaos difficulty in Story Mode or Free Mode" + ONE_PLAYER_STRING, sixthDescription),
+                 points = 10,
+                 trigger = musouOrFreeMode() &&
+                           weaponHasDropped(sixthId) &&
+                           !isSecondPlayerActive() &&
+                           chaosDifficulty() &&
                            trigger_when(playerjustWonStage())
     )   
 }
 
-for key in fifthWeapons
+for key in WeaponList
 {
-    weaponAchievement(key = key, points = 5, difficulty = hardDifficulty(), difficultyString = "hard difficulty")
+    weaponAchievement(key = key)
 }
-
-for key in sixthWeapons
-{
-    weaponAchievement(key = key, points = 10, difficulty = chaosDifficulty(), difficultyString = "chaos difficulty")
-}
-
 
 achievement( title = "Top-Tier Officers",
              description = "Reach level 20 with all your officers and one of the new officers",
@@ -4260,7 +4450,7 @@ achievement( title = "Commons Champion",
 function musouRareItemAchievement(key) 
 {
     achievement(title = itemLookup[key],
-                description = format("Obtain {0} in Story Mode or Free Mode", itemLookup[key]),
+                description = format("Obtain {0} in Story Mode or Free Mode" + ONE_PLAYER_STRING, itemLookup[key]),
                 points = 5,
                 trigger = itemHasDropped(key) &&
                           !isSecondPlayerActive() &&
@@ -4443,15 +4633,15 @@ missionLeaderboardAchievementAndLeaderboard(missionId = DEFLECT_MISSION,
                               value = 74)
 missionLeaderboardAchievementAndLeaderboardLesser(missionId = BURST_MISSION,
                               title = "Blazing Burst",
-                              description = "Finish Burst in Challenge Mode with 1'09'26 still on the clock", 
+                              description = "Finish Burst in Challenge Mode with 1'12'00 still on the clock", 
                               target = timeSpentInLevelinFrames(),
-                              value = (2*60*60) - (((1 * 60 + 9) * 60) +26) )
+                              value = (2*60*60) - (((1 * 60 + 12) * 60)) )
 
 missionLeaderboardAchievementAndLeaderboardLesser(missionId = RIDING_MISSION,
                               title = "Rapid Riding",
-                              description = "Finish Burst in Challenge Mode with 1'12'00 still on the clock", 
+                              description = "Finish Riding in Challenge Mode with 1'12'00 still on the clock", 
                               target = timeSpentInLevelinFrames(),
-                              value = ((4*60 + 30 )*60) - (((1 * 60 + 9) * 60) +26) )
+                              value = ((4*60 + 30 )*60) - (((1 * 60 + 12) * 60) ) )
 
 function survivalLeaderboardAchievement(missionId, title, description, target, value)
 {
@@ -4482,9 +4672,43 @@ function survivalLeaderboardAchievement(missionId, title, description, target, v
     )
 }
 
+
+function highTowerLeaderboardAchievement(missionId, title, description, target, value)
+{
+    achievement( title = title,
+                description = description,
+                points = 5,
+                trigger = survivalMode() &&
+                          !isSecondPlayerActive() &&
+                          target > value &&
+                          playerjustFinishedHighTower()
+    )
+
+    leaderboard(
+        title = format("Best Score on {0}", LevelLookup[missionId]),
+        description = format("Get the highest score on {0} challenge", LevelLookup[missionId]),
+        
+        start  =
+        (
+            survivalMode() &&
+            currentScenarioId() == missionId &&
+            !isSecondPlayerActive() &&
+            playerjustFinishedHighTower()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = target,
+        format = "VALUE" 
+    )
+}
+
+
+
+
+
 survivalLeaderboardAchievement(missionId = GOLD_RUSH,
                               title = "Godly Gold Rush",
-                              description = "Survive Gold Rush in Survival Mode with 7000G ", 
+                              description = "Survive Gold Rush in Survival Mode with 7000G", 
                               target = goldInGoldRush(),
                               value = ((4*60 + 30 )*60) - (((1 * 60 + 9) * 60) +26)  )
 survivalLeaderboardAchievement(missionId = DEEP_ABYSS,
@@ -4492,7 +4716,7 @@ survivalLeaderboardAchievement(missionId = DEEP_ABYSS,
                               description = "Finish Deep Abyss in Survival Mode with 2000 KOs", 
                               target = firstPlayerKoCount(),
                               value = 2000)
-survivalLeaderboardAchievement(missionId = HIGH_TOWER,
+highTowerLeaderboardAchievement(missionId = HIGH_TOWER,
                               title = "Holy High Tower",
                               description = "Finish High Tower in Survival Mode with over 30 floor complete", 
                               target = survivalFloorLevel(),
@@ -4514,7 +4738,7 @@ newOfficerAchievement(title = "Musket Mastery",
 newOfficerAchievement(title = "Fulfilling Frenzy",
                       description = "Learn the Frenzy Skill from Ranmaru Mori in New Officer Mode",
                       target = newOfficerFrenzyUnlock())
-newOfficerAchievement(title = "Reliable Reach ",
+newOfficerAchievement(title = "Reliable Reach",
                       description = "Learn the Reach Skill from Kenji Maeda in New Officer Mode",
                       target = newOfficerReachUnlock())
 newOfficerAchievement(title = "Robust Rage",
@@ -4578,6 +4802,7 @@ rich_presence_display("In Menus.") //Intentionally slightly different to say "is
 
 
 // One of every skill on a single character?
+
 
 
 
