@@ -568,7 +568,7 @@ NINJA_SUIT = 0x19
 KAGE_SCROLL = 0x1a
 WAR_BATON = 0x1b
 BOOK_OF_HEALING = 0x1c
-SHEILD_WALL = 0x1d
+SHIELD_WALL = 0x1d
 GOLDEN_RUNE = 0x1e
 BOOK_OF_EARTH = 0x1f
 BOOK_OF_WATER = 0x20
@@ -608,7 +608,7 @@ itemLookup=
     KAGE_SCROLL : "The Kage Scroll", 
     WAR_BATON : "War Baton", 
     BOOK_OF_HEALING : "Book of Healing", 
-    SHEILD_WALL : "Sheild Wall", 
+    SHIELD_WALL : "Sheild Wall", 
     GOLDEN_RUNE : "Golden Rune", 
     BOOK_OF_EARTH : "Book of Earth", 
     BOOK_OF_WATER : "Book of Water", 
@@ -653,7 +653,7 @@ rareItems =
     KAGE_SCROLL,
     WAR_BATON,
     BOOK_OF_HEALING,
-    SHEILD_WALL,
+    SHIELD_WALL,
     GOLDEN_RUNE,
     BOOK_OF_EARTH,
     BOOK_OF_WATER,
@@ -4173,7 +4173,7 @@ function newOfficerRidingProgression() => dword(0x6D71A8)
 
 // On bootup time spent in level is 0.  Should never be 0 after a level. 
 // NOTE: On bootup the game is set to Musou mode. 
-function saveProtection() => !optionMenu() && timeSpentInLevelinFrames() != 00
+function saveProtection() => !optionMenu() && (timeSpentInLevelinFrames() != 00 || prev(timeSpentInLevelinFrames()) != 00)
 
 arrayOfNewOfficerSkills =
 [
@@ -4231,6 +4231,7 @@ function scenarioAchievementAndLeaderboards(key)
     }
                   
     comparision = prev(word(levelInfo[MISSION_INFO])) & levelInfo[EXPECTED_VALUE] != levelInfo[EXPECTED_VALUE]
+    reset_logic = prev(word(levelInfo[MISSION_INFO])) & word(levelInfo[MISSION_INFO]) != prev(word(levelInfo[MISSION_INFO])) 
     if (ContainsKey(levelInfo, EXTENDED_MISSION_INFO))
     {
         index = 0  
@@ -4246,14 +4247,18 @@ function scenarioAchievementAndLeaderboards(key)
 
         comparision = ( prev(word(levelInfo[MISSION_INFO])) & levelInfo[EXPECTED_VALUE] != levelInfo[EXPECTED_VALUE] ||
                         prev(word(levelInfo[EXTENDED_MISSION_INFO])) & levelInfo[EXTENDED_EXPECTED_VALUE] != levelInfo[EXTENDED_EXPECTED_VALUE] )
+        reset_logic = prev(word(levelInfo[MISSION_INFO])) & word(levelInfo[MISSION_INFO]) != prev(word(levelInfo[MISSION_INFO])) || 
+                      prev(word(levelInfo[EXTENDED_MISSION_INFO])) & word(levelInfo[EXTENDED_MISSION_INFO]) != prev(word(levelInfo[EXTENDED_MISSION_INFO])) 
+
     }
     achievement( title = format("{0} Missions", LevelLookup[key]),
-                 description = format("Complete every mission in {0} in Story Mode or Free Mode", LevelLookup[key]),
+                 description = format("Complete every mission in {0} in Story Mode", LevelLookup[key]),
                  points = levelInfo[POINTS],
                  trigger = comparision &&
                            measured(tally_of(measured_conditions, length(measured_conditions), bitValue => once(bitValue == 1))) &&
-                           saveProtection()
-                           
+                           saveProtection() &&
+                           currentScenarioId() == key && // Just a safety check.
+                           never(reset_logic)
     )   
     
     leaderboard(
@@ -4264,7 +4269,8 @@ function scenarioAchievementAndLeaderboards(key)
             musouOrFreeMode() &&
             currentScenarioId() == key &&
             !isSecondPlayerActive() &&
-            playerjustWonStage()
+            playerjustWonStage() &&
+            timeSpentInLevelinFrames() != 00
 
         ),
         cancel = always_false(),
@@ -4282,7 +4288,8 @@ function scenarioAchievementAndLeaderboards(key)
             musouOrFreeMode() &&
             currentScenarioId() == key &&
             !isSecondPlayerActive() &&
-            playerjustWonStage()
+            playerjustWonStage() &&
+            timeSpentInLevelinFrames() != 00
         ),
         cancel = always_false(),
         submit = always_true(),
@@ -4299,7 +4306,8 @@ function scenarioAchievementAndLeaderboards(key)
             currentScenarioId() == key &&
             !isSecondPlayerActive() &&
             playerjustWonStage() &&
-            chaosDifficulty()
+            chaosDifficulty() &&
+            timeSpentInLevelinFrames() != 00
         ),
         cancel = always_false(),
         submit = always_true(),
@@ -4317,7 +4325,8 @@ function scenarioAchievementAndLeaderboards(key)
             currentScenarioId() == key &&
             !isSecondPlayerActive() &&
             playerjustWonStage() &&
-            chaosDifficulty()
+            chaosDifficulty() &&
+            timeSpentInLevelinFrames() != 00
         ),
         cancel = always_false(),
         submit = always_true(),
@@ -4336,7 +4345,8 @@ function endingAchievement(key, points)
                  points = points,
                  trigger = musouOrFreeMode() &&
                            endingMovieTrigger(key) &&
-                           !isSecondPlayerActive()
+                           !isSecondPlayerActive() &&
+                           timeSpentInLevelinFrames() != 00
     )   
 }
 
@@ -4498,9 +4508,8 @@ function versusRareItemAchievement(key)
                 description = format("Obtain {0} in Versus Mode", itemLookup[key]),
                 points = 5,
                 trigger = itemHasDropped(key) &&
-                          !isSecondPlayerActive() &&
                           saveProtection() &&
-                          survivalMode()
+                          versusMode()
                 )
 }
 
@@ -4521,7 +4530,7 @@ musouRareItemAchievement(NINJA_SUIT)
 musouRareItemAchievement(KAGE_SCROLL)
 versusRareItemAchievement(WAR_BATON)
 musouRareItemAchievement(BOOK_OF_HEALING)
-musouRareItemAchievement(SHEILD_WALL)
+musouRareItemAchievement(SHIELD_WALL)
 oneTimeSurvival(GOLDEN_RUNE)
 survivalRareItemAchievement(BOOK_OF_EARTH)
 survivalRareItemAchievement(BOOK_OF_WATER)
@@ -4542,7 +4551,8 @@ achievement( title = "Pacifist",
                 trigger = musouOrFreeMode() &&
                         !isSecondPlayerActive() &&
                         firstPlayerKoCount() == 0 &&
-                        playerjustWonStage()
+                        playerjustWonStage() &&
+                        timeSpentInLevelinFrames() != 00
 )
 
 function missionLeaderboardAchievementAndLeaderboard(missionId, title, description, target, value)
@@ -4726,7 +4736,7 @@ function newOfficerAchievement(title, description, target)
 {
     achievement( title = title,
                 description = description,
-                points = 5,
+                points = 10,
                 trigger = newOfficerMode() &&
                           target
                 )
@@ -4759,17 +4769,19 @@ newOfficerAchievement(title = "Diligent Discern",
 
 achievement(title = "Visage Variety",
             description = "Unlock four additional faces for your new officer",
-            points = 5,
+            points = 10,
             trigger = newOfficerMode() &&
                       newOfficerFaceUnlock()
 )
 
-achievement(title = "Steller Student",
-            description = "Reach expert tier for six of the classes for a New Officer",
-            points = 10,
-            trigger = newOfficerMode() && 
-                      newOfficerSixExpertcheck() &&
-                      never(!newOfficerMode()) 
+achievement(title = "The First of Many",
+            description = "Beat any scenario in Story Mode or Free Mode for the first time",
+            points = 1, 
+            trigger = playerjustWonStage() &&
+                      musouOrFreeMode() &&
+                      saveProtection() &&
+                      timeSpentInLevelinFrames() != 00 ,
+            id = 388818
             )
 
 rich_presence_conditional_display(optionMenu(), "In The Menus")
@@ -4802,6 +4814,7 @@ rich_presence_display("In Menus.") //Intentionally slightly different to say "is
 
 
 // One of every skill on a single character?
+
 
 
 
