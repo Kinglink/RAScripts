@@ -3912,14 +3912,16 @@ function gameplayIndicator() => byte(0x521430)
 WON_STAGE = 0x0
 IN_GAME = 0x0c 
 LOST_GAME = 0x01
+RESTART_STAGE = 0x06
 function playerjustWonStage() => prev( gameplayIndicator()) == IN_GAME && 
                                  gameplayIndicator() == WON_STAGE
 function playerjustWonSurvival() => prev( gameplayIndicator()) == IN_GAME &&
                                     gameplayIndicator() == WON_STAGE 
 function playerjustFinishedHighTower() => prev( gameplayIndicator()) == IN_GAME && 
                                      gameplayIndicator() == LOST_GAME 
-function playerJustFinishedChallenge() => prev( gameplayIndicator()) == IN_GAME && 
-                                        gameplayIndicator() != IN_GAME
+function playerJustFinishedChallenge() => prev( gameplayIndicator()) == IN_GAME &&
+                                        gameplayIndicator() != IN_GAME &&
+                                        gameplayIndicator() != RESTART_STAGE
 
 // $521260: (8-bit) Ending movie to play.
 //          
@@ -4594,7 +4596,8 @@ function missionLeaderboardAchievementAndLeaderboardLesser(missionId, title, des
                           currentScenarioId() == missionId &&
                           !isSecondPlayerActive() &&
                           target <= value &&
-                          playerJustFinishedChallenge()
+                          playerJustFinishedChallenge() &&
+                          timeSpentInLevelinFrames() != 00 
     )
 
     leaderboard(
@@ -4606,7 +4609,8 @@ function missionLeaderboardAchievementAndLeaderboardLesser(missionId, title, des
             challengeMode() &&
             currentScenarioId() == missionId &&
             !isSecondPlayerActive() &&
-            playerJustFinishedChallenge()
+            playerJustFinishedChallenge() &&
+            timeSpentInLevelinFrames() != 00 
         ),
         cancel = always_false(),
         submit = always_true(),
