@@ -25,8 +25,9 @@ Release checklist.
 1. Has a test plan been run against this set? (Test team or personal) 
 2. Has all achievemetns been tested (Types of achievements if necessary)?
 3. Has negative testing been confirmed for cheat codes? 
-4. Save files? 
-5. Passwords? 
-6. Have badges been checked?
-7. Do leaderboards have scores already?
-8. Have you written an FAQ?  If so have you posted it? 
+4. Has Reset testing been done?  Has Restart testing been done? 
+5. Save files? 
+6. Passwords? 
+7. Have badges been checked?
+8. Do leaderboards have scores already?
+9. Have you written an FAQ?  If so have you posted it? 
