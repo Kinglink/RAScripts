@@ -1,6 +1,14 @@
 // Girls in Motion Puzzle Vol. 1: Hiyake no Omoide + Himekuri
 // #ID = 14954
 
+// $000000: (32-bit) Boot detection
+//
+//          This value will be 0x01404443 after a full boot up.  Any other value should be considered in the boot sequence.
+function initialValues() => dword(0x00000000)
+
+BOOTING_VALUE = 0x00000000
+function bootDetection() => initialValues() != BOOTING_VALUE
+
 // $10034A: (8-bit) Movie Indicator
 //          
 //          0x74 = Large Screen movie Playing.
@@ -9,7 +17,17 @@
 function movieIndicator() => byte(0x10034A)
 
 MOVIE_PLAYING_VALUE = 0x74
+
 function isMoviePlaying() => prev(movieIndicator()) != MOVIE_PLAYING_VALUE && movieIndicator() == MOVIE_PLAYING_VALUE
+
+
+// $12f594: (16-bit) Birthday cutscene check 
+//
+//          This will be set to 0x010c on the birthday movie. 
+function birthdayIndicator() => word(0x12f594)
+
+BIRTHDAY_VALUE = 0x0c01
+function birthdayCheck() => birthdayIndicator() == BIRTHDAY_VALUE
 
 // $1304C0: (8-bit) Menu Selection VS Puzzle
 //          
@@ -1067,7 +1085,8 @@ function girlUnlocks(id)
                                                           girlId() == id &&
                                                           sceneId() == index &&
                                                           moviePuzzleComplete() &&
-                                                          practiceModeCheck()
+                                                          practiceModeCheck() &&
+                                                          bootDetection()
                                                          )
                                            )
                                   )
@@ -1112,7 +1131,8 @@ for targetSceneId in range(1,4)
                       never(tileDiscarded()) &&
                       never(detectLifeLoss()) &&
                       trigger_when(moviePuzzleComplete()) &&
-                      practiceModeCheck()
+                      practiceModeCheck() &&
+                      never(!bootDetection())
             )
             
     achievement(title = format("Jigsaw Race {0}", NumberLookup[targetSceneId]),
@@ -1123,7 +1143,8 @@ for targetSceneId in range(1,4)
                       sceneId() == targetSceneId - 1 &&
                       timerInFrames() <= (timeRequirements[targetSceneId]["minutes"] * 60 + timeRequirements[targetSceneId]["seconds"]) * 60 && 
                       trigger_when(moviePuzzleComplete()) &&
-                      practiceModeCheck()
+                      practiceModeCheck() &&
+                      bootDetection()
             )
      leaderboard(title = format("Fastest Stage {0}", targetSceneId),
                 description = format("Beat a stage {0} puzzle from any woman as fast as possible", targetSceneId),
@@ -1131,7 +1152,8 @@ for targetSceneId in range(1,4)
                         inMoviePuzzle() &&
                         sceneId() == targetSceneId - 1 &&
                         moviePuzzleComplete() &&
-                        practiceModeCheck(),
+                        practiceModeCheck() &&
+                        bootDetection(),
                 cancel = always_false(),
                 submit = always_true(),
                 value = timerInFrames(),
@@ -1154,7 +1176,8 @@ for id in [VS_1_ROUND_VALUE, VS_3_ROUND_VALUE, VS_5_ROUND_VALUE]
             points = vsCPUInfo[id]["points1"],                
             trigger = vsPuzzleMode() &&
                       playerVsCom1() &&
-                      vsCPUInfo[id]["vsCheck"]
+                      vsCPUInfo[id]["vsCheck"] &&
+                      bootDetection()
             )
     
     achievement(title = format("The Real Deal {0}", NumberLookup[id + 1]),
@@ -1162,7 +1185,8 @@ for id in [VS_1_ROUND_VALUE, VS_3_ROUND_VALUE, VS_5_ROUND_VALUE]
             points = vsCPUInfo[id]["points2"],                
             trigger = vsPuzzleMode() &&
                       playerVsCom2() &&
-                      vsCPUInfo[id]["vsCheck"]
+                      vsCPUInfo[id]["vsCheck"] &&
+                      bootDetection()
             )
 }
 
@@ -1170,7 +1194,9 @@ achievement(title = "Celebrating Your Special Day",
             description = "Enjoy a special video from all the women, and then have a big slice of cake",
             points = 1,                
             trigger = mainMenuCalendarChoice() &&
-                      isMoviePlaying()
+                      isMoviePlaying() &&
+                      birthdayCheck () &&
+                      bootDetection()
             )
 
 function generateCalendarTrigger(week) => mainMenuCalendarChoice() && 
@@ -1197,7 +1223,8 @@ function weekAchievement(week)
                                     monthLookup[week["arrayOfDates"][lastValue]["month"]],
                                     week["arrayOfDates"][lastValue]["day"]),
                 points = points,
-                trigger = generateCalendarTrigger(week)
+                trigger = generateCalendarTrigger(week) && 
+                          never(!bootDetection())
      )
 }
 
@@ -1225,4 +1252,5 @@ rich_presence_conditional_display(mainMenuCalendarChoice(),
                                   )
 
 rich_presence_display("Enjoying beautiful women, and moving puzzles") // intentionally adding a period to signify a problem. 
+
 
