@@ -4012,7 +4012,13 @@ function timeSpentInLevelinFrames() => dword(0x521438)
 // $521668: (16-bit) Gold in Gold Rush
 //          
 //          Does not appear to be the "real value"
-function goldInGoldRush() => word(0x521668)
+function badGoldInGoldRush() => word(0x521668)
+
+// The above appears to be incorrect in some cases (has been off by 4k?) we use this value instead. 
+// $61e910: (16-bit) Real display for First Player KO Count/Gold Count
+//
+//          Use 0x0052d6b0 instead, as that appears to be the real value for Kos
+function goldInGoldRush() => word(0x61e910)
 
 // $521230: (8-bit) In-Game Difficulty
 //          
@@ -4724,7 +4730,7 @@ survivalLeaderboardAchievement(missionId = GOLD_RUSH,
                               title = "Godly Gold Rush",
                               description = "Survive Gold Rush in Survival Mode with 7000G", 
                               target = goldInGoldRush(),
-                              value = ((4*60 + 30 )*60) - (((1 * 60 + 9) * 60) +26)  )
+                              value = 7000)
 survivalLeaderboardAchievement(missionId = DEEP_ABYSS,
                               title = "Devilish Deep Abyss",
                               description = "Finish Deep Abyss in Survival Mode with 2000 KOs", 
