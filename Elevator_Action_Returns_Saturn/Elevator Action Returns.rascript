@@ -179,12 +179,15 @@ function blueDoorPointIndicatorPart4() => byte(0x1c5290)
 
 BLUE_DOOR_POINT_RESULT_PART_4_VALUE = 0xe0
 
-function pointsRouletteResult() =>  blueDoorPointIndicatorPart1() == BLUE_DOOR_POINT_RESULT_PART_1_VALUE &&
-                                    blueDoorPointIndicatorPart2() == BLUE_DOOR_POINT_RESULT_PART_2_VALUE &&
+// I'm removing blueDoor Point Indicator PArt 1 as I feel that can flap back and forth and potentially give more than one credit a level.  
+// Saw it once (have a second point item on the screen), but there's a ticket at https://retroachievements.org/ticketmanager.php?i=68601 so will try that fix. 
+// blueDoorPointIndicatorPart1() == BLUE_DOOR_POINT_RESULT_PART_1_VALUE &&                                     
+// ( prev(blueDoorPointIndicatorPart1()) != BLUE_DOOR_POINT_RESULT_PART_1_VALUE || 
+
+function pointsRouletteResult() =>  blueDoorPointIndicatorPart2() == BLUE_DOOR_POINT_RESULT_PART_2_VALUE &&
                                     blueDoorPointIndicatorPart3() == BLUE_DOOR_POINT_RESULT_PART_3_VALUE &&
                                     blueDoorPointIndicatorPart4() == BLUE_DOOR_POINT_RESULT_PART_4_VALUE &&
-                                    ( prev(blueDoorPointIndicatorPart1()) != BLUE_DOOR_POINT_RESULT_PART_1_VALUE || 
-                                      prev(blueDoorPointIndicatorPart2()) != BLUE_DOOR_POINT_RESULT_PART_2_VALUE || 
+                                    ( prev(blueDoorPointIndicatorPart2()) != BLUE_DOOR_POINT_RESULT_PART_2_VALUE || 
                                       prev(blueDoorPointIndicatorPart3()) != BLUE_DOOR_POINT_RESULT_PART_3_VALUE || 
                                       prev(blueDoorPointIndicatorPart4()) != BLUE_DOOR_POINT_RESULT_PART_4_VALUE 
                                     )
@@ -616,7 +619,7 @@ achievement(title = "Immortal Vermillion Sun",
                     normalDifficultyAndAbove() &&
                     once( prev(levelId()) == LEVEL_FIVE &&
                         levelId() == LEVEL_SIX )&&
-                    never(firstPlayerLivesRemaining() != prev(firstPlayerLivesRemaining()) && stage6Failed()) &&
+                    never(firstPlayerLivesRemaining() != prev(firstPlayerLivesRemaining()) || stage6Failed()) &&
                     trigger_when(prev(levelId()) == LEVEL_SIX &&
                                   levelId() == LEVEL_POSTGAME &&
                                   stage6Success())
@@ -779,7 +782,7 @@ achievement(title = "Half a million",
         )
 
 achievement(title = "Bingo!",
-        description = "Earn the original arcade's maximum score on normal or hard difficulty",
+        description = "Earn 1 million points. The original Elevator Action Returns arcade machine only recorded up to 999999 points, break that limit!",
         points = 25, 
         trigger = elevatorActionReturns() &&
                     cheatProtection() &&
