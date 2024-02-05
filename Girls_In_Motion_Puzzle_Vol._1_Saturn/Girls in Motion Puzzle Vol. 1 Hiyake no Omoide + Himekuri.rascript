@@ -1172,7 +1172,7 @@ vsCPUInfo =
 for id in [VS_1_ROUND_VALUE, VS_3_ROUND_VALUE, VS_5_ROUND_VALUE]
 {
     achievement(title = format("Easy Peasy {0}", NumberLookup[id + 1]),
-            description = format("Complete a VS CPU 1 best ouf of {0}.", vsCPUInfo[id]["string"]),
+            description = format("Complete a VS CPU 1 best out of {0}.", vsCPUInfo[id]["string"]),
             points = vsCPUInfo[id]["points1"],                
             trigger = vsPuzzleMode() &&
                       playerVsCom1() &&
@@ -1181,7 +1181,7 @@ for id in [VS_1_ROUND_VALUE, VS_3_ROUND_VALUE, VS_5_ROUND_VALUE]
             )
     
     achievement(title = format("The Real Deal {0}", NumberLookup[id + 1]),
-            description = format("Complete a VS CPU 2 best ouf of {0}.", vsCPUInfo[id]["string"]),
+            description = format("Complete a VS CPU 2 best out of {0}.", vsCPUInfo[id]["string"]),
             points = vsCPUInfo[id]["points2"],                
             trigger = vsPuzzleMode() &&
                       playerVsCom2() &&
