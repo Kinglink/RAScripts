@@ -1,0 +1,693 @@
+TokyoTeamInformation = 
+[
+    {
+        "TeamName": "Rolling Guy", 
+        "TeamLeader": "Rolling Guy 1",
+        "TeamLeaderID": 1,
+        "LastMember": 6,
+        "Points":2
+    },
+    {
+        "TeamName": "Fine Drive", 
+        "TeamLeader": "Shooting star",
+        "TeamLeaderID": 7,
+        "LastMember": 14,
+        "Points":2
+    },
+    {
+        "TeamName": "SS Limited", 
+        "TeamLeader": "Evening Star",
+        "TeamLeaderID": 15,
+        "LastMember": 22,
+        "Points":2
+    },
+    {
+        "TeamName": "Rolling Guy", 
+        "TeamLeader": "Rolling Guy 1",
+        "TeamLeaderID": 1,
+        "LastMember": 6,
+        "Points":2
+    },
+    {
+        "TeamName": "The Road of Justice", 
+        "TeamLeader": "Hearing Master",
+        "TeamLeaderID": 86,
+        "LastMember": 92,
+        "Points":2
+    },
+    {
+        "TeamName": "Rings", 
+        "TeamLeader": "Outstanding Jackle",
+        "TeamLeaderID": 93,
+        "LastMember": 100,
+        "Points":2
+    },
+    {
+        "TeamName": "Galaxy Racers", 
+        "TeamLeader": "Mister Othello",
+        "TeamLeaderID": 23,
+        "LastMember": 29,
+        "Points":2
+    },
+    {
+        "TeamName": "Max Racing", 
+        "TeamLeader": "Bloody Rose",
+        "TeamLeaderID": 30,
+        "LastMember": 37,
+        "Points":2
+    },
+    {
+        "TeamName": "Twister", 
+        "TeamLeader": "The Incadescent Flame",
+        "TeamLeaderID": 38,
+        "LastMember": 44,
+        "Points":2
+    },
+    {
+        "TeamName": "Ratt", 
+        "TeamLeader": "The Monkey",
+        "TeamLeaderID": 101,
+        "LastMember": 107,
+        "Points":2
+    },
+    {
+        "TeamName": "Departures", 
+        "TeamLeader": "Happy Chappy",
+        "TeamLeaderID": 108,
+        "LastMember": 113,
+        "Points":2
+    },
+    {
+        "TeamName": "Diamond Image", 
+        "TeamLeader": "Lightning Shift, Takuya",
+        "TeamLeaderID": 45,
+        "LastMember": 51,
+        "Points":2
+    },
+    {
+        "TeamName": "Wind Stars", 
+        "TeamLeader": "Wolf Requiem",
+        "TeamLeaderID": 52,
+        "LastMember": 58,
+        "Points":2
+    },
+    {
+        "TeamName": "Highway Outlaw", 
+        "TeamLeader": "Spirit Crasher",
+        "TeamLeaderID": 59,
+        "LastMember": 65,
+        "Points":2
+    },
+    {
+        "TeamName": "Explosion", 
+        "TeamLeader": "Wind Monster",
+        "TeamLeaderID": 114,
+        "LastMember": 119,
+        "Points":2
+    },
+    {
+        "TeamName": "Top Level", 
+        "TeamLeader": "Tarmac Suzuki",
+        "TeamLeaderID": 120,
+        "LastMember": 126,
+        "Points":2
+    },
+    {
+        "TeamName": "R.Gangs", 
+        "TeamLeader": "Shiver Drift Dancer",
+        "TeamLeaderID": 66,
+        "LastMember": 72,
+        "Points":2
+    },
+    {
+        "TeamName": "Tokio Jungle", 
+        "TeamLeader": "Io",
+        "TeamLeaderID": 73,
+        "LastMember": 79,
+        "Points":2
+    },
+    {
+        "TeamName": "Cupid Arrows", 
+        "TeamLeader": "Sonic Runner",
+        "TeamLeaderID": 80,
+        "LastMember": 85,
+        "Points":2
+    },
+    {
+        "TeamName": "Another Star", 
+        "TeamLeader": "Blue Speed",
+        "TeamLeaderID": 127,
+        "LastMember": 131,
+        "Points":2
+    },
+    {
+        "TeamName": "Free Way", 
+        "TeamLeader": "The Blue Star",
+        "TeamLeaderID": 132,
+        "LastMember": 139,
+        "Points":2
+    },
+    {
+        "TeamName": "True Ride", 
+        "TeamLeader": "Perfect Driver",
+        "TeamLeaderID": 140,
+        "LastMember": 147,
+        "Points":2
+    },
+    {
+        "TeamName": "Unlimited", 
+        "TeamLeader": "Killing Machine",
+        "TeamLeaderID": 148,
+        "LastMember": 155,
+        "Points":2
+    },
+    {
+        "TeamName": "R.R.", 
+        "TeamLeader": "The Nobleman",
+        "TeamLeaderID": 156,
+        "LastMember": 163,
+        "Points":2
+    },
+    {
+        "TeamName": "Neo Limited", 
+        "TeamLeader": "Lemon Flavor",
+        "TeamLeaderID": 164,
+        "LastMember": 170,
+        "Points":2
+    },
+    {
+        "TeamName": "Sanjyushi", 
+        "TeamLeader": "The Forbidden Privateer",
+        "TeamLeaderID": 171,
+        "LastMember": 176,
+        "Points":2
+    },
+    {
+        "TeamName": "Big Wave", 
+        "TeamLeader": "The Master",
+        "TeamLeaderID": 177,
+        "LastMember": 184,
+        "Points":2
+    },
+    {
+        "TeamName": "A.P.S.", 
+        "TeamLeader": "Yokohane's Heavy Fighter",
+        "TeamLeaderID": 185,
+        "LastMember": 191,
+        "Points":2
+    },
+    {
+        "TeamName": "Commander", 
+        "TeamLeader": "Senna's Foot",
+        "TeamLeaderID": 192,
+        "LastMember": 199,
+        "Points":2
+    },
+    {
+        "TeamName": "Miracle Dogs", 
+        "TeamLeader": "The Sepherd",
+        "TeamLeaderID": 200,
+        "LastMember": 205,
+        "Points":2
+    },
+    {
+        "TeamName": "Speed Master", 
+        "TeamLeader": "The Insane moon",
+        "TeamLeaderID": 206,
+        "LastMember": 215,
+        "Points":2
+    },
+    {
+        "TeamName": "Knife and Forks", 
+        "TeamLeader": "Matchless Full Course",
+        "TeamLeaderID": 216,
+        "LastMember": 222,
+        "Points":2
+    },
+    {
+        "TeamName": "Team Alpha", 
+        "TeamLeader": "Texas Wolf",
+        "TeamLeaderID": 223,
+        "LastMember": 228,
+        "Points":2
+    },
+    {
+        "TeamName": "Rhythm Box", 
+        "TeamLeader": "Hip-hop Red",
+        "TeamLeaderID": 229,
+        "LastMember": 234,
+        "Points":2
+    },
+    {
+        "TeamName": "Thunder Dragoon", 
+        "TeamLeader": "Black Dragon",
+        "TeamLeaderID": 235,
+        "LastMember": 241,
+        "Points":2
+    },
+    {
+        "TeamName": "Infinity", 
+        "TeamLeader": "Marvelous",
+        "TeamLeaderID": 242,
+        "LastMember": 248,
+        "Points":2
+    },
+}
+
+TokyoBoss = 
+[
+    {
+        "BossName": "Betrayal Jack Knife", 
+        "BossID": 249,
+        "Points":2
+    },
+    {
+        "BossName": "Blood Hound", 
+        "BossID": 250,
+        "Points":2
+    },
+    {
+        "BossName": "Dejected Angel", 
+        "BossID": 251,
+        "Points":2
+    },
+    {
+        "BossName": "Steal Heart", 
+        "BossID": 252,
+        "Points":2
+    },
+    {
+        "BossName": "Dying Star", 
+        "BossID": 253,
+        "Points":2
+    },
+    {
+        "BossName": "Midnight Rose", 
+        "BossID": 254,
+        "Points":2
+    },
+    {
+        "BossName": "Pursuit Tailgunner", 
+        "BossID": 255,
+        "Points":2
+    },
+    {
+        "BossName": "Shadow Eyes", 
+        "BossID": 256,
+        "Points":2
+    },
+    {
+        "BossName": "Pluto", 
+        "BossID": 257,
+        "Points":2
+    },
+    {
+        "BossName": "The Red Devil", 
+        "BossID": 258,
+        "Points":2
+    },
+    {
+        "BossName": "Jintei", 
+        "BossID": 259,
+        "Points":2
+    },    
+]
+
+Tokyo Wanderers = 
+[
+    {
+        "WanderersName": "Rikochan", 
+        "ID": 260,
+        "Points":2
+    },
+    {
+        "WanderersName": "The Divine Wind", 
+        "ID": 261,
+        "Points":2
+    },
+    {
+        "WanderersName": "White Tiger", 
+        "ID": 262,
+        "Points":2
+    },
+    {
+        "WanderersName": "Immortal Clown", 
+        "ID": 263,
+        "Points":2
+    },
+    {
+        "WanderersName": "Sorrow SIX STAR", 
+        "ID": 264,
+        "Points":2
+    },
+    {
+        "WanderersName": "Straying Idol Freak", 
+        "ID": 265,
+        "Points":2
+    },
+    {
+        "WanderersName": "Bloody Mary", 
+        "ID": 266,
+        "Points":2
+    },
+    {
+        "WanderersName": "Illusion B", 
+        "ID": 267,
+        "Points":2
+    },
+    {
+        "WanderersName": "Caffeine X3", 
+        "ID": 268,
+        "Points":2
+    },
+    {
+        "WanderersName": "Paul Suzuki", 
+        "ID": 269,
+        "Points":2
+    },
+    {
+        "WanderersName": "Funabashi Hooligan", 
+        "ID": 270,
+        "Points":2
+    },
+    {
+        "WanderersName": "Rolling Master", 
+        "ID": 271,
+        "Points":2
+    },
+    {
+        "WanderersName": "The Death Driver", 
+        "ID": 272,
+        "Points":2
+    },
+    {
+        "WanderersName": "Shutokou Leader", 
+        "ID": 273,
+        "Points":2
+    },
+    {
+        "WanderersName": "Mosquito Lemon", 
+        "ID": 274,
+        "Points":2
+    },
+    {
+        "WanderersName": "Wild Child", 
+        "ID": 275,
+        "Points":2
+    },
+    {
+        "WanderersName": "Crossroad Queen", 
+        "ID": 276,
+        "Points":2
+    },
+    {
+        "WanderersName": "Yellow Desperado", 
+        "ID": 277,
+        "Points":2
+    },
+    {
+        "WanderersName": "Gold License", 
+        "ID": 278,
+        "Points":2
+    },
+    {
+        "WanderersName": "Master Position", 
+        "ID": 279,
+        "Points":2
+    },
+    {
+        "WanderersName": "Glamorous Mami", 
+        "ID": 280,
+        "Points":2
+    },
+    {
+        "WanderersName": "Raspberry Kiss", 
+        "ID": 281,
+        "Points":2
+    },
+    {
+        "WanderersName": "Kaoru", 
+        "ID": 282,
+        "Points":2
+    },
+    {
+        "WanderersName": "Cutie Hip", 
+        "ID": 283,
+        "Points":2
+    },
+    {
+        "WanderersName": "Drift Samurai", 
+        "ID": 284,
+        "Points":2
+    },
+    {
+        "WanderersName": "Silver Wolf", 
+        "ID": 285,
+        "Points":2
+    },
+    {
+        "WanderersName": "VIP Style", 
+        "ID": 286,
+        "Points":2
+    },
+    {
+        "WanderersName": "Dirty HATO", 
+        "ID": 287,
+        "Points":2
+    },
+    {
+        "WanderersName": "PAst 12 o'clock Cinderella", 
+        "ID": 288,
+        "Points":2
+    },
+    {
+        "WanderersName": "Golden Wolf", 
+        "ID": 289,
+        "Points":2
+    },
+    {
+        "WanderersName": "Mark of Outburst", 
+        "ID": 290,
+        "Points":2
+    },
+    {
+        "WanderersName": "ZERO", 
+        "ID": 291,
+        "Points":2
+    },
+    {
+        "WanderersName": "White Dragon Revolution", 
+        "ID": 292,
+        "Points":2
+    },
+    {
+        "WanderersName": "Late Night Salesman", 
+        "ID": 293,
+        "Points":2
+    },
+    {
+        "WanderersName": "Osaka Blond", 
+        "ID": 294,
+        "Points":2
+    },
+    {
+        "WanderersName": "Gentle Rain", 
+        "ID": 295,
+        "Points":2
+    },
+    {
+        "WanderersName": "Electric Shark", 
+        "ID": 296,
+        "Points":2
+    },
+    {
+        "WanderersName": "Exotic Butterfly", 
+        "ID": 297,
+        "Points":2
+    },
+    {
+        "WanderersName": "Night Rocket", 
+        "ID": 298,
+        "Points":2
+    },
+    {
+        "WanderersName": "SPEED BOX", 
+        "ID": 299,
+        "Points":2
+    },
+    {
+        "WanderersName": "I, Shiotani", 
+        "ID": 300,
+        "Points":2
+    },
+    {
+        "WanderersName": "S. Agata Cattle", 
+        "ID": 301,
+        "Points":2
+    },
+    {
+        "WanderersName": "Ghost Soul", 
+        "ID": 302,
+        "Points":2
+    },
+    {
+        "WanderersName": "The Surf Goblin", 
+        "ID": 303,
+        "Points":2
+    },
+    {
+        "WanderersName": "Mr. N-zuka", 
+        "ID": 304,
+        "Points":2
+    },
+    {
+        "WanderersName": "NOB", 
+        "ID": 305,
+        "Points":2
+    },
+    {
+        "WanderersName": "Armadillo", 
+        "ID": 306,
+        "Points":2
+    },
+    {
+        "WanderersName": "Obi-Wan Kenori", 
+        "ID": 307,
+        "Points":2
+    },
+    {
+        "WanderersName": "Yamaachi", 
+        "ID": 308,
+        "Points":2
+    },
+    {
+        "WanderersName": "Let's GO!", 
+        "ID": 309,
+        "Points":2
+    },
+    
+]
+
+NagoyaTeamInformation = 
+[
+    {
+        "TeamName": "Racing Funs", 
+        "TeamLeader": "Big Deal",
+        "TeamLeaderID": 1,
+        "LastMember": 6,
+        "Points":2
+    },
+    {
+        "TeamName": "Real Echo", 
+        "TeamLeader": "Steel Dinosaur",
+        "TeamLeaderID": 7,
+        "LastMember": 11,
+        "Points":2
+    },
+    {
+        "TeamName": "Genesis R", 
+        "TeamLeader": "Darkness Seven",
+        "TeamLeaderID": 12,
+        "LastMember": 16,
+        "Points":2
+    },
+    {
+        "TeamName": "Hot head", 
+        "TeamLeader": "Forever Night",
+        "TeamLeaderID": 17,
+        "LastMember": 22,
+        "Points":2
+    },
+    {
+        "TeamName": "@-Tention", 
+        "TeamLeader": "4 PRIDE",
+        "TeamLeaderID": 23,
+        "LastMember": 29,
+        "Points":2
+    },
+    {
+        "TeamName": "Seeks", 
+        "TeamLeader": "Ogre Deity",
+        "TeamLeaderID": 30,
+        "LastMember": 34,
+        "Points":2
+    },
+    {
+        "TeamName": "M/R", 
+        "TeamLeader": "The flame",
+        "TeamLeaderID": 35,
+        "LastMember": 41,
+        "Points":2
+    },
+    {
+        "TeamName": "Castle Stage", 
+        "TeamLeader": "Golden Dolphin",
+        "TeamLeaderID": 42,
+        "LastMember": 46,
+        "Points":2
+    },
+    {
+        "TeamName": "Face to Faith", 
+        "TeamLeader": "Summer Time Again",
+        "TeamLeaderID": 47,
+        "LastMember": 53,
+        "Points":2
+    },
+    {
+        "TeamName": "Willows", 
+        "TeamLeader": "The Stomach",
+        "TeamLeaderID": 54,
+        "LastMember": 59,
+        "Points":2
+    },
+    {
+        "TeamName": "Shake Hips", 
+        "TeamLeader": "Sweet Veronica",
+        "TeamLeaderID": 60,
+        "LastMember": 66,
+        "Points":2
+    },
+    {
+        "TeamName": "Tribute-J", 
+        "TeamLeader": "Atomic Heart",
+        "TeamLeaderID": 67,
+        "LastMember": 72,
+        "Points":2
+    },
+    {
+        "TeamName": "Purple Bullet", 
+        "TeamLeader": "Night Lord",
+        "TeamLeaderID": 73,
+        "LastMember": 78,
+        "Points":2
+    },
+    {
+        "TeamName": "Another Heaven", 
+        "TeamLeader": "Brown Satan",
+        "TeamLeaderID": 79,
+        "LastMember": 85,
+        "Points":2
+    },
+    {
+        "TeamName": "Flower Dancers", 
+        "TeamLeader": "Blue Rose",
+        "TeamLeaderID": 86,
+        "LastMember": 91,
+        "Points":2
+    },
+    {
+        "TeamName": "Glory Days", 
+        "TeamLeader": "",
+        "TeamLeaderID": 79,
+        "LastMember": 85,
+        "Points":2
+    },
+]
+
+{
+    "TeamName": "", 
+    "TeamLeader": "",
+    "TeamLeaderID": 79,
+    "LastMember": 85,
+    "Points":2
+},
