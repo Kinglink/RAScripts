@@ -467,14 +467,17 @@ function offsetInitialEnemyHP(index) => byte(0x1CB582 + offsetMath(index))
 
 // $1ADEE8: (8-bit) Stage 6 Success check.
 //          
-//          This will be set to 0x02 if the player stops the bomb at the end of stage six (full success).  This gets set to 0x0c if the bomb blows up.
+//          This will be set to 0x02 if the player stops the bomb at the end of stage six (full success).  
+//          This will increase up to 0xc (only 0x6 at the first floor) if the player failes. 
 function stage6FinaleCheck() => byte(0x1ADEE8)
 // These are not boolean values, 0 means it hasn't been finished. 
 STAGE_SIX_FINALE_SUCCESS_VALUE = 0x02
 STAGE_SIX_FINALE_FAILED_VALUE = 0x0c
+// Failure is any value that is over 0x2
 STAGE_SIX_FINALE_NOT_FINISHED_VALUE = 0x00
 function stage6Success() =>  stage6FinaleCheck() == STAGE_SIX_FINALE_SUCCESS_VALUE
-function stage6Failed() =>  stage6FinaleCheck() == STAGE_SIX_FINALE_FAILED_VALUE
+function stage6Failed() =>  stage6FinaleCheck() > STAGE_SIX_FINALE_SUCCESS_VALUE
+function stage6JustFailed() =>  stage6Failed() && prev(stage6FinaleCheck()) != stage6FinaleCheck()
 function stage6NotFinished() =>  stage6FinaleCheck() == STAGE_SIX_FINALE_NOT_FINISHED_VALUE
 
 // $19eab5: (8-bit) First stage started check
@@ -619,7 +622,7 @@ achievement(title = "Immortal Vermillion Sun",
                     normalDifficultyAndAbove() &&
                     once( prev(levelId()) == LEVEL_FIVE &&
                         levelId() == LEVEL_SIX )&&
-                    never(firstPlayerLivesRemaining() != prev(firstPlayerLivesRemaining()) || stage6Failed()) &&
+                    never(firstPlayerLivesRemaining() != prev(firstPlayerLivesRemaining()) || stage6JustFailed()) &&
                     trigger_when(prev(levelId()) == LEVEL_SIX &&
                                   levelId() == LEVEL_POSTGAME &&
                                   stage6Success())
@@ -817,7 +820,7 @@ function offsetMath(index)
                    
 achievement(
     title = "Foot Meet Face", points = 1,
-    description = "Kill a human or animal with a jump kick in a single game on normal or hard difficulty. (Killing blow must be the jump kick)",
+    description = "Kill a human or animal with a jump kick. (Killing blow must be the jump kick)",
     trigger = elevatorActionReturns() &&
               cheatProtection() &&                         
               firstPlayerJoined() == 1 &&                                    
