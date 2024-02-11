@@ -5,11 +5,15 @@
 //          
 //          However if this is not set to 01, it likely will crash the game.
 function drivingPointerIndicator() => byte(0x3394AB)
+VALUE_DRIVING_IN_GAME = 0x01
 
 // $3461E0: (8-bit) Visibility Value
 //          
 //          If set to 0 The screen goes to almost black.   Set to 2 when driving
 function cityBackgroundIndicator() => byte(0x3461E0)
+VALUE_BACKGROUND_IN_GAME = 0x02
+
+function isDriving() => cityBackgroundIndicator() == VALUE_BACKGROUND_IN_GAME && drivingPointerIndicator() == VALUE_DRIVING_IN_GAME
 
 // $3565B4: (32-bit likely larger) A timer for the current battle.
 //          
@@ -24,29 +28,45 @@ function timerForQuestBattle() => dword(0x3565B4)
 //          0x05 for Default Car.
 function garageIndexInGame() => byte(0x3AEBBA)
 
+VALUE_DEFAULT_CAR = 0x05;
+    
+function isDefaultCar() => garageIndexInGame() === VALUE_DEFAULT_CAR
+
+
 // $3AF39E: (8-bit) Rolling Guy #1 Beat Indicator
 //          
-//          0x01 Marks opponent beaten, 0x00 not beat.  See 600 bytes before this for Met value.
+//          0x01 or 0x02 marks opponent beaten, 0x00 not beat.  See 600 bytes before this for Met value.
 //          
 //          This is the source of truth in game
-function tokoyStartingBeat() => byte(0x3AF39E)
+function tokyoStartingBeat() => byte(0x3AF39E)
+function tokyoStartingBeatMemoryLocation() => 0x3AF39E
+
+VALUE_NOT_BEATEN_OPPONENT = 0x00
+
+// We test against not beaten, because 0x02 is possible along with 0x01
+function justBeatOpponent(data) => data != VALUE_NOT_BEATEN_OPPONENT && prev(data) == VALUE_NOT_BEATEN_OPPONENT
+
+function calculateMemoryLocation(startingMemory, index) => byte(startingMemory + index - 1)
 
 // $3AF4D3: (8-bit) Final Boss Beat Indicator
 //          
-//          0x01 Marks opponent beaten, 0x00 not beat.  See 600 bytes before this for Met value.
+//          0x01 Marks opponent beaten, 0x00 not beat.  
 //          
 //          This is the source of truth in game
 function finalBossBeatIndicator() => byte(0x3AF4D3)
+function finalBossBeatMemoryLocation() => 0x3AF4D3
 
 // $3AF4D4: (8-bit) In game value for if Big Deal is beaten (Begining of Nagoya)
 //          
 //          In Game Source of Truth
 function nagoyaStartingBeat() => byte(0x3AF4D4)
+function nagoyaBeatMemoryLocation() => 0x3AF4D4
 
 // $3AF556: (8-bit) In Game value for if Humanoid Precision is beaten
 //          
 //          (First of Osaka)
 function osakaStartingBeat() => byte(0x3AF556)
+function osakaBeatMemoryLocation() => 0x3AF556
 
 // $41E90C: (8-bit) Race Result
 //          
@@ -55,11 +75,19 @@ function osakaStartingBeat() => byte(0x3AF556)
 //          0x03 = Draw
 //          0x0d= Goal (For Time Attack)
 function raceResult() => byte(0x41E90C)
+RESULT_NONE_VALUE = 0x00
+RESULT_WIN_VALUE = 0x01
+RESULT_GOAL_VALUE = 0x04
+
+function justFinishedTimeAttack() => raceResult() == RESULT_GOAL_VALUE && prev(raceResult()) == RESULT_NONE_VALUE
+function justFinishedQuest() => raceResult() == RESULT_WIN_VALUE && prev(raceResult()) == RESULT_NONE_VALUE
 
 // $41E959: (16-bit) Player's SP
 //          
 //          Starts at 4c4b
 function playerHealth() => word(0x41E959)
+
+MAX_HEALTH = 0x4c4b
 
 // $41E9A9: (16-bit) Enemy's SP
 function enemyHealth() => word(0x41E9A9)
