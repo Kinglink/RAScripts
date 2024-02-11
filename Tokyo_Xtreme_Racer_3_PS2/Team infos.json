@@ -1,5 +1,4 @@
-TokyoTeamInformation = 
-[
+TokyoTeamInformation = [
     {
         "TeamName": "Rolling Guy", 
         "TeamLeader": "Rolling Guy 1",
@@ -19,13 +18,6 @@ TokyoTeamInformation =
         "TeamLeader": "Evening Star",
         "TeamLeaderID": 15,
         "LastMember": 22,
-        "Points":2
-    },
-    {
-        "TeamName": "Rolling Guy", 
-        "TeamLeader": "Rolling Guy 1",
-        "TeamLeaderID": 1,
-        "LastMember": 6,
         "Points":2
     },
     {
@@ -252,10 +244,9 @@ TokyoTeamInformation =
         "LastMember": 248,
         "Points":2
     },
-}
+]
 
-TokyoBoss = 
-[
+TokyoBoss = [
     {
         "BossName": "Betrayal Jack Knife", 
         "BossID": 249,
@@ -313,8 +304,7 @@ TokyoBoss =
     },    
 ]
 
-Tokyo Wanderers = 
-[
+TokyoWanderers = [
     {
         "WanderersName": "Rikochan", 
         "ID": 260,
@@ -565,11 +555,9 @@ Tokyo Wanderers =
         "ID": 309,
         "Points":2
     },
-    
 ]
 
-NagoyaTeamInformation = 
-[
+NagoyaTeamInformation = [
     {
         "TeamName": "Racing Funs", 
         "TeamLeader": "Big Deal",
@@ -677,17 +665,442 @@ NagoyaTeamInformation =
     },
     {
         "TeamName": "Glory Days", 
-        "TeamLeader": "",
-        "TeamLeaderID": 79,
-        "LastMember": 85,
+        "TeamLeader": "Wind Walker",
+        "TeamLeaderID": 92,
+        "LastMember": 98,
+        "Points":2
+    },
+    {
+        "TeamName": "DE LA Speed", 
+        "TeamLeader": "Planet HArmony",
+        "TeamLeaderID": 99,
+        "LastMember": 104,
+        "Points":2
+    },
+    {
+        "TeamName": "Breath Less", 
+        "TeamLeader": "2nd Generation Landlady",
+        "TeamLeaderID": 105,
+        "LastMember": 111,
         "Points":2
     },
 ]
 
-{
-    "TeamName": "", 
-    "TeamLeader": "",
-    "TeamLeaderID": 79,
-    "LastMember": 85,
-    "Points":2
-},
+NagoyaBoss = [
+    {
+        "BossName": "Flame Dragon", 
+        "BossID": 112,
+        "Points":2
+    },
+    {
+        "BossName": "J", 
+        "BossID": 113,
+        "Points":2
+    },
+    {
+        "BossName": "The rook", 
+        "BossID": 114,
+        "Points":2
+    },
+    {
+        "BossName": "The Bishop", 
+        "BossID": 115,
+        "Points":2
+    },
+    {
+        "BossName": "The Knight", 
+        "BossID": 116,
+        "Points":2
+    },
+]
+
+NagoyaWanderers = [
+    {
+        "WanderersName": "Hyper Groove", 
+        "ID": 117,
+        "Points":2
+    },
+    {
+        "WanderersName": "Snow Dancer", 
+        "ID": 118,
+        "Points":2
+    },
+    {
+        "WanderersName": "Maniac Bun Bun Maru", 
+        "ID": 119,
+        "Points":2
+    },
+    {
+        "WanderersName": "Midnight Black Sun", 
+        "ID": 120,
+        "Points":2
+    },
+    {
+        "WanderersName": "White Leopard", 
+        "ID": 121,
+        "Points":2
+    },
+    {
+        "WanderersName": "Fascinating Magician", 
+        "ID": 122,
+        "Points":2
+    },
+    {
+        "WanderersName": "100,000 km Rotary", 
+        "ID": 123,
+        "Points":2
+    },
+    {
+        "WanderersName": "YV Gen-san", 
+        "ID": 124,
+        "Points":2
+    },
+    {
+        "WanderersName": "Phantom Spectacle", 
+        "ID": 125,
+        "Points":2
+    },
+    {
+        "WanderersName": "Kuso Chimpan", 
+        "ID": 126,
+        "Points":2
+    },
+    {
+        "WanderersName": "Turbo Man", 
+        "ID": 127,
+        "Points":2
+    },
+    {
+        "WanderersName": "WEST No. 5", 
+        "ID": 128,
+        "Points":2
+    },
+    {
+        "WanderersName": "Cram Instructor", 
+        "ID": 129,
+        "Points":2
+    },
+    {
+        "WanderersName": "Shocking White Dog", 
+        "ID": 130,
+        "Points":2
+    }
+]
+
+
+OsakaTeamInformation = [
+    {
+        "TeamName": "Nippon-Bashi", 
+        "TeamLeader": "Humanoid Precision",
+        "TeamLeaderID": 1,
+        "LastMember": 7,
+        "Points":2
+    },
+    {
+        "TeamName": "Vip Project", 
+        "TeamLeader": "Burning Passion",
+        "TeamLeaderID": 8,
+        "LastMember": 14,
+        "Points":2
+    },
+    {
+        "TeamName": "Drifters", 
+        "TeamLeader": "Rokko",
+        "TeamLeaderID": 15,
+        "LastMember": 20,
+        "Points":2
+    },
+    {
+        "TeamName": "First Lady", 
+        "TeamLeader": "Provactive Secretary",
+        "TeamLeaderID": 21,
+        "LastMember": 27,
+        "Points":2
+    },
+    {
+        "TeamName": "Birken Club", 
+        "TeamLeader": "Lucky Come Come",
+        "TeamLeaderID": 28,
+        "LastMember": 33,
+        "Points":2
+    },
+    {
+        "TeamName": "TuTenKaku", 
+        "TeamLeader": "Passion Runner",
+        "TeamLeaderID": 34,
+        "LastMember": 39,
+        "Points":2
+    },
+    {
+        "TeamName": "No Loser", 
+        "TeamLeader": "Naniwa Warship",
+        "TeamLeaderID": 40,
+        "LastMember": 45,
+        "Points":2
+    },
+    {
+        "TeamName": "Home Run", 
+        "TeamLeader": "Angry Hoshino",
+        "TeamLeaderID": 46,
+        "LastMember": 53,
+        "Points":2
+    },
+    {
+        "TeamName": "Millennium 2", 
+        "TeamLeader": "Final Revolution",
+        "TeamLeaderID": 54,
+        "LastMember": 59,
+        "Points":2
+    },
+    {
+        "TeamName": "Miyabi", 
+        "TeamLeader": "Meteor Storm",
+        "TeamLeaderID": 60,
+        "LastMember": 66,
+        "Points":2
+    },
+    {
+        "TeamName": "Baldy's", 
+        "TeamLeader": "The Captain",
+        "TeamLeaderID": 67,
+        "LastMember": 72,
+        "Points":2
+    },
+    {
+        "TeamName": "Low Position", 
+        "TeamLeader": "Anti-Gravity Dimension",
+        "TeamLeaderID": 73,
+        "LastMember": 78,
+        "Points":2
+    },
+    {
+        "TeamName": "Perfect Works", 
+        "TeamLeader": "Kishiwada Crisis",
+        "TeamLeaderID": 79,
+        "LastMember": 84,
+        "Points":2
+    },
+    {
+        "TeamName": "Team Kengo", 
+        "TeamLeader": "The Old Man",
+        "TeamLeaderID": 85,
+        "LastMember": 90,
+        "Points":2
+    },
+    {
+        "TeamName": "G.R.O.", 
+        "TeamLeader": "Angry Naito",
+        "TeamLeaderID": 91,
+        "LastMember": 98,
+        "Points":2
+    },
+    {
+        "TeamName": "Night Wing", 
+        "TeamLeader": "Gold Wing",
+        "TeamLeaderID": 99,
+        "LastMember": 104,
+        "Points":2
+    },
+    {
+        "TeamName": "Univer-Saru", 
+        "TeamLeader": "Jurassic Period Shikkyusha",
+        "TeamLeaderID": 105,
+        "LastMember": 111,
+        "Points":2
+    },
+    {
+        "TeamName": "Shoryu Group", 
+        "TeamLeader": "Dragon of Sakai",
+        "TeamLeaderID": 112,
+        "LastMember": 118,
+        "Points":2
+    },
+    {
+        "TeamName": "Kaze", 
+        "TeamLeader": "Miracle Divine Wind",
+        "TeamLeaderID": 119,
+        "LastMember": 125,
+        "Points":2
+    },
+    {
+        "TeamName": "Harisen Chop", 
+        "TeamLeader": "Nishi Nagahori Justice",
+        "TeamLeaderID": 126,
+        "LastMember": 132,
+        "Points":2
+    },
+    {
+        "TeamName": "Darts", 
+        "TeamLeader": "God's Estuary",
+        "TeamLeaderID": 133,
+        "LastMember": 141,
+        "Points":2
+    }
+]
+
+OsakaWanderers = [
+    {
+        "TeamName": "Low Position",
+        "TeamLeader": "Anti-Gravity Dimension",
+        "TeamLeaderID": 73,
+        "LastMember": 78,
+        "Points": 2
+    },
+    {
+        "TeamName": "Perfect Works",
+        "TeamLeader": "Kishiwada Crisis",
+        "TeamLeaderID": 79,
+        "LastMember": 84,
+        "Points": 2
+    },
+    {
+        "TeamName": "Team Kengo",
+        "TeamLeader": "The Old Man",
+        "TeamLeaderID": 85,
+        "LastMember": 90,
+        "Points": 2
+    },
+    {
+        "TeamName": "G.R.O.",
+        "TeamLeader": "Angry Naito",
+        "TeamLeaderID": 91,
+        "LastMember": 98,
+        "Points": 2
+    },
+    {
+        "TeamName": "Night Wing",
+        "TeamLeader": "Gold Wing",
+        "TeamLeaderID": 99,
+        "LastMember": 104,
+        "Points": 2
+    },
+    {
+        "TeamName": "Univer-Saru",
+        "TeamLeader": "Jurassic Period Shikkyusha",
+        "TeamLeaderID": 105,
+        "LastMember": 111,
+        "Points": 2
+    },
+    {
+        "TeamName": "Shoryu Group",
+        "TeamLeader": "Dragon of Sakai",
+        "TeamLeaderID": 112,
+        "LastMember": 118,
+        "Points": 2
+    },
+    {
+        "TeamName": "Kaze",
+        "TeamLeader": "Miracle Divine Wind",
+        "TeamLeaderID": 119,
+        "LastMember": 125,
+        "Points": 2
+    },
+    {
+        "TeamName": "Harisen Chop",
+        "TeamLeader": "Nishi Nagahori Justice",
+        "TeamLeaderID": 126,
+        "LastMember": 132,
+        "Points": 2
+    },
+    {
+        "TeamName": "Darts",
+        "TeamLeader": "God's Estuary",
+        "TeamLeaderID": 133,
+        "LastMember": 141,
+        "Points": 2
+    }
+        "WanderersName": "POU@MSR", 
+        "ID": 142,
+        "Points": 2
+    },
+    {
+        "WanderersName": "Mistral@MSR", 
+        "ID": 143,
+        "Points": 2
+    },
+    {
+        "WanderersName": "EIC@MSR", 
+        "ID": 144,
+        "Points": 2
+    },
+    {
+        "WanderersName": "Sports Newspaper Mania", 
+        "ID": 145,
+        "Points": 2
+    },
+    {
+        "WanderersName": "Night King", 
+        "ID": 146,
+        "Points": 2
+    },
+    {
+        "WanderersName": "FD Tomo-san", 
+        "ID": 147,
+        "Points": 2
+    },
+    {
+        "WanderersName": "Beat Ignition", 
+        "ID": 148,
+        "Points": 2
+    },
+    {
+        "WanderersName": "Jet-Black", 
+        "ID": 149,
+        "Points": 2
+    },
+    {
+        "WanderersName": "Wangan Runner", 
+        "ID": 150,
+        "Points": 2
+    },
+    {
+        "WanderersName": "Fire Legend", 
+        "ID": 151,
+        "Points": 2
+    },
+    {
+        "WanderersName": "Orimabu", 
+        "ID": 152,
+        "Points": 2
+    },
+    {
+        "WanderersName": "Stalker Hammer", 
+        "ID": 153,
+        "Points": 2
+    },
+    {
+        "WanderersName": "Radiant Storm", 
+        "ID": 154,
+        "Points": 2
+    },
+    {
+        "WanderersName": "YOO@TFB", 
+        "ID": 155,
+        "Points": 2
+    },
+    {
+        "WanderersName": "Magazine", 
+        "ID": 156,
+        "Points": 2
+    },
+    {
+        "WanderersName": "Whiurlwind Fanfare", 
+        "ID": 157,
+        "Points": 2
+    },
+    {
+        "WanderersName": "Mister Orange Road", 
+        "ID": 158,
+        "Points": 2
+    },
+    {
+        "WanderersName": "The Pinball", 
+        "ID": 159,
+        "Points": 2
+    },
+    {
+        "WanderersName": "The Driver", 
+        "ID": 160,
+        "Points": 2
+    }   
+]
