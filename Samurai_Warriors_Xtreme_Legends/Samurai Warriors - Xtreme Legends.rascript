@@ -4425,7 +4425,7 @@ function weaponAchievement(key)
     
     achievement( title = sixthName,
                  description = format("Obtain {0} on chaos difficulty in Story Mode or Free Mode" + ONE_PLAYER_STRING, sixthDescription),
-                 points = 10,
+                 points = 25,
                  trigger = musouOrFreeMode() &&
                            weaponHasDropped(sixthId) &&
                            !isSecondPlayerActive() &&
@@ -4640,7 +4640,7 @@ missionLeaderboardAchievementAndLeaderboard(missionId = MUSOU_MISSION,
                               title = "Musou Maniac",
                               description = "Earn more than 702 KOs for Musous in Challenge Mode", 
                               target = firstPlayerKoCount(),
-                              value = 113)
+                              value = 702)
 missionLeaderboardAchievementAndLeaderboard(missionId = ARCHERY_MISSION,
                               title = "Archery Ace",
                               description = "Earn more than 41 Kos for Archery in Challenge Mode", 
