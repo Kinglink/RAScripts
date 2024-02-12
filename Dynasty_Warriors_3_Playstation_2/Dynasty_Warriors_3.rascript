@@ -4731,15 +4731,19 @@ function getMusouModeTotalKOs()
     return sum_of(range(0, 10 - 1), target_index => dword(MemoryLocationOfFirstStagesKOTotal + SizeOfPostGameStageData * target_index))
 }
 
+function calcGeneralKill(FirstGeneralMemoryLocation, targetGeneralIndex)
+{
+    return byte(FirstGeneralMemoryLocation + (SizeOfKilledGenerals * targetGeneralIndex)) / NoGeneral 
+}
 function getMusouModeGeneralKills( musouStages )
 {
     // This will find all the Generals killed 
     // This must respect how ever many musou stages are complete.  Additional stages are all set to 0x00. 
-
-    
+    // In addition this was originally a tally, however tally_of would count every value a second time if a player finished a second musou mode. 
+    // Might be ways to fix it, but this will always work and avoid that issue.
    totalChecks = musouStages * 20
-   return tally_of(range(0, totalChecks - 1), totalChecks, targetGeneralIndex => checkNumberGeneralKilledInternal(MemoryLocationOfPostGameGeneralKilledArrayFirstStage + SizeOfPostGameStageData * (targetGeneralIndex / 20), 
-                                                                                 targetGeneralIndex % 20 ))
+   return totalChecks - sum_of(range(0, totalChecks - 1), targetGeneralIndex => calcGeneralKill(MemoryLocationOfPostGameGeneralKilledArrayFirstStage + SizeOfPostGameStageData * (targetGeneralIndex / 20), 
+                                                                                                targetGeneralIndex % 20 ))
        
 }
 
@@ -4767,7 +4771,7 @@ leaderboard(
 
 leaderboard(
     title = format("Most General kills for a 7 Stage Musou Mode"),
-    description = format("Get the most total kills of general (or named units) across each stage of musou mode (No Sun Jian, Liu Bei, or Cao Cao, only first player kills are counted, duplicate kills in the same level are not counted.)"),
+    description = format("Get the most total kills of general (or named units) across each stage of musou mode (Sun Jian, Liu Bei, or Cao Cao, only first player kills are counted, duplicate kills in the same level are not counted.)"),
     start = 
     (
         CurrentStagesCompleteMusouMode() == 7 && 
