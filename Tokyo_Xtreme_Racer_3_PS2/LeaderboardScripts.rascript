@@ -82,3 +82,171 @@ function garageIndex() => byte(0x003aebba)
 DEFAULT_CAR_VALUE = 0x05
 function defaultCar() => garageIndex() == DEFAULT_CAR_VALUE
 
+// $82BD90: (32-bit) Unique identifier for Time Attack
+//          
+//          Tokyo
+//          0x4360bb24 = Kandabashi C1 Inner Loop
+//          0x434c2db9 = Shibakouen C1 Outer Loop
+//          0x45b8e60f = Ariake ShinKanjou CCL
+//          0x4509f5b0 = Daiba ShinKanjou CWL
+//          0x44f75d21 = Route 13 Are Wangan Out
+//          0xc4caa43a = Daikoku Futou Wangan In
+//          0xc3948282 = Shibaura Yokohane Out
+//          0xc4525469 = Shioiri Yokohane In
+//          0xc61f8292 = Asada Yokohama CCL
+//          0xc5d83333 = Asada Yokohama CWL
+//          
+//          Nagoya
+//          0x450e7226 = Meieki Nagoya Kanjou
+//          0x43e8a24f = Kurokawa W. Higashimeihan
+//          0xc5e2566eKasumori E. Higashimeihan
+//          
+//          Osaka
+//          0x4613dd92 = Shinanobashi Kanjou Shortcut
+//          0x461bfc99 = Yotsuhashi Kanjou Long
+//          0x45f5e83c = Shiomibashi Sakai Out
+//          0x45ead4df = Sakai Sakai In
+//          0x4585eafc = W. Nagahori Wangan Out
+//          0x456fe94c = Oohama Wangan In
+function timeAttackTrackId() => dword(0x82BD90)
+
+// Tokyo
+KANDABASHI_C1_INNER_LOOP = 0x4360BB24
+SHIBAKOUEN_C1_OUTER_LOOP = 0x434C2DB9 
+ARIAKE_SHINKANJOU_CCL = 0x45B8E60F
+DAIBA_SHINKANJOU_CWL = 0x4509F5B0
+ROUTE_13_AREA_WANGAN_OUT = 0x44F75D21 
+DAIKOKU_FUTOU_WANGAN_IN = 0xC4CAA43A 
+SHIBAURA_YOKOHANE_OUT = 0xC3948282 
+SHIOIRI_YOKOHANE_IN = 0xC4525469 
+ASADA_YOKOHAMA_CCL = 0xC61F8292 
+ASADA_YOKOHAMA_CWL = 0xC5D83333 
+         
+// Nagoya
+MEIEKI_NAGOYA_KANJOU = 0x450E7226 
+KUROKAWA_W_HIGASHIMEIHAN = 0x43E8A24F
+KASUMORI_E_HIGASHIMEIHAN = 0xC5E2566E
+         
+// Osaka
+SHINANOBASHI_KANJOU_SHORTCUT = 0x4613DD92
+YOTSUHASHI_KANJOU_LONG = 0x461BFC99
+SHIOMIBASHI_SAKAI_OUT = 0x45F5E83C 
+SAKAI_IN = 0x45EAD4DF
+W_NAGAHORI_WANGAN_OUT = 0x4585EAFC
+OOHAMA_WANGAN_IN = 0x456FE94C
+
+
+TrackLookup =
+{
+    KANDABASHI_C1_INNER_LOOP: "Kandabashi C1 Inner Loop",
+    SHIBAKOUEN_C1_OUTER_LOOP: "Shibakouen C1 Outer Loop",
+    ARIAKE_SHINKANJOU_CCL: "Ariake ShinKanjou CCL",
+    DAIBA_SHINKANJOU_CWL: "Daiba ShinKanjou CWL",
+    ROUTE_13_AREA_WANGAN_OUT: "Route 13 Area Wangan Out",
+    DAIKOKU_FUTOU_WANGAN_IN: "Daikoku Futou Wangan In",
+    SHIBAURA_YOKOHANE_OUT: "Shibaura Yokohane Out",
+    SHIOIRI_YOKOHANE_IN: "Shioiri Yokohane In",
+    ASADA_YOKOHAMA_CCL: "Asada Yokohame CCL",
+    ASADA_YOKOHAMA_CWL: "Asada Yokohame CWL",
+    MEIEKI_NAGOYA_KANJOU: "Meieki Nagoya Kanjou",
+    KUROKAWA_W_HIGASHIMEIHAN: "Kurokawa W Higashimeihan",
+    KASUMORI_E_HIGASHIMEIHAN: "Kasumori E Higashimeihan",
+    SHINANOBASHI_KANJOU_SHORTCUT: "Shinanobashi Kanjou Shortcut",
+    YOTSUHASHI_KANJOU_LONG: "Yotsuhashi Kanjou Long",
+    SHIOMIBASHI_SAKAI_OUT: "Shiomibashi Sakai Out",
+    SAKAI_IN: "Sakai Sakai In",
+    W_NAGAHORI_WANGAN_OUT: "W Nagahori Wangan Out",
+    OOHAMA_WANGAN_IN: "Oohama Wangan In",
+}
+
+for key in TrackLookup
+{
+    leaderboard(
+        title = format("Fastest time on {0}",  TrackLookup[key]),
+        description = format("Record the fastest time on {0} in Time Trial Mode", TrackLookup[key]),
+        start = 
+        (
+            actuallyRacing() && 
+            finishedTimeAttack() && 
+            timeAttackID() && 
+            timeAttackTotalTime() > 0 &&
+            timeAttackTrackId() == key
+    
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = timeAttackTotalTime(),
+        lower_is_better = true,
+        format = "FRAMES"
+    )
+}
+
+ShortCarName = 
+{
+    NISSAN_GTR: "GT-R",
+    NISSAN_180SX: "180SX",
+    MITSUBISHI_LANCER_EVO_V: "Evo V",
+    MITSUBISHI_GTO: "GTO",
+    MAZDA_RX_7: "RX-7 ",
+    SUBURU_IMPREZA_WRX: "WRX STi",
+}
+
+CarName = 
+{
+    NISSAN_GTR: "Nissan Skyline GT-R",
+    NISSAN_180SX: "Nissan 180SX",
+    MITSUBISHI_LANCER_EVO_V: "Mitsubishi Lancer Evolution V",
+    MITSUBISHI_GTO: "Mitsubishi GTO",
+    MAZDA_RX_7: "Mazda RX-7 Type RZ.0",
+    SUBURU_IMPREZA_WRX: "Suburu Impreza WRX STi TypeRA SpecC",
+}
+
+CAR = "Car"
+TRACK = "Track"
+CREATOR = "Creator"
+SpecificLeaderboard =
+[
+    { TRACK: SHIBAKOUEN_C1_OUTER_LOOP,
+      CAR: MITSUBISHI_LANCER_EVO_V,
+      CREATOR: "Borysewicz"
+    },
+    { TRACK: DAIBA_SHINKANJOU_CWL,
+      CAR: NISSAN_180SX,
+      CREATOR: "jintei"
+    },    
+    { TRACK: SHINANOBASHI_KANJOU_SHORTCUT,
+      CAR: MITSUBISHI_GTO,
+      CREATOR: "WeerDough"
+    },    
+    { TRACK: MEIEKI_NAGOYA_KANJOU,
+      CAR: NISSAN_GTR,
+      CREATOR: "letdowNN"
+    },
+    
+]
+
+
+for data in SpecificLeaderboard
+{
+    leaderboard(
+        title = format("Fastest {1} on {0}",  TrackLookup[data[TRACK]],  ShortCarName[data[CAR]]),
+        description = format("Record the fastest time on {0} while driving the Default Car of {1} in Time Trial Mode. Thanks to {2} For the suggestion", TrackLookup[data[TRACK]], CarName[data[CAR]], data[CREATOR]),
+        start = 
+        (
+            actuallyRacing() && 
+            finishedTimeAttack() && 
+            timeAttackID() && 
+            timeAttackTotalTime() > 0 &&
+            timeAttackTrackId() == data[TRACK] &&
+            carCheck(data[CAR]) &&
+            defaultCar()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = timeAttackTotalTime(),
+        lower_is_better = true,
+        format = "FRAMES"
+    )
+}
+
+
