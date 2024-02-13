@@ -1,6 +1,8 @@
 // Tokyo Xtreme Racer 3
 // #ID = 20776
 
+function timeConversion(minutes, seconds) => ((minutes * 60) +seconds) * 60
+
 TokyoTeamInformation = [
     {
         "TeamName": "Rolling Guy", 
@@ -1052,6 +1054,27 @@ function cityBackgroundIndicator() => byte(0x3461E0)
 VALUE_BACKGROUND_IN_GAME = 0x02
 
 function isDriving() => cityBackgroundIndicator() == VALUE_BACKGROUND_IN_GAME && drivingPointerIndicator() == VALUE_DRIVING_IN_GAME
+function justWasDriving() => (prev(cityBackgroundIndicator()) == VALUE_BACKGROUND_IN_GAME || 
+                              prev(drivingPointerIndicator()) == VALUE_DRIVING_IN_GAME) &&
+                              cityBackgroundIndicator() != VALUE_BACKGROUND_IN_GAME && 
+                              drivingPointerIndicator() != VALUE_DRIVING_IN_GAME
+                            
+
+// $352544: (8-bit) Raining control
+// 
+//          If this is set to 0x00 it's a clear day.
+//          If this is set to 0x01 there is rain. 
+//
+//          Changing this to 0x01 mid race WILL start the rain. 
+//          
+//          0x08 removes barriers, not sure why. 
+//          0x09 and above seems to show graphical corruption
+//
+//          NOTE snow and others will also say 0x01
+function rainControl() => byte(0x352544)
+
+RAINING_VALUE = 0x01
+function isRaining() => rainControl() == RAINING_VALUE
 
 // $3565B4: (32-bit likely larger) A timer for the current battle.
 //          
@@ -1066,9 +1089,9 @@ function timerForQuestBattle() => dword(0x3565B4)
 //          0x05 for Default Car.
 function garageIndexInGame() => byte(0x3AEBBA)
 
-VALUE_DEFAULT_CAR = 0x05;
+VALUE_DEFAULT_CAR = 0x05
     
-function isDefaultCar() => garageIndexInGame() === VALUE_DEFAULT_CAR
+function isDefaultCar() => garageIndexInGame() == VALUE_DEFAULT_CAR
 
 
 // $3AF39E: (8-bit) Rolling Guy #1 Beat Indicator
@@ -1177,6 +1200,248 @@ function demoMode() => gameMode() == DEMO_MODE_VALUE
 //          0x30 = Suburu Impreza WRX STi TypeRA SpecC
 //          If wrong check 0x8082d0
 function vehicleNameID() => byte(0x806AD0)
+
+NISSAN_350_ZX = 0x00
+NISSAN_SKYLINE_GT_R_V_SPECII = 0x01
+NISSAN_SKYLINE_GT_R_V_SPEC = 0x02
+NISSAN_SKYLINE_GT_R_V_SPECII = 0x03
+NISSAN_350_ZX_TWINTURBO = 0x04
+NISSAN_240Z = 0x05
+NISSAN_200SX_S15 = 0x06
+NISSAN_200SX_S14 = 0x07
+NISSAN_200SX_PS13 = 0x08
+NISSAN_MAXIMA = 0x09
+NISSAN_PULSAR = 0x0a
+NISSAN_CIMA = 0x0b
+NISSAN_280Z_T = 0x0c
+NISSAN_180SX = 0x0d
+NISSAN_SYKLINE_HT20000GT_R = 0x0e
+NISSAN_CEDRIC = 0x0f
+NISSAN_GLORIA = 0x10
+NISSAN_350_Z = 0x11
+MITSUBISHI_LANCER_EVOLUTION_VII = 0x12
+MITSUBISHI_LANCER_EVOLUTION_V = 0x13
+MITSUBISHI_FTO = 0x14
+MITSUBISHI_GTO = 0x15
+MITSUBISHI_STARION = 0x16
+MITSUBISHI_LANCER_EX = 0x17
+MAZDA_RX_7_TYPE_RZ_0 = 0x18
+MAZDA_RX_7_INFINITI = 0x18
+MAZDA_MX_5_MIATA_RS = 0x1a
+MAZDA_MX_5_MIATA_S_SPECIAL_TYPE_II = 0x1b
+MAZDA_RX_8 = 0x1c
+MAZDA_RX_7_TURBO_GT_X = 0x1d
+MAZDA_RX_3_GT = 0x1e
+TOYOTA_MR2 = 0x1f
+TOYOTA_SUPRA = 0x20
+TOYOTA_LEXUS_GS300 = 0x21
+TOYOTA_SPRINTER_TRUENO = 0x22
+TOYOTA_COROLLA_LEVIN_3DOOR = 0x23
+TOYOTA_MARK_2 = 0x25
+TOYOTA_CELICA = 0x25
+TOYOTA_MR_S_JAPANESE_NAME = 0x26
+TOYOTA_LEXUS_LS430 = 0x27
+TOYOTA_CHASER = 0x28
+TOYOTA_STARLET = 0x28
+TOYOTA_COROLLA_LEVIN = 0x2a
+TOYOTA_MR2_1_6G = 0x2b
+TOYOTA_SUPRA_2_5GT = 0x2c
+TOYOTA_2000GT = 0x2d
+TOYOTA_COROLLA_FX = 0x2e
+TOYOTA_BB_JAPANESE_NAME = 0x2f
+SUBURU_IMPREZA_WRX_STI_TYPERA_SPECC = 0x30
+SUBURU_IMPREZA_WRX_STI_VERSION_VI = 0x31
+SUBURU_LEGACY_B4 = 0x32
+SUBURU_LEGACY_TOURING_WAGON = 0x33
+SUBURU_ALCYONE = 0x34
+ISUZU_VEHICROSS = 0x35
+IZUSU_PIAZZA = 0x36
+SUZUKI_WAGON_R_RR = 0x37
+SUZUKI_CAPPUCCINO = 0x38
+DAIHATSU_COPEN = 0x39
+DAIHATSU_MOVE = 0x3a
+GM_CORVETTE_Z51 = 0x3c
+GM_CORVETTE = 0x3d
+GM_FIREBIRD = 0x3e
+FORD_GT = 0x3f
+FORD_MUSTANG = 0x40
+DODGE_VIPER = 0x41
+MERCEDES_BENZ_SL_CLASS = 0x42
+MERCEDES_BENZ_S_CLASS = 0x43
+MERCEDES_BENZ_500E = 0x44
+VOLKSWAGEN_NEW_BETTLE = 0x45
+VOLKSWAGEN_GOLF_GTI = 0x44
+LOTUS_ESPRIT = 0x49
+LOTUS_TURBO_ESPRIT = 0x4a
+LOTUS_EUROPA = 0x4b
+DETOMASO_PANTERA = 0x4c
+GEMBALLA_GTR750 = 0x4e
+GEMBALLA_GTR500 = 0x4f
+TOYOTA_VITZ_JAPANESE_NAME = 0x50
+MCR_R34 = 0x52
+RIDOX_SUPRA = 0x53
+NOB_S15 = 0x54
+WEST_CORVETTE = 0x55
+NAGINATA = 0x56
+EMPEROR = 0x57
+THE_ROOK = 0x58
+THE_BISHOP = 0x59
+THE_KNIGHT = 0x5a
+JACK_KNIFE = 0x5b
+BLOOD_HOUND = 0x5c
+DEJECTED_ANGEL = 0x5d
+STEAL_HEART = 0x5e
+DYING_STAR = 0x5f
+MIDNIGHT_ROSE = 0x60
+TAIL_GUNNER = 0x61
+SHADOW_EYES = 0x62
+GRIEF_PLUTO = 0x63
+FLAME_DRAGON = 0x64
+ALIAS_THE_J = 0x65
+THE_LORD = 0x66
+NIHILISMS_ENVOY = 0x67
+HEAVENS_ENVORY = 0x68
+EARTHS_ENVOY = 0x69
+DUTYS_ENVOY = 0x6a
+WIND_CONDUCTOR = 0x6b
+WOODS_CONDUCTOR = 0x6c
+FIRE_CONDUCTOR = 0x6d
+MT_CONDUCTOR = 0x6e
+NANIWAS_WARSHIP = 0x6f
+TERRIBLE_NUCLEAR = 0x70
+MAD_TERRORIST = 0x71
+TIMEBOMB_STALKER = 0x72
+STEALTH_FIGHTER = 0x73
+KAMIKAZE = 0x74
+MIDNIGHT_CINDERELLA = 0x76
+DEATH_DRIVER = 0x77
+
+CarNameLookup =
+{
+    NISSAN_350_ZX: "Nissan 350 ZX",
+    NISSAN_SKYLINE_GT_R_V_SPECII: "Nissan Skyline GT-R V-SpecII",
+    NISSAN_SKYLINE_GT_R_V_SPEC: "Nissan Skyline GT-R V-Spec",
+    NISSAN_SKYLINE_GT_R_V_SPECII: "Nissan Skyline GT-R V-SpecII",
+    NISSAN_350_ZX_TWINTURBO: "Nissan 350 ZX TwinTurbo",
+    NISSAN_240Z: "Nissan 240Z",
+    NISSAN_200SX_S15: "Nissan 200SX S15",
+    NISSAN_200SX_S14: "Nissan 200SX S14",
+    NISSAN_200SX_PS13: "Nissan 200SX PS13",
+    NISSAN_MAXIMA: "Nissan Maxima",
+    NISSAN_PULSAR: "Nissan Pulsar",
+    NISSAN_CIMA: "Nissan Cima",
+    NISSAN_280Z_T: "Nissan 280Z-T",
+    NISSAN_180SX: "Nissan 180SX",
+    NISSAN_SYKLINE_HT20000GT_R: "Nissan Sykline HT20000GT-R",
+    NISSAN_CEDRIC: "Nissan Cedric",
+    NISSAN_GLORIA: "Nissan Gloria",
+    NISSAN_350_Z: "Nissan 350 Z",
+    MITSUBISHI_LANCER_EVOLUTION_VII: "Mitsubishi Lancer Evolution VII",
+    MITSUBISHI_LANCER_EVOLUTION_V: "Mitsubishi Lancer Evolution V",
+    MITSUBISHI_FTO: "Mitsubishi FTO",
+    MITSUBISHI_GTO: "Mitsubishi GTO",
+    MITSUBISHI_STARION: "Mitsubishi Starion",
+    MITSUBISHI_LANCER_EX: "Mitsubishi Lancer EX",
+    MAZDA_RX_7_TYPE_RZ_0: "Mazda RX-7 Type RZ.0",
+    MAZDA_RX_7_INFINITI: "Mazda RX-7 Infiniti",
+    MAZDA_MX_5_MIATA_RS: "Mazda MX-5  Miata RS",
+    MAZDA_MX_5_MIATA_S_SPECIAL_TYPE_II: "Mazda MX-5  Miata S-Special Type-II",
+    MAZDA_RX_8: "Mazda RX-8",
+    MAZDA_RX_7_TURBO_GT_X: "Mazda RX-7 Turbo GT-X",
+    MAZDA_RX_3_GT: "Mazda RX-3 GT",
+    TOYOTA_MR2: "Toyota MR2",
+    TOYOTA_SUPRA: "Toyota Supra",
+    TOYOTA_LEXUS_GS300: "Toyota Lexus GS300",
+    TOYOTA_SPRINTER_TRUENO: "Toyota Sprinter Trueno",
+    TOYOTA_COROLLA_LEVIN_3DOOR: "Toyota Corolla Levin 3door",
+    TOYOTA_MARK_2: "Toyota Mark 2",
+    TOYOTA_CELICA: "Toyota Celica",
+    TOYOTA_MR_S_JAPANESE_NAME: "Toyota MR-S(Japanese Name)",
+    TOYOTA_LEXUS_LS430: "Toyota Lexus LS430",
+    TOYOTA_CHASER: "Toyota Chaser",
+    TOYOTA_STARLET: "Toyota Starlet",
+    TOYOTA_COROLLA_LEVIN: "Toyota Corolla Levin",
+    TOYOTA_MR2_1_6G: "Toyota MR2 1.6G",
+    TOYOTA_SUPRA_2_5GT: "Toyota Supra 2.5GT",
+    TOYOTA_2000GT: "Toyota 2000GT",
+    TOYOTA_COROLLA_FX: "Toyota Corolla FX",
+    TOYOTA_BB_JAPANESE_NAME: "Toyota bB(Japanese Name)",
+    SUBURU_IMPREZA_WRX_STI_TYPERA_SPECC: "Suburu Impreza WRX STi TypeRA SpecC",
+    SUBURU_IMPREZA_WRX_STI_VERSION_VI: "Suburu Impreza WRX STi Version VI",
+    SUBURU_LEGACY_B4: "Suburu Legacy B4",
+    SUBURU_LEGACY_TOURING_WAGON: "Suburu Legacy Touring Wagon",
+    SUBURU_ALCYONE: "Suburu Alcyone",
+    ISUZU_VEHICROSS: "Isuzu VehiCROSS",
+    IZUSU_PIAZZA: "Izusu Piazza",
+    SUZUKI_WAGON_R_RR: "Suzuki wagon R RR",
+    SUZUKI_CAPPUCCINO: "Suzuki Cappuccino",
+    DAIHATSU_COPEN: "Daihatsu Copen",
+    DAIHATSU_MOVE: "Daihatsu Move",
+    GM_CORVETTE_Z51: "GM Corvette Z51",
+    GM_CORVETTE: "GM Corvette",
+    GM_FIREBIRD: "GM Firebird",
+    FORD_GT: "Ford GT",
+    FORD_MUSTANG: "Ford Mustang",
+    DODGE_VIPER: "Dodge Viper",
+    MERCEDES_BENZ_SL_CLASS: "Mercedes-Benz SL-Class",
+    MERCEDES_BENZ_S_CLASS: "Mercedes-Benz S-Class",
+    MERCEDES_BENZ_500E: "Mercedes-Benz 500E",
+    VOLKSWAGEN_NEW_BETTLE: "Volkswagen New Bettle",
+    VOLKSWAGEN_GOLF_GTI: "Volkswagen Golf GTi",
+    LOTUS_ESPRIT: "Lotus Esprit",
+    LOTUS_TURBO_ESPRIT: "Lotus Turbo Esprit",
+    LOTUS_EUROPA: "Lotus Europa",
+    DETOMASO_PANTERA: "Detomaso Pantera",
+    GEMBALLA_GTR750: "Gemballa GTR750",
+    GEMBALLA_GTR500: "Gemballa GTR500",
+    TOYOTA_VITZ_JAPANESE_NAME: "Toyota Vitz(Japanese Name)",
+    MCR_R34: "MCR R34",
+    RIDOX_SUPRA: "Ridox Supra",
+    NOB_S15: "NOB S15",
+    WEST_CORVETTE: "West Corvette",
+    NAGINATA: "Naginata",
+    EMPEROR: "Emperor",
+    THE_ROOK: "The Rook",
+    THE_BISHOP: "The Bishop",
+    THE_KNIGHT: "The Knight",
+    JACK_KNIFE: "Jack Knife",
+    BLOOD_HOUND: "Blood Hound",
+    DEJECTED_ANGEL: "Dejected Angel",
+    STEAL_HEART: "Steal Heart",
+    DYING_STAR: "Dying Star",
+    MIDNIGHT_ROSE: "Midnight Rose",
+    TAIL_GUNNER: "Tail Gunner",
+    SHADOW_EYES: "Shadow Eyes",
+    GRIEF_PLUTO: "Grief Pluto",
+    FLAME_DRAGON: "Flame Dragon",
+    ALIAS_THE_J: "Alias The J",
+    THE_LORD: "The Lord",
+    NIHILISMS_ENVOY: "Nihilism's Envoy",
+    HEAVENS_ENVORY: "Heaven's Envory",
+    EARTHS_ENVOY: "Earth's Envoy",
+    DUTYS_ENVOY: "Duty's Envoy",
+    WIND_CONDUCTOR: "Wind Conductor",
+    WOODS_CONDUCTOR: "Woods Conductor",
+    FIRE_CONDUCTOR: "Fire Conductor",
+    MT_CONDUCTOR: "Mt. Conductor",
+    NANIWAS_WARSHIP: "Naniwa's Warship",
+    TERRIBLE_NUCLEAR: "Terrible Nuclear",
+    MAD_TERRORIST: "Mad Terrorist",
+    TIMEBOMB_STALKER: "Timebomb Stalker",
+    STEALTH_FIGHTER: "Stealth Fighter ",
+    KAMIKAZE: "Kamikaze",
+    MIDNIGHT_CINDERELLA: "Midnight Cinderella ",
+    DEATH_DRIVER: "Death Driver",
+}
+
+function carCheck(vehicleId) => vehicleNameID() == vehicleId
+function nissanGTR() => vehicleNameID() == NISSAN_SKYLINE_GT_R_V_SPECII
+function nissan180Sx() => vehicleNameID() == NISSAN_180SX
+function lancerEvoV() => vehicleNameID() == MITSUBISHI_LANCER_EVOLUTION_V
+function mitsubishiGTO() => vehicleNameID() == MITSUBISHI_GTO
+function mazdaRX7() => vehicleNameID() == MAZDA_RX_7_TYPE_RZ_0
+function suburaWRX() => vehicleNameID() == SUBURU_IMPREZA_WRX_STI_TYPERA_SPECC
+
 
 // $8153B0: (32-bit) Player's Money in Quest mode.
 //          
@@ -1304,16 +1569,16 @@ for key in TrackLookup
         description = format("Record the fastest time on {0} in Time Trial Mode", TrackLookup[key]),
         start = 
         (
-            actuallyRacing() && 
-            finishedTimeAttack() && 
-            timeAttackID() && 
-            timeAttackTotalTime() > 0 &&
-            timeAttackTrackId() == key
+            isDriving() && 
+            justFinishedTimeAttack() && 
+            timeAttackMode() && 
+            timeTimeAttackMode() > 0 &&
+            courseSelectedForTimeAttackMode() == key
     
         ),
         cancel = always_false(),
         submit = always_true(),
-        value = timeAttackTotalTime(),
+        value = timeTimeAttackMode(),
         lower_is_better = true,
         format = "FRAMES"
     )
@@ -1321,53 +1586,68 @@ for key in TrackLookup
 
 ShortCarName = 
 {
-    NISSAN_GTR: "GT-R",
+    NISSAN_SKYLINE_GT_R_V_SPECII: "GT-R",
     NISSAN_180SX: "180SX",
-    MITSUBISHI_LANCER_EVO_V: "Evo V",
+    MITSUBISHI_LANCER_EVOLUTION_V: "Evo V",
     MITSUBISHI_GTO: "GTO",
-    MAZDA_RX_7: "RX-7 ",
-    SUBURU_IMPREZA_WRX: "WRX STi",
+    MAZDA_RX_7_TYPE_RZ_0: "RX-7",
+    SUBURU_IMPREZA_WRX_STI_TYPERA_SPECC: "WRX STi",
 }
 
 CarName = 
 {
-    NISSAN_GTR: "Nissan Skyline GT-R",
+    NISSAN_SKYLINE_GT_R_V_SPECII: "Nissan Skyline GT-R",
     NISSAN_180SX: "Nissan 180SX",
-    MITSUBISHI_LANCER_EVO_V: "Mitsubishi Lancer Evolution V",
+    MITSUBISHI_LANCER_EVOLUTION_V: "Mitsubishi Lancer Evolution V",
     MITSUBISHI_GTO: "Mitsubishi GTO",
-    MAZDA_RX_7: "Mazda RX-7 Type RZ.0",
-    SUBURU_IMPREZA_WRX: "Suburu Impreza WRX STi TypeRA SpecC",
+    MAZDA_RX_7_TYPE_RZ_0: "Mazda RX-7 Type RZ.0",
+    SUBURU_IMPREZA_WRX_STI_TYPERA_SPECC: "Suburu Impreza WRX STi TypeRA SpecC",
 }
 
 CAR = "Car"
 TRACK = "Track"
 CREATOR = "Creator"
 ID = "WanderersID"
+TIME = "Time"
+ACHIEVEMENT_NAME = "Title"
+TIMESTRING = "DisplayString"
+
 SpecificLeaderboard =
 [
     { TRACK: SHIBAKOUEN_C1_OUTER_LOOP,
-      CAR: MITSUBISHI_LANCER_EVO_V,
+      CAR: MITSUBISHI_LANCER_EVOLUTION_V,
       CREATOR: "Borysewicz",
-      ID: 87762
+      ID: 87762,
+      TIME: timeConversion(5,00),
+      ACHIEVEMENT_NAME: "King of C1",
+      TIMESTRING: "5:00"
     },
     { TRACK: DAIBA_SHINKANJOU_CWL,
       CAR: NISSAN_180SX,
       CREATOR: "jintei",
-      ID: 87763
+      ID: 87763,
+      TIME: timeConversion(6,00),
+      ACHIEVEMENT_NAME: "King of ShinKanjou",
+      TIMESTRING: "6:00"
     },    
     { TRACK: SHINANOBASHI_KANJOU_SHORTCUT,
       CAR: MITSUBISHI_GTO,
       CREATOR: "WeerDough",
-      ID: 87764
+      ID: 87764,
+      TIME: timeConversion(1,48),
+      ACHIEVEMENT_NAME: "King of Osaka",
+      TIMESTRING: "1:48"
     },    
-    { TRACK: MEIEKI_NAGOYA_KANJOU,
-      CAR: NISSAN_GTR,
-      CREATOR: "letdowNN",
-      ID: 87765
-    },
-    
-]
 
+    { TRACK: MEIEKI_NAGOYA_KANJOU,
+      CAR: NISSAN_SKYLINE_GT_R_V_SPECII,
+      CREATOR: "letdowNN",
+      ID: 87765,
+      TIME: timeConversion(3,0),
+      ACHIEVEMENT_NAME: "King of Nagoya",
+      TIMESTRING: "3:00"
+    },   
+]
 
 for data in SpecificLeaderboard
 {
@@ -1376,22 +1656,71 @@ for data in SpecificLeaderboard
         description = format("Record the fastest time on {0} while driving the Default Car of {1} in Time Trial Mode. Thanks to {2} For the suggestion", TrackLookup[data[TRACK]], CarName[data[CAR]], data[CREATOR]),
         start = 
         (
-            actuallyRacing() && 
-            finishedTimeAttack() && 
-            timeAttackID() && 
-            timeAttackTotalTime() > 0 &&
-            timeAttackTrackId() == data[TRACK] &&
+            isDriving() && 
+            justFinishedTimeAttack() && 
+            timeAttackMode() && 
+            timeTimeAttackMode() > 0 &&
+            courseSelectedForTimeAttackMode() == data[TRACK] &&
             carCheck(data[CAR]) &&
-            defaultCar()
+            isDefaultCar()
         ),
         cancel = always_false(),
         submit = always_true(),
-        value = timeAttackTotalTime(),
+        value = timeTimeAttackMode(),
         lower_is_better = true,
-        format = "FRAMES"
+        format = "FRAMES",
         id = data[ID]
     )
+
+    achievement(title = data[ACHIEVEMENT_NAME],
+                description = format("Beat {0} on {1} while driving the Default Car of {2} in Time Trial Mode.  Thanks to {3} for designing this achievement", data[TIMESTRING], TrackLookup[data[TRACK]], CarName[data[CAR]], data[CREATOR]),
+                points = 5,
+                trigger = isDriving() && 
+                          justFinishedTimeAttack() && 
+                          timeAttackMode() && 
+                          timeTimeAttackMode() > 0 &&
+                          timeTimeAttackMode() < data[TIME] &&
+                          courseSelectedForTimeAttackMode() == data[TRACK] &&
+                          carCheck(data[CAR]) &&
+                          isDefaultCar()
+
+    )
 }
+
+leaderboard(
+        title = format("Fastest AE86T on Nagahori in Rain"),
+        description = format("Record the fastest time on W Nagahori Wangan Out while driving the Default Car of Toyota Sprinter Trueno in the rain in Time Trial Mode."),
+        start = 
+        (
+            isDriving() && 
+            justFinishedTimeAttack() && 
+            timeAttackMode() && 
+            timeTimeAttackMode() > 0 &&
+            courseSelectedForTimeAttackMode() == W_NAGAHORI_WANGAN_OUT &&
+            carCheck(TOYOTA_SPRINTER_TRUENO) &&
+            isDefaultCar() &&
+            isRaining()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = timeTimeAttackMode(),
+        lower_is_better = true,
+        format = "FRAMES"
+    )
+ achievement(title = "Time to deliver some Tofu",
+                description = format("Beat 5:15 on N WNagahori Wangan Out while driving the Default Car of Toyota Sprinter Trueno in the rain in Time Trial Mode."),
+                points = 3,
+                trigger = isDriving() && 
+                          justFinishedTimeAttack() && 
+                          timeAttackMode() && 
+                          timeTimeAttackMode() > 0 &&
+                          timeTimeAttackMode() < timeConversion(5,15) &&
+                          courseSelectedForTimeAttackMode() == W_NAGAHORI_WANGAN_OUT &&
+                          carCheck(TOYOTA_SPRINTER_TRUENO) &&
+                          isDefaultCar() &&
+                          isRaining()
+    )
+
 
 
 function winAchievement(title, description, points, index, memoryLocation)
@@ -1422,20 +1751,20 @@ function teamAchievements(data, memoryLocation)
 
 function wanderersAchievements(data, memoryLocation)
 {
-    winAchievement(title = WandererInfo["WandererName"],
-                   description = format("Beat Wanderer {0} in Quest Mode", WandererInfo["WandererName"]),
+    winAchievement(title = data["WanderersName"],
+                   description = format("Beat Wanderer {0} in Quest Mode", data["WanderersName"]),
                    points = data["Points"],
-                   index = WandererInfo["WandererID"],
+                   index = data["WanderersID"],
                    memoryLocation = memoryLocation
                    )
 }
 
 function bossAchievements(data, memoryLocation)
 {
-    winAchievement(title = EliteInfo["BossName"],
-                   description = format("Beat {0} in Quest Mode", EliteInfo["BossName"]),
+    winAchievement(title = data["BossName"],
+                   description = format("Beat {0} in Quest Mode", data["BossName"]),
                    points = data["Points"],  
-                   index = EliteInfo["BossID"],
+                   index = data["BossID"],
                    memoryLocation = memoryLocation
                    )
     
@@ -1481,63 +1810,118 @@ for info in OsakaWanderers
     wanderersAchievements(info, osakaBeatMemoryLocation())
 }
 
-achievement(title = title,
-            description = description,
-            points = points,
-            trigger = justFinishedQuestRace()
+achievement(title = "Too easy",
+            description = "Win a battle in Quest Mode losing only a small amount (5 percent max)",
+            points = 3,
+            trigger = justFinishedQuestRace() &&
                       questMode() &&
                       isDriving() &&
-                      !demoMode() 
+                      !demoMode() &&
+                      playerHealth() >= MAX_HEALTH * 0.95
             )
 
-IDeas
-
->- Win a battle without losing SP
-No... MAybe... I don't know.   But 95 percent is more likely. 
-
->- Win a battle with less than 5% of SP left
-Yeah. 
-
->- Win a battle that lasted for more than 2 minutes  (3 minutes?) 
-Sounds good. 
-
-- Win a battle on a really worn out car *
-STruggling to get these values so far, but I'll try again. 
-
-- Refuse a challenge by any non-boss rival
-- Challenge a rival that doesn't want to race you
-Interesting idea. I haven't been challenged often though
-
-> Txr3 also features pit areas that could act as a collectible for exploration achievements
-YEah this sounds good. 
-Except There's a Wanderer for that. 
-
-Break speed 
-> 100 mph (gimmie) 
-> 150 mph
-> 200 mph
-> 230 mph 
-
-all in Quest mode. 
-> 400 kmh 
-Hmmm 
-
-Unreachable. 
-
->"15-win streak" 
-20.  20 gives you 2x.  That's the max
-Actually 10 15 then 20.
-
-> Change weather. 
-
-> Buy the best upgrades? 
-All cards don't have "Best" upgrades I think, so would be annoying. 
-
-Leaderboard 
-
-end of the day, Quest mode, speed
-
-Most wins in a row Leaderboard?  Yeah...   End of the day. 
+achievement(title = "By the skin of your grill",
+            description = "Win a battle in Quest Mode with less than 5 percent health left",
+            points = 2,
+            trigger = justFinishedQuestRace() &&
+                      questMode() &&
+                      isDriving() &&
+                      !demoMode() &&
+                      playerHealth() <= MAX_HEALTH * 0.05
+            )
 
 
-Leader board, longest battle over 2 minutes.
+achievement(title = "All Night Battle",
+            description = "Win a battle in Quest Mode that lasted for more than 2 minutes",
+            points = 2,
+            trigger = justFinishedQuestRace() &&
+                      questMode() &&
+                      isDriving() &&
+                      !demoMode() &&
+                      timerForQuestBattle() >= timeConversion(2,0)
+            )
+
+function speedAchievement(title, speedValue) 
+{
+    achievement(title = title,
+            description = format("Reach {0} MPH in quest mode",speedValue),
+            points = 2,
+            trigger = questMode() &&
+                      isDriving() &&
+                      !demoMode() &&
+                      questModeCurrentSpeedMPH() >= speedValue &&
+                      prev(questModeCurrentSpeedMPH()) < speedValue
+            )
+}
+
+speedAchievement("Speed Boy", 100)
+speedAchievement("Speed Demon",150 )
+speedAchievement("Speed King",200)
+speedAchievement("Speed God",230)
+
+function winStreakAchievement(title, targetValue) 
+{
+    achievement(title = title,
+            description = format("Have a {0} win streak in quest mode", targetValue),
+            points = 2,
+            trigger = questMode() &&
+                      isDriving() &&
+                      !demoMode() &&
+                      currentWinCombo() == targetValue &&
+                      prev(currentWinCombo()) < targetValue
+            )
+}
+
+winStreakAchievement("Are they even trying?", 10)
+winStreakAchievement("No one can stop you", 15)
+winStreakAchievement("All you do is win", 20) 
+
+
+leaderboard(
+    title = format("Faster Speed in Quest Mode"),
+    description = format("Record the fastest time in Quest Mode"),
+    start = 
+    (
+        justWasDriving() && 
+        questMode() &&
+        !demoMode()
+
+    ),
+    cancel = always_false(),
+    submit = always_true(),
+    value = todayMaxSpeedMPHconverted(),
+    format = "VALUE"
+)
+
+leaderboard(
+    title = format("Highest Win Combo in Quest Mode"),
+    description = format("Record the wins combo counter in Quest Mode"),
+    start = 
+    (
+        justWasDriving() && 
+        questMode() &&
+        !demoMode()
+
+    ),
+    cancel = always_false(),
+    submit = always_true(),
+    value = todayMaxWinCombo(),
+    format = "VALUE"
+)
+
+
+leaderboard(
+    title = format("Longest battle in Quest Mode"),
+    description = format("Record the longest battle over 2 minutes"),
+    start = 
+    (
+        justFinishedQuestRace() &&
+        questMode() &&
+        isDriving() &&
+        !demoMode() 
+    ),
+    cancel = always_false(),
+    submit = always_true(),
+    value = timerForQuestBattle(),
+    format = "FRAMES"
+)
