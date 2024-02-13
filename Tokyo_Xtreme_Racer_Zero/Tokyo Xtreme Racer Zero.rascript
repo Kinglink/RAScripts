@@ -2435,14 +2435,15 @@ DISTANCE_FACTOR = 1612
 //          
 //          0x00 = In Front end. or Loading.
 //          0x01 = Actually driving or paused while in game.
+// Found situation where this is not correct. DO NOT USE 
 function inGameIndicator() => byte(0x74AF6C)
 
 IN_GAME_INDICATOR_FRONT_END = 0x00
 IN_GAME_INDICATOR_DRIVING = 0x01
 
-// This can set 3 in game.  Might be bit 0 but let's do not Front end. 
-function inGameDriving() => inGameIndicator() != IN_GAME_INDICATOR_FRONT_END 
-function previnGameDriving() => prev(inGameIndicator()) != IN_GAME_INDICATOR_FRONT_END
+// Using frontend Indicator instead of Ingame indicator as ingameIndicator has caused issues.  (Said was in front end with a specific car, was not)
+function inGameDriving() => frontEndIndicator() != IN_GAME_INDICATOR_FRONT_END 
+function previnGameDriving() => prev(frontEndIndicator()) != IN_GAME_INDICATOR_FRONT_END
 
 // $7508F8: (32-bit) Player's Health in battle
 //          
@@ -3056,7 +3057,7 @@ QuickRaceAchievement( title = "Centurion Conqueror",
                       points = 50,
                       winCount = 100)
 
-achievement(title = "Whose Going to Watch That?",
+achievement(title = "Who's Going to Watch That?",
             description = "Watch the Fast and the Furious trailer",
             points = 1,
             trigger = dvdExtrasMode() &&
