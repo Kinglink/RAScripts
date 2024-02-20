@@ -3253,8 +3253,10 @@ LevelInfo =
     HANZO_UEDA_INFILTRATION: { MISSION_INFO: completeHanzoUedaInfiltration(), 
                                        EXPECTED_VALUE: BIT4_FULL, 
                                        POINTS: 5},
-    HANZO_SIEGE_OF_OSAKA: { MISSION_INFO: completeHanzoSiegeOfOsakaSummerPart2(), 
-                                       EXPECTED_VALUE: BIT3_FULL, 
+    HANZO_SIEGE_OF_OSAKA: { MISSION_INFO: completeHanzoSiegeOfOsakaSummerPart1(), 
+                                       EXPECTED_VALUE: BIT4_FULL, 
+                                       EXTENDED_MISSION_INFO: completeHanzoSiegeOfOsakaSummerPart2(),
+                                       EXTENDED_EXPECTED_VALUE: BIT3_FULL,
                                        POINTS: 5},
     HANZO_OSAKA_INFILTRATION: { MISSION_INFO: completeHanzoOsakaInfiltration(), 
                                        EXPECTED_VALUE: BIT6_FULL, 
@@ -3444,7 +3446,7 @@ OKUNI_YUKIMURA_ENDING = 0x2c
 OKUNI_SHINGEN_ENDING = 0x2d 
 OKUNI_KENSHIN_ENDING = 0x2e 
 NEW_OFFICER_FIRST = 0x2f 
-NEW_OFFICER_SECOND = 0x30 
+NEW_OFFICER_SECOND = 0x35 
 NO_ENDING = 0x03b
 
 endingNameLookup =
@@ -3986,9 +3988,19 @@ FIRST_OKUNI_ALT_ENDING = 0x26
 LAST_OKUNI_ALT_ENDING = 0x2e
 
 
+
 // Okuni's ending are a little different and trigger earlier. 
 function endingMovieTrigger(targetId) 
 {
+    if(targetId == NEW_OFFICER_FIRST || targetId == NEW_OFFICER_SECOND)
+    {
+        return playerjustWonStage() && 
+               prev(endingMovieToPlay()) == NO_ENDING &&
+               endingMovieToPlay() >= targetId &&
+               endingMovieToPlay() <= targetId + 5
+               
+    }
+
     retValue =  playerjustWonStage() && endingMovieToPlay() == targetId
     if (targetId >= FIRST_OKUNI_ALT_ENDING  && targetId <= LAST_OKUNI_ALT_ENDING)
     {
