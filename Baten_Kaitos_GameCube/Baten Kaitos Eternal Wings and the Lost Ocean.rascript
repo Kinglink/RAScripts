@@ -1,16 +1,72 @@
 // Baten Kaitos: Eternal Wings and the Lost Ocean
 // #ID = 8489
 
-// $1AE249: (8-bit) Load Indicator.
+// Name of each area.  Using a plain text as the identifier. 
+CEBALRAI = "Cebalrai"
+MOONGUILE_FOREST = "Moonguile Forest"
+NUNKI_VALLEY = "Nunki Valley"
+PHERKAD = "Pherkad"
+LORDS_MANSIONS = "Lord's Mansion"
+NASHIRA = "Nashira"
+LESSER_CELESTIAL_RIVER = "Lesser Celestial River"
+CLOUD_PASSAGE = "Cloud Passage"
+SHELIAK = "Sheliak"
+CASTLE_ELNATH = "Castle Elnath"
+ANUENUE_PORT = "Anuenue Port"
+KOMO_MAI = "Komo Mai"
+ANCIENT_LIBRARY_OF_MAGIC = "Ancient Library of Magic"
+HOLOHOLO_JUNGLE = "Holoholo Jungle"
+OPU = "Opu"
+CELESTIAL_TREE = "Celestial Tree"
+TRAIL_OF_SOULS = "Trail of Souls"
+PARNASSE = "Parnasse"
+DETOURNE = "Detourne"
+REVERENCE = "Reverence"
+NEKTON = "Nekton"
+BALANCOIRE = "Balancoire"
+COCCOLITH = "Coccolith"
+MINTAKA = "Mintaka"
+BATTLESHIP_GOLDOBA = "Battleship Goldoba"
+AZHA_VILLAGE = "Azha Village"
+LAVA_CAVES = "Lava Caves"
+IMPERIAL_FORTRESS = "Imperial Fortress"
+ICE_CLIFFS = "Ice Cliffs of Gomeisa"
+KAFFALJIDHMA = "Kaffaljidhma"
+CURSA = "Cursa"
+LABYRINTH_OF_DUHR = "Labyrinth of Duhr"
+GEMMA_VILLAGE = "Gemma Village"
+CAPELLA = "Capella"
+ALGORAB_VILLAGE = "Algorab Village"
+ZOSMA_TOWER = "Zosma Tower"
+CELESTIAL_ALPS = "Celestial Alps"
+ILLUSORY_FORTRESS = "Illusory Fortress"
+GREATER_CELESTIAL_RIVER = "Greater Celestial River"
+PHANTOM_GOLDOBA = "Phantom Goldoba"
+NIHAL_DESERT = "Nihal Desert"
+COR_HYDRAE = "Cor Hydrae"
+
+
+// $251b78: (8-bit) Load Indicator.
 //          
 //          0x00 = Not Loading
 //          0x01 = Loading a save file.
-function loadIndicator() => byte(0x1AE249)
+function loadIndicator() => byte(0x00251b78)
+
+LOADING_FILE_VALUE = 0x01
+
+function saveProtection() => loadIndicator() != LOADING_FILE_VALUE
 
 // $1EDD55: (24-bit BE) Pointer to Mindeer Info
 //          
 //          +0x700C= (32-bit BE) Number of Magnus found in Mindeer minigame
 function pointerToMindeer() => dword_be(0x1EDD55)
+
+MINDEER_MINI_GAME_MAGNUS_COUNT_OFFSET = 0x700C
+
+function mindeerMinigameMagnusCount() => dword_be(pointerToMindeer() + MINDEER_MINI_GAME_MAGNUS_COUNT_OFFSET)
+
+function mindeerMinigameCheck(magnusTarget) => mindeerMinigameMagnusCount() == magnusTarget &&
+                                               prev(mindeerMinigameMagnusCount()) == magnusTarget - 1
 
 // $2494E4: (32-bit bitfield)  Valuable Items bitfield
 //          
@@ -39,12 +95,26 @@ function pointerToMindeer() => dword_be(0x1EDD55)
 //          bit27 = Red Necklace
 //          bit28 = Green Ring
 //          bit29 = Balance
-function valuableItems() => byte(0x2494E4)
+VALUABLE_ITEM_MEMORY_LOCATION => 0x2494E4
+function valuableItems() => dword(VALUABLE_ITEM_MEMORY_LOCATION)
+
+JET_BOOTS_BIT = 25 
+WHITE_SWORD_BIT = 26
+RED_NECKLACE_BIT = 27
+GREEN_RING_BIT = 28
+BALANCE_BIT = 29 
+
+function detoroneValuableItemsCheck() => bit(JET_BOOTS_BIT, VALUABLE_ITEM_MEMORY_LOCATION) == 0 &&
+                                         bit(WHITE_SWORD_BIT, VALUABLE_ITEM_MEMORY_LOCATION) == 0 &&
+                                         bit(RED_NECKLACE_BIT, VALUABLE_ITEM_MEMORY_LOCATION) == 0 &&
+                                         bit(GREEN_RING_BIT, VALUABLE_ITEM_MEMORY_LOCATION) == 0 &&
+                                         bit(BALANCE_BIT, VALUABLE_ITEM_MEMORY_LOCATION) == 0
 
 // $249500: (24-bit bitfield) 17 Animals collected not delivered
 //          
 //          17 bits  (bit0 on 3rd byte)
 function animalsCollected() => tbyte(0x249500)
+// Not actually needed, use 24950F
 
 // $249508: (bitfield) Star Map Fragments.
 //          
@@ -55,17 +125,24 @@ function animalsCollected() => tbyte(0x249500)
 //          bit 1 = Draco
 //          bit 2 = Vela
 function starmapFragments() => byte(0x249508)
+// Not actually needed. 
 
 // $24950F: (24-bit bitfield) Quest info
 //          
 //          bit0 = Start of Animal of Wazn Campaign
 //          bit1-18 = Animals Delivered
-function animalsDelivered() => tbyte(0x24950F)
+ANIMALS_DELIVERED_MEMORY_LOCATION = 0x24950F
+function animalsDelivered() => tbyte(ANIMALS_DELIVERED_MEMORY_LOCATION)
+
+function animalDeliveredCount() => sum_of(range(0,2), index=> bitcount(ANIMALS_DELIVERED_MEMORY_LOCATION + index))
+function prevAnimalDeliveredCount() => sum_of(range(0,2), index=> prev(bitcount(ANIMALS_DELIVERED_MEMORY_LOCATION + index)))
+ 
 
 // $2495CE: (bitfield) Event Progress
 //          
 //          bit0 = Cebalrai Maynee quest
-function eventProgress() => byte(0x2495CE)
+function eventProgress() => 0x2495CE
+// Shouldn't be needed.  End of the question is at 0x2496A5
 
 // $2495D7: (4-bit low ) Quest progress
 //          Azha Kids magnus quest.  Bit 0 is first, bit 1 is first reward, bit 2 is second reward.  See 0x002495e3 instead
@@ -80,7 +157,7 @@ function azhaKidsQuest() => byte(0x2495D7)
 //          bit5 = Shrine Progression 2 finished
 //          bit6 = Shrine Progression Dancer
 //          bit7 = Shrine Progression Blue guy
-function lootProgress() => byte(0x2495DB)
+function lootProgress() => 0x2495DB
 
 // $2495DC: (bitfield) Quest Progress
 //          
@@ -89,7 +166,7 @@ function lootProgress() => byte(0x2495DB)
 //          bit2 = Shrine Progression Snail Girl School
 //          bit3 = Shrine Progression Snail Girl palace
 //          bit4 = Shrine Progression Reward Given
-function lootProgress2() => byte(0x2495DC)
+function lootProgress2() => 0x2495DC
 
 // $2495E3: (bitfield) Chest Progress
 //          
@@ -97,21 +174,21 @@ function lootProgress2() => byte(0x2495DC)
 //          bit5 =Azha Village Kids 21 magnus card Secret Recipe 7
 //          bit6 =Azha Village Left building first floor pots Green tea
 //          bit7 =Azha Village Left building second floor shelf Crimson Oak Blossom
-function lootProgress3() => byte(0x2495E3)
+function lootProgress3() => 0x2495E3
 
 // $2495E4: (bitfield) Chest Progress
 //          
 //          bit0 = Azha Village Left Building Second Floor Drill Sculpting Knife
 //          bit1 = Azha Third floor Pot Pork Ribs
 //          bit2 = Azha Third floor Pot Sunflower Coin
-function lootProgress4() => byte(0x2495E4)
+function lootProgress4() => 0x2495E4
 
 // $2495E5: (bitfield) Chest Progress
 //          
 //          bit5 = Azha Third floor Pot Jumbo Pastry
 //          bit6 =Balancore Restaurant Quest Scorpion Barette
 //          bit7 =Balancore Restaurant Quest Given to Man (Versus woman)
-function lootProgress5() => byte(0x2495E5)
+function lootProgress5() => 0x2495E5
 
 // $2495E6: (bitfield) Chest Progress
 //          
@@ -122,8 +199,8 @@ function lootProgress5() => byte(0x2495E5)
 //          bit4 =Balancore First house Dresser Millinery
 //          bit5 =Balancore Second house Dishes Pot of Air
 //          bit6 =Balancore Second house Plants Cedar Tree
-//          bit0 =Balancoire Duke's Mansion, bottom right Jill's Jewlery Box
-function lootProgress6() => byte(0x2495E6)
+//          bit7 =Balancoire Duke's Mansion, bottom right Jill's Jewlery Box
+function lootProgress6() => 0x2495E6
 
 // $2495E7: (bitfield) Chest Progress
 //          
@@ -133,7 +210,7 @@ function lootProgress6() => byte(0x2495E6)
 //          bit4 =Balancoire Duke's Mansion, Left Side Tearless Mermaid
 //          bit5 =Balancoire Duke's Mansion, Left Side Sleet Shawl
 //          bit6 =Celestial Tree Right Tent Crater
-function lootProgress7() => byte(0x2495E7)
+function lootProgress7() => 0x2495E7
 
 // $2495E8: (bitfield) Chest Progress
 //          
@@ -144,8 +221,8 @@ function lootProgress7() => byte(0x2495E7)
 //          bit4 = Komo Mai School of Magic West Lockers Chronos Blow 2
 //          bit5 = Komo Mai School of Magic Oil Paintings Sweetheart Picture
 //          bit6 = Komo Mai School of Magic Bookshelf Secret Recipe 3
-//          bit7 = Komo Mai  School of Magic Lockers Black Scepter
-function lootProgress8() => byte(0x2495E8)
+//          bit7 = Komo Mai School of Magic Lockers Black Scepter
+function lootProgress8() => 0x2495E8
 
 // $2495E9: (bitfield) Chest Progress
 //          
@@ -157,7 +234,7 @@ function lootProgress8() => byte(0x2495E8)
 //          bit5 = Komo Mai Cordelia Palace Left side Pot Deluxe Bananas
 //          bit6 = Komo Mai Cordelia Palace Cordelia Bedroom, Hair Dryer
 //          bit7 = Komo Mai Cordelia Palace Cordelia Bedroom Mattress
-function lootProgress9() => byte(0x2495E9)
+function lootProgress9() => 0x2495E9
 
 // $2495EA: (bitfield) Chest Progress
 //          
@@ -168,7 +245,7 @@ function lootProgress9() => byte(0x2495E9)
 //          bit4 = Nihal Desert Boxes Rooster
 //          bit5 = Nihal Desert Barrels Centarus
 //          bit6 = Nihal Desert Water Quest Chaos mail
-function lootProgress10() => byte(0x2495EA)
+function lootProgress10() => 0x2495EA
 
 // $2495EB: (bitfield) Chest Progress
 //          
@@ -179,7 +256,7 @@ function lootProgress10() => byte(0x2495EA)
 //          bit5 = Pherkad Tree - Pine Tree
 //          bit6 = Lord's Mansion Stained Glass Frozen Shield
 //          bit7 = Lord's Mansion Mini Quest Alejeemo Voice II
-function lootProgress11() => byte(0x2495EB)
+function lootProgress11() => 0x2495EB
 
 // $2495EC: (bitfield) Chest Progress
 //          
@@ -190,7 +267,7 @@ function lootProgress11() => byte(0x2495EB)
 //          bit5 = Pherkad  Talk to girl, Got Pyxxis
 //          bit6= Azha Village Post Quest Hot stone Platnium Buckle
 //          bit7= Azha Village Quest Hot stone for Cetaka's Sword
-function lootProgress12() => byte(0x2495EC)
+function lootProgress12() => 0x2495EC
 
 // $2495ED: (bitfield) chest Progress
 //          
@@ -200,23 +277,23 @@ function lootProgress12() => byte(0x2495EC)
 //          bit4 = Komo Mai Hot Rock Quest Erbschaft
 //          bit5 = Komo Mai Evergreen quest Pickup line Zeit Robe
 //          bit6 = Pherkad  Talk to man, given Dark Flare 2
-function lootProgress13() => byte(0x2495ED)
+function lootProgress13() => 0x2495ED
 
 // $2495EE: (bitfield) Chest Progress
 //          
 //          bit0 = Balancore Sea Bream Filet quest Wizard Robe
 //          bit1 = Balancore Cloud quest Arm Bomber
 //          bit2 = Balancore Salt quest Pork Ribs
-//          bit2 = Balancore Kids quest Firedrake Fist
+//          bit3 = Balancore Kids quest Firedrake Fist
 //          bit4 = Azha Third floor girl Thoughts Red Oak
 //          bit5 = Celestial Tree Apple Vinegar Quest Flugel Shield
 //          bit7 = Balancore Museum Quest Broken Birdie
-function lootProgress14() => byte(0x2495EE)
+function lootProgress14() => 0x2495EE
 
 // $2495EF: (bitfield) Quest Progress
 //          
 //          bit0 = Cebalrai Larikush Tutorial Ice Dagger given
-function lootProgress15() => byte(0x2495EF)
+function lootProgress15() => 0x2495EF
 
 // $24962E: (bitfield) Chest Progress
 //          
@@ -224,7 +301,7 @@ function lootProgress15() => byte(0x2495EF)
 //          bit5 = Lord's Mansion Chest Moon Buckle
 //          bit6 = Lord's Mansion Chest Wind Blow
 //          bit7 = Lord's Mansion Chest Shadow Wings
-function lootProgress16() => byte(0x24962E)
+function lootProgress16() => 0x24962E
 
 // $24962F: (bitfield) Chest Progress
 //          
@@ -232,13 +309,13 @@ function lootProgress16() => byte(0x24962E)
 //          bit3 = Anuenue Port Chest Snake Tuba
 //          bit4 = Anuenue Port Chest Explosive Paddle
 //          bit5 = Anuenue Port Chest Bamboo Grass Creel
-function lootProgress17() => byte(0x24962F)
+function lootProgress17() => 0x24962F
 
 // $249631: (bitfield) Chest Progress
 //          
 //          bit6 =Celestial Tree Left Branch Wild Cherry Bud
 //          bit7 =Nerton Chest Corona Borelis
-function lootProgress18() => byte(0x249631)
+function lootProgress18() => 0x249631
 
 // $249632: (bitfield) Chest Progress
 //          
@@ -250,7 +327,7 @@ function lootProgress18() => byte(0x249631)
 //          bit5 = Azha Village Right lab chest Dream Blade
 //          bit6 = Celestial Alps First Screen Chest Canis Minor
 //          bit7 = Celestial Alps Chest Apocolypse Sword
-function lootProgress19() => byte(0x249632)
+function lootProgress19() => 0x249632
 
 // $249633: (bitfield) Chest Progress
 //          
@@ -262,7 +339,7 @@ function lootProgress19() => byte(0x249632)
 //          bit5 = Celestial Alps Right room Chest Void Phantom
 //          bit6 = Illusionary Fortress First Hall Chest Aqua Truth
 //          bit7 = Illusionary Fortress First Hall Chest Apple Pie (full)
-function lootProgress20() => byte(0x249633)
+function lootProgress20() => 0x249633
 
 // $249634: (bitfield) Chest Progress
 //          
@@ -274,34 +351,34 @@ function lootProgress20() => byte(0x249633)
 //          bit5 = Lava Caves Chest Solar Saber
 //          bit6 = Nihal Desert Chest Skull Barrette
 //          bit7 = Nihal Desert Chest Dragon Plum Bud
-function lootProgress21() => byte(0x249634)
+function lootProgress21() => 0x249634
 
 // $249635: (bitfield) Chest Progress
 //          
 //          bit0 = Celestial Alps House Chest Eferetti Saber
-function lootProgress22() => byte(0x249635)
+function lootProgress22() => 0x249635
 
 // $24963D: (bitfield) Event Flags
 //          
 //          bit6 = Zosma Tower Wizard Shadow killed
-function eventProgress2() => byte(0x24963D)
+function eventProgress2() => 0x24963D
 
 // $24965B: (bitfield) Event Flags
 //          
 //          bit5 = Nunki Valley, Killed Spider
-function eventProgress3() => byte(0x24965B)
+function eventProgress3() => 0x24965B
 
 // $249679: (bitfield) Event Flags
 //          
 //          bit7 = Cebalrai Milker discussion of Pherkad
-function eventProgress4() => byte(0x249679)
+function eventProgress4() => 0x249679
 
 // $249692: (bitfield) Chest Progress
 //          
 //          bit4 = Cebalrai Drawer: Dark Flare 1
 //          bit5 = Cebalrai Drawer: Fire Burst 1
 //          bit6 = Cebalrai Wood Chest: Shish Kebab (S)
-function lootProgress23() => byte(0x249692)
+function lootProgress23() => 0x249692
 
 // $2496A5: (bitfield) Chest Progress
 //          
@@ -309,14 +386,14 @@ function lootProgress23() => byte(0x249692)
 //          bit3 = Cebalrai Old woman: Shish Kebab (M)
 //          bit4 = Cebalrai Young chef Puppis
 //          bit5 = Cebalrai Milker Anklet of Calm Winds
-function lootProgress24() => byte(0x2496A5)
+function lootProgress24() => 0x2496A5
 
 // $2496AB: (bitfield) Chest Progress
 //          
 //          bit4 = Moonguile Forest First room Chest: Voice 1
 //          bit5 = Moonguile Forest second room Chest: Leather Armor
 //          bit7 = Moonguile Forest second room Chest behind log: Ice Dagger
-function lootProgress25() => byte(0x2496AB)
+function lootProgress25() => 0x2496AB
 
 // $2496AC: (bitfield) Event Flags
 //          
@@ -326,14 +403,14 @@ function lootProgress25() => byte(0x2496AB)
 //          bit4 = Nunki Valley Lower path chest Flame Shield
 //          bit5 = Nunki Valley Upper path chest Frozen Shield
 //          bit6 = Nunki Valley Behind Waterfall Secret Recipe 1
-function lootProgress26() => byte(0x2496AC)
+function lootProgress26() => 0x2496AC
 
 // $2496AE: (bitfield) Chest Progress
 //          
 //          bit5 =Ice Cliffs of Gomeisa chest Shepard's Purse
 //          bit6 =Coccolith Second room Chest Heaven's Pillar
 //          bit7 =Coccolith Third Room Chest Corona Australis
-function lootProgress27() => byte(0x2496AE)
+function lootProgress27() => 0x2496AE
 
 // $2496AF: (bitfield) Chest Progress
 //          
@@ -345,7 +422,7 @@ function lootProgress27() => byte(0x2496AE)
 //          bit5 = Zosma Tower Chest Skull Birdie
 //          bit6 = Ice Cliffs of Gomeisa chest Deluxe Pastry
 //          bit7 = Ice Cliffs of Gomeisa chest Tower Shield
-function lootProgress28() => byte(0x2496AF)
+function lootProgress28() => 0x2496AF
 
 // $2496B0: (bitfield) Chest Progress
 //          
@@ -353,7 +430,7 @@ function lootProgress28() => byte(0x2496AF)
 //          bit1 =Ice Cliffs of Gomeisa chest Forseti Robe
 //          bit2 =Ice Cliffs of Gomeisa chest Leo
 //          bit5 =Coccolith Chest Robe of Firelight
-function lootProgress29() => byte(0x2496B0)
+function lootProgress29() => 0x2496B0
 
 // $2496C9: (bitfield) Museum Quest Progress
 //          
@@ -363,7 +440,8 @@ function museumQuest() => byte(0x2496C9)
 // $249728: (36 bits) Quzman Family bits
 //          
 //          Technically starting high4 here, there's 32 bits from 0x00249728 to 0x0024972c each of which is a member of the family, when 32 is found, the final cutscene plays out.
-function quzmanFamily() => dword(0x249728)
+QUZMAN_FAMILY_MEMORY_LOCATION = 0x249728
+function quzmanFamily() => dword(QUZMAN_FAMILY_MEMORY_LOCATION)
 
 // $24972F: (bitfield) Quzman Family status
 //          
@@ -374,29 +452,29 @@ function quzmanEnding() => byte(0x24972F)
 //          
 //          bit0 = Gemma Village Gift Sun Anklet
 //          bit3 = Gemma Village Chest Quest Siegfried
-function lootProgress30() => byte(0x249748)
+function lootProgress30() => 0x249748
 
 // $24974B: (bitfield) Chest Progress
 //          
 //          bit4 = Gemma Village Right room Fire conversation Broken Earth Sphere
-function lootProgress31() => byte(0x24974B)
+function lootProgress31() => 0x24974B
 
 // $24974E: (bitfield) Chest Progress
 //          
 //          bit4 = Imperial Fortress Geldoblame's room Bed Cute Doll
-function lootProgress32() => byte(0x24974E)
+function lootProgress32() => 0x24974E
 
 // $249752: (bitfield) Chest Progress
 //          
 //          bit3 = Opu Flower girl Perseus
-function lootProgress33() => byte(0x249752)
+function lootProgress33() => 0x249752
 
 // $249755: (bitfield) QuestProgress
 //          
 //          bit5 = Kaffaljidhma  Right side, Warriors Memories
 //          bit6 = Kaffaljidhma  Right side, Warriors Mementos
-//          bit8 = Labyrinth of Duhr Quest Bells of Fate
-function lootProgress34() => byte(0x249755)
+//          bit7 = Labyrinth of Duhr Quest Bells of Fate
+function lootProgress34() => 0x249755
 
 // $249756: (bitfield) Chest progress
 //          
@@ -406,42 +484,42 @@ function lootProgress34() => byte(0x249755)
 //          bit3 = Nashira Secret Information Quest Creel of the Whale
 //          bit5 = Gemma Village Rubber Mud Quest (just quest)
 //          bit7 = Gemma Village Rubber Mud Quest Power Blade
-function lootProgress35() => byte(0x249756)
+function lootProgress35() => 0x249756
 
 // $249757: (bitfield) Chest progress
 //          
 //          bit0 = Gemma Village Rubber Mud Quest Sacred Helm
 //          bit5 = Opu Quest Secret Information Crimson Oak Blossom
-function lootProgress36() => byte(0x249757)
+function lootProgress36() => 0x249757
 
 // $249758: (bitfield) Chest Progress
 //          
 //          bit0 = Opu Mayfee repeatable quest Deluxe Shish Kebab
-function lootProgress37() => byte(0x249758)
+function lootProgress37() => 0x249758
 
 // $249759: (bitfield) Chest Progress
 //          
 //          bit1 and bt2 = Nashira Bar Pickup Line Quest Shako
-function lootProgress38() => byte(0x249759)
+function lootProgress38() => 0x249759
 
 // $24975A: (bitfield) Chest Progress
 //          
 //          bit 0-bit 2=  Parts of Parnasse quest giving celestial seed.  and mountain apple wine
 //          bit3 = Parnasse Quest Celestial Seed Silk Robe
 //          bit4 = Parnasse Quest Mountain Apple Wine Second Hand
-function lootProgress39() => byte(0x24975A)
+function lootProgress39() => 0x24975A
 
 // $24975E: (bitfield) Mintaka's Attack
 //          
 //          bit1 = Up the first alleyway.
-function eventProgress5() => byte(0x24975E)
+function eventProgress5() => 0x24975E
 
 // $24975F: (bitfield) Mintaka's Attack
 //          
 //          bit0 = First area
 //          bit2+3 = Guard room
 //          bit5 = Room at the end of the first alley
-function eventProgress6() => byte(0x24975F)
+function eventProgress6() => 0x24975F
 
 // $249767: (bitfield) Chest Progress
 //          
@@ -449,20 +527,20 @@ function eventProgress6() => byte(0x24975F)
 //          bit4 = Nashira Boxes Fire burst 2
 //          bit5 = Nashira Warehouse Jars Pine tree
 //          bit6 = Nashira Warehouse Pots Fire Yell level 1
-//          bit3 = Nashira chest Carina Constellation
-function lootProgress40() => byte(0x249767)
+//          bit7 = Nashira chest Carina Constellation
+function lootProgress40() => 0x249767
 
 // $249768: (bitfield) Chest Progress
 //          
 //          bit1 = Nashira Bed Feathered Hat
 //          bit2 = Nashira Bar Barrels Shortcake
-function lootProgress41() => byte(0x249768)
+function lootProgress41() => 0x249768
 
 // $24978D: (bitfield) Mintaka's Attack
 //          
 //          bit1 = Top of the Guards room
 //          bit2 = Second area
-function eventProgress7() => byte(0x24978D)
+function eventProgress7() => 0x24978D
 
 // $24979A: (bitfield) Chest Progress
 //          
@@ -472,7 +550,7 @@ function eventProgress7() => byte(0x24978D)
 //          bit5 = Greater Celestial River Hidden Chest Corvus
 //          bit6 = Gemma Village Mitzuki's house Green Drawers Large Team Mug
 //          bit7 = Gemma Village Mitzuki's house Fire oakwood
-function lootProgress42() => byte(0x24979A)
+function lootProgress42() => 0x24979A
 
 // $24979B: (bitfield) Chest Progress
 //          
@@ -483,7 +561,7 @@ function lootProgress42() => byte(0x24979A)
 //          bit4 = Kaffaljidhma Queen's Chambers Lamp Young Wasabi Root
 //          bit5 = Kaffaljidhma Queen's Chambers Bed Dancing Flames
 //          bit6 = Kaffaljidhma Bottom floor Left side Green Tea
-function lootProgress43() => byte(0x24979B)
+function lootProgress43() => 0x24979B
 
 // $24979C: (bitfield) Chest Progress
 //          
@@ -493,7 +571,7 @@ function lootProgress43() => byte(0x24979B)
 //          bit4 = Ancient Library of Magic History Section Bookshelf Deluxe BonBon
 //          bit5 = Imperial Fortress Second Floor left Deluxe Cream Puff
 //          bit6 = Imperial Fortress Cell Toilet Pot of Air
-function lootProgress44() => byte(0x24979C)
+function lootProgress44() => 0x24979C
 
 // $24979D: (bitfield) Chest Progress
 //          
@@ -505,7 +583,7 @@ function lootProgress44() => byte(0x24979C)
 //          bit5 = Opu First Room Tub Uncooked Rice
 //          bit6 = Parnasse Far back room Chocolate Dresser Chronos Armor
 //          bit7 = Parnasse Far back room Kitchen Fresh Beef
-function lootProgress45() => byte(0x24979D)
+function lootProgress45() => 0x24979D
 
 // $24979E: (bitfield) Chest Progress
 //          
@@ -517,12 +595,12 @@ function lootProgress45() => byte(0x24979D)
 //          bit5 = Mintaka End of Alley Apple Pie
 //          bit6 = Mintaka Round Building Pickled Eggplant
 //          bit7 = Gemma Village Right room Fire Guy Boots
-function lootProgress46() => byte(0x24979E)
+function lootProgress46() => 0x24979E
 
 // $24979F: (bitfield) Chest Progress
 //          
 //          bit2 = Capella Chest Full Plate
-function lootProgress47() => byte(0x24979F)
+function lootProgress47() => 0x24979F
 
 // $2497A5: (bitfield) Chest Progress
 //          
@@ -530,7 +608,7 @@ function lootProgress47() => byte(0x24979F)
 //          bit5 = HoloHolo Jungle 1 Chest Dead end Silver Earring
 //          bit6 = HoloHolo Jungle 6 Chest Dead End Chest Fire Burst III
 //          bit7 = HoloHolo Jungle 6 Chest Dead End Chest Heat Paddle
-function lootProgress48() => byte(0x2497A5)
+function lootProgress48() => 0x2497A5
 
 // $2497A6: (bitfield) Chest Progress
 //          
@@ -542,7 +620,7 @@ function lootProgress48() => byte(0x2497A5)
 //          bit5 = Ancient Library of Magic Geography Section Hidden Chest Will o wisp hat
 //          bit6 = Ancient Library of Magic History Section Chest Fruity Gelatin
 //          bit7 = Ancient Library of Magic History Section Chest Taurus
-function lootProgress49() => byte(0x2497A6)
+function lootProgress49() => 0x2497A6
 
 // $2497A7: (bitfield) Chest Progress
 //          
@@ -552,7 +630,7 @@ function lootProgress49() => byte(0x2497A6)
 //          bit3 = Ancient Library of Magic Literarture Section Chest Ruby Earrings
 //          bit4 = Ancient Library of Magic Literarture Section Chest Silver Sword
 //          bit5 = Ancient Library of Magic Boss Room Water Mirror Anklet
-function lootProgress50() => byte(0x2497A7)
+function lootProgress50() => 0x2497A7
 
 // $2497A8: (bitfield) Chest Progress
 //          
@@ -561,7 +639,7 @@ function lootProgress50() => byte(0x2497A7)
 //          bit3 = Opu First room hidden area Flash Explosion
 //          bit6= Mintaka Guard Area Scale Mail
 //          bit7= Mintaka Guard Area Coffin Shield
-function lootProgress51() => byte(0x2497A8)
+function lootProgress51() => 0x2497A8
 
 // $2497A9: (bitfield) Chest Progress
 //          
@@ -573,7 +651,7 @@ function lootProgress51() => byte(0x2497A8)
 //          bit5 = Imperial Fortress Hall Chest Spark Hat
 //          bit6 = Imperial Fortress 5th Floor Equipment Chest Blood Sword
 //          bit7 = Imperial Fortress 5th Floor Equipment Chest Dragonfly
-function lootProgress52() => byte(0x2497A9)
+function lootProgress52() => 0x2497A9
 
 // $2497AA: (bitfield) Chest Progress
 //          
@@ -584,7 +662,7 @@ function lootProgress52() => byte(0x2497A9)
 //          bit4 = Imperial Fortress Second Floor Toilets Phoenix Helm
 //          bit6 = Imperial Fortress First Floor Left Chest Fire Burst IV
 //          bit7 = Imperial Fortress Geldoblame's room Chest Crown of Bubbles
-function lootProgress53() => byte(0x2497AA)
+function lootProgress53() => 0x2497AA
 
 // $2497AB: (bitfield) Chest progress
 //          
@@ -594,7 +672,7 @@ function lootProgress53() => byte(0x2497AA)
 //          bit4 = Imperial Fortress Cell floor Port Scorpius
 //          bit5 = Capella Chest Flashy Earrings
 //          bit7 = Greater Celestial River Chest Buoy of Light
-function lootProgress54() => byte(0x2497AB)
+function lootProgress54() => 0x2497AB
 
 // $2497AC: (bitfield) Chest progress
 //          
@@ -606,7 +684,7 @@ function lootProgress54() => byte(0x2497AB)
 //          bit5 = Labyrinth of Duhr Chest Hamelin Cloak
 //          bit6 = Labyrinth of Duhr Chest Cinderella Birdie
 //          bit7 = Labyrinth of Duhr Chest Sun Coin
-function lootProgress55() => byte(0x2497AC)
+function lootProgress55() => 0x2497AC
 
 // $2497AD: (bitfield) Chest Progress
 //          
@@ -615,9 +693,9 @@ function lootProgress55() => byte(0x2497AC)
 //          bit3 = Gemma Village Chest Earth Buckle
 //          bit4 = Kaffaljidhma  Right side, Chest Phoenix helm
 //          bit5 = Kaffaljidhma  Right side, Chest Birdie Fatale
-//          bit7 = Greater Celestial River Chest Skull Creel
+//          bit6 = Greater Celestial River Chest Skull Creel
 //          bit7 = Greater Celestial River Chest Battle Suit
-function lootProgress56() => byte(0x2497AD)
+function lootProgress56() => 0x2497AD
 
 // $2497AE: (bitfield) Chest Progress
 //          
@@ -629,7 +707,7 @@ function lootProgress56() => byte(0x2497AD)
 //          bit5 = Lesser Celestial River Chest Hemp Creel
 //          bit6 = Cloud Passage Chest Aqua Burst 2
 //          bit7 = HoloHolo Jungle 6 Chest Dead End Chest Smash Tackle
-function lootProgress57() => byte(0x2497AE)
+function lootProgress57() => 0x2497AE
 
 // $2497AF: (bitfield) Chest Progress
 //          
@@ -637,8 +715,8 @@ function lootProgress57() => byte(0x2497AE)
 //          bit1 = HoloHolo Jungle 6 Chest Dead End Chest Wind Yell I
 //          bit2 = HoloHolo Jungle 6 Chest Dead End Chest Brave Knight Helm
 //          bit3 = Capella Chest Whitecap Shield
-//          bit3 = Capella Chest Purple Rose
-function lootProgress58() => byte(0x2497AF)
+//          bit4 = Capella Chest Purple Rose
+function lootProgress58() => 0x2497AF
 
 // $2497B2: (bitfield) Chest Progress
 //          
@@ -649,7 +727,7 @@ function lootProgress58() => byte(0x2497AF)
 //          bit5 = Cor Hydrae Sibiling God Unknown
 //          bit6 = Sheliak Mayor's Room Saving Book
 //          bit7 = Sheliak Obelisk room, Cloud Shield
-function lootProgress59() => byte(0x2497B2)
+function lootProgress59() => 0x2497B2
 
 // $2497B3: (bitfield) Chest Progress
 //          
@@ -661,33 +739,33 @@ function lootProgress59() => byte(0x2497B2)
 //          bit5 = Algorab Village Far Left room Pot Aries
 //          bit6 = Algorab Village Upper Left room Pot Curry
 //          bit7 = Algorab Village Upper Left Room Left book Divorce Papers
-function lootProgress60() => byte(0x2497B3)
+function lootProgress60() => 0x2497B3
 
 // $2497B4: (bitfield) Chest Progress
 //          
 //          bit0 = Algorab Village Right room Bookshelf Cassiopera
-function lootProgress61() => byte(0x2497B4)
+function lootProgress61() => 0x2497B4
 
 // $2497BE: (Upper4) I believe this is the values for thirsty soldier.  However you get nothing for it.  Noted just for interesting
-function eventProgress8() => byte(0x2497BE)
+function eventProgress8() => 0x2497BE
 
 // $2497C1: (bitfield) Chest Progress
 //          
 //          bit7 = Sheliak Giving water to Soldier and get Shadow Cornet
-function lootProgress62() => byte(0x2497C1)
+function lootProgress62() => 0x2497C1
 
 // $2497C2: (bitfield) Chest Progress
 //          
 //          bit0 = Sheliak Giving salty water to clean lamp and get Flash Armor
 //          bit0 = Also possible to give Apple wine to someone by the bonfire at the end of the game.  Flash Armor
-function lootProgress63() => byte(0x2497C2)
+function lootProgress63() => 0x2497C2
 
 // $249822: (bitfield) Chest Progress
 //          
-//          bit6  = Algorab Village Post Mal Alley Inferno Cannon
+//          bit5  = Algorab Village Post Mal Alley Inferno Cannon
 //          bit6  = Sheliak Mayor's Room Chest Butterfly
 //          bit7 =  Sheliak Hidden Room Calm Helmet
-function lootProgress64() => byte(0x249822)
+function lootProgress64() => 0x249822
 
 // $249823: (bitfield) Chest Progress
 //          
@@ -699,7 +777,7 @@ function lootProgress64() => byte(0x249822)
 //          bit5 = Cor Hydrae Chest Esperanza
 //          bit6 = Cor Hydrae Chest Light Flare VI
 //          bit7 = Cor Hydrae Chest Dark Flare VI
-function lootProgress66() => byte(0x249823)
+function lootProgress66() => 0x249823
 
 // $249824: (bitfield) Chest Progress
 //          
@@ -711,7 +789,7 @@ function lootProgress66() => byte(0x249823)
 //          bit5 =  Cor Hydrae Chest Firefly
 //          bit6 =  Cor Hydrae Chest Wind Blow VI
 //          bit7 =  Cor Hydrae Chest Golden Helm
-function lootProgress67() => byte(0x249824)
+function lootProgress67() => 0x249824
 
 // $249825: (bitfield) Chest Progress
 //          
@@ -719,41 +797,41 @@ function lootProgress67() => byte(0x249824)
 //          bit1 =  Cor Hydrae Chest Shield of Hope
 //          bit2 =  Cor Hydrae Chest Mermaid's Nail
 //          bit3 =  Cor Hydrae Chest Sybil's Crown
-function lootProgress68() => byte(0x249825)
+function lootProgress68() => 0x249825
 
 // $249832: (8-bit) Quest Progress
 //          
 //          bit2 = Kaffaljidhma  Right side, Warriors Mementos OR memories, for more specific check 0x00249755
-function lootProgress69() => byte(0x249832)
+function lootProgress69() => 0x249832
 
 // $24985D: (bitfield) Chest Progress
 //          
 //          bit3 = Goldoba Code Viking Hat
 //          bit4 = Goldoba Code Assasin Robe
 //          bit7 = Goldoba Code Open bridge (not an item)
-function lootProgress70() => byte(0x24985D)
+function lootProgress70() => 0x24985D
 
 // $24985F: (bitfield) Quest Process
 //          
 //          bit4 = Illusionary Fortress Kulcabaran Boss Killed
-function lootProgress71() => byte(0x24985F)
+function lootProgress71() => 0x24985F
 
 // $24986E: (bitfield) Chest Progress
 //          
 //          bit7 = Castle Elnath Clean up West Side
-function lootProgress72() => byte(0x24986E)
+function lootProgress72() => 0x24986E
 
 // $24986F: (bitfield) Chest Progress
 //          
 //          bit0 = Castle Elnath Clean up East Side
 //          bit1 = Castle Elnath Cleaned up both West and East Side
-function lootProgress73() => byte(0x24986F)
+function lootProgress73() => 0x24986F
 
 // $249874: (bitfield) Quest Progress
 //          
 //          bit0 = Cursa Skating Girl Rubber Mud Quest Light Flare IV
 //          bit3 = Castle ElnathRoyal Crest Quest Rainbow Ash
-function lootProgress74() => byte(0x249874)
+function lootProgress74() => 0x249874
 
 // $249887: (bitfield) Chest Progress
 //          
@@ -764,7 +842,7 @@ function lootProgress74() => byte(0x249874)
 //          bit4 = Castle Elnath Middle Left Arrogance Dark Yellow I
 //          bit5 = Castle Elnath Middle Right Metropolis Light Yell 1
 //          bit6 = Castle Elnath Upper Left room Desk Fading Notebook
-function lootProgress75() => byte(0x249887)
+function lootProgress75() => 0x249887
 
 // $249888: (bitfield) Chest Progress
 //          
@@ -774,17 +852,17 @@ function lootProgress75() => byte(0x249887)
 //          bit3 = Cursa Left house left bin Dark Flare IV
 //          bit4 = Cursa Left house right bin Soybeans
 //          bit5 = Cursa 2nd Left House Fish Ursa Minor
-function lootProgress76() => byte(0x249888)
+function lootProgress76() => 0x249888
 
 // $249899: (bitfield) Chest Progress
 //          
 //          bit7 = Phantom Goldoba Boss Rampulus
-function lootProgress77() => byte(0x249899)
+function lootProgress77() => 0x249899
 
 // $2498A0: (bitfield) Chest Progress
 //          
 //          bit7 = Lesser Celestial River Chest Heron Statue
-function lootProgress78() => byte(0x2498A0)
+function lootProgress78() => 0x2498A0
 
 // $2498A1: (bitfield) Chest Progress
 //          
@@ -796,7 +874,7 @@ function lootProgress78() => byte(0x2498A0)
 //          bit5 = Goldoba Garage Chest Crystal Nails
 //          bit6 = Goldoba Bottom right room Rice Paper
 //          bit6 = Goldoba Bottom right room Cetaka's Sword
-function lootProgress79() => byte(0x2498A1)
+function lootProgress79() => 0x2498A1
 
 // $2498A2: (bitfield) Chest Progress
 //          
@@ -805,7 +883,7 @@ function lootProgress79() => byte(0x2498A1)
 //          bit2 = Phantom Goldoba Cherst Agni Tuba
 //          bit3 = Phantom Goldoba Cherst Mithril Helm
 //          bit4 = Phantom Goldoba Cherst Hades Horn
-function lootProgress80() => byte(0x2498A2)
+function lootProgress80() => 0x2498A2
 
 // $2498A4: (bitfield) Chest Progress
 //          
@@ -814,12 +892,12 @@ function lootProgress80() => byte(0x2498A2)
 //          bit5 = Castle Elnath Dock Infinity Mask
 //          bit6 = Castle Elnath Top floor Dark Sword
 //          bit7 = Castle Elnath Bottom Floor Chest Flame Armor
-function lootProgress81() => byte(0x2498A4)
+function lootProgress81() => 0x2498A4
 
 // $2498A5: (bitfield) Chest Progress
 //          
 //          bit0 = Castle Elnath Bottom Floor Chest Shadow Suit
-function lootProgress82() => byte(0x2498A5)
+function lootProgress82() => 0x2498A5
 
 // $249CC4: (32-bit BE) This is the major script ID.
 //          
@@ -2142,3 +2220,330 @@ function handValue3() => word_be(0x88CE58)
 //          
 //          Note: CAN go negative.  Disappears at 0
 function handPower3() => word_be(0x88CE5A)
+
+
+BIT0 = 0
+BIT1 = 1
+BIT2 = 2
+BIT3 = 3
+BIT4 = 4
+BIT5 = 5
+BIT6 = 6
+BIT7 = 7
+LOCATION = "Location"
+BITS = "Bits"
+
+lootList = 
+{
+    CEBALRAI:
+        [
+            { LOCATION: lootProgress23(), BITS: range(BIT4,BIT6) },
+            { LOCATION: lootProgress24(), BITS: [BIT3,BIT4] },
+        ],
+    MOONGUILE_FOREST: 
+        [
+            { LOCATION: lootProgress25(), BITS: [BIT4,BIT5,BIT7] },
+            { LOCATION: lootProgress26(), BITS: range(BIT0,BIT2) },
+        ],
+    NUNKI_VALLEY: 
+        [
+            { LOCATION: lootProgress26(), BITS: range(BIT4,BIT6) },
+        ],
+    PHERKAD: 
+        [
+            { LOCATION: lootProgress(), BITS: [BIT0] },
+            { LOCATION: lootProgress11(), BITS: [BIT3, BIT4] },
+            { LOCATION: lootProgress12(), BITS: [BIT5] },
+            { LOCATION: lootProgress13(), BITS: [BIT6] },
+        ],
+    LORDS_MANSIONS:
+        [
+            { LOCATION: lootProgress11(), BITS: [BIT6, BIT7] },
+            { LOCATION: lootProgress12(), BITS: [BIT0, BIT2, BIT3] },
+            { LOCATION: lootProgress16(), BITS: range(BIT4, BIT7) },
+            { LOCATION: lootProgress17(), BITS: [BIT2] },
+        ],
+    NASHIRA: 
+        [
+            { LOCATION: lootProgress35(), BITS: [BIT2, BIT3] },
+            { LOCATION: lootProgress38(), BITS: [BIT2] },
+            { LOCATION: lootProgress40(), BITS: range(BIT3, BIT7) },
+            { LOCATION: lootProgress41(), BITS: [BIT1, BIT2] },
+        ],
+    LESSER_CELESTIAL_RIVER: 
+        [
+            { LOCATION: lootProgress57(), BITS: range(BIT0, BIT5) },
+            { LOCATION: lootProgress78(), BITS: [BIT7] },
+            { LOCATION: lootProgress78(), BITS: [BIT0, BIT1] },
+            { LOCATION: lootProgress81(), BITS: [BIT4] },
+        ],
+    CLOUD_PASSAGE: 
+        [
+            { LOCATION: lootProgress57(), BITS: [BIT6] },
+            { LOCATION: lootProgress81(), BITS: [BIT0] },
+        ],
+    SHELIAK: 
+        [
+            { LOCATION: lootProgress59(), BITS: [BIT6, BIT7] },
+            { LOCATION: lootProgress60(), BITS: range(BIT0, BIT3) },
+            { LOCATION: lootProgress63(), BITS: [BIT0] },
+            { LOCATION: lootProgress64(), BITS: [BIT6, BIT7] },
+            { LOCATION: lootProgress66(), BITS: [BIT0] },
+        ],
+    CASTLE_ELNATH: 
+        [
+            { LOCATION: lootProgress74(), BITS: [BIT3] },
+            { LOCATION: lootProgress75(), BITS: range(BIT2,BIT6) },
+            { LOCATION: lootProgress79(), BITS: [BIT2] },
+            { LOCATION: lootProgress81(), BITS: range(BIT5,BIT7) },
+            { LOCATION: lootProgress82(), BITS: [BIT0] },
+        ],
+    ANUENUE_PORT: 
+        [
+            { LOCATION: lootProgress8(), BITS: [BIT2] },
+            { LOCATION: lootProgress17(), BITS: range(BIT3, BIT5) },
+        ],
+    KOMO_MAI: 
+        [
+            { LOCATION: lootProgress8(), BITS: range(BIT3, BIT7) },
+            { LOCATION: lootProgress9(), BITS: range(BIT0, BIT7) },
+            { LOCATION: lootProgress12(), BITS: [BIT4] },
+            { LOCATION: lootProgress13(), BITS: range(BIT2,BIT5) },
+        ],
+    ANCIENT_LIBRARY_OF_MAGIC: 
+        [
+            { LOCATION: lootProgress44(), BITS: [BIT3, BIT4] },
+            { LOCATION: lootProgress49(), BITS: range(BIT0, BIT7) },
+            { LOCATION: lootProgress50(), BITS: range(BIT0, BIT5) },
+        ],
+    HOLOHOLO_JUNGLE: 
+        [
+            { LOCATION: lootProgress48(), BITS: range(BIT4, BIT7) },
+            { LOCATION: lootProgress57(), BITS: [BIT7] },
+            { LOCATION: lootProgress58(), BITS: range(BIT0,BIT2) },
+        ],
+    OPU: 
+        [
+            { LOCATION: lootProgress33(), BITS: [BIT3] },
+            { LOCATION: lootProgress36(), BITS: [BIT5] },
+            { LOCATION: lootProgress37(), BITS: [BIT0] },
+            { LOCATION: lootProgress45(), BITS: range(BIT2, BIT5) },
+            { LOCATION: lootProgress51(), BITS: [BIT3] },
+        ],
+    CELESTIAL_TREE: 
+        [
+            { LOCATION: lootProgress7(), BITS: [BIT6] },
+            { LOCATION: lootProgress14(), BITS: [BIT5] },
+            { LOCATION: lootProgress18(), BITS: [BIT6] },
+        ],
+    // TRAIL_OF_SOULS:  // NOne available. 
+    PARNASSE: 
+        [
+            { LOCATION: lootProgress39(), BITS: [BIT3, BIT4] },
+            { LOCATION: lootProgress45(), BITS: [BIT6, BIT7] },
+            { LOCATION: lootProgress46(), BITS: [BIT0] },
+        ],
+    DETOURNE: 
+        [
+            { LOCATION: lootProgress51(), BITS: [BIT1, BIT2] },
+        ],
+    REVERENCE: 
+        [
+            { LOCATION: lootProgress75(), BITS: [BIT0, BIT1] },
+        ],
+    NEKTON: 
+        [
+            { LOCATION: lootProgress18(), BITS: [BIT7] },
+            { LOCATION: lootProgress19(), BITS: [BIT0,BIT1] },
+        ],
+    BALANCOIRE: 
+        [
+            { LOCATION: lootProgress5(), BITS: [BIT6] },
+            { LOCATION: lootProgress6(), BITS: range(BIT1, BIT7) },
+            { LOCATION: lootProgress7(), BITS: range(BIT0, BIT5) },
+            { LOCATION: lootProgress14(), BITS: range(BIT0,BIT2) },
+        ],
+    COCCOLITH: 
+        [
+            { LOCATION: lootProgress27(), BITS: [BIT6,BIT7] },
+            { LOCATION: lootProgress29(), BITS: [BIT5] },
+        ],
+    MINTAKA: 
+        [
+            { LOCATION: lootProgress46(), BITS: range(BIT1, BIT6) },
+            { LOCATION: lootProgress51(), BITS: [BIT6, BIT7] },
+            { LOCATION: lootProgress52(), BITS: range(BIT0, BIT2) },
+        ],
+    BATTLESHIP_GOLDOBA: 
+        [
+            { LOCATION: lootProgress70(), BITS: [BIT3, BIT4] },
+            { LOCATION: lootProgress75(), BITS: [BIT0, BIT1] },
+            { LOCATION: lootProgress79(), BITS: range(BIT3,BIT7) },
+        ],
+    AZHA_VILLAGE: 
+        [
+            { LOCATION: lootProgress3(), BITS: range(BIT6, BIT7) },
+            { LOCATION: lootProgress4(), BITS: range(BIT0, BIT2) },
+            { LOCATION: lootProgress5(), BITS: [BIT5] },
+            { LOCATION: lootProgress8(), BITS: [BIT0, BIT1] },
+            { LOCATION: lootProgress19(), BITS: [BIT2,BIT5] },
+        ],
+    LAVA_CAVES: 
+        [
+            { LOCATION: lootProgress19(), BITS: [BIT3,BIT4] },
+            { LOCATION: lootProgress21(), BITS: [BIT4, BIT5] },
+        ],
+    IMPERIAL_FORTRESS: 
+        [
+            { LOCATION: lootProgress32(), BITS: [BIT4] },
+            { LOCATION: lootProgress42(), BITS: range(BIT2, BIT4) },
+            { LOCATION: lootProgress44(), BITS: [BIT5, BIT6] },
+            { LOCATION: lootProgress45(), BITS: [BIT0, BIT1] },
+            { LOCATION: lootProgress52(), BITS: range(BIT3, BIT7) },
+            { LOCATION: lootProgress53(), BITS: range(BIT0, BIT7) },
+            { LOCATION: lootProgress54(), BITS: range(BIT1, BIT4) },
+        ],
+    ICE_CLIFFS: 
+        [
+            { LOCATION: lootProgress27(), BITS: [BIT5] },
+            { LOCATION: lootProgress28(), BITS: [BIT6, BIT7] },
+            { LOCATION: lootProgress43(), BITS: range(BIT0, BIT2) },
+            { LOCATION: lootProgress44(), BITS: [BIT1, BIT2] },
+        ],
+    KAFFALJIDHMA: 
+        [
+            { LOCATION: lootProgress43(), BITS: range(BIT2, BIT6) },
+            { LOCATION: lootProgress56(), BITS: [BIT4, BIT5] },
+        ],
+    CURSA: 
+        [
+            { LOCATION: lootProgress71(), BITS: [BIT0] },
+            { LOCATION: lootProgress76(), BITS: range(BIT2, BIT5) },
+        ],
+    LABYRINTH_OF_DUHR: 
+        [
+            { LOCATION: lootProgress34(), BITS: [BIT7] },
+            { LOCATION: lootProgress35(), BITS: [BIT0] },
+            { LOCATION: lootProgress55(), BITS: range(BIT1,BIT7) },
+            { LOCATION: lootProgress56(), BITS: [BIT0,BIT2] },
+        ],
+    GEMMA_VILLAGE: 
+        [
+            { LOCATION: lootProgress30(), BITS: [BIT0, BIT3] },
+            { LOCATION: lootProgress31(), BITS: [BIT4] },
+            { LOCATION: lootProgress35(), BITS: [BIT7] },
+            { LOCATION: lootProgress36(), BITS: [BIT0] },
+            { LOCATION: lootProgress42(), BITS: [BIT6, BIT7] },
+            { LOCATION: lootProgress43(), BITS: [BIT0, BIT1] },
+            { LOCATION: lootProgress46(), BITS: [BIT7] },
+            { LOCATION: lootProgress56(), BITS: [BIT3] },
+        ],
+    CAPELLA: 
+        [
+            { LOCATION: lootProgress47(), BITS: [BIT2] },
+            { LOCATION: lootProgress54(), BITS: [BIT5] },
+            { LOCATION: lootProgress58(), BITS: [BIT3, BIT4] },
+        ],
+    ALGORAB_VILLAGE: 
+        [
+            { LOCATION: lootProgress60(), BITS: range(BIT4, BIT7) },
+            { LOCATION: lootProgress61(), BITS: [BIT0] },
+            { LOCATION: lootProgress64(), BITS: [BIT5] },
+        ],
+    ZOSMA_TOWER: 
+        [
+            { LOCATION: lootProgress28(), BITS: range(BIT0, BIT5) },
+        ],
+    CELESTIAL_ALPS: 
+        [
+            { LOCATION: lootProgress10(), BITS: range(BIT0, BIT3) },
+            { LOCATION: lootProgress19(), BITS: [BIT6,BIT7] },
+            { LOCATION: lootProgress20(), BITS: range(BIT0,BIT5) },
+            { LOCATION: lootProgress22(), BITS: [BIT0] },
+        ],
+    ILLUSORY_FORTRESS: 
+        [
+            { LOCATION: lootProgress20(), BITS: [BIT6, BIT7] },
+            { LOCATION: lootProgress21(), BITS: range(BIT0, BIT4) },
+        ],
+    GREATER_CELESTIAL_RIVER: 
+        [
+            { LOCATION: lootProgress35(), BITS: [BIT1] },
+            { LOCATION: lootProgress42(), BITS: [BIT5] },
+            { LOCATION: lootProgress54(), BITS: [BIT7] },
+            { LOCATION: lootProgress55(), BITS: [BIT0] },
+            { LOCATION: lootProgress56(), BITS: [BIT6, BIT7] },
+        ],
+    PHANTOM_GOLDOBA: 
+        [
+            { LOCATION: lootProgress80(), BITS: range(BIT0, BIT4) },
+        ],
+    NIHAL_DESERT: 
+        [
+            { LOCATION: lootProgress10(), BITS: range(BIT4, BIT6) },
+            { LOCATION: lootProgress11(), BITS: range(BIT0, BIT2) },
+            { LOCATION: lootProgress21(), BITS: [BIT6, BIT7] },
+        ],
+    COR_HYDRAE: 
+        [
+            { LOCATION: lootProgress66(), BITS: range(BIT1, BIT7) },
+            { LOCATION: lootProgress67(), BITS: range(BIT0, BIT7) },
+            { LOCATION: lootProgress68(), BITS: range(BIT0, BIT3) },
+        ],
+ }
+
+function collectionAchievement(key) 
+{
+    locations = []
+    previous = []
+    for element in lootList[key]
+    {
+        for bitValue in element[BITS]
+        {
+            target = bit(bitValue, element[LOCATION])
+            array_push(locations, target)
+            array_push(previous, prev(target))
+        }
+    }
+
+    achievement(title = format("Lootable {0}",key),
+                description = format("Loot everything from {0}",key),
+                points = 1,
+                trigger = saveProtection() &&
+                          any_of(previous, value => value == 0) &&
+                          measured(sum_of(locations, value => value) == length(locations))
+    )
+
+}
+
+for key in lootList
+{
+    collectionAchievement(key)
+}
+
+// Celebrai Tutorial lootProgress15() BIT0
+// Celebrai Maynee Quest Shampoo  lootProgress24() BIT2
+// CELEBRAI Anklet of Calm Wind Quest lootProgress24() BIT5
+// Shrine Progression lootProgress13() BIT1  "Could you repeat that?" 
+// Azha Kids lootProgress3() [BIT4, BIT5] 
+// Azha Cetaka Sword Quest lootprogress12() BIT6 BIT7
+// Azha Girl's Thoughts Quest lootprogress14() BIT4
+// Balancoire Musuem lootProgress14(), BIT7
+// Balancoire Kids lootProgress14(), BIT3
+// Balancore RestaurantQuest lootProgress4(), BITS: [BIT7], lootProgress5(), BITS: [BIT0], 
+// 
+// Quzman Family QUZMANFAMILY_MEMORY_LOCATION quzmanEnding BIT3
+// Kaffaljidhma Warriors Mementos lootProgress34() BIT6
+// 
+// Bosses
+// Zosma Tower eventProgress2() bit6
+// Spider Boss eventProgress3() bit5
+// Sibiling gods lootProgress59( BIT1-BIT5
+// Kulcabaran lootProgress71() BIT4
+// Phantom Goldoba lootProgress77() BIT7
+// 
+// Mintaka Attack eventProgress5() BIT1   eventProgress6() BIT0 BIT2 BIT3 BIT5 eventProgress7() BIT1 BIT2
+// 
+// Thirsty soldier eventProgress8  Meh
+// 
+// POST ELNATH battle cleanup.  lootProgress62() BIT7  lootProgress73() BIT1// Note 63 BIT0 can be earned later
