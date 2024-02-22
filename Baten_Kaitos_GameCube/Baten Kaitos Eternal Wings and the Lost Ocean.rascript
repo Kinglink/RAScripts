@@ -1,6 +1,13 @@
 // Baten Kaitos: Eternal Wings and the Lost Ocean
 // #ID = 8489
 
+function containsKey(dictionary, key_name)
+{
+    for key in dictionary 
+        if(key == key_name) return true
+    return false
+}
+
 // Name of each area.  Using a plain text as the identifier. 
 CEBALRAI = "Cebalrai"
 MOONGUILE_FOREST = "Moonguile Forest"
@@ -55,6 +62,7 @@ function loadIndicator() => byte(0x00251b78)
 LOADING_FILE_VALUE = 0x01
 
 function saveProtection() => loadIndicator() != LOADING_FILE_VALUE
+function resetSaveProtection() => never(loadIndicator() != LOADING_FILE_VALUE)
 
 // $1EDD55: (24-bit BE) Pointer to Mindeer Info
 //          
@@ -1057,22 +1065,31 @@ function xelhaClass() => byte(0x249D27)
 //          Cash, Dough, Gold, Loot, Lucre!
 function moneyTotal() => dword_be(0x251B7C)
 
+// $251b80: (1216-bit BE bitflag ) Magnus Display Bitflag
+//
+//          This is an array of the Magnus Gathering Display bitfields. There's 1022 cards, each has a bit. 
+//          
+//          This should be easy, but of course nothing is easy with this game.  There are gaps in the bit (maybe cut cards, maybe the game just being annoying as !@#$ but yeah.   The span of 1022 is spread over 1212  From 0x251b80-0x251c17.    
+//          
+//          You have to remove some of the values :(
+function magnusDisplayStart() => 0x251b80
+
 // $251B83: (bitfield)  First bits of Magnus Display
 //          
 //          bit0  = NOT USED
-function magnusDisplayStart() => byte(0x251B83)
+function magnusDisplayIssue40() => 0x251B83
 
 // $251B9D: (bitfield) Magnus Display Field Issue
 //          
 //          bit7 = Camera 1
 //          NOTE: All other bits NOT USED
-function magnusDisplayIssue1() => byte(0x251B9D)
+function magnusDisplayIssue1() => 0x251B9D
 
 // $251B9E: (bitfield) Magnus Display Field Issue
 //          
 //          bit0 = Escape
 //          NOTE: All other bits NOT USED
-function magnusDisplayIssue2() => byte(0x251B9E)
+function magnusDisplayIssue2() => 0x251B9E
 
 // $251B9F: (bitfield) Magnus Display Field Issue
 //          
@@ -1084,79 +1101,79 @@ function magnusDisplayIssue2() => byte(0x251B9E)
 //          bit2 = Sword of the Heavens
 //          bit3 = Broken Heaven Sword
 //          bit4 = Broken Ocean Mirror
-function magnusDisplayIssue3() => byte(0x251B9F)
+function magnusDisplayIssue3() => 0x251B9F
 
 // $251BAC: (bitfield) Magnus Display Field Issue
 //          
 //          bit4 = NOT USED
-function magnusDisplayIssue4() => byte(0x251BAC)
+function magnusDisplayIssue4() => 0x251BAC
 
 // $251BAD: (bitfield) Magnus Display Field Issue
 //          
 //          bit5 = NOT USED
-function magnusDisplayIssue5() => byte(0x251BAD)
+function magnusDisplayIssue5() => 0x251BAD
 
 // $251BAE: (bitfield) Magnus Display Field Issue
 //          
 //          bit6 = NOT USED
-function magnusDisplayIssue6() => byte(0x251BAE)
+function magnusDisplayIssue6() => 0x251BAE
 
 // $251BAF: (bitfield) Magnus Display Field Issue
 //          
 //          bit0 = NOT USED
 //          bit7 = NOT USED
-function magnusDisplayIssue7() => byte(0x251BAF)
+function magnusDisplayIssue7() => 0x251BAF
 
 // $251BB3: (bitfield) Magnus Display Field Issue
 //          
 //          bit3= NOT USED
-function magnusDisplayIssue8() => byte(0x251BB3)
+function magnusDisplayIssue8() => 0x251BB3
 
 // $251BB4: (bitfield) Magnus Display Field Issue
 //          
 //          NO BITS USED
-function magnusDisplayIssue9() => byte(0x251BB4)
+function magnusDisplayIssue9() => 0x251BB4
 
 // $251BB5: (bitfield) Magnus Display Field Issue
 //          
 //          NO BITS USED
-function magnusDisplayIssue10() => byte(0x251BB5)
+function magnusDisplayIssue10() => 0x251BB5
 
 // $251BB6: (bitfield) Magnus Display Field Issue
 //          
 //          NO BITS USED
-function magnusDisplayIssue11() => byte(0x251BB6)
+function magnusDisplayIssue11() => 0x251BB6
 
 // $251BB7: (bitfield) Magnus Display Field Issue
 //          
 //          bit0 = Tradescantia Petals
 //          NO OTHER BITS USED
-function magnusDisplayIssue12() => byte(0x251BB7)
+function magnusDisplayIssue12() => 0x251BB7
 
 // $251BBA: (bitfield) Magnus Display Field Issue
 //          
 //          bit6 = Draco
 //          bit7 = Vela
 //          NO OTHER BITS USED
-function magnusDisplayIssue13() => byte(0x251BBA)
+function magnusDisplayIssue13() => 0x251BBA
 
 // $251BBB: (bitfield) Magnus Display Field Issue
 //          
 //          NO BITS USED
-function magnusDisplayIssue14() => byte(0x251BBB)
+function magnusDisplayIssue14() => 0x251BBB
 
 // $251BC8: (bitfield) Magnus Display Field Issue
 //          
 //          bit0-bit3 used
 //          NO OTHER BITS USED
-function magnusDisplayIssue15() => byte(0x251BC8)
+function magnusDisplayIssue15() => 0x251BC8
 
 // $251BC9: (bitfield) Magnus Display Field Issue
 //          
 //          bit1 = NOT USED
 //          bit7 = NOT USED
 //          ALL OTHER BITS USED
-function magnusDisplayIssue16() => byte(0x251BC9)
+function magnusDisplayIssue16() => 0x251BC9
 
 // $251BCE: (bitfield) Magnus Display Field Issue
 //          
@@ -1164,129 +1181,146 @@ function magnusDisplayIssue16() => byte(0x251BC9)
 //          bit1 = NOT USED
 //          bit2 = NOT USED
 //          ALL OTHER BITS USED
-function magnusDisplayIssue17() => byte(0x251BCE)
+function magnusDisplayIssue17() => 0x251BCE
 
 // $251BCF: (bitfield) Magnus Display Field Issue
 //          
 //          NO BITS USED
-function magnusDisplayIssue18() => byte(0x251BCF)
+function magnusDisplayIssue18() => 0x251BCF
 
 // $251BF4: (bitfield) Magnus Display Field Issue
 //          
 //          bit0 = NOT USED
 //          bit2 = NOT USED
 //          bit7 = NOT USED
-function magnusDisplayIssue19() => byte(0x251BF4)
+function magnusDisplayIssue19() => 0x251BF4
 
 // $251BF5: (bitfield) Magnus Display Field Issue
 //          
 //          bit0 = NOT USED
-function magnusDisplayIssue20() => byte(0x251BF5)
+function magnusDisplayIssue20() => 0x251BF5
 
 // $251BF6: (bitfield) Magnus Display Field Issue
 //          
 //          bit7 = NOT USED
-function magnusDisplayIssue21() => byte(0x251BF6)
+function magnusDisplayIssue21() => 0x251BF6
 
 // $251BFA: (bitfield) Magnus Display Field Issue
 //          
 //          bit0 = NOT USED
 //          bit1 = NOT USED
-function magnusDisplayIssue22() => byte(0x251BFA)
+function magnusDisplayIssue22() => 0x251BFA
 
 // $251BFB: (bitfield) Magnus Display Field Issue
 //          
 //          bit0 = NOT USED
 //          bit1 = NOT USED
 //          bit2 = NOT USED
-function magnusDisplayIssue23() => byte(0x251BFB)
+function magnusDisplayIssue23() => 0x251BFB
 
 // $251C00: (bitfield) Magnus Display Field Issue
 //          
 //          bit3-bit7 = NOT USED
-function magnusDisplayIssue24() => byte(0x251C00)
+function magnusDisplayIssue24() => 0x251C00
 
 // $251C01: (bitfield) Magnus Display Field Issue
 //          
 //          bit2 = NOT USED
 //          bit3 = NOT USED
-function magnusDisplayIssue25() => byte(0x251C01)
+function magnusDisplayIssue25() => 0x251C01
 
 // $251C03: (bitfield) Magnus Display Field Issue
 //          
 //          bit2 = NOT USED
 //          bit3 = NOT USED
-function magnusDisplayIssue26() => byte(0x251C03)
+function magnusDisplayIssue26() => 0x251C03
 
 // $251C04: (bitfield) Magnus Display Field Issue
 //          
 //          NO BITS USED
-function magnusDisplayIssue27() => byte(0x251C04)
+function magnusDisplayIssue27() => 0x251C04
 
 // $251C05: (bitfield) Magnus Display Field Issue
 //          
 //          NO BITS USED
-function magnusDisplayIssue28() => byte(0x251C05)
+function magnusDisplayIssue28() => 0x251C05
 
 // $251C07: (bitfield) Magnus Display Field Issue
 //          
 //          bit0 = NOT USED
 //          bit1 = NOT USED
-function magnusDisplayIssue29() => byte(0x251C07)
+function magnusDisplayIssue29() => 0x251C07
 
 // $251C08: (bitfield) Magnus Display Field Issue
 //          
 //          NO BITS USED
-function magnusDisplayIssue30() => byte(0x251C08)
+function magnusDisplayIssue30() => 0x251C08
 
 // $251C09: (bitfield) Magnus Display Field Issue
 //          
 //          NO BITS USED
-function magnusDisplayIssue31() => byte(0x251C09)
+function magnusDisplayIssue31() => 0x251C09
 
 // $251C0A: (bitfield) Magnus Display Field Issue
 //          
 //          NO BITS USED
-function magnusDisplayIssue32() => byte(0x251C0A)
+function magnusDisplayIssue32() => 0x251C0A
 
 // $251C0B: (bitfield) Magnus Display Field Issue
 //          
 //          NO BITS USED
-function magnusDisplayIssue33() => byte(0x251C0B)
+function magnusDisplayIssue33() => 0x251C0B
 
 // $251C0C: (bitfield) Magnus Display Field Issue
 //          
 //          bit2 = NOT USED
 //          bit3 = NOT USED
-function magnusDisplayIssue34() => byte(0x251C0C)
+function magnusDisplayIssue34() => 0x251C0C
 
 // $251C0D: (bitfield) Magnus Display Field Issue
 //          
 //          bit0-5 = NOT USED
-function magnusDisplayIssue35() => byte(0x251C0D)
+function magnusDisplayIssue35() => 0x251C0D
 
 // $251C0E: (bitfield) Magnus Display Field Issue
 //          
 //          NO BITS USED
-function magnusDisplayIssue36() => byte(0x251C0E)
+function magnusDisplayIssue36() => 0x251C0E
 
 // $251C0F: (bitfield) Magnus Display Field Issue
 //          
 //          NO BITS USED
-function magnusDisplayIssue37() => byte(0x251C0F)
+function magnusDisplayIssue37() => 0x251C0F
 
 // $251C14: (bitfield) Magnus Display Field Issue
 //          
 //          NO BITS USED
-function magnusDisplayIssue38() => byte(0x251C14)
+function magnusDisplayIssue38() => 0x251C14
 
 // $251C15: (bitfield) Magnus Display Field Issue
 //          
 //          bit0 = Treasured Painting
-function magnusDisplayIssue39() => byte(0x251C15)
+//          Other Values not recorded at this time
+function magnusDisplayIssue39() => 0x251C15
 
 // $251C18: (1216-bit  bitflag ) Magnus Seen Bitflag
-function magnusSeenStart() => byte(0x251C18)
+function magnusSeenStart() => 0x251C18
+
+// $251c27: (bitfield) Magnus seen 
+//
+//          bit3 = Phoneix Crest Sowzana card
+function phoenixCrestSeenLocation() => 0x251c27
+
+// $251c7c :bitfield) Magnus Seen Value
+// 
+//          bit4 Splendid hair.  (Time delayed) 
+//          Other Values not recorded at this time
+function splendidHairSeenLocation() => 0x251c7c
+
+// $251cad: (bitfield) Magnus Seen Value
+//
+//          bit0 = Treasured Painting  (Time delayed) 
+function treasuredPaintingSeenLocation() => 0x251cad
 
 // $251E35: (8-bit) Star Map Fragments collected
 //          
@@ -1303,7 +1337,7 @@ function timerForGoldobaEscape() => byte(0x251EE8)
 //          If set to 0x0000 then SP Combo has not been found, otherwise it's been discovered
 //          
 //          Note: many of the SP Combos are 4 bytes apart, however that is NOT guarenteed, as 4 bytes is 2 cards, and some combo are 3,4,5 cards long, and one (Secret recipe) is 9! so ...
-function spCombo1() => dword(0x25EC98)
+function spCombo1() => word(0x25EC98)
 
 // $25EC9C: (16-bit) First card of the SP Combo 2, Lukewarm Rice Wine
 //          
@@ -2231,7 +2265,314 @@ BIT5 = 5
 BIT6 = 6
 BIT7 = 7
 LOCATION = "Location"
+BIT = "Bit"
 BITS = "Bits"
+TITLE = "Title"
+DESCRIPTION = "Description"
+POINTS = "Points"
+TRIGGER = "Trigger"
+NAME = "Name"
+PRIOR = "Prior"
+POST = "Post"
+
+bossScriptIdList = 
+[
+    {
+        NAME: "Sabre Dragon", 
+        POINTS: 1,
+        PRIOR: 0x000001f4,
+        POST: 0x000002bc
+    },
+    {
+        NAME: "Lord of the Spring", 
+        POINTS: 1,
+        PRIOR: 0x00000320,
+        POST: 0x000044c
+    },
+    {
+        NAME: "Giacomo", 
+        POINTS: 1,
+        PRIOR: 0x708,
+        POST: 0x0000834
+    },
+    {
+        NAME: "Thunderfish", 
+        POINTS: 1,
+        PRIOR: 0x00000bb8,
+        POST: 0x0000c1c
+    },
+    {
+        NAME: "Iron Beetle I", 
+        POINTS: 1,
+        PRIOR: 0x00000e10,
+        POST: 0x0000e74
+    },
+    {
+        NAME: "Iron Beetle V", 
+        POINTS: 1,
+        PRIOR: 0x00001068,
+        POST: 0x0001194
+    },
+    {
+        NAME: "Lord of the Winds", 
+        POINTS: 1,
+        PRIOR: 0x00001324,
+        POST: 0x0001388
+    },
+    {
+        NAME: "Folon", 
+        POINTS: 1,
+        PRIOR: 0x00001770,
+        POST: 0x000017d4
+    },
+    {
+        NAME: "Tree Guardian", 
+        POINTS: 1,
+        PRIOR: 0x000019c8,
+        POST: 0x00001a2c
+    },
+    {
+        NAME: "Savyna", 
+        POINTS: 1,
+        PRIOR: 0x00001a36,
+        POST: 0x00001a90
+    },
+    {
+        NAME: "Gnosis", 
+        POINTS: 1,
+        PRIOR: 0x00001d4c,
+        POST: 0x00001db0
+    },
+    {
+        NAME: "Magnus Giganticus", 
+        POINTS: 1,
+        PRIOR: 0x00002008,
+        POST: 0x0000206c
+    },
+    {
+        NAME: "Sikri", 
+        POINTS: 1,
+        PRIOR: 0x000022c4,
+        POST: 0x00002328
+    },
+    {
+        NAME: "Phantasm", 
+        POINTS: 1,
+        PRIOR: 0x00002648,
+        POST: 0x000026ac
+    },
+    {
+        NAME: "Trio On The Goldoba", 
+        POINTS: 1,
+        PRIOR: 0x000029cc,
+        POST: 0x00002a94
+    },
+    {
+        NAME: "Geldoblame", 
+        POINTS: 1,
+        PRIOR: 0x00002e18,
+        POST: 0x00002e22
+    },
+    {
+        NAME: "Goddess of Ice", 
+        POINTS: 1,
+        PRIOR: 0x0000319c,
+        POST: 0x00003200
+    },
+    {
+        NAME: "Fadroh", 
+        POINTS: 1,
+        PRIOR: 0x000034bc,
+        POST: 0x00003520
+    },
+    {
+        NAME: "Angel of Darkness", 
+        POINTS: 1,
+        PRIOR: 0x00003584,
+        POST: 0x000035e8
+    },
+    {
+        NAME: "Agyo and Ungyo", 
+        POINTS: 1,
+        PRIOR: 0x00003a34,
+        POST: 0x0003a98
+    },
+    {
+        NAME: "The Ancient God", 
+        POINTS: 1,
+        PRIOR: 0x0003afc,
+        POST: 0x0003b60
+    },
+    {
+        NAME: "Trio at the Celestial Alps", 
+        POINTS: 1,
+        PRIOR: 0x00003ee4,
+        POST: 0x00003f48
+    },
+    {
+        NAME: "Malpercio", 
+        POINTS: 1,
+        PRIOR: 0x00413c,
+        POST: 0x0041a0
+    },
+    {
+        NAME: "The Final Boss", 
+        POINTS: 1,
+        PRIOR: 0x04204,
+        POST: 0x04268
+    },
+    {
+        TITLE: "The End", 
+        NAME: "True Final Boss",
+        DESCRIPTION: "Reach the end of the game.",
+        POINTS: 1,
+        PRIOR: 0x004394,
+        POST: 0x0043f8
+    },
+    
+]
+
+function bossScriptIdAchievement(data) 
+{
+    if (containsKey(data,TITLE))
+    {
+        title = data[TITLE]
+    }
+    else
+    {
+        title = data[NAME]
+    }
+
+    if (containsKey(data,DESCRIPTION))
+    {
+        description = data[DESCRIPTION]
+    }
+    else
+    {
+        description = format("Defeat {0}",data[NAME])
+    }
+
+    achievement(title = title,
+                description = description,
+                points = data[POINTS],
+                trigger = saveProtection() &&
+                          prev(majorScriptId()) == data[PRIOR] &&
+                          majorScriptId() == data[POST]
+    )
+}
+
+
+for data in bossScriptIdList
+{
+    bossScriptIdAchievement(data)
+}
+
+// Need to identify this by boolean. 
+bossBooleanList = 
+[
+    {
+        NAME: "Nunkirantula", 
+        POINTS: 1,
+        LOCATION: eventProgress3(),
+        BIT: BIT5
+    },
+    {
+        NAME: "Rampulus", 
+        POINTS: 1,
+        LOCATION: lootProgress77(),
+        BIT: BIT7
+    },
+    {
+        NAME: "Sowzana", 
+        POINTS: 1,
+        LOCATION: phoenixCrestSeenLocation(),
+        BIT: BIT3
+    },
+    {
+        NAME: "Kulcabaran", 
+        POINTS: 1,
+        LOCATION: lootProgress71(),
+        BIT: BIT4
+    },
+    {
+        NAME: "Wizard Shadow", 
+        POINTS: 1,
+        LOCATION: eventProgress2(),
+        BIT: BIT6
+    },
+    {
+        NAME: "Brokolis", 
+        POINTS: 1,
+        LOCATION: lootProgress35(),
+        BIT: BIT1
+    },
+    {
+        NAME: "Sibiling Gods He", 
+        POINTS: 1,
+        LOCATION: lootProgress59(),
+        BIT: BIT1
+    },
+    {
+        NAME: "Sibling Gods Che", 
+        POINTS: 1,
+        LOCATION: lootProgress59(),
+        BIT: BIT2
+    },
+    {
+        NAME: "Sibling Gods Bo", 
+        POINTS: 1,
+        LOCATION: lootProgress59(),
+        BIT: BIT3
+    },
+    {
+        NAME: "Sibling Gods Ar", 
+        POINTS: 1,
+        LOCATION: lootProgress59(),
+        BIT: BIT4
+    },
+    {
+        NAME: "Sibling Gods Le", 
+        POINTS: 1,
+        LOCATION: lootProgress59(),
+        BIT: BIT5
+    }
+]
+
+function booleanBossAchievement(data) 
+{
+    if (containsKey(data,TITLE))
+    {
+        title = data[TITLE]
+    }
+    else
+    {
+        title = data[NAME]
+    }
+
+    if (containsKey(data,DESCRIPTION))
+    {
+        description = data[DESCRIPTION]
+    }
+    else
+    {
+        description = format("Defeat {0}",data[NAME])
+    }
+
+    target = bit(data[BIT], data[LOCATION])
+
+    achievement(title = title,
+                description = description,
+                points = data[POINTS],
+                trigger = saveProtection() &&
+                          prev(target) == 0 &&
+                          target == 1
+    )
+}
+
+for data in bossBooleanList
+{
+    booleanBossAchievement(data)
+}
 
 lootList = 
 {
@@ -2495,14 +2836,12 @@ lootList =
 function collectionAchievement(key) 
 {
     locations = []
-    previous = []
     for element in lootList[key]
     {
         for bitValue in element[BITS]
         {
             target = bit(bitValue, element[LOCATION])
             array_push(locations, target)
-            array_push(previous, prev(target))
         }
     }
 
@@ -2510,40 +2849,513 @@ function collectionAchievement(key)
                 description = format("Loot everything from {0}",key),
                 points = 1,
                 trigger = saveProtection() &&
-                          any_of(previous, value => value == 0) &&
+                          any_of(locations, value => prev(value) == 0) &&
                           measured(sum_of(locations, value => value) == length(locations))
     )
-
 }
+
+
 
 for key in lootList
 {
     collectionAchievement(key)
 }
 
-// Celebrai Tutorial lootProgress15() BIT0
-// Celebrai Maynee Quest Shampoo  lootProgress24() BIT2
-// CELEBRAI Anklet of Calm Wind Quest lootProgress24() BIT5
-// Shrine Progression lootProgress13() BIT1  "Could you repeat that?" 
-// Azha Kids lootProgress3() [BIT4, BIT5] 
-// Azha Cetaka Sword Quest lootprogress12() BIT6 BIT7
-// Azha Girl's Thoughts Quest lootprogress14() BIT4
-// Balancoire Musuem lootProgress14(), BIT7
-// Balancoire Kids lootProgress14(), BIT3
-// Balancore RestaurantQuest lootProgress4(), BITS: [BIT7], lootProgress5(), BITS: [BIT0], 
+questList = 
+[
+    {
+        TITLE: "Learning how to use quest magnus" ,
+        DESCRIPTION: "Earn an Ice Dagger by giving an apple to Larikush", 
+        POINTS: 1,
+        TRIGGER: [
+            { LOCATION: lootProgress15(), BITS: [BIT0] }
+        ]
+    },
+    {
+        TITLE: "And now the real speedrun begins..." ,
+        DESCRIPTION: "Earn the fabled Shampoo by helping Maynee find her husband.", 
+        POINTS: 1,
+        TRIGGER: [
+            { LOCATION: lootProgress24(), BITS: [BIT2] }
+        ]
+    },
+    {
+        TITLE: "Tripadvisor: Sheliak" ,
+        DESCRIPTION: "Earn the Anklet of Calm Winds by visiting by helping Maynee find her boyfriend.", 
+        POINTS: 1,
+        TRIGGER: [
+            { LOCATION: lootProgress24(), BITS: [BIT2] }
+        ]
+    },
+    {
+        TITLE: "Cleaning up" ,
+        DESCRIPTION: "Help three soldiers and get rewarded after the Battle of Castle Elnath.", 
+        POINTS: 1,
+        TRIGGER: [
+            { LOCATION: lootProgress62(), BITS: [BIT7] },
+            { LOCATION: lootProgress73(), BITS: [BIT1] }
+        ]
+    },
+    {
+        TITLE: "Here you go kid, now get away from me" ,
+        DESCRIPTION: "Earn the Secret Recipe 7 by giving a lot of items to those annoying kids.", 
+        POINTS: 1,
+        TRIGGER: [
+            { LOCATION: lootProgress3(), BITS: [BIT5] }
+        ]
+    },
+    {
+        TITLE: "Quite a trade" ,
+        DESCRIPTION: "Earn a Platnium Buckle and a Cetaka's Sword for helping an old woman's backache.", 
+        POINTS: 1,
+        TRIGGER: [
+            { LOCATION: lootProgress12(), BITS: [BIT6, BIT7] }
+        ]
+    },
+    {
+        TITLE: "Let me through" ,
+        DESCRIPTION: "Earn a Red Oak for sharing a Girl's Thoughts.", 
+        POINTS: 1,
+        TRIGGER: [
+            { LOCATION: lootProgress14(), BITS: [BIT4] }
+        ]
+    },
+    {
+        TITLE: "Hero of Mintaka",
+        DESCRIPTION: "Save everyone possible during Mintaka's attack.", 
+        POINTS: 1,
+        TRIGGER: [
+            { LOCATION: eventProgress5(), BITS: [BIT1] },
+            { LOCATION: eventProgress6(), BITS: [BIT0, BIT2, BIT3, BIT5] },
+            { LOCATION: eventProgress7(), BITS: [BIT1, BIT2] }
+        ]
+    },
+    {
+        TITLE: "It belongs in a museum!",
+        DESCRIPTION: "Earn a Broken Birdie by completing the Balancoire Museum Collection.", 
+        POINTS: 1,
+        TRIGGER: [
+            { LOCATION: lootProgress14(), BITS: [BIT7] }
+        ]
+    },
+    {
+        TITLE: "Glad I'm not cleaning that up",
+        DESCRIPTION: "Earn a Firedrake Fist by complete the Balancoire Kids quest.", 
+        POINTS: 1,
+        TRIGGER: [
+            { LOCATION: lootProgress14(), BITS: [BIT3] }
+        ]
+    },
+    {
+        TITLE: "Could you Repeat that?" ,
+        DESCRIPTION: "Earn a Rainbow Ash by putting on a second Shrine Progression.", 
+        POINTS: 1,
+        TRIGGER: [
+            { LOCATION: lootProgress13(), BITS: [BIT1] }
+        ]
+    },
+    {
+        TITLE: "Very Sorry for your loss" ,
+        DESCRIPTION: "Earn a Golden Bugle by giving two widows in Kaffaljidhma something to remember their husbands with.", 
+        POINTS: 1,
+        TRIGGER: [
+            { LOCATION: lootProgress34(), BITS: [BIT6] }
+        ]
+    }
+]
+
+function questAchievement(data) 
+{
+    locations = []
+    for element in data[TRIGGER]
+    {
+        for bitValue in element[BITS]
+        {
+            target = bit(bitValue, element[LOCATION])
+            array_push(locations, target)
+        }
+    }
+
+    achievement(title = data[TITLE],
+                description = data[DESCRIPTION],
+                points = data[POINTS],
+                trigger = saveProtection() &&
+                          any_of(locations, value => prev(value) == 0) &&
+                          measured(sum_of(locations, value => value) == length(locations))
+    )
+}
+
+for data in questList
+{
+    questAchievement(data)
+}
+
+optionalQuestsList =
+[
+    {
+        TITLE: "An expensive dessert",
+        DESCRIPTION: "Earn a desert for a gold nugget in Balancoire.", 
+        POINTS: 1,
+        TRIGGER: [
+            { LOCATION: lootProgress5(), BITS: [BIT7] },
+            { LOCATION: lootProgress6(), BITS: [BIT0] }
+        ]
+    }
+]
+
+function optionalQuestAchievement(data) 
+{
+    locations = []
+    for element in data[TRIGGER]
+    {
+        for bitValue in element[BITS]
+        {
+            target = bit(bitValue, element[LOCATION])
+            array_push(locations, target)
+        }
+    }
+
+    achievement(title = data[TITLE],
+                description = data[DESCRIPTION],
+                points = data[POINTS],
+                trigger = saveProtection() &&
+                          any_of(locations, value => prev(value) == 0 && value == 1) 
+    )
+}
+
+for data in optionalQuestsList
+{
+    optionalQuestAchievement(data)
+}
+
+spCombos = 
+[
+    spCombo1(),
+    spCombo2(),
+    spCombo3(),
+    spCombo4(),
+    spCombo5(),
+    spCombo6(),
+    spCombo7(),
+    spCombo8(),
+    spCombo9(),
+    spCombo10(),
+    spCombo11(),
+    spCombo12(),
+    spCombo13(),
+    spCombo14(),
+    spCombo15(),
+    spCombo16(),
+    spCombo17(),
+    spCombo18(),
+    spCombo19(),
+    spCombo20(),
+    spCombo21(),
+    spCombo22(),
+    spCombo23(),
+    spCombo24(),
+    spCombo25(),
+    spCombo26(),
+    spCombo27(),
+    spCombo28(),
+    spCombo29(),
+    spCombo30(),
+    spCombo31(),
+    spCombo32(),
+    spCombo33(),
+    spCombo34(),
+    spCombo35(),
+    spCombo36(),
+    spCombo37(),
+    spCombo38(),
+    spCombo39(),
+    spCombo40(),
+    spCombo41(),
+    spCombo42(),
+    spCombo43(),
+    spCombo44(),
+    spCombo45(),
+    spCombo46(),
+    spCombo47(),
+    spCombo48(),
+    spCombo49(),
+    spCombo50(),
+    spCombo51(),
+    spCombo52(),
+    spCombo53(),
+    spCombo54(),
+    spCombo55(),
+    spCombo56(),
+    spCombo57(),
+    spCombo58(),
+    spCombo59(),
+    spCombo60(),
+    spCombo61(),
+    spCombo62(),
+    spCombo63(),
+    spCombo64(),
+    spCombo65(),
+    spCombo66(),
+    spCombo67(),
+    spCombo68(),
+    spCombo69(),
+    spCombo70(),
+    spCombo71(),
+    spCombo72(),
+    spCombo73(),
+    spCombo74(),
+    spCombo75(),
+    spCombo76(),
+    spCombo77(),
+    spCombo78(),
+    spCombo79(),
+    spCombo80(),
+    spCombo81(),
+    spCombo82(),
+    spCombo83(),
+    spCombo84(),
+    spCombo85(),
+    spCombo86(),
+    spCombo87(),
+    spCombo88(),
+    spCombo89(),
+    spCombo90(),
+    spCombo91(),
+    spCombo92(),
+    spCombo93(),
+    spCombo94(),
+    spCombo95(),
+    spCombo96(),
+    spCombo97(),
+    spCombo98(),
+    spCombo99(),
+    spCombo100(),
+    spCombo101(),
+    spCombo102(),
+    spCombo103(),
+    spCombo104(),
+    spCombo105(),
+    spCombo106(),
+    spCombo107(),
+    spCombo108(),
+    spCombo109(),
+    spCombo110(),
+    spCombo111(),
+    spCombo112(),
+    spCombo113(),
+    spCombo114(),
+    spCombo115(),
+    spCombo116(),
+    spCombo117(),
+    spCombo118(),
+    spCombo119(),
+    spCombo120(),
+    spCombo121(),
+    spCombo122(),
+    spCombo123(),
+    spCombo124(),
+    spCombo125(),
+    spCombo126(),
+    spCombo127(),
+    spCombo128(),
+    spCombo129(),
+    spCombo130(),
+    spCombo131(),
+    spCombo132(),
+    spCombo133(),
+    spCombo134(),
+    spCombo135(),
+    spCombo136(),
+    spCombo137(),
+    spCombo138(),
+    spCombo139(),
+    spCombo140(),
+    spCombo141()
+]
+
+function spComboAchievements(title, targetValue)
+{
+    achievement(title = title,
+                description = format("Discover {0} SP combos",targetValue),
+                points = 1,
+                trigger = saveProtection() && 
+                          sum_of(spCombos, value => prev(value)/ prev(value)) < targetValue &&
+                          measured(sum_of(spCombos, value => value/value) == targetValue) 
+    )
+}
+
+for percentage in range(10,90, step=10)
+{
+    spComboAchievements(format("SP Combos {0} percentage", percentage), 14*percentage/10)
+}
+
+spComboAchievements("SP Combos Fully Loaded", 141)
+
+displayIssues = 
+[    
+    { LOCATION: magnusDisplayIssue40(), BITS: [BIT0] },
+    { LOCATION: magnusDisplayIssue1(), BITS: range(BIT0, BIT6) },
+    { LOCATION: magnusDisplayIssue2(), BITS: range(BIT1, BIT7) },
+    { LOCATION: magnusDisplayIssue3(), BITS: range(BIT5, BIT7) },
+    { LOCATION: magnusDisplayIssue4(), BITS: [BIT4] },
+    { LOCATION: magnusDisplayIssue5(), BITS: [BIT5] },
+    { LOCATION: magnusDisplayIssue6(), BITS: [BIT6] },
+    { LOCATION: magnusDisplayIssue7(), BITS: [BIT0,BIT7] },
+    { LOCATION: magnusDisplayIssue8(), BITS: [BIT3] },
+    { LOCATION: magnusDisplayIssue9(), BITS: range(BIT0, BIT7) },
+    { LOCATION: magnusDisplayIssue10(), BITS: range(BIT0, BIT7) },
+    { LOCATION: magnusDisplayIssue11(), BITS: range(BIT0, BIT7) },
+    { LOCATION: magnusDisplayIssue12(), BITS: range(BIT1, BIT7) },
+    { LOCATION: magnusDisplayIssue13(), BITS: range(BIT0, BIT5) },
+    { LOCATION: magnusDisplayIssue14(), BITS: range(BIT0, BIT7) },
+    { LOCATION: magnusDisplayIssue15(), BITS: range(BIT4, BIT7) },
+    { LOCATION: magnusDisplayIssue16(), BITS: [BIT1, BIT7] },
+    { LOCATION: magnusDisplayIssue17(), BITS: range(BIT0, BIT2) },
+    { LOCATION: magnusDisplayIssue18(), BITS: range(BIT0, BIT7) },
+    { LOCATION: magnusDisplayIssue19(), BITS: [BIT0, BIT2, BIT7] },
+    { LOCATION: magnusDisplayIssue20(), BITS: [BIT0] },
+    { LOCATION: magnusDisplayIssue21(), BITS: [BIT7] },
+    { LOCATION: magnusDisplayIssue22(), BITS: [BIT0, BIT1] },
+    { LOCATION: magnusDisplayIssue23(), BITS: range(BIT0, BIT2) },
+    { LOCATION: magnusDisplayIssue24(), BITS: range(BIT3, BIT7) },
+    { LOCATION: magnusDisplayIssue25(), BITS: [BIT2, BIT3] },
+    { LOCATION: magnusDisplayIssue26(), BITS: [BIT2, BIT3] },
+    { LOCATION: magnusDisplayIssue27(), BITS: range(BIT0, BIT7) },
+    { LOCATION: magnusDisplayIssue28(), BITS: range(BIT0, BIT7) },
+    { LOCATION: magnusDisplayIssue29(), BITS: [BIT0, BIT1] },
+    { LOCATION: magnusDisplayIssue30(), BITS: range(BIT0, BIT7) },
+    { LOCATION: magnusDisplayIssue31(), BITS: range(BIT0, BIT7) },
+    { LOCATION: magnusDisplayIssue32(), BITS: range(BIT0, BIT7) },
+    { LOCATION: magnusDisplayIssue33(), BITS: range(BIT0, BIT7) },
+    { LOCATION: magnusDisplayIssue34(), BITS: [BIT2, BIT3] },
+    { LOCATION: magnusDisplayIssue35(), BITS: range(BIT0, BIT5) },
+    { LOCATION: magnusDisplayIssue36(), BITS: range(BIT0, BIT7) },
+    { LOCATION: magnusDisplayIssue37(), BITS: range(BIT0, BIT7) },
+    { LOCATION: magnusDisplayIssue38(), BITS: range(BIT0, BIT7) },
+    { LOCATION: magnusDisplayIssue39(), BITS: range(BIT1, BIT7) },
+]
+
+
+MAGNUS_TOTAL_BITS = 1216
+MAGNUS_ACHIEVEMENT_CARDS = 1020
+MAGNUS_TOTAL_CARDS = 1022
+// This is the bit locations of every value 
+fullMagnusLocations = range(0, MAGNUS_TOTAL_BITS - 1)
+
+// Achievement counts will not include Splendid hair or Treasured Painting
+correctAchievementCombinationLocations = []
+correctAchievementReduceCombinationLocations = []
+correctAchievementPrevCombinationLocations = []
+correctAchievementPrevReduceCombinationLocations = []
+// Count all the cards including the Splendid Hair and Treasured Painting
+correctRPCombinationLocations = []
+correctRPReduceCombinationLocations = []
+// No prev needed on RP
+
+TRUE = 1
+FALSE = 0
+// This is kind of a crazy idea, but we're going to take every error location, calculate the offset and delete it from 
+function calculateCorrectMagnusLocations()
+{
+    // Cycle through all index.
+    for bitOffset in fullMagnusLocations
+    {
+        // Calculate the offset and bit.
+        offset = bitOffset / 8
+        targetBit = bitOffset % 8
+
+        // Set data to good. 
+        data = TRUE
+
+        // Cycle through all Bad datas. 
+        for badData in displayIssues
+        {
+            // If bad data Location is the same as the offset.  Mark data as bad.
+            if(badData[LOCATION] == magnusDisplayStart() + offset)
+            {
+                for bitValue in badData[BITS]
+                {
+                    if(bitValue == targetBit)
+                    {
+                        data = FALSE
+                    }
+                }
+            }
+        }  
+        
+        achievementValid = TRUE
+        // Hardcoded.
+        if ((targetBit == BIT4 && magnusSeenStart() + offset == splendidHairSeenLocation()) &&
+            (targetBit == BIT0 && magnusSeenStart() + offset == treasuredPaintingSeenLocation()))
+        {
+            achievementValid = FALSE
+        }
+        
+        // If data is still good, mark data as good for SEEN field, not Display field. 
+        if (data == TRUE)
+        {
+            array_push(correctRPCombinationLocations, bit(targetBit, magnusSeenStart() + offset) + bit(targetBit, magnusDisplayStart() + offset) )
+            array_push(correctRPReduceCombinationLocations, bit(targetBit, magnusSeenStart() + offset) / bit(targetBit, magnusDisplayStart() + offset) )
+            
+            if (achievementValid == TRUE)
+            {
+                array_push(correctAchievementCombinationLocations, bit(targetBit, magnusSeenStart() + offset) + bit(targetBit, magnusDisplayStart() + offset) )
+                array_push(correctAchievementReduceCombinationLocations, bit(targetBit, magnusSeenStart() + offset) / bit(targetBit, magnusDisplayStart() + offset) )
+                array_push(correctAchievementPrevCombinationLocations, prev(bit(targetBit, magnusSeenStart() + offset)) + prev(bit(targetBit, magnusDisplayStart() + offset)) )
+                array_push(correctAchievementPrevReduceCombinationLocations, prev(bit(targetBit, magnusSeenStart() + offset)) / prev(bit(targetBit, magnusDisplayStart() + offset)) )
+            }   
+        }
+    }
+}
+
+calculateCorrectMagnusLocations()
+
+
+function magnusCollectionAchievement(title, targetValue)
+{
+    achievement(title = title,
+                description = format("Discover {0} Magnus Cards",targetValue),
+                points = 1,
+                trigger = saveProtection() && 
+                          sum_of(correctAchievementPrevCombinationLocations, value => value) - sum_of(correctAchievementPrevReduceCombinationLocations, value => value)   < targetValue &&
+                          measured(sum_of(correctAchievementCombinationLocations, value => value) - sum_of(correctAchievementReduceCombinationLocations, value => value) >= targetValue)
+    )
+}
+
+for percentage in range(10,90, step=10)
+{
+    magnusCollectionAchievement(format("Magnus {0} Percentage", percentage), MAGNUS_ACHIEVEMENT_CARDS * percentage / 100)
+}
+
+magnusCollectionAchievement("Magnus Fully Loaded", MAGNUS_ACHIEVEMENT_CARDS)
+
+rich_presence_display("Magnus collection: {0}/1022 SP Combo: {1}/141",
+    rich_presence_value("VALUE", sum_of(correctRPCombinationLocations, value => value) - sum_of(correctRPReduceCombinationLocations, value => value)),
+    rich_presence_value("VALUE", sum_of(spCombos, value => value/value))
+)
+
+// 
+// Camera pictures of every boss in groups	10
+// Constallation magnus.	11
+// Family quest	6
+// Animal Quest	3
+// Each time people join you?	11
+// Naiad			Note this is not a control	Script 0x00002f4e  No 0x03 in 0x00249ccc  But also check 0x00249cd2 for which is the newest 	Get a 0x03 in that second range
+// Thalassa			Note this is not a control	Script 0x00002f4e  No 0x05 in 0x00249ccc  But also check 0x00249cd2 for which is the newest 	Get a 0x05 in the second range
+// Despina			Note this is not a control	Script 0x00002f4e  No 0x06 in 0x00249ccc  But also check 0x00249cd2 for which is the newest 	Get a 0x06 in the second range
+// Galatea			Note this is not a control	Script 0x00002f4e  No 0x04 in 0x00249ccc  But also check 0x00249cd2 for which is the newest 	Get a 0x04 in the second range
+
+// Card hands	12
+// Music	1
+// Max Class Level	6
+// 
+// Picking up the winglet at the beginning of the game? 
+// Starship game drops 12 magnus.
+// 
+// Wonder Momo
+// Pac Mania Pac-Man
+// Key In Detorone, but no Green Ring, Red Necklace Or balance?  Is that possible? 
 // 
 // Quzman Family QUZMANFAMILY_MEMORY_LOCATION quzmanEnding BIT3
-// Kaffaljidhma Warriors Mementos lootProgress34() BIT6
 // 
-// Bosses
-// Zosma Tower eventProgress2() bit6
-// Spider Boss eventProgress3() bit5
-// Sibiling gods lootProgress59( BIT1-BIT5
-// Kulcabaran lootProgress71() BIT4
-// Phantom Goldoba lootProgress77() BIT7
-// 
-// Mintaka Attack eventProgress5() BIT1   eventProgress6() BIT0 BIT2 BIT3 BIT5 eventProgress7() BIT1 BIT2
-// 
-// Thirsty soldier eventProgress8  Meh
-// 
-// POST ELNATH battle cleanup.  lootProgress62() BIT7  lootProgress73() BIT1// Note 63 BIT0 can be earned later
+
