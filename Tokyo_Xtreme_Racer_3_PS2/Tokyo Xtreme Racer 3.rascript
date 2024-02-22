@@ -1573,7 +1573,7 @@ for key in TrackLookup
             justFinishedTimeAttack() && 
             timeAttackMode() && 
             timeTimeAttackMode() > 0 &&
-            courseSelectedForTimeAttackMode() == key
+            timeAttackTrackId() == key
     
         ),
         cancel = always_false(),
@@ -1651,7 +1651,7 @@ SpecificLeaderboard =
 
 for data in SpecificLeaderboard
 {
-    leaderboard(
+    leaderboard(    
         title = format("Fastest {1} on {0}",  TrackLookup[data[TRACK]],  ShortCarName[data[CAR]]),
         description = format("Record the fastest time on {0} while driving the Default Car of {1} in Time Trial Mode. Thanks to {2} For the suggestion", TrackLookup[data[TRACK]], CarName[data[CAR]], data[CREATOR]),
         start = 
@@ -1660,7 +1660,7 @@ for data in SpecificLeaderboard
             justFinishedTimeAttack() && 
             timeAttackMode() && 
             timeTimeAttackMode() > 0 &&
-            courseSelectedForTimeAttackMode() == data[TRACK] &&
+            timeAttackTrackId() == data[TRACK] &&
             carCheck(data[CAR]) &&
             isDefaultCar()
         ),
@@ -1680,7 +1680,7 @@ for data in SpecificLeaderboard
                           timeAttackMode() && 
                           timeTimeAttackMode() > 0 &&
                           timeTimeAttackMode() < data[TIME] &&
-                          courseSelectedForTimeAttackMode() == data[TRACK] &&
+                          timeAttackTrackId() == data[TRACK] &&
                           carCheck(data[CAR]) &&
                           isDefaultCar()
 
@@ -1688,6 +1688,7 @@ for data in SpecificLeaderboard
 }
 
 leaderboard(
+        id = 89760,
         title = format("Fastest AE86T on Nagahori in Rain"),
         description = format("Record the fastest time on W Nagahori Wangan Out while driving the Default Car of Toyota Sprinter Trueno in the rain in Time Trial Mode."),
         start = 
@@ -1696,7 +1697,7 @@ leaderboard(
             justFinishedTimeAttack() && 
             timeAttackMode() && 
             timeTimeAttackMode() > 0 &&
-            courseSelectedForTimeAttackMode() == W_NAGAHORI_WANGAN_OUT &&
+            timeAttackTrackId() == W_NAGAHORI_WANGAN_OUT &&
             carCheck(TOYOTA_SPRINTER_TRUENO) &&
             isDefaultCar() &&
             isRaining()
@@ -1715,7 +1716,7 @@ leaderboard(
                           timeAttackMode() && 
                           timeTimeAttackMode() > 0 &&
                           timeTimeAttackMode() < timeConversion(5,15) &&
-                          courseSelectedForTimeAttackMode() == W_NAGAHORI_WANGAN_OUT &&
+                          timeAttackTrackId() == W_NAGAHORI_WANGAN_OUT &&
                           carCheck(TOYOTA_SPRINTER_TRUENO) &&
                           isDefaultCar() &&
                           isRaining()
@@ -1811,23 +1812,23 @@ for info in OsakaWanderers
 }
 
 achievement(title = "Too easy",
-            description = "Win a battle in Quest Mode losing only a small amount (5 percent max)",
+            description = "Win a battle in Quest Mode losing only a small amount (1 percent max)",
             points = 3,
             trigger = justFinishedQuestRace() &&
                       questMode() &&
                       isDriving() &&
                       !demoMode() &&
-                      playerHealth() >= MAX_HEALTH * 0.95
+                      playerHealth() >= MAX_HEALTH * 0.99
             )
 
 achievement(title = "By the skin of your grill",
-            description = "Win a battle in Quest Mode with less than 5 percent health left",
+            description = "Win a battle in Quest Mode with less than 1 percent health left",
             points = 2,
             trigger = justFinishedQuestRace() &&
                       questMode() &&
                       isDriving() &&
                       !demoMode() &&
-                      playerHealth() <= MAX_HEALTH * 0.05
+                      playerHealth() <= MAX_HEALTH * 0.01
             )
 
 
@@ -1878,6 +1879,7 @@ winStreakAchievement("All you do is win", 20)
 
 
 leaderboard(
+    id = 89757,
     title = format("Faster Speed in Quest Mode"),
     description = format("Record the fastest time in Quest Mode"),
     start = 
@@ -1894,6 +1896,7 @@ leaderboard(
 )
 
 leaderboard(
+    id = 89758,
     title = format("Highest Win Combo in Quest Mode"),
     description = format("Record the wins combo counter in Quest Mode"),
     start = 
@@ -1911,8 +1914,9 @@ leaderboard(
 
 
 leaderboard(
+    id = 89759,
     title = format("Longest battle in Quest Mode"),
-    description = format("Record the longest battle over 2 minutes"),
+    description = format("Record the longest battle"),
     start = 
     (
         justFinishedQuestRace() &&
