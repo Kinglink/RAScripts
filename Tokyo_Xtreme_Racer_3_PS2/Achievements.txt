@@ -1,0 +1,188 @@
+111000001:"0xH3af39e!=0_d0xH3af39e=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Rolling Guy:Beat Rolling Guy 1 from Rolling Guy in Quest Mode::::Kinglink:2:::::00000
+111000002:"0xH3af3a4!=0_d0xH3af3a4=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Fine Drive:Beat Shooting star from Fine Drive in Quest Mode::::Kinglink:2:::::00000
+111000003:"0xH3af3ac!=0_d0xH3af3ac=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":SS Limited:Beat Evening Star from SS Limited in Quest Mode::::Kinglink:2:::::00000
+111000004:"0xH3af3f3!=0_d0xH3af3f3=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":The Road of Justice:Beat Hearing Master from The Road of Justice in Quest Mode::::Kinglink:2:::::00000
+111000005:"0xH3af3fa!=0_d0xH3af3fa=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Rings:Beat Outstanding Jackle from Rings in Quest Mode::::Kinglink:2:::::00000
+111000006:"0xH3af3b4!=0_d0xH3af3b4=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Galaxy Racers:Beat Mister Othello from Galaxy Racers in Quest Mode::::Kinglink:2:::::00000
+111000007:"0xH3af3bb!=0_d0xH3af3bb=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Max Racing:Beat Bloody Rose from Max Racing in Quest Mode::::Kinglink:2:::::00000
+111000008:"0xH3af3c3!=0_d0xH3af3c3=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Twister:Beat The Incadescent Flame from Twister in Quest Mode::::Kinglink:2:::::00000
+111000009:"0xH3af402!=0_d0xH3af402=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Ratt:Beat The Monkey from Ratt in Quest Mode::::Kinglink:2:::::00000
+111000010:"0xH3af409!=0_d0xH3af409=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Departures:Beat Happy Chappy from Departures in Quest Mode::::Kinglink:2:::::00000
+111000011:"0xH3af3ca!=0_d0xH3af3ca=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Diamond Image:Beat Lightning Shift, Takuya from Diamond Image in Quest Mode::::Kinglink:2:::::00000
+111000012:"0xH3af3d1!=0_d0xH3af3d1=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Wind Stars:Beat Wolf Requiem from Wind Stars in Quest Mode::::Kinglink:2:::::00000
+111000013:"0xH3af3d8!=0_d0xH3af3d8=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Highway Outlaw:Beat Spirit Crasher from Highway Outlaw in Quest Mode::::Kinglink:2:::::00000
+111000014:"0xH3af40f!=0_d0xH3af40f=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Explosion:Beat Wind Monster from Explosion in Quest Mode::::Kinglink:2:::::00000
+111000015:"0xH3af415!=0_d0xH3af415=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Top Level:Beat Tarmac Suzuki from Top Level in Quest Mode::::Kinglink:2:::::00000
+111000016:"0xH3af3df!=0_d0xH3af3df=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":R.Gangs:Beat Shiver Drift Dancer from R.Gangs in Quest Mode::::Kinglink:2:::::00000
+111000017:"0xH3af3e6!=0_d0xH3af3e6=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Tokio Jungle:Beat Io from Tokio Jungle in Quest Mode::::Kinglink:2:::::00000
+111000018:"0xH3af3ed!=0_d0xH3af3ed=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Cupid Arrows:Beat Sonic Runner from Cupid Arrows in Quest Mode::::Kinglink:2:::::00000
+111000019:"0xH3af41c!=0_d0xH3af41c=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Another Star:Beat Blue Speed from Another Star in Quest Mode::::Kinglink:2:::::00000
+111000020:"0xH3af421!=0_d0xH3af421=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Free Way:Beat The Blue Star from Free Way in Quest Mode::::Kinglink:2:::::00000
+111000021:"0xH3af429!=0_d0xH3af429=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":True Ride:Beat Perfect Driver from True Ride in Quest Mode::::Kinglink:2:::::00000
+111000022:"0xH3af431!=0_d0xH3af431=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Unlimited:Beat Killing Machine from Unlimited in Quest Mode::::Kinglink:2:::::00000
+111000023:"0xH3af439!=0_d0xH3af439=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":R.R.:Beat The Nobleman from R.R. in Quest Mode::::Kinglink:2:::::00000
+111000024:"0xH3af441!=0_d0xH3af441=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Neo Limited:Beat Lemon Flavor from Neo Limited in Quest Mode::::Kinglink:2:::::00000
+111000025:"0xH3af448!=0_d0xH3af448=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Sanjyushi:Beat The Forbidden Privateer from Sanjyushi in Quest Mode::::Kinglink:2:::::00000
+111000026:"0xH3af44e!=0_d0xH3af44e=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Big Wave:Beat The Master from Big Wave in Quest Mode::::Kinglink:2:::::00000
+111000027:"0xH3af456!=0_d0xH3af456=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":A.P.S.:Beat Yokohane's Heavy Fighter from A.P.S. in Quest Mode::::Kinglink:2:::::00000
+111000028:"0xH3af45d!=0_d0xH3af45d=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Commander:Beat Senna's Foot from Commander in Quest Mode::::Kinglink:2:::::00000
+111000029:"0xH3af465!=0_d0xH3af465=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Miracle Dogs:Beat The Sepherd from Miracle Dogs in Quest Mode::::Kinglink:2:::::00000
+111000030:"0xH3af46b!=0_d0xH3af46b=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Speed Master:Beat The Insane moon from Speed Master in Quest Mode::::Kinglink:2:::::00000
+111000031:"0xH3af475!=0_d0xH3af475=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Knife and Forks:Beat Matchless Full Course from Knife and Forks in Quest Mode::::Kinglink:2:::::00000
+111000032:"0xH3af47c!=0_d0xH3af47c=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Team Alpha:Beat Texas Wolf from Team Alpha in Quest Mode::::Kinglink:2:::::00000
+111000033:"0xH3af482!=0_d0xH3af482=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Rhythm Box:Beat Hip-hop Red from Rhythm Box in Quest Mode::::Kinglink:2:::::00000
+111000034:"0xH3af488!=0_d0xH3af488=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Thunder Dragoon:Beat Black Dragon from Thunder Dragoon in Quest Mode::::Kinglink:2:::::00000
+111000035:"0xH3af48f!=0_d0xH3af48f=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Infinity:Beat Marvelous from Infinity in Quest Mode::::Kinglink:2:::::00000
+111000036:"0xH3af4d4!=0_d0xH3af4d4=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Racing Funs:Beat Big Deal from Racing Funs in Quest Mode::::Kinglink:2:::::00000
+111000037:"0xH3af4da!=0_d0xH3af4da=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Real Echo:Beat Steel Dinosaur from Real Echo in Quest Mode::::Kinglink:2:::::00000
+111000038:"0xH3af4df!=0_d0xH3af4df=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Genesis R:Beat Darkness Seven from Genesis R in Quest Mode::::Kinglink:2:::::00000
+111000039:"0xH3af4e4!=0_d0xH3af4e4=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Hot head:Beat Forever Night from Hot head in Quest Mode::::Kinglink:2:::::00000
+111000040:"0xH3af4ea!=0_d0xH3af4ea=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":@-Tention:Beat 4 PRIDE from @-Tention in Quest Mode::::Kinglink:2:::::00000
+111000041:"0xH3af4f1!=0_d0xH3af4f1=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Seeks:Beat Ogre Deity from Seeks in Quest Mode::::Kinglink:2:::::00000
+111000042:"0xH3af4f6!=0_d0xH3af4f6=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":M/R:Beat The flame from M/R in Quest Mode::::Kinglink:2:::::00000
+111000043:"0xH3af4fd!=0_d0xH3af4fd=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Castle Stage:Beat Golden Dolphin from Castle Stage in Quest Mode::::Kinglink:2:::::00000
+111000044:"0xH3af502!=0_d0xH3af502=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Face to Faith:Beat Summer Time Again from Face to Faith in Quest Mode::::Kinglink:2:::::00000
+111000045:"0xH3af509!=0_d0xH3af509=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Willows:Beat The Stomach from Willows in Quest Mode::::Kinglink:2:::::00000
+111000046:"0xH3af50f!=0_d0xH3af50f=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Shake Hips:Beat Sweet Veronica from Shake Hips in Quest Mode::::Kinglink:2:::::00000
+111000047:"0xH3af516!=0_d0xH3af516=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Tribute-J:Beat Atomic Heart from Tribute-J in Quest Mode::::Kinglink:2:::::00000
+111000048:"0xH3af51c!=0_d0xH3af51c=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Purple Bullet:Beat Night Lord from Purple Bullet in Quest Mode::::Kinglink:2:::::00000
+111000049:"0xH3af522!=0_d0xH3af522=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Another Heaven:Beat Brown Satan from Another Heaven in Quest Mode::::Kinglink:2:::::00000
+111000050:"0xH3af529!=0_d0xH3af529=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Flower Dancers:Beat Blue Rose from Flower Dancers in Quest Mode::::Kinglink:2:::::00000
+111000051:"0xH3af52f!=0_d0xH3af52f=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Glory Days:Beat Wind Walker from Glory Days in Quest Mode::::Kinglink:2:::::00000
+111000052:"0xH3af536!=0_d0xH3af536=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":DE LA Speed:Beat Planet HArmony from DE LA Speed in Quest Mode::::Kinglink:2:::::00000
+111000053:"0xH3af53c!=0_d0xH3af53c=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Breath Less:Beat 2nd Generation Landlady from Breath Less in Quest Mode::::Kinglink:2:::::00000
+111000054:"0xH3af556!=0_d0xH3af556=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Nippon-Bashi:Beat Humanoid Precision from Nippon-Bashi in Quest Mode::::Kinglink:2:::::00000
+111000055:"0xH3af55d!=0_d0xH3af55d=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Vip Project:Beat Burning Passion from Vip Project in Quest Mode::::Kinglink:2:::::00000
+111000056:"0xH3af564!=0_d0xH3af564=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Drifters:Beat Rokko from Drifters in Quest Mode::::Kinglink:2:::::00000
+111000057:"0xH3af56a!=0_d0xH3af56a=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":First Lady:Beat Provactive Secretary from First Lady in Quest Mode::::Kinglink:2:::::00000
+111000058:"0xH3af571!=0_d0xH3af571=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Birken Club:Beat Lucky Come Come from Birken Club in Quest Mode::::Kinglink:2:::::00000
+111000059:"0xH3af577!=0_d0xH3af577=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":TuTenKaku:Beat Passion Runner from TuTenKaku in Quest Mode::::Kinglink:2:::::00000
+111000060:"0xH3af57d!=0_d0xH3af57d=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":No Loser:Beat Naniwa Warship from No Loser in Quest Mode::::Kinglink:2:::::00000
+111000061:"0xH3af583!=0_d0xH3af583=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Home Run:Beat Angry Hoshino from Home Run in Quest Mode::::Kinglink:2:::::00000
+111000062:"0xH3af58b!=0_d0xH3af58b=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Millennium 2:Beat Final Revolution from Millennium 2 in Quest Mode::::Kinglink:2:::::00000
+111000063:"0xH3af591!=0_d0xH3af591=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Miyabi:Beat Meteor Storm from Miyabi in Quest Mode::::Kinglink:2:::::00000
+111000064:"0xH3af598!=0_d0xH3af598=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Baldy's:Beat The Captain from Baldy's in Quest Mode::::Kinglink:2:::::00000
+111000065:"0xH3af59e!=0_d0xH3af59e=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Low Position:Beat Anti-Gravity Dimension from Low Position in Quest Mode::::Kinglink:2:::::00000
+111000066:"0xH3af5a4!=0_d0xH3af5a4=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Perfect Works:Beat Kishiwada Crisis from Perfect Works in Quest Mode::::Kinglink:2:::::00000
+111000067:"0xH3af5aa!=0_d0xH3af5aa=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Team Kengo:Beat The Old Man from Team Kengo in Quest Mode::::Kinglink:2:::::00000
+111000068:"0xH3af5b0!=0_d0xH3af5b0=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":G.R.O.:Beat Angry Naito from G.R.O. in Quest Mode::::Kinglink:2:::::00000
+111000069:"0xH3af5b8!=0_d0xH3af5b8=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Night Wing:Beat Gold Wing from Night Wing in Quest Mode::::Kinglink:2:::::00000
+111000070:"0xH3af5be!=0_d0xH3af5be=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Univer-Saru:Beat Jurassic Period Shikkyusha from Univer-Saru in Quest Mode::::Kinglink:2:::::00000
+111000071:"0xH3af5c5!=0_d0xH3af5c5=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Shoryu Group:Beat Dragon of Sakai from Shoryu Group in Quest Mode::::Kinglink:2:::::00000
+111000072:"0xH3af5cc!=0_d0xH3af5cc=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Kaze:Beat Miracle Divine Wind from Kaze in Quest Mode::::Kinglink:2:::::00000
+111000073:"0xH3af5d3!=0_d0xH3af5d3=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Harisen Chop:Beat Nishi Nagahori Justice from Harisen Chop in Quest Mode::::Kinglink:2:::::00000
+111000074:"0xH3af5da!=0_d0xH3af5da=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Darts:Beat God's Estuary from Darts in Quest Mode::::Kinglink:2:::::00000
+111000075:"0xH3af496!=0_d0xH3af496=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Betrayal Jack Knife:Beat Betrayal Jack Knife in Quest Mode::::Kinglink:2:::::00000
+111000076:"0xH3af497!=0_d0xH3af497=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Blood Hound:Beat Blood Hound in Quest Mode::::Kinglink:2:::::00000
+111000077:"0xH3af498!=0_d0xH3af498=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Dejected Angel:Beat Dejected Angel in Quest Mode::::Kinglink:2:::::00000
+111000078:"0xH3af499!=0_d0xH3af499=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Steal Heart:Beat Steal Heart in Quest Mode::::Kinglink:2:::::00000
+111000079:"0xH3af49a!=0_d0xH3af49a=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Dying Star:Beat Dying Star in Quest Mode::::Kinglink:2:::::00000
+111000080:"0xH3af49b!=0_d0xH3af49b=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Midnight Rose:Beat Midnight Rose in Quest Mode::::Kinglink:2:::::00000
+111000081:"0xH3af49c!=0_d0xH3af49c=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Pursuit Tailgunner:Beat Pursuit Tailgunner in Quest Mode::::Kinglink:2:::::00000
+111000082:"0xH3af49d!=0_d0xH3af49d=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Shadow Eyes:Beat Shadow Eyes in Quest Mode::::Kinglink:2:::::00000
+111000083:"0xH3af49e!=0_d0xH3af49e=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Pluto:Beat Pluto in Quest Mode::::Kinglink:2:::::00000
+111000084:"0xH3af49f!=0_d0xH3af49f=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":The Red Devil:Beat The Red Devil in Quest Mode::::Kinglink:2:::::00000
+111000085:"0xH3af4a0!=0_d0xH3af4a0=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Jintei:Beat Jintei in Quest Mode::::Kinglink:2:::::00000
+111000086:"0xH3af543!=0_d0xH3af543=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Flame Dragon:Beat Flame Dragon in Quest Mode::::Kinglink:2:::::00000
+111000087:"0xH3af544!=0_d0xH3af544=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":J:Beat J in Quest Mode::::Kinglink:2:::::00000
+111000088:"0xH3af545!=0_d0xH3af545=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":The rook:Beat The rook in Quest Mode::::Kinglink:2:::::00000
+111000089:"0xH3af546!=0_d0xH3af546=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":The Bishop:Beat The Bishop in Quest Mode::::Kinglink:2:::::00000
+111000090:"0xH3af547!=0_d0xH3af547=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":The Knight:Beat The Knight in Quest Mode::::Kinglink:2:::::00000
+111000091:"0xH3af4a1!=0_d0xH3af4a1=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Rikochan:Beat Wanderer Rikochan in Quest Mode::::Kinglink:2:::::00000
+111000092:"0xH3af4a2!=0_d0xH3af4a2=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":The Divine Wind:Beat Wanderer The Divine Wind in Quest Mode::::Kinglink:2:::::00000
+111000093:"0xH3af4a3!=0_d0xH3af4a3=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":White Tiger:Beat Wanderer White Tiger in Quest Mode::::Kinglink:2:::::00000
+111000094:"0xH3af4a4!=0_d0xH3af4a4=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Immortal Clown:Beat Wanderer Immortal Clown in Quest Mode::::Kinglink:2:::::00000
+111000095:"0xH3af4a5!=0_d0xH3af4a5=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Sorrow SIX STAR:Beat Wanderer Sorrow SIX STAR in Quest Mode::::Kinglink:2:::::00000
+111000096:"0xH3af4a6!=0_d0xH3af4a6=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Straying Idol Freak:Beat Wanderer Straying Idol Freak in Quest Mode::::Kinglink:2:::::00000
+111000097:"0xH3af4a7!=0_d0xH3af4a7=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Bloody Mary:Beat Wanderer Bloody Mary in Quest Mode::::Kinglink:2:::::00000
+111000098:"0xH3af4a8!=0_d0xH3af4a8=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Illusion B:Beat Wanderer Illusion B in Quest Mode::::Kinglink:2:::::00000
+111000099:"0xH3af4a9!=0_d0xH3af4a9=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Caffeine X3:Beat Wanderer Caffeine X3 in Quest Mode::::Kinglink:2:::::00000
+111000100:"0xH3af4aa!=0_d0xH3af4aa=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Paul Suzuki:Beat Wanderer Paul Suzuki in Quest Mode::::Kinglink:2:::::00000
+111000101:"0xH3af4ab!=0_d0xH3af4ab=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Funabashi Hooligan:Beat Wanderer Funabashi Hooligan in Quest Mode::::Kinglink:2:::::00000
+111000102:"0xH3af4ac!=0_d0xH3af4ac=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Rolling Master:Beat Wanderer Rolling Master in Quest Mode::::Kinglink:2:::::00000
+111000103:"0xH3af4ad!=0_d0xH3af4ad=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":The Death Driver:Beat Wanderer The Death Driver in Quest Mode::::Kinglink:2:::::00000
+111000104:"0xH3af4ae!=0_d0xH3af4ae=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Shutokou Leader:Beat Wanderer Shutokou Leader in Quest Mode::::Kinglink:2:::::00000
+111000105:"0xH3af4af!=0_d0xH3af4af=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Mosquito Lemon:Beat Wanderer Mosquito Lemon in Quest Mode::::Kinglink:2:::::00000
+111000106:"0xH3af4b0!=0_d0xH3af4b0=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Wild Child:Beat Wanderer Wild Child in Quest Mode::::Kinglink:2:::::00000
+111000107:"0xH3af4b1!=0_d0xH3af4b1=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Crossroad Queen:Beat Wanderer Crossroad Queen in Quest Mode::::Kinglink:2:::::00000
+111000108:"0xH3af4b2!=0_d0xH3af4b2=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Yellow Desperado:Beat Wanderer Yellow Desperado in Quest Mode::::Kinglink:2:::::00000
+111000109:"0xH3af4b3!=0_d0xH3af4b3=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Gold License:Beat Wanderer Gold License in Quest Mode::::Kinglink:2:::::00000
+111000110:"0xH3af4b4!=0_d0xH3af4b4=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Master Position:Beat Wanderer Master Position in Quest Mode::::Kinglink:2:::::00000
+111000111:"0xH3af4b5!=0_d0xH3af4b5=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Glamorous Mami:Beat Wanderer Glamorous Mami in Quest Mode::::Kinglink:2:::::00000
+111000112:"0xH3af4b6!=0_d0xH3af4b6=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Raspberry Kiss:Beat Wanderer Raspberry Kiss in Quest Mode::::Kinglink:2:::::00000
+111000113:"0xH3af4b7!=0_d0xH3af4b7=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Kaoru:Beat Wanderer Kaoru in Quest Mode::::Kinglink:2:::::00000
+111000114:"0xH3af4b8!=0_d0xH3af4b8=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Cutie Hip:Beat Wanderer Cutie Hip in Quest Mode::::Kinglink:2:::::00000
+111000115:"0xH3af4b9!=0_d0xH3af4b9=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Drift Samurai:Beat Wanderer Drift Samurai in Quest Mode::::Kinglink:2:::::00000
+111000116:"0xH3af4ba!=0_d0xH3af4ba=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Silver Wolf:Beat Wanderer Silver Wolf in Quest Mode::::Kinglink:2:::::00000
+111000117:"0xH3af4bb!=0_d0xH3af4bb=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":VIP Style:Beat Wanderer VIP Style in Quest Mode::::Kinglink:2:::::00000
+111000118:"0xH3af4bc!=0_d0xH3af4bc=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Dirty HATO:Beat Wanderer Dirty HATO in Quest Mode::::Kinglink:2:::::00000
+111000119:"0xH3af4bd!=0_d0xH3af4bd=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":PAst 12 o'clock Cinderella:Beat Wanderer PAst 12 o'clock Cinderella in Quest Mode::::Kinglink:2:::::00000
+111000120:"0xH3af4be!=0_d0xH3af4be=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Golden Wolf:Beat Wanderer Golden Wolf in Quest Mode::::Kinglink:2:::::00000
+111000121:"0xH3af4bf!=0_d0xH3af4bf=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Mark of Outburst:Beat Wanderer Mark of Outburst in Quest Mode::::Kinglink:2:::::00000
+111000122:"0xH3af4c0!=0_d0xH3af4c0=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":ZERO:Beat Wanderer ZERO in Quest Mode::::Kinglink:2:::::00000
+111000123:"0xH3af4c1!=0_d0xH3af4c1=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":White Dragon Revolution:Beat Wanderer White Dragon Revolution in Quest Mode::::Kinglink:2:::::00000
+111000124:"0xH3af4c2!=0_d0xH3af4c2=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Late Night Salesman:Beat Wanderer Late Night Salesman in Quest Mode::::Kinglink:2:::::00000
+111000125:"0xH3af4c3!=0_d0xH3af4c3=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Osaka Blond:Beat Wanderer Osaka Blond in Quest Mode::::Kinglink:2:::::00000
+111000126:"0xH3af4c4!=0_d0xH3af4c4=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Gentle Rain:Beat Wanderer Gentle Rain in Quest Mode::::Kinglink:2:::::00000
+111000127:"0xH3af4c5!=0_d0xH3af4c5=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Electric Shark:Beat Wanderer Electric Shark in Quest Mode::::Kinglink:2:::::00000
+111000128:"0xH3af4c6!=0_d0xH3af4c6=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Exotic Butterfly:Beat Wanderer Exotic Butterfly in Quest Mode::::Kinglink:2:::::00000
+111000129:"0xH3af4c7!=0_d0xH3af4c7=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Night Rocket:Beat Wanderer Night Rocket in Quest Mode::::Kinglink:2:::::00000
+111000130:"0xH3af4c8!=0_d0xH3af4c8=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":SPEED BOX:Beat Wanderer SPEED BOX in Quest Mode::::Kinglink:2:::::00000
+111000131:"0xH3af4c9!=0_d0xH3af4c9=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":I, Shiotani:Beat Wanderer I, Shiotani in Quest Mode::::Kinglink:2:::::00000
+111000132:"0xH3af4ca!=0_d0xH3af4ca=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":S. Agata Cattle:Beat Wanderer S. Agata Cattle in Quest Mode::::Kinglink:2:::::00000
+111000133:"0xH3af4cb!=0_d0xH3af4cb=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Ghost Soul:Beat Wanderer Ghost Soul in Quest Mode::::Kinglink:2:::::00000
+111000134:"0xH3af4cc!=0_d0xH3af4cc=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":The Surf Goblin:Beat Wanderer The Surf Goblin in Quest Mode::::Kinglink:2:::::00000
+111000135:"0xH3af4cd!=0_d0xH3af4cd=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Mr. N-zuka:Beat Wanderer Mr. N-zuka in Quest Mode::::Kinglink:2:::::00000
+111000136:"0xH3af4ce!=0_d0xH3af4ce=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":NOB:Beat Wanderer NOB in Quest Mode::::Kinglink:2:::::00000
+111000137:"0xH3af4cf!=0_d0xH3af4cf=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Armadillo:Beat Wanderer Armadillo in Quest Mode::::Kinglink:2:::::00000
+111000138:"0xH3af4d0!=0_d0xH3af4d0=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Obi-Wan Kenori:Beat Wanderer Obi-Wan Kenori in Quest Mode::::Kinglink:2:::::00000
+111000139:"0xH3af4d1!=0_d0xH3af4d1=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Yamaachi:Beat Wanderer Yamaachi in Quest Mode::::Kinglink:2:::::00000
+111000140:"0xH3af4d2!=0_d0xH3af4d2=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Let's GO!:Beat Wanderer Let's GO! in Quest Mode::::Kinglink:2:::::00000
+111000141:"0xH3af548!=0_d0xH3af548=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Hyper Groove:Beat Wanderer Hyper Groove in Quest Mode::::Kinglink:2:::::00000
+111000142:"0xH3af549!=0_d0xH3af549=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Snow Dancer:Beat Wanderer Snow Dancer in Quest Mode::::Kinglink:2:::::00000
+111000143:"0xH3af54a!=0_d0xH3af54a=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Maniac Bun Bun Maru:Beat Wanderer Maniac Bun Bun Maru in Quest Mode::::Kinglink:2:::::00000
+111000144:"0xH3af54b!=0_d0xH3af54b=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Midnight Black Sun:Beat Wanderer Midnight Black Sun in Quest Mode::::Kinglink:2:::::00000
+111000145:"0xH3af54c!=0_d0xH3af54c=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":White Leopard:Beat Wanderer White Leopard in Quest Mode::::Kinglink:2:::::00000
+111000146:"0xH3af54d!=0_d0xH3af54d=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Fascinating Magician:Beat Wanderer Fascinating Magician in Quest Mode::::Kinglink:2:::::00000
+111000147:"0xH3af54e!=0_d0xH3af54e=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":100,000 km Rotary:Beat Wanderer 100,000 km Rotary in Quest Mode::::Kinglink:2:::::00000
+111000148:"0xH3af54f!=0_d0xH3af54f=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":YV Gen-san:Beat Wanderer YV Gen-san in Quest Mode::::Kinglink:2:::::00000
+111000149:"0xH3af550!=0_d0xH3af550=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Phantom Spectacle:Beat Wanderer Phantom Spectacle in Quest Mode::::Kinglink:2:::::00000
+111000150:"0xH3af551!=0_d0xH3af551=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Kuso Chimpan:Beat Wanderer Kuso Chimpan in Quest Mode::::Kinglink:2:::::00000
+111000151:"0xH3af552!=0_d0xH3af552=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Turbo Man:Beat Wanderer Turbo Man in Quest Mode::::Kinglink:2:::::00000
+111000152:"0xH3af553!=0_d0xH3af553=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":WEST No. 5:Beat Wanderer WEST No. 5 in Quest Mode::::Kinglink:2:::::00000
+111000153:"0xH3af554!=0_d0xH3af554=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Cram Instructor:Beat Wanderer Cram Instructor in Quest Mode::::Kinglink:2:::::00000
+111000154:"0xH3af555!=0_d0xH3af555=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Shocking White Dog:Beat Wanderer Shocking White Dog in Quest Mode::::Kinglink:2:::::00000
+111000155:"0xH3af5e3!=0_d0xH3af5e3=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":POU@MSR:Beat Wanderer POU@MSR in Quest Mode::::Kinglink:2:::::00000
+111000156:"0xH3af5e4!=0_d0xH3af5e4=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Mistral@MSR:Beat Wanderer Mistral@MSR in Quest Mode::::Kinglink:2:::::00000
+111000157:"0xH3af5e5!=0_d0xH3af5e5=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":EIC@MSR:Beat Wanderer EIC@MSR in Quest Mode::::Kinglink:2:::::00000
+111000158:"0xH3af5e6!=0_d0xH3af5e6=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Sports Newspaper Mania:Beat Wanderer Sports Newspaper Mania in Quest Mode::::Kinglink:2:::::00000
+111000159:"0xH3af5e7!=0_d0xH3af5e7=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Night King:Beat Wanderer Night King in Quest Mode::::Kinglink:2:::::00000
+111000160:"0xH3af5e8!=0_d0xH3af5e8=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":FD Tomo-san:Beat Wanderer FD Tomo-san in Quest Mode::::Kinglink:2:::::00000
+111000161:"0xH3af5e9!=0_d0xH3af5e9=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Beat Ignition:Beat Wanderer Beat Ignition in Quest Mode::::Kinglink:2:::::00000
+111000162:"0xH3af5ea!=0_d0xH3af5ea=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Jet-Black:Beat Wanderer Jet-Black in Quest Mode::::Kinglink:2:::::00000
+111000163:"0xH3af5eb!=0_d0xH3af5eb=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Wangan Runner:Beat Wanderer Wangan Runner in Quest Mode::::Kinglink:2:::::00000
+111000164:"0xH3af5ec!=0_d0xH3af5ec=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Fire Legend:Beat Wanderer Fire Legend in Quest Mode::::Kinglink:2:::::00000
+111000165:"0xH3af5ed!=0_d0xH3af5ed=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Orimabu:Beat Wanderer Orimabu in Quest Mode::::Kinglink:2:::::00000
+111000166:"0xH3af5ee!=0_d0xH3af5ee=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Stalker Hammer:Beat Wanderer Stalker Hammer in Quest Mode::::Kinglink:2:::::00000
+111000167:"0xH3af5ef!=0_d0xH3af5ef=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Radiant Storm:Beat Wanderer Radiant Storm in Quest Mode::::Kinglink:2:::::00000
+111000168:"0xH3af5f0!=0_d0xH3af5f0=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":YOO@TFB:Beat Wanderer YOO@TFB in Quest Mode::::Kinglink:2:::::00000
+111000169:"0xH3af5f1!=0_d0xH3af5f1=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Magazine:Beat Wanderer Magazine in Quest Mode::::Kinglink:2:::::00000
+111000170:"0xH3af5f2!=0_d0xH3af5f2=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Whiurlwind Fanfare:Beat Wanderer Whiurlwind Fanfare in Quest Mode::::Kinglink:2:::::00000
+111000171:"0xH3af5f3!=0_d0xH3af5f3=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":Mister Orange Road:Beat Wanderer Mister Orange Road in Quest Mode::::Kinglink:2:::::00000
+111000172:"0xH3af5f4!=0_d0xH3af5f4=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":The Pinball:Beat Wanderer The Pinball in Quest Mode::::Kinglink:2:::::00000
+111000173:"0xH3af5f5!=0_d0xH3af5f5=0_0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1":The Driver:Beat Wanderer The Driver in Quest Mode::::Kinglink:2:::::00000
+111000174:"0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1_0x 41e959>19335":Too easy:Win a battle in Quest Mode losing only a small amount (1 percent max)::::Kinglink:3:::::00000
+111000175:"0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1_0x 41e959<=195":By the skin of your grill:Win a battle in Quest Mode with less than 1 percent health left::::Kinglink:2:::::00000
+111000176:"0xH41e90c=1_d0xH41e90c=0_0xH8052d2=0_0xH3461e0=2_0xH3394ab=1_0xX3565b4>=7200":All Night Battle:Win a battle in Quest Mode that lasted for more than 2 minutes::::Kinglink:2:::::00000
+111000177:"0xH8052d2=0_0xH3461e0=2_0xH3394ab=1_fF82d8ac>=100_dfF82d8ac<100":Speed Boy:Reach 100 MPH in quest mode::::Kinglink:2:::::00000
+111000178:"0xH8052d2=0_0xH3461e0=2_0xH3394ab=1_fF82d8ac>=150_dfF82d8ac<150":Speed Demon:Reach 150 MPH in quest mode::::Kinglink:2:::::00000
+111000179:"0xH8052d2=0_0xH3461e0=2_0xH3394ab=1_fF82d8ac>=200_dfF82d8ac<200":Speed King:Reach 200 MPH in quest mode::::Kinglink:2:::::00000
+111000180:"0xH8052d2=0_0xH3461e0=2_0xH3394ab=1_fF82d8ac>=230_dfF82d8ac<230":Speed God:Reach 230 MPH in quest mode::::Kinglink:2:::::00000
+111000181:"0xH8052d2=0_0xH3461e0=2_0xH3394ab=1_0x 41eaaa=10_d0x 41eaaa<10":Are they even trying?:Have a 10 win streak in quest mode::::Kinglink:2:::::00000
+111000182:"0xH8052d2=0_0xH3461e0=2_0xH3394ab=1_0x 41eaaa=15_d0x 41eaaa<15":No one can stop you:Have a 15 win streak in quest mode::::Kinglink:2:::::00000
+111000183:"0xH8052d2=0_0xH3461e0=2_0xH3394ab=1_0x 41eaaa=20_d0x 41eaaa<20":All you do is win:Have a 20 win streak in quest mode::::Kinglink:2:::::00000
+111000187:"0xH3461e0=2_0xH3394ab=1_0xH41e90c=4_d0xH41e90c=0_0xH8052d2=1_0xX41eb4c!=0_0xX41eb4c<18000_0xX82bd90=1129065913_0xH806ad0=19_0xH3aebba=5":King of C1:"Beat 5:00 on Shibakouen C1 Outer Loop while driving the Default Car of Mitsubishi Lancer Evolution V in Time Trial Mode.  Thanks to Borysewicz for designing this achievement"::::Kinglink:5:::::00000
+111000188:"0xH3461e0=2_0xH3394ab=1_0xH41e90c=4_d0xH41e90c=0_0xH8052d2=1_0xX41eb4c!=0_0xX41eb4c<21600_0xX82bd90=1158280624_0xH806ad0=13_0xH3aebba=5":King of ShinKanjou:"Beat 6:00 on Daiba ShinKanjou CWL while driving the Default Car of Nissan 180SX in Time Trial Mode.  Thanks to jintei for designing this achievement"::::Kinglink:5:::::00000
+111000189:"0xH3461e0=2_0xH3394ab=1_0xH41e90c=4_d0xH41e90c=0_0xH8052d2=1_0xX41eb4c!=0_0xX41eb4c<6480_0xX82bd90=1175707026_0xH806ad0=21_0xH3aebba=5":King of Osaka:"Beat 1:48 on Shinanobashi Kanjou Shortcut while driving the Default Car of Mitsubishi GTO in Time Trial Mode.  Thanks to WeerDough for designing this achievement"::::Kinglink:5:::::00000
+111000190:"0xH3461e0=2_0xH3394ab=1_0xH41e90c=4_d0xH41e90c=0_0xH8052d2=1_0xX41eb4c!=0_0xX41eb4c<10800_0xX82bd90=1158574630_0xH806ad0=3_0xH3aebba=5":King of Nagoya:"Beat 3:00 on Meieki Nagoya Kanjou while driving the Default Car of Nissan Skyline GT-R in Time Trial Mode.  Thanks to letdowNN for designing this achievement"::::Kinglink:5:::::00000
+111000191:"0xH3461e0=2_0xH3394ab=1_0xH41e90c=4_d0xH41e90c=0_0xH8052d2=1_0xX41eb4c!=0_0xX41eb4c<18900_0xX82bd90=1166404348_0xH806ad0=34_0xH3aebba=5_0xH352544=1":Time to deliver some Tofu:"Beat 5:15 on N WNagahori Wangan Out while driving the Default Car of Toyota Sprinter Trueno in the rain in Time Trial Mode."::::Kinglink:3:::::00000
