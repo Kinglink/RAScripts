@@ -1138,7 +1138,7 @@ function osakaBeatMemoryLocation() => 0x3AF556
 function raceResult() => byte(0x41E90C)
 RESULT_NONE_VALUE = 0x00
 RESULT_WIN_VALUE = 0x01
-RESULT_GOAL_VALUE = 0x04
+RESULT_GOAL_VALUE = 0x0d
 
 function justFinishedTimeAttack() => raceResult() == RESULT_GOAL_VALUE && prev(raceResult()) == RESULT_NONE_VALUE
 function justFinishedQuestRace() => raceResult() == RESULT_WIN_VALUE && prev(raceResult()) == RESULT_NONE_VALUE
@@ -1178,7 +1178,20 @@ function todayMaxWinCombo() => byte(0x41EEF0)
 //          0x03 = Versus
 //          0x07 = Demo Mode
 //          0x08 = Replay Theater
-function gameMode() => byte(0x8052D2)
+// This fails when you set up rain in Time attack mode. 
+function gameModeFailed() => byte(0x8052D2)
+
+// $80ec58: (8-bit) Game Mode while Driving 
+// 
+//          0x00 = Quest Mode Or Main Menu
+//          0x01 = Time attack
+//          0x02 = Free Run
+//          0x03 = Versus
+//          0x07 = Demo Mode
+//          0x08 = Replay Theater
+// 
+// (Exiting gameplay appears to work too) 
+function gameMode() => byte(0x80ec58)
 
 QUEST_MODE_VALUE = 0x00
 TIME_ATTACK_MODE_VALUE = 0x01
@@ -1485,7 +1498,7 @@ function courseSelectedForTimeAttackMode() => byte(0x17F595E)
 //          0x461bfc99 = Yotsuhashi Kanjou Long
 //          0x45f5e83c = Shiomibashi Sakai Out
 //          0x45ead4df = Sakai Sakai In
-//          0x4585eafc = W. Nagahori Wangan Out
+//          0x4585eefc = W. Nagahori Wangan Out
 //          0x456fe94c = Oohama Wangan In
 function timeAttackTrackId() => dword(0x82BD90)
 
@@ -1511,7 +1524,7 @@ SHINANOBASHI_KANJOU_SHORTCUT = 0x4613DD92
 YOTSUHASHI_KANJOU_LONG = 0x461BFC99
 SHIOMIBASHI_SAKAI_OUT = 0x45F5E83C 
 SAKAI_IN = 0x45EAD4DF
-W_NAGAHORI_WANGAN_OUT = 0x4585EAFC
+W_NAGAHORI_WANGAN_OUT = 0x4585EEFC
 OOHAMA_WANGAN_IN = 0x456FE94C
 
 
