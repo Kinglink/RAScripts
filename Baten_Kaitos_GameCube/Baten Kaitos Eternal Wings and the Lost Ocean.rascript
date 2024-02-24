@@ -67,7 +67,7 @@ function resetSaveProtection() => never(loadIndicator() != LOADING_FILE_VALUE)
 // $1EDD55: (24-bit BE) Pointer to Mindeer Info
 //          
 //          +0x700C= (32-bit BE) Number of Magnus found in Mindeer minigame
-function pointerToMindeer() => dword_be(0x1EDD55)
+function pointerToMindeer() => tbyte_be(0x1EDD55)
 
 MINDEER_MINI_GAME_MAGNUS_COUNT_OFFSET = 0x700C
 
@@ -103,7 +103,7 @@ function mindeerMinigameCheck(magnusTarget) => mindeerMinigameMagnusCount() == m
 //          bit27 = Red Necklace
 //          bit28 = Green Ring
 //          bit29 = Balance
-VALUABLE_ITEM_MEMORY_LOCATION => 0x2494E4
+VALUABLE_ITEM_MEMORY_LOCATION = 0x2494E4
 function valuableItems() => dword(VALUABLE_ITEM_MEMORY_LOCATION)
 
 JET_BOOTS_BIT = 25 
@@ -1044,21 +1044,32 @@ function majorScriptId() => dword_be(0x249CC4)
 //          0x04 = Lyude
 //          0x05 = Sayvna
 //          0x06 = Mitzuki
-function characterOrder() => byte(0x249CCC)
+CHARACTER_ORDER_LOCATION = 0x249CCC
+function characterOrder() => byte(CHARACTER_ORDER_LOCATION)
 
 // $249CE3: (8-bit) Kalas - Class
 //          
 //          0x01-0x06
 //          
 //          This is the controls the Combo Max, and Deck Size.
-function kalasClass() => byte(0x249CE3)
+KALAS_CLASS_LOCATION = 0x249CE3
+function kalasClass() => byte(KALAS_CLASS_LOCATION)
 
 // $249D27: (8-bit) Xelha - Class
 //          
 //          0x01-0x06
 //          
 //          This is the controls the Combo Max, and Deck Size.
-function xelhaClass() => byte(0x249D27)
+XELHA_CLASS_LOCATION = 0x249D27
+function xelhaClass() => byte(XELHA_CLASS_LOCATION)
+
+// This could grab all the locations manually but let's just math them. 
+CLASS_OFFSET = XELHA_CLASS_LOCATION - KALAS_CLASS_LOCATION
+
+// Values from 0x01-0x06 so let's start 1 more value back. 
+CLASS_STARTING_VALUE = KALAS_CLASS_LOCATION - CLASS_OFFSET
+
+function classValue(characterId) => byte(CLASS_STARTING_VALUE + (CLASS_OFFSET * characterId))
 
 // $251B7C: (32-bit BE) Money
 //          
@@ -1188,6 +1199,30 @@ function magnusDisplayIssue17() => 0x251BCE
 //          NO BITS USED
 function magnusDisplayIssue18() => 0x251BCF
 
+// $251bd4: (bitfield) Magnus Display Special Cards
+// 
+//          bit0 = Frozen Tangerine
+//          bit1 = Melon
+//          bit2 = Pac-Man
+//          bit3 = Pac-Land
+//          bit4 = Pac-Mania
+//          bit5 = Peach
+//          bit6 = The Peach Boy
+//          bit7 = Wonder MOMO
+function specialCards() => 0x251bd4
+
+// $251be1: (bitfield) Magnus Display Special Cards
+//
+//          bit0 = Conditioner
+//          bit1 = Hair Aftercare
+//          bit2 = Hair Dryer
+//          bit3 = Rare Action Figure (Kosmos) 
+//          bit4 = Sweetheart Picture
+//          bit5 = Broken Heart Picture 
+//          bit6 = Nostalgic Picture
+//          bit7 = Cursed Picture
+function specialCards2() => 0x251be1
+
 // $251BF4: (bitfield) Magnus Display Field Issue
 //          
 //          bit0 = NOT USED
@@ -1303,7 +1338,99 @@ function magnusDisplayIssue38() => 0x251C14
 //          Other Values not recorded at this time
 function magnusDisplayIssue39() => 0x251C15
 
-// $251C18: (1216-bit  bitflag ) Magnus Seen Bitflag
+
+// NOTE: The following are repeats of the above values, but 
+// $251BF4: (bitfield) Magnus Display Field Issue and Boss cards
+//          
+//          bit0 = NOT USED
+//          bit1 = Folon
+//          bit2 = NOT USED
+//          bit3 = Kalas -- Angel of Darkness
+//          bit4 = Agyo
+//          bit5 = Malpercio
+//          bit6 = Wizard Shadow
+//          bit7 = NOT USED
+function bossCards1() => 0x251BF4
+
+// $251BF5: (bitfield) Magnus Display Field Issue and Boss cards
+//          
+//          bit0 = NOT USED
+//          bit1 = Ayme
+//          bit2 = Geldoblame
+//          bit3 = Naiad
+//          bit4 = Thalassa
+//          bit5 = Despina
+//          bit6 = Galatea
+//          bit7 = Goddess of Ice
+function bossCards2() => 0x251BF5
+
+// $251BF6: (bitfield) Magnus Display Field Issue and Boss cards
+//          
+//          bit0 = Iron Beetle I
+//          bit1 = Iron Beetle II
+//          bit2 = Tree Guardian
+//          bit3 = Magnus Giganticus
+//          bit4 =Sikri
+//          bit5 =Phantasm
+//          bit6 =Giacomo
+//          bit7 = NOT USED
+function bossCards3() => 0x251BF6
+
+// $251BF7: (bitfield) Magnus Display Boss Cards
+//          
+//          bit2 = Sabre Dragon
+//          bit3 = Lord of the Spring
+//          bit4 = Thunderfish
+//          bit5 = Iron Beetle V
+//          bit6 = Lord of The Winds
+//          bit7 = Gnosis
+function bossCards4() => 0x251BF7
+
+// $251BFA: (bitfield) Magnus Display Field Issue and Boss cards
+//          
+//          bit0 = NOT USED
+//          bit1 = NOT USED
+//          bit2 = Ungyo
+//          bit3 = Imperial Soldier
+//          bit4 = Imperial Elite
+//          bit5 = Imperial Blackhelm
+function bossCards5() => 0x251BFA
+
+// $251BFB: (bitfield) Magnus Display Field Issue and Boss cards
+//          
+//          bit0 = NOT USED
+//          bit1 = NOT USED
+//          bit2 = NOT USED
+//          bit3 = Sibling God: He
+//          bit4 = Sibling God: Che
+//          bit5 = Sibling God: Bo
+//          bit6 = Sibling God: Ar
+//          bit7 = Sibling God: Le
+function bossCards6() => 0x251BFB
+
+// $251c00: (bitfield) Magnus Display Field Issue and Boss Cards
+//
+//          bit1 = Nunkirantula
+//          bit2 = Tentacle
+//          bit3-bit7 = NOT USED
+function bossCards7() => 0x251c00
+
+// $251c01: (bitfield) Magnus Display Field Issue and Boss cards
+//          
+//          bit0 = Brolokis
+//          bit1 = Rampulus
+//          bit2 = NOT USED
+//          bit3 = NOT USED
+//          bit4 = Fadroh
+//          bit5 = Sowzana
+function bossCards8() => 0x251c01
+
+// $251c02 (bitfield) Magnus Display Boss Cards
+// 
+//          bit7 = Kulcabaran
+function bossCards9() => 0x251c02
+
+// $251C18: (1216-bit  bitflag) Magnus Seen Bitflag
 function magnusSeenStart() => 0x251C18
 
 // $251c27: (bitfield) Magnus seen 
@@ -2147,12 +2274,13 @@ function musicGathering8() => byte(0x26183F)
 //          bit7 = UNUSED
 function musicGathering9() => byte(0x261840)
 
-// $88CE48: (16-bit BE) Hand Value  1
-//          
+// $3efccd: (24-bit BE)  Pointer to Hand Information
+//
+//          +0x1309= (8-bit) Hand Value 1
 //          Note: this will cause memory issues if it's not a valid target.
-//          
+//
 //          If this is 0x0000 ALL hands are not shown.
-//          
+//
 //          0x0000 = No Display.
 //          0x0001 = No Display but don't block other rows.
 //          0x0002-f = Straights  Evens straight X/2+1   Odds Straight with 9s
@@ -2183,77 +2311,21 @@ function musicGathering9() => byte(0x261840)
 //          0x0026 = 9 cards
 //          0x0027 = 9 cards with 9
 //          0x0028 = Voice
-//          
-//          0x0011 = Final Straight Sunrise
-//          0x0012
-//          0x0002 = 2 cards
-//          0x0003 = 2 cards with 9
-function handValue1() => word_be(0x88CE48)
+//          +0x130b= (8-bit) Hand Power 1
+//          +0x1311= (8-bit) Hand Value 2
+//          +0x1313= (8-bit) Hand Power 2
+//          +0x1319= (8-bit) Hand Value 3
+//          +0x131b= (8-bit) Hand Power 3
+function pointerToHandinfo () => tbyte_be(0x3efccd)
 
-// $88CE4A: (16-bit BE) Hand 1 Power
-//          
-//          Note: CAN go negative.  Disappears at 0
-function handPower1() => word_be(0x88CE4A)
+HAND_VALUE_1_OFFSET = 0x1309
+HAND_VALUE_2_OFFSET = 0x1311
+HAND_VALUE_3_OFFSET = 0x1319
 
-// $88CE50: (16-bit BE) Hand Value  2
-//          
-//          Note: this will cause memory issues if it's not a valid target.
-//          
-//          If this is 0x0000 Remaining hands are not shown.
-function handValue2() => word_be(0x88CE50)
+function handValue1() => byte(pointerToHandinfo() + HAND_VALUE_1_OFFSET)
+function handValue2() => byte(pointerToHandinfo() + HAND_VALUE_2_OFFSET)
+function handValue3() => byte(pointerToHandinfo() + HAND_VALUE_3_OFFSET)
 
-// $88CE52: (16-bit BE) Hand 2 Power
-//          
-//          Note: CAN go negative.  Disappears at 0
-function handPower2() => word_be(0x88CE52)
-
-// $88CE58: (16-bit BE) Hand Value  3
-//          
-//          Note: this will cause memory issues if it's not a valid target.
-//          
-//          If this is 0x0000 ALL hands are not shown.
-//          
-//          0x0000 = No Display.
-//          0x0001 = No Display but don't block other rows.
-//          0x0002-f = Straights  Evens straight X/2+1   Odds Straight with 9s
-//          0x0002 = 2 Straights
-//          0x0003 = 2 Straights with 9
-//          0x0010 = Final Straight Sunset
-//          0x0011 = Final Straight Sunrise
-//          0x0012 = 2 cards
-//          0x0013 = 2 card with 9
-//          0x0014 = 2 cards 2 pair
-//          0x0015 = 2 cards 3 pair
-//          0x0016 = 2 cards 4 pair
-//          0x0017 = 3 cards
-//          0x0018 = 3 cards with 9
-//          0x0019 = 3 cards 2 pair
-//          0x001a = 3 cards 3 pairs
-//          0x001b = 4 cards
-//          0x001c = 4 cards with 9
-//          0x001d = 4 cards 2 pair
-//          0x001e = 5 cards
-//          0x001f = 5 cards with 9
-//          0x0020 = 6 cards
-//          0x0021 = 6 cards with 9
-//          0x0022 = 7 cards
-//          0x0023 = 7 cards with 9
-//          0x0024 = 8 cards
-//          0x0025 = 8 cards with 9
-//          0x0026 = 9 cards
-//          0x0027 = 9 cards with 9
-//          0x0028 = Voice
-//          
-//          0x0011 = Final Straight Sunrise
-//          0x0012
-//          0x0002 = 2 cards
-//          0x0003 = 2 cards with 9
-function handValue3() => word_be(0x88CE58)
-
-// $88CE5A: (16-bit BE) Hand 2 Power
-//          
-//          Note: CAN go negative.  Disappears at 0
-function handPower3() => word_be(0x88CE5A)
 
 
 BIT0 = 0
@@ -2274,6 +2346,16 @@ TRIGGER = "Trigger"
 NAME = "Name"
 PRIOR = "Prior"
 POST = "Post"
+WHO = "Who"
+CARDS = "Cards"
+COUNT = "Count"
+NO_CHARACTER = 0x00
+KALAS = 0x01
+XELHA = 0x02
+GIBARI = 0x03
+LYUDE = 0x04
+SAYVNA = 0x05
+MIZUTI = 0x06
 
 bossScriptIdList = 
 [
@@ -2884,7 +2966,7 @@ questList =
         DESCRIPTION: "Earn the Anklet of Calm Winds by visiting by helping Maynee find her boyfriend.", 
         POINTS: 1,
         TRIGGER: [
-            { LOCATION: lootProgress24(), BITS: [BIT2] }
+            { LOCATION: lootProgress24(), BITS: [BIT5] }
         ]
     },
     {
@@ -3317,8 +3399,9 @@ function magnusCollectionAchievement(title, targetValue)
                 description = format("Discover {0} Magnus Cards",targetValue),
                 points = 1,
                 trigger = saveProtection() && 
-                          sum_of(correctAchievementPrevCombinationLocations, value => value) - sum_of(correctAchievementPrevReduceCombinationLocations, value => value)   < targetValue &&
-                          measured(sum_of(correctAchievementCombinationLocations, value => value) - sum_of(correctAchievementReduceCombinationLocations, value => value) >= targetValue)
+                          sum_of(correctAchievementPrevCombinationLocations, value => value) - sum_of(correctAchievementPrevReduceCombinationLocations, value => value) < targetValue &&
+                          sum_of(correctAchievementCombinationLocations, value => value) - sum_of(correctAchievementReduceCombinationLocations, value => value) >= targetValue
+                          // NOTE: This intentionally does not have measured because everything adds cards.
     )
 }
 
@@ -3329,33 +3412,632 @@ for percentage in range(10,90, step=10)
 
 magnusCollectionAchievement("Magnus Fully Loaded", MAGNUS_ACHIEVEMENT_CARDS)
 
+cameraAchievementList = 
+[
+    {
+        TITLE: "Portfolio: Sadal Suud" ,
+        DESCRIPTION: "Register in the Magnus Gathering a picture of Sabre Dragon, Lord of the Spring, Nunkirantula.  Note: Other cards and photos will be missable.", 
+        POINTS: 1,
+        CARDS: [
+            { LOCATION: bossCards4(), BITS: [BIT0, BIT1] },
+            { LOCATION: bossCards7(), BITS: [BIT1] }
+        ]
+    },
+    {
+        TITLE: "Portfolio: Diadem" ,
+        DESCRIPTION: "Register in the Magnus Gathering a picture of Thunderfish, Iron Beetle I, Iron Beetle V, and Lord of the Winds.  Note: Other cards and photos will be missable.", 
+        POINTS: 1,
+        CARDS: [
+            { LOCATION: bossCards4(), BITS: [BIT4, BIT5, BIT6] },
+            { LOCATION: bossCards3(), BITS: [BIT0] }
+        ]
+    },
+    {
+        TITLE: "Portfolio: Anuenue" ,
+        DESCRIPTION: "Register in the Magnus Gathering a picture of Tree Guardian, and Tentacle.  Note: Other cards and photos will be missable.", 
+        POINTS: 1,
+        CARDS: [
+            { LOCATION: bossCards3(), BITS: [BIT2] },
+            { LOCATION: bossCards7(), BITS: [BIT2] }
+        ]
+    },
+    {
+        TITLE: "Portfolio: Mira" ,
+        DESCRIPTION: "Register in the Magnus Gathering a picture of Gnosis, Magnus Giganticus, Sikri, Phantasm, and two enemies on the spaceship game.  Note: Other cards and photos will be missable.", 
+        POINTS: 1,
+        CARDS: [
+            { LOCATION: bossCards4(), BITS: [BIT7] },
+            { LOCATION: bossCards3(), BITS: [BIT3, BIT4, BIT5] }
+        ]
+    },
+    {
+        TITLE: "Portfolio: Alfred" ,
+        DESCRIPTION: "Register in the Magnus Gathering a picture of Geldoblame, Fadroh, and the Angel of Darkness.  Note: Other cards and photos will be missable.", 
+        POINTS: 1,
+        CARDS: [
+            { LOCATION: bossCards2(), BITS: [BIT2] },
+            { LOCATION: bossCards8(), BITS: [BIT4] },
+            { LOCATION: bossCards1(), BITS: [BIT3] }
+        ]
+    },
+    {
+        TITLE: "Portfolio: Reform Party" ,
+        DESCRIPTION: "Register in the Magnus Gathering a picture of Naiad, Thalassa, Despina, and Galatea.  Note: Other cards and photos will be missable.", 
+        POINTS: 1,
+        CARDS: [
+            { LOCATION: bossCards2(), BITS: range(BIT3, BIT6) }
+        ]
+    },
+    {
+        TITLE: "Portfolio: Wazn" ,
+        DESCRIPTION: "Register in the Magnus Gathering a picture of Goddess of Ice.  Note: Other cards and photos will be missable.", 
+        POINTS: 1,
+        CARDS: [
+            { LOCATION: bossCards2(), BITS: [BIT7] }
+        ]
+    },
+    {
+        TITLE: "Portfolio: Duhr" ,
+        DESCRIPTION: "Register in the Magnus Gathering a picture of Agyo and Ugyo.  Note: Other cards and photos will be missable.",
+        POINTS: 1,
+        CARDS:[
+            { LOCATION: bossCards1(), BITS: [BIT4] },
+            { LOCATION: bossCards5(), BITS: [BIT2] }
+        ]
+    },
+    {
+        TITLE: "Portfolio: The World",
+        DESCRIPTION: "Register in the Magnus Gathering a picture of Rampulus, Sowzana, Kulcabaran, Wizard Shadow, Brokolis, the boss at the Celestial alps, .  Note: Other cards and photos will be missable.",
+        POINTS: 1,
+        CARDS:[
+            { LOCATION: bossCards8(), BITS: [BIT0, BIT1, BIT5] },
+            { LOCATION: bossCards9(), BITS: [BIT7] },
+            { LOCATION: bossCards1(), BITS: [BIT1, BIT6] },
+            { LOCATION: bossCards3(), BITS: [BIT6] },
+            { LOCATION: bossCards2(), BITS: [BIT1] }
+        ]
+    },
+    {
+        TITLE: "Portfolio: Finale",
+        DESCRIPTION: "Register in the Magnus Gathering a picture of the five Sibling Gods and the Final Boss.  Note: Other cards and photos will be missable.",
+        POINTS: 1,
+        CARDS:[
+            { LOCATION: bossCards6(), BITS: range(BIT3, BIT7) },
+            { LOCATION: bossCards1(), BITS: [BIT0] }
+        ]
+    }
+]
+
+function cardAchievement(data) 
+{
+    additionValues = []
+    reduceValues =[]
+    prevNotOwned = []
+    prevReduceValues = []
+    for element in data[CARDS]
+    {
+        for bitValue in element[BITS]
+        {
+            offset = element[LOCATION] - magnusDisplayStart()
+            array_push(additionValues, bit(bitValue, magnusSeenStart() + offset) + bit(bitValue, magnusDisplayStart() + offset) )
+            array_push(reduceValues, bit(bitValue, magnusSeenStart() + offset) / bit(bitValue, magnusDisplayStart() + offset) )
+            array_push(prevNotOwned, prev(bit(bitValue, magnusSeenStart() + offset)) == 0 && prev(bit(bitValue, magnusDisplayStart() + offset)) == 0 )
+        }
+    }
+
+    achievement(title = data[TITLE],
+                description = data[DESCRIPTION],
+                points = data[POINTS],
+                trigger = saveProtection() &&
+                          any_of(prevNotOwned, value => value) &&
+                          measured(sum_of(additionValues, value => value) - sum_of(reduceValues, value => value) == length(additionValues))
+    )
+}
+
+for data in cameraAchievementList
+{
+    cardAchievement(data)
+}
+
+specialCardList =
+[
+  {
+        TITLE: "He's Now a 3-D Pizza",
+        DESCRIPTION: "Find the Pac-Mania card.",
+        POINTS: 1,
+        CARDS:[
+            { LOCATION: specialCards(), BITS: [BIT4] }
+        ]
+    },
+    {
+        TITLE: "Is There a Set For That?",
+        DESCRIPTION: "Find the Wonder MOMO card.",
+        POINTS: 1,
+        CARDS:[
+            { LOCATION: specialCards(), BITS: [BIT7] }
+        ]
+    },
+    {
+        TITLE: "Cosmic Guardian",
+        DESCRIPTION: "Find the Rare Action Figure card.",
+        POINTS: 1,
+        CARDS:[
+            { LOCATION: specialCards2(), BITS: [BIT7] }
+        ]
+    }
+]
+
+for data in specialCardList
+{
+    cardAchievement(data)
+}
+
+function starFragmentAchievement(title, targetValue)
+{
+    achievement(title = title,
+                description = format("Deliver {0} constellations",targetValue),
+                points = 1,
+                trigger = saveProtection() && 
+                          prev(starFragmentsCollected()) < targetValue &&
+                          measured(starFragmentsCollected() == targetValue) 
+    )
+}
+
+STAR_FRAGMENTS = 50
+
+for percentage in range(10,100, step=10)
+{
+    starFragmentAchievement(format("Constellations {0} percentage", percentage), STAR_FRAGMENTS*percentage/100)
+}
+
+
 rich_presence_display("Magnus collection: {0}/1022 SP Combo: {1}/141",
     rich_presence_value("VALUE", sum_of(correctRPCombinationLocations, value => value) - sum_of(correctRPReduceCombinationLocations, value => value)),
     rich_presence_value("VALUE", sum_of(spCombos, value => value/value))
 )
 
-// 
-// Camera pictures of every boss in groups	10
-// Constallation magnus.	11
-// Family quest	6
-// Animal Quest	3
-// Each time people join you?	11
-// Naiad			Note this is not a control	Script 0x00002f4e  No 0x03 in 0x00249ccc  But also check 0x00249cd2 for which is the newest 	Get a 0x03 in that second range
-// Thalassa			Note this is not a control	Script 0x00002f4e  No 0x05 in 0x00249ccc  But also check 0x00249cd2 for which is the newest 	Get a 0x05 in the second range
-// Despina			Note this is not a control	Script 0x00002f4e  No 0x06 in 0x00249ccc  But also check 0x00249cd2 for which is the newest 	Get a 0x06 in the second range
-// Galatea			Note this is not a control	Script 0x00002f4e  No 0x04 in 0x00249ccc  But also check 0x00249cd2 for which is the newest 	Get a 0x04 in the second range
+familyLocations = 
+[
+    { LOCATION: (QUZMAN_FAMILY_MEMORY_LOCATION + 0), BITS: range(BIT4, BIT7) },
+    { LOCATION: (QUZMAN_FAMILY_MEMORY_LOCATION + 1), BITS: range(BIT0, BIT7) },
+    { LOCATION: (QUZMAN_FAMILY_MEMORY_LOCATION + 2), BITS: range(BIT0, BIT7) },
+    { LOCATION: (QUZMAN_FAMILY_MEMORY_LOCATION + 3), BITS: range(BIT0, BIT7) },
+    { LOCATION: (QUZMAN_FAMILY_MEMORY_LOCATION + 4), BITS: range(BIT0, BIT3) },
+    { LOCATION: quzmanEnding(), BITS: [BIT3] }
+]
 
-// Card hands	12
-// Music	1
-// Max Class Level	6
-// 
-// Picking up the winglet at the beginning of the game? 
-// Starship game drops 12 magnus.
-// 
-// Wonder Momo
-// Pac Mania Pac-Man
-// Key In Detorone, but no Green Ring, Red Necklace Or balance?  Is that possible? 
-// 
-// Quzman Family QUZMANFAMILY_MEMORY_LOCATION quzmanEnding BIT3
-// 
+familyAchievements  =
+[
+  {
+        TITLE: "Gathering Threads",
+        DESCRIPTION: "Find 5 members of the Quzman family",
+        POINTS: 1,
+        COUNT:5
+    },
+    {
+        TITLE: "Rekindling Bonds",
+        DESCRIPTION: "Find 10 members of the Quzman family",
+        POINTS: 1,
+        COUNT:10
+    },
+    {
+        TITLE: "Uniting Roots",
+        DESCRIPTION: "Find 15 members of the Quzman family",
+        POINTS: 1,
+        COUNT:15
+    },
+    {
+        TITLE: "Harmony Restored",
+        DESCRIPTION: "Find 20 members of the Quzman family",
+        POINTS: 1,
+        COUNT:20
+    },
+    {
+        TITLE: "Hearts Entwined",
+        DESCRIPTION: "Find 25 members of the Quzman family",
+        POINTS: 1,
+        COUNT:25
+    },
+    {
+        TITLE: "Legacy Embraced",
+        DESCRIPTION: "Find 30 members of the Quzman family",
+        POINTS: 1,
+        COUNT:10
+    },
+    {
+        TITLE: "A Full Circle",
+        DESCRIPTION: "Find 33 members of the Quzman family",
+        POINTS: 1,
+        COUNT:10
+    }
 
+]
+
+
+function bitfieldCountAchievement(data, values)
+{
+    targetBits = []
+    for element in values
+    {
+        for bitValue in element[BITS]
+        {
+            array_push(targetBits, bit(bitValue, element[LOCATION]))
+            
+        }
+    }
+
+    achievement(title = data[TITLE],
+                description = data[DESCRIPTION],
+                points = data[POINTS],
+                trigger = saveProtection() && 
+                          sum_of(targetBits, value => prev(value)) < data[COUNT] &&
+                          measured(sum_of(targetBits, value => value) == data[COUNT]) 
+    )
+}
+
+
+for data in familyAchievements
+{
+    bitfieldCountAchievement(data, familyLocations)
+}
+
+
+animalLocations = 
+[
+    { LOCATION: (ANIMALS_DELIVERED_MEMORY_LOCATION + 0), BITS: range(BIT1, BIT7) },
+    { LOCATION: (ANIMALS_DELIVERED_MEMORY_LOCATION + 1), BITS: range(BIT0, BIT7) },
+    { LOCATION: (ANIMALS_DELIVERED_MEMORY_LOCATION + 2), BITS: range(BIT0, BIT4) }
+]
+
+animalAchievements  =
+[
+  {
+        TITLE: "Zoo Enthusiast",
+        DESCRIPTION: "Deliver 8 animals to Wazn",
+        POINTS: 1,
+        COUNT:8
+    },
+    {
+        TITLE: "Zoo Master",
+        DESCRIPTION: "Deliver all 17 animals to Wazn",
+        POINTS: 1,
+        COUNT:17
+    }
+]
+for data in animalAchievements
+{
+    bitfieldCountAchievement(data, animalLocations)
+}
+
+joiningAchievementsList  =
+[
+  {
+        TITLE: "Mysterious Woman",
+        DESCRIPTION: "Have Xelha join the party",
+        POINTS: 1,
+        WHO: XELHA
+    },
+    {
+        TITLE: "Mysterious Fisherman",
+        DESCRIPTION: "Have Gibari join the party",
+        POINTS: 1,
+        WHO: GIBARI
+    },
+    {
+        TITLE: "Mysterious Former Soldier",
+        DESCRIPTION: "Have Lyude join the party",
+        POINTS: 1,
+        WHO: LYUDE
+    },
+    {
+        TITLE: "Mysterious Hunter ",
+        DESCRIPTION: "Have Savyna join the party",
+        POINTS: 1,
+        WHO: SAYVNA
+    },
+    {
+        TITLE: "Mysterious Mystery",
+        DESCRIPTION: "Have Mizuti join the party",
+        POINTS: 1,
+        WHO: MIZUTI
+    }
+]
+
+rejoiningAchievementsList  =
+[
+    {
+        TITLE: "Naiad",
+        DESCRIPTION: "Defeat Naiad and find what they were guarding.",
+        POINTS: 1,
+        WHO: GIBARI
+    },
+    {
+        TITLE: "Galatea",
+        DESCRIPTION: "Defeat Galatea and find what they were guarding",
+        POINTS: 1,
+        WHO: LYUDE
+    },
+    {
+        TITLE: "Thalassa",
+        DESCRIPTION: "Defeat Thalassa and find what they were guarding",
+        POINTS: 1,
+        WHO: SAYVNA
+    },
+    {
+        TITLE: "Despina",
+        DESCRIPTION: "Defeat Despina and find what they were guarding",
+        POINTS: 1,
+        WHO: MIZUTI
+    }
+]
+
+function joiningAchievements(data)
+{
+
+    achievement(title = data[TITLE],
+                description = data[DESCRIPTION],
+                points = data[POINTS],
+                trigger = saveProtection() && 
+                          any_of( range(1,6), index => byte(CHARACTER_ORDER_LOCATION + index - 1) == data[WHO] &&
+                                                       prev(byte(CHARACTER_ORDER_LOCATION + index - 1)) == NO_CHARACTER &&
+                                                       (CHARACTER_ORDER_LOCATION + 6) >= index  // probably could be == but that's it. 
+                                ) &&
+                          any_of( range(1,6), index => byte(CHARACTER_ORDER_LOCATION + index - 1) == KALAS &&
+                                                       (CHARACTER_ORDER_LOCATION + 6) >= index  // probably could be == but that's it. 
+                                )
+                        
+    )
+}
+
+
+function rejoiningAchievements(data)
+{
+
+    achievement(title = data[TITLE],
+                description = data[DESCRIPTION],
+                points = data[POINTS],
+                trigger = saveProtection() && 
+                          any_of( range(1,6), index => byte(CHARACTER_ORDER_LOCATION + index - 1) == data[WHO] &&
+                                                       prev(byte(CHARACTER_ORDER_LOCATION + index - 1)) == NO_CHARACTER &&
+                                                       (CHARACTER_ORDER_LOCATION + 6) >= index  // probably could be == but that's it. 
+                                )  &&
+                          none_of( range(1,6), index => byte(CHARACTER_ORDER_LOCATION + index - 1) != KALAS &&
+                                                       (CHARACTER_ORDER_LOCATION + 6) >= index  // probably could be == but that's it. 
+                                 ) &&
+                          majorScriptId() == 0x00002f4e
+    )
+}
+
+
+
+for data in joiningAchievementsList
+{
+    joiningAchievements(data)
+}
+
+for data in rejoiningAchievementsList
+{
+    rejoiningAchievements(data)
+}
+
+maxClassLevelList  =
+[
+    {
+        TITLE: "Amazing Angel",
+        DESCRIPTION: "Reach max class level with Kalas",
+        POINTS: 1,
+        WHO: KALAS
+    },
+    {
+        TITLE: "Master Magician",
+        DESCRIPTION: "Reach max class level with Xelha",
+        POINTS: 1,
+        WHO: XELHA
+    },
+    {
+        TITLE: "Fantastic Fisherman",
+        DESCRIPTION: "Reach max class level with Gibari",
+        POINTS: 1,
+        WHO: GIBARI
+    },
+    {
+        TITLE: "Solid Soldier",
+        DESCRIPTION: "Reach max class level with Lyude",
+        POINTS: 1,
+        WHO: LYUDE
+    },
+    {
+        TITLE: "Honorable Hunter",
+        DESCRIPTION: "Reach max class level with Sayvna",
+        POINTS: 1,
+        WHO: SAYVNA
+    },
+    {
+        TITLE: "The Great Mizuti",
+        DESCRIPTION: "Reach max class level with Mizuti",
+        POINTS: 1,
+        WHO: MIZUTI
+    }
+]
+
+
+PREV_CLASS_VALUE = 0x05
+TARGET_CLASS_VALUE = 0x06
+function classLevelAchievement(data)
+{
+    achievement(title = data[TITLE],
+                description = data[DESCRIPTION],
+                points = data[POINTS],
+                trigger = saveProtection() && 
+                          prev(classValue( data[WHO] )) == PREV_CLASS_VALUE &&
+                          classValue(data[WHO]) == TARGET_CLASS_VALUE
+    )
+}
+
+for data in maxClassLevelList
+{
+    classLevelAchievement(data)
+}
+
+TOTAL_MAGNUS_IN_MINDEER_MINIGAME = 12
+achievement(title = "Trail of Souls Collector",
+            description = "Earn all 12 cards from the Mindeer minigame.",
+            points = 3,
+            trigger = saveProtection() &&
+                      mindeerMinigameCheck(TOTAL_MAGNUS_IN_MINDEER_MINIGAME) &&
+                      majorScriptId() == 0x00001d4c
+)
+
+achievement(title = "Naked Detourne",
+            description = "Beat the Detourne Boss with out getting any special items from the Golden Hero",
+            points = 3,
+            trigger = saveProtection() &&
+                      detoroneValuableItemsCheck() &&
+                      prev(majorScriptId()) == 0x00002008 &&
+                      majorScriptId() == 0x0000206c
+)
+
+NO_CARD_HAND = 0x000
+VOICE =0x0028
+PAIR = 0x0012
+PAIR_NINE = 0x0013
+TRIPLE = 0x0017
+TRIPLE_NINE = 0x0018
+TRIPLE_TRIPLE = 0x001a
+FOUR_OF_A_KIND = 0x001b
+FOUR_NINES = 0x001c
+FIVE_OF_A_KIND = 0x001e
+FIVE_NINES = 0x001f
+NINE_OF_A_KIND = 0x0026
+NINE_NINES = 0x0027
+SUNRISE = 0x0011
+SUNSET = 0x0010
+FOUR_STRAIGHT = 0x0006
+FOUR_STRAIGHT_NINE = 0x0007
+FIVE_STRAIGHT = 0x0008
+FIVE_STRAIGHT_NINE = 0x0009
+SIX_STRAIGHT = 0x000a
+SIX_STRAIGHT_NINE = 0x00b
+
+function finalValue(targetValue) => (targetValue == NO_CARD_HAND || 
+                                   targetValue == VOICE) &&
+                                  prev(targetValue) == NO_CARD_HAND
+
+function matchHand(targetValue, targetHand) => targetValue == targetHand &&
+                                               prev(targetValue) == NO_CARD_HAND
+
+cardHandList  =
+[
+    {
+        TITLE: "Quatro Magio",
+        DESCRIPTION: "Make a Four of a kind hand combo in a single turn. (No other pairs)",
+        POINTS: 1,
+        TRIGGER: (( matchHand(handValue1(), FOUR_OF_A_KIND) ||
+                   matchHand(handValue1(), FOUR_NINES)) &&
+                 finalValue(handValue2()) )
+    },
+    {
+        TITLE: "Quintuples",
+        DESCRIPTION: "Make a Five of a kind hand combo in a single turn. (No other pairs)",
+        POINTS: 1,
+        TRIGGER: (( matchHand(handValue1(), FIVE_OF_A_KIND) ||
+                   matchHand(handValue1(), FIVE_NINES)) &&
+                 finalValue(handValue2()))
+    },
+    {
+        TITLE: "Only need one Number",
+        DESCRIPTION: "Make a Nine of a Kind hand combo.",
+        POINTS: 1,
+        TRIGGER: (matchHand(handValue1(), NINE_OF_A_KIND) &&
+                 finalValue(handValue2()))
+    },
+    {
+        TITLE: "Eighty One",
+        DESCRIPTION: "Make a Nine 9s hand combo.",
+        POINTS: 1,
+        TRIGGER: (matchHand(handValue1(), NINE_NINES) && 
+                 finalValue(handValue2()))
+    },
+    {
+        TITLE: "Good Morning",
+        DESCRIPTION: "Make a Sunrise hand combo.",
+        POINTS: 1,
+        TRIGGER: (matchHand(handValue1(), SUNRISE) &&
+                 finalValue(handValue2()))
+    },
+    {
+        TITLE: "Good Night",
+        DESCRIPTION: "Make a Sunset hand combo.",
+        POINTS: 1,
+        TRIGGER: (matchHand(handValue1(), SUNSET) &&
+                 finalValue(handValue2()))
+    },
+    {
+        TITLE: "Small Straight",
+        DESCRIPTION: "Make a 4 card Straight hand combo.",
+        POINTS: 1,
+        TRIGGER: (matchHand(handValue1(), FOUR_STRAIGHT) &&
+                 finalValue(handValue2()))
+    },
+    {
+        TITLE: "Large Straight",
+        DESCRIPTION: "Make a 6 card Straight hand combo.",
+        POINTS: 1,
+        TRIGGER: (matchHand(handValue1(), SIX_STRAIGHT) &&
+                 finalValue(handValue2()))
+    },
+    {
+        TITLE: "Full House",
+        DESCRIPTION: "Make a three of a kind and a two of a kind hand combo in a single turn.",
+        POINTS: 1,
+        TRIGGER: (( matchHand(handValue1(), TRIPLE ) ||
+                    matchHand(handValue1(), TRIPLE_NINE )) &&
+                  ( matchHand(handValue2(), PAIR) ||
+                    matchHand(handValue2(), PAIR_NINE)) &&
+                  finalValue(handValue2()))                  
+    },
+    {
+        TITLE: "Fuller House",
+        DESCRIPTION: "Make a four of a kind and a three of a kind hand combo in a single turn.",
+        POINTS: 1,
+        TRIGGER:(( matchHand(handValue1(), FOUR_OF_A_KIND) ||
+                   matchHand(handValue1(), FOUR_NINES)) &&
+                 ( matchHand(handValue2(), TRIPLE) ||
+                   matchHand(handValue2(), TRIPLE_NINE)) &&
+                 finalValue(handValue2()))
+    },
+    {
+        TITLE: "Fullest House",
+        DESCRIPTION: "Make a five of a kind and a four of a kind  hand combo in a single turn.",
+        POINTS: 1,
+        TRIGGER:(( matchHand(handValue1(), FIVE_OF_A_KIND) ||
+                   matchHand(handValue1(), FIVE_NINES)) &&
+                 ( matchHand(handValue2(), FOUR_OF_A_KIND) ||
+                   matchHand(handValue2(), FOUR_NINES)) &&
+                 finalValue(handValue3()))
+    },
+    {
+        TITLE: "Triple Triple",
+        DESCRIPTION: "Make three card three pairs (three sets of three) hand combo in a single turn.",
+        POINTS: 1,
+        TRIGGER:(matchHand(handValue1(), TRIPLE_TRIPLE) &&
+                 finalValue(handValue2()))
+    }
+    
+
+]
+
+function cardHandAchievement(data)
+{
+    achievement(title = data[TITLE],
+                description = data[DESCRIPTION],
+                points = data[POINTS],
+                trigger = saveProtection() && 
+                          data[TRIGGER] 
+    )
+}
+
+for data in cardHandList
+{
+    cardHandAchievement(data)
+}
