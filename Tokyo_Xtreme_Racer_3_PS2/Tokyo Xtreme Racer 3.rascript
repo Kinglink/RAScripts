@@ -30,14 +30,14 @@ TokyoTeamInformation = [
         "TeamLeader": "Hearing Master",
         "TeamLeaderID": 86,
         "LastMember": 92,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "Rings", 
         "TeamLeader": "Outstanding Jackle",
         "TeamLeaderID": 93,
         "LastMember": 100,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "Galaxy Racers", 
@@ -58,21 +58,21 @@ TokyoTeamInformation = [
         "TeamLeader": "The Incadescent Flame",
         "TeamLeaderID": 38,
         "LastMember": 44,
-        "Points":2
+        "Points":3
     },
     {
         "TeamName": "Ratt", 
         "TeamLeader": "The Monkey",
         "TeamLeaderID": 101,
         "LastMember": 107,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "Departures", 
         "TeamLeader": "Happy Chappy",
         "TeamLeaderID": 108,
         "LastMember": 113,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "Diamond Image", 
@@ -86,28 +86,28 @@ TokyoTeamInformation = [
         "TeamLeader": "Wolf Requiem",
         "TeamLeaderID": 52,
         "LastMember": 58,
-        "Points":2
+        "Points":3
     },
     {
         "TeamName": "Highway Outlaw", 
         "TeamLeader": "Spirit Crasher",
         "TeamLeaderID": 59,
         "LastMember": 65,
-        "Points":2
+        "Points":3
     },
     {
         "TeamName": "Explosion", 
         "TeamLeader": "Wind Monster",
         "TeamLeaderID": 114,
         "LastMember": 119,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "Top Level", 
         "TeamLeader": "Tarmac Suzuki",
         "TeamLeaderID": 120,
         "LastMember": 126,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "R.Gangs", 
@@ -135,119 +135,119 @@ TokyoTeamInformation = [
         "TeamLeader": "Blue Speed",
         "TeamLeaderID": 127,
         "LastMember": 131,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "Free Way", 
         "TeamLeader": "The Blue Star",
         "TeamLeaderID": 132,
         "LastMember": 139,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "True Ride", 
         "TeamLeader": "Perfect Driver",
         "TeamLeaderID": 140,
         "LastMember": 147,
-        "Points":2
+        "Points":5
     },
     {
         "TeamName": "Unlimited", 
         "TeamLeader": "Killing Machine",
         "TeamLeaderID": 148,
         "LastMember": 155,
-        "Points":2
+        "Points":5
     },
     {
         "TeamName": "R.R.", 
         "TeamLeader": "The Nobleman",
         "TeamLeaderID": 156,
         "LastMember": 163,
-        "Points":2
+        "Points":5
     },
     {
         "TeamName": "Neo Limited", 
         "TeamLeader": "Lemon Flavor",
         "TeamLeaderID": 164,
         "LastMember": 170,
-        "Points":2
+        "Points":5
     },
     {
         "TeamName": "Sanjyushi", 
         "TeamLeader": "The Forbidden Privateer",
         "TeamLeaderID": 171,
         "LastMember": 176,
-        "Points":2
+        "Points":5
     },
     {
         "TeamName": "Big Wave", 
         "TeamLeader": "The Master",
         "TeamLeaderID": 177,
         "LastMember": 184,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "A.P.S.", 
         "TeamLeader": "Yokohane's Heavy Fighter",
         "TeamLeaderID": 185,
         "LastMember": 191,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "Commander", 
         "TeamLeader": "Senna's Foot",
         "TeamLeaderID": 192,
         "LastMember": 199,
-        "Points":2
+        "Points":5
     },
     {
         "TeamName": "Miracle Dogs", 
         "TeamLeader": "The Sepherd",
         "TeamLeaderID": 200,
         "LastMember": 205,
-        "Points":2
+        "Points":5
     },
     {
         "TeamName": "Speed Master", 
         "TeamLeader": "The Insane moon",
         "TeamLeaderID": 206,
         "LastMember": 215,
-        "Points":2
+        "Points":5
     },
     {
         "TeamName": "Knife and Forks", 
         "TeamLeader": "Matchless Full Course",
         "TeamLeaderID": 216,
         "LastMember": 222,
-        "Points":2
+        "Points":5
     },
     {
         "TeamName": "Team Alpha", 
         "TeamLeader": "Texas Wolf",
         "TeamLeaderID": 223,
         "LastMember": 228,
-        "Points":2
+        "Points":5
     },
     {
         "TeamName": "Rhythm Box", 
         "TeamLeader": "Hip-hop Red",
         "TeamLeaderID": 229,
         "LastMember": 234,
-        "Points":2
+        "Points":5
     },
     {
         "TeamName": "Thunder Dragoon", 
         "TeamLeader": "Black Dragon",
         "TeamLeaderID": 235,
         "LastMember": 241,
-        "Points":2
+        "Points":5
     },
     {
         "TeamName": "Infinity", 
         "TeamLeader": "Marvelous",
         "TeamLeaderID": 242,
         "LastMember": 248,
-        "Points":2
+        "Points":5
     },
 ]
 
@@ -255,57 +255,57 @@ TokyoBoss = [
     {
         "BossName": "Betrayal Jack Knife", 
         "BossID": 249,
-        "Points":2
+        "Points":5
     },
     {
         "BossName": "Blood Hound", 
         "BossID": 250,
-        "Points":2
+        "Points":5
     },
     {
         "BossName": "Dejected Angel", 
         "BossID": 251,
-        "Points":2
+        "Points":10
     },
     {
         "BossName": "Steal Heart", 
         "BossID": 252,
-        "Points":2
+        "Points":10
     },
     {
         "BossName": "Dying Star", 
         "BossID": 253,
-        "Points":2
+        "Points":10
     },
     {
         "BossName": "Midnight Rose", 
         "BossID": 254,
-        "Points":2
+        "Points":10
     },
     {
         "BossName": "Pursuit Tailgunner", 
         "BossID": 255,
-        "Points":2
+        "Points":10
     },
     {
         "BossName": "Shadow Eyes", 
         "BossID": 256,
-        "Points":2
+        "Points":25
     },
     {
         "BossName": "Pluto", 
         "BossID": 257,
-        "Points":2
+        "Points":25
     },
     {
         "BossName": "The Red Devil", 
         "BossID": 258,
-        "Points":2
+        "Points":25
     },
     {
         "BossName": "Jintei", 
         "BossID": 259,
-        "Points":2
+        "Points":25
     },    
     {
         "BossName": "Unknown",
@@ -318,12 +318,12 @@ TokyoWanderers = [
     {
         "WanderersName": "Rikochan", 
         "WanderersID": 260,
-        "Points":2
+        "Points":1
     },
     {
         "WanderersName": "The Divine Wind", 
         "WanderersID": 261,
-        "Points":2
+        "Points":1
     },
     {
         "WanderersName": "White Tiger", 
@@ -333,7 +333,7 @@ TokyoWanderers = [
     {
         "WanderersName": "Immortal Clown", 
         "WanderersID": 263,
-        "Points":2
+        "Points":1
     },
     {
         "WanderersName": "Sorrow SIX STAR", 
@@ -343,7 +343,7 @@ TokyoWanderers = [
     {
         "WanderersName": "Straying Idol Freak", 
         "WanderersID": 265,
-        "Points":2
+        "Points":3
     },
     {
         "WanderersName": "Bloody Mary", 
@@ -353,37 +353,37 @@ TokyoWanderers = [
     {
         "WanderersName": "Illusion B", 
         "WanderersID": 267,
-        "Points":2
+        "Points":1
     },
     {
         "WanderersName": "Caffeine X3", 
         "WanderersID": 268,
-        "Points":2
+        "Points":1
     },
     {
         "WanderersName": "Paul Suzuki", 
         "WanderersID": 269,
-        "Points":2
+        "Points":1
     },
     {
         "WanderersName": "Funabashi Hooligan", 
         "WanderersID": 270,
-        "Points":2
+        "Points":5
     },
     {
         "WanderersName": "Rolling Master", 
         "WanderersID": 271,
-        "Points":2
+        "Points":3
     },
     {
         "WanderersName": "The Death Driver", 
         "WanderersID": 272,
-        "Points":2
+        "Points":3
     },
     {
         "WanderersName": "Shutokou Leader", 
         "WanderersID": 273,
-        "Points":2
+        "Points":3
     },
     {
         "WanderersName": "Mosquito Lemon", 
@@ -403,7 +403,7 @@ TokyoWanderers = [
     {
         "WanderersName": "Yellow Desperado", 
         "WanderersID": 277,
-        "Points":2
+        "Points":1
     },
     {
         "WanderersName": "Gold License", 
@@ -413,7 +413,7 @@ TokyoWanderers = [
     {
         "WanderersName": "Master Position", 
         "WanderersID": 279,
-        "Points":2
+        "Points":3
     },
     {
         "WanderersName": "Glamorous Mami", 
@@ -443,12 +443,12 @@ TokyoWanderers = [
     {
         "WanderersName": "Silver Wolf", 
         "WanderersID": 285,
-        "Points":2
+        "Points":5
     },
     {
         "WanderersName": "VIP Style", 
         "WanderersID": 286,
-        "Points":2
+        "Points":3
     },
     {
         "WanderersName": "Dirty HATO", 
@@ -456,9 +456,9 @@ TokyoWanderers = [
         "Points":2
     },
     {
-        "WanderersName": "PAst 12 o'clock Cinderella", 
+        "WanderersName": "Past 12 o'clock Cinderella", 
         "WanderersID": 288,
-        "Points":2
+        "Points":3
     },
     {
         "WanderersName": "Golden Wolf", 
@@ -473,17 +473,17 @@ TokyoWanderers = [
     {
         "WanderersName": "ZERO", 
         "WanderersID": 291,
-        "Points":2
+        "Points":3
     },
     {
         "WanderersName": "White Dragon Revolution", 
         "WanderersID": 292,
-        "Points":2
+        "Points":4
     },
     {
         "WanderersName": "Late Night Salesman", 
         "WanderersID": 293,
-        "Points":2
+        "Points":3
     },
     {
         "WanderersName": "Osaka Blond", 
@@ -503,12 +503,12 @@ TokyoWanderers = [
     {
         "WanderersName": "Exotic Butterfly", 
         "WanderersID": 297,
-        "Points":2
+        "Points":5
     },
     {
         "WanderersName": "Night Rocket", 
         "WanderersID": 298,
-        "Points":2
+        "Points":3
     },
     {
         "WanderersName": "SPEED BOX", 
@@ -518,7 +518,7 @@ TokyoWanderers = [
     {
         "WanderersName": "I, Shiotani", 
         "WanderersID": 300,
-        "Points":2
+        "Points":5
     },
     {
         "WanderersName": "S. Agata Cattle", 
@@ -528,7 +528,7 @@ TokyoWanderers = [
     {
         "WanderersName": "Ghost Soul", 
         "WanderersID": 302,
-        "Points":2
+        "Points":1
     },
     {
         "WanderersName": "The Surf Goblin", 
@@ -543,7 +543,7 @@ TokyoWanderers = [
     {
         "WanderersName": "NOB", 
         "WanderersID": 305,
-        "Points":2
+        "Points":1
     },
     {
         "WanderersName": "Armadillo", 
@@ -587,7 +587,7 @@ NagoyaTeamInformation = [
         "TeamLeader": "Darkness Seven",
         "TeamLeaderID": 12,
         "LastMember": 16,
-        "Points":2
+        "Points":5
     },
     {
         "TeamName": "Hot head", 
@@ -615,84 +615,84 @@ NagoyaTeamInformation = [
         "TeamLeader": "The flame",
         "TeamLeaderID": 35,
         "LastMember": 41,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "Castle Stage", 
         "TeamLeader": "Golden Dolphin",
         "TeamLeaderID": 42,
         "LastMember": 46,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "Face to Faith", 
         "TeamLeader": "Summer Time Again",
         "TeamLeaderID": 47,
         "LastMember": 53,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "Willows", 
         "TeamLeader": "The Stomach",
         "TeamLeaderID": 54,
         "LastMember": 59,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "Shake Hips", 
         "TeamLeader": "Sweet Veronica",
         "TeamLeaderID": 60,
         "LastMember": 66,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "Tribute-J", 
         "TeamLeader": "Atomic Heart",
         "TeamLeaderID": 67,
         "LastMember": 72,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "Purple Bullet", 
         "TeamLeader": "Night Lord",
         "TeamLeaderID": 73,
         "LastMember": 78,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "Another Heaven", 
         "TeamLeader": "Brown Satan",
         "TeamLeaderID": 79,
         "LastMember": 85,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "Flower Dancers", 
         "TeamLeader": "Blue Rose",
         "TeamLeaderID": 86,
         "LastMember": 91,
-        "Points":2
+        "Points":5
     },
     {
         "TeamName": "Glory Days", 
         "TeamLeader": "Wind Walker",
         "TeamLeaderID": 92,
         "LastMember": 98,
-        "Points":2
+        "Points":5
     },
     {
         "TeamName": "DE LA Speed", 
         "TeamLeader": "Planet HArmony",
         "TeamLeaderID": 99,
         "LastMember": 104,
-        "Points":2
+        "Points":5
     },
     {
         "TeamName": "Breath Less", 
         "TeamLeader": "2nd Generation Landlady",
         "TeamLeaderID": 105,
         "LastMember": 111,
-        "Points":2
+        "Points":5
     },
 ]
 
@@ -700,27 +700,27 @@ NagoyaBoss = [
     {
         "BossName": "Flame Dragon", 
         "BossID": 112,
-        "Points":2
+        "Points":10
     },
     {
         "BossName": "J", 
         "BossID": 113,
-        "Points":2
+        "Points":10
     },
     {
-        "BossName": "The rook", 
+        "BossName": "The Rook", 
         "BossID": 114,
-        "Points":2
+        "Points":25
     },
     {
         "BossName": "The Bishop", 
         "BossID": 115,
-        "Points":2
+        "Points":25
     },
     {
         "BossName": "The Knight", 
         "BossID": 116,
-        "Points":2
+        "Points":25
     },
 ]
 
@@ -728,7 +728,7 @@ NagoyaWanderers = [
     {
         "WanderersName": "Hyper Groove", 
         "WanderersID": 117,
-        "Points":2
+        "Points":3
     },
     {
         "WanderersName": "Snow Dancer", 
@@ -743,7 +743,7 @@ NagoyaWanderers = [
     {
         "WanderersName": "Midnight Black Sun", 
         "WanderersID": 120,
-        "Points":2
+        "Points":3
     },
     {
         "WanderersName": "White Leopard", 
@@ -753,7 +753,7 @@ NagoyaWanderers = [
     {
         "WanderersName": "Fascinating Magician", 
         "WanderersID": 122,
-        "Points":2
+        "Points":3
     },
     {
         "WanderersName": "100,000 km Rotary", 
@@ -773,12 +773,12 @@ NagoyaWanderers = [
     {
         "WanderersName": "Kuso Chimpan", 
         "WanderersID": 126,
-        "Points":2
+        "Points":5
     },
     {
         "WanderersName": "Turbo Man", 
         "WanderersID": 127,
-        "Points":2
+        "Points":5
     },
     {
         "WanderersName": "WEST No. 5", 
@@ -793,7 +793,7 @@ NagoyaWanderers = [
     {
         "WanderersName": "Shocking White Dog", 
         "WanderersID": 130,
-        "Points":2
+        "Points":5
     }
 ]
 
@@ -807,7 +807,7 @@ OsakaTeamInformation = [
         "Points":2
     },
     {
-        "TeamName": "Vip Project", 
+        "TeamName": "VIP Project", 
         "TeamLeader": "Burning Passion",
         "TeamLeaderID": 8,
         "LastMember": 14,
@@ -818,7 +818,7 @@ OsakaTeamInformation = [
         "TeamLeader": "Rokko",
         "TeamLeaderID": 15,
         "LastMember": 20,
-        "Points":2
+        "Points":3
     },
     {
         "TeamName": "First Lady", 
@@ -839,112 +839,112 @@ OsakaTeamInformation = [
         "TeamLeader": "Passion Runner",
         "TeamLeaderID": 34,
         "LastMember": 39,
-        "Points":2
+        "Points":3
     },
     {
         "TeamName": "No Loser", 
         "TeamLeader": "Naniwa Warship",
         "TeamLeaderID": 40,
         "LastMember": 45,
-        "Points":2
+        "Points":5
     },
     {
         "TeamName": "Home Run", 
         "TeamLeader": "Angry Hoshino",
         "TeamLeaderID": 46,
         "LastMember": 53,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "Millennium 2", 
         "TeamLeader": "Final Revolution",
         "TeamLeaderID": 54,
         "LastMember": 59,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "Miyabi", 
         "TeamLeader": "Meteor Storm",
         "TeamLeaderID": 60,
         "LastMember": 66,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "Baldy's", 
         "TeamLeader": "The Captain",
         "TeamLeaderID": 67,
         "LastMember": 72,
-        "Points":2
+        "Points":10
     },
     {
         "TeamName": "Low Position", 
         "TeamLeader": "Anti-Gravity Dimension",
         "TeamLeaderID": 73,
         "LastMember": 78,
-        "Points":2
+        "Points":5
     },
     {
         "TeamName": "Perfect Works", 
         "TeamLeader": "Kishiwada Crisis",
         "TeamLeaderID": 79,
         "LastMember": 84,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "Team Kengo", 
         "TeamLeader": "The Old Man",
         "TeamLeaderID": 85,
         "LastMember": 90,
-        "Points":2
+        "Points":5
     },
     {
         "TeamName": "G.R.O.", 
         "TeamLeader": "Angry Naito",
         "TeamLeaderID": 91,
         "LastMember": 98,
-        "Points":2
+        "Points":5
     },
     {
         "TeamName": "Night Wing", 
         "TeamLeader": "Gold Wing",
         "TeamLeaderID": 99,
         "LastMember": 104,
-        "Points":2
+        "Points":5
     },
     {
         "TeamName": "Univer-Saru", 
         "TeamLeader": "Jurassic Period Shikkyusha",
         "TeamLeaderID": 105,
         "LastMember": 111,
-        "Points":2
+        "Points":5
     },
     {
         "TeamName": "Shoryu Group", 
         "TeamLeader": "Dragon of Sakai",
         "TeamLeaderID": 112,
         "LastMember": 118,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "Kaze", 
         "TeamLeader": "Miracle Divine Wind",
         "TeamLeaderID": 119,
         "LastMember": 125,
-        "Points":2
+        "Points":4
     },
     {
         "TeamName": "Harisen Chop", 
         "TeamLeader": "Nishi Nagahori Justice",
         "TeamLeaderID": 126,
         "LastMember": 132,
-        "Points":2
+        "Points":25
     },
     {
         "TeamName": "Darts", 
         "TeamLeader": "God's Estuary",
         "TeamLeaderID": 133,
         "LastMember": 141,
-        "Points":2
+        "Points":25
     }
 ]
 
@@ -952,97 +952,97 @@ OsakaWanderers = [
     {
         "WanderersName": "POU@MSR", 
         "WanderersID": 142,
-        "Points": 2
+        "Points":3
     },
     {
         "WanderersName": "Mistral@MSR", 
         "WanderersID": 143,
-        "Points": 2
+        "Points":2
     },
     {
         "WanderersName": "EIC@MSR", 
         "WanderersID": 144,
-        "Points": 2
+        "Points":3
     },
     {
         "WanderersName": "Sports Newspaper Mania", 
         "WanderersID": 145,
-        "Points": 2
+        "Points":2
     },
     {
         "WanderersName": "Night King", 
         "WanderersID": 146,
-        "Points": 2
+        "Points":3
     },
     {
         "WanderersName": "FD Tomo-san", 
         "WanderersID": 147,
-        "Points": 2
+        "Points":2
     },
     {
         "WanderersName": "Beat Ignition", 
         "WanderersID": 148,
-        "Points": 2
+        "Points":2
     },
     {
         "WanderersName": "Jet-Black", 
         "WanderersID": 149,
-        "Points": 2
+        "Points":1
     },
     {
         "WanderersName": "Wangan Runner", 
         "WanderersID": 150,
-        "Points": 2
+        "Points":1
     },
     {
         "WanderersName": "Fire Legend", 
         "WanderersID": 151,
-        "Points": 2
+        "Points":3
     },
     {
         "WanderersName": "Orimabu", 
         "WanderersID": 152,
-        "Points": 2
+        "Points":1
     },
     {
         "WanderersName": "Stalker Hammer", 
         "WanderersID": 153,
-        "Points": 2
+        "Points":3
     },
     {
         "WanderersName": "Radiant Storm", 
         "WanderersID": 154,
-        "Points": 2
+        "Points":1
     },
     {
         "WanderersName": "YOO@TFB", 
         "WanderersID": 155,
-        "Points": 2
+        "Points":1
     },
     {
-        "WanderersName": "Magazine", 
+        "WanderersName": "Magazine Z", 
         "WanderersID": 156,
-        "Points": 2
+        "Points":3
     },
     {
-        "WanderersName": "Whiurlwind Fanfare", 
+        "WanderersName": "Whirlwind Fanfare", 
         "WanderersID": 157,
-        "Points": 2
+        "Points":10
     },
     {
         "WanderersName": "Mister Orange Road", 
         "WanderersID": 158,
-        "Points": 2
+        "Points":3
     },
     {
         "WanderersName": "The Pinball", 
         "WanderersID": 159,
-        "Points": 2
+        "Points":1
     },
     {
         "WanderersName": "The Driver", 
         "WanderersID": 160,
-        "Points": 2
+        "Points":2
     }   
 ]
 
@@ -1064,6 +1064,25 @@ function justWasDriving() => (prev(cityBackgroundIndicator()) == VALUE_BACKGROUN
                               cityBackgroundIndicator() != VALUE_BACKGROUND_IN_GAME && 
                               drivingPointerIndicator() != VALUE_DRIVING_IN_GAME
                             
+// $352541: (8-bit) City Selection
+//
+//          0x00 =Tokyo
+//          0x01 = Nagoya 
+//          0x02 = Osaka
+//          
+//          Note: Freezing this will make players load in and drive in the previous city. 
+function citySelected() => byte(0x352541)
+
+TOKYO = 0x00
+NAGOYA = 0x01
+OSAKA = 0x02
+
+CityNameLookup = 
+{
+    TOKYO: "Tokyo",
+    NAGOYA: "Nagoya",
+    OSAKA: "Osaka"
+}
 
 // $352544: (8-bit) Raining control
 // 
@@ -1084,7 +1103,19 @@ function isRaining() => rainControl() == RAINING_VALUE
 // $3565B4: (32-bit likely larger) A timer for the current battle.
 //          
 //          Note, can't find the one who controls the UI, this however keeps in step with that (one frame ahead)
-function timerForQuestBattle() => dword(0x3565B4)
+function timerForQuestBattlefailed() => dword(0x3565B4)
+
+// $41eac0: (32-bit) Race time in Quest Mode. and Time Attack 
+//          
+//          Freezing it freezes the timer. 
+function timerForQuestBattle() => dword(0x41eac0)
+function timeTimeAttackMode() => dword(0x41eac0)
+
+// $41ead0: (32-bit) Race time in Quest Mode. 
+// 
+//          Freezes at the end race screen
+// Trying to uuse the real timer. function timerForQuestBattle() => dword(0x41ead0)
+
 
 // $3AEBBA: (8-bit) Garage Index of current car in game
 //          
@@ -1146,6 +1177,7 @@ RESULT_WIN_VALUE = 0x01
 RESULT_GOAL_VALUE = 0x0d
 
 function justFinishedTimeAttack() => raceResult() == RESULT_GOAL_VALUE && prev(raceResult()) == RESULT_NONE_VALUE
+function triggerJustFinishedTimeAttack() => trigger_when(raceResult() == RESULT_GOAL_VALUE) && prev(raceResult()) == RESULT_NONE_VALUE
 function justFinishedQuestRace() => raceResult() == RESULT_WIN_VALUE && prev(raceResult()) == RESULT_NONE_VALUE
 
 // $41E959: (16-bit) Player's SP
@@ -1170,7 +1202,8 @@ function todayMaxSpeedMPHconverted() => todayMaxSpeedKPH() / 1.609
 // $41EB4C: (32-bit) Total time in Time Attack mode
 //          
 //          Displayed as Lap Time but not a control
-function timeTimeAttackMode() => dword(0x41EB4C)
+// Not a bad value, just using a different one. 
+function timeTimeAttackModeold() => dword(0x41EB4C)
 
 // $41EEF0: (8-bit) Max Win Combo Today
 function todayMaxWinCombo() => byte(0x41EEF0)
@@ -1200,10 +1233,20 @@ function gameMode() => byte(0x80ec58)
 
 QUEST_MODE_VALUE = 0x00
 TIME_ATTACK_MODE_VALUE = 0x01
+FREE_RUN_MODE_VALUE = 0x02
+VERSUS_MODE_VALUE = 0x03
 DEMO_MODE_VALUE = 0x07
 function questMode() => gameMode() == QUEST_MODE_VALUE
 function timeAttackMode() => gameMode() == TIME_ATTACK_MODE_VALUE
-function demoMode() => gameMode() == DEMO_MODE_VALUE
+function demoMode() => gameModeFailed() == DEMO_MODE_VALUE  // This still works as failed. 
+
+GameModeLookup =
+{
+    QUEST_MODE_VALUE: "Quest Mode",
+    TIME_ATTACK_MODE_VALUE: "Time Attack Mode",
+    FREE_RUN_MODE_VALUE: "Free Run Mode",
+    VERSUS_MODE_VALUE: "Versus Mode"
+}
 
 // $806AD0: (8-bit) Vehicle Name ID
 //          
@@ -1590,13 +1633,13 @@ for key in TrackLookup
             isDriving() && 
             justFinishedTimeAttack() && 
             timeAttackMode() && 
-            timeTimeAttackMode() > 0 &&
+            prev(timeTimeAttackMode()) > 0 &&
             timeAttackTrackId() == key
     
         ),
         cancel = always_false(),
         submit = always_true(),
-        value = timeTimeAttackMode(),
+        value = prev(timeTimeAttackMode()),
         lower_is_better = true,
         format = "FRAMES"
     )
@@ -1666,80 +1709,6 @@ SpecificLeaderboard =
       TIMESTRING: "3:00"
     },   
 ]
-
-for data in SpecificLeaderboard
-{
-    leaderboard(    
-        title = format("Fastest {1} on {0}",  TrackLookup[data[TRACK]],  ShortCarName[data[CAR]]),
-        description = format("Record the fastest time on {0} while driving the Default Car of {1} in Time Trial Mode. Thanks to {2} For the suggestion", TrackLookup[data[TRACK]], CarName[data[CAR]], data[CREATOR]),
-        start = 
-        (
-            isDriving() && 
-            justFinishedTimeAttack() && 
-            timeAttackMode() && 
-            timeTimeAttackMode() > 0 &&
-            timeAttackTrackId() == data[TRACK] &&
-            carCheck(data[CAR]) &&
-            isDefaultCar()
-        ),
-        cancel = always_false(),
-        submit = always_true(),
-        value = timeTimeAttackMode(),
-        lower_is_better = true,
-        format = "FRAMES",
-        id = data[ID]
-    )
-
-    achievement(title = data[ACHIEVEMENT_NAME],
-                description = format("Beat {0} on {1} while driving the Default Car of {2} in Time Trial Mode.  Thanks to {3} for designing this achievement", data[TIMESTRING], TrackLookup[data[TRACK]], CarName[data[CAR]], data[CREATOR]),
-                points = 5,
-                trigger = isDriving() && 
-                          justFinishedTimeAttack() && 
-                          timeAttackMode() && 
-                          timeTimeAttackMode() > 0 &&
-                          timeTimeAttackMode() < data[TIME] &&
-                          timeAttackTrackId() == data[TRACK] &&
-                          carCheck(data[CAR]) &&
-                          isDefaultCar()
-
-    )
-}
-
-leaderboard(
-        id = 89760,
-        title = format("Fastest AE86T on Nagahori in Rain"),
-        description = format("Record the fastest time on W Nagahori Wangan Out while driving the Default Car of Toyota Sprinter Trueno in the rain in Time Trial Mode."),
-        start = 
-        (
-            isDriving() && 
-            justFinishedTimeAttack() && 
-            timeAttackMode() && 
-            timeTimeAttackMode() > 0 &&
-            timeAttackTrackId() == W_NAGAHORI_WANGAN_OUT &&
-            carCheck(TOYOTA_SPRINTER_TRUENO) &&
-            isDefaultCar() &&
-            isRaining()
-        ),
-        cancel = always_false(),
-        submit = always_true(),
-        value = timeTimeAttackMode(),
-        lower_is_better = true,
-        format = "FRAMES"
-    )
- achievement(title = "Time to deliver some Tofu",
-                description = format("Beat 5:15 on N WNagahori Wangan Out while driving the Default Car of Toyota Sprinter Trueno in the rain in Time Trial Mode."),
-                points = 3,
-                trigger = isDriving() && 
-                          justFinishedTimeAttack() && 
-                          timeAttackMode() && 
-                          timeTimeAttackMode() > 0 &&
-                          timeTimeAttackMode() < timeConversion(5,15) &&
-                          timeAttackTrackId() == W_NAGAHORI_WANGAN_OUT &&
-                          carCheck(TOYOTA_SPRINTER_TRUENO) &&
-                          isDefaultCar() &&
-                          isRaining()
-    )
-
 
 
 function winAchievement(title, description, points, index, memoryLocation)
@@ -1829,7 +1798,7 @@ for info in OsakaWanderers
     wanderersAchievements(info, osakaBeatMemoryLocation())
 }
 
-achievement(title = "Too easy",
+achievement(title = "Too Easy",
             description = "Win a battle in Quest Mode losing only a small amount (1 percent max)",
             points = 3,
             trigger = justFinishedQuestRace() &&
@@ -1839,7 +1808,7 @@ achievement(title = "Too easy",
                       playerHealth() >= MAX_HEALTH * 0.99
             )
 
-achievement(title = "By the skin of your grill",
+achievement(title = "By the Skin of Your Grill",
             description = "Win a battle in Quest Mode with less than 1 percent health left",
             points = 2,
             trigger = justFinishedQuestRace() &&
@@ -1851,20 +1820,20 @@ achievement(title = "By the skin of your grill",
 
 
 achievement(title = "All Night Battle",
-            description = "Win a battle in Quest Mode that lasted for more than 2 minutes",
-            points = 2,
+            description = "Win a battle in Quest Mode that lasted for more than 3 minutes",
+            points = 5,
             trigger = justFinishedQuestRace() &&
                       questMode() &&
                       isDriving() &&
                       !demoMode() &&
-                      timerForQuestBattle() >= timeConversion(2,0)
+                      prev(timerForQuestBattle()) >= timeConversion(2,0)
             )
 
-function speedAchievement(title, speedValue) 
+function speedAchievement(title, speedValue, points) 
 {
     achievement(title = title,
             description = format("Reach {0} MPH in quest mode",speedValue),
-            points = 2,
+            points = points,
             trigger = questMode() &&
                       isDriving() &&
                       !demoMode() &&
@@ -1873,16 +1842,16 @@ function speedAchievement(title, speedValue)
             )
 }
 
-speedAchievement("Speed Boy", 100)
-speedAchievement("Speed Demon",150 )
-speedAchievement("Speed King",200)
-speedAchievement("Speed God",230)
+speedAchievement("Speed Boy", 100, 1)
+speedAchievement("Speed Demon",150, 2)
+speedAchievement("Speed King",200, 3)
+speedAchievement("Speed God",230, 10)
 
-function winStreakAchievement(title, targetValue) 
+function winStreakAchievement(title, targetValue, points) 
 {
     achievement(title = title,
             description = format("Have a {0} win streak in quest mode", targetValue),
-            points = 2,
+            points = points,
             trigger = questMode() &&
                       isDriving() &&
                       !demoMode() &&
@@ -1891,9 +1860,9 @@ function winStreakAchievement(title, targetValue)
             )
 }
 
-winStreakAchievement("Are they even trying?", 10)
-winStreakAchievement("No one can stop you", 15)
-winStreakAchievement("All you do is win", 20) 
+winStreakAchievement("Are They Even Trying?", 10, 2)
+winStreakAchievement("No One Can Stop You", 15, 4)
+winStreakAchievement("All You Do Is Win", 20, 5) 
 
 
 leaderboard(
@@ -1904,7 +1873,8 @@ leaderboard(
     (
         justWasDriving() && 
         questMode() &&
-        !demoMode()
+        !demoMode() &&
+        todayMaxSpeedMPHconverted() > 1
 
     ),
     cancel = always_false(),
@@ -1921,7 +1891,8 @@ leaderboard(
     (
         justWasDriving() && 
         questMode() &&
-        !demoMode()
+        !demoMode() &&
+        todayMaxWinCombo() > 1
 
     ),
     cancel = always_false(),
@@ -1933,7 +1904,7 @@ leaderboard(
 
 leaderboard(
     id = 89759,
-    title = format("Longest battle in Quest Mode"),
+    title = format("Longest Battle in Quest Mode"),
     description = format("Record the longest battle"),
     start = 
     (
@@ -1944,6 +1915,92 @@ leaderboard(
     ),
     cancel = always_false(),
     submit = always_true(),
-    value = timerForQuestBattle(),
+    value = prev(timerForQuestBattle()),
     format = "FRAMES"
 )
+
+for data in SpecificLeaderboard
+{
+    leaderboard(    
+        title = format("Fastest {1} on {0}",  TrackLookup[data[TRACK]],  ShortCarName[data[CAR]]),
+        description = format("Record the fastest time on {0} while driving the Default Car of {1} in Time Trial Mode. Thanks to {2} For the suggestion", TrackLookup[data[TRACK]], CarName[data[CAR]], data[CREATOR]),
+        start = 
+        (
+            isDriving() && 
+            justFinishedTimeAttack() && 
+            timeAttackMode() && 
+            prev(timeTimeAttackMode()) > 0 &&
+            timeAttackTrackId() == data[TRACK] &&
+            carCheck(data[CAR]) &&
+            isDefaultCar()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = prev(timeTimeAttackMode()),
+        lower_is_better = true,
+        format = "FRAMES",
+        id = data[ID]
+    )
+
+    achievement(title = data[ACHIEVEMENT_NAME],
+                description = format("Beat {0} on {1} while driving the Default Car of {2} in Time Trial Mode.  Thanks to {3} for designing this achievement", data[TIMESTRING], TrackLookup[data[TRACK]], CarName[data[CAR]], data[CREATOR]),
+                points = 5,
+                trigger = isDriving() && 
+                          triggerJustFinishedTimeAttack() && 
+                          timeAttackMode() && 
+                          prev(timeTimeAttackMode()) > 0 &&
+                          prev(timeTimeAttackMode()) < data[TIME] &&
+                          timeAttackTrackId() == data[TRACK] &&
+                          carCheck(data[CAR]) &&
+                          isDefaultCar()
+
+    )
+}
+
+leaderboard(
+        id = 89760,
+        title = format("Fastest AE86T on Nagahori in Rain"),
+        description = format("Record the fastest time on W Nagahori Wangan Out while driving the Default Car of Toyota Sprinter Trueno in the rain in Time Trial Mode."),
+        start = 
+        (
+            isDriving() && 
+            justFinishedTimeAttack() && 
+            timeAttackMode() && 
+            prev(timeTimeAttackMode()) > 0 &&
+            timeAttackTrackId() == W_NAGAHORI_WANGAN_OUT &&
+            carCheck(TOYOTA_SPRINTER_TRUENO) &&
+            isDefaultCar() &&
+            isRaining()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = prev(timeTimeAttackMode()),
+        lower_is_better = true,
+        format = "FRAMES"
+    )
+ achievement(title = "Time to Deliver Some Tofu",
+                description = format("Beat 5:15 on N WNagahori Wangan Out while driving the Default Car of Toyota Sprinter Trueno in the rain in Time Trial Mode."),
+                points = 5,
+                trigger = isDriving() && 
+                          triggerJustFinishedTimeAttack() && 
+                          timeAttackMode() && 
+                          prev(timeTimeAttackMode()) > 0 &&
+                          prev(timeTimeAttackMode()) < timeConversion(5,15) &&
+                          timeAttackTrackId() == W_NAGAHORI_WANGAN_OUT &&
+                          carCheck(TOYOTA_SPRINTER_TRUENO) &&
+                          isDefaultCar() &&
+                          isRaining()
+    )
+
+
+rich_presence_conditional_display(demoMode(), "watching the demos.")
+
+
+rich_presence_conditional_display(isDriving(),
+                                  "is driving a {0} around {1} in {2}.",
+                                  rich_presence_lookup("CarNameLookup", vehicleNameID(), CarNameLookup),
+                                  rich_presence_lookup("CityLookup", citySelected(), CityNameLookup),
+                                  rich_presence_lookup("ModeLookup", gameMode(), GameModeLookup)
+                                  )
+
+rich_presence_display("is in the menus.")
