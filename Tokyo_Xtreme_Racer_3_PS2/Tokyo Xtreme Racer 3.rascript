@@ -1826,7 +1826,7 @@ achievement(title = "All Night Battle",
                       questMode() &&
                       isDriving() &&
                       !demoMode() &&
-                      prev(timerForQuestBattle()) >= timeConversion(2,0)
+                      prev(timerForQuestBattle()) >= timeConversion(3,0)
             )
 
 function speedAchievement(title, speedValue, points) 
