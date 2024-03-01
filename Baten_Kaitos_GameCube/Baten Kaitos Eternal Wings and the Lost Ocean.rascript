@@ -408,6 +408,7 @@ function lootProgress25() => 0x2496AB
 //          bit0 = Moonguile Forest Second room chest: Bamboo Shoot
 //          bit1 = Moonguile Forest Save room Flame sword
 //          bit2 = Moonguile Forest Save room Flame Burst 1
+//          bit3 = Moonguile Forest Spring Escape
 //          bit4 = Nunki Valley Lower path chest Flame Shield
 //          bit5 = Nunki Valley Upper path chest Frozen Shield
 //          bit6 = Nunki Valley Behind Waterfall Secret Recipe 1
@@ -728,11 +729,11 @@ function lootProgress58() => 0x2497AF
 
 // $2497B2: (bitfield) Chest Progress
 //          
-//          bit1 = Cor Hydrae Sibiling God Unknown
-//          bit2 = Cor Hydrae Sibiling God Che
-//          bit3 = Cor Hydrae Sibiling God Body
-//          bit4 = Cor Hydrae Sibiling God Unknown
-//          bit5 = Cor Hydrae Sibiling God Unknown
+//          bit1 = Cor Hydrae Sibling God Unknown
+//          bit2 = Cor Hydrae Sibling God Che
+//          bit3 = Cor Hydrae Sibling God Body
+//          bit4 = Cor Hydrae Sibling God Unknown
+//          bit5 = Cor Hydrae Sibling God Unknown
 //          bit6 = Sheliak Mayor's Room Saving Book
 //          bit7 = Sheliak Obelisk room, Cloud Shield
 function lootProgress59() => 0x2497B2
@@ -2360,154 +2361,178 @@ MIZUTI = 0x06
 bossScriptIdList = 
 [
     {
+        TITLE:"Saving the Lady",
         NAME: "Sabre Dragon", 
-        POINTS: 1,
+        POINTS: 3,
         PRIOR: 0x000001f4,
         POST: 0x000002bc
     },
     {
+        TITLE:"Opening the First Gate",
         NAME: "Lord of the Spring", 
-        POINTS: 1,
+        POINTS: 5,
         PRIOR: 0x00000320,
         POST: 0x000044c
     },
     {
+        TITLE:"This One Time in the Prequel",
         NAME: "Giacomo", 
-        POINTS: 1,
+        POINTS: 5,
         PRIOR: 0x708,
         POST: 0x0000834
     },
     {
+        TITLE:"Bringing the Thunder",
         NAME: "Thunderfish", 
-        POINTS: 1,
+        POINTS: 5,
         PRIOR: 0x00000bb8,
         POST: 0x0000c1c
     },
     {
+        TITLE:"Fighting Among the Clouds",
         NAME: "Iron Beetle I", 
-        POINTS: 1,
+        POINTS: 5,
         PRIOR: 0x00000e10,
         POST: 0x0000e74
     },
     {
+        TITLE:"Drill, Baby, Drill",
         NAME: "Iron Beetle V", 
-        POINTS: 1,
+        POINTS: 5,
         PRIOR: 0x00001068,
         POST: 0x0001194
     },
     {
+        TITLE:"Opening the Second Gate",
         NAME: "Lord of the Winds", 
-        POINTS: 1,
+        POINTS: 5,
         PRIOR: 0x00001324,
         POST: 0x0001388
     },
     {
+        TITLE:"Taking out the Librarian",
         NAME: "Folon", 
-        POINTS: 1,
+        POINTS: 5,
         PRIOR: 0x00001770,
         POST: 0x000017d4
     },
     {
+        TITLE:"Opening the Third Gate",
         NAME: "Tree Guardian", 
-        POINTS: 1,
+        POINTS: 5,
         PRIOR: 0x000019c8,
         POST: 0x00001a2c
     },
     {
+        TITLE:"Was It Something I Said?",
         NAME: "Savyna", 
-        POINTS: 1,
+        POINTS: 5,
         PRIOR: 0x00001a36,
         POST: 0x00001a90
     },
     {
+        TITLE:"Xeno-What?",
         NAME: "Gnosis", 
-        POINTS: 1,
+        POINTS: 5,
         PRIOR: 0x00001d4c,
         POST: 0x00001db0
     },
     {
+        TITLE:"Massive Shuffle",
         NAME: "Magnus Giganticus", 
-        POINTS: 1,
+        POINTS: 5,
         PRIOR: 0x00002008,
         POST: 0x0000206c
     },
     {
+        TITLE:"You Again?",
         NAME: "Sikri", 
-        POINTS: 1,
+        POINTS: 5,
         PRIOR: 0x000022c4,
         POST: 0x00002328
     },
     {
+        TITLE:"Opening the Fourth Gate",
         NAME: "Phantasm", 
-        POINTS: 1,
+        POINTS: 5,
         PRIOR: 0x00002648,
         POST: 0x000026ac
     },
     {
+        TITLE:"Time to Run",
         NAME: "Trio On The Goldoba", 
-        POINTS: 1,
+        POINTS: 10,
         PRIOR: 0x000029cc,
         POST: 0x00002a94
     },
     {
+        TITLE:"What the Heck Was That? ",
         NAME: "Geldoblame", 
-        POINTS: 1,
+        POINTS: 10,
         PRIOR: 0x00002e18,
         POST: 0x00002e22
     },
     {
+        TITLE:"Passing The Test",
         NAME: "Goddess of Ice", 
-        POINTS: 1,
+        POINTS: 3,
         PRIOR: 0x0000319c,
         POST: 0x00003200
     },
     {
+        TITLE:"Eye See You",
         NAME: "Fadroh", 
-        POINTS: 1,
+        POINTS: 5,
         PRIOR: 0x000034bc,
         POST: 0x00003520
     },
     {
+        TITLE:"Angel of Darkness",
         NAME: "Angel of Darkness", 
-        POINTS: 1,
+        POINTS: 10,
         PRIOR: 0x00003584,
         POST: 0x000035e8
     },
     {
+        TITLE:"Twin Doggos",
         NAME: "Agyo and Ungyo", 
-        POINTS: 1,
+        POINTS: 5,
         PRIOR: 0x00003a34,
         POST: 0x0003a98
     },
     {
+        TITLE:"Is That All You Got?",
         NAME: "The Ancient God", 
-        POINTS: 1,
+        POINTS: 10,
         PRIOR: 0x0003afc,
         POST: 0x0003b60
     },
     {
+        TITLE:"Our Final Meeting",
         NAME: "Trio at the Celestial Alps", 
-        POINTS: 1,
+        POINTS: 10,
         PRIOR: 0x00003ee4,
         POST: 0x00003f48
     },
     {
+        TITLE:"The Evil God",
         NAME: "Malpercio", 
-        POINTS: 1,
+        POINTS: 25,
         PRIOR: 0x00413c,
         POST: 0x0041a0
     },
     {
+        TITLE:"Wake Up!",
         NAME: "The Final Boss", 
-        POINTS: 1,
+        POINTS: 25,
         PRIOR: 0x04204,
         POST: 0x04268
     },
     {
         TITLE: "The End", 
         NAME: "True Final Boss",
-        DESCRIPTION: "Reach the end of the game.",
-        POINTS: 1,
+        DESCRIPTION: "Reach the end of the game",
+        POINTS: 50,
         PRIOR: 0x004394,
         POST: 0x0043f8
     },
@@ -2553,68 +2578,79 @@ for data in bossScriptIdList
 bossBooleanList = 
 [
     {
+        TITLE:"Required Spider Boss",
         NAME: "Nunkirantula", 
-        POINTS: 1,
+        POINTS: 3,
         LOCATION: eventProgress3(),
         BIT: BIT5
     },
     {
+        TITLE:"Putting the Ghosts to Rest",
         NAME: "Rampulus", 
-        POINTS: 1,
+        POINTS: 10,
         LOCATION: lootProgress77(),
         BIT: BIT7
     },
     {
+        TITLE:"Sand in Your Eyes",
         NAME: "Sowzana", 
-        POINTS: 1,
+        POINTS: 10,
         LOCATION: phoenixCrestSeenLocation(),
         BIT: BIT3
     },
     {
+        TITLE:"Returning to the First Boss",
         NAME: "Kulcabaran", 
-        POINTS: 1,
+        POINTS: 10,
         LOCATION: lootProgress71(),
         BIT: BIT4
     },
     {
+        TITLE:"The Shadow of the Wizard",
         NAME: "Wizard Shadow", 
-        POINTS: 1,
+        POINTS: 5,
         LOCATION: eventProgress2(),
         BIT: BIT6
     },
     {
+        TITLE:"Quite a Catch",
         NAME: "Brokolis", 
-        POINTS: 1,
+        POINTS: 10,
         LOCATION: lootProgress35(),
         BIT: BIT1
     },
     {
-        NAME: "Sibiling Gods He", 
-        POINTS: 1,
+        TITLE:"Beheading",
+        NAME: "Sibling God: He", 
+        POINTS: 5,
         LOCATION: lootProgress59(),
         BIT: BIT1
     },
     {
-        NAME: "Sibling Gods Che", 
-        POINTS: 1,
+        TITLE:"Chest Shot",
+        NAME: "Sibling God: Che", 
+        POINTS: 5,
         LOCATION: lootProgress59(),
         BIT: BIT2
     },
     {
-        NAME: "Sibling Gods Bo", 
-        POINTS: 1,
+        TITLE:"Body Blow",
+        NAME: "Sibling God: Bo", 
+        POINTS: 5,
         LOCATION: lootProgress59(),
         BIT: BIT3
     },
     {
-        NAME: "Sibling Gods Ar", 
-        POINTS: 1,
+        TITLE:"Disarming",
+        NAME: "Sibling God: Ar", 
+        POINTS: 5,
         LOCATION: lootProgress59(),
         BIT: BIT4
     },
     {
-        NAME: "Sibling Gods Le", 
-        POINTS: 1,
+        TITLE:"Grounded",
+        NAME: "Sibling God: Le", 
+        POINTS: 5,
         LOCATION: lootProgress59(),
         BIT: BIT5
     }
@@ -2661,12 +2697,12 @@ lootList =
     CEBALRAI:
         [
             { LOCATION: lootProgress23(), BITS: range(BIT4,BIT6) },
-            { LOCATION: lootProgress24(), BITS: [BIT3,BIT4] },
+            { LOCATION: lootProgress24(), BITS: [BIT4] },  // The Shish Kebab is not an evergreen item, let's not require it. 
         ],
     MOONGUILE_FOREST: 
         [
             { LOCATION: lootProgress25(), BITS: [BIT4,BIT5,BIT7] },
-            { LOCATION: lootProgress26(), BITS: range(BIT0,BIT2) },
+            { LOCATION: lootProgress26(), BITS: range(BIT0,BIT3) },
         ],
     NUNKI_VALLEY: 
         [
@@ -2913,7 +2949,53 @@ lootList =
             { LOCATION: lootProgress67(), BITS: range(BIT0, BIT7) },
             { LOCATION: lootProgress68(), BITS: range(BIT0, BIT3) },
         ],
- }
+}
+
+// Doing it this way because I accidentally wrote the Locations before I thought about this. 
+lootPointsList ={
+    CEBALRAI: 2,
+    MOONGUILE_FOREST: 3,
+    NUNKI_VALLEY: 2,
+    PHERKAD: 3,
+    LORDS_MANSIONS: 5,
+    NASHIRA: 3,
+    LESSER_CELESTIAL_RIVER: 4,
+    CLOUD_PASSAGE: 1,
+    SHELIAK: 4,
+    CASTLE_ELNATH: 4,
+    ANUENUE_PORT: 2,
+    KOMO_MAI: 5,
+    ANCIENT_LIBRARY_OF_MAGIC: 5,
+    HOLOHOLO_JUNGLE: 5,
+    OPU: 3,
+    CELESTIAL_TREE: 3,
+    // TRAIL_OF_SOULS:  // NOne available. 
+    PARNASSE: 3,
+    DETOURNE: 2,
+    REVERENCE: 1,
+    NEKTON: 3,
+    BALANCOIRE: 3,
+    COCCOLITH: 3,
+    MINTAKA: 3,
+    BATTLESHIP_GOLDOBA: 5,
+    AZHA_VILLAGE: 4,
+    LAVA_CAVES: 4,
+    IMPERIAL_FORTRESS: 10,
+    ICE_CLIFFS: 5,
+    KAFFALJIDHMA: 3,
+    CURSA: 3,
+    LABYRINTH_OF_DUHR: 5,
+    GEMMA_VILLAGE: 5,
+    CAPELLA: 3,
+    ALGORAB_VILLAGE: 3,
+    ZOSMA_TOWER: 5,
+    CELESTIAL_ALPS: 5,
+    ILLUSORY_FORTRESS: 3,
+    GREATER_CELESTIAL_RIVER: 4,
+    PHANTOM_GOLDOBA: 4,
+    NIHAL_DESERT: 5,
+    COR_HYDRAE: 10
+}
 
 function collectionAchievement(key) 
 {
@@ -2927,9 +3009,9 @@ function collectionAchievement(key)
         }
     }
 
-    achievement(title = format("Lootable {0}",key),
-                description = format("Loot everything from {0}",key),
-                points = 1,
+    achievement(title = format("{0} Collector",key),
+                description = format("Loot and earn everything from {0}.  Some Missable items are not counted",key),
+                points = lootPointsList[key],
                 trigger = saveProtection() &&
                           any_of(locations, value => prev(value) == 0) &&
                           measured(sum_of(locations, value => value) == length(locations))
@@ -2946,7 +3028,7 @@ for key in lootList
 questList = 
 [
     {
-        TITLE: "Learning how to use quest magnus" ,
+        TITLE: "Learning How to Use Quest Magnus",
         DESCRIPTION: "Earn an Ice Dagger by giving an apple to Larikush", 
         POINTS: 1,
         TRIGGER: [
@@ -2954,58 +3036,58 @@ questList =
         ]
     },
     {
-        TITLE: "And now the real speedrun begins..." ,
-        DESCRIPTION: "Earn the fabled Shampoo by helping Maynee find her husband.", 
-        POINTS: 1,
+        TITLE: "And Now the Real Speedrun Begins...",
+        DESCRIPTION: "Earn the fabled Shampoo by helping Maynee find her husband", 
+        POINTS: 2,
         TRIGGER: [
             { LOCATION: lootProgress24(), BITS: [BIT2] }
         ]
     },
     {
-        TITLE: "Tripadvisor: Sheliak" ,
-        DESCRIPTION: "Earn the Anklet of Calm Winds by visiting by helping Maynee find her boyfriend.", 
-        POINTS: 1,
+        TITLE: "Tripadvisor: Sheliak",
+        DESCRIPTION: "Earn the Anklet of Calm Winds by visiting Sheliak", 
+        POINTS: 2,
         TRIGGER: [
             { LOCATION: lootProgress24(), BITS: [BIT5] }
         ]
     },
     {
-        TITLE: "Cleaning up" ,
-        DESCRIPTION: "Help three soldiers and get rewarded after the Battle of Castle Elnath.", 
-        POINTS: 1,
+        TITLE: "Cleaning Up" ,
+        DESCRIPTION: "Help three soldiers and get rewarded after the Battle of Castle Elnath", 
+        POINTS: 3,
         TRIGGER: [
             { LOCATION: lootProgress62(), BITS: [BIT7] },
             { LOCATION: lootProgress73(), BITS: [BIT1] }
         ]
     },
     {
-        TITLE: "Here you go kid, now get away from me" ,
-        DESCRIPTION: "Earn the Secret Recipe 7 by giving a lot of items to those annoying kids.", 
-        POINTS: 1,
+        TITLE: "Here You Go Kid, Now Get Away From Me" ,
+        DESCRIPTION: "Earn the Secret Recipe 7 by giving a lot of items to those annoying kids", 
+        POINTS: 3,
         TRIGGER: [
             { LOCATION: lootProgress3(), BITS: [BIT5] }
         ]
     },
     {
-        TITLE: "Quite a trade" ,
-        DESCRIPTION: "Earn a Platnium Buckle and a Cetaka's Sword for helping an old woman's backache.", 
-        POINTS: 1,
+        TITLE: "Quite a Trade" ,
+        DESCRIPTION: "Earn a Platnium Buckle and a Cetaka's Sword for helping an old woman's backache", 
+        POINTS: 2,
         TRIGGER: [
             { LOCATION: lootProgress12(), BITS: [BIT6, BIT7] }
         ]
     },
     {
-        TITLE: "Let me through" ,
-        DESCRIPTION: "Earn a Red Oak for sharing a Girl's Thoughts.", 
-        POINTS: 1,
+        TITLE: "Let Me Through" ,
+        DESCRIPTION: "Earn a Red Oak for sharing a Girl's Thoughts", 
+        POINTS: 3,
         TRIGGER: [
             { LOCATION: lootProgress14(), BITS: [BIT4] }
         ]
     },
     {
         TITLE: "Hero of Mintaka",
-        DESCRIPTION: "Save everyone possible during Mintaka's attack.", 
-        POINTS: 1,
+        DESCRIPTION: "Save everyone possible during Mintaka's attack", 
+        POINTS: 5,
         TRIGGER: [
             { LOCATION: eventProgress5(), BITS: [BIT1] },
             { LOCATION: eventProgress6(), BITS: [BIT0, BIT2, BIT3, BIT5] },
@@ -3013,33 +3095,33 @@ questList =
         ]
     },
     {
-        TITLE: "It belongs in a museum!",
-        DESCRIPTION: "Earn a Broken Birdie by completing the Balancoire Museum Collection.", 
-        POINTS: 1,
+        TITLE: "It Belongs in a Museum!",
+        DESCRIPTION: "Earn a Broken Birdie by completing the Balancoire Museum Collection", 
+        POINTS: 5,
         TRIGGER: [
             { LOCATION: lootProgress14(), BITS: [BIT7] }
         ]
     },
     {
-        TITLE: "Glad I'm not cleaning that up",
-        DESCRIPTION: "Earn a Firedrake Fist by complete the Balancoire Kids quest.", 
-        POINTS: 1,
+        TITLE: "Glad I'm Not Cleaning That Up",
+        DESCRIPTION: "Earn a Firedrake Fist by complete the Balancoire Kids quest", 
+        POINTS: 5,
         TRIGGER: [
             { LOCATION: lootProgress14(), BITS: [BIT3] }
         ]
     },
     {
-        TITLE: "Could you Repeat that?" ,
-        DESCRIPTION: "Earn a Rainbow Ash by putting on a second Shrine Progression.", 
-        POINTS: 1,
+        TITLE: "Could You Repeat That?" ,
+        DESCRIPTION: "Earn a Rainbow Ash by putting on a second Shrine Progression", 
+        POINTS: 5,
         TRIGGER: [
             { LOCATION: lootProgress13(), BITS: [BIT1] }
         ]
     },
     {
-        TITLE: "Very Sorry for your loss" ,
-        DESCRIPTION: "Earn a Golden Bugle by giving two widows in Kaffaljidhma something to remember their husbands with.", 
-        POINTS: 1,
+        TITLE: "Very Sorry For Your Loss" ,
+        DESCRIPTION: "Earn a Golden Bugle by giving two widows in Kaffaljidhma something to remember their husbands with", 
+        POINTS: 3,
         TRIGGER: [
             { LOCATION: lootProgress34(), BITS: [BIT6] }
         ]
@@ -3075,9 +3157,9 @@ for data in questList
 optionalQuestsList =
 [
     {
-        TITLE: "An expensive dessert",
-        DESCRIPTION: "Earn a desert for a gold nugget in Balancoire.", 
-        POINTS: 1,
+        TITLE: "An Expensive Dessert",
+        DESCRIPTION: "Earn a desert for a gold nugget in Balancoire", 
+        POINTS: 2,
         TRIGGER: [
             { LOCATION: lootProgress5(), BITS: [BIT7] },
             { LOCATION: lootProgress6(), BITS: [BIT0] }
@@ -3257,18 +3339,23 @@ spCombos =
 
 function spComboAchievements(title, targetValue)
 {
+    points = 5
+    if (targetValue == 141)
+    {
+        points = 25
+    }
     achievement(title = title,
                 description = format("Discover {0} SP combos",targetValue),
-                points = 1,
+                points = points,
                 trigger = saveProtection() && 
                           sum_of(spCombos, value => prev(value)/ prev(value)) < targetValue &&
                           measured(sum_of(spCombos, value => value/value) == targetValue) 
     )
 }
 
-for percentage in range(10,90, step=10)
+for percentage in range(10,90,step=10)
 {
-    spComboAchievements(format("SP Combos {0} percentage", percentage), 14*percentage/10)
+    spComboAchievements(format("SP Combos {0} Percentage", percentage), 14*percentage/10)
 }
 
 spComboAchievements("SP Combos Fully Loaded", 141)
@@ -3395,9 +3482,14 @@ calculateCorrectMagnusLocations()
 
 function magnusCollectionAchievement(title, targetValue)
 {
+    points = 10
+    if (targetValue == MAGNUS_ACHIEVEMENT_CARDS)
+    {
+        points = 50
+    }
     achievement(title = title,
                 description = format("Discover {0} Magnus Cards",targetValue),
-                points = 1,
+                points = points,
                 trigger = saveProtection() && 
                           sum_of(correctAchievementPrevCombinationLocations, value => value) - sum_of(correctAchievementPrevReduceCombinationLocations, value => value) < targetValue &&
                           sum_of(correctAchievementCombinationLocations, value => value) - sum_of(correctAchievementReduceCombinationLocations, value => value) >= targetValue
@@ -3416,17 +3508,17 @@ cameraAchievementList =
 [
     {
         TITLE: "Portfolio: Sadal Suud" ,
-        DESCRIPTION: "Register in the Magnus Gathering a picture of Sabre Dragon, Lord of the Spring, Nunkirantula.  Note: Other cards and photos will be missable.", 
-        POINTS: 1,
+        DESCRIPTION: "Register in the Magnus Gathering a picture of Sabre Dragon, Lord of the Spring, Nunkirantula.  Note: Other cards and photos will be missable", 
+        POINTS: 5,
         CARDS: [
-            { LOCATION: bossCards4(), BITS: [BIT0, BIT1] },
+            { LOCATION: bossCards4(), BITS: [BIT2, BIT3] },
             { LOCATION: bossCards7(), BITS: [BIT1] }
         ]
     },
     {
         TITLE: "Portfolio: Diadem" ,
-        DESCRIPTION: "Register in the Magnus Gathering a picture of Thunderfish, Iron Beetle I, Iron Beetle V, and Lord of the Winds.  Note: Other cards and photos will be missable.", 
-        POINTS: 1,
+        DESCRIPTION: "Register in the Magnus Gathering a picture of Thunderfish, Iron Beetle I, Iron Beetle V, and Lord of the Winds.  Note: Other cards and photos will be missable", 
+        POINTS: 5,
         CARDS: [
             { LOCATION: bossCards4(), BITS: [BIT4, BIT5, BIT6] },
             { LOCATION: bossCards3(), BITS: [BIT0] }
@@ -3434,8 +3526,8 @@ cameraAchievementList =
     },
     {
         TITLE: "Portfolio: Anuenue" ,
-        DESCRIPTION: "Register in the Magnus Gathering a picture of Tree Guardian, and Tentacle.  Note: Other cards and photos will be missable.", 
-        POINTS: 1,
+        DESCRIPTION: "Register in the Magnus Gathering a picture of Tree Guardian, and Tentacle.  Note: Other cards and photos will be missable", 
+        POINTS: 2,
         CARDS: [
             { LOCATION: bossCards3(), BITS: [BIT2] },
             { LOCATION: bossCards7(), BITS: [BIT2] }
@@ -3443,8 +3535,8 @@ cameraAchievementList =
     },
     {
         TITLE: "Portfolio: Mira" ,
-        DESCRIPTION: "Register in the Magnus Gathering a picture of Gnosis, Magnus Giganticus, Sikri, Phantasm, and two enemies on the spaceship game.  Note: Other cards and photos will be missable.", 
-        POINTS: 1,
+        DESCRIPTION: "Register in the Magnus Gathering a picture of Gnosis, Magnus Giganticus, Sikri, Phantasm, and two enemies on the spaceship game.  Note: Other cards and photos will be missable", 
+        POINTS: 5,
         CARDS: [
             { LOCATION: bossCards4(), BITS: [BIT7] },
             { LOCATION: bossCards3(), BITS: [BIT3, BIT4, BIT5] }
@@ -3452,8 +3544,8 @@ cameraAchievementList =
     },
     {
         TITLE: "Portfolio: Alfred" ,
-        DESCRIPTION: "Register in the Magnus Gathering a picture of Geldoblame, Fadroh, and the Angel of Darkness.  Note: Other cards and photos will be missable.", 
-        POINTS: 1,
+        DESCRIPTION: "Register in the Magnus Gathering a picture of Geldoblame, Fadroh, and the Angel of Darkness.  Note: Other cards and photos will be missable", 
+        POINTS: 5,
         CARDS: [
             { LOCATION: bossCards2(), BITS: [BIT2] },
             { LOCATION: bossCards8(), BITS: [BIT4] },
@@ -3462,15 +3554,15 @@ cameraAchievementList =
     },
     {
         TITLE: "Portfolio: Reform Party" ,
-        DESCRIPTION: "Register in the Magnus Gathering a picture of Naiad, Thalassa, Despina, and Galatea.  Note: Other cards and photos will be missable.", 
-        POINTS: 1,
+        DESCRIPTION: "Register in the Magnus Gathering a picture of Naiad, Thalassa, Despina, and Galatea.  Note: Other cards and photos will be missable", 
+        POINTS: 5,
         CARDS: [
             { LOCATION: bossCards2(), BITS: range(BIT3, BIT6) }
         ]
     },
     {
         TITLE: "Portfolio: Wazn" ,
-        DESCRIPTION: "Register in the Magnus Gathering a picture of Goddess of Ice.  Note: Other cards and photos will be missable.", 
+        DESCRIPTION: "Register in the Magnus Gathering a picture of Goddess of Ice.  Note: Other cards and photos will be missable", 
         POINTS: 1,
         CARDS: [
             { LOCATION: bossCards2(), BITS: [BIT7] }
@@ -3478,8 +3570,8 @@ cameraAchievementList =
     },
     {
         TITLE: "Portfolio: Duhr" ,
-        DESCRIPTION: "Register in the Magnus Gathering a picture of Agyo and Ugyo.  Note: Other cards and photos will be missable.",
-        POINTS: 1,
+        DESCRIPTION: "Register in the Magnus Gathering a picture of Agyo and Ugyo.  Note: Other cards and photos will be missable",
+        POINTS: 2,
         CARDS:[
             { LOCATION: bossCards1(), BITS: [BIT4] },
             { LOCATION: bossCards5(), BITS: [BIT2] }
@@ -3487,8 +3579,8 @@ cameraAchievementList =
     },
     {
         TITLE: "Portfolio: The World",
-        DESCRIPTION: "Register in the Magnus Gathering a picture of Rampulus, Sowzana, Kulcabaran, Wizard Shadow, Brokolis, the boss at the Celestial alps, .  Note: Other cards and photos will be missable.",
-        POINTS: 1,
+        DESCRIPTION: "Register in the Magnus Gathering a picture of Rampulus, Sowzana, Kulcabaran, Wizard Shadow, Brokolis, the boss at the Celestial alps, .  Note: Other cards and photos will be missable",
+        POINTS: 5,
         CARDS:[
             { LOCATION: bossCards8(), BITS: [BIT0, BIT1, BIT5] },
             { LOCATION: bossCards9(), BITS: [BIT7] },
@@ -3499,8 +3591,8 @@ cameraAchievementList =
     },
     {
         TITLE: "Portfolio: Finale",
-        DESCRIPTION: "Register in the Magnus Gathering a picture of the five Sibling Gods and the Final Boss.  Note: Other cards and photos will be missable.",
-        POINTS: 1,
+        DESCRIPTION: "Register in the Magnus Gathering a picture of the five Sibling Gods and the Final Boss.  Note: Other cards and photos will be missable",
+        POINTS: 10,
         CARDS:[
             { LOCATION: bossCards6(), BITS: range(BIT3, BIT7) },
             { LOCATION: bossCards1(), BITS: [BIT0] }
@@ -3543,26 +3635,26 @@ specialCardList =
 [
   {
         TITLE: "He's Now a 3-D Pizza",
-        DESCRIPTION: "Find the Pac-Mania card.",
-        POINTS: 1,
+        DESCRIPTION: "Find the Pac-Mania card",
+        POINTS: 2,
         CARDS:[
             { LOCATION: specialCards(), BITS: [BIT4] }
         ]
     },
     {
         TITLE: "Is There a Set For That?",
-        DESCRIPTION: "Find the Wonder MOMO card.",
-        POINTS: 1,
+        DESCRIPTION: "Find the Wonder MOMO card",
+        POINTS: 2,
         CARDS:[
             { LOCATION: specialCards(), BITS: [BIT7] }
         ]
     },
     {
         TITLE: "Cosmic Guardian",
-        DESCRIPTION: "Find the Rare Action Figure card.",
+        DESCRIPTION: "Find the Rare Action Figure card",
         POINTS: 1,
         CARDS:[
-            { LOCATION: specialCards2(), BITS: [BIT7] }
+            { LOCATION: specialCards2(), BITS: [BIT3] }
         ]
     }
 ]
@@ -3572,22 +3664,31 @@ for data in specialCardList
     cardAchievement(data)
 }
 
+STAR_FRAGMENTS = 50
+
 function starFragmentAchievement(title, targetValue)
 {
+    points = 4
+    if (targetValue >= 40)
+    {
+        points = 5
+    }
+    if (targetValue == STAR_FRAGMENTS)
+    {
+        points = 25
+    }
     achievement(title = title,
                 description = format("Deliver {0} constellations",targetValue),
-                points = 1,
+                points = points,
                 trigger = saveProtection() && 
                           prev(starFragmentsCollected()) < targetValue &&
                           measured(starFragmentsCollected() == targetValue) 
     )
 }
 
-STAR_FRAGMENTS = 50
-
 for percentage in range(10,100, step=10)
 {
-    starFragmentAchievement(format("Constellations {0} percentage", percentage), STAR_FRAGMENTS*percentage/100)
+    starFragmentAchievement(format("Constellations {0} Percentage", percentage), STAR_FRAGMENTS*percentage/100)
 }
 
 
@@ -3611,44 +3712,44 @@ familyAchievements  =
   {
         TITLE: "Gathering Threads",
         DESCRIPTION: "Find 5 members of the Quzman family",
-        POINTS: 1,
+        POINTS: 3,
         COUNT:5
     },
     {
         TITLE: "Rekindling Bonds",
         DESCRIPTION: "Find 10 members of the Quzman family",
-        POINTS: 1,
+        POINTS: 4,
         COUNT:10
     },
     {
         TITLE: "Uniting Roots",
         DESCRIPTION: "Find 15 members of the Quzman family",
-        POINTS: 1,
+        POINTS: 5,
         COUNT:15
     },
     {
         TITLE: "Harmony Restored",
         DESCRIPTION: "Find 20 members of the Quzman family",
-        POINTS: 1,
+        POINTS: 5,
         COUNT:20
     },
     {
         TITLE: "Hearts Entwined",
         DESCRIPTION: "Find 25 members of the Quzman family",
-        POINTS: 1,
+        POINTS: 5,
         COUNT:25
     },
     {
         TITLE: "Legacy Embraced",
         DESCRIPTION: "Find 30 members of the Quzman family",
-        POINTS: 1,
-        COUNT:10
+        POINTS: 10,
+        COUNT:30
     },
     {
         TITLE: "A Full Circle",
-        DESCRIPTION: "Find 33 members of the Quzman family",
-        POINTS: 1,
-        COUNT:10
+        DESCRIPTION: "See the ending of the Quzman's questline",
+        POINTS: 25,
+        COUNT:33
     }
 
 ]
@@ -3694,13 +3795,13 @@ animalAchievements  =
   {
         TITLE: "Zoo Enthusiast",
         DESCRIPTION: "Deliver 8 animals to Wazn",
-        POINTS: 1,
+        POINTS: 5,
         COUNT:8
     },
     {
         TITLE: "Zoo Master",
         DESCRIPTION: "Deliver all 17 animals to Wazn",
-        POINTS: 1,
+        POINTS: 10,
         COUNT:17
     }
 ]
@@ -3732,13 +3833,13 @@ joiningAchievementsList  =
     {
         TITLE: "Mysterious Hunter ",
         DESCRIPTION: "Have Savyna join the party",
-        POINTS: 1,
+        POINTS: 2,
         WHO: SAYVNA
     },
     {
         TITLE: "Mysterious Mystery",
         DESCRIPTION: "Have Mizuti join the party",
-        POINTS: 1,
+        POINTS: 3,
         WHO: MIZUTI
     }
 ]
@@ -3746,27 +3847,27 @@ joiningAchievementsList  =
 rejoiningAchievementsList  =
 [
     {
-        TITLE: "Naiad",
-        DESCRIPTION: "Defeat Naiad and find what they were guarding.",
-        POINTS: 1,
+        TITLE: "Cloud Rider",
+        DESCRIPTION: "Defeat Naiad and find what they were guarding",
+        POINTS: 3,
         WHO: GIBARI
     },
     {
-        TITLE: "Galatea",
+        TITLE: "Burning Love",
         DESCRIPTION: "Defeat Galatea and find what they were guarding",
-        POINTS: 1,
+        POINTS: 3,
         WHO: LYUDE
     },
     {
-        TITLE: "Thalassa",
+        TITLE: "Whacky Weed",
         DESCRIPTION: "Defeat Thalassa and find what they were guarding",
-        POINTS: 1,
+        POINTS: 3,
         WHO: SAYVNA
     },
     {
-        TITLE: "Despina",
+        TITLE: "Planting a Seed",
         DESCRIPTION: "Defeat Despina and find what they were guarding",
-        POINTS: 1,
+        POINTS: 4,
         WHO: MIZUTI
     }
 ]
@@ -3783,7 +3884,7 @@ function joiningAchievements(data)
                                                        (CHARACTER_ORDER_LOCATION + 6) >= index  // probably could be == but that's it. 
                                 ) &&
                           any_of( range(1,6), index => byte(CHARACTER_ORDER_LOCATION + index - 1) == KALAS &&
-                                                       (CHARACTER_ORDER_LOCATION + 6) >= index  // probably could be == but that's it. 
+                                                       (CHARACTER_ORDER_LOCATION + 6) >= index  
                                 )
                         
     )
@@ -3801,8 +3902,8 @@ function rejoiningAchievements(data)
                                                        prev(byte(CHARACTER_ORDER_LOCATION + index - 1)) == NO_CHARACTER &&
                                                        (CHARACTER_ORDER_LOCATION + 6) >= index  // probably could be == but that's it. 
                                 )  &&
-                          none_of( range(1,6), index => byte(CHARACTER_ORDER_LOCATION + index - 1) != KALAS &&
-                                                       (CHARACTER_ORDER_LOCATION + 6) >= index  // probably could be == but that's it. 
+                          none_of( range(1,6), index => byte(CHARACTER_ORDER_LOCATION + index - 1) == KALAS &&
+                                                       (CHARACTER_ORDER_LOCATION + 6) >= index  
                                  ) &&
                           majorScriptId() == 0x00002f4e
     )
@@ -3825,37 +3926,37 @@ maxClassLevelList  =
     {
         TITLE: "Amazing Angel",
         DESCRIPTION: "Reach max class level with Kalas",
-        POINTS: 1,
+        POINTS: 5,
         WHO: KALAS
     },
     {
         TITLE: "Master Magician",
         DESCRIPTION: "Reach max class level with Xelha",
-        POINTS: 1,
+        POINTS: 5,
         WHO: XELHA
     },
     {
         TITLE: "Fantastic Fisherman",
         DESCRIPTION: "Reach max class level with Gibari",
-        POINTS: 1,
+        POINTS: 5,
         WHO: GIBARI
     },
     {
         TITLE: "Solid Soldier",
         DESCRIPTION: "Reach max class level with Lyude",
-        POINTS: 1,
+        POINTS: 5,
         WHO: LYUDE
     },
     {
         TITLE: "Honorable Hunter",
         DESCRIPTION: "Reach max class level with Sayvna",
-        POINTS: 1,
+        POINTS: 5,
         WHO: SAYVNA
     },
     {
         TITLE: "The Great Mizuti",
         DESCRIPTION: "Reach max class level with Mizuti",
-        POINTS: 1,
+        POINTS: 5,
         WHO: MIZUTI
     }
 ]
@@ -3881,8 +3982,8 @@ for data in maxClassLevelList
 
 TOTAL_MAGNUS_IN_MINDEER_MINIGAME = 12
 achievement(title = "Trail of Souls Collector",
-            description = "Earn all 12 cards from the Mindeer minigame.",
-            points = 3,
+            description = "Earn all 12 cards from the Mindeer minigame",
+            points = 5,
             trigger = saveProtection() &&
                       mindeerMinigameCheck(TOTAL_MAGNUS_IN_MINDEER_MINIGAME) &&
                       majorScriptId() == 0x00001d4c
@@ -3890,7 +3991,7 @@ achievement(title = "Trail of Souls Collector",
 
 achievement(title = "Naked Detourne",
             description = "Beat the Detourne Boss with out getting any special items from the Golden Hero",
-            points = 3,
+            points = 5,
             trigger = saveProtection() &&
                       detoroneValuableItemsCheck() &&
                       prev(majorScriptId()) == 0x00002008 &&
@@ -3920,106 +4021,133 @@ SIX_STRAIGHT = 0x000a
 SIX_STRAIGHT_NINE = 0x00b
 
 function finalValue(targetValue) => (targetValue == NO_CARD_HAND || 
-                                   targetValue == VOICE) &&
-                                  prev(targetValue) == NO_CARD_HAND
+                                   targetValue == VOICE)
 
 function matchHand(targetValue, targetHand) => targetValue == targetHand &&
-                                               prev(targetValue) == NO_CARD_HAND
+                                               prev(targetValue) != targetHand
+function matchOnlyHand(targetValue, targetHand) => targetValue == targetHand
 
 cardHandList  =
 [
     {
         TITLE: "Quatro Magio",
         DESCRIPTION: "Make a Four of a kind hand combo in a single turn. (No other pairs)",
-        POINTS: 1,
-        TRIGGER: (( matchHand(handValue1(), FOUR_OF_A_KIND) ||
-                   matchHand(handValue1(), FOUR_NINES)) &&
-                 finalValue(handValue2()) )
+        POINTS: 3,
+        TRIGGER: (( matchOnlyHand(handValue1(), FOUR_OF_A_KIND) ||
+                   matchOnlyHand(handValue1(), FOUR_NINES)) &&
+                  ((prev(handValue1()) != FOUR_OF_A_KIND &&
+                    prev(handValue1()) != FOUR_NINES ) ||
+                   (prev(handValue2()) != VOICE &&
+                    prev(handValue2()) != NO_CARD_HAND)) &&
+                  finalValue(handValue2()) )
     },
     {
         TITLE: "Quintuples",
         DESCRIPTION: "Make a Five of a kind hand combo in a single turn. (No other pairs)",
-        POINTS: 1,
-        TRIGGER: (( matchHand(handValue1(), FIVE_OF_A_KIND) ||
-                   matchHand(handValue1(), FIVE_NINES)) &&
+        POINTS: 4,
+        TRIGGER: (( matchOnlyHand(handValue1(), FIVE_OF_A_KIND) ||
+                   matchOnlyHand(handValue1(), FIVE_NINES)) &&
+                  ((prev(handValue1()) != FIVE_OF_A_KIND &&
+                   prev(handValue1()) != FIVE_NINES ) ||
+                  (prev(handValue2()) != VOICE &&
+                   prev(handValue2()) != NO_CARD_HAND)) &&
                  finalValue(handValue2()))
     },
     {
         TITLE: "Only need one Number",
-        DESCRIPTION: "Make a Nine of a Kind hand combo.",
-        POINTS: 1,
+        DESCRIPTION: "Make a Nine of a Kind hand combo",
+        POINTS: 10,
         TRIGGER: (matchHand(handValue1(), NINE_OF_A_KIND) &&
                  finalValue(handValue2()))
     },
     {
         TITLE: "Eighty One",
-        DESCRIPTION: "Make a Nine 9s hand combo.",
-        POINTS: 1,
+        DESCRIPTION: "Make a Nine 9s hand combo",
+        POINTS: 10,
         TRIGGER: (matchHand(handValue1(), NINE_NINES) && 
                  finalValue(handValue2()))
     },
     {
         TITLE: "Good Morning",
-        DESCRIPTION: "Make a Sunrise hand combo.",
-        POINTS: 1,
+        DESCRIPTION: "Make a Sunrise hand combo",
+        POINTS: 5,
         TRIGGER: (matchHand(handValue1(), SUNRISE) &&
                  finalValue(handValue2()))
     },
     {
         TITLE: "Good Night",
-        DESCRIPTION: "Make a Sunset hand combo.",
-        POINTS: 1,
+        DESCRIPTION: "Make a Sunset hand combo",
+        POINTS: 5,
         TRIGGER: (matchHand(handValue1(), SUNSET) &&
                  finalValue(handValue2()))
     },
     {
         TITLE: "Small Straight",
-        DESCRIPTION: "Make a 4 card Straight hand combo.",
-        POINTS: 1,
+        DESCRIPTION: "Make a 4 card Straight hand combo",
+        POINTS: 3,
         TRIGGER: (matchHand(handValue1(), FOUR_STRAIGHT) &&
                  finalValue(handValue2()))
     },
     {
         TITLE: "Large Straight",
-        DESCRIPTION: "Make a 6 card Straight hand combo.",
-        POINTS: 1,
+        DESCRIPTION: "Make a 6 card Straight hand combo",
+        POINTS: 4,
         TRIGGER: (matchHand(handValue1(), SIX_STRAIGHT) &&
                  finalValue(handValue2()))
     },
     {
         TITLE: "Full House",
-        DESCRIPTION: "Make a three of a kind and a two of a kind hand combo in a single turn.",
-        POINTS: 1,
-        TRIGGER: (( matchHand(handValue1(), TRIPLE ) ||
-                    matchHand(handValue1(), TRIPLE_NINE )) &&
-                  ( matchHand(handValue2(), PAIR) ||
-                    matchHand(handValue2(), PAIR_NINE)) &&
+        DESCRIPTION: "Make a three of a kind and a two of a kind hand combo in a single turn",
+        POINTS: 4,
+        TRIGGER: (( matchOnlyHand(handValue1(), TRIPLE ) ||
+                    matchOnlyHand(handValue1(), TRIPLE_NINE )) &&
+                  ( matchOnlyHand(handValue2(), PAIR) ||
+                    matchOnlyHand(handValue2(), PAIR_NINE)) &&
+                  ((prev(handValue1()) != TRIPLE &&
+                    prev(handValue1()) != TRIPLE_NINE ) ||
+                   (prev(handValue2()) != PAIR &&
+                    prev(handValue3()) != PAIR_NINE ) ||
+                   (prev(handValue3()) != VOICE &&
+                    prev(handValue3()) != NO_CARD_HAND)) &&
                   finalValue(handValue2()))                  
     },
     {
         TITLE: "Fuller House",
-        DESCRIPTION: "Make a four of a kind and a three of a kind hand combo in a single turn.",
-        POINTS: 1,
-        TRIGGER:(( matchHand(handValue1(), FOUR_OF_A_KIND) ||
-                   matchHand(handValue1(), FOUR_NINES)) &&
-                 ( matchHand(handValue2(), TRIPLE) ||
-                   matchHand(handValue2(), TRIPLE_NINE)) &&
+        DESCRIPTION: "Make a four of a kind and a three of a kind hand combo in a single turn",
+        POINTS: 5,
+        TRIGGER:(( matchOnlyHand(handValue1(), FOUR_OF_A_KIND) ||
+                   matchOnlyHand(handValue1(), FOUR_NINES)) &&
+                 ( matchOnlyHand(handValue2(), TRIPLE) ||
+                   matchOnlyHand(handValue2(), TRIPLE_NINE)) &&
+                 ((prev(handValue1()) != FOUR_OF_A_KIND &&
+                   prev(handValue1()) != FOUR_NINES ) ||
+                  (prev(handValue2()) != TRIPLE &&
+                   prev(handValue3()) != TRIPLE_NINE ) ||
+                  (prev(handValue3()) != VOICE &&
+                   prev(handValue3()) != NO_CARD_HAND)) &&
                  finalValue(handValue2()))
     },
     {
         TITLE: "Fullest House",
-        DESCRIPTION: "Make a five of a kind and a four of a kind  hand combo in a single turn.",
-        POINTS: 1,
-        TRIGGER:(( matchHand(handValue1(), FIVE_OF_A_KIND) ||
-                   matchHand(handValue1(), FIVE_NINES)) &&
-                 ( matchHand(handValue2(), FOUR_OF_A_KIND) ||
-                   matchHand(handValue2(), FOUR_NINES)) &&
+        DESCRIPTION: "Make a five of a kind and a four of a kind hand combo in a single turn",
+        POINTS: 5,
+        TRIGGER:(( matchOnlyHand(handValue1(), FIVE_OF_A_KIND) ||
+                   matchOnlyHand(handValue1(), FIVE_NINES)) &&
+                 ( matchOnlyHand(handValue2(), FOUR_OF_A_KIND) ||
+                   matchOnlyHand(handValue2(), FOUR_NINES)) &&
+                 ((prev(handValue1()) != FIVE_OF_A_KIND &&
+                   prev(handValue1()) != FIVE_NINES ) ||
+                  (prev(handValue2()) != FOUR_OF_A_KIND &&
+                   prev(handValue3()) != FOUR_NINES ) ||
+                  (prev(handValue3()) != VOICE &&
+                   prev(handValue3()) != NO_CARD_HAND)) &&
+                 
                  finalValue(handValue3()))
     },
     {
         TITLE: "Triple Triple",
-        DESCRIPTION: "Make three card three pairs (three sets of three) hand combo in a single turn.",
-        POINTS: 1,
+        DESCRIPTION: "Make three card three pairs (three sets of three) hand combo in a single turn",
+        POINTS: 5,
         TRIGGER:(matchHand(handValue1(), TRIPLE_TRIPLE) &&
                  finalValue(handValue2()))
     }
