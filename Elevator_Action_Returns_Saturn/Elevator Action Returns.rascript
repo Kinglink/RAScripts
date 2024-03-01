@@ -107,11 +107,16 @@ function gameDifficulty() => byte(0x1A110D)
 Easy = 0x00
 Normal = 0x01
 Hard = 0x02
+VERY_HARD = 0x03
 
 // Everyone
 function easyDifficultyAndAbove() => true
 function normalDifficultyAndAbove() => gameDifficulty() >= Normal
+function hardDifficultyAndAbove() => gameDifficulty()  >= Hard
 function hardDifficulty() => gameDifficulty()  == Hard
+function normalDifficulty() => gameDifficulty() == Normal
+function veryHardDifficulty() => gameDifficulty()  == VERY_HARD
+
 
 // $1A1162: (8-bit) Cheat mod option for Player Stock
 //          
@@ -529,11 +534,11 @@ function normalLevelAchievement(title, levelNumber, points)
 function hardLevelAchievement(title, levelNumber, points)
 {
     achievement(title = title,
-            description = format("Beat Stage {0} on hard difficulty", levelNumber + 1),
+            description = format("Beat Stage {0} on hard or higher difficulty", levelNumber + 1),
             points = points, 
             trigger = elevatorActionReturns() &&
                       cheatProtection() &&
-                      hardDifficulty() &&
+                      hardDifficultyAndAbove() &&
                       prev(levelId()) == levelNumber &&
                       levelId() == levelNumber + 1
             )
@@ -567,27 +572,27 @@ function levelAchievement(title, levelNumber, normalPoints, hardPoints, immortal
 levelAchievement(title = "Red After Image", 
                  levelNumber = LEVEL_ONE,
                  normalPoints = 2,
-                 hardPoints = 2,
+                 hardPoints = 3,
                  immortalPoints = 2)
 levelAchievement(title = "Cross The Breeze", 
                  levelNumber = LEVEL_TWO,
                  normalPoints = 2,
-                 hardPoints = 3,
+                 hardPoints = 4,
                  immortalPoints = 4)
 levelAchievement(title = "Colors Of Night", 
                  levelNumber = LEVEL_THREE,
                  normalPoints = 3,
-                 hardPoints = 4,
+                 hardPoints = 5,
                  immortalPoints = 5)
 levelAchievement(title = "Under The Crack", 
                  levelNumber = LEVEL_FOUR,
                  normalPoints = 4,
-                 hardPoints = 5,
+                 hardPoints = 10,
                  immortalPoints = 5)
 levelAchievement(title = "Crimson Line", 
                  levelNumber = LEVEL_FIVE,
                  normalPoints = 5,
-                 hardPoints = 5,
+                 hardPoints = 10,
                  immortalPoints = 10)
 
 // Level six will be different because you can win or lose.  
@@ -604,11 +609,11 @@ achievement(title = "Vermillion Sun",
             )
 
 achievement(title = "Hard Vermillion Sun",
-        description = "Beat Stage 6 and stop the missile on hard difficulty",
-        points = 10, 
+        description = "Beat Stage 6 and stop the missile on hard or higher difficulty",
+        points = 25, 
         trigger = elevatorActionReturns() &&
                     cheatProtection() &&
-                    hardDifficulty() &&
+                    hardDifficultyAndAbove() &&
                     prev(levelId()) == LEVEL_SIX &&
                     levelId() == LEVEL_POSTGAME &&
                     stage6Success()
@@ -654,7 +659,7 @@ function characterAchievement(character, characterName, title, achievement_id, n
 {
     achievement(title = title,
             description = format("Finish the game on normal or hard difficulty while playing as {0}", characterName),
-            points = 3, 
+            points = 5, 
             id = achievement_id,
             trigger = elevatorActionReturns() &&
                       cheatProtection() &&
@@ -671,7 +676,7 @@ function characterAchievement(character, characterName, title, achievement_id, n
     {
         achievement(title = no_continue_title,
             description = format("Finish the game on normal or hard difficulty with out using a continue while playing as {0}", characterName),
-            points = 10, 
+            points = 25, 
             trigger = elevatorActionReturns() &&
                         cheatProtection() &&
                         normalDifficultyAndAbove() &&
@@ -688,7 +693,7 @@ function characterAchievement(character, characterName, title, achievement_id, n
     {
         achievement(title = no_continue_title,
             description = format("Finish the game on normal or hard difficulty with out using a continue while playing as {0}", characterName),
-            points = 10, 
+            points = 25, 
             id = no_continue_id,
             trigger = elevatorActionReturns() &&
                         cheatProtection() &&
@@ -761,8 +766,8 @@ achievement(title = "Too Fast for the Alarm",
 
 // This logic could be simplied to firstPlayerCreditsRemaining == 3 but we'll do it this way. 
 achievement(title = "No Credit Needed, 250K",
-        description = "Earn 250,0000 points with out using a credit on normal or hard difficulty",
-        points = 5, 
+        description = "Earn 250,000 points with out using a credit on normal or hard difficulty",
+        points = 10, 
         trigger = elevatorActionReturns() &&
                     cheatProtection() &&
                     normalDifficultyAndAbove() &&
@@ -774,8 +779,8 @@ achievement(title = "No Credit Needed, 250K",
         )
 
 achievement(title = "Half a million",
-        description = "Earn 500,0000 points on normal or hard difficulty",
-        points = 10, 
+        description = "Earn 500,000 points on normal or hard difficulty",
+        points = 25, 
         id = 382669,
         trigger = elevatorActionReturns() &&
                     cheatProtection() &&
@@ -785,13 +790,13 @@ achievement(title = "Half a million",
         )
 
 achievement(title = "Bingo!",
-        description = "Earn 1 million points. The original Elevator Action Returns arcade machine only recorded up to 999999 points, break that limit!",
-        points = 25, 
+        description = "Earn 1 million points. The original Elevator Action Returns arcade machine only recorded up to 999,999 points, break that limit!",
+        points = 50, 
         trigger = elevatorActionReturns() &&
                     cheatProtection() &&
                     normalDifficultyAndAbove() &&
                     prev(inGameFirstPlayerScore()) < 999900 &&
-                    inGameFirstPlayerScore() >= 999900 
+                    inGameFirstPlayerScore() > 999900 
         )
 
 
@@ -971,12 +976,34 @@ leaderboard(
 
 leaderboard(
     title = format("1 Credit Hard Difficulty High Score"),
-    description = format("Get the most points in the first two lives, hard difficulty"),
+    description = format("Get the most points in the first two lives, hard or higher difficulty"),
     start = 
     (
         elevatorActionReturns() &&
         cheatProtectionLeaderboards() &&
-        hardDifficulty() &&
+        hardDifficultyAndAbove() &&
+        firstPlayerCreditsRemaining() == 0x03 &&
+        (   (prev(firstPlayerLivesRemaining()) == 0 &&
+             firstPlayerLivesRemaining() == 0xff) ||   // This will be true for a frame.
+            (prev(firstPlayerJoined()) == 1 &&  // Score is still true after the end of the game. 
+             firstPlayerJoined() == 0 &&
+             levelId() == LEVEL_POSTGAME))
+    ),
+    cancel = always_false(),
+    submit = always_true(),
+    value = measured(inGameFirstPlayerScore()),
+    format = "VALUE"
+)
+
+
+leaderboard(
+    title = format("1 Credit Very Hard Difficulty High Score"),
+    description = format("Get the most points in the first two lives, very hard difficulty"),
+    start = 
+    (
+        elevatorActionReturns() &&
+        cheatProtectionLeaderboards() &&
+        veryHardDifficulty() &&
         firstPlayerCreditsRemaining() == 0x03 &&
         (   (prev(firstPlayerLivesRemaining()) == 0 &&
              firstPlayerLivesRemaining() == 0xff) ||   // This will be true for a frame.
@@ -1009,12 +1036,29 @@ leaderboard(
 
 leaderboard(
     title = format("Hard Difficulty High Score"),
-    description = format("Get the most points in a single playthrough, hard difficulty"),
+    description = format("Get the most points in a single playthrough, hard or higher difficulty"),
     start = 
     (
         elevatorActionReturns() &&
         cheatProtectionLeaderboards() &&
-        hardDifficulty() &&
+        hardDifficultyAndAbove() &&
+        prev(firstPlayerJoined()) == 1 &&  // Score is still true after the end of the game. 
+        firstPlayerJoined() == 0 
+    ),
+    cancel = always_false(),
+    submit = always_true(),
+    value = measured(inGameFirstPlayerScore()),
+    format = "VALUE"
+)
+
+leaderboard(
+    title = format("Very Hard Difficulty High Score"),
+    description = format("Get the most points in a single playthrough, very hard difficulty"),
+    start = 
+    (
+        elevatorActionReturns() &&
+        cheatProtectionLeaderboards() &&
+        veryHardDifficulty() &&
         prev(firstPlayerJoined()) == 1 &&  // Score is still true after the end of the game. 
         firstPlayerJoined() == 0 
     ),
@@ -1042,7 +1086,7 @@ leaderboard(
 
 leaderboard(
     title = format("Arcade Elite High Score"),
-    description = format("Get the most points on the original arcade game.  Use the Very Hard Difficulty, and 250000 Extend Setting"),
+    description = format("Get the most points on the original arcade game.  Use the Very Hard Difficulty, and 25,000 Extend Setting"),
     start = 
     (
         elevatorActionArcade() &&
@@ -1078,12 +1122,33 @@ leaderboard(
 
 leaderboard(
     title = format("Fastest Hard Clear"),
-    description = format("Beat the game as fast as possible on hard difficulty."),
+    description = format("Beat the game as fast as possible on hard or higher difficulty."),
     start = 
     (
         elevatorActionReturns() &&
         cheatProtection() && // Don't need to limit this to just Leaderboard testing. 
-        hardDifficulty() &&
+        hardDifficultyAndAbove() &&
+        prev(firstStageStartedCheck()) == FIRST_STAGE_STARTED_CHECK_CHARACTER_SELECT &&
+        firstStageStartedCheck() == FIRST_STAGE_STARTED_CHECK_IN_GAME
+                    
+    ),
+    cancel = !cheatProtection(),
+    submit =  prev(levelId()) == LEVEL_SIX &&
+              levelId() == LEVEL_POSTGAME,
+    value = measured(always_true(), when=!gameplayPaused()) && unless(gameplayPaused()),
+    lower_is_better = true,
+    format = "FRAMES"
+)
+
+
+leaderboard(
+    title = format("Fastest Very Hard Clear"),
+    description = format("Beat the game as fast as possible on very hard difficulty."),
+    start = 
+    (
+        elevatorActionReturns() &&
+        cheatProtection() && // Don't need to limit this to just Leaderboard testing. 
+        veryHardDifficulty() &&
         prev(firstStageStartedCheck()) == FIRST_STAGE_STARTED_CHECK_CHARACTER_SELECT &&
         firstStageStartedCheck() == FIRST_STAGE_STARTED_CHECK_IN_GAME
                     
