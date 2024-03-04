@@ -4786,7 +4786,7 @@ newOfficerAchievement(title = "Flourishing Fortitude",
                       description = "Learn the Fortitude Skill from Dokkimaru in New Officer Mode",
                       target = newOfficerFortitudeUnlock())
 newOfficerAchievement(title = "Diligent Discern",
-                      description = "Learn the Frenzy Skill from Ranmaru Mori in New Officer Mode",
+                      description = "Learn the Discern skill from Goemon Ishikawa in New Officer Mode",
                       target = newOfficerDiscernUnlock())
 
 achievement(title = "Visage Variety",
