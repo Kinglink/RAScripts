@@ -100,9 +100,87 @@ NO_CHARACTER2 = 0x5F
 
 FIRST_CHARACTER = ZHAO_YUN
 LAST_ABILITY_CHARACTER = KATSUIE_SHIBATA // No Orochi X Abilities
-LAST_STORY_CHARACTER = OROCHI_X
+LAST_PROFICIENCY_CHARACTER = KATSUIE_SHIBATA 
+LAST_WEAPON_CHARACTER = KATSUIE_SHIBATA
 LAST_SURVIVAL_CHARACTER = GYUKI
 DEFAULT_NO_CHARACTER = NO_CHARACTER2
+
+TOTAL_STAGE_COUNT = 8
+SHU_STAGE_1_ID = 0x00
+SHU_STAGE_2_ID = 0x01
+SHU_STAGE_3_ID = 0x02
+SHU_STAGE_4_ID = 0x03
+SHU_STAGE_5_ID = 0x04
+SHU_STAGE_6_ID = 0x05
+SHU_STAGE_7_ID = 0x06
+SHU_STAGE_8_ID = 0x07
+
+WEI_STAGE_1_ID = 0x08
+WEI_STAGE_2_ID = 0x09
+WEI_STAGE_3_ID = 0x0A
+WEI_STAGE_4_ID = 0x0B
+WEI_STAGE_5_ID = 0x0C
+WEI_STAGE_6_ID = 0x0D
+WEI_STAGE_7_ID = 0x0E
+WEI_STAGE_8_ID = 0x0F
+
+WU_STAGE_1_ID = 0x10
+WU_STAGE_2_ID = 0x11
+WU_STAGE_3_ID = 0x12
+WU_STAGE_4_ID = 0x13
+WU_STAGE_5_ID = 0x14
+WU_STAGE_6_ID = 0x15
+WU_STAGE_7_ID = 0x16
+WU_STAGE_8_ID = 0x17
+
+SW_STAGE_1_ID = 0x18
+SW_STAGE_2_ID = 0x19
+SW_STAGE_3_ID = 0x1A
+SW_STAGE_4_ID = 0x1B
+SW_STAGE_5_ID = 0x1C
+SW_STAGE_6_ID = 0x1D
+SW_STAGE_7_ID = 0x1E
+SW_STAGE_8_ID = 0x1F
+
+OROCHI_STAGE_1_ID = 0x20
+OROCHI_STAGE_2_ID = 0x21
+OROCHI_STAGE_3_ID = 0x22
+OROCHI_STAGE_4_ID = 0x23
+OROCHI_STAGE_5_ID = 0x24
+OROCHI_STAGE_6_ID = 0x25
+OROCHI_STAGE_7_ID = 0x26
+OROCHI_STAGE_8_ID = 0x27
+
+DREAM_STAGE_1_ID = 0x28
+DREAM_STAGE_2_ID = 0x29
+DREAM_STAGE_3_ID = 0x2A
+DREAM_STAGE_4_ID = 0x2B
+DREAM_STAGE_5_ID = 0x2C
+DREAM_STAGE_6_ID = 0x2D
+DREAM_STAGE_7_ID = 0x2E
+DREAM_STAGE_8_ID = 0x2F
+DREAM_STAGE_9_ID = 0x30
+DREAM_STAGE_10_ID = 0x31
+DREAM_STAGE_11_ID = 0x32
+DREAM_STAGE_12_ID = 0x33
+DREAM_STAGE_13_ID = 0x34
+DREAM_STAGE_14_ID = 0x35
+DREAM_STAGE_15_ID = 0x36
+DREAM_STAGE_16_ID = 0x37
+DREAM_STAGE_17_ID = 0x38
+DREAM_STAGE_18_ID = 0x39
+DREAM_STAGE_19_ID = 0x3A
+DREAM_STAGE_20_ID = 0x3B
+DREAM_STAGE_21_ID = 0x3C
+DREAM_STAGE_22_ID = 0x3D
+DREAM_STAGE_23_ID = 0x3E
+DREAM_STAGE_24_ID = 0x3F
+DREAM_STAGE_25_ID = 0x40
+DREAM_STAGE_26_ID = 0x41
+DREAM_STAGE_27_ID = 0x42
+DREAM_STAGE_28_ID = 0x43
+
+DREAM_STAGE_COUNT = (8*3)+4
 
 characterNameLookup ={
     ZHAO_YUN: "Zhao Yun",
@@ -204,7 +282,172 @@ characterNameLookup ={
 }
 
 stageNameLookup = characterNameLookup
-weaponNameLookup = characterNameLookup
+weaponNameLookup ={
+    ZHAO_YUN: "Fierce Dragon",
+    GUAN_YU: "Blue Moon Dragon",
+    ZHANG_FEI: "Viper Blade",
+    XIAHOU_DUN: "Kirin Fang",
+    DIAN_WEI: "Mad Bull",
+    XU_ZHU: "Stone Crusher",
+    ZHOU_YU: "Ancients Sword",
+    LU_XUN: "Falcon",
+    TAISHI_CI: "Tiger Slayer",
+    DIAO_CHAN: "Diva",
+    ZHUGE_LIANG: "Peacock Feather",
+    CAO_CAO: "Wrath of Heaven",
+    LU_BU: "Sky Scorcher",
+    SUN_SHANG_XIANG: "Sol Chakram",
+    LIU_BEI: "Gold Moon Dragon",
+    SUN_JIAN: "Savage Tiger",
+    SUN_QUAN: "Master Wolf",
+    DONG_ZHUO: "Horror",
+    YUAN_SHAO: "Sword of Kings",
+    MA_CHAO: "Stallion Fury",
+    HUANG_ZHONG: "Oracle Sword",
+    XIAHOU_YUAN: "Enforcer Rod",
+    ZHANG_LIAO: "Gold Wyvern",
+    SIMA_YI: "Dark Feather",
+    LU_MENG: "White Tiger",
+    GAN_NING: "Sea Master",
+    JIANG_WEI: "Blink",
+    ZHANG_JIAO: "Volcano Staff",
+    XU_HUANG: "Marauder",
+    ZHANG_HE: "Phoenix Talon",
+    ZHEN_JI: "Dark Moon Flute",
+    HUANG_GAI: "Dark Shadow",
+    SUN_CE: "Overlord",
+    WEI_YAN: "Comet Strike",
+    PANG_TONG: "Tornado Staff",
+    MENG_HUO: "King of Beasts",
+    ZHU_RONG: "Inferno",
+    DA_QIAO: "Qiao Beauty",
+    XIAO_QIAO: "Qiao Grace",
+    CAO_REN: "Roc",
+    ZHOU_TAI: "Dusk",
+    YUE_YING: "Oblivion",
+    CAO_PI: "Chaos",
+    PANG_DE: "Heavenly Halberd",
+    LING_TONG: "Dragon Fury",
+    GUAN_PING: "Young Dragon",
+    XING_CAI: "Ambition",
+    ZUO_CI: "Trump Deck",
+    YUKIMURA_SANADA: "Dragon's Tail",
+    KEIJI_MAEDA: "Divine Mandible",
+    NOBUNAGA_ODA: "Demon Regalia",
+    MITSUHIDE_AKECHI: "Gilded Talon",
+    GOEMON_ISHIKAWA: "Kai-Basara",
+    KENSHIN_UESAGI: "Frozen Flame",
+    OICHI: "Cup & Gold",
+    OKUNI: "Raging Sun",
+    KUNOICHI: "Shiranui",
+    MAGOICHI_SAIKA: "Marksman's Pride",
+    SHINGEN_TAKEDA: "Heaven's Sign",
+    MASAMUNE_DATE: "Manhunters",
+    NO: "Delicious Venom",
+    HANZO_HATTORI: "Chained Dragon",
+    RANMARU_MORI: "Iron Vegeance",
+    HIDEYOSHI_HASHIBA: "Simian Sansetsu",
+    YOSHIMOTO_IMAGAWA: "Velvet Kemari",
+    TADAKATSU_HONDA: "Tonbo-giri",
+    INA: "Coiled Viper",
+    IEYASU_TOKUGAWA: "Quake Maker",
+    MITSUNARI_ISHIDA: "Golden Frill",
+    NAGAMASA_AZAI: "King's Honor",
+    SAKON_SHIMA: "Wrecking Blade",
+    YOSHIHIRO_SHIMAZU: "Beast Crusher",
+    GINCHIYO_TACHIBANA: "Heaven's Bite",
+    KANETSUGU_NAOE: "Evil's Bane",
+    NENE: "Devil Feathers",
+    KOTAMA_FUMA: "Thorns of Peril",
+    MUSASHI_MIYAMOTO: "Mastery & Vision",
+    OROCHI: "Eternal Agony",
+    DA_JI: "Orbs of Ruin",
+    TAIGONG_WANG: "Lightning Rod",
+    SUN_WUKONG: "Jingu Staff",
+    FU_XI: "Fu Xi's Sword",
+    NU_WA: "Nu Wa's Rapier",
+    YOSHITSUNE_MINAMOTO: "Sun Gauntlet",
+    KIYOMORI_TAIRA: "Tyranny",
+    HIMIKO: "Amaterasu",
+    TOSHIIE_MAEDA: "Dragon's Bite",
+    MOTOCHIKA_CHOSOKABE: "Golden Ginkgo",
+    GRACIA: "Sacred Grace",
+    KOJIRO_SASAKI: "Deathly Shadow",
+    KATSUIE_SHIBATA: "Heaven and Earth"
+}
+
+stageNameLookup = {
+    SHU_STAGE_1_ID: "Battle of Shi Ting",
+    SHU_STAGE_2_ID: "Battle of Saika",
+    SHU_STAGE_3_ID: "Battle of Nagashino",
+    SHU_STAGE_4_ID: "Battle of Wuhang Mountains",
+    SHU_STAGE_5_ID: "Battle of Jia Meng Gate",
+    SHU_STAGE_6_ID: "Battle of Odani Castle",
+    SHU_STAGE_7_ID: "Battle of Koshi Castle",
+    SHU_STAGE_8_ID: "Battle of Wu Zhang Plains",
+    WEI_STAGE_1_ID: "Battle of Si Province",
+    WEI_STAGE_2_ID: "Battle of Si Shui Gate",
+    WEI_STAGE_3_ID: "Battle of Shizugatake",
+    WEI_STAGE_4_ID: "Battle of Ji Castle",
+    WEI_STAGE_5_ID: "Battle of Komaki-Nagakute",
+    WEI_STAGE_6_ID: "Battle of Yamatai",
+    WEI_STAGE_7_ID: "Battle of Tong Gate",
+    WEI_STAGE_8_ID: "Battle of Guan Du",
+    WU_STAGE_1_ID: "Battle of Ru Xu Kou",
+    WU_STAGE_2_ID: "Battle of Kanegasaki",
+    WU_STAGE_3_ID: "Battle of Nan Zhong",
+    WU_STAGE_4_ID: "Battle of Itsukushima",
+    WU_STAGE_5_ID: "Battle of Okehazama",
+    WU_STAGE_6_ID: "Battle of Yang Ping Gate",
+    WU_STAGE_7_ID: "Battle of Yamazaki",
+    WU_STAGE_8_ID: "Battle of Chi Bi",
+    SW_STAGE_1_ID: "Battle of Lou Sang Village",
+    SW_STAGE_2_ID: "Battle of Ji Province",
+    SW_STAGE_3_ID: "Rescue at Hasedo",
+    SW_STAGE_4_ID: "Battle of Chang Ban",
+    SW_STAGE_5_ID: "Battle of Liang Province",
+    SW_STAGE_6_ID: "Battle of Hu Lao Gate",
+    SW_STAGE_7_ID: "Battle of Bai Di Castle",
+    SW_STAGE_8_ID: "Battle of Sekigahara",
+    OROCHI_STAGE_1_ID: "Battle of Odwara Castle",
+    OROCHI_STAGE_2_ID: "Battle of Cheng Du",
+    OROCHI_STAGE_3_ID: "Battle of Kawanakajima",
+    OROCHI_STAGE_4_ID: "Battle of He Fei",
+    OROCHI_STAGE_5_ID: "Battle of Edo Castle",
+    OROCHI_STAGE_6_ID: "Battle of Yi Ling",
+    OROCHI_STAGE_7_ID: "Battle of Mikatagahara",
+    OROCHI_STAGE_8_ID: "Battle of Hinokawa",
+    DREAM_STAGE_1_ID: "Battle of Osaka Castle",
+    DREAM_STAGE_2_ID: "Battle of Fan Castle",
+    DREAM_STAGE_3_ID: "Battle of He Fei Castle",
+    DREAM_STAGE_4_ID: "Escape from Itsukushima",
+    DREAM_STAGE_5_ID: "Battle of Mount Qi",
+    DREAM_STAGE_6_ID: "Showdown at Odawara Castle",
+    DREAM_STAGE_7_ID: "Battle of the Wu Territory",
+    DREAM_STAGE_8_ID: "Showdown in Yamatai",
+    DREAM_STAGE_9_ID: "Battle of Jing Province",
+    DREAM_STAGE_10_ID: "Battle of Xin Castle",
+    DREAM_STAGE_11_ID: "Resue at Nan Zhong",
+    DREAM_STAGE_12_ID: "Struggle for Nan Zhong",
+    DREAM_STAGE_13_ID: "Encounter in Ji Province",
+    DREAM_STAGE_14_ID: "Battle of Osaka Bay",
+    DREAM_STAGE_15_ID: "Battle of Han Sui",
+    DREAM_STAGE_16_ID: "Battle of Ueda Castle",
+    DREAM_STAGE_17_ID: "Battle of Kyushu",
+    DREAM_STAGE_18_ID: "Battle of Honnoji",
+    DREAM_STAGE_19_ID: "Showdown at Hinokawa",
+    DREAM_STAGE_20_ID: "Battle of Mai Castle",
+    DREAM_STAGE_21_ID: "Battle of Shikoku",
+    DREAM_STAGE_22_ID: "Battle of Xia Pi",
+    DREAM_STAGE_23_ID: "Battle of Chen Cang",
+    DREAM_STAGE_24_ID: "Battle of Lu Shan",
+    DREAM_STAGE_25_ID: "Battle of Chang Sha",
+    DREAM_STAGE_26_ID: "Encounter at Nan Zhong",
+    DREAM_STAGE_27_ID: "Battle of Yan Province",
+    DREAM_STAGE_28_ID: "Battle of Hasedo"
+}
+
+
 
 // $3B0094: (24-bit) Character Choices
 //          
@@ -332,8 +575,10 @@ function gamePhase() => byte(0x3B0324)
 TRANSITION_VALUE = 0x3b
 FINISHED_STAGE_VALUE = 0x0a
 FINISHED_SURVIVAL_VALUE = 0x09
+CHANGE_CHARACTER_SCREEN_VALUE = 0x04
 function stageWon() => gamePhase() == FINISHED_STAGE_VALUE && prev(gamePhase()) == TRANSITION_VALUE
 function survivalFinished() => gamePhase() == FINISHED_SURVIVAL_VALUE && prev(gamePhase()) == TRANSITION_VALUE
+function changeCharacterScreen() => gamePhase() == CHANGE_CHARACTER_SCREEN_VALUE 
 
 // $52C254: (8-bit) Zhao Yun Level
 //          
@@ -436,9 +681,10 @@ function shuChapter1KORecord() => dword(0x5311BC)
 SHU_CHAPTER_1_VISIBILITY_MEMORY_LOCATION = 0x5311C0
 function shuChapter1VisibilityFlag() => byte(0x5311C0)
 
+NOT_VISIBLE_VALUE = 0x00
 function checkUnlock(memory_location)
 {
-    return byte(memory_location) != 0x00 && prev(byte(memory_location)) == 0x00
+    return byte(memory_location) != NOT_VISIBLE_VALUE && prev(byte(memory_location)) == NOT_VISIBLE_VALUE
 }
 
 
@@ -544,7 +790,7 @@ function treasureBitfield() => dword(0x531504)
 //          0x03 = Chaos
 function difficultyLevel() => byte(0x531531)
 CHAOS_VALUE = 0x03
-function ChaosMode() => difficultyLevel() == CHAOS_VALUE
+function chaosDifficulty() => difficultyLevel() == CHAOS_VALUE
 
 // $531828: (8-bit) Game Mode
 //          
@@ -578,14 +824,15 @@ function mainMenu() => gameMode() == MAIN_MENU_VALUE
 //          0x20 = Orochi Stage 1
 //          0x28 = Dream Stage 1
 function mapID() => byte(0x531830)
-TOTAL_STAGE_COUNT = 8
-SHU_STAGE_1_ID = 0x00
-WEI_STAGE_1_ID = 0x08
-WU_STAGE_1_ID = 0x10
-SW_STAGE_1_ID = 0x18
-OROCHI_STAGE_1_ID = 0x20
-DREAM_STAGE_1_ID = 0x28
-DREAM_STAGE_COUNT = (8*3)+4
+
+storyStageLookup =
+{
+    SHU_STAGE_1_ID: "Shu", 
+    WEI_STAGE_1_ID: "Wei",
+    WU_STAGE_1_ID: "Wu",
+    SW_STAGE_1_ID:"SW",
+    OROCHI_STAGE_1_ID: "Orochi"
+}
 STORY_STAGES = [SHU_STAGE_1_ID, 
                 WEI_STAGE_1_ID, 
                 WU_STAGE_1_ID, 
@@ -601,10 +848,17 @@ function twoPlayerControl() => byte(0x531838)
 TWO_PLAYER_VALUE = 0x02
 function twoPlayer() => twoPlayerControl() == TWO_PLAYER_VALUE
 
-// $531868: (32-bit) KO Count for First Player
+
+// $5e0fc0: (16-bit) Total KOs 
+//
+//          Calculated Total KO, this is NOT a control, but it's based on the number of kills for each general  (1's count + 2's count + 3's count) 
+function koForFirstPlayer() => word(0x5e0fc0)
+
+// Is only for the first character. 
+// $531868: (32-bit) KO Count for First Character
 //          
 //          Any number over 9999 is just shown as 9999
-function koForFirstPlayer() => dword(0x531868)
+function failedKoForFirstPlayer() => dword(0x531868)
 
 // $531B1C: (32-bit) Current Time in level
 function timeInLevel() => dword(0x531B1C)
@@ -619,35 +873,124 @@ DEMO_MODE_TARGET_TIME_VALUE = 0x0e10
 // Going to give it a little more just in case I missed something. 
 function demoMode() => targetTime() <= DEMO_MODE_TARGET_TIME_VALUE * 10
 
-// Replace this. 
-function survivalCount() => byte(10)
+// $531b40: (8-bit) Survivial Win Count 
+// 
+//          0x01 = 0 Wins
+//          0x02 = 1 Win. 
+//
+//          All values after this is one higher than the win counts. 
+function survivalCount() => byte(0x00531b40)
 
 function saveProtection()
 {
     // hope this works as save protection.  It should (But can be disabled for some testing) 
-    return gamePhase() == FINISHED_STAGE_VALUE
+    return always_true()// gamePhase() == FINISHED_STAGE_VALUE
 }
 
 
-STAGE_COMPLETE_STRING = "Complete the {0} stage as a single player"
-function storyStageComplete(stageID) 
+STAGE_COMPLETE_STRING = "Complete the {0} stage {1} as a single player"
+function storyStageCompleteAndLeaderboards(stageID, group, index) 
 {
     achievement(title = stageNameLookup[stageID],
-                description = format(STAGE_COMPLETE_STRING, stageNameLookup[stageID]),
+                description = format(STAGE_COMPLETE_STRING, storyStageLookup[group], index + 1),
                 points = 3,
                 trigger = stageWon() && 
                           mapID() == stageID && 
                           !twoPlayer() && 
                           !demoMode() && 
                           (storyMode() || 
-                           freeMode())
+                           freeMode()),
+                type = "Progression"
                 )
+    
+    leaderboard(
+        title = format("Most Kills on {0}",  stageNameLookup[stageID]),
+        description = format("Get the most kills on {0} stage {1} and win the scenario as a single player", storyStageLookup[group], index + 1),
+        start = 
+        (
+            stageWon() && 
+            mapID() == stageID && 
+            !twoPlayer() && 
+            !demoMode() && 
+            (storyMode() || 
+            freeMode()) &&
+            timeInLevel() != 00
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = koForFirstPlayer(),
+        format = "VALUE"
+    )
+
+    leaderboard(
+        title = format("Fastest Run on {0}", stageNameLookup[stageID]),
+        description = format("Get through the {0} stage {1} the fastest as a single player", storyStageLookup[group], index + 1),
+        
+        start  =
+        (
+            stageWon() && 
+            mapID() == stageID && 
+            !twoPlayer() && 
+            !demoMode() && 
+            (storyMode() || 
+            freeMode()) &&
+            timeInLevel() != 00
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = timeInLevel(),
+        format = "FRAMES", 
+        lower_is_better = true 
+    )
+    leaderboard(
+        title = format("Chaos: Most Kills on {0}",  stageNameLookup[stageID]),
+        description = format("Get the most kills on {0} stage {1} and win the scenario on chaos difficulty as a single player",  storyStageLookup[group], index + 1),
+        start = 
+        (
+            stageWon() && 
+            mapID() == stageID && 
+            !twoPlayer() && 
+            !demoMode() && 
+            (storyMode() || 
+            freeMode()) &&
+            timeInLevel() != 00 &&
+            chaosDifficulty()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = koForFirstPlayer(),
+        format = "VALUE"
+    )
+
+    leaderboard(
+        title = format("Chaos: Fastest Run on {0}", stageNameLookup[stageID]),
+        description = format("Get through the {0} stage {1} the fastest on chaos difficulty as a single player", storyStageLookup[group], index + 1),
+        
+        start  =
+        (
+            stageWon() && 
+            mapID() == stageID && 
+            !twoPlayer() && 
+            !demoMode() && 
+            (storyMode() || 
+            freeMode()) &&
+            timeInLevel() != 00 &&
+            chaosDifficulty()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = timeInLevel(),
+        format = "FRAMES", 
+        lower_is_better = true 
+    )
+
+
 }
 
-function dreamStageComplete(stageID) 
+function dreamStageCompleteAndLeaderboards(stageID, index) 
 {
     achievement(title = stageNameLookup[stageID],
-                description = format(STAGE_COMPLETE_STRING, stageNameLookup[stageID]),
+                description = format(STAGE_COMPLETE_STRING, "Dream", index + 1),
                 points = 3,
                 trigger = stageWon() && 
                           mapID() == stageID && 
@@ -655,6 +998,86 @@ function dreamStageComplete(stageID)
                           !demoMode() && 
                           dreamMode()
                 )
+    leaderboard(
+        title = format("Most Kills on {0}",  stageNameLookup[stageID]),
+        description = format("Get the most kills on {0} stage {1} and win the scenario as a single player",  "Dream", index + 1),
+        start = 
+        (
+            stageWon() && 
+            mapID() == stageID && 
+            !twoPlayer() && 
+            !demoMode() && 
+            (storyMode() || 
+            freeMode()) &&
+            timeInLevel() != 00
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = koForFirstPlayer(),
+        format = "VALUE"
+    )
+
+    leaderboard(
+        title = format("Fastest Run on {0}", stageNameLookup[stageID]),
+        description = format("Get through the {0} stage {1} the fastest as a single player" ,  "Dream", index + 1),
+        
+        start  =
+        (
+            stageWon() && 
+            mapID() == stageID && 
+            !twoPlayer() && 
+            !demoMode() && 
+            (storyMode() || 
+            freeMode()) &&
+            timeInLevel() != 00
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = timeInLevel(),
+        format = "FRAMES", 
+        lower_is_better = true 
+    )
+    leaderboard(
+        title = format("Chaos: Most Kills on {0}",  stageNameLookup[stageID]),
+        description = format("Get the most kills on {0} stage {1} and win the scenario on chaos difficulty as a single player",   "Dream", index + 1),
+        start = 
+        (
+            stageWon() && 
+            mapID() == stageID && 
+            !twoPlayer() && 
+            !demoMode() && 
+            (storyMode() || 
+            freeMode()) &&
+            timeInLevel() != 00 &&
+            chaosDifficulty()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = koForFirstPlayer(),
+        format = "VALUE"
+    )
+
+    leaderboard(
+        title = format("Chaos: Fastest Run on {0}", stageNameLookup[stageID]),
+        description = format("Get through the {0} stage {1} the fastest on chaos difficulty as a single player",  "Dream", index + 1),
+        
+        start  =
+        (
+            stageWon() && 
+            mapID() == stageID && 
+            !twoPlayer() && 
+            !demoMode() && 
+            (storyMode() || 
+            freeMode()) &&
+            timeInLevel() != 00 &&
+            chaosDifficulty()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = timeInLevel(),
+        format = "FRAMES", 
+        lower_is_better = true 
+    )
 }
 
 for group in STORY_STAGES
@@ -662,18 +1085,18 @@ for group in STORY_STAGES
     // Zero-Index
     for index in range(0,TOTAL_STAGE_COUNT - 1)
     {
-        storyStageComplete(group + index)
+        storyStageCompleteAndLeaderboards(group + index, group, index)
     }
 }
 
 for index in range(0,DREAM_STAGE_COUNT - 1)
 {
-    dreamStageComplete(DREAM_STAGE_1_ID + index)
+    dreamStageCompleteAndLeaderboards(DREAM_STAGE_1_ID + index, index)
 }
 
-function getCompleteFromVisibleLocation(memory_location, stageIndex)
+function getChaosCompleteFromVisibleLocation(memory_location, stageIndex)
 {
-    return byte(memory_location + STAGE_COMPLETE_MEMORY_LOCATION_OFFSET + (stageIndex * STAGE_SIZE))
+    return bit(3, memory_location + STAGE_COMPLETE_MEMORY_LOCATION_OFFSET + (stageIndex * STAGE_SIZE))
 }
 
 function getVisibleMemoryLocation(memory_location, stageIndex)
@@ -702,14 +1125,23 @@ for index in range(0,DREAM_STAGE_COUNT - 1)
 
 function chaosStoryCampaignComplete(stageMemoryLocation)
 {
-    achievement(title = format("Chaos {0} Campaign", "Replace This"),
-                description = format("Complete all stages in the {0} story mode on Chaos difficulty", "REPLACE THIS"),
+    achievement(title = format("Chaos {0} Campaign", CampaignNameLookup[stageMemoryLocation]),
+                description = format("Complete all stages in the {0} story mode on Chaos difficulty", CampaignNameLookup[stageMemoryLocation]),
                 points = 10,
                 trigger = saveProtection() && 
-                          all_of(range(0, TOTAL_STAGE_COUNT-1), index => getCompleteFromVisibleLocation(stageMemoryLocation, index) == 1) &&
-                          any_of(range(0, TOTAL_STAGE_COUNT-1), index => prev(getCompleteFromVisibleLocation(stageMemoryLocation, index)) == 0)
+                          all_of(range(0, TOTAL_STAGE_COUNT-1), index => getChaosCompleteFromVisibleLocation(stageMemoryLocation, index) == 1) &&
+                          any_of(range(0, TOTAL_STAGE_COUNT-1), index => prev(getChaosCompleteFromVisibleLocation(stageMemoryLocation, index)) == 0)
                 )
 }
+
+CampaignNameLookup = {
+    SHU_CHAPTER_1_VISIBILITY_MEMORY_LOCATION: "Shu",
+    WEI_CHAPTER_1_VISIBILITY_MEMORY_LOCATION: "Wei",
+    WU_CHAPTER_1_VISIBILITY_MEMORY_LOCATION: "Wu",
+    SW_CHAPTER_1_VISIBILITY_MEMORY_LOCATION: "Samurai Warriors",
+    OROCHI_CHAPTER_1_VISIBILITY_MEMORY_LOCATION: "Orochi"
+}
+
 
 function chaosDreamStagesComplete(stageMemoryLocation, firstStageIndex, lastStageIndex, title, description)
 {
@@ -717,8 +1149,8 @@ function chaosDreamStagesComplete(stageMemoryLocation, firstStageIndex, lastStag
                 description = description,
                 points = 25,
                 trigger = saveProtection() && 
-                          all_of(range(firstStageIndex, lastStageIndex), index => getCompleteFromVisibleLocation(stageMemoryLocation, index) == 1) &&
-                          any_of(range(firstStageIndex, lastStageIndex), index => prev(getCompleteFromVisibleLocation(stageMemoryLocation, index)) == 0)
+                          all_of(range(firstStageIndex, lastStageIndex), index => getChaosCompleteFromVisibleLocation(stageMemoryLocation, index) == 1) &&
+                          any_of(range(firstStageIndex, lastStageIndex), index => prev(getChaosCompleteFromVisibleLocation(stageMemoryLocation, index)) == 0)
                 )
 }
 
@@ -749,7 +1181,7 @@ function chaosStoryAchievement(stageId)
                           !twoPlayer() && 
                           !demoMode() && 
                           storyMode() && 
-                          ChaosMode() &&
+                          chaosDifficulty() &&
                           never(mainMenu())
                 )
 }
@@ -765,7 +1197,7 @@ function chaosDreamAchievement(stageId)
                           !twoPlayer() && 
                           !demoMode() && 
                           dreamMode() && 
-                          ChaosMode() &&
+                          chaosDifficulty() &&
                           never(mainMenu())
                 )
 }
@@ -797,24 +1229,44 @@ function treasureCountAchievement(treasureCount, title, description, points)
 
 treasureCountAchievement(10, "Treasure Searcher", "Collect 10 treasures", 5)
 treasureCountAchievement(20, "Treasure Collector", "Collect 20 treasures", 10)
-treasureCountAchievement(30, "Treasure Hoarder", "Collect 30 treasures", 25)
+treasureCountAchievement(30, "Treasure Hoarder", "Collect all 30 treasures", 25)
 
 function survivalAchievement(winCount, title, description, points)
 {
     achievement(title = title,
                 description = description,
                 points = points,
-                trigger = survivalFinished() &&
-                          survivalCount() >= winCount &&
+                trigger = survivalCount() == winCount + 1 &&
+                          prev(survivalCount()) == winCount &&
                           !demoMode() &&
                           survivalMode()
                 )
 }
 
-survivalAchievement(10, "Survivor Man", "Win at least 10 matches in a row in Survival Mode and lose a match", 5)
-survivalAchievement(25, "Survivor Hero", "Win at least 25 matches in a row in Survival Mode and lose a match", 10)
-survivalAchievement(50, "Survivor God", "Win at least 50 matches in a row in Survival Mode and lose a match", 25)
+survivalAchievement(10, "Survivor Man", "Win at least 10 matches in a row in Survival Mode", 5)
+survivalAchievement(25, "Survivor Hero", "Win at least 25 matches in a row in Survival Mode", 10)
+survivalAchievement(50, "Survivor God", "Win at least 50 matches in a row in Survival Mode", 25)
 
+leaderboard(
+    title = format("Survival Wins"),
+    description = format("Win as many rounds of Survival as possible. Changing characters will not register your current wins"),
+    
+    start  =
+    ( 
+        prev(gameMode()) == SURVIVAL_MODE_VALUE &&
+        survivalCount() > 0x01 && // More than 0 wins. 
+        (
+            changeCharacterScreen() ||
+            !survivalMode() ||
+            survivalFinished() // This also resets the wins to 0. 
+        )
+    ),
+    cancel = always_false(),
+    submit = always_true(),
+    value = survivalCount() - 1,
+    format = "VALUE"
+)
+    
 function weaponAchievement(characterID)
 {
     TOTAL_WEAPON_PER_CHARACTER = 4
@@ -829,7 +1281,7 @@ function weaponAchievement(characterID)
                 )
 }
 
-for characterID in range(FIRST_CHARACTER, LAST_STORY_CHARACTER)
+for characterID in range(FIRST_CHARACTER, LAST_WEAPON_CHARACTER)
 {
     weaponAchievement(characterID)
 }
@@ -855,19 +1307,16 @@ function proficiencyAchievement(characterID)
     achievement(title = format("Grand Master {0}", characterNameLookup[characterID]),
                 description = format("Raise {0}'s proficiency to max.", characterNameLookup[characterID]),
                 points = 5,
-                trigger = word(ZHAO_YUN_PROFICIENCY_MEMORY_LOCATION + (characterID * CHARACTER_SIZE)) == 40 &&
-                          prev(word(ZHAO_YUN_PROFICIENCY_MEMORY_LOCATION + (characterID * CHARACTER_SIZE))) != 40 &&
+                trigger = word(ZHAO_YUN_PROFICIENCY_MEMORY_LOCATION + (characterID * CHARACTER_SIZE)) == 49 &&
+                          prev(word(ZHAO_YUN_PROFICIENCY_MEMORY_LOCATION + (characterID * CHARACTER_SIZE))) != 49 &&
                           saveProtection()
                 )
 }
 
-for characterID in range(FIRST_CHARACTER, LAST_STORY_CHARACTER)
+for characterID in range(FIRST_CHARACTER, LAST_PROFICIENCY_CHARACTER)
 {
     proficiencyAchievement(characterID)
 }
 
-
-// Survival Leaderboard? 
-// Time and KO leaderboard for stage? 
 
 
