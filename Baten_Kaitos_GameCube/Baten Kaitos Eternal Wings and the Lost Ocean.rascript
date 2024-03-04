@@ -52,6 +52,52 @@ PHANTOM_GOLDOBA = "Phantom Goldoba"
 NIHAL_DESERT = "Nihal Desert"
 COR_HYDRAE = "Cor Hydrae"
 
+DescriptionNameLookup =
+{
+    CEBALRAI: "Cebalrai",
+    MOONGUILE_FOREST: "Moonguile Forest",
+    NUNKI_VALLEY: "Nunki Valley",
+    PHERKAD: "Pherkad",
+    LORDS_MANSIONS: "the Lord's Mansion",
+    NASHIRA: "Nashira",
+    LESSER_CELESTIAL_RIVER: "the Lesser Celestial River",
+    CLOUD_PASSAGE: "the Cloud Passage",
+    SHELIAK: "Sheliak",
+    CASTLE_ELNATH: "Castle Elnath",
+    ANUENUE_PORT: "Anuenue Port",
+    KOMO_MAI: "Komo Mai",
+    ANCIENT_LIBRARY_OF_MAGIC: "the Ancient Library of Magic",
+    HOLOHOLO_JUNGLE: "Holoholo Jungle",
+    OPU: "Opu",
+    CELESTIAL_TREE: "the Celestial Tree",
+    TRAIL_OF_SOULS: "Trail of Souls",
+    PARNASSE: "Parnasse",
+    DETOURNE: "Detourne",
+    REVERENCE: "Reverence",
+    NEKTON: "Nekton",
+    BALANCOIRE: "Balancoire",
+    COCCOLITH: "Coccolith",
+    MINTAKA: "Mintaka",
+    BATTLESHIP_GOLDOBA: "Battleship Goldoba",
+    AZHA_VILLAGE: "Azha Village",
+    LAVA_CAVES: "the Lava Caves",
+    IMPERIAL_FORTRESS: "the Imperial Fortress",
+    ICE_CLIFFS: "the Ice Cliffs of Gomeisa",
+    KAFFALJIDHMA: "Kaffaljidhma",
+    CURSA: "Cursa",
+    LABYRINTH_OF_DUHR: "the Labyrinth of Duhr",
+    GEMMA_VILLAGE: "Gemma Village",
+    CAPELLA: "Capella",
+    ALGORAB_VILLAGE: "Algorab Village",
+    ZOSMA_TOWER: "Zosma Tower",
+    CELESTIAL_ALPS: "the Celestial Alps",
+    ILLUSORY_FORTRESS: "the Illusory Fortress",
+    GREATER_CELESTIAL_RIVER: "the Greater Celestial River",
+    PHANTOM_GOLDOBA: "Phantom Goldoba",
+    NIHAL_DESERT: "Nihal Desert",
+    COR_HYDRAE: "Cor Hydrae",
+}
+
 
 // $251b78: (8-bit) Load Indicator.
 //          
@@ -2350,6 +2396,11 @@ POST = "Post"
 WHO = "Who"
 CARDS = "Cards"
 COUNT = "Count"
+TYPE = "Type"
+PROGRESSION = "Progression"
+WIN_CONDITION = "Win_Condition"
+MISSABLE = "Missable"
+STANDARD = ""
 NO_CHARACTER = 0x00
 KALAS = 0x01
 XELHA = 0x02
@@ -2362,14 +2413,14 @@ bossScriptIdList =
 [
     {
         TITLE:"Saving the Lady",
-        NAME: "Sabre Dragon", 
+        NAME: "the Sabre Dragon", 
         POINTS: 3,
         PRIOR: 0x000001f4,
         POST: 0x000002bc
     },
     {
         TITLE:"Opening the First Gate",
-        NAME: "Lord of the Spring", 
+        NAME: "the Lord of the Spring", 
         POINTS: 5,
         PRIOR: 0x00000320,
         POST: 0x000044c
@@ -2383,28 +2434,28 @@ bossScriptIdList =
     },
     {
         TITLE:"Bringing the Thunder",
-        NAME: "Thunderfish", 
+        NAME: "the Thunderfish", 
         POINTS: 5,
         PRIOR: 0x00000bb8,
         POST: 0x0000c1c
     },
     {
         TITLE:"Fighting Among the Clouds",
-        NAME: "Iron Beetle I", 
+        NAME: "the Iron Beetle I", 
         POINTS: 5,
         PRIOR: 0x00000e10,
         POST: 0x0000e74
     },
     {
         TITLE:"Drill, Baby, Drill",
-        NAME: "Iron Beetle V", 
+        NAME: "the Iron Beetle V", 
         POINTS: 5,
         PRIOR: 0x00001068,
         POST: 0x0001194
     },
     {
         TITLE:"Opening the Second Gate",
-        NAME: "Lord of the Winds", 
+        NAME: "the Lord of the Winds", 
         POINTS: 5,
         PRIOR: 0x00001324,
         POST: 0x0001388
@@ -2418,7 +2469,7 @@ bossScriptIdList =
     },
     {
         TITLE:"Opening the Third Gate",
-        NAME: "Tree Guardian", 
+        NAME: "the Tree Guardian", 
         POINTS: 5,
         PRIOR: 0x000019c8,
         POST: 0x00001a2c
@@ -2439,7 +2490,7 @@ bossScriptIdList =
     },
     {
         TITLE:"Massive Shuffle",
-        NAME: "Magnus Giganticus", 
+        NAME: "the Magnus Giganticus", 
         POINTS: 5,
         PRIOR: 0x00002008,
         POST: 0x0000206c
@@ -2460,13 +2511,13 @@ bossScriptIdList =
     },
     {
         TITLE:"Time to Run",
-        NAME: "Trio On The Goldoba", 
+        NAME: "the Chaotic Trio On The Goldoba", 
         POINTS: 10,
         PRIOR: 0x000029cc,
         POST: 0x00002a94
     },
     {
-        TITLE:"What the Heck Was That? ",
+        TITLE:"What the Heck Was That?",
         NAME: "Geldoblame", 
         POINTS: 10,
         PRIOR: 0x00002e18,
@@ -2474,7 +2525,7 @@ bossScriptIdList =
     },
     {
         TITLE:"Passing The Test",
-        NAME: "Goddess of Ice", 
+        NAME: "the Goddess of Ice", 
         POINTS: 3,
         PRIOR: 0x0000319c,
         POST: 0x00003200
@@ -2488,7 +2539,7 @@ bossScriptIdList =
     },
     {
         TITLE:"Angel of Darkness",
-        NAME: "Angel of Darkness", 
+        NAME: "the Angel of Darkness", 
         POINTS: 10,
         PRIOR: 0x00003584,
         POST: 0x000035e8
@@ -2502,14 +2553,14 @@ bossScriptIdList =
     },
     {
         TITLE:"Is That All You Got?",
-        NAME: "The Ancient God", 
+        NAME: "the Ancient God", 
         POINTS: 10,
         PRIOR: 0x0003afc,
         POST: 0x0003b60
     },
     {
         TITLE:"Our Final Meeting",
-        NAME: "Trio at the Celestial Alps", 
+        NAME: "the CHaotic Trio at the Celestial Alps", 
         POINTS: 10,
         PRIOR: 0x00003ee4,
         POST: 0x00003f48
@@ -2523,7 +2574,7 @@ bossScriptIdList =
     },
     {
         TITLE:"Wake Up!",
-        NAME: "The Final Boss", 
+        NAME: "the Final Boss", 
         POINTS: 25,
         PRIOR: 0x04204,
         POST: 0x04268
@@ -2534,7 +2585,8 @@ bossScriptIdList =
         DESCRIPTION: "Reach the end of the game",
         POINTS: 50,
         PRIOR: 0x004394,
-        POST: 0x0043f8
+        POST: 0x0043f8,
+        TYPE: WIN_CONDITION
     },
     
 ]
@@ -2558,9 +2610,18 @@ function bossScriptIdAchievement(data)
     {
         description = format("Defeat {0}",data[NAME])
     }
+    if (containsKey(data,TYPE))
+    {
+        type = data[TYPE]
+    }
+    else
+    {
+        type = PROGRESSION
+    }
 
     achievement(title = title,
                 description = description,
+                type = type,
                 points = data[POINTS],
                 trigger = saveProtection() &&
                           prev(majorScriptId()) == data[PRIOR] &&
@@ -2579,80 +2640,91 @@ bossBooleanList =
 [
     {
         TITLE:"Required Spider Boss",
-        NAME: "Nunkirantula", 
+        NAME: "the Nunkirantula", 
         POINTS: 3,
         LOCATION: eventProgress3(),
-        BIT: BIT5
+        BIT: BIT5,
+        TYPE: PROGRESSION
     },
     {
         TITLE:"Putting the Ghosts to Rest",
         NAME: "Rampulus", 
         POINTS: 10,
         LOCATION: lootProgress77(),
-        BIT: BIT7
+        BIT: BIT7,
+        TYPE:STANDARD
     },
     {
         TITLE:"Sand in Your Eyes",
         NAME: "Sowzana", 
         POINTS: 10,
         LOCATION: phoenixCrestSeenLocation(),
-        BIT: BIT3
+        BIT: BIT3,
+        TYPE: STANDARD
     },
     {
         TITLE:"Returning to the First Boss",
         NAME: "Kulcabaran", 
         POINTS: 10,
         LOCATION: lootProgress71(),
-        BIT: BIT4
+        BIT: BIT4,
+        TYPE: STANDARD
     },
     {
         TITLE:"The Shadow of the Wizard",
         NAME: "Wizard Shadow", 
         POINTS: 5,
         LOCATION: eventProgress2(),
-        BIT: BIT6
+        BIT: BIT6,
+        TYPE: STANDARD
     },
     {
         TITLE:"Quite a Catch",
         NAME: "Brokolis", 
         POINTS: 10,
         LOCATION: lootProgress35(),
-        BIT: BIT1
+        BIT: BIT1,
+        TYPE: STANDARD
     },
     {
         TITLE:"Beheading",
         NAME: "Sibling God: He", 
         POINTS: 5,
         LOCATION: lootProgress59(),
-        BIT: BIT1
+        BIT: BIT1,
+        TYPE: PROGRESSION
     },
     {
         TITLE:"Chest Shot",
         NAME: "Sibling God: Che", 
         POINTS: 5,
         LOCATION: lootProgress59(),
-        BIT: BIT2
+        BIT: BIT2,
+        TYPE: PROGRESSION
     },
     {
         TITLE:"Body Blow",
         NAME: "Sibling God: Bo", 
         POINTS: 5,
         LOCATION: lootProgress59(),
-        BIT: BIT3
+        BIT: BIT3,
+        TYPE: PROGRESSION
     },
     {
         TITLE:"Disarming",
         NAME: "Sibling God: Ar", 
         POINTS: 5,
         LOCATION: lootProgress59(),
-        BIT: BIT4
+        BIT: BIT4,
+        TYPE: PROGRESSION
     },
     {
         TITLE:"Grounded",
         NAME: "Sibling God: Le", 
         POINTS: 5,
         LOCATION: lootProgress59(),
-        BIT: BIT5
+        BIT: BIT5,
+        TYPE: PROGRESSION
     }
 ]
 
@@ -2680,6 +2752,7 @@ function booleanBossAchievement(data)
 
     achievement(title = title,
                 description = description,
+                type = data[TYPE],
                 points = data[POINTS],
                 trigger = saveProtection() &&
                           prev(target) == 0 &&
@@ -3009,8 +3082,15 @@ function collectionAchievement(key)
         }
     }
 
+    type = STANDARD
+    if (key == PHANTOM_GOLDOBA || key == BATTLESHIP_GOLDOBA)
+    {
+        type = MISSABLE
+    }
+
     achievement(title = format("{0} Collector",key),
-                description = format("Loot and earn everything from {0}.  Some Missable items are not counted",key),
+                description = format("Loot and earn everything from {0}.  Some missable items are not counted",DescriptionNameLookup[key]),
+                type = type,
                 points = lootPointsList[key],
                 trigger = saveProtection() &&
                           any_of(locations, value => prev(value) == 0) &&
@@ -3033,7 +3113,8 @@ questList =
         POINTS: 1,
         TRIGGER: [
             { LOCATION: lootProgress15(), BITS: [BIT0] }
-        ]
+        ],
+        TYPE: MISSABLE
     },
     {
         TITLE: "And Now the Real Speedrun Begins...",
@@ -3041,7 +3122,8 @@ questList =
         POINTS: 2,
         TRIGGER: [
             { LOCATION: lootProgress24(), BITS: [BIT2] }
-        ]
+        ],
+        TYPE: MISSABLE
     },
     {
         TITLE: "Tripadvisor: Sheliak",
@@ -3049,7 +3131,8 @@ questList =
         POINTS: 2,
         TRIGGER: [
             { LOCATION: lootProgress24(), BITS: [BIT5] }
-        ]
+        ],
+        TYPE: MISSABLE
     },
     {
         TITLE: "Cleaning Up" ,
@@ -3058,7 +3141,8 @@ questList =
         TRIGGER: [
             { LOCATION: lootProgress62(), BITS: [BIT7] },
             { LOCATION: lootProgress73(), BITS: [BIT1] }
-        ]
+        ],
+        TYPE: MISSABLE
     },
     {
         TITLE: "Here You Go Kid, Now Get Away From Me" ,
@@ -3066,15 +3150,17 @@ questList =
         POINTS: 3,
         TRIGGER: [
             { LOCATION: lootProgress3(), BITS: [BIT5] }
-        ]
+        ],
+        TYPE: MISSABLE
     },
     {
         TITLE: "Quite a Trade" ,
-        DESCRIPTION: "Earn a Platnium Buckle and a Cetaka's Sword for helping an old woman's backache", 
+        DESCRIPTION: "Earn a Platinum Buckle and a Cetaka's Sword for helping an old woman's backache", 
         POINTS: 2,
         TRIGGER: [
             { LOCATION: lootProgress12(), BITS: [BIT6, BIT7] }
-        ]
+        ],
+        TYPE: MISSABLE
     },
     {
         TITLE: "Let Me Through" ,
@@ -3082,7 +3168,8 @@ questList =
         POINTS: 3,
         TRIGGER: [
             { LOCATION: lootProgress14(), BITS: [BIT4] }
-        ]
+        ],
+        TYPE: MISSABLE
     },
     {
         TITLE: "Hero of Mintaka",
@@ -3092,7 +3179,8 @@ questList =
             { LOCATION: eventProgress5(), BITS: [BIT1] },
             { LOCATION: eventProgress6(), BITS: [BIT0, BIT2, BIT3, BIT5] },
             { LOCATION: eventProgress7(), BITS: [BIT1, BIT2] }
-        ]
+        ],
+        TYPE: MISSABLE
     },
     {
         TITLE: "It Belongs in a Museum!",
@@ -3100,7 +3188,8 @@ questList =
         POINTS: 5,
         TRIGGER: [
             { LOCATION: lootProgress14(), BITS: [BIT7] }
-        ]
+        ],
+        TYPE: MISSABLE
     },
     {
         TITLE: "Glad I'm Not Cleaning That Up",
@@ -3108,7 +3197,8 @@ questList =
         POINTS: 5,
         TRIGGER: [
             { LOCATION: lootProgress14(), BITS: [BIT3] }
-        ]
+        ],
+        TYPE: STANDARD
     },
     {
         TITLE: "Could You Repeat That?" ,
@@ -3116,7 +3206,8 @@ questList =
         POINTS: 5,
         TRIGGER: [
             { LOCATION: lootProgress13(), BITS: [BIT1] }
-        ]
+        ],
+        TYPE: STANDARD
     },
     {
         TITLE: "Very Sorry For Your Loss" ,
@@ -3124,7 +3215,8 @@ questList =
         POINTS: 3,
         TRIGGER: [
             { LOCATION: lootProgress34(), BITS: [BIT6] }
-        ]
+        ],
+        TYPE: MISSABLE
     }
 ]
 
@@ -3142,6 +3234,7 @@ function questAchievement(data)
 
     achievement(title = data[TITLE],
                 description = data[DESCRIPTION],
+                type = data[TYPE],
                 points = data[POINTS],
                 trigger = saveProtection() &&
                           any_of(locations, value => prev(value) == 0) &&
@@ -3158,7 +3251,7 @@ optionalQuestsList =
 [
     {
         TITLE: "An Expensive Dessert",
-        DESCRIPTION: "Earn a desert for a gold nugget in Balancoire", 
+        DESCRIPTION: "Earn a dessert for a gold nugget in Balancoire", 
         POINTS: 2,
         TRIGGER: [
             { LOCATION: lootProgress5(), BITS: [BIT7] },
@@ -3181,6 +3274,7 @@ function optionalQuestAchievement(data)
 
     achievement(title = data[TITLE],
                 description = data[DESCRIPTION],
+                type = STANDARD,
                 points = data[POINTS],
                 trigger = saveProtection() &&
                           any_of(locations, value => prev(value) == 0 && value == 1) 
@@ -3353,12 +3447,19 @@ function spComboAchievements(title, targetValue)
     )
 }
 
-for percentage in range(10,90,step=10)
-{
-    spComboAchievements(format("SP Combos {0} Percentage", percentage), 14*percentage/10)
-}
+TOTAL_SP_COMBOS = 141
+TENTH_SP_TOTAL_COMBOS = TOTAL_SP_COMBOS / 10
 
-spComboAchievements("SP Combos Fully Loaded", 141)
+spComboAchievements("SP Combos Discovery I", 1 * TENTH_SP_TOTAL_COMBOS)
+spComboAchievements("SP Combos Discovery II", 2 * TENTH_SP_TOTAL_COMBOS)
+spComboAchievements("SP Combos Discovery III", 3 * TENTH_SP_TOTAL_COMBOS)
+spComboAchievements("SP Combos Discovery IV", 4 * TENTH_SP_TOTAL_COMBOS)
+spComboAchievements("SP Combos Discovery V", 5 * TENTH_SP_TOTAL_COMBOS)
+spComboAchievements("SP Combos Discovery VI", 6 * TENTH_SP_TOTAL_COMBOS)
+spComboAchievements("SP Combos Discovery VII", 7 * TENTH_SP_TOTAL_COMBOS)
+spComboAchievements("SP Combos Discovery VIII", 8 * TENTH_SP_TOTAL_COMBOS)
+spComboAchievements("SP Combos Discovery IX", 9 * TENTH_SP_TOTAL_COMBOS)
+spComboAchievements("SP Combos Discovery X", TOTAL_SP_COMBOS)
 
 displayIssues = 
 [    
@@ -3480,15 +3581,17 @@ function calculateCorrectMagnusLocations()
 calculateCorrectMagnusLocations()
 
 
-function magnusCollectionAchievement(title, targetValue)
+function magnusCollectionAchievement(id, title, targetValue, type)
 {
     points = 10
     if (targetValue == MAGNUS_ACHIEVEMENT_CARDS)
     {
         points = 50
     }
-    achievement(title = title,
-                description = format("Discover {0} Magnus Cards",targetValue),
+    achievement(id = id,
+                title = title,
+                description = format("Discover {0} Magnus Cards. Splendid Hair and Treasured Painting are not counted",targetValue),
+                type = type,
                 points = points,
                 trigger = saveProtection() && 
                           sum_of(correctAchievementPrevCombinationLocations, value => value) - sum_of(correctAchievementPrevReduceCombinationLocations, value => value) < targetValue &&
@@ -3497,89 +3600,111 @@ function magnusCollectionAchievement(title, targetValue)
     )
 }
 
-for percentage in range(10,90, step=10)
-{
-    magnusCollectionAchievement(format("Magnus {0} Percentage", percentage), MAGNUS_ACHIEVEMENT_CARDS * percentage / 100)
-}
+MAGNUS_ACHIEVEMENT_CARDS_TENTH = MAGNUS_ACHIEVEMENT_CARDS/10
 
-magnusCollectionAchievement("Magnus Fully Loaded", MAGNUS_ACHIEVEMENT_CARDS)
+magnusCollectionAchievement(403458, "Magnus Collector I", 1 * MAGNUS_ACHIEVEMENT_CARDS_TENTH, STANDARD)
+magnusCollectionAchievement(403459, "Magnus Collector II", 2 * MAGNUS_ACHIEVEMENT_CARDS_TENTH, STANDARD)
+magnusCollectionAchievement(403460, "Magnus Collector III", 3 * MAGNUS_ACHIEVEMENT_CARDS_TENTH, STANDARD)
+magnusCollectionAchievement(403461, "Magnus Collector IV", 4 * MAGNUS_ACHIEVEMENT_CARDS_TENTH, STANDARD)
+magnusCollectionAchievement(403462, "Magnus Collector V", 5 * MAGNUS_ACHIEVEMENT_CARDS_TENTH, STANDARD)
+magnusCollectionAchievement(403463, "Magnus Collector VI", 6 * MAGNUS_ACHIEVEMENT_CARDS_TENTH, STANDARD)
+magnusCollectionAchievement(403464, "Magnus Collector VII", 7 * MAGNUS_ACHIEVEMENT_CARDS_TENTH, STANDARD)
+magnusCollectionAchievement(403465, "Magnus Collector VIII", 8 * MAGNUS_ACHIEVEMENT_CARDS_TENTH, STANDARD)
+magnusCollectionAchievement(403466, "Magnus Collector IX", 9 * MAGNUS_ACHIEVEMENT_CARDS_TENTH, STANDARD)
+magnusCollectionAchievement(403467, "Waiting for 100%", MAGNUS_ACHIEVEMENT_CARDS, MISSABLE)
 
 cameraAchievementList = 
 [
     {
         TITLE: "Portfolio: Sadal Suud" ,
-        DESCRIPTION: "Register in the Magnus Gathering a picture of Sabre Dragon, Lord of the Spring, Nunkirantula.  Note: Other cards and photos will be missable", 
+        DESCRIPTION: " Register a picture in the Magnus Gathering of the Sabre Dragon, the Lord of the Spring, and the Nunkirantula from the Sadal Suud nation", 
         POINTS: 5,
         CARDS: [
             { LOCATION: bossCards4(), BITS: [BIT2, BIT3] },
             { LOCATION: bossCards7(), BITS: [BIT1] }
-        ]
+        ],
+        TYPE: MISSABLE,
+        ID: 403468
     },
     {
         TITLE: "Portfolio: Diadem" ,
-        DESCRIPTION: "Register in the Magnus Gathering a picture of Thunderfish, Iron Beetle I, Iron Beetle V, and Lord of the Winds.  Note: Other cards and photos will be missable", 
+        DESCRIPTION: "Register a picture in the Magnus Gathering of the Thunderfish, the Iron Beetle I, the Iron Beetle V, and the Lord of the Winds from the Diadem nation", 
         POINTS: 5,
         CARDS: [
             { LOCATION: bossCards4(), BITS: [BIT4, BIT5, BIT6] },
             { LOCATION: bossCards3(), BITS: [BIT0] }
-        ]
+        ],
+        TYPE: MISSABLE,
+        ID: 403469
     },
     {
         TITLE: "Portfolio: Anuenue" ,
-        DESCRIPTION: "Register in the Magnus Gathering a picture of Tree Guardian, and Tentacle.  Note: Other cards and photos will be missable", 
+        DESCRIPTION: "Register a picture in the Magnus Gathering of the Tree Guardian and the Tentacle from the Anuenue nation", 
         POINTS: 2,
         CARDS: [
             { LOCATION: bossCards3(), BITS: [BIT2] },
             { LOCATION: bossCards7(), BITS: [BIT2] }
-        ]
+        ],
+        TYPE: MISSABLE,
+        ID: 403470
     },
     {
         TITLE: "Portfolio: Mira" ,
-        DESCRIPTION: "Register in the Magnus Gathering a picture of Gnosis, Magnus Giganticus, Sikri, Phantasm, and two enemies on the spaceship game.  Note: Other cards and photos will be missable", 
+        DESCRIPTION: "Register a picture in the Magnus Gathering of Gnosis, Magnus Giganticus, Sikri, and Phantasm from the Mira nation", 
         POINTS: 5,
         CARDS: [
             { LOCATION: bossCards4(), BITS: [BIT7] },
             { LOCATION: bossCards3(), BITS: [BIT3, BIT4, BIT5] }
-        ]
+        ],
+        TYPE: MISSABLE,
+        ID: 403471
     },
     {
-        TITLE: "Portfolio: Alfred" ,
-        DESCRIPTION: "Register in the Magnus Gathering a picture of Geldoblame, Fadroh, and the Angel of Darkness.  Note: Other cards and photos will be missable", 
+        TITLE: "Portfolio: Alfard" ,
+        DESCRIPTION: "Register a picture in the Magnus Gathering of Geldoblame, Fadroh, and the Angel of Darkness from  the Alfard nation", 
         POINTS: 5,
         CARDS: [
             { LOCATION: bossCards2(), BITS: [BIT2] },
             { LOCATION: bossCards8(), BITS: [BIT4] },
             { LOCATION: bossCards1(), BITS: [BIT3] }
-        ]
+        ],
+        TYPE: MISSABLE,
+        ID: 403472
     },
     {
-        TITLE: "Portfolio: Reform Party" ,
-        DESCRIPTION: "Register in the Magnus Gathering a picture of Naiad, Thalassa, Despina, and Galatea.  Note: Other cards and photos will be missable", 
+        TITLE: "Portfolio: Reforming Party" ,
+        DESCRIPTION: "Register a picture in the Magnus Gathering of Naiad, Thalassa, Despina, and Galatea", 
         POINTS: 5,
         CARDS: [
             { LOCATION: bossCards2(), BITS: range(BIT3, BIT6) }
-        ]
+        ],
+        TYPE: MISSABLE,
+        ID: 403473
     },
     {
         TITLE: "Portfolio: Wazn" ,
-        DESCRIPTION: "Register in the Magnus Gathering a picture of Goddess of Ice.  Note: Other cards and photos will be missable", 
+        DESCRIPTION: "Register a picture in the Magnus Gathering of the Goddess of Ice from the Wazn nation", 
         POINTS: 1,
         CARDS: [
             { LOCATION: bossCards2(), BITS: [BIT7] }
-        ]
+        ],
+        TYPE: MISSABLE,
+        ID: 403474
     },
     {
         TITLE: "Portfolio: Duhr" ,
-        DESCRIPTION: "Register in the Magnus Gathering a picture of Agyo and Ugyo.  Note: Other cards and photos will be missable",
+        DESCRIPTION: "Register a picture in the Magnus Gathering of Agyo and Ugyo from the Duhr nation",
         POINTS: 2,
         CARDS:[
             { LOCATION: bossCards1(), BITS: [BIT4] },
             { LOCATION: bossCards5(), BITS: [BIT2] }
-        ]
+        ],
+        TYPE: MISSABLE,
+        ID: 403475
     },
     {
         TITLE: "Portfolio: The World",
-        DESCRIPTION: "Register in the Magnus Gathering a picture of Rampulus, Sowzana, Kulcabaran, Wizard Shadow, Brokolis, the boss at the Celestial alps, .  Note: Other cards and photos will be missable",
+        DESCRIPTION: "Register a picture in the Magnus Gathering of Rampulus, Sowzana, Kulcabaran, Wizard Shadow, Brokolis, and the Chaotic Trio from the bonus dungeons",
         POINTS: 5,
         CARDS:[
             { LOCATION: bossCards8(), BITS: [BIT0, BIT1, BIT5] },
@@ -3587,16 +3712,20 @@ cameraAchievementList =
             { LOCATION: bossCards1(), BITS: [BIT1, BIT6] },
             { LOCATION: bossCards3(), BITS: [BIT6] },
             { LOCATION: bossCards2(), BITS: [BIT1] }
-        ]
+        ],
+        TYPE: MISSABLE,
+        ID: 403476
     },
     {
         TITLE: "Portfolio: Finale",
-        DESCRIPTION: "Register in the Magnus Gathering a picture of the five Sibling Gods and the Final Boss.  Note: Other cards and photos will be missable",
+        DESCRIPTION: "Register a picture in the Magnus Gathering of the five Sibling Gods and the Final Boss from the finale of the story",
         POINTS: 10,
         CARDS:[
             { LOCATION: bossCards6(), BITS: range(BIT3, BIT7) },
             { LOCATION: bossCards1(), BITS: [BIT0] }
-        ]
+        ],
+        TYPE: MISSABLE,
+        ID: 403477
     }
 ]
 
@@ -3617,8 +3746,10 @@ function cardAchievement(data)
         }
     }
 
-    achievement(title = data[TITLE],
+    achievement(id = data[ID],
+                title = data[TITLE],
                 description = data[DESCRIPTION],
+                type = data[TYPE],
                 points = data[POINTS],
                 trigger = saveProtection() &&
                           any_of(prevNotOwned, value => value) &&
@@ -3639,7 +3770,8 @@ specialCardList =
         POINTS: 2,
         CARDS:[
             { LOCATION: specialCards(), BITS: [BIT4] }
-        ]
+        ],
+        TYPE: STANDARD
     },
     {
         TITLE: "Is There a Set For That?",
@@ -3647,7 +3779,8 @@ specialCardList =
         POINTS: 2,
         CARDS:[
             { LOCATION: specialCards(), BITS: [BIT7] }
-        ]
+        ],
+        TYPE: STANDARD
     },
     {
         TITLE: "Cosmic Guardian",
@@ -3655,7 +3788,8 @@ specialCardList =
         POINTS: 1,
         CARDS:[
             { LOCATION: specialCards2(), BITS: [BIT3] }
-        ]
+        ],
+        TYPE: STANDARD
     }
 ]
 
@@ -3678,19 +3812,23 @@ function starFragmentAchievement(title, targetValue)
         points = 25
     }
     achievement(title = title,
-                description = format("Deliver {0} constellations",targetValue),
+                description = format("Deliver {0} Constellations",targetValue),
                 points = points,
                 trigger = saveProtection() && 
                           prev(starFragmentsCollected()) < targetValue &&
                           measured(starFragmentsCollected() == targetValue) 
     )
 }
-
-for percentage in range(10,100, step=10)
-{
-    starFragmentAchievement(format("Constellations {0} Percentage", percentage), STAR_FRAGMENTS*percentage/100)
-}
-
+starFragmentAchievement("Skywatcher", 5)
+starFragmentAchievement("Celestial Observer", 10)
+starFragmentAchievement("Star Gazer", 15)
+starFragmentAchievement("Amateur Astronomer", 20)
+starFragmentAchievement("Astronomer", 25)
+starFragmentAchievement("Astrobiologist", 30)
+starFragmentAchievement("Space Scientist", 35)
+starFragmentAchievement("Planetary Scientist", 40) 
+starFragmentAchievement("Cosmologist", 45)
+starFragmentAchievement("Astrophysicist", 50) 
 
 rich_presence_display("Magnus collection: {0}/1022 SP Combo: {1}/141",
     rich_presence_value("VALUE", sum_of(correctRPCombinationLocations, value => value) - sum_of(correctRPReduceCombinationLocations, value => value)),
@@ -3831,7 +3969,7 @@ joiningAchievementsList  =
         WHO: LYUDE
     },
     {
-        TITLE: "Mysterious Hunter ",
+        TITLE: "Mysterious Hunter",
         DESCRIPTION: "Have Savyna join the party",
         POINTS: 2,
         WHO: SAYVNA
@@ -3877,6 +4015,7 @@ function joiningAchievements(data)
 
     achievement(title = data[TITLE],
                 description = data[DESCRIPTION],
+                type = PROGRESSION,
                 points = data[POINTS],
                 trigger = saveProtection() && 
                           any_of( range(1,6), index => byte(CHARACTER_ORDER_LOCATION + index - 1) == data[WHO] &&
@@ -3896,6 +4035,7 @@ function rejoiningAchievements(data)
 
     achievement(title = data[TITLE],
                 description = data[DESCRIPTION],
+                type = PROGRESSION,
                 points = data[POINTS],
                 trigger = saveProtection() && 
                           any_of( range(1,6), index => byte(CHARACTER_ORDER_LOCATION + index - 1) == data[WHO] &&
@@ -3983,6 +4123,7 @@ for data in maxClassLevelList
 TOTAL_MAGNUS_IN_MINDEER_MINIGAME = 12
 achievement(title = "Trail of Souls Collector",
             description = "Earn all 12 cards from the Mindeer minigame",
+            type = MISSABLE,
             points = 5,
             trigger = saveProtection() &&
                       mindeerMinigameCheck(TOTAL_MAGNUS_IN_MINDEER_MINIGAME) &&
@@ -3990,7 +4131,8 @@ achievement(title = "Trail of Souls Collector",
 )
 
 achievement(title = "Naked Detourne",
-            description = "Beat the Detourne Boss with out getting any special items from the Golden Hero",
+            description = "Beat the Detourne Boss without getting any special items from the Golden Hero",
+            type = MISSABLE,
             points = 5,
             trigger = saveProtection() &&
                       detoroneValuableItemsCheck() &&
@@ -4031,7 +4173,7 @@ cardHandList  =
 [
     {
         TITLE: "Quatro Magio",
-        DESCRIPTION: "Make a Four of a kind hand combo in a single turn. (No other pairs)",
+        DESCRIPTION: "Make a 'four of a kind' hand combo in a single turn. (No other pairs)",
         POINTS: 3,
         TRIGGER: (( matchOnlyHand(handValue1(), FOUR_OF_A_KIND) ||
                    matchOnlyHand(handValue1(), FOUR_NINES)) &&
@@ -4043,7 +4185,7 @@ cardHandList  =
     },
     {
         TITLE: "Quintuples",
-        DESCRIPTION: "Make a Five of a kind hand combo in a single turn. (No other pairs)",
+        DESCRIPTION: "Make a 'five of a kind' hand combo in a single turn. (No other pairs)",
         POINTS: 4,
         TRIGGER: (( matchOnlyHand(handValue1(), FIVE_OF_A_KIND) ||
                    matchOnlyHand(handValue1(), FIVE_NINES)) &&
@@ -4054,50 +4196,50 @@ cardHandList  =
                  finalValue(handValue2()))
     },
     {
-        TITLE: "Only need one Number",
-        DESCRIPTION: "Make a Nine of a Kind hand combo",
+        TITLE: "Only Need One Number",
+        DESCRIPTION: "Make a 'nine of a kind' hand combo",
         POINTS: 10,
         TRIGGER: (matchHand(handValue1(), NINE_OF_A_KIND) &&
                  finalValue(handValue2()))
     },
     {
         TITLE: "Eighty One",
-        DESCRIPTION: "Make a Nine 9s hand combo",
+        DESCRIPTION: "Make a 'nine 9s' hand combo",
         POINTS: 10,
         TRIGGER: (matchHand(handValue1(), NINE_NINES) && 
                  finalValue(handValue2()))
     },
     {
         TITLE: "Good Morning",
-        DESCRIPTION: "Make a Sunrise hand combo",
+        DESCRIPTION: "Make a 'sunrise' hand combo",
         POINTS: 5,
         TRIGGER: (matchHand(handValue1(), SUNRISE) &&
                  finalValue(handValue2()))
     },
     {
         TITLE: "Good Night",
-        DESCRIPTION: "Make a Sunset hand combo",
+        DESCRIPTION: "Make a 'sunset' hand combo",
         POINTS: 5,
         TRIGGER: (matchHand(handValue1(), SUNSET) &&
                  finalValue(handValue2()))
     },
     {
         TITLE: "Small Straight",
-        DESCRIPTION: "Make a 4 card Straight hand combo",
+        DESCRIPTION: "Make a 'four card straight' hand combo",
         POINTS: 3,
         TRIGGER: (matchHand(handValue1(), FOUR_STRAIGHT) &&
                  finalValue(handValue2()))
     },
     {
         TITLE: "Large Straight",
-        DESCRIPTION: "Make a 6 card Straight hand combo",
+        DESCRIPTION: "Make a 'six card straight' hand combo",
         POINTS: 4,
         TRIGGER: (matchHand(handValue1(), SIX_STRAIGHT) &&
                  finalValue(handValue2()))
     },
     {
         TITLE: "Full House",
-        DESCRIPTION: "Make a three of a kind and a two of a kind hand combo in a single turn",
+        DESCRIPTION: "Make a 'three of a kind' and a 'two of a kind' hand combo in a single turn",
         POINTS: 4,
         TRIGGER: (( matchOnlyHand(handValue1(), TRIPLE ) ||
                     matchOnlyHand(handValue1(), TRIPLE_NINE )) &&
@@ -4113,7 +4255,7 @@ cardHandList  =
     },
     {
         TITLE: "Fuller House",
-        DESCRIPTION: "Make a four of a kind and a three of a kind hand combo in a single turn",
+        DESCRIPTION: "Make a 'four of a kind' and a 'three of a kind' hand combo in a single turn",
         POINTS: 5,
         TRIGGER:(( matchOnlyHand(handValue1(), FOUR_OF_A_KIND) ||
                    matchOnlyHand(handValue1(), FOUR_NINES)) &&
@@ -4129,7 +4271,7 @@ cardHandList  =
     },
     {
         TITLE: "Fullest House",
-        DESCRIPTION: "Make a five of a kind and a four of a kind hand combo in a single turn",
+        DESCRIPTION: "Make a 'five of a kind' and a 'four of a kind' hand combo in a single turn",
         POINTS: 5,
         TRIGGER:(( matchOnlyHand(handValue1(), FIVE_OF_A_KIND) ||
                    matchOnlyHand(handValue1(), FIVE_NINES)) &&
@@ -4146,7 +4288,7 @@ cardHandList  =
     },
     {
         TITLE: "Triple Triple",
-        DESCRIPTION: "Make three card three pairs (three sets of three) hand combo in a single turn",
+        DESCRIPTION: "Make a 'three card three pairs' hand combo in a single turn",
         POINTS: 5,
         TRIGGER:(matchHand(handValue1(), TRIPLE_TRIPLE) &&
                  finalValue(handValue2()))
