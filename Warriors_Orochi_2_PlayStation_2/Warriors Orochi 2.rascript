@@ -105,6 +105,101 @@ LAST_WEAPON_CHARACTER = KATSUIE_SHIBATA
 LAST_SURVIVAL_CHARACTER = GYUKI
 DEFAULT_NO_CHARACTER = NO_CHARACTER2
 
+abilityLookup =
+{
+    ZHAO_YUN: 0x0f, // 4 bit
+    GUAN_YU: 0x0f,
+    ZHANG_FEI: 0x0f,
+    XIAHOU_DUN: 0x0f,
+    DIAN_WEI: 0x0f,
+    XU_ZHU: 0x0f,
+    ZHOU_YU: 0x0f,
+    LU_XUN: 0x0f,
+    TAISHI_CI: 0x0f,
+    DIAO_CHAN: 0x07,
+    ZHUGE_LIANG: 0x0f,
+    CAO_CAO: 0x07,
+    LU_BU: 0x0f,
+    SUN_SHANG_XIANG: 0x0f,
+    LIU_BEI: 0x07, // 3 bit
+    SUN_JIAN: 0x07,
+    SUN_QUAN: 0x0f,
+    DONG_ZHUO: 0x07,
+    YUAN_SHAO: 0x0f,
+    MA_CHAO: 0x0f,
+    HUANG_ZHONG: 0x07,
+    XIAHOU_YUAN: 0x0f,
+    ZHANG_LIAO: 0x0f,
+    SIMA_YI: 0x07,
+    LU_MENG: 0x07,
+    GAN_NING: 0x0f,
+    JIANG_WEI: 0x0f,
+    ZHANG_JIAO: 0x0f,
+    XU_HUANG: 0x0f,
+    ZHANG_HE: 0x07,
+    ZHEN_JI: 0x07,
+    HUANG_GAI: 0x0f,
+    SUN_CE: 0x0f,
+    WEI_YAN: 0x07,
+    PANG_TONG: 0x0f,
+    MENG_HUO: 0x0f,
+    ZHU_RONG: 0x0f,
+    DA_QIAO: 0x07,
+    XIAO_QIAO: 0x07,
+    CAO_REN: 0x07,
+    ZHOU_TAI: 0x0f,
+    YUE_YING: 0x0f,
+    CAO_PI: 0x0f,
+    PANG_DE: 0x0f,
+    LING_TONG: 0x0f,
+    GUAN_PING: 0x0f,
+    XING_CAI: 0x0f,
+    ZUO_CI: 0x0f,
+    YUKIMURA_SANADA: 0x0f,
+    KEIJI_MAEDA: 0x07,
+    NOBUNAGA_ODA: 0x0f,
+    MITSUHIDE_AKECHI: 0x0f,
+    GOEMON_ISHIKAWA: 0x0f,
+    KENSHIN_UESAGI: 0x0f,
+    OICHI: 0x07,
+    OKUNI: 0x0f,
+    KUNOICHI: 0x07,
+    MAGOICHI_SAIKA: 0x07,
+    SHINGEN_TAKEDA: 0x0f,
+    MASAMUNE_DATE: 0x07,
+    NO: 0x07,
+    HANZO_HATTORI: 0x0f,
+    RANMARU_MORI: 0x0f,
+    HIDEYOSHI_HASHIBA: 0x0f,
+    YOSHIMOTO_IMAGAWA: 0x07,
+    TADAKATSU_HONDA: 0x0f,
+    INA: 0x07,
+    IEYASU_TOKUGAWA: 0x0f,
+    MITSUNARI_ISHIDA: 0x0f,
+    NAGAMASA_AZAI: 0x0f,
+    SAKON_SHIMA: 0x07,
+    YOSHIHIRO_SHIMAZU: 0x0f,
+    GINCHIYO_TACHIBANA: 0x0f,
+    KANETSUGU_NAOE: 0x07,
+    NENE: 0x0f,
+    KOTAMA_FUMA: 0x07,
+    MUSASHI_MIYAMOTO: 0x07,
+    OROCHI: 0x0f,
+    DA_JI: 0x0f,
+    TAIGONG_WANG: 0x07,
+    SUN_WUKONG: 0x07,
+    FU_XI: 0x07,
+    NU_WA: 0x07,
+    YOSHITSUNE_MINAMOTO: 0x07,
+    KIYOMORI_TAIRA: 0x07,
+    HIMIKO: 0x03, // 2 bits! WOW!
+    TOSHIIE_MAEDA: 0x07,
+    MOTOCHIKA_CHOSOKABE: 0x07,
+    GRACIA: 0x07,
+    KOJIRO_SASAKI: 0x07,
+    KATSUIE_SHIBATA: 0x07,
+}
+
 TOTAL_STAGE_COUNT = 8
 SHU_STAGE_1_ID = 0x00
 SHU_STAGE_2_ID = 0x01
@@ -597,6 +692,7 @@ function zhaoYunsChosenWeapon() => byte(0x52C255)
 //          Level 1 = 0x00
 //          Every 1,000 is a new level.
 //          Level 49 = 49000/0xBF68
+MAX_PROFICIENCY_VALUE = 0xBF68
 ZHAO_YUN_PROFICIENCY_MEMORY_LOCATION = 0x52C262
 function zhaoYunProficiency() => word(0x52C262)
 
@@ -810,6 +906,7 @@ SURVIVAL_MODE_VALUE = 0x04
 MAIN_MENU_VALUE = 0x0c
 function storyMode() => gameMode() == STORY_MODE_VALUE
 function freeMode() => gameMode() == FREE_MODE_VALUE
+function storyOrFreeMode() => (storyMode() || freeMode())
 function dreamMode() => gameMode() == DREAM_MODE_VALUE
 function survivalMode() => gameMode() == SURVIVAL_MODE_VALUE
 function mainMenu() => gameMode() == MAIN_MENU_VALUE
@@ -884,7 +981,7 @@ function survivalCount() => byte(0x00531b40)
 function saveProtection()
 {
     // hope this works as save protection.  It should (But can be disabled for some testing) 
-    return always_true()// gamePhase() == FINISHED_STAGE_VALUE
+    return gamePhase() == FINISHED_STAGE_VALUE
 }
 
 
@@ -898,8 +995,7 @@ function storyStageCompleteAndLeaderboards(stageID, group, index)
                           mapID() == stageID && 
                           !twoPlayer() && 
                           !demoMode() && 
-                          (storyMode() || 
-                           freeMode()),
+                          storyOrFreeMode(),
                 type = "Progression"
                 )
     
@@ -912,8 +1008,7 @@ function storyStageCompleteAndLeaderboards(stageID, group, index)
             mapID() == stageID && 
             !twoPlayer() && 
             !demoMode() && 
-            (storyMode() || 
-            freeMode()) &&
+            storyOrFreeMode() &&
             timeInLevel() != 00
         ),
         cancel = always_false(),
@@ -932,8 +1027,7 @@ function storyStageCompleteAndLeaderboards(stageID, group, index)
             mapID() == stageID && 
             !twoPlayer() && 
             !demoMode() && 
-            (storyMode() || 
-            freeMode()) &&
+            storyOrFreeMode() &&
             timeInLevel() != 00
         ),
         cancel = always_false(),
@@ -951,8 +1045,7 @@ function storyStageCompleteAndLeaderboards(stageID, group, index)
             mapID() == stageID && 
             !twoPlayer() && 
             !demoMode() && 
-            (storyMode() || 
-            freeMode()) &&
+            storyOrFreeMode() &&
             timeInLevel() != 00 &&
             chaosDifficulty()
         ),
@@ -972,8 +1065,7 @@ function storyStageCompleteAndLeaderboards(stageID, group, index)
             mapID() == stageID && 
             !twoPlayer() && 
             !demoMode() && 
-            (storyMode() || 
-            freeMode()) &&
+            storyOrFreeMode() &&
             timeInLevel() != 00 &&
             chaosDifficulty()
         ),
@@ -1007,8 +1099,7 @@ function dreamStageCompleteAndLeaderboards(stageID, index)
             mapID() == stageID && 
             !twoPlayer() && 
             !demoMode() && 
-            (storyMode() || 
-            freeMode()) &&
+            dreamMode() &&
             timeInLevel() != 00
         ),
         cancel = always_false(),
@@ -1027,8 +1118,7 @@ function dreamStageCompleteAndLeaderboards(stageID, index)
             mapID() == stageID && 
             !twoPlayer() && 
             !demoMode() && 
-            (storyMode() || 
-            freeMode()) &&
+            dreamMode() &&
             timeInLevel() != 00
         ),
         cancel = always_false(),
@@ -1046,8 +1136,7 @@ function dreamStageCompleteAndLeaderboards(stageID, index)
             mapID() == stageID && 
             !twoPlayer() && 
             !demoMode() && 
-            (storyMode() || 
-            freeMode()) &&
+            dreamMode() &&
             timeInLevel() != 00 &&
             chaosDifficulty()
         ),
@@ -1067,8 +1156,7 @@ function dreamStageCompleteAndLeaderboards(stageID, index)
             mapID() == stageID && 
             !twoPlayer() && 
             !demoMode() && 
-            (storyMode() || 
-            freeMode()) &&
+            dreamMode() &&
             timeInLevel() != 00 &&
             chaosDifficulty()
         ),
@@ -1106,8 +1194,10 @@ function getVisibleMemoryLocation(memory_location, stageIndex)
 
 function dreamUnlockAchievement(stageId) 
 {
-    achievement(title = format("Dream {0} Unlocked", stageNameLookup[stageId]),
-                description = format("Unlock the {0} stage for Dream mode", stageNameLookup[stageId]),
+    // Need an offset of DREAM_STAGE_1_ID because stage ID is a 0-th index. 
+    correctedStageID = DREAM_STAGE_1_ID + stageId
+    achievement(title = format("{0} Unlocked", stageNameLookup[correctedStageID]), 
+                description = format("Unlock stage {0} for Dream Mode", stageId + 1),
                 points = 5,
                 trigger = checkUnlock(getVisibleMemoryLocation(DREAM_1_MEMORY_LOCATION,stageId)) &&
                           saveProtection()
@@ -1126,10 +1216,10 @@ for index in range(0,DREAM_STAGE_COUNT - 1)
 function chaosStoryCampaignComplete(stageMemoryLocation)
 {
     achievement(title = format("Chaos {0} Campaign", CampaignNameLookup[stageMemoryLocation]),
-                description = format("Complete all stages in the {0} story mode on Chaos difficulty", CampaignNameLookup[stageMemoryLocation]),
+                description = format("Complete all stages in the {0} campaign on Chaos difficulty", CampaignNameLookup[stageMemoryLocation]),
                 points = 10,
                 trigger = saveProtection() && 
-                          all_of(range(0, TOTAL_STAGE_COUNT-1), index => getChaosCompleteFromVisibleLocation(stageMemoryLocation, index) == 1) &&
+                          measured(sum_of(range(0, TOTAL_STAGE_COUNT-1), index => getChaosCompleteFromVisibleLocation(stageMemoryLocation, index)) == 8) &&
                           any_of(range(0, TOTAL_STAGE_COUNT-1), index => prev(getChaosCompleteFromVisibleLocation(stageMemoryLocation, index)) == 0)
                 )
 }
@@ -1149,14 +1239,14 @@ function chaosDreamStagesComplete(stageMemoryLocation, firstStageIndex, lastStag
                 description = description,
                 points = 25,
                 trigger = saveProtection() && 
-                          all_of(range(firstStageIndex, lastStageIndex), index => getChaosCompleteFromVisibleLocation(stageMemoryLocation, index) == 1) &&
+                          measured(sum_of(range(firstStageIndex, lastStageIndex), index => getChaosCompleteFromVisibleLocation(stageMemoryLocation, index)) == 8) &&
                           any_of(range(firstStageIndex, lastStageIndex), index => prev(getChaosCompleteFromVisibleLocation(stageMemoryLocation, index)) == 0)
                 )
 }
 
-chaosDreamStagesComplete(DREAM_1_MEMORY_LOCATION, 0, 9, "Chaos Dream First Row", "Complete the first 10 Dream stages on Chaos difficulty")
-chaosDreamStagesComplete(DREAM_1_MEMORY_LOCATION, 10, 19, "Chaos Dream Second Row", "Complete the second 10 Dream stages on Chaos difficulty")
-chaosDreamStagesComplete(DREAM_1_MEMORY_LOCATION, 20, 27, "Chaos Dream Third Row", "Complete the final 8 Dream stages on Chaos difficulty")
+chaosDreamStagesComplete(DREAM_1_MEMORY_LOCATION, 0, 9, "Chaos Dream First Row", "Complete the first 10 Dream Mode stages on Chaos difficulty")
+chaosDreamStagesComplete(DREAM_1_MEMORY_LOCATION, 10, 19, "Chaos Dream Second Row", "Complete the second 10 Dream Mode stages on Chaos difficulty")
+chaosDreamStagesComplete(DREAM_1_MEMORY_LOCATION, 20, 27, "Chaos Dream Third Row", "Complete the final 8 Dream Mode stages on Chaos difficulty")
 
 
 for memory_location in [SHU_CHAPTER_1_VISIBILITY_MEMORY_LOCATION, 
@@ -1168,28 +1258,28 @@ for memory_location in [SHU_CHAPTER_1_VISIBILITY_MEMORY_LOCATION,
     chaosStoryCampaignComplete(memory_location)
 }
 
-CHAOS_STAGE_COMPLETE_STRING = "Complete the {0} stage on Chaos difficulty without loading an interim save as a single player"
+CHAOS_STAGE_COMPLETE_STRING = "Complete the {0} stage {1} on Chaos difficulty without loading an interim save as a single player"
 
-function chaosStoryAchievement(stageId) 
+function chaosStoryAchievement(stageId, group, index) 
 {
     achievement(title = format("Elite Chaos {0}", stageNameLookup[stageId]),
-                description = format(CHAOS_STAGE_COMPLETE_STRING, stageNameLookup[stageId]),
+                description = format(CHAOS_STAGE_COMPLETE_STRING, storyStageLookup[group], index + 1),
                 points = 10,
                 trigger = once(startStage()) &&
-                          stageWon() && 
+                          trigger_when(stageWon()) && 
                           mapID() == stageId && 
                           !twoPlayer() && 
                           !demoMode() && 
-                          storyMode() && 
+                          storyOrFreeMode() && 
                           chaosDifficulty() &&
                           never(mainMenu())
                 )
 }
 
-function chaosDreamAchievement(stageId) 
+function chaosDreamAchievement(stageId, index) 
 {
     achievement(title = format("Elite Chaos {0}", stageNameLookup[stageId]),
-                description = format(CHAOS_STAGE_COMPLETE_STRING, stageNameLookup[stageId]),
+                description = format(CHAOS_STAGE_COMPLETE_STRING, "Dream", index + 1),
                 points = 10,
                 trigger = once(startStage()) &&
                           stageWon() && 
@@ -1207,13 +1297,13 @@ for group in STORY_STAGES
     // Zero-Index
     for index in range(0,TOTAL_STAGE_COUNT - 1)
     {
-        chaosStoryAchievement(group + index)
+        chaosStoryAchievement(group + index, group, index)
     }
 }
 
 for index in range(0,DREAM_STAGE_COUNT - 1)
 {
-    chaosDreamAchievement(DREAM_STAGE_1_ID + index)
+    chaosDreamAchievement(DREAM_STAGE_1_ID + index, index)
 }
 
 function treasureCountAchievement(treasureCount, title, description, points)
@@ -1273,7 +1363,7 @@ function weaponAchievement(characterID)
     OFFSET_FOR_FOURTH_WEAPON = 3
     targetWeaponID = characterID * TOTAL_WEAPON_PER_CHARACTER + OFFSET_FOR_FOURTH_WEAPON
     achievement(title = weaponNameLookup[characterID],
-                description = format("Acquire a {0} for {1}.  Weapon must be placed in a weapon slot that didn't already contain a {0} and in single player.", weaponNameLookup[characterID], characterNameLookup[characterID]),
+                description = format("Acquire a {0} for {1}.  Weapon must be placed in a weapon slot that didn't already contain a {0} and in single player", weaponNameLookup[characterID], characterNameLookup[characterID]),
                 points = 5,
                 trigger = any_of(range(0, TOTAL_WEAPON_SLOTS - 1), index => word(ZHAO_YUN_FIRST_WEAPON_MEMORY_LOCATION + (characterID * CHARACTER_SIZE) + (index * WEAPON_SIZE)) == targetWeaponID &&
                                                                             prev(word(ZHAO_YUN_FIRST_WEAPON_MEMORY_LOCATION + (characterID * CHARACTER_SIZE) + (index * WEAPON_SIZE))) != targetWeaponID ) &&
@@ -1289,10 +1379,10 @@ for characterID in range(FIRST_CHARACTER, LAST_WEAPON_CHARACTER)
 function abilityAchievement(characterID)
 {
     achievement(title = format("Master {0}", characterNameLookup[characterID]),
-                description = format("Acquire all abilities for {0}.", characterNameLookup[characterID]),
+                description = format("Acquire all abilities for {0}", characterNameLookup[characterID]),
                 points = 5,
-                trigger = byte(ZHAO_YUN_ABILITY_MEMORY_LOCATION + (characterID * CHARACTER_SIZE)) == 0x0f &&
-                          prev(byte(ZHAO_YUN_ABILITY_MEMORY_LOCATION + (characterID * CHARACTER_SIZE))) != 0x0f &&
+                trigger = byte(ZHAO_YUN_ABILITY_MEMORY_LOCATION + (characterID * CHARACTER_SIZE)) == abilityLookup[characterID] &&
+                          prev(byte(ZHAO_YUN_ABILITY_MEMORY_LOCATION + (characterID * CHARACTER_SIZE))) != abilityLookup[characterID] &&
                           saveProtection()
                 )
 }
@@ -1305,10 +1395,10 @@ for characterID in range(FIRST_CHARACTER, LAST_ABILITY_CHARACTER)
 function proficiencyAchievement(characterID)
 {
     achievement(title = format("Grand Master {0}", characterNameLookup[characterID]),
-                description = format("Raise {0}'s proficiency to max.", characterNameLookup[characterID]),
-                points = 5,
-                trigger = word(ZHAO_YUN_PROFICIENCY_MEMORY_LOCATION + (characterID * CHARACTER_SIZE)) == 49 &&
-                          prev(word(ZHAO_YUN_PROFICIENCY_MEMORY_LOCATION + (characterID * CHARACTER_SIZE))) != 49 &&
+                description = format("Raise {0}'s proficiency to max", characterNameLookup[characterID]),
+                points = 10,
+                trigger = word(ZHAO_YUN_PROFICIENCY_MEMORY_LOCATION + (characterID * CHARACTER_SIZE)) >= MAX_PROFICIENCY_VALUE&&
+                          prev(word(ZHAO_YUN_PROFICIENCY_MEMORY_LOCATION + (characterID * CHARACTER_SIZE))) < MAX_PROFICIENCY_VALUE &&
                           saveProtection()
                 )
 }
@@ -1317,6 +1407,7 @@ for characterID in range(FIRST_CHARACTER, LAST_PROFICIENCY_CHARACTER)
 {
     proficiencyAchievement(characterID)
 }
+
 
 
 
