@@ -76,7 +76,7 @@ YOSHIHIRO_SHIMAZU = 0x47
 GINCHIYO_TACHIBANA = 0x48
 KANETSUGU_NAOE = 0x49
 NENE = 0x4A
-KOTAMA_FUMA = 0x4B
+KOTARO_FUMA = 0x4B
 MUSASHI_MIYAMOTO = 0x4C
 OROCHI = 0x4D
 DA_JI = 0x4E
@@ -182,7 +182,7 @@ abilityLookup =
     GINCHIYO_TACHIBANA: 0x0f,
     KANETSUGU_NAOE: 0x07,
     NENE: 0x0f,
-    KOTAMA_FUMA: 0x07,
+    KOTARO_FUMA: 0x07,
     MUSASHI_MIYAMOTO: 0x07,
     OROCHI: 0x0f,
     DA_JI: 0x0f,
@@ -353,7 +353,7 @@ characterNameLookup ={
     GINCHIYO_TACHIBANA: "Ginchiyo Tachibana",
     KANETSUGU_NAOE: "Kanetsugu Naoe",
     NENE: "Nene",
-    KOTAMA_FUMA: "Kotama Fuma",
+    KOTARO_FUMA: "Kotaro Fuma",
     MUSASHI_MIYAMOTO: "Musashi Miyamoto",
     OROCHI: "Orochi",
     DA_JI: "Da Ji",
@@ -453,7 +453,7 @@ weaponNameLookup ={
     GINCHIYO_TACHIBANA: "Heaven's Bite",
     KANETSUGU_NAOE: "Evil's Bane",
     NENE: "Devil Feathers",
-    KOTAMA_FUMA: "Thorns of Peril",
+    KOTARO_FUMA: "Thorns of Peril",
     MUSASHI_MIYAMOTO: "Mastery & Vision",
     OROCHI: "Eternal Agony",
     DA_JI: "Orbs of Ruin",
@@ -522,7 +522,7 @@ stageNameLookup = {
     DREAM_STAGE_8_ID: "Showdown in Yamatai",
     DREAM_STAGE_9_ID: "Battle of Jing Province",
     DREAM_STAGE_10_ID: "Battle of Xin Castle",
-    DREAM_STAGE_11_ID: "Resue at Nan Zhong",
+    DREAM_STAGE_11_ID: "Rescue at Nan Zhong",
     DREAM_STAGE_12_ID: "Struggle for Nan Zhong",
     DREAM_STAGE_13_ID: "Encounter in Ji Province",
     DREAM_STAGE_14_ID: "Battle of Osaka Bay",
@@ -902,12 +902,14 @@ function gameMode() => byte(0x531828)
 STORY_MODE_VALUE = 0x00
 FREE_MODE_VALUE = 0x01
 DREAM_MODE_VALUE = 0x02
+VERSUS_MODE_VALUE = 0x03
 SURVIVAL_MODE_VALUE = 0x04
 MAIN_MENU_VALUE = 0x0c
 function storyMode() => gameMode() == STORY_MODE_VALUE
 function freeMode() => gameMode() == FREE_MODE_VALUE
 function storyOrFreeMode() => (storyMode() || freeMode())
 function dreamMode() => gameMode() == DREAM_MODE_VALUE
+function versusMode() => gameMode() == VERSUS_MODE_VALUE
 function survivalMode() => gameMode() == SURVIVAL_MODE_VALUE
 function mainMenu() => gameMode() == MAIN_MENU_VALUE
 
@@ -944,6 +946,15 @@ STORY_STAGES = [SHU_STAGE_1_ID,
 function twoPlayerControl() => byte(0x531838)
 TWO_PLAYER_VALUE = 0x02
 function twoPlayer() => twoPlayerControl() == TWO_PLAYER_VALUE
+
+// $53184c: (8-bit) First Character Index
+function firstCharacterIndex() => byte(0x53184c)
+
+// $531874: (8-bit) Second Character Index
+function secondCharacterIndex() => byte(0x531874)
+
+// $53189c: (8-bit) Third Character Index
+function thirdCharacterIndex() => byte(0x53189c)
 
 
 // $5e0fc0: (16-bit) Total KOs 
@@ -1409,5 +1420,34 @@ for characterID in range(FIRST_CHARACTER, LAST_PROFICIENCY_CHARACTER)
 }
 
 
+rich_presence_conditional_display(demoMode(), "In the menus")
+
+rich_presence_conditional_display(versusMode(), "In Versus Mode")
+
+rich_presence_conditional_display(dreamMode() && !changeCharacterScreen(), "Dream Mode: {0}, {1}, and {2} fighting in {3} ",
+                                  rich_presence_lookup("CharacterNameLookup", firstCharacterIndex(), characterNameLookup), 
+                                  rich_presence_lookup("CharacterNameLookup", secondCharacterIndex(), characterNameLookup), 
+                                  rich_presence_lookup("CharacterNameLookup", thirdCharacterIndex(), characterNameLookup), 
+                                  rich_presence_lookup("LevelLookup", mapID(), stageNameLookup))
+
+rich_presence_conditional_display(freeMode() && !changeCharacterScreen(), "Free Mode: {0}, {1}, and {2} fighting in {3} ",
+                                  rich_presence_lookup("CharacterNameLookup", firstCharacterIndex(), characterNameLookup), 
+                                  rich_presence_lookup("CharacterNameLookup", secondCharacterIndex(), characterNameLookup), 
+                                  rich_presence_lookup("CharacterNameLookup", thirdCharacterIndex(), characterNameLookup), 
+                                  rich_presence_lookup("LevelLookup", mapID(), stageNameLookup))
+
+rich_presence_conditional_display(storyMode() && !changeCharacterScreen(), "Story Mode: {0}, {1}, and {2} fighting in {3} ",
+                                  rich_presence_lookup("CharacterNameLookup", firstCharacterIndex(), characterNameLookup), 
+                                  rich_presence_lookup("CharacterNameLookup", secondCharacterIndex(), characterNameLookup), 
+                                  rich_presence_lookup("CharacterNameLookup", thirdCharacterIndex(), characterNameLookup), 
+                                  rich_presence_lookup("LevelLookup", mapID(), stageNameLookup))
 
 
+rich_presence_conditional_display(survivalMode() && !changeCharacterScreen(), "Survival Mode: {0}, {1}, and {2}  Wins: {3}",
+                                  rich_presence_lookup("CharacterNameLookup", firstCharacterIndex(), characterNameLookup), 
+                                  rich_presence_lookup("CharacterNameLookup", secondCharacterIndex(), characterNameLookup), 
+                                  rich_presence_lookup("CharacterNameLookup", thirdCharacterIndex(), characterNameLookup), 
+                                  rich_presence_value("Number", survivalCount() - 1))
+
+// Everyone else.
+rich_presence_display("In the menus") 
