@@ -50,7 +50,7 @@ if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
 # Directory containing the base images
-generated_dir = "Generated"
+generated_dir = "CharacterImages"
 
 # Process each .png file in the Generated directory
 for file_name in os.listdir(generated_dir):
