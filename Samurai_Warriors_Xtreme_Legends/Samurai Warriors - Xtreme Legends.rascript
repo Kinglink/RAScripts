@@ -395,7 +395,8 @@ function solarGemPower() => byte(MEMORY_LOCATION_SOLAR_GEM_POWER)
 //          Does not appear to unlock the item, but once unlocked shows the Musou Power
 //          
 //          See 0x0050134e for the unlock array
-function moonStonePower() => byte(0x50125D)
+MEMORY_LOCATION_MOON_STONE_POWER = 0x50125D
+function moonStonePower() => byte(MEMORY_LOCATION_MOON_STONE_POWER)
 
 // $50125E: (8-bit) Power Bracer Item Power
 //          
@@ -423,14 +424,16 @@ function vixenTailPower() => byte(0x501260)
 //          Does not appear to unlock the item, but once unlocked shows the Speed Power
 //          
 //          See 0x0050134e for the unlock array
-function tenguSandalsPower() => byte(0x501261)
+MEMORY_LOCATION_TENGU_SANDALS = 0x501261
+function tenguSandalsPower() => byte(MEMORY_LOCATION_TENGU_SANDALS)
 
 // $501262: (8-bit) Hare Greavs Item Power
 //          
 //          Does not appear to unlock the item, but once unlocked shows the Jump Power
 //          
 //          See 0x0050134e for the unlock array
-function hareGreavesPower() => byte(0x501262)
+MEMORY_LOCATION_HARE_GREAVES = 0x501262
+function hareGreavesPower() => byte(MEMORY_LOCATION_HARE_GREAVES)
 
 // $501263: (8-bit) Kappa Amulet Item Power
 //          
@@ -475,10 +478,26 @@ function serpentBracerPower() => byte(0x501267)
 MEMORY_LOCATION_SADDLE_POWER = 0x501268
 function saddlePower() => byte(MEMORY_LOCATION_SADDLE_POWER)
 
-function itemsReachedAtXPower(PowerLevel) => all_of(range(MEMORY_LOCATION_SOLAR_GEM_POWER,MEMORY_LOCATION_SADDLE_POWER), 
-                                                        index => byte(index) >= PowerLevel) &&
+function fiftyPointMaxPower(index) => index == MEMORY_LOCATION_MOON_STONE_POWER ||
+                                      index == MEMORY_LOCATION_SOLAR_GEM_POWER ||
+                                      index == MEMORY_LOCATION_SADDLE_POWER ||
+                                      index == MEMORY_LOCATION_TENGU_SANDALS ||
+                                      index == MEMORY_LOCATION_HARE_GREAVES
+
+function testItemPower(index) 
+{
+    targetValue = 50
+    if(fiftyPointMaxPower(index))
+    {
+        targetValue = 40
+    }
+return byte(index) >= targetValue
+}
+
+function itemsReachedAtXPower() => all_of(range(MEMORY_LOCATION_SOLAR_GEM_POWER,MEMORY_LOCATION_SADDLE_POWER), 
+                                                        index => testItemPower(index)) &&
                                              any_of(range(MEMORY_LOCATION_SOLAR_GEM_POWER,MEMORY_LOCATION_SADDLE_POWER), 
-                                                        index => prev(byte(index)) < PowerLevel)
+                                                        index => prev(byte(index)) < byte(index))
 
 // $50134E: (8-bit)(Bitfield)  Item Owned Bitfield (1 of 5)
 //          
@@ -4358,9 +4377,10 @@ function scenarioAchievementAndLeaderboards(key)
 
 
 
-function endingAchievement(key, points)
+function endingAchievement(key, points, type)
 {
     achievement( title = endingNameLookup[key],
+                 type = type,    
                  description = format("Reach {0} in Story Mode or Free Mode" + ONE_PLAYER_STRING, endingDescriptionLookup[key]),
                  points = points,
                  trigger = musouOrFreeMode() &&
@@ -4373,17 +4393,17 @@ function endingAchievement(key, points)
 
 for key in range(YUKIMURA_FIRST_ENDING, INA_SECOND_ENDING)
 {
-    endingAchievement(key = key, points = 5)
+    endingAchievement(key = key, points = 5, type = "Progression")
 }
 for key in [NEW_OFFICER_FIRST, NEW_OFFICER_SECOND] 
 {
-    endingAchievement(key = key, points = 5)
+    endingAchievement(key = key, points = 5, type = "Progression")
 }
 
 
 for key in range(OKUNI_NOBUNAGA_ENDING, OKUNI_KENSHIN_ENDING)
 {
-    endingAchievement(key = key, points = 2)
+    endingAchievement(key = key, points = 2, type = "")
 }
 
 
@@ -4424,6 +4444,7 @@ function weaponAchievement(key)
     sixthDescription = weaponDescriptionLookup[sixthId]
     
     achievement( title = fifthName,
+                 type = "Missable",
                  description = format("Obtain {0} on hard difficulty in Story Mode or Free Mode before obtaining {1}" + ONE_PLAYER_STRING, fifthDescription, sixthName),
                  points = 5,
                  trigger = musouOrFreeMode() &&
@@ -4470,10 +4491,15 @@ achievement( title = "Commons Collection",
                        saveProtection()
             )
 
+index == MEMORY_LOCATION_MOON_STONE_POWER ||
+                                      index == MEMORY_LOCATION_SOLAR_GEM_POWER ||
+                                      index == MEMORY_LOCATION_SADDLE_POWER ||
+                                      index == MEMORY_LOCATION_TENGU_SANDALS ||
+                                      index == MEMORY_LOCATION_HARE_GREAVES
 achievement( title = "Commons Champion", 
-             description = "Get Every Common item to have at least 50 item power",
+             description = "Get Solar Gem, Moon Stone, Horse Saddle, Tengue Sandals, and Hare Greaves to 40 item power, and the rest of the common items to at least 50 item power",
              points = 5, 
-             trigger = itemsReachedAtXPower(50) &&
+             trigger = itemsReachedAtXPower() &&
                        saveProtection()
             )
 
@@ -4513,7 +4539,7 @@ function oneTimeSurvival(key)
 function survivalRareItemAchievement(key) 
 {
     achievement(title = itemLookup[key],
-                description = format("Obtain {0} in Story Mode or Free Mode", itemLookup[key]),
+                description = format("Obtain {0} in Survival Mode", itemLookup[key]),
                 points = 5,
                 trigger = itemHasDropped(key) &&
                           !isSecondPlayerActive() &&
@@ -4797,6 +4823,7 @@ achievement(title = "Visage Variety",
 )
 
 achievement(title = "The First of Many",
+            type = "Progression",
             description = "Beat any scenario in Story Mode or Free Mode for the first time",
             points = 1, 
             trigger = playerjustWonStage() &&
@@ -4836,6 +4863,7 @@ rich_presence_display("In Menus.") //Intentionally slightly different to say "is
 
 
 // One of every skill on a single character?
+
 
 
 
