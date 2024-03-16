@@ -670,6 +670,7 @@ function gamePhase() => byte(0x3B0324)
 TRANSITION_VALUE = 0x3b
 FINISHED_STAGE_VALUE = 0x0a
 FINISHED_SURVIVAL_VALUE = 0x09
+LOST_STAGE_VALUE = 0x08
 CHANGE_CHARACTER_SCREEN_VALUE = 0x04
 function stageWon() => gamePhase() == FINISHED_STAGE_VALUE && prev(gamePhase()) == TRANSITION_VALUE
 function survivalFinished() => gamePhase() == FINISHED_SURVIVAL_VALUE && prev(gamePhase()) == TRANSITION_VALUE
@@ -995,6 +996,14 @@ function saveProtection()
     return gamePhase() == FINISHED_STAGE_VALUE
 }
 
+function saveProtectionCanLose()
+{
+    // For Grand Master/Proficiency, the game saves the proficiency after winning or losing the stage
+    return gamePhase() == FINISHED_STAGE_VALUE || 
+           (gamePhase() == TRANSITION_VALUE && 
+            prior(gamePhase()) == LOST_STAGE_VALUE)
+}
+
 
 STAGE_COMPLETE_STRING = "Complete the {0} stage {1} as a single player"
 function storyStageCompleteAndLeaderboards(stageID, group, index) 
@@ -1250,7 +1259,7 @@ function chaosDreamStagesComplete(stageMemoryLocation, firstStageIndex, lastStag
                 description = description,
                 points = 25,
                 trigger = saveProtection() && 
-                          measured(sum_of(range(firstStageIndex, lastStageIndex), index => getChaosCompleteFromVisibleLocation(stageMemoryLocation, index)) == 8) &&
+                          measured(sum_of(range(firstStageIndex, lastStageIndex), index => getChaosCompleteFromVisibleLocation(stageMemoryLocation, index)) == lastStageIndex - firstStageIndex + 1) &&
                           any_of(range(firstStageIndex, lastStageIndex), index => prev(getChaosCompleteFromVisibleLocation(stageMemoryLocation, index)) == 0)
                 )
 }
@@ -1410,7 +1419,7 @@ function proficiencyAchievement(characterID)
                 points = 10,
                 trigger = word(ZHAO_YUN_PROFICIENCY_MEMORY_LOCATION + (characterID * CHARACTER_SIZE)) >= MAX_PROFICIENCY_VALUE&&
                           prev(word(ZHAO_YUN_PROFICIENCY_MEMORY_LOCATION + (characterID * CHARACTER_SIZE))) < MAX_PROFICIENCY_VALUE &&
-                          saveProtection()
+                          saveProtectionCanLose()
                 )
 }
 
