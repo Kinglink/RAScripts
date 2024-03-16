@@ -23,12 +23,8 @@ def resize_image(file_name):
     # Resize to 96x96
     image = image.resize((96, 96))
 
-    # Create the rips folder if it doesn't exist
-    if not os.path.exists('Generated'):
-        os.makedirs('Generated')
-
     # Save the image in the rips folder with the user-provided name
-    output_path = os.path.join('Generated', f'{file_name}.png')
+    output_path = f'{file_name}.png'
     image.save(output_path)
     print(f"Image saved as {output_path}")
 
