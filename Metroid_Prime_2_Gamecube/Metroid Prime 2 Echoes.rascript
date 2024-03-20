@@ -21,8 +21,10 @@ function isEUVersion() => versionNumbers() == 0x47324d50
 //          ..|+0x08=HUD Boss Current Health [Float BE]
 //          ..|+0x0c=HUD Boss Max Health [Float BE]
 SAMUS_HUD_MEMORY_LOCATION_EU = 0x3B32B0
+// US has a different location, not based on the US_OFFSET
+SAMUS_HUD_MEMORY_LOCATION_US = 0x003b1f30
 function pointerToSamusHudEU() => dword_be(SAMUS_HUD_MEMORY_LOCATION_EU)
-function pointerToSamusHudUS() => dword_be(SAMUS_HUD_MEMORY_LOCATION_EU - US_OFFSET)
+function pointerToSamusHudUS() => dword_be(SAMUS_HUD_MEMORY_LOCATION_US)
 
 BOSS_HEALTH_OFFSET = 0x6b0 + POINTER_OFFSET_FIX
 BOSS_HEALTH_SECOND_OFFSET = 0x08 + POINTER_OFFSET_FIX
@@ -374,6 +376,11 @@ MISSILE_COUNT_OFFSET = 0x26C + POINTER_OFFSET_FIX
 function missileCountUS() => dword_be(pointerToPlayerStateUS() + MISSILE_COUNT_OFFSET)
 function missileCountEU() => dword_be(pointerToPlayerStateEU() + MISSILE_COUNT_OFFSET)
 
+LOGBOOK_SCANS_OFFSET = 0x578 + POINTER_OFFSET_FIX
+TOTAL_LOGBOOK_SCANS = 0xd3
+function logbookScansUS() => dword_be(pointerToPlayerStateUS() + LOGBOOK_SCANS_OFFSET)
+function logbookScansEU() => dword_be(pointerToPlayerStateEU() + LOGBOOK_SCANS_OFFSET)
+
 // $3DDF60: [EU] Pointer to Camera Manager? [32-Bit BE]
 function pointerToCameraManagerEU() => dword_be(0x3DDF60)
 
@@ -422,7 +429,9 @@ function previousRoomNumberEU() => dword_be(PREVIOUS_ROOM_NUMBER_MEMORY_LOCATION
 function previousRoomNumberUS() => dword_be(PREVIOUS_ROOM_NUMBER_MEMORY_LOCATION_EU - US_OFFSET)
 
 // $3DED44: [EU](Float BE) Boss Max HP
-function bossMaxHP() => float_be(0x3DED44)
+BOSS_MAX_HP_MEMORY_LOCATION_EU = 0x3DED44
+function bossMaxHPEU() => float_be(BOSS_MAX_HP_MEMORY_LOCATION_EU)
+function bossMaxHPUS() => float_be(BOSS_MAX_HP_MEMORY_LOCATION_EU - US_OFFSET)
 
 // $3DED48: [EU](32-bit BE) Boss Display Name ID
 BOSS_DISPLAY_NAME_ID_MEMORY_LOCATION_EU = 0x3DED48
@@ -441,11 +450,14 @@ ITEM_DESCRIPTION = "ITEM_DESCRIPTION"
 POINTS = "POINTS"
 ROOM = "ROOM"
 ZONE = "ZONE"
+PROGRESSION_TYPE = "Progression"
+NO_TYPE = ""
+MISSABLE_TYPE = "Missable"
 
 function itemAchievement(data)
 {
     achievement( title = data[TITLE],
-                 description =  "Collect " + data[ITEM_DESCRIPTION] + ".",
+                 description =  "Collect the " + data[ITEM_DESCRIPTION],
                  points =  data[POINTS],
                  type =  data[TYPE],
                  trigger =  ( isUSVersion() && 
@@ -481,83 +493,83 @@ SACRIFICIAL_CHAMBER = 0x3b
 DYNAMO_WORKS = 0x14
 GRAND_WINDCHAMBER = 0x1D
 VAULT = 0x2C
-SANCTUM = 0xB
+SANCTUM = 0xB  // EMPOROR ING
 
-itemAchievement({TYPE: "Progression", 
+itemAchievement({TYPE: PROGRESSION_TYPE, 
                  OFFSET: ENERGY_TRANSFER_MODULE_OFFSET, 
-                 TITLE: "Energy Transfer Module", 
+                 TITLE: "Oh That’s What That Was", 
                  ITEM_DESCRIPTION: "Energy Transfer Module",
                  ROOM: MAIN_ENERGY_CONTROLLER,
                  ZONE: GREAT_TEMPLE,
                  POINTS: 2})
 
-itemAchievement({TYPE: "Progression", 
-                 OFFSET: BOMB_COUNT_OFFSET
-                 TITLE: "Morph Ball Bombs", 
-                 ITEM_DESCRIPTION: "Morph Ball Bombs",
+itemAchievement({TYPE: PROGRESSION_TYPE, 
+                 OFFSET: BOMB_COUNT_OFFSET,
+                 TITLE: "Bombs Away", 
+                 ITEM_DESCRIPTION: "Morph Ball Bomb",
                  ROOM: AGON_TEMPLE,
                  ZONE: AGON_WASTES,
                  POINTS: 2})
 
-itemAchievement({TYPE: "Progression",
+itemAchievement({TYPE: PROGRESSION_TYPE,
                  OFFSET: DARK_BEAM_COUNT_OFFSET,
-                 TITLE: "Dark Beam",
+                 TITLE: "You'll Look Good in Black",
                  ITEM_DESCRIPTION: "Dark Beam",
                  ROOM: STORAGE_D,
                  ZONE: AGON_WASTES,
                  POINTS: 2})
-itemAchievement({TYPE: "Progression",
+itemAchievement({TYPE: PROGRESSION_TYPE,
                  OFFSET: DARK_SUIT_COUNT_OFFSET,
-                 TITLE: "Dark Suit",
+                 TITLE: "I am the Night",
                  ITEM_DESCRIPTION: "Dark Suit",
                  ROOM: DARK_AGON_TEMPLE,
                  ZONE: DARK_AGON_WASTES,
                  POINTS: 2})
-itemAchievement({TYPE: "Progression",
+itemAchievement({TYPE: PROGRESSION_TYPE,
                   OFFSET: BOOST_BALL_COUNT_OFFSET,
-                  TITLE: "Boost Ball",
+                  TITLE: "Hit it Samus!",
                   ITEM_DESCRIPTION: "Boost Ball",
                   ROOM: DARK_TORVUS_ARENA,
                   ZONE: DARK_TORVUS_BOG,
                   POINTS: 2})
-itemAchievement({TYPE: "Progression",
+itemAchievement({TYPE: PROGRESSION_TYPE,
                  OFFSET: SEEKER_LAUNCHER_COUNT_OFFSET,
-                 TITLE: "Seeker Launcher",
+                 TITLE: "You Can Hide, but I`ll Seek You",
                  ITEM_DESCRIPTION: "Seeker Launcher",
                  ROOM: HALL_OF_HONORED_DEAD,
                  ZONE: TEMPLE_GROUNDS,
                  POINTS: 2})
-itemAchievement({TYPE: "Progression",
+itemAchievement({TYPE: PROGRESSION_TYPE,
                  OFFSET: GRAPPLE_BEAM_COUNT_OFFSET,
-                 TITLE: "Grapple Beam",
+                 TITLE: "It Don`t Mean a Thing If It Ain`t Got That Swing",
                  ITEM_DESCRIPTION: "Grapple Beam",
                  ROOM: SACRIFICIAL_CHAMBER,
                  ZONE: DARK_TORVUS_BOG,
                  POINTS: 2})
-itemAchievement({TYPE: "Progression",
+itemAchievement({TYPE: PROGRESSION_TYPE,
                  OFFSET: SPIDER_BALL_COUNT_OFFSET,
-                  TITLE: "Spider Ball",
+                  TITLE: "Grip It and Rip It",
                   ITEM_DESCRIPTION: "Spider Ball",
                   ROOM: DYNAMO_WORKS,
                   ZONE: SANCTUARY_FORTRESS,
                   POINTS: 2})
-itemAchievement({TYPE: "Progression",
+itemAchievement({TYPE: NO_TYPE,
                  OFFSET: SUN_BURST_COUNT_OFFSET,
-                 TITLE: "Sunburst",
+                 TITLE: "Brightening Up the Place",
                  ITEM_DESCRIPTION: "Sunburst",
                  ROOM: GRAND_WINDCHAMBER,
                  ZONE: TEMPLE_GROUNDS,
                  POINTS: 2})
-itemAchievement({TYPE: "Progression",
+itemAchievement({TYPE: PROGRESSION_TYPE,
                   OFFSET: SCREW_ATTACK_COUNT_OFFSET,
-                  TITLE: "Screw Attack",
+                  TITLE: "You Spin Me Right 'Round, Baby, Right 'Round",
                   ITEM_DESCRIPTION: "Screw Attack",
                   ROOM: VAULT,
                   ZONE: SANCTUARY_FORTRESS,
                   POINTS: 2})
-itemAchievement({TYPE: "Progression",
+itemAchievement({TYPE: PROGRESSION_TYPE,
                  OFFSET: LIGHT_SUIT_COUNT_OFFSET,
-                 TITLE: "Light Suit",
+                 TITLE: "Now I Don`t Fear the Darkness",
                  ITEM_DESCRIPTION: "Light Suit",
                  ROOM: MAIN_ENERGY_CONTROLLER,
                  ZONE: GREAT_TEMPLE,
@@ -570,17 +582,42 @@ function playerLostHealthEU() => playerHealthEU() < prev(playerHealthEU())
 function playerUsedMissilesUS() => missileCountUS() < prev(missileCountUS())
 function playerUsedMissilesEU() => missileCountEU() < prev(missileCountEU())
 
-achievement( title = "Perfect Dark Alpha Splinter",
+EMPEROR_ING_FINAL_FORM_MAX_HEALTH = 1000
+EMPEROR_ING_ID = 0x39
+
+achievement( title = "And Now the Obligatory Countdown",
+             description = "Defeat Emperor Ing",
+             points = 10,
+             type = PROGRESSION_TYPE,
+              trigger = ( isUSVersion() && 
+                          bossDisplayNameIDUS() == EMPEROR_ING_ID &&
+                          bossMaxHPUS() == EMPEROR_ING_FINAL_FORM_MAX_HEALTH &&
+                          bossRunsOutOfHPUS() &&
+                          roomNumberUS() == SANCTUM &&
+                          saveProtectionUS()
+                        ) ||
+                        ( isEUVersion() &&
+                          bossDisplayNameIDEU() == EMPEROR_ING_ID &&
+                          bossMaxHPEU() == EMPEROR_ING_FINAL_FORM_MAX_HEALTH &&
+                          bossRunsOutOfHPEU() &&
+                          roomNumberEU() == SANCTUM &&
+                          saveProtectionEU()
+                        )
+)
+
+achievement( title = "Back, Bugs!",
              description = "Defeat Dark Alpha Splinter without taking damage or using missiles",
              points =  5,
-             type = "Missable",
+             type = MISSABLE_TYPE,
              trigger=  ( isUSVersion() && 
                         once(roomNumberUS() == TEMPLE_SANCTUARY_ROOM_NUMBER && 
                              previousRoomNumberUS() == TRANSPORT_A_ACCESS &&
                              prev(roomNumberUS()) == TRANSPORT_A_ACCESS &&
+                             dword_be(pointerToPlayerStateUS() + ENERGY_TRANSFER_MODULE_OFFSET) == 0 &&
                              worldIDUS() == GREAT_TEMPLE) &&
-                        never( playerLostHealthUS() ) &&
-                        never( playerUsedMissilesUS() ) &&
+                        never( playerLostHealthUS() && isUSVersion()) &&
+                        never( playerUsedMissilesUS() && isUSVersion()) &&
+                        never(roomNumberUS() != TEMPLE_SANCTUARY_ROOM_NUMBER && isUSVersion()) &&
                         trigger_when(bossRunsOutOfHPUS()) &&
                         saveProtectionUS()
                       ) ||
@@ -588,10 +625,63 @@ achievement( title = "Perfect Dark Alpha Splinter",
                         once(roomNumberEU() == TEMPLE_SANCTUARY_ROOM_NUMBER && 
                              previousRoomNumberEU() == TRANSPORT_A_ACCESS &&
                              prev(roomNumberEU()) == TRANSPORT_A_ACCESS &&
+                             dword_be(pointerToPlayerStateEU() + ENERGY_TRANSFER_MODULE_OFFSET) == 0 &&
                              worldIDEU() == GREAT_TEMPLE) &&
-                        never( playerLostHealthEU() ) &&
-                        never( playerUsedMissilesEU() ) &&
+                        never( playerLostHealthEU()  && isEUVersion()) &&
+                        never( playerUsedMissilesEU() && isEUVersion()) &&
+                        never(roomNumberEU() != TEMPLE_SANCTUARY_ROOM_NUMBER && isEUVersion()) &&
                         trigger_when(bossRunsOutOfHPEU()) &&
                         saveProtectionEU()
                       )
 )
+
+function scanPercentageAchievement(data)
+{
+    achievement( title = data[TITLE],
+                 description =  data[DESCRIPTION],
+                 points =  data[POINTS],
+                 type =  data[TYPE],
+                 trigger =  ( isUSVersion() && 
+                              prev(logbookScansUS() )== data[TARGET] - 1 && 
+                              logbookScansUS() == data[TARGET] && 
+                              saveProtectionUS()
+                            ) ||
+                            ( isEUVersion() &&
+                              prev(logbookScansEU() )== data[TARGET] - 1 && 
+                              logbookScansEU() == data[TARGET] && 
+                              saveProtectionEU()
+                            )
+    )
+}
+
+function calculateScans(target) => TOTAL_LOGBOOK_SCANS * target / 100 + 1
+
+scanPercentageAchievement({TYPE: NO_TYPE, 
+                           TARGET: calculateScans(20), 
+                           TITLE: "20 Percent Scan", 
+                           DESCRIPTION: "Scan 20 percent of the game (According to the pause menu)",
+                           POINTS: 3})
+
+scanPercentageAchievement({TYPE: NO_TYPE, 
+                           TARGET: calculateScans(40), 
+                           TITLE: "40 Percent Scan", 
+                           DESCRIPTION: "Scan 40 percent of the game (According to the pause menu)",
+                           POINTS: 4})
+
+scanPercentageAchievement({TYPE: NO_TYPE, 
+                           TARGET: calculateScans(60), 
+                           TITLE: "60 Percent Scan", 
+                           DESCRIPTION: "Scan 60 percent of the game (According to the pause menu)",
+                           POINTS: 5})
+
+scanPercentageAchievement({TYPE: NO_TYPE, 
+                           TARGET: calculateScans(80), 
+                           TITLE: "80 Percent Scan", 
+                           DESCRIPTION: "Scan 80 percent of the game (According to the pause menu)",
+                           POINTS: 10})
+
+scanPercentageAchievement({TYPE: PROGRESSION_TYPE, 
+                           TARGET: TOTAL_LOGBOOK_SCANS, 
+                           TITLE: "100 Percent Scan", 
+                           DESCRIPTION: "Scan 100 percent of the game (According to the pause menu)",
+                           POINTS: 25})
