@@ -4381,7 +4381,7 @@ function endingAchievement(key, points, type)
 {
     achievement( title = endingNameLookup[key],
                  type = type,    
-                 description = format("Reach {0} in Story Mode or Free Mode" + ONE_PLAYER_STRING, endingDescriptionLookup[key]),
+                 description = format("Reach {0} in Story Mode" + ONE_PLAYER_STRING, endingDescriptionLookup[key]),
                  points = points,
                  trigger = musouOrFreeMode() &&
                            endingMovieTrigger(key) &&
@@ -4491,11 +4491,6 @@ achievement( title = "Commons Collection",
                        saveProtection()
             )
 
-index == MEMORY_LOCATION_MOON_STONE_POWER ||
-                                      index == MEMORY_LOCATION_SOLAR_GEM_POWER ||
-                                      index == MEMORY_LOCATION_SADDLE_POWER ||
-                                      index == MEMORY_LOCATION_TENGU_SANDALS ||
-                                      index == MEMORY_LOCATION_HARE_GREAVES
 achievement( title = "Commons Champion", 
              description = "Get Solar Gem, Moon Stone, Horse Saddle, Tengue Sandals, and Hare Greaves to 40 item power, and the rest of the common items to at least 50 item power",
              points = 5, 
