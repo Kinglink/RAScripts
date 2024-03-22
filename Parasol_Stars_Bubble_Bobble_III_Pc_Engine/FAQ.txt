@@ -1,0 +1,36 @@
+FAQ.  
+
+First off Thank you to [user=Scott] for the initial Code Notes.  Dude detailed a lot of the game which made it take me probably half the time it normally would. 
+
+[b]Why this game?[/b]
+
+It's Bubble Bobble III! 
+
+[b]Is it really?[/b]
+
+After playing it a lot, yeah I totally get the flavor of Bubble Bobble, not just in the 9th and 10th level, but through out the game. 
+
+However.  I either hate bubble bobble (I might) or I just dislike this game (I do), I don't know it's like a "cute em up" in a different genre, but also so bland   A couple bosses feel like they are weak, the level design is more "Annoying" than anything.  A shame because there's good ides here, but I wouldn't be surprised if the devs had 3-6 months instead of a year or two  or they got their dev time slashed. 
+
+[b]What?  There's like no information on this game[/b]
+
+Yeah, I know, I probably missed something because there's so little.   I'd recommend both [url=https://bubblebobble.fandom.com/wiki/Parasol_Stars]this site[/url] and [url=https://www.youtube.com/watch?v=PCd8QVi20BA]this video[/url]... Yes I'm linking to you a let's play because literally that's the two sites that had correct information on this game.  Gamefaqs information is mostly about the NES and Amiga version and doesn't appear to match this version.  Yes that's annoying.   Also both of them are missing an important hint the let's play's description will tell you. 
+
+[b]No death is too hard.[/b]  
+
+Actually I think 25 Million is harder.    Seriously though I wanted some really tough achievements and those are them.   I didn't go too crazy (the video above shows 100 million+ is possible)  Don't want to require "perfect play" but this should be reasonable.   
+
+[b]When's this release?[/b]
+
+When ever the TG DevJam is over, my expectation as I write this is April 30th.  More information might be available [url=https://github.com/RetroAchievements/docs/wiki/DevJam#planned-devjams]here[/url]
+
+[b]Why didn't you make an achievement for...[/b]
+
+99 percent likely I didn't know about it, PLEASE tell me about it, please tell me if there's a way to get the super secret item reliably or you just have to hope for it to drop.  Heck the video says 77 levels, but does that have to be a full play through or could it happen any time even if you don't finish the game.  I DON'T KNOW!!!!! 
+
+I probably could decompile the game, but ehhh refer to my second answer.   But seriously if you know something cool or unique in this game, message me, hit me up on Discord, or just reach out.  I wouldn't mind knowing more about this one. 
+
+OLD MESSAGE: 
+Don't expect it any time soon, going to be part of DevJam, so probably 3 months.
+
+Feel free to suggest any ideas, I really don't know what to do with this off the top of my head, but obviously miracles, item pickups, and more will be counted.  Though a lot of the game also feels a touch random what will show up.
