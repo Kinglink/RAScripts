@@ -64,7 +64,7 @@ MASAMUNE_DATE = 0x3B
 NO = 0x3C
 HANZO_HATTORI = 0x3D
 RANMARU_MORI = 0x3E
-HIDEYOSHI_HASHIBA = 0x3F
+HIDEYOSHI_TOYOTOMI = 0x3F
 YOSHIMOTO_IMAGAWA = 0x40
 TADAKATSU_HONDA = 0x41
 INA = 0x42
@@ -170,7 +170,7 @@ abilityLookup =
     NO: 0x07,
     HANZO_HATTORI: 0x0f,
     RANMARU_MORI: 0x0f,
-    HIDEYOSHI_HASHIBA: 0x0f,
+    HIDEYOSHI_TOYOTOMI: 0x0f,
     YOSHIMOTO_IMAGAWA: 0x07,
     TADAKATSU_HONDA: 0x0f,
     INA: 0x07,
@@ -341,7 +341,7 @@ characterNameLookup ={
     NO: "No",
     HANZO_HATTORI: "Hanzo Hattori",
     RANMARU_MORI: "Ranmaru Mori",
-    HIDEYOSHI_HASHIBA: "Hideyoshi Hashiba",
+    HIDEYOSHI_TOYOTOMI: "Hideyoshi Toyotomi",
     YOSHIMOTO_IMAGAWA: "Yoshimoto Imagawa",
     TADAKATSU_HONDA: "Tadakatsu Honda",
     INA: "Ina",
@@ -441,7 +441,7 @@ weaponNameLookup ={
     NO: "Delicious Venom",
     HANZO_HATTORI: "Chained Dragon",
     RANMARU_MORI: "Iron Vegeance",
-    HIDEYOSHI_HASHIBA: "Simian Sansetsu",
+    HIDEYOSHI_TOYOTOMI: "Simian Sansetsu",
     YOSHIMOTO_IMAGAWA: "Velvet Kemari",
     TADAKATSU_HONDA: "Tonbo-giri",
     INA: "Coiled Viper",
