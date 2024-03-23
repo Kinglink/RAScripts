@@ -3882,7 +3882,7 @@ function weaponHasDropped(targetId) => any_of(range(0, NUM_DROPPED_WEAPON - 1), 
 // $52140C: (8-bit) Actual Value of Points
 //          
 //          Used for New Officer's Combo training
-function comboTrainingScore() => byte(0x52140C)
+function comboTrainingScore() => dword(0x52140C)
 
 
 // $5211f0: (8-bit) Mode Select
