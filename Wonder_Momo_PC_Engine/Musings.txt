@@ -1,0 +1,26 @@
+Gonna be blunt, I'm already working on achievements for this game, basically kept it all in my head. 
+
+"Beat a level"  12 of them
+ 
+"Beat a level hitless" 12 of them
+
+"Beat a level with out transforming" 12 of them
+
+// Man I want to do this but I don't think there's a good indicator.  Sadly when in normal form, the flying enemies shoot weapons that cause the same "damage" 
+"Beat the game with out getting a picture taken of your underwear"  Need a better name 1 of them.
+
+"Beat the game with out needing a continue" 1 of them.
+
+Score Achievements.  10k, 100k.  That's it. 
+
+Leaderboard score.
+Leaderboard time to beat the game. 
+Rich presence something something. 
+
+Honestly pretty simple game.  12 bosses.  Images will be the hardest, but I have a bunch of those already. 
+
+Kind of a weak game.  Arcade game was better.  A Bit pervy too. 
+
+Stage select is impossible to get into with out save states.  Ugh. 
+
+But it doesn't do much.  Considering allowing it as kind of a "continue where you stopped"  Basically because you have infinite continues. 
