@@ -252,6 +252,7 @@ RAINBOW_BOSS_ROOM = 0x3e
 UNDERWORLD_BOSS_ROOM = 0x4e
 
 stageLookup = {
+    0x00: "Music World Stage 1",
     0x01: "Music World Stage 2",
     0x02: "Music World Stage 3",
     0x03: "Music World Stage 4",
@@ -404,7 +405,7 @@ ALTERNATE_START = "ALTERNATE_START"
 POWERUP = "POWERUP"
 SCORE = "SCORE"
 
-WIN_CONDITION_TYPE = "Win Condition"
+WIN_CONDITION_TYPE = "Win_condition"
 PROGRESSION_TYPE = "Progression"
 NO_TYPE = ""
 MISSABLE_TYPE = "Missable"
