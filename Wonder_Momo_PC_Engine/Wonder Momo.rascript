@@ -454,7 +454,7 @@ leaderboard(
     ),
     cancel =  lockoutAchievements(),
     submit =  (currentStage() + 1 == 12 && justWonStage()),
-    value = measured(always_true(), when=gameIsRunning() && gameplayRunning() ),
+    value = measured(always_true()) && unless(gameIsRunning() || gameplayRunning() ),  // When shows 0:00 when you pause, use unless
     lower_is_better = true,
     format = "FRAMES"
 )
