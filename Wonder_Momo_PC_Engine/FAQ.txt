@@ -1,0 +1,37 @@
+[b]Why this game? [/b]
+[ach=403479]
+
+[b]Really? [/b]
+Yup... Thought of it as a joke so I did it. 
+
+[b]How is this game?[/b]
+Pretty meh.   Not horrible but more grindy by the end.   It's really just 12 stages where you kill bosses.  Worse, this is the inferior version, the arcade version looks better, and has more levels.  But also DevJam is going on so there's that. 
+
+[b]How do I play the game?[/b]
+
+Ok so I'm going to ignore attack, jump and movement, you're a big boy or girl you can figure those out. 
+
+There's a whirlwind that comes in and if you touch it you transform from Izumi to the superhero Momo...  However there's an alternate way to transform, press the opposite way you are facing so you face the screen... you know the way you kick both directions? or ... flash your panties.  (What's wrong with these developers?) Standing and facing the screen "Attack" a few times and you'll spin around and transform. 
+
+You can also dodge the whirlwind quite easily.
+
+You do double damage when transformed.  The hoop is just a ranged attack, your kicks does the same damage.  
+
+Hold up and jump and you'll jump higher. 
+
+[b]This game is broken/Doesn't look right[/b]
+
+Yup.  Tried three emulators, Bizhawk was the best but still slightly broken.  Use the patch at  https://www.romhacking.net/translations/6298/  it will translate it to English (Yay) and fix a few visual glitches 
+
+[b]I think X achievement is impossible. [/b]
+
+I'll be honest, there is one that I think might be impossible, but I think in absolutely optimal circumstances might be possible.  It's hard, and I'd consider doubling it's points if only a couple people can pull it off. 
+
+[b]You know there's a stage select[/b]
+
+Yup and I'm not punishing people for using it.  
+
+A. It's near impossible to enter.  I got in but I had to use save states and still needed multiple attempts.
+
+B. I believe you have infinite continues, so I'm treating that as a "password".  The goal is to beat each act individually.  I hate when you have to play a whole game to do a challenge attempt, so I'm being as lenient as I can.  The only thing you can't Stage Select for is the no continue achievement (obviously).   I figured by allowing stage select, people don't have to leave the game running over night/all day.  So again, you're welcome. 
+
