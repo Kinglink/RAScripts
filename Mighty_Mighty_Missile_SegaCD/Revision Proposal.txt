@@ -1,0 +1,22 @@
+Revision proposal
+
+Current achievements are Voided.
+Change hash/game to Mighty Mighty Missile Sega CD (This is just the demo) Target: c3f476595c1151bde8b87e7a8e2c5c30
+
+The Original game will get a couple achievements.
+Win the game vs 1 CPU (2-3 points)
+Win the game vs 3 CPU (5-10 points)
+
+Puzzles
+There are 96 stages in the full version. They will be broken up into sets of 6 to give players a decent amount of feedback.
+Values will probably be low, 1-3 points for the first four sets of puzzles (first 24). I still need to play the other 72 to get a feel for difficulty, but a few of the "Mania" are auto play.
+
+The puzzles will be broken up a second time to require beating each stage's time limit.
+
+If I find stages that can be won with out using all the tiles, special achievements will be listed for them (I have seen at least 1)
+
+Cats Soccer will not be covered (it's 4 player multiplayer only, no CPUs.)
+
+Snake will be tested and appropriate scores will be generated.
+
+The actual game was made for the Sega CD, and has a bit more content than the Mega Drive Demo. Demo doesn't appear to have special content.
