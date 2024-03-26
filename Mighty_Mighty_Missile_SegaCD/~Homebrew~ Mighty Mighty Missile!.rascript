@@ -850,7 +850,7 @@ for data in puzzleData {
 function speedAchievement(data)
 {
     achievement(title = data[SPEED_TITLE],
-                description = format("Beat Best time for the levels from {0} to {1}", data[FIRST], data[LAST]),
+                description = format("Beat the best time for the levels from {0} to {1} in Puzzle Mode", data[FIRST], data[LAST]),
                 points = data[SPEED_POINTS],
                 trigger = measured(tally_of(range(data[FIRST], data[LAST]), data[LAST] - data[FIRST] + 1, index => once(beatenBestTimeForLevel(index)))) &&
                           any_of(range(data[FIRST], data[LAST]), index => justBeatBestTimeForLevel(index)) &&
@@ -892,7 +892,7 @@ function itemJustUsed(index) =>  byte(MEMORY_LOCATION_FOR_ITEMS + correctedNumbe
 function itemLeftAchievement(data)
 {
     achievement(title = data[TITLE],
-                description = format("Win level {0} with at least {1} items remaining", data[STAGE], data[LEFT]),
+                description = format("Beat level {0} with at least {1} items remaining", data[STAGE], data[LEFT]),
                 points = data[POINTS],
                 trigger = trigger_when( numberOfMiceToSave() == 0 &&
                                         justStartedFadingOut() &&
@@ -915,7 +915,7 @@ VALUE = "VALUE"
 function snakeAchievement(data)
 {
     achievement(title = data[TITLE],
-                description = format("Score {0} Snake Mode", data[VALUE]),
+                description = format("Score {0} points in Snake Mode", data[VALUE]),
                 points = data[POINTS],
                 trigger = totalSnakeScore() >= data[VALUE] &&
                           prev(totalSnakeScore()) < data[VALUE] &&
@@ -949,7 +949,7 @@ for index in range(FIRST_ORIGINAL_MAP, LAST_ORIGINAL_MAP) {
 }
 
 achievement(title = "Four Thousand Points",
-            description = "Get 4000 points in Original Game Mode. P1 is the only Human, all other players must be CPU, AI Difficulty should be 9(max)",
+            description = "Get 4000 points in a single round in Original Game Mode. P1 is the only Human, all other players must be CPU, AI Difficulty should be 9(max)",
             points = 3,
             trigger = player1Score() >= 4000 &&
                       prev(player1Score()) < 4000 &&
@@ -962,7 +962,7 @@ achievement(title = "Four Thousand Points",
 
 leaderboard(
     title = format("High Original Round Score"),
-    description = format("Get the highest Original Score possible. P1 is the only Human, all other players must be CPU, AI Difficulty should be 9(max)"),
+    description = format("Get the highest Original Score in one round. P1 is the only Human, all other players must be CPU, AI Difficulty should be 9(max)"),
     start = 
     (
         justP1WonRound() &&
@@ -982,17 +982,18 @@ function StageLeaderboard(index)
 {
     leaderboard(
         title = format("Fastest {0}", stageLookup[index]),
-        description = format("Get the fastest time on {0}", stageLookup[index]),
+        description = format("Get the fastest time on {0} in Puzzle Mode", stageLookup[index]),
         start = 
         (
             justWonLevel() &&
             currentLevelSelected() == index &&
             achievementReady() &&
-            gameMode() == PUZZLE_VALUE
+            gameMode() == PUZZLE_VALUE 
         ),
         cancel = always_false(),
         submit = always_true(),
         value = totalTimeInHundredthsOfASecond(),
+        lower_is_better = true,
         format = "MILLISECS"
     )
 }
@@ -1003,7 +1004,7 @@ for index in range(FIRST_PUZZLE_LEVEL, LAST_PUZZLE_LEVEL) {
 
 leaderboard(
     title = "High Snake Score",
-    description = "Get the highest score in Snake",
+    description = "Get the highest score in Snake Mode",
     start = 
     (
         deathSnakeGameplay() &&
