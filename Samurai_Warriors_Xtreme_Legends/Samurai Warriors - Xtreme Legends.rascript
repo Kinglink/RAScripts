@@ -3933,13 +3933,15 @@ function gameplayIndicator() => byte(0x521430)
 WON_STAGE = 0x0
 IN_GAME = 0x0c 
 LOST_GAME = 0x01
+OUT_OF_TIME_VALUE = 0x04
 RESTART_STAGE = 0x06
 function playerjustWonStage() => prev( gameplayIndicator()) == IN_GAME && 
                                  gameplayIndicator() == WON_STAGE
 function playerjustWonSurvival() => prev( gameplayIndicator()) == IN_GAME &&
                                     gameplayIndicator() == WON_STAGE 
 function playerjustFinishedHighTower() => prev( gameplayIndicator()) == IN_GAME && 
-                                     gameplayIndicator() == LOST_GAME 
+                                     (gameplayIndicator() == LOST_GAME || 
+                                      gameplayIndicator() == OUT_OF_TIME_VALUE)
 function playerJustFinishedChallenge() => prev( gameplayIndicator()) == IN_GAME &&
                                         gameplayIndicator() != IN_GAME &&
                                         gameplayIndicator() != RESTART_STAGE
