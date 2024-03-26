@@ -1,1 +1,26 @@
-Musings
+Likely will change Revision Proposal 
+
+Win each of the levels for Original Game at 4 CPU (GAME not round)  Probably 3-5 points. They're easier than expected (the AI is Fing dumb)
+
+Will require Level 9 AI. But still the AI is dumb. 
+
+Puzzles divided up into 6.  Need to figure out scores. 
+
+Beat the time.  Low score but also divided into 6. 
+
+Snake will get 100, 200 and 250.   Could go higher. 
+
+
+Puzzles
+There are 96 stages in the full version. They will be broken up into sets of 6 to give players a decent amount of feedback.
+Values will probably be low, 1-3 points for the first four sets of puzzles (first 24). I still need to play the other 72 to get a feel for difficulty, but a few of the "Mania" are auto play.
+
+The puzzles will be broken up a second time to require beating each stage's time limit.
+
+If I find stages that can be won with out using all the tiles, special achievements will be listed for them (I have seen at least 1)
+
+Cats Soccer will not be covered (it's 4 player multiplayer only, no CPUs.)
+
+Snake will be tested and appropriate scores will be generated.
+
+The actual game was made for the Sega CD, and has a bit more content than the Mega Drive Demo. Demo doesn't appear to have special content.
