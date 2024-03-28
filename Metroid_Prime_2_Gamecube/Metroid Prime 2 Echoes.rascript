@@ -29,9 +29,13 @@ function pointerToSamusHudUS() => dword_be(SAMUS_HUD_MEMORY_LOCATION_US)
 BOSS_HEALTH_OFFSET = 0x6b0 + POINTER_OFFSET_FIX
 BOSS_HEALTH_SECOND_OFFSET = 0x08 + POINTER_OFFSET_FIX
 
-function bossHealthUS() => float_be(dword_be(pointerToSamusHudUS() + BOSS_HEALTH_OFFSET) + BOSS_HEALTH_SECOND_OFFSET)
-function bossHealthEU() => float_be(dword_be(pointerToSamusHudEU() + BOSS_HEALTH_OFFSET) + BOSS_HEALTH_SECOND_OFFSET)
-
+function bossHealthPointerUS() => dword_be(pointerToSamusHudUS() + BOSS_HEALTH_OFFSET) 
+function bossHealthPointerEU() => dword_be(pointerToSamusHudEU() + BOSS_HEALTH_OFFSET)
+function bossHealthUS() => float_be(bossHealthPointerUS() + BOSS_HEALTH_SECOND_OFFSET)
+function bossHealthEU() => float_be(bossHealthPointerEU() + BOSS_HEALTH_SECOND_OFFSET)
+// Visor change check.  
+function bossHealthVisorCheckUS() => bossHealthPointerUS() == prev(bossHealthPointerUS())
+function bossHealthVisorCheckEU() => bossHealthPointerEU() == prev(bossHealthPointerEU())
 
 // $3c6dc0: [EU][32-BIT BE]  Main Menu/loading detection
 //          
@@ -453,6 +457,8 @@ ZONE = "ZONE"
 PROGRESSION_TYPE = "Progression"
 NO_TYPE = ""
 MISSABLE_TYPE = "Missable"
+TARGET = "TARGET"
+DESCRIPTION = "DESCRIPTION"
 
 function itemAchievement(data)
 {
@@ -575,8 +581,8 @@ itemAchievement({TYPE: PROGRESSION_TYPE,
                  ZONE: GREAT_TEMPLE,
                  POINTS: 2})
 
-function bossRunsOutOfHPUS() => prev(bossHealthUS()) > 0x00000000 && bossHealthUS() == 0x00000000
-function bossRunsOutOfHPEU() => prev(bossHealthEU()) > 0x00000000 && bossHealthEU() == 0x00000000
+function bossRunsOutOfHPUS() => prev(bossHealthUS()) > 0x00000000 && bossHealthUS() == 0x00000000 && bossHealthVisorCheckUS()
+function bossRunsOutOfHPEU() => prev(bossHealthEU()) > 0x00000000 && bossHealthEU() == 0x00000000 && bossHealthVisorCheckEU()
 function playerLostHealthUS() => playerHealthUS() < prev(playerHealthUS()) 
 function playerLostHealthEU() => playerHealthEU() < prev(playerHealthEU())
 function playerUsedMissilesUS() => missileCountUS() < prev(missileCountUS())
@@ -658,30 +664,30 @@ function calculateScans(target) => TOTAL_LOGBOOK_SCANS * target / 100 + 1
 
 scanPercentageAchievement({TYPE: NO_TYPE, 
                            TARGET: calculateScans(20), 
-                           TITLE: "20 Percent Scan", 
+                           TITLE: "Oh That's What That Is?", 
                            DESCRIPTION: "Scan 20 percent of the game (According to the pause menu)",
                            POINTS: 3})
 
 scanPercentageAchievement({TYPE: NO_TYPE, 
                            TARGET: calculateScans(40), 
-                           TITLE: "40 Percent Scan", 
+                           TITLE: "Archival Activist", 
                            DESCRIPTION: "Scan 40 percent of the game (According to the pause menu)",
                            POINTS: 4})
 
 scanPercentageAchievement({TYPE: NO_TYPE, 
                            TARGET: calculateScans(60), 
-                           TITLE: "60 Percent Scan", 
+                           TITLE: "Lore Librarian", 
                            DESCRIPTION: "Scan 60 percent of the game (According to the pause menu)",
                            POINTS: 5})
 
 scanPercentageAchievement({TYPE: NO_TYPE, 
                            TARGET: calculateScans(80), 
-                           TITLE: "80 Percent Scan", 
+                           TITLE: "Learning All Your Secrets", 
                            DESCRIPTION: "Scan 80 percent of the game (According to the pause menu)",
                            POINTS: 10})
 
-scanPercentageAchievement({TYPE: PROGRESSION_TYPE, 
+scanPercentageAchievement({TYPE: MISSABLE_TYPE, 
                            TARGET: TOTAL_LOGBOOK_SCANS, 
-                           TITLE: "100 Percent Scan", 
+                           TITLE: "Now I Know Everything", 
                            DESCRIPTION: "Scan 100 percent of the game (According to the pause menu)",
                            POINTS: 25})
