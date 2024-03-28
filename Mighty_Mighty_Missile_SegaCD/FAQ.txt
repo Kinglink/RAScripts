@@ -27,3 +27,15 @@ One of them requires a bit of a glitch (The mouse walks through the cat) but all
 [b]Why is there a snake game?[/b]
 
 I know right? 
+
+[b]What are the controls?[/b]
+
+Oh right, I've played this so much they're second nature to me. 
+
+When in a level Press A to run the simulation/game.   Press A+ B to reset the game to planning mode (which wipes the arrows) .  
+
+While in planning mode hit B and a direction to  place an arrow on the square you're on in the direction you press (if you have one in stock).  tap B to remove the arrow (This only works like... 33 percent of the time, maybe it's speed dependent). 
+
+There is a way to speed up the simulation, but I'll leave that for you to find.
+
+To leave a level press Start, and then press A+B+C
