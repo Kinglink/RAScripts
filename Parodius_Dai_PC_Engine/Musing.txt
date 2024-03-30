@@ -19,11 +19,15 @@ No death each stage Hard 8
 
 1 cc 1
 
+!? When max ability. 
+
 Beat the game on each of the four characters. 
 
-scorr 250k
+Max power on each character. 
+
+Score 250k
 Score 500k
-score 1 million
+Score 1 million
 
 Restart = Reset score. 
 
