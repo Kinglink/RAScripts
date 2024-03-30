@@ -454,7 +454,7 @@ leaderboard(
     ),
     cancel =  lockoutAchievements(),
     submit =  (currentStage() + 1 == 12 && justWonStage()),
-    value = measured(always_true()) && unless(gameIsRunning() || gameplayRunning() ),  // When shows 0:00 when you pause, use unless
+    value = measured(always_true()) && unless(!gameIsRunning() || !gameplayRunning() ),  // When shows 0:00 when you pause, use unless
     lower_is_better = true,
     format = "FRAMES"
 )
@@ -463,5 +463,5 @@ rich_presence_conditional_display(lockoutAchievements(), "Watching Demos")
 
 rich_presence_display("Score: {0}, Act {1}", 
                       rich_presence_value("Number", score()*10),
-                      rich_presence_value("Number", currentStage())
+                      rich_presence_value("Number", currentStage() + 1)
                       )
