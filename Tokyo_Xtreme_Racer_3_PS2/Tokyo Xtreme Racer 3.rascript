@@ -1657,7 +1657,7 @@ ShortCarName =
 
 CarName = 
 {
-    NISSAN_SKYLINE_GT_R_V_SPECII: "Nissan Skyline GT-R",
+    NISSAN_SKYLINE_GT_R_V_SPECII: "Nissan Skyline GT-R V-SpecII (BNR34)",
     NISSAN_180SX: "Nissan 180SX",
     MITSUBISHI_LANCER_EVOLUTION_V: "Mitsubishi Lancer Evolution V",
     MITSUBISHI_GTO: "Mitsubishi GTO",
