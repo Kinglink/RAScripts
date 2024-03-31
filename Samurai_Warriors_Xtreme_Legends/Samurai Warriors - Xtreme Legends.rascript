@@ -3939,6 +3939,8 @@ function playerjustWonStage() => prev( gameplayIndicator()) == IN_GAME &&
                                  gameplayIndicator() == WON_STAGE
 function playerjustWonSurvival() => prev( gameplayIndicator()) == IN_GAME &&
                                     gameplayIndicator() == WON_STAGE 
+function playerjustWonRiding() => prev( gameplayIndicator()) == IN_GAME &&
+                                    gameplayIndicator() == WON_STAGE         
 function playerjustFinishedHighTower() => prev( gameplayIndicator()) == IN_GAME && 
                                      (gameplayIndicator() == LOST_GAME || 
                                       gameplayIndicator() == OUT_OF_TIME_VALUE)
@@ -4637,7 +4639,7 @@ function missionLeaderboardAchievementAndLeaderboardLesser(missionId, title, des
                           currentScenarioId() == missionId &&
                           !isSecondPlayerActive() &&
                           target <= value &&
-                          playerJustFinishedChallenge() &&
+                          playerjustWonRiding() && // used for Burst as well, but this will work. 
                           timeSpentInLevelinFrames() != 00 
     )
 
@@ -4650,7 +4652,7 @@ function missionLeaderboardAchievementAndLeaderboardLesser(missionId, title, des
             challengeMode() &&
             currentScenarioId() == missionId &&
             !isSecondPlayerActive() &&
-            playerJustFinishedChallenge() &&
+            playerjustWonRiding() &&
             timeSpentInLevelinFrames() != 00 
         ),
         cancel = always_false(),
