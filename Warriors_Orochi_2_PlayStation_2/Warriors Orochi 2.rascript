@@ -1001,7 +1001,7 @@ function saveProtectionCanLose()
     // For Grand Master/Proficiency, the game saves the proficiency after winning or losing the stage
     return gamePhase() == FINISHED_STAGE_VALUE || 
            (gamePhase() == TRANSITION_VALUE && 
-            prior(gamePhase()) == LOST_STAGE_VALUE)
+            prior(gamePhase()) != 0x00)  // 0x08 and 0x09 are known possibilities. 0x00 is on boot up.  This is done to hopefully avoid more tickets.  Based on Ticket # 70726
 }
 
 
