@@ -653,6 +653,13 @@ DESCRIPTION = "DESCRIPTION"
 POINTS = "POINTS"
 CHARACTER_SELECT_VALUE = "CHARACTER_SELECT_VALUE"
 SCORE = "SCORE"
+JUNIOR_SPARED_ACHIEVEMENT_ID = "JUNIOR_SPARED_ACHIEVEMENT_ID"
+SPARED_ACHIEVEMENT_ID = "SPARED_ACHIEVEMENT_ID"
+JUNIOR_KILLED_ACHIEVEMENT_ID = "JUNIOR_KILLED_ACHIEVEMENT_ID"
+KILLED_ACHIEVEMENT_ID = "KILLED_ACHIEVEMENT_ID"
+SPARED_ACHIEVEMENT_NAME = "SPARED_ACHIEVEMENT_NAME"
+KILLED_ACHIEVEMENT_NAME = "KILLED_ACHIEVEMENT_NAME"
+ACHIEVEMENT_ID = "ACHIEVEMENT_ID"
 
 function bossSpared(bossHealth, memoryLocation) => (byte(memoryLocation) & 0x7f) == 0x00 && (prev(byte(memoryLocation)) & 0x7f) == bossHealth
 function bossKilled(memoryLocation) => byte(memoryLocation) == 0x00 && prev(byte(memoryLocation)) & 0x7f == 0x01
@@ -666,6 +673,8 @@ function levelAchievement(levelData)
     achievement( title = levelData[TITLE],
                  description = levelData[DESCRIPTION],
                  points = levelData[POINTS],
+                 id = levelData[ACHIEVEMENT_ID],
+                 type = "Progression",
                  trigger = beatStageNumber(levelData[STAGE_INDEX]) &&
                            achievementIsValid()
     )
@@ -674,58 +683,67 @@ function levelAchievement(levelData)
 levelDataList = 
 [
     {
-        TITLE: "Stage 1 Cleared",
-        DESCRIPTION: "Beat Stage 1",
+        TITLE: "Pirate Stage Cleared",
+        DESCRIPTION: "Beat Stage 1 on any Difficulty",
         POINTS: 1,
-        STAGE_INDEX: 1
+        STAGE_INDEX: 1,
+        ACHIEVEMENT_ID: 415076
     },
     {
-        TITLE: "Stage 2 Cleared",
-        DESCRIPTION: "Beat Stage 2",
-        POINTS: 1,
-        STAGE_INDEX: 2
+        TITLE: "Las Vegas Cleared",
+        DESCRIPTION: "Beat Stage 2 on any Difficulty",
+        POINTS: 2,
+        STAGE_INDEX: 2,
+        ACHIEVEMENT_ID: 415077
     },
     {
-        TITLE: "Stage 3 Cleared",
-        DESCRIPTION: "Beat Stage 3",
-        POINTS: 1,
-        STAGE_INDEX: 3
+        TITLE: "Labyrinth Cleared",
+        DESCRIPTION: "Beat Stage 3 on any Difficulty",
+        POINTS: 3,
+        STAGE_INDEX: 3,
+        ACHIEVEMENT_ID: 415078
     },
     {
-        TITLE: "Stage 4 Cleared",
-        DESCRIPTION: "Beat Stage 4",
-        POINTS: 1,
-        STAGE_INDEX: 4
+        TITLE: "Japan Cleared",
+        DESCRIPTION: "Beat Stage 4 on any Difficulty",
+        POINTS: 4,
+        STAGE_INDEX: 4,
+        ACHIEVEMENT_ID: 415079
     },
     {
-        TITLE: "Stage 5 Cleared",
-        DESCRIPTION: "Beat Stage 5",
-        POINTS: 1,
-        STAGE_INDEX: 5
+        TITLE: "Pachinko Cleared",
+        DESCRIPTION: "Beat Stage 5 on any Difficulty",
+        POINTS: 4,
+        STAGE_INDEX: 5,
+        ACHIEVEMENT_ID: 415080
     },
     {
-        TITLE: "Stage 6 Cleared",
-        DESCRIPTION: "Beat Stage 6",
-        POINTS: 1,
-        STAGE_INDEX: 6
+        TITLE: "Clouds And Bubbles Cleared",
+        DESCRIPTION: "Beat Stage 6 on any Difficulty",
+        POINTS: 5,
+        STAGE_INDEX: 6,
+        ACHIEVEMENT_ID: 415081
     },
     {
-        TITLE: "Stage 7 Cleared",
-        DESCRIPTION: "Beat Stage 7",
-        POINTS: 1,
-        STAGE_INDEX: 7
+        TITLE: "Cemetary Cleared",
+        DESCRIPTION: "Beat Stage 7 on any Difficulty",
+        POINTS: 5,
+        STAGE_INDEX: 7,
+        ACHIEVEMENT_ID: 415082
     },
     {
-        TITLE: "First Loop Cleared",
+        TITLE: "Zeo's Fortress Cleared",
         DESCRIPTION: "Beat Stage 8 on any Difficuly",
-        POINTS: 1,
-        STAGE_INDEX: 0x8            
+        POINTS: 10,
+        STAGE_INDEX: 0x8,
+        ACHIEVEMENT_ID: 415083      
     },
     {
         TITLE: "Special Stage Half Cleared",
         DESCRIPTION: "Beat half of the Special Stage",
-        POINTS: 1,
-        STAGE_INDEX: 0xa
+        POINTS: 3,
+        STAGE_INDEX: 0xa,
+        ACHIEVEMENT_ID: 415084
     }
 ]
 
@@ -736,7 +754,7 @@ for data in levelDataList
 
 achievement( title = "First Loop Cleared Normal",
              description = "Beat level 8 on normal or hard difficulty",
-             points = 1,
+             points = 10,
              trigger = once(justStartedGame()) &&
                        never(notInGame()) &&
                        never(!isNormalDifficultyOrHarder()) && // You can mouse over Easy accidentally.
@@ -747,7 +765,7 @@ achievement( title = "First Loop Cleared Normal",
 
 achievement( title = "First Loop Cleared Hard",
              description = "Beat level 8 on Hard difficulty",
-             points = 1,
+             points = 10,
              trigger = once(justStartedGame()) &&
                        never(notInGame()) &&
                        never(!isHardDifficulty()) && // You can mouse over other difficulties accidentally.
@@ -760,7 +778,8 @@ achievement( title = "First Loop Cleared Hard",
 
 achievement( title = "Finished Special",
              description = "Beat Special mode on any difficulty",
-             points = 1,
+             points = 5,
+             type = "Win_Condition",
              trigger = isSpecialMode() &&
                        exitingLocation(convertToMajorMinor(0x0c, 0x3a), SPECIAL_STAGE_END_STAGE_INDEX) &&
                        achievementIsValid()
@@ -768,7 +787,7 @@ achievement( title = "Finished Special",
 
 achievement( title = "Finished Special Normal",
              description = "Beat Special mode on normal or hard difficulty",
-             points = 1,
+             points = 5,
              trigger = isSpecialMode() &&
                        isNormalDifficultyOrHarder() &&
                        exitingLocation(convertToMajorMinor(0x0c, 0x3a), SPECIAL_STAGE_END_STAGE_INDEX) &&
@@ -777,7 +796,7 @@ achievement( title = "Finished Special Normal",
 
 achievement( title = "Finished Special Hard",
              description = "Beat Special mode on hard difficulty",
-             points = 1,
+             points = 10,
              trigger = isSpecialMode() &&
                        isHardDifficulty() &&
                        exitingLocation(convertToMajorMinor(0x0c, 0x3a), SPECIAL_STAGE_END_STAGE_INDEX) &&
@@ -803,25 +822,25 @@ beatGameCharacterData =
     {
         TITLE: "Staring Vic Viper",
         DESCRIPTION: "Beat the game as Vic Viper",
-        POINTS: 1,
+        POINTS: 5,
         CHARACTER_SELECT_VALUE: VIC_VIPER_CHARACTER_SELECT_VALUE
     },
     {
         TITLE: "Staring Octopus",
         DESCRIPTION: "Beat the game as Octopus",
-        POINTS: 1,
+        POINTS: 5,
         CHARACTER_SELECT_VALUE: OCTOPUS_CHARACTER_SELECT_VALUE
     },
     {
         TITLE: "Staring TwinBee",
         DESCRIPTION: "Beat the game as TwinBee",
-        POINTS: 1,
+        POINTS: 5,
         CHARACTER_SELECT_VALUE: TWIN_BEE_CHARACTER_SELECT_VALUE
     },
     {
         TITLE: "Staring Pentarou",
         DESCRIPTION: "Beat the game as Pentarou",
-        POINTS: 1,
+        POINTS: 5,
         CHARACTER_SELECT_VALUE: PENTAROU_CHARACTER_SELECT_VALUE
     }
 ]
@@ -848,25 +867,25 @@ beatSpecialCharacterData =
     {
         TITLE: "Special Guest Vic Viper",
         DESCRIPTION: "Beat Special mode as Vic Viper",
-        POINTS: 1,
+        POINTS: 2,
         CHARACTER_SELECT_VALUE: VIC_VIPER_CHARACTER_SELECT_VALUE
     },
     {
         TITLE: "Special Guest Octopus",
         DESCRIPTION: "Beat Special mode as Octopus",
-        POINTS: 1,
+        POINTS: 2,
         CHARACTER_SELECT_VALUE: OCTOPUS_CHARACTER_SELECT_VALUE
     },
     {
         TITLE: "Special Guest TwinBee",
         DESCRIPTION: "Beat Special mode as TwinBee",
-        POINTS: 1,
+        POINTS: 2,
         CHARACTER_SELECT_VALUE: TWIN_BEE_CHARACTER_SELECT_VALUE
     },
     {
         TITLE: "Special Guest Pentarou",
         DESCRIPTION: "Beat Special mode as Pentarou",
-        POINTS: 1,
+        POINTS: 2,
         CHARACTER_SELECT_VALUE: PENTAROU_CHARACTER_SELECT_VALUE
     }
 
@@ -896,51 +915,51 @@ function noHitLevelAchievement(levelData)
 noHitLevelDataList = 
 [
     {
-        TITLE: "Slick Stage 1",
+        TITLE: "Perfect Pirates",
         DESCRIPTION: "Beat Stage 1 without losing a life on hard difficulty",
         POINTS: 1,
         STAGE_INDEX: 1
     },
     {
-        TITLE: "Slick Stage 2",
+        TITLE: "Lovely Las Vegas",
         DESCRIPTION: "Beat Stage 2 without losing a life on hard difficulty",
-        POINTS: 1,
+        POINTS: 2,
         STAGE_INDEX: 2
     },
     {
-        TITLE: "Slick Stage 3",
+        TITLE: "Long Labyrinth",
         DESCRIPTION: "Beat Stage 3 without losing a life on hard difficulty",
-        POINTS: 1,
+        POINTS: 3,
         STAGE_INDEX: 3
     },
     {
-        TITLE: "Slick Stage 4",
+        TITLE: "Japan Jive",
         DESCRIPTION: "Beat Stage 4 without losing a life on hard difficulty",
-        POINTS: 1,
+        POINTS: 4,
         STAGE_INDEX: 4
     },
     {
-        TITLE: "Slick Stage 5",
+        TITLE: "Pretty Pachinko",
         DESCRIPTION: "Beat Stage 5 without losing a life on hard difficulty",
-        POINTS: 1,
+        POINTS: 5,
         STAGE_INDEX: 5
     },
     {
-        TITLE: "Slick Stage 6",
+        TITLE: "Colorful Clouds and Beautiful Bubbles",
         DESCRIPTION: "Beat Stage 6 without losing a life on hard difficulty",
-        POINTS: 1,
+        POINTS: 5,
         STAGE_INDEX: 6
     },
     {
-        TITLE: "Slick Stage 7",
+        TITLE: "Clean Cemetary",
         DESCRIPTION: "Beat Stage 7 without losing a life on hard difficulty",
-        POINTS: 1,
+        POINTS: 10,
         STAGE_INDEX: 7
     },
     {
-        TITLE: "Slick Stage 8",
+        TITLE: "Fantastic Fortress",
         DESCRIPTION: "Beat Stage 8 without losing a life on hard difficulty",
-        POINTS: 1,
+        POINTS: 10,
         STAGE_INDEX: 0x8            
     }
 ]
@@ -952,7 +971,7 @@ for data in noHitLevelDataList
 
 achievement( title = "Slick Special",
              description = "Beat Special mode without losing a life",
-             points = 1,
+             points = 5,
              trigger = once(enteringStage(SPECIAL_STAGE_FIRST_STAGE_INDEX)) &&
                        trigger_when(exitingLocation(convertToMajorMinor(0x0c, 0x3a), SPECIAL_STAGE_END_STAGE_INDEX)) &&
                        never(justLostLife()) &&
@@ -962,7 +981,7 @@ achievement( title = "Slick Special",
 
 achievement( title = "Super Slick Special",
              description = "Beat Special mode without losing a life on hard difficulty",
-             points = 1,
+             points = 10,
              trigger = once(enteringStage(SPECIAL_STAGE_FIRST_STAGE_INDEX)) &&
                        trigger_when(exitingLocation(convertToMajorMinor(0x0c, 0x3a), SPECIAL_STAGE_END_STAGE_INDEX)) &&
                        never(justLostLife()) &&
@@ -983,12 +1002,17 @@ function bossSparedAchievement(bossData)
     boss_flee_check = bossData[BOSS_FLEE_CHECK]
     
     special_Boss_Check = always_true() // not a special boss. 
+    
+    stageName = "Stage " + (bossData[STAGE_INDEX])
+    
     if (ContainsKey(bossData, SPECIAL_BOSS_VALUE))
     {
+        stageName = "Special Stage"
         special_Boss_Check = once(bossData[SPECIAL_BOSS_VALUE])
-        achievement( title = format("Junior {0} Spared", bossData[BOSS_NAME]),
-                 description = "Spare " + bossData[BOSS_NAME] + " on stage " + (bossData[STAGE_INDEX]) + " without damaging them at all",
+        achievement( title = "Junior " + bossData[SPARED_ACHIEVEMENT_NAME],
+                 description = "Spare " + bossData[BOSS_NAME] + " on " + stageName + " without damaging them at all",
                  points = bossData[BOSS_SPARED_POINTS],
+                 id = bossData[JUNIOR_SPARED_ACHIEVEMENT_ID],
                  trigger = once(enteringLocation(bossData[BOSS_LOCATION_IN_STAGE], bossData[STAGE_INDEX])) && 
                            never(bossDamaged(bossData[BOSS_HEALTH_LOCATION])) &&
                            never(stageNumber() != bossData[STAGE_INDEX] - 1) &&
@@ -1003,9 +1027,10 @@ function bossSparedAchievement(bossData)
         )
     }
     
-    achievement( title = format("{0} Spared", bossData[BOSS_NAME]),
-                 description = "Spare " + bossData[BOSS_NAME] + " on stage " + (bossData[STAGE_INDEX] + 1) + " on hard difficulty without damaging them at all",
+    achievement( title = bossData[SPARED_ACHIEVEMENT_NAME],
+                 description = "Spare " + bossData[BOSS_NAME] + " on " + stageName + " on hard difficulty without damaging them at all",
                  points = bossData[BOSS_SPARED_POINTS],
+                 id = bossData[SPARED_ACHIEVEMENT_ID],
                  trigger = once(enteringLocation(bossData[BOSS_LOCATION_IN_STAGE], bossData[STAGE_INDEX])) && 
                            never(bossDamaged(bossData[BOSS_HEALTH_LOCATION])) &&
                            never(stageNumber() != bossData[STAGE_INDEX] - 1) &&
@@ -1028,33 +1053,39 @@ function bossKilledAchievement(bossData)
     boss_flee_check = bossData[BOSS_FLEE_CHECK]
     
     special_Boss_Check = always_true() // not a special boss. 
+    
+    stageName = "Stage " + (bossData[STAGE_INDEX])
+    
     if (ContainsKey(bossData, SPECIAL_BOSS_VALUE))
     {
+        stageName = "Special Stage"
         special_Boss_Check = once(bossData[SPECIAL_BOSS_VALUE])
         // Just run a second achievement for the special bosses.  No difficulty check.     
-        achievement( title = format("Junior {0} Killed", bossData[BOSS_NAME]),
-                 description = "Beat " + bossData[BOSS_NAME] + " in stage " + bossData[STAGE_INDEX] + "on hard difficulty",
-                 points = bossData[BOSS_KILLED_POINTS],
-                 trigger = once(enteringLocation(bossData[BOSS_LOCATION_IN_STAGE], bossData[STAGE_INDEX])) && 
-                           bossData[MODE_CHECK] &&
-                           never(stageNumber() != bossData[STAGE_INDEX] - 1) &&
-                           never(justLostLife()) &&
-                           never(beforeEnterLocation(bossData[BOSS_LOCATION_IN_STAGE])) &&
-                           trigger_when( once(bossKilled(bossData[BOSS_HEALTH_LOCATION]) &&
-                                              inLocation(bossData[BOSS_LOCATION_IN_STAGE], 
-                                                         bossData[BOSS_LOCATION_IN_STAGE], 
-                                                         bossData[STAGE_INDEX])) && 
-                                         exitingLocationCondition) &&
-                           special_Boss_Check &&
-                           never(boss_flee_check && bossAlive(bossData[BOSS_HEALTH_LOCATION], bossData[BOSS_STARTING_HEALTH])) &&
-                           achievementIsValid()
+        achievement( title = format("Junior {0}", bossData[KILLED_ACHIEVEMENT_NAME]),
+                     id = bossData[JUNIOR_KILLED_ACHIEVEMENT_ID],
+                     description = "Beat " + bossData[BOSS_NAME] + " on " + stageName + "on hard difficulty",
+                     points = bossData[BOSS_KILLED_POINTS],
+                     trigger = once(enteringLocation(bossData[BOSS_LOCATION_IN_STAGE], bossData[STAGE_INDEX])) && 
+                               bossData[MODE_CHECK] &&
+                               never(stageNumber() != bossData[STAGE_INDEX] - 1) &&
+                               never(justLostLife()) &&
+                               never(beforeEnterLocation(bossData[BOSS_LOCATION_IN_STAGE])) &&
+                               trigger_when( once(bossKilled(bossData[BOSS_HEALTH_LOCATION]) &&
+                                                  inLocation(bossData[BOSS_LOCATION_IN_STAGE], 
+                                                             bossData[BOSS_LOCATION_IN_STAGE], 
+                                                             bossData[STAGE_INDEX])) && 
+                                             exitingLocationCondition) &&
+                               special_Boss_Check &&
+                               never(boss_flee_check && bossAlive(bossData[BOSS_HEALTH_LOCATION], bossData[BOSS_STARTING_HEALTH])) &&
+                               achievementIsValid()
 
         )
     }
 
-    achievement( title = format("{0} Killed", bossData[BOSS_NAME]),
-                 description = "Beat " + bossData[BOSS_NAME] + " in stage " + (bossData[STAGE_INDEX]) + " on hard difficulty",
+    achievement( title = bossData[KILLED_ACHIEVEMENT_NAME],
+                 description = "Beat " + bossData[BOSS_NAME] + " on " + stageName + " on hard difficulty",
                  points = bossData[BOSS_KILLED_POINTS],
+                 id = bossData[KILLED_ACHIEVEMENT_ID],
                  trigger = once(enteringLocation(bossData[BOSS_LOCATION_IN_STAGE], bossData[STAGE_INDEX])) && 
                            bossData[MODE_CHECK] &&
                            never(stageNumber() != bossData[STAGE_INDEX] - 1) &&
@@ -1077,7 +1108,9 @@ bossData =
 [
 
     { 
-        BOSS_NAME: "Big Bird",
+        SPARED_ACHIEVEMENT_NAME: "Captain Penguinovski The 3rd Spared",
+        KILLED_ACHIEVEMENT_NAME: "Captain Penguinovski The 3rd Killed",
+        BOSS_NAME: "Captain Penguinovski The 3rd",
         BOSS_HEALTH_LOCATION: BOSS_ONE_HEALTH_MEMORY_LOCATION,
         STAGE_INDEX: 1,
         BOSS_STARTING_HEALTH: 0x0f,
@@ -1085,92 +1118,131 @@ bossData =
         BOSS_SPARED_POINTS: 2,
         BOSS_KILLED_POINTS: 1,
         MODE_CHECK: isOnePlayerMode(),
-        BOSS_FLEE_CHECK: (boss1MajorTimer() == 0x00 && boss1MinorTimer() == 0x00)
+        BOSS_FLEE_CHECK: (boss1MajorTimer() == 0x00 && 
+                          boss1MinorTimer() == 0x00),
+        SPARED_ACHIEVEMENT_ID: 415102,
+        KILLED_ACHIEVEMENT_ID: 415114
     },
     {
-        BOSS_NAME: "Uncle Sam",
+        SPARED_ACHIEVEMENT_NAME: "Eagle Eagle Sabnosuke Spared",
+        KILLED_ACHIEVEMENT_NAME: "Eagle Eagle Sabnosuke Killed",
+        BOSS_NAME: "Eagle Eagle Sabnosuke",
         BOSS_HEALTH_LOCATION: BOSS_ONE_HEALTH_MEMORY_LOCATION,
         STAGE_INDEX: 2,
         BOSS_STARTING_HEALTH: 0x0c,
         BOSS_LOCATION_IN_STAGE: convertToMajorMinor(0x10, 0xa0),
-        BOSS_SPARED_POINTS: 2,
-        BOSS_KILLED_POINTS: 1,
+        BOSS_SPARED_POINTS: 4,
+        BOSS_KILLED_POINTS: 3,
         MODE_CHECK: isOnePlayerMode(),
-        BOSS_FLEE_CHECK: (boss2Attacks() == 0x00)
+        BOSS_FLEE_CHECK: (boss2Attacks() == 0x00),
+        SPARED_ACHIEVEMENT_ID:415103,
+        KILLED_ACHIEVEMENT_ID: 415115
 
     },
     // Boss 3 needs to be special code because it's 8 characters. 
     { 
-        BOSS_NAME: "Sumo",
+        SPARED_ACHIEVEMENT_NAME: "Sumo Spared",
+        KILLED_ACHIEVEMENT_NAME: "Ringed Out", 
+        BOSS_NAME: "Pig Tide",
         BOSS_HEALTH_LOCATION: LEVEL_4_BOSS_HEALTH_MEMORY_LOCATION,
         STAGE_INDEX: 4,
         BOSS_STARTING_HEALTH: 0x17,
         BOSS_LOCATION_IN_STAGE: convertToMajorMinor(0x10, 0x49),
-        BOSS_SPARED_POINTS: 2,
-        BOSS_KILLED_POINTS: 1,
+        BOSS_SPARED_POINTS: 10,
+        BOSS_KILLED_POINTS: 3,
         MODE_CHECK: isOnePlayerMode(),
-        BOSS_FLEE_CHECK: (boss4Attacks() == 0x00)
+        BOSS_FLEE_CHECK: (boss4Attacks() == 0x00),
+        SPARED_ACHIEVEMENT_ID: 415104,
+        KILLED_ACHIEVEMENT_ID: 415116
     },
     // Boss 5 needs to be special because it's multi-stage because it's score calculation. 
     {   
         // Boss 6 doesn't appear to have countdown (probably an attack countdown.)
-        BOSS_NAME: "6th Boss", // Lady killer, White Knight
+        SPARED_ACHIEVEMENT_NAME: "White Knight",
+        KILLED_ACHIEVEMENT_NAME: "Lady Killer", 
+        BOSS_NAME: "Honey Miyako", // Lady killer, White Knight
         BOSS_HEALTH_LOCATION: BOSS_ONE_HEALTH_MEMORY_LOCATION,
         STAGE_INDEX: 6,
         BOSS_STARTING_HEALTH: 0x06,
         BOSS_LOCATION_IN_STAGE: convertToMajorMinor(0x11, 0x81),
-        BOSS_SPARED_POINTS: 2,
-        BOSS_KILLED_POINTS: 1,
+        BOSS_SPARED_POINTS: 5,
+        BOSS_KILLED_POINTS: 3,
         MODE_CHECK: isOnePlayerMode(),
-        BOSS_FLEE_CHECK: (boss6Attacks() == 0x00)
+        BOSS_FLEE_CHECK: (boss6Attacks() == 0x00),
+        SPARED_ACHIEVEMENT_ID: 415105,
+        KILLED_ACHIEVEMENT_ID: 415117
     },
     { 
-        BOSS_NAME: "7th Boss",
+        SPARED_ACHIEVEMENT_NAME: "Spared the Spirit",
+        KILLED_ACHIEVEMENT_NAME: "Ghost Buster", 
+        BOSS_NAME: "Yoshiwara Dayuu",
         BOSS_HEALTH_LOCATION: LEVEL_7_BOSS_HEALTH_MEMORY_LOCATION,
         STAGE_INDEX: 7,
         BOSS_STARTING_HEALTH: 0xf,
         BOSS_LOCATION_IN_STAGE: convertToMajorMinor(0x0a, 0x28),
-        BOSS_SPARED_POINTS: 2,
-        BOSS_KILLED_POINTS: 1,
+        BOSS_SPARED_POINTS: 5,
+        BOSS_KILLED_POINTS: 4,
         MODE_CHECK: isOnePlayerMode(),
-        BOSS_FLEE_CHECK: ( boss7MajorTimer() == 0x00 && boss7MinorTimer() == 0x00)
+        BOSS_FLEE_CHECK: ( boss7MajorTimer() == 0x00 && boss7MinorTimer() == 0x00),
+        SPARED_ACHIEVEMENT_ID: 415106,
+        KILLED_ACHIEVEMENT_ID: 415118
     },
     // Boss 8 is special for the exit. 
     {
-        BOSS_NAME: "30k Boss",
+        SPARED_ACHIEVEMENT_NAME: "Pervy Penguin Spared",
+        KILLED_ACHIEVEMENT_NAME: "No More Flashing", 
+        BOSS_NAME: "Marvelous Green Mantle",
         BOSS_HEALTH_LOCATION: SPECIAL_BOSS_HEALTH_MEMORY_LOCATION,
         STAGE_INDEX: 0xc,
         BOSS_STARTING_HEALTH: 0x0f,
         BOSS_LOCATION_IN_STAGE: convertToMajorMinor(0x0c, 0x3b),
         SPECIAL_BOSS_VALUE: isLowScoreSpecialBoss(),
-        BOSS_SPARED_POINTS: 2,
-        BOSS_KILLED_POINTS: 1,
+        BOSS_SPARED_POINTS: 10,
+        BOSS_KILLED_POINTS: 10,
         MODE_CHECK: isSpecialMode(),
-        BOSS_FLEE_CHECK: (thirtyThousandBossAttacks() == 0x00)
+        BOSS_FLEE_CHECK: (thirtyThousandBossAttacks() == 0x00),
+        JUNIOR_SPARED_ACHIEVEMENT_ID: 415107,
+        SPARED_ACHIEVEMENT_ID: 415108,
+        JUNIOR_KILLED_ACHIEVEMENT_ID: 415119,
+        KILLED_ACHIEVEMENT_ID: 415120
+
     },
     {
-        BOSS_NAME: "900k Boss",
+        SPARED_ACHIEVEMENT_NAME: "Enjoyed the Meal",
+        KILLED_ACHIEVEMENT_NAME: "Gourmet Killer", 
+        BOSS_NAME: "Great Gourmet King Majiri Kun",
         BOSS_HEALTH_LOCATION: SPECIAL_BOSS_HEALTH_MEMORY_LOCATION,
         STAGE_INDEX: 0xc,
         BOSS_STARTING_HEALTH: 0x0f,
         BOSS_LOCATION_IN_STAGE: convertToMajorMinor(0x0c, 0x3a),
         SPECIAL_BOSS_VALUE: isNineHundredThousandSpecialBoss(),
-        BOSS_SPARED_POINTS: 2,
-        BOSS_KILLED_POINTS: 1,
+        BOSS_SPARED_POINTS: 25,
+        BOSS_KILLED_POINTS: 10,
         MODE_CHECK: isSpecialMode(),
-        BOSS_FLEE_CHECK: (nineThousandBossAttacks() == 0xff)
+        BOSS_FLEE_CHECK: (nineThousandBossAttacks() == 0xff),
+        JUNIOR_SPARED_ACHIEVEMENT_ID: 415109,
+        SPARED_ACHIEVEMENT_ID: 415110,
+        JUNIOR_KILLED_ACHIEVEMENT_ID: 415121,
+        KILLED_ACHIEVEMENT_ID: 415122
     },
     {
-        BOSS_NAME: "1 Million Boss",
+        SPARED_ACHIEVEMENT_NAME: "Penguin Uprising",
+        KILLED_ACHIEVEMENT_NAME: "Penguin Regicide", 
+        BOSS_NAME: "Super DX Emperor Penguin",
         BOSS_HEALTH_LOCATION: BOSS_ONE_HEALTH_MEMORY_LOCATION,
         STAGE_INDEX: 0xc,
         BOSS_STARTING_HEALTH: 0x10,
         BOSS_LOCATION_IN_STAGE: convertToMajorMinor(0x0c, 0x3b),
         SPECIAL_BOSS_VALUE: isOneMillionSpecialBoss(),
-        BOSS_SPARED_POINTS: 2,
-        BOSS_KILLED_POINTS: 1,
+        BOSS_SPARED_POINTS: 25,
+        BOSS_KILLED_POINTS: 10,
         MODE_CHECK: isSpecialMode(),
-        BOSS_FLEE_CHECK: (oneMillionBossMajorTimer() == 0x00 && oneMillionBossMinorTimer() == 0x00)
+        BOSS_FLEE_CHECK: (oneMillionBossMajorTimer() == 0x00 && 
+                          oneMillionBossMinorTimer() == 0x00),
+        JUNIOR_SPARED_ACHIEVEMENT_ID: 415111,
+        SPARED_ACHIEVEMENT_ID: 415112,
+        JUNIOR_KILLED_ACHIEVEMENT_ID: 415123,
+        KILLED_ACHIEVEMENT_ID: 415124
     }
 ]
 
@@ -1187,9 +1259,10 @@ CAT_SHIP_ENTER_MAJOR_MINOR = convertToMajorMinor(0x0c, 0x58)
 CAT_SHIP_EXIT_MAJOR_MINOR = convertToMajorMinor(0x0f, 0xa8)
 CAT_SHIP_STAGE_INDEX = 1
 CAT_SHIP_HEALTH_AMOUNT = 0x08
-achievement(title = "Cat Ship Spared",
-            description = "Spare the Cat ship on Stage 1 on hard difficulty without damaging it",
+achievement(title = "Pardoned Pussycat",
+            description = "Spare the Cat Battleship on Stage 1 on hard difficulty without damaging it",
             points = 3,
+            id = 415101,
             trigger = once(enteringLocation(CAT_SHIP_ENTER_MAJOR_MINOR, CAT_SHIP_STAGE_INDEX)) &&
                       never(bossDamaged(CAT_MINI_BOSS_HEALTH_MEMORY_LOCATION)) &&
                       never(stageNumber() != CAT_SHIP_STAGE_INDEX - 1) && 
@@ -1201,9 +1274,10 @@ achievement(title = "Cat Ship Spared",
                       achievementIsValid()                     
 )
 
-achievement(title = "Cat Ship Killed",
-            description = "Beat the Cat ship on Stage 1 on hard difficulty",
+achievement(title = "Kitty Killer",
+            description = "Beat the Cat Battleship on Stage 1 on hard difficulty",
             points = 1,
+            id = 415113,
             trigger = once(enteringLocation(CAT_SHIP_ENTER_MAJOR_MINOR, CAT_SHIP_STAGE_INDEX)) &&
                       never(stageNumber() != CAT_SHIP_STAGE_INDEX - 1) && 
                       never(justLostLife()) &&
@@ -1223,8 +1297,9 @@ OCTO_LIPS_STAGE_INDEX = 3
 OCTO_LIPS_HEALTH_AMOUNT = 0x08
 OCTO_LIPS_HEALTH_AMOUNT_ALTERNATE = 0x06
 achievement(title = "No PDAs Here",
-            description = "Spare the Octo Lips on Stage 3 on hard difficulty without damaging any of them",
-            points = 1,
+            description = "Spare the Hot Lips on Stage 3 on hard difficulty without damaging any of them",
+            points = 25,
+            id = 415125,
             trigger = once(enteringLocation(OCTO_LIPS_MAJOR_MINOR, OCTO_LIPS_STAGE_INDEX)) &&
                       never(any_of(range(0,8, step= 0x1), index => bossDamaged(BOSS_ONE_HEALTH_MEMORY_LOCATION + index))) &&
                       never(stageNumber() != OCTO_LIPS_STAGE_INDEX - 1) && 
@@ -1241,8 +1316,9 @@ achievement(title = "No PDAs Here",
 )
 
 achievement(title = "So many Kisses",
-            description = "Beat all the Octo Lips on Stage 3 on hard difficulty",
-            points = 1,
+            description = "Beat all the Hot Lips on Stage 3 on hard difficulty",
+            points = 10,
+            id = 415126,
             trigger = once(enteringLocation(OCTO_LIPS_MAJOR_MINOR, OCTO_LIPS_STAGE_INDEX)) &&
                       never(stageNumber() != OCTO_LIPS_STAGE_INDEX - 1) && 
                       never(justLostLife()) &&
@@ -1259,8 +1335,9 @@ BOSS_5_LEVEL_INDEX = 5
 BOSS_5_MAJOR_MINOR = convertToMajorMinor(0x17, 0xd8)
 
 achievement(title = "Gambler's Anonymous",
-            description = "Spare the Boss of the 5th stage on hard difficulty without damaging her at all",
-            points = 1,
+            description = "Spare Viva Core on Stage 5 on hard difficulty without damaging her at all",
+            points = 10,
+            id = 415127,
             trigger = once(enteringLocation(BOSS_5_MAJOR_MINOR, BOSS_5_LEVEL_INDEX)) && 
                       // never(bossDamaged(BOSS_ONE_HEALTH_MEMORY_LOCATION)) &&  // Multi stage boss, so probably could find a way to do this, but let's just check score calculation
                       never(bcdScoreArcade() >= 500 + prev(bcdScoreArcade())) && // more than 100 points in a single frame.  May have to increase it to 499
@@ -1275,8 +1352,9 @@ achievement(title = "Gambler's Anonymous",
 )
 
 achievement(title = "Jackpot!",
-            description = "Kill the Boss of the 5th stage on hard difficulty",
-            points = 1,
+            description = "Kill Viva Core on Stage 5 on hard difficulty",
+            points = 5,
+            id = 415128,
             trigger = once(enteringLocation(BOSS_5_MAJOR_MINOR, BOSS_5_LEVEL_INDEX)) && 
                       never(stageNumber() != BOSS_5_LEVEL_INDEX - 1 ) &&
                       never(justLostLife()) &&
@@ -1299,8 +1377,9 @@ FINAL_BOSS_FIRST_HEALTH_LOCATION = CAT_MINI_BOSS_HEALTH_MEMORY_LOCATION + 1
 FINAL_BOSS_NUMBER_OF_HEALTH = 7
 
 achievement(title = "The Light Ending (Duality of Choice)",
-            description = "Spare the final boss without damaging them at all on hard difficulty",
+            description = "Spare Golgotha Takobee on Stage 8 without damaging them at all on hard difficulty",
             points = 1,
+            id = 415129,
             trigger = once(enteringLocation(FINAL_BOSS_ENTERING_MAJOR_MINOR, FINAL_BOSS_LEVEL_INDEX)) && 
                       never(any_of(range(0,FINAL_BOSS_NUMBER_OF_HEALTH, step= 0x1), index => bossDamaged(FINAL_BOSS_FIRST_HEALTH_LOCATION + index) &&
                                                                                              (finalBossMajorTimer() != 0x00 || 
@@ -1320,8 +1399,9 @@ achievement(title = "The Light Ending (Duality of Choice)",
 )
 
 achievement(title = "The Dark Ending (Duality of Choice)",
-            description = "Kill the final boss on hard difficulty",
+            description = "Kill Golgotha Takobee on Stage 8 on hard difficulty",
             points = 1,
+            id = 415130,
             trigger = once(enteringLocation(FINAL_BOSS_ENTERING_MAJOR_MINOR, FINAL_BOSS_LEVEL_INDEX)) && 
                       never(stageNumber() != FINAL_BOSS_LEVEL_INDEX - 1 && stageNumber() != 0) &&
                       never(justLostLife()) &&
@@ -1340,7 +1420,7 @@ achievement(title = "The Dark Ending (Duality of Choice)",
 
 achievement( title = "1cc",
              description = "Beat the game without continuing",
-             points = 1,
+             points = 5,
              trigger = once(justStartedGame()) &&
                        trigger_when(beatStageNumber(0x08)) &&
                        never(justLostCredit()) &&
@@ -1350,7 +1430,7 @@ achievement( title = "1cc",
 
 achievement( title = "1cc on Normal",
              description = "Beat the game on normal or hard difficulty without continuing",
-             points = 1,
+             points = 10,
              trigger = trigger_when(beatStageNumber(0x08)) &&
                        once(justStartedGame()) &&
                        isNormalDifficultyOrHarder() &&
@@ -1361,7 +1441,7 @@ achievement( title = "1cc on Normal",
 
 achievement( title = "1cc on Hard",
              description = "Beat the game on Hard difficulty without continuing",
-             points = 1,
+             points = 10,
              trigger = once(justStartedGame()) &&
                        trigger_when(beatStageNumber(0x08)) &&
                        isHardDifficulty() &&
@@ -1391,25 +1471,25 @@ maxAbilityData =
     {
         TITLE: "Max Vic Viper",
         DESCRIPTION: "Get five speed ups, the special shot, one of the two upgraded shots, four options, and the shield active all at the same time as Vic Viper",
-        POINTS: 1,
+        POINTS: 3,
         CHARACTER_SELECT_VALUE: VIC_VIPER_CHARACTER_SELECT_VALUE
     },
     {
         TITLE: "Max Octopus",
         DESCRIPTION: "Get five speed ups, the special shot, one of the two upgraded shots, four options, and the shield active all at the same time as Octopus",
-        POINTS: 1,
+        POINTS: 3,
         CHARACTER_SELECT_VALUE: OCTOPUS_CHARACTER_SELECT_VALUE
     },
     {
         TITLE: "Max TwinBee",
-        DESCRIPTION: "Get five speed ups, the special shot, one of the two upgraded shots, four options, and the shield active all at the same time as TwinBee",
-        POINTS: 1,
+        DESCRIPTION: "Get five speed ups, the special shot, one of the two upgraded shots, three options, and the shield active all at the same time as TwinBee",
+        POINTS: 3,
         CHARACTER_SELECT_VALUE: TWIN_BEE_CHARACTER_SELECT_VALUE
     },
     {
         TITLE: "Max Pentarou",
-        DESCRIPTION: "Get five speed ups, the special shot, one of the two upgraded shots, four options, and the shield active all at the same time as Pentarou",
-        POINTS: 1,
+        DESCRIPTION: "Get five speed ups, the special shot, one of the two upgraded shots, three options, and the shield active all at the same time as Pentarou",
+        POINTS: 3,
         CHARACTER_SELECT_VALUE: PENTAROU_CHARACTER_SELECT_VALUE
     }
 ]
@@ -1438,25 +1518,25 @@ maxAbilityData =
     {
         TITLE: "What's This button do?",
         DESCRIPTION: "Use the !? upgrade when you're fully powered up (five speedups, special shot, upgraded shot, options, and shield) as Vic Viper",
-        POINTS: 1,
+        POINTS: 5,
         CHARACTER_SELECT_VALUE: VIC_VIPER_CHARACTER_SELECT_VALUE
     },
     {
         TITLE: "Forgetful Octopus",
         DESCRIPTION: "Use the !? upgrade when you're fully powered up (five speedups, special shot, upgraded shot, options, and shield) as Octopus",
-        POINTS: 1,
+        POINTS: 5,
         CHARACTER_SELECT_VALUE: OCTOPUS_CHARACTER_SELECT_VALUE
     },
     {
         TITLE: "Broken TwinBee",
         DESCRIPTION: "Use the !? upgrade when you're fully powered up (five speedups, special shot, upgraded shot, options, and shield) as TwinBee",
-        POINTS: 1,
+        POINTS: 5,
         CHARACTER_SELECT_VALUE: TWIN_BEE_CHARACTER_SELECT_VALUE
     },
     {
         TITLE: "Stupid Penguin",
         DESCRIPTION: "Use the !? button when you're fully powered up (five speedups, special shot, upgraded shot, options, and shield) as Pentarou",
-        POINTS: 1,
+        POINTS: 5,
         CHARACTER_SELECT_VALUE: PENTAROU_CHARACTER_SELECT_VALUE
     }
 ]
@@ -1495,21 +1575,21 @@ scoreAchievementData =
     {
         TITLE: "Quarter of a Million",
         DESCRIPTION: "Score 250,000 points in One Player Mode",
-        POINTS: 1,
+        POINTS: 5,
         SCORE: (250 * 1000),
         MODE_CHECK: isOnePlayerMode()
     },
     {
         TITLE: "Half a Million",
         DESCRIPTION: "Score 500,000 points in One Player Mode",
-        POINTS: 1,
+        POINTS: 10,
         SCORE: (500 * 1000),
         MODE_CHECK: isOnePlayerMode()
     },
     {
         TITLE: "A cool million",
         DESCRIPTION: "Score 1,000,000 points in One Player Mode",
-        POINTS: 1,
+        POINTS: 25,
         SCORE: (1000 * 1000),
         MODE_CHECK: isOnePlayerMode()
     }
@@ -1520,21 +1600,21 @@ specialScoreAchievementData =
     {
         TITLE: "Special Half a Million",
         DESCRIPTION: "Score 500,000 points in Special Mode",
-        POINTS: 1,
+        POINTS: 3,
         SCORE: (500 * 1000),
         MODE_CHECK: isSpecialMode()
     },
     {
         TITLE: "A cool million",
         DESCRIPTION: "Score 1,000,000 points in Special Mode",
-        POINTS: 1,
+        POINTS: 5,
         SCORE: (1000 * 1000),
         MODE_CHECK: isSpecialMode()
     },
     {
         TITLE: "Special Million and a Half",
         DESCRIPTION: "Score 1,500,000 points in Special Mode",
-        POINTS: 1,
+        POINTS: 10,
         SCORE: (1500 * 1000),
         MODE_CHECK: isSpecialMode()
     }
