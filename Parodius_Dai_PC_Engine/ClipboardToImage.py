@@ -33,5 +33,7 @@ def resize_image(file_name):
     print(f"Image saved as {output_path}")
 
 if __name__ == "__main__":
-    file_name = input("Enter a name for the image file: ")
+    file_name_input = input("Enter a name for the image file: ")
+    # Replace spaces with underscores
+    file_name = file_name_input.replace(" ", "_")
     resize_image(file_name)
