@@ -153,6 +153,11 @@ function isMaxSpeedUp() => speedUp() == MAX_SPEED_UP_VALUE
 //        0x07= Vic Viper  Wall special  (orange bell)  (Same for TwinBee)
 //        0x09 = Blue Bell Blast (different ability per character)
 function equippedWeapon() => byte(0x0000B4)
+ORANGE_BELL_VALUE = 0x07
+BLUE_BELL_VALUE = 0x09
+
+function blueBellActive() => equippedWeapon() == BLUE_BELL_VALUE
+function orangeBellActive() => equippedWeapon() == ORANGE_BELL_VALUE
 
 // $00B7: (8-bit) Shoot special
 //        
@@ -218,14 +223,41 @@ function optionType3() => byte(0x000967)
 //        0x02 = Octopus Option (mini Octopus)
 function optionType4() => byte(0x000968)
 
-function wasMaxOption() => prev(optionType1()) == (characterSelect() + 1) && 
-                           prev(optionType2()) == (characterSelect() + 1) && 
-                           prev(optionType3()) == (characterSelect() + 1) && 
-                           prev(optionType4()) == (characterSelect() + 1)
-function isMaxOption() => optionType1() == (characterSelect() + 1) &&
-                          optionType2() == (characterSelect() + 1) &&
-                          optionType3() == (characterSelect() + 1) &&
-                          optionType4() == (characterSelect() + 1)
+function wasMaxOption(character)
+{
+     // Only three Options
+    if (character == TWIN_BEE_CHARACTER_SELECT_VALUE || character == PENTAROU_CHARACTER_SELECT_VALUE)
+    {
+        return prev(optionType1()) == (character + 1) && 
+               prev(optionType2()) == (character + 1) && 
+               prev(optionType3()) == (character + 1) 
+    }
+    else
+    {
+        return prev(optionType1()) == (character + 1) && 
+               prev(optionType2()) == (character + 1) && 
+               prev(optionType3()) == (character + 1) && 
+               prev(optionType4()) == (character + 1)
+    }
+}
+
+function isMaxOption(character)
+{
+    // Only three Options
+    if (character == TWIN_BEE_CHARACTER_SELECT_VALUE || character == PENTAROU_CHARACTER_SELECT_VALUE)
+    {
+        return optionType1() == (character + 1) && 
+               optionType2() == (character + 1) && 
+               optionType3() == (character + 1) 
+    }
+    else
+    {
+        return optionType1() == (character + 1) && 
+               optionType2() == (character + 1) && 
+               optionType3() == (character + 1) && 
+               optionType4() == (character + 1)
+    }
+}
 
 function isNoOption() => optionType1() == 0x00 && 
                          optionType2() == 0x00 && 
@@ -245,9 +277,13 @@ function isNoOption() => optionType1() == 0x00 &&
 //        If this sets to Enlargen it grows and then stays big and shrinks
 function shieldType() => byte(0x000969)
 NOT_ACTIVE_SHIELD_VALUE = 0x00
+HORN_ACTIVE_SHIELD_VALUE = 0x05
+GREEN_ACTIVE_SHIELD_VALUE = 0x0a
 function wasShieldActive() => prev(shieldType()) == (characterSelect() + 1)
 function isShieldActive() => shieldType() == (characterSelect() + 1)
 function isNoShieldActive() => shieldType() == NOT_ACTIVE_SHIELD_VALUE
+function greyBellActive() => shieldType() == HORN_ACTIVE_SHIELD_VALUE
+function greenBellActive() => shieldType() == GREEN_ACTIVE_SHIELD_VALUE
 
 // $096A: (8-bit)  Special Attack
 //        
@@ -284,6 +320,17 @@ function enteringLocation(majorMinor, stage) => majorMinor == majorMinor() &&
 function exitingLocation(majorMinor, stage) => majorMinor == prev(majorMinor()) && 
                                                 majorMinor + 1 == majorMinor() &&
                                                 stageNumber() == stage - 1
+
+function beforeEnterLocation(majorMinorValue) => majorMinor() < majorMinorValue 
+
+function inLocation(enterMajorMinor, exitMajorMinor, stage) => majorMinor() > (enterMajorMinor - 1) &&
+                                                                 majorMinor() < (exitMajorMinor + 1) &&
+                                                                 stageNumber() == stage - 1
+                                                                  
+
+SPECIAL_STAGE_FIRST_STAGE_INDEX = 0x0b  // plus 1 
+SPECIAL_STAGE_END_STAGE_INDEX = 0x0c  // plus 1
+
 
 // $0D27: (8-bit) Boss Health
 //        
@@ -383,7 +430,7 @@ function bossTypeForSpecial() => byte(0x001381)
 
 LOW_SCORE_SPECIAL_BOSS_VAUE = 0x00
 NINE_HUNDRED_THOUSAND_SPECIAL_BOSS_VALUE = 0x05
-ONE_MILLION_SPECIAL_BOSS_VALUE = 0x09
+ONE_MILLION_SPECIAL_BOSS_VALUE = 0x06
 
 function isLowScoreSpecialBoss() => bossTypeForSpecial() == LOW_SCORE_SPECIAL_BOSS_VAUE
 function isNineHundredThousandSpecialBoss() => bossTypeForSpecial() == NINE_HUNDRED_THOUSAND_SPECIAL_BOSS_VALUE
@@ -397,16 +444,37 @@ function loopNumber() => byte(0x001D04)
 
 function reachedNewLoop() => loopNumber() > prev(loopNumber())
 
-// $1F8C: (32-bit) BCD of Players Score in Normal Mode
+// $1F84: (32-bit) BCD of Players Score in Normal Mode
 //        
 //        (Control Value)
-function playerScoreArcade() => bcd(dword(0x001F8C))
+ARCADE_SCORE_LOCATION = 0x1F84
+function playerScoreArcade() => bcd(dword(ARCADE_SCORE_LOCATION))
 
-// $1f84: (32-bit) BCD of Players Score in Special Mode
+function bcdScoreArcade()=> low4(ARCADE_SCORE_LOCATION + 0) +
+                            high4(ARCADE_SCORE_LOCATION + 0) * 10 +
+                            low4(ARCADE_SCORE_LOCATION + 1) * 100 +
+                            high4(ARCADE_SCORE_LOCATION + 1) * 1000 +
+                            low4(ARCADE_SCORE_LOCATION + 2) * 10000 +
+                            high4(ARCADE_SCORE_LOCATION + 2) * 100000 +
+                            low4(ARCADE_SCORE_LOCATION + 3) * 1000000 +
+                            high4(ARCADE_SCORE_LOCATION + 3) * 10000000
+                    
+
+
+// $1f8C: (32-bit) BCD of Players Score in Special Mode
 //
 //        (Control Value)
-function playerScoreSpecial() => bcd(dword(0x001F8C))
+SPECIAL_SCORE_LOCATION = 0x001F8C
+function playerScoreSpecial() => bcd(dword(SPECIAL_SCORE_LOCATION))
 
+function bcdScoreSpecial()=> low4(SPECIAL_SCORE_LOCATION + 0) +
+                             high4(SPECIAL_SCORE_LOCATION + 0) * 10 +
+                             low4(SPECIAL_SCORE_LOCATION + 1) * 100 +
+                             high4(SPECIAL_SCORE_LOCATION + 1) * 1000 +
+                             low4(SPECIAL_SCORE_LOCATION + 2) * 10000 +
+                             high4(SPECIAL_SCORE_LOCATION + 2) * 100000 +
+                             low4(SPECIAL_SCORE_LOCATION + 3) * 1000000 +
+                             high4(SPECIAL_SCORE_LOCATION + 3) * 10000000
 // $1F95: (8-bit) Gameplay Mode
 //        
 //        0x00 = 1 Player
@@ -480,6 +548,13 @@ function boss7MinorTimer() => byte(0x00164D)
 // $1695: (8-bit) Boss 7 Flee Major Countdown
 function boss7MajorTimer() => byte(0x001695)
 
+// $13a7: (8-bit) Cat Boss Major Flee Timer 
+function catShipMajorTimer() => byte(0x0013A7)
+
+// $13EF: (8-bit) Cat Ship Minor Flee Timer
+function catShipMinorTimer() => byte(0x0013EF)
+
+
 // $1802: (8-bit) Ship Choice Screen.
 //
 //        0x00 = Main Gameplay (Main Menu) 
@@ -488,8 +563,53 @@ function shipChoiceScreen() => byte(0x001802)
 
 function inGame() => shipChoiceScreen() == 0x00
 
-function achievementIsValid() => demoCheck1() == DEMO_CHECK1_VALUE && demoCheck2() == DEMO_CHECK2_VALUE && inGame()
+// $0044 (8-bit) Cheat Used
+//        
+//        0x00 = Normal
+//        0x80 = Credit Cheat Has been used.
+//        0xff = 30 Life Triggered
+//        
+//        Note Konami codes are displayed at 0x00cb
+//        
+//        Remains active after continue.
+NO_CODE_USED = 0x00
+function cheatCodeUsed() => byte(0x000044) != NO_CODE_USED
 
+// $00cb: (8-bit) Konami Code Progress
+// 
+//        0x00 = Just paused
+//        0x01 = UP
+//        0x02 = Second Up
+//        0x03 = Down 
+//        0x04 = Second Down
+//        0x05 = Left
+//        0x06 = Right
+//        0x07 = Left
+//        0x08 = Right
+//        0x09 = Button 2
+//        0xff = Button 1
+//        0x80 = Incorrect
+// 
+//        Starts at 0x00 at pause.  If next button pressed isn't the next button in the value, the code is locked out until another pause is done. 
+function konamiCodeUsed() => byte(0x0000CB) == 0xff
+
+function achievementIsValid() => demoCheck1() == DEMO_CHECK1_VALUE && 
+                                 demoCheck2() == DEMO_CHECK2_VALUE && 
+                                 inGame() &&
+                                 // cheatCode doesn't have to be a once but why not, lock it out. 
+                                 disable_when(once(konamiCodeUsed() || cheatCodeUsed()), until = demoCheck1() != DEMO_CHECK1_VALUE && 
+                                                                                                 demoCheck2() != DEMO_CHECK2_VALUE ) 
+
+// for the disable achievements.                                                                                                  
+function disableAchievementIsValid() => demoCheck1() == DEMO_CHECK1_VALUE && 
+                                        demoCheck2() == DEMO_CHECK2_VALUE && 
+                                        // cheatCode doesn't have to be a once but why not, lock it out. 
+                                        disable_when(once(konamiCodeUsed() || cheatCodeUsed()), until = demoCheck1() != DEMO_CHECK1_VALUE && 
+                                                                                                        demoCheck2() != DEMO_CHECK2_VALUE ) 
+function rpIsValid() => demoCheck1() == DEMO_CHECK1_VALUE && 
+                        demoCheck2() == DEMO_CHECK2_VALUE && 
+                        inGame()
+                        
 function justStartedGame() 
 {
     return demoCheck1() == DEMO_CHECK1_VALUE &&
@@ -534,9 +654,12 @@ POINTS = "POINTS"
 CHARACTER_SELECT_VALUE = "CHARACTER_SELECT_VALUE"
 SCORE = "SCORE"
 
-function bossSpared(bossHealth, memoryLocation) => byte(memoryLocation) == 0x80 && (prev(byte(memoryLocation)) & 0x7f) == bossHealth
+function bossSpared(bossHealth, memoryLocation) => (byte(memoryLocation) & 0x7f) == 0x00 && (prev(byte(memoryLocation)) & 0x7f) == bossHealth
 function bossKilled(memoryLocation) => byte(memoryLocation) == 0x00 && prev(byte(memoryLocation)) & 0x7f == 0x01
+function catBossKilled(memoryLocation) => byte(memoryLocation) == 0x89 && prev(byte(memoryLocation)) & 0x7f == 0x00
 function bossDamaged(memoryLocation) => (prev(byte(memoryLocation) & 0x7f) - (byte(memoryLocation) & 0x7f) == 1)
+function bossDead(memoryLocation) => byte(memoryLocation) & 0x7f == 0x00
+function bossAlive(memoryLocation, maxHealth) => byte(memoryLocation) & 0x7f != 0x00 && byte(memoryLocation) & 0x7f <= maxHealth
 
 function levelAchievement(levelData)
 {
@@ -633,11 +756,13 @@ achievement( title = "First Loop Cleared Hard",
                        achievementIsValid()
 )
 
+
+
 achievement( title = "Finished Special",
              description = "Beat Special mode on any difficulty",
              points = 1,
              trigger = isSpecialMode() &&
-                       exitingLocation(convertToMajorMinor(0x0c, 0x3a), 0xb) &&
+                       exitingLocation(convertToMajorMinor(0x0c, 0x3a), SPECIAL_STAGE_END_STAGE_INDEX) &&
                        achievementIsValid()
 )
 
@@ -646,7 +771,7 @@ achievement( title = "Finished Special Normal",
              points = 1,
              trigger = isSpecialMode() &&
                        isNormalDifficultyOrHarder() &&
-                       exitingLocation(convertToMajorMinor(0x0c, 0x3a), 0xb) &&
+                       exitingLocation(convertToMajorMinor(0x0c, 0x3a), SPECIAL_STAGE_END_STAGE_INDEX) &&
                        achievementIsValid()
 )
 
@@ -655,7 +780,7 @@ achievement( title = "Finished Special Hard",
              points = 1,
              trigger = isSpecialMode() &&
                        isHardDifficulty() &&
-                       exitingLocation(convertToMajorMinor(0x0c, 0x3a), 0xb) &&
+                       exitingLocation(convertToMajorMinor(0x0c, 0x3a), SPECIAL_STAGE_END_STAGE_INDEX) &&
                        achievementIsValid()
 )
 
@@ -713,7 +838,7 @@ function beatSpecialAchievement(characterData)
                  points = characterData[POINTS],
                  trigger = characterSelect() == characterData[CHARACTER_SELECT_VALUE] &&
                            isSpecialMode() &&
-                           exitingLocation(convertToMajorMinor(0x0c, 0x3a), 0xb) &&
+                           exitingLocation(convertToMajorMinor(0x0c, 0x3a), SPECIAL_STAGE_END_STAGE_INDEX) &&
                            achievementIsValid()
     )
 }
@@ -747,6 +872,11 @@ beatSpecialCharacterData =
 
 ]
 
+for data in beatSpecialCharacterData
+{
+    beatSpecialAchievement(data)
+}
+
 
 function noHitLevelAchievement(levelData)
 {
@@ -757,7 +887,6 @@ function noHitLevelAchievement(levelData)
                  trigger = once(startingCheck) &&
                            trigger_when(beatStageNumber(levelData[STAGE_INDEX])) &&
                            never(justLostLife()) &&
-                           never(!achievementIsValid()) && // You can mouse over other difficulties accidentally.
                            never(stageNumber() != levelData[STAGE_INDEX] - 1 && stageNumber() != levelData[STAGE_INDEX]) && // You can mouse over other difficulties accidentally.
                            achievementIsValid()
     )
@@ -821,15 +950,12 @@ for data in noHitLevelDataList
     noHitLevelAchievement(data)
 }
 
-SPECIAL_STAGE_FIRST_INDEX = 0x0b  // plus 1 
-SPECIAL_STAGE_END_INDEX = 0x0c  // plus 1
 achievement( title = "Slick Special",
              description = "Beat Special mode without losing a life",
              points = 1,
-             trigger = once(enteringStage(SPECIAL_STAGE_FIRST_INDEX)) &&
-                       trigger_when(exitingLocation(convertToMajorMinor(0x0c, 0x3a), SPECIAL_STAGE_END_INDEX)) &&
+             trigger = once(enteringStage(SPECIAL_STAGE_FIRST_STAGE_INDEX)) &&
+                       trigger_when(exitingLocation(convertToMajorMinor(0x0c, 0x3a), SPECIAL_STAGE_END_STAGE_INDEX)) &&
                        never(justLostLife()) &&
-                       never(!achievementIsValid()) &&
                        never(!isSpecialMode()) &&
                        achievementIsValid()
 )
@@ -837,10 +963,9 @@ achievement( title = "Slick Special",
 achievement( title = "Super Slick Special",
              description = "Beat Special mode without losing a life on hard difficulty",
              points = 1,
-             trigger = once(enteringStage(SPECIAL_STAGE_FIRST_INDEX)) &&
-                       trigger_when(exitingLocation(convertToMajorMinor(0x0c, 0x3a), SPECIAL_STAGE_END_INDEX)) &&
+             trigger = once(enteringStage(SPECIAL_STAGE_FIRST_STAGE_INDEX)) &&
+                       trigger_when(exitingLocation(convertToMajorMinor(0x0c, 0x3a), SPECIAL_STAGE_END_STAGE_INDEX)) &&
                        never(justLostLife()) &&
-                       never(!achievementIsValid()) &&
                        never(!isSpecialMode()) &&
                        achievementIsValid() &&
                        isHardDifficulty()
@@ -854,15 +979,13 @@ function bossSparedAchievement(bossData)
     {
         exitingLocationCondition = exitingLocation(bossData[BOSS_EXIT_IN_STAGE], bossData[STAGE_INDEX])
     }
-    boss_flee_check = always_true()
-    if (ContainsKey(bossData, BOSS_FLEE_CHECK))
-    {
-        boss_flee_check = bossData[BOSS_FLEE_CHECK]
-    }
+    
+    boss_flee_check = bossData[BOSS_FLEE_CHECK]
+    
     special_Boss_Check = always_true() // not a special boss. 
     if (ContainsKey(bossData, SPECIAL_BOSS_VALUE))
     {
-        special_Boss_Check = bossData[SPECIAL_BOSS_VALUE]
+        special_Boss_Check = once(bossData[SPECIAL_BOSS_VALUE])
         achievement( title = format("Junior {0} Spared", bossData[BOSS_NAME]),
                  description = "Spare " + bossData[BOSS_NAME] + " on stage " + (bossData[STAGE_INDEX]) + " without damaging them at all",
                  points = bossData[BOSS_SPARED_POINTS],
@@ -870,6 +993,7 @@ function bossSparedAchievement(bossData)
                            never(bossDamaged(bossData[BOSS_HEALTH_LOCATION])) &&
                            never(stageNumber() != bossData[STAGE_INDEX] - 1) &&
                            never(justLostLife()) &&
+                           never(beforeEnterLocation(bossData[BOSS_LOCATION_IN_STAGE])) &&
                            bossData[MODE_CHECK] &&
                            trigger_when( once(bossSpared(bossData[BOSS_STARTING_HEALTH], bossData[BOSS_HEALTH_LOCATION])) && // shouldn't need this
                                          once(boss_flee_check) &&
@@ -886,6 +1010,7 @@ function bossSparedAchievement(bossData)
                            never(bossDamaged(bossData[BOSS_HEALTH_LOCATION])) &&
                            never(stageNumber() != bossData[STAGE_INDEX] - 1) &&
                            never(justLostLife()) &&
+                           never(beforeEnterLocation(bossData[BOSS_LOCATION_IN_STAGE])) &&
                            bossData[MODE_CHECK] &&
                            trigger_when( once(bossSpared(bossData[BOSS_STARTING_HEALTH], bossData[BOSS_HEALTH_LOCATION])) && // shouldn't need this
                                          once(boss_flee_check) &&
@@ -899,21 +1024,13 @@ function bossSparedAchievement(bossData)
 function bossKilledAchievement(bossData)
 {
     exitingLocationCondition = exitingLocation(bossData[BOSS_LOCATION_IN_STAGE], bossData[STAGE_INDEX])
-    if (ContainsKey(bossData, BOSS_EXIT_IN_STAGE))
-    {
-        exitingLocationCondition = exitingLocation(bossData[BOSS_EXIT_IN_STAGE], bossData[STAGE_INDEX])
-    }
- 
-    boss_flee_check = always_false()
-    if (ContainsKey(bossData, BOSS_FLEE_CHECK))
-    {
-        boss_flee_check = bossData[BOSS_FLEE_CHECK]
-    }
+    
+    boss_flee_check = bossData[BOSS_FLEE_CHECK]
     
     special_Boss_Check = always_true() // not a special boss. 
     if (ContainsKey(bossData, SPECIAL_BOSS_VALUE))
     {
-        special_Boss_Check = bossData[SPECIAL_BOSS_VALUE]
+        special_Boss_Check = once(bossData[SPECIAL_BOSS_VALUE])
         // Just run a second achievement for the special bosses.  No difficulty check.     
         achievement( title = format("Junior {0} Killed", bossData[BOSS_NAME]),
                  description = "Beat " + bossData[BOSS_NAME] + " in stage " + bossData[STAGE_INDEX] + "on hard difficulty",
@@ -922,27 +1039,35 @@ function bossKilledAchievement(bossData)
                            bossData[MODE_CHECK] &&
                            never(stageNumber() != bossData[STAGE_INDEX] - 1) &&
                            never(justLostLife()) &&
-                           trigger_when( once(bossKilled(bossData[BOSS_HEALTH_LOCATION])) && 
+                           never(beforeEnterLocation(bossData[BOSS_LOCATION_IN_STAGE])) &&
+                           trigger_when( once(bossKilled(bossData[BOSS_HEALTH_LOCATION]) &&
+                                              inLocation(bossData[BOSS_LOCATION_IN_STAGE], 
+                                                         bossData[BOSS_LOCATION_IN_STAGE], 
+                                                         bossData[STAGE_INDEX])) && 
                                          exitingLocationCondition) &&
                            special_Boss_Check &&
-                           never(boss_flee_check) &&
+                           never(boss_flee_check && bossAlive(bossData[BOSS_HEALTH_LOCATION], bossData[BOSS_STARTING_HEALTH])) &&
                            achievementIsValid()
 
         )
     }
 
     achievement( title = format("{0} Killed", bossData[BOSS_NAME]),
-                 description = "Beat " + bossData[BOSS_NAME] + " in stage " + (bossData[STAGE_INDEX] + 1) + " on hard difficulty",
+                 description = "Beat " + bossData[BOSS_NAME] + " in stage " + (bossData[STAGE_INDEX]) + " on hard difficulty",
                  points = bossData[BOSS_KILLED_POINTS],
                  trigger = once(enteringLocation(bossData[BOSS_LOCATION_IN_STAGE], bossData[STAGE_INDEX])) && 
                            bossData[MODE_CHECK] &&
                            never(stageNumber() != bossData[STAGE_INDEX] - 1) &&
                            never(justLostLife()) &&
-                           trigger_when( once(bossKilled(bossData[BOSS_HEALTH_LOCATION])) && 
+                           never(beforeEnterLocation(bossData[BOSS_LOCATION_IN_STAGE])) &&
+                           trigger_when( once(bossKilled(bossData[BOSS_HEALTH_LOCATION]) &&
+                                              inLocation(bossData[BOSS_LOCATION_IN_STAGE], 
+                                                         bossData[BOSS_LOCATION_IN_STAGE], 
+                                                         bossData[STAGE_INDEX])) && 
                                          exitingLocationCondition) &&
                            special_Boss_Check &&
                            isHardDifficulty() &&
-                           never(boss_flee_check) &&
+                           never(boss_flee_check && bossAlive(bossData[BOSS_HEALTH_LOCATION], bossData[BOSS_STARTING_HEALTH])) &&
                            achievementIsValid()
 
     )
@@ -950,17 +1075,7 @@ function bossKilledAchievement(bossData)
 
 bossData = 
 [
-    { 
-        BOSS_NAME: "Cat Ship",
-        BOSS_HEALTH_LOCATION: CAT_MINI_BOSS_HEALTH_MEMORY_LOCATION,
-        STAGE_INDEX: 1,
-        BOSS_STARTING_HEALTH: 0x08,
-        BOSS_LOCATION_IN_STAGE: convertToMajorMinor(0x0c, 0x58),
-        BOSS_EXIT_IN_STAGE: convertToMajorMinor(0x0f, 0xa8),
-        BOSS_SPARED_POINTS: 2,
-        BOSS_KILLED_POINTS: 1,
-        MODE_CHECK: isOnePlayerMode()
-    },
+
     { 
         BOSS_NAME: "Big Bird",
         BOSS_HEALTH_LOCATION: BOSS_ONE_HEALTH_MEMORY_LOCATION,
@@ -976,7 +1091,7 @@ bossData =
         BOSS_NAME: "Uncle Sam",
         BOSS_HEALTH_LOCATION: BOSS_ONE_HEALTH_MEMORY_LOCATION,
         STAGE_INDEX: 2,
-        BOSS_STARTING_HEALTH: 0x0f,
+        BOSS_STARTING_HEALTH: 0x0c,
         BOSS_LOCATION_IN_STAGE: convertToMajorMinor(0x10, 0xa0),
         BOSS_SPARED_POINTS: 2,
         BOSS_KILLED_POINTS: 1,
@@ -1026,7 +1141,7 @@ bossData =
         BOSS_HEALTH_LOCATION: SPECIAL_BOSS_HEALTH_MEMORY_LOCATION,
         STAGE_INDEX: 0xc,
         BOSS_STARTING_HEALTH: 0x0f,
-        BOSS_LOCATION_IN_STAGE: convertToMajorMinor(0x0c, 0x3a),
+        BOSS_LOCATION_IN_STAGE: convertToMajorMinor(0x0c, 0x3b),
         SPECIAL_BOSS_VALUE: isLowScoreSpecialBoss(),
         BOSS_SPARED_POINTS: 2,
         BOSS_KILLED_POINTS: 1,
@@ -1049,8 +1164,8 @@ bossData =
         BOSS_NAME: "1 Million Boss",
         BOSS_HEALTH_LOCATION: BOSS_ONE_HEALTH_MEMORY_LOCATION,
         STAGE_INDEX: 0xc,
-        BOSS_STARTING_HEALTH: 0x0f,
-        BOSS_LOCATION_IN_STAGE: convertToMajorMinor(0x0c, 0x3a),
+        BOSS_STARTING_HEALTH: 0x10,
+        BOSS_LOCATION_IN_STAGE: convertToMajorMinor(0x0c, 0x3b),
         SPECIAL_BOSS_VALUE: isOneMillionSpecialBoss(),
         BOSS_SPARED_POINTS: 2,
         BOSS_KILLED_POINTS: 1,
@@ -1067,6 +1182,41 @@ for data in bossData
 {
     bossKilledAchievement(data)
 }
+
+CAT_SHIP_ENTER_MAJOR_MINOR = convertToMajorMinor(0x0c, 0x58)
+CAT_SHIP_EXIT_MAJOR_MINOR = convertToMajorMinor(0x0f, 0xa8)
+CAT_SHIP_STAGE_INDEX = 1
+CAT_SHIP_HEALTH_AMOUNT = 0x08
+achievement(title = "Cat Ship Spared",
+            description = "Spare the Cat ship on Stage 1 on hard difficulty without damaging it",
+            points = 3,
+            trigger = once(enteringLocation(CAT_SHIP_ENTER_MAJOR_MINOR, CAT_SHIP_STAGE_INDEX)) &&
+                      never(bossDamaged(CAT_MINI_BOSS_HEALTH_MEMORY_LOCATION)) &&
+                      never(stageNumber() != CAT_SHIP_STAGE_INDEX - 1) && 
+                      never(justLostLife()) &&
+                      isOnePlayerMode() &&
+                      trigger_when( once(bossSpared(CAT_SHIP_HEALTH_AMOUNT, CAT_MINI_BOSS_HEALTH_MEMORY_LOCATION)) && // shouldn't need this
+                                    exitingLocation(CAT_SHIP_EXIT_MAJOR_MINOR, CAT_SHIP_STAGE_INDEX)) &&
+                      isHardDifficulty() &&
+                      achievementIsValid()                     
+)
+
+achievement(title = "Cat Ship Killed",
+            description = "Beat the Cat ship on Stage 1 on hard difficulty",
+            points = 1,
+            trigger = once(enteringLocation(CAT_SHIP_ENTER_MAJOR_MINOR, CAT_SHIP_STAGE_INDEX)) &&
+                      never(stageNumber() != CAT_SHIP_STAGE_INDEX - 1) && 
+                      never(justLostLife()) &&
+                      isOnePlayerMode() &&
+                      trigger_when( once(catBossKilled(CAT_MINI_BOSS_HEALTH_MEMORY_LOCATION) &&
+                                         inLocation(CAT_SHIP_ENTER_MAJOR_MINOR, 
+                                                    CAT_SHIP_EXIT_MAJOR_MINOR, 
+                                                     CAT_SHIP_STAGE_INDEX)) &&
+                                    exitingLocation(CAT_SHIP_EXIT_MAJOR_MINOR, CAT_SHIP_STAGE_INDEX) ) && 
+                      isHardDifficulty() &&
+                      never(exitingLocation(CAT_SHIP_EXIT_MAJOR_MINOR + 1, CAT_SHIP_STAGE_INDEX)) &&
+                      achievementIsValid()
+)
 
 OCTO_LIPS_MAJOR_MINOR = convertToMajorMinor(0x14, 0x20)
 OCTO_LIPS_STAGE_INDEX = 3
@@ -1098,11 +1248,10 @@ achievement(title = "So many Kisses",
                       never(justLostLife()) &&
                       isOnePlayerMode() &&
                       trigger_when( all_of(range(1,7, step= 0x2), index => once(bossKilled(BOSS_ONE_HEALTH_MEMORY_LOCATION + index))) && 
-                                    all_of(range(2,8, step= 0x2), index => once(bossKilled(BOSS_ONE_HEALTH_MEMORY_LOCATION + index))) && 
-                                    exitingLocation(OCTO_LIPS_MAJOR_MINOR, OCTO_LIPS_STAGE_INDEX)) &&
+                                    all_of(range(2,8, step= 0x2), index => once(bossKilled(BOSS_ONE_HEALTH_MEMORY_LOCATION + index)))) && // Note: We're not exiting location on boss.  The math is too complicated for that. 
                       isHardDifficulty() &&
                       never(boss3MajorTimer() == 0x00 && 
-                            boss3MinorTimer() == 0x00) &&
+                            boss3MinorTimer() == 0x00 ) &&
                       achievementIsValid()
 )
 
@@ -1114,7 +1263,7 @@ achievement(title = "Gambler's Anonymous",
             points = 1,
             trigger = once(enteringLocation(BOSS_5_MAJOR_MINOR, BOSS_5_LEVEL_INDEX)) && 
                       // never(bossDamaged(BOSS_ONE_HEALTH_MEMORY_LOCATION)) &&  // Multi stage boss, so probably could find a way to do this, but let's just check score calculation
-                      never(playerScoreArcade() > 101 + prev(playerScoreArcade())) && // more than 100 points in a single frame.  May have to increase it to 499
+                      never(bcdScoreArcade() >= 500 + prev(bcdScoreArcade())) && // more than 100 points in a single frame.  May have to increase it to 499
                       never(stageNumber() != BOSS_5_LEVEL_INDEX - 1) &&
                       never(justLostLife()) &&
                       isOnePlayerMode() &&
@@ -1135,8 +1284,6 @@ achievement(title = "Jackpot!",
                       trigger_when( once(bossKilled(LEVEL_5_BOSS_HEALTH_MEMORY_LOCATION)) && 
                                     exitingLocation(BOSS_5_MAJOR_MINOR, BOSS_5_LEVEL_INDEX)) &&
                       isHardDifficulty() &&
-                      never(boss5MajorTimer() == 0x00 && 
-                            boss5MinorTimer() == 0x00) &&
                       achievementIsValid()
 )
 
@@ -1145,7 +1292,7 @@ FINAL_BOSS_ENTERING_MAJOR_MINOR = convertToMajorMinor(0x0f, 0x99)
 FINAL_BOSS_LEVEL_INDEX = 0x08
 FINAL_BOSS_HEALTH = 0x01
 FINAL_BOSS_EXITING_PREVIOUS = convertToMajorMinor(0x10, 0x79)
-FINAL_BOSS_EXITING_POST = convertToMajorMinor(0x0,0x0)
+FINAL_BOSS_EXITING_POST = convertToMajorMinor(0x0,0x40)
 
 function boss8exitingLocation() => FINAL_BOSS_EXITING_PREVIOUS == prev(majorMinor()) && FINAL_BOSS_EXITING_POST == majorMinor()
 FINAL_BOSS_FIRST_HEALTH_LOCATION = CAT_MINI_BOSS_HEALTH_MEMORY_LOCATION + 1
@@ -1155,7 +1302,9 @@ achievement(title = "The Light Ending (Duality of Choice)",
             description = "Spare the final boss without damaging them at all on hard difficulty",
             points = 1,
             trigger = once(enteringLocation(FINAL_BOSS_ENTERING_MAJOR_MINOR, FINAL_BOSS_LEVEL_INDEX)) && 
-                      never(any_of(range(0,FINAL_BOSS_NUMBER_OF_HEALTH, step= 0x1), index => bossDamaged(FINAL_BOSS_FIRST_HEALTH_LOCATION + index))) && 
+                      never(any_of(range(0,FINAL_BOSS_NUMBER_OF_HEALTH, step= 0x1), index => bossDamaged(FINAL_BOSS_FIRST_HEALTH_LOCATION + index) &&
+                                                                                             (finalBossMajorTimer() != 0x00 || 
+                                                                                             finalBossMinorTimer() != 0x00))) && 
                       never(stageNumber() != FINAL_BOSS_LEVEL_INDEX - 1 && stageNumber() != 0  ) &&
                       never(justLostLife()) &&
                       isOnePlayerMode() &&
@@ -1177,11 +1326,14 @@ achievement(title = "The Dark Ending (Duality of Choice)",
                       never(stageNumber() != FINAL_BOSS_LEVEL_INDEX - 1 && stageNumber() != 0) &&
                       never(justLostLife()) &&
                       isOnePlayerMode() &&
-                      trigger_when( all_of(range(0,FINAL_BOSS_NUMBER_OF_HEALTH, step= 0x1), index => once(bossKilled(FINAL_BOSS_FIRST_HEALTH_LOCATION + index))) &&
+                      trigger_when( all_of(range(0,FINAL_BOSS_NUMBER_OF_HEALTH, step= 0x1), index => once(bossKilled(FINAL_BOSS_FIRST_HEALTH_LOCATION + index)&&
+                                                                                                         (finalBossMajorTimer() != 0x00 || 
+                                                                                                          finalBossMinorTimer() != 0x00))) &&
                                     boss8exitingLocation() ) &&
                       isHardDifficulty() &&
                       never(finalBossMajorTimer() == 0x00 &&  
-                            finalBossMinorTimer() == 0x00) &&
+                            finalBossMinorTimer() == 0x00 && 
+                            any_of(range(0,FINAL_BOSS_NUMBER_OF_HEALTH, step= 0x1), index => (prev(byte(FINAL_BOSS_FIRST_HEALTH_LOCATION + index)) == 0x1))) &&
                       achievementIsValid()
 )
 
@@ -1219,16 +1371,16 @@ achievement( title = "1cc on Hard",
 )
 
 
-function maxPower() => isMaxSpeedUp() && isUpgradedShot() && isUpgradedSpecialShot() && isMaxOption() && isShieldActive()
-function wasMaxPower() => wasMaxSpeedUp() && wasUpgradedShot() && wasUpgradedSpecialShot() && wasMaxOption() && wasShieldActive()
-function noPower() => !anySpeedUp() && !isUpgradedShot() && !isUpgradedSpecialShot() && isNoOption() && isNoShieldActive()
+function maxPower(character) => isMaxSpeedUp() && isUpgradedShot() && isUpgradedSpecialShot() && isMaxOption(character) && isShieldActive()
+function wasMaxPower(character) => wasMaxSpeedUp() && wasUpgradedShot() && wasUpgradedSpecialShot() && wasMaxOption(character) && wasShieldActive()
+function noPower() => !anySpeedUp() && !isUpgradedShot() && !isUpgradedSpecialShot() && isNoOption()  // Don't check Shield, it doesn't disappear. 
 
 function maxAbilityAchievement(characterData)
 {
     achievement( title = characterData[TITLE],
                  description = characterData[DESCRIPTION],
                  points = characterData[POINTS],
-                 trigger = maxPower() &&
+                 trigger = maxPower(characterData[CHARACTER_SELECT_VALUE]) &&
                            characterSelect() == characterData[CHARACTER_SELECT_VALUE] &&
                            achievementIsValid()
     )
@@ -1272,11 +1424,12 @@ function disableAchievement(achievementData)
     achievement( title = achievementData[TITLE],
                  description = achievementData[DESCRIPTION],
                  points = achievementData[POINTS],
-                 trigger = wasMaxPower() &&
-                           noPower() &&
+                 trigger = wasMaxPower(achievementData[CHARACTER_SELECT_VALUE]) &&
+                           noPower() && // Shield doesn't disappear. 
+                           isShieldActive() && // protects against death.
                            !justLostLife() &&
                            characterSelect() == achievementData[CHARACTER_SELECT_VALUE] &&
-                           achievementIsValid()
+                           disableAchievementIsValid() // You take a strange type of damage when this happens, so we have an alternative achievement check.
     )
 }
 
@@ -1313,7 +1466,31 @@ for characterData in maxAbilityData
     disableAchievement(characterData)
 }
 
-scoreAchievement = 
+function scoreAchievement(data)
+{
+    achievement( title = data[TITLE],
+                 description = data[DESCRIPTION],
+                 points = data[POINTS],
+                 trigger = playerScoreArcade() >= data[SCORE] &&
+                           prev(bcdScoreArcade()) < data[SCORE] &&
+                           data[MODE_CHECK] &&
+                           achievementIsValid()
+    )
+}
+
+function specialScoreAchievement(data)
+{
+    achievement( title = data[TITLE],
+                 description = data[DESCRIPTION],
+                 points = data[POINTS],
+                 trigger = playerScoreSpecial() >= data[SCORE] &&
+                           prev(bcdScoreSpecial()) < data[SCORE] &&
+                           data[MODE_CHECK] &&
+                           achievementIsValid()
+    )
+}
+
+scoreAchievementData = 
 [
     {
         TITLE: "Quarter of a Million",
@@ -1335,7 +1512,11 @@ scoreAchievement =
         POINTS: 1,
         SCORE: (1000 * 1000),
         MODE_CHECK: isOnePlayerMode()
-    },
+    }
+]
+
+specialScoreAchievementData =
+[
     {
         TITLE: "Special Half a Million",
         DESCRIPTION: "Score 500,000 points in Special Mode",
@@ -1359,6 +1540,44 @@ scoreAchievement =
     }
 
 ]
+
+for data in scoreAchievementData
+{
+    scoreAchievement(data)
+}
+
+for data in specialScoreAchievementData
+{
+    specialScoreAchievement(data)
+}
+
+achievement(title = "Shouting All over the World",
+            description = "Get the Grey Bell Power-up",
+            points = 1,
+            trigger = greyBellActive() &&
+                      achievementIsValid()
+)
+
+achievement(title = "Ate the Mushroom",
+            description = "Get the Green Bell Power-up",
+            points = 1,
+            trigger = greenBellActive() &&
+                      achievementIsValid()
+)
+
+achievement(title = "A Different Kind of Shield",
+            description = "Get the Orange Bell Power-up",
+            points = 1,
+            trigger = orangeBellActive() &&
+                      achievementIsValid()
+)
+
+achievement(title = "The Mega Cannon",
+            description = "Get the Blue Bell Power-up",
+            points = 1,
+            trigger = blueBellActive() &&
+                      achievementIsValid()
+)
 
 leaderboard(
     title = format("High Score"),
@@ -1417,7 +1636,10 @@ leaderboard(
     start = 
     (
         isSpecialMode() &&
-        gameOver() &&
+        ((gameOver() && 
+          majorMinor() != 0x00) ||
+         (!gameOver() && 
+          majorMinor() == 0x00)) &&
         playerScoreSpecial() > 0 &&
         achievementIsValid()
     ),
@@ -1434,7 +1656,10 @@ leaderboard(
     (
         isNormalDifficultyOrHarder() &&
         isSpecialMode() &&
-        gameOver() &&
+        ((gameOver() && 
+          majorMinor() != 0x00) ||
+         (!gameOver() && 
+          majorMinor() == 0x00)) &&
         playerScoreSpecial() > 0 &&
         achievementIsValid()
     ),
@@ -1451,7 +1676,10 @@ leaderboard(
     (
         isHardDifficulty() &&
         isSpecialMode() &&
-        gameOver() &&
+        ((gameOver() && 
+          majorMinor() != 0x00) ||
+         (!gameOver() && 
+          majorMinor() == 0x00)) &&
         playerScoreSpecial() > 0 &&
         achievementIsValid()
     ),
@@ -1462,7 +1690,7 @@ leaderboard(
 )
 
 
-rich_presence_conditional_display(isOnePlayerMode() && achievementIsValid(), "1P Mode {3} Score: {0} Stage: {1} Loop: {2} Difficulty: {4}", 
+rich_presence_conditional_display(isOnePlayerMode() && rpIsValid(), "1P Mode {3} Score: {0} Stage: {1} Loop: {2} Difficulty: {4}", 
                                   rich_presence_value("Number", playerScoreArcade()),
                                   rich_presence_value("Number", stageNumber() + 1),
                                   rich_presence_value("Number", loopNumber() + 1),
@@ -1470,16 +1698,15 @@ rich_presence_conditional_display(isOnePlayerMode() && achievementIsValid(), "1P
                                   rich_presence_lookup("Difficulty", difficulty(), difficultyLookup)
                                   )
 
-rich_presence_conditional_display(isSpecialMode() && achievementIsValid(), "Special Mode {3} Score: {0} Stage: {1} Loop: {2} Difficulty: {4}", 
-                                  rich_presence_value("Number", playerScoreArcade()),
+rich_presence_conditional_display(isSpecialMode() && rpIsValid(), "Special Mode {3} Score: {0} Stage: {1} Loop: {2} Difficulty: {4}", 
+                                  rich_presence_value("Number", playerScoreSpecial()),
                                   rich_presence_value("Number", stageNumber() + 1),
                                   rich_presence_value("Number", loopNumber() + 1),
                                   rich_presence_lookup("CharacterName", characterSelect(), characterNameLookup),
                                   rich_presence_lookup("Difficulty", difficulty(), difficultyLookup)
                                   )
-rich_presence_conditional_display(isTwoPlayerMode() && achievementIsValid(), "Playing Two Player Mode")
+
+rich_presence_conditional_display(isTwoPlayerMode() && rpIsValid(), "Playing Two Player Mode")
                       
 rich_presence_display("Watching Demos")
 
-
-//  Bell powers. 
