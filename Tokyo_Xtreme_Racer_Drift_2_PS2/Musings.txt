@@ -44,3 +44,12 @@ Need to figure out leaderboard for the record Challenge and Record tour.
 Which map are you on? 
 
 Which car are you driving? 
+
+Leaderboard  Stage Time and Days. 
+
+Leaderboard each Track one Down and one Up. 
+
+Leaderboard special choices. 
+
+Leaderboards each Tier each race Record Challenge
+Leaderboard Final boss 
