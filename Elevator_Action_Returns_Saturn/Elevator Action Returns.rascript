@@ -646,6 +646,7 @@ achievement(title = "Your Mission Is Over",
 
 achievement(title = "Elevator Action Returns Is So Easy",
             description = "Beat Stage 6 on any difficulty",
+            type = "win_condition",
             points = 10, 
             trigger = elevatorActionReturns() &&
                       cheatProtection() &&
