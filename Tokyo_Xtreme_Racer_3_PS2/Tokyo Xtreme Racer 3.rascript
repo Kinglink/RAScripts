@@ -1970,7 +1970,7 @@ leaderboard(
             timeAttackTrackId() == W_NAGAHORI_WANGAN_OUT &&
             carCheck(TOYOTA_SPRINTER_TRUENO) &&
             isDefaultCar() &&
-            isRaining()
+            isRaining() // Done differently because isRaining, everything else is the same as above.
         ),
         cancel = always_false(),
         submit = always_true(),
