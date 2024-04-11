@@ -17,6 +17,10 @@ function ContainsKey(dictionary, key_name)
     return false
 }
 
+// only doing what I'll use currently.  All values are in the lookup
+DAIHATSU_MIDGET_II_R_TYPE_K100P = 0x01
+MITSUBISHI_MIRAGE_CYBORG_ZR = 0x27
+TOYOTO_TRUENO_3DOOR_GT_APEX_AE86 = 0x94
 carLookup =
 {
     0x00: "ASL Garaiya(Garaiya)",
@@ -162,14 +166,14 @@ carLookup =
     0x8c: "Toyota Vitz RS (NCP13)",
     0x8d: "Toyota Levin 1500SR (AE85)",
     0x8e: "Toyota Trueno 1500SR (AE85)",
-    0x8f: "Toyota Levin GT-Apex (AE86)",
-    0x90: "Toyota Levin GT-Apex (AE86)",
-    0x91: "Toyota Levin GT-Apex (AE86)",
-    0x92: "Toyota Levin GT-Apex (AE86)",
-    0x93: "Toyota Trueno GT-Apex (AE86)",
-    0x94: "Toyota Trueno GT-Apex (AE86)",
-    0x95: "Toyota Trueno GT-Apex (AE86)",
-    0x96: "Toyota Trueno GT-Apex (AE86)",
+    0x8f: "Toyota Levin 3Door GT-Apex (AE86)",
+    0x90: "Toyota Levin 3Door GT-Apex (AE86)",
+    0x91: "Toyota Levin 2Door GT-Apex (AE86)",
+    0x92: "Toyota Levin 2Door GT-Apex (AE86)",
+    0x93: "Toyota Sprinter 3Door GT-Apex (AE86)",
+    0x94: "Toyota Trueno 3Door GT-Apex (AE86)",
+    0x95: "Toyota Sprinter 2Door GT-Apex (AE86)",
+    0x96: "Toyota Trueno 2Door GT-Apex (AE86)",
     0x97: "Toyota Levin 1.6 GT-Z (AE92)",
     0x98: "Toyota Trueno 1.6 GT-Z (AE92)",
     0x99: "Toyota Levin BZ-R (AE111)",
@@ -357,7 +361,7 @@ opponentLookup =
     0x43: "PT Sprint (Medalist)",
     0x44: "Natural Corner (Hi Gambler)",
     0x45: "Drift Wood (Trickster)",
-    0x46: *"1st Kingdom (Kingdom Twelve)",
+    0x46: "1st Kingdom (Kingdom Twelve)",
     0x47: "Backstab (Thirteen Devils)",
     0x48: "Fake",
     0x49: "Rev SR",
@@ -389,7 +393,7 @@ opponentLookup =
     0x63: "Bloodhound (Thirteen Devils)",
     0x64: "True Pleiades",
     0x65: "Hikam Strawberry",
-    0x66: "Sugar wind",
+    0x66: "Sugar Wind",
     0x67: "Blue Revolution",
     0x68: "Hake Creek",
     0x69: "Shifty One",
@@ -691,14 +695,14 @@ function replayActive() => replayIndicator() == REPLAY_ACTIVE
 //          Doesn't appear to get changed AFTER a race, but may be incorrect before racing.
 function gameModeInGame() => byte(0x3B3524)
 CONQUEST_MODE = 0x01
-TIME_RECORD_MODE = 0x02
-TIME_CHALLENGE_MODE = 0x03
+RECORD_CHALLENGE_MODE = 0x02
+RECORD_TOUR_MODE = 0x03
 VERSUS_MODE = 0x04
 REPLAY_VIEWER_MODE = 0x05
 
 function conquestMode() => gameModeInGame() == CONQUEST_MODE
-function timeRecordMode() => gameModeInGame() == TIME_RECORD_MODE
-function timeChallengeMode() => gameModeInGame() == TIME_CHALLENGE_MODE
+function recordChallengeMode() => gameModeInGame() == RECORD_CHALLENGE_MODE
+function recordTourMode() => gameModeInGame() == RECORD_TOUR_MODE
 function versusMode() => gameModeInGame() == VERSUS_MODE
 function replayViewerMode() => gameModeInGame() == REPLAY_VIEWER_MODE
 
@@ -725,7 +729,7 @@ function replayViewerMode() => gameModeInGame() == REPLAY_VIEWER_MODE
 //          0x13 = Kirigamine
 //          0x14 = Hakone Nanamagari
 // Value doesn't appear to change after race
-function courseInGAme() => byte(0x3B3525)
+function courseInGame() => byte(0x3B3525)
 HARUNA_COURSE_INDEX = 0x00
 HAKONE_COURSE_INDEX = 0x01
 NIKKO_COURSE_INDEX = 0x02
@@ -771,6 +775,78 @@ ingameCourseLookup =
     HAKONE_NANAMAGARI_COURSE_INDEX: "Hakone Nanamagari"
 }
 
+HAKONE_UNLOCK_BIT = 0
+FIRST_RECORD_TOUR_COURSE = HAKONE_UNLOCK_BIT
+HIROSHIMA_UNLOCK_BIT = 1
+HARUNA_UNLOCK_BIT = 2
+AKAGI_UNLOCK_BIT = 3
+URA_ROKKA_UNLOCK_BIT = 4
+OMOTE_ROKKO_UNLOCK_BIT = 5
+SHIGA_KUSATSU_UNLOCK_BIT = 6
+NIKKO_UNLOCK_BIT = 7
+ZAO_UNLOCK_BIT = 8
+ASO_UNLOCK_BIT = 9
+HOKKAIDO_UNLOCK_BIT = 10
+LAST_RECORD_TOUR_COURSE = HOKKAIDO_UNLOCK_BIT
+
+recordTourLookup =
+{
+    HAKONE_UNLOCK_BIT: "Hakone",
+    HIROSHIMA_UNLOCK_BIT: "Hiroshima",
+    HARUNA_UNLOCK_BIT: "Haruna",
+    AKAGI_UNLOCK_BIT: "Akagi",
+    URA_ROKKA_UNLOCK_BIT: "Ura Rokka",
+    OMOTE_ROKKO_UNLOCK_BIT: "Omote Rokko",
+    SHIGA_KUSATSU_UNLOCK_BIT: "Shiga Kusatsu",
+    NIKKO_UNLOCK_BIT: "Nikko",
+    ZAO_UNLOCK_BIT: "Zao",
+    ASO_UNLOCK_BIT: "Aso",
+    HOKKAIDO_UNLOCK_BIT: "Hokkaido"
+}
+
+DOWNHILL_VALUE = 0
+CLIMB_VALUE = 1
+
+directionLookup =
+{
+    DOWNHILL_VALUE: "Downhill",
+    CLIMB_VALUE: "Uphill"
+
+}
+
+shortCarNameLookup =
+{
+    MITSUBISHI_MIRAGE_CYBORG_ZR: "Mirage Cyborg ZR",
+    DAIHATSU_MIDGET_II_R_TYPE_K100P: "Midget II",
+    TOYOTO_TRUENO_3DOOR_GT_APEX_AE86: "Trueno GT"
+}
+
+SUNNY_VALUE = 0
+RAIN_VALUE = 1
+SNOW_VALUE = 2
+CLOUDY_VALUE = 3
+STORM_VALUE = 4
+SNOWSTORM_VALUE = 5
+
+weatherLookup =
+{
+    SUNNY_VALUE: "FINE",
+    RAIN_VALUE: "Rain",
+    SNOW_VALUE: "Snow",
+    CLOUDY_VALUE: "Cloudy",
+    STORM_VALUE: "Storm",
+    SNOWSTORM_VALUE: "Snowstorm"
+} 
+
+DAYTIME_VALUE = 0
+NIGHTTIME_VALUE = 1
+
+timeOfDayLookup =
+{
+    DAYTIME_VALUE: "Day",
+    NIGHTTIME_VALUE: "Night"
+}
+
 // $3C0070: (8-bit) Alternate Replay Indicator
 //          
 //          0x00 = Replay active
@@ -785,6 +861,8 @@ function inGameIndicator() => byte(0x3FA984)
 
 IN_GAME_VALUE = 0x01
 function isInGame() => inGameIndicator() == IN_GAME_VALUE
+function wasInGame() => prev(inGameIndicator()) == IN_GAME_VALUE
+function justFinishedGameplay() => !isInGame() && wasInGame()
 
 
 // $3FAFE4: (32-bit) Save Game handler.
@@ -894,17 +972,6 @@ function money() => dword(0x75CB30)
 //          Hokkaido
 COURSE_UNLOCKED_MEMORY_LOCATION = 0x760784
 function courseUnlocked() => byte(COURSE_UNLOCKED_MEMORY_LOCATION)
-HAKONE_UNLOCK_BIT = 0
-HIROSHIMA_UNLOCK_BIT = 1
-HARUNA_UNLOCK_BIT = 2
-AKAGI_UNLOCK_BIT = 3
-URA_ROKKA_UNLOCK_BIT = 4
-OMOTE_ROKKO_UNLOCK_BIT = 5
-SHIGA_KUSATSU_UNLOCK_BIT = 6
-NIKKO_UNLOCK_BIT = 7
-ZAO_UNLOCK_BIT = 8
-ASO_UNLOCK_BIT = 9
-HOKKAIDO_UNLOCK_BIT = 10
 
 function courseJustUnlocked(bitIndex) => bit(bitIndex, COURSE_UNLOCKED_MEMORY_LOCATION) == 1 && 
                                          prev(bit(bitIndex, COURSE_UNLOCKED_MEMORY_LOCATION)) == 0
@@ -944,7 +1011,7 @@ function rivalLoss(rivalIndex) => word(FIRST_RIVAL_LOSS_MEMORY_LOCATION + (rival
 //          This is the data for Ground Zero  If you have beat him this is 0x01.
 function winsFirstRival() => word(FIRST_RIVAL_WIN_MEMORY_LOCATION)
 
-function rivalWin(rivalIndex) => word(FIRST_RIVAL_WIN_MEMORY_LOCATION + (rivalIndex * RIVAL_MEMORY_SIZE)
+function rivalWin(rivalIndex) => word(FIRST_RIVAL_WIN_MEMORY_LOCATION + (rivalIndex * RIVAL_MEMORY_SIZE))
 
 // $760790: (8-bit) Rival Met
 //          
@@ -956,7 +1023,7 @@ function rivalWin(rivalIndex) => word(FIRST_RIVAL_WIN_MEMORY_LOCATION + (rivalIn
 //          Not a bitfield.
 function firstRivalMetFriend() => byte(FIRST_RIVAL_FRIEND_MEMORY_LOCATION)
 
-function rivalFriend(rivalIndex) => byte(FIRST_RIVAL_FRIEND_MEMORY_LOCATION + (rivalIndex * RIVAL_MEMORY_SIZE)
+function rivalFriend(rivalIndex) => byte(FIRST_RIVAL_FRIEND_MEMORY_LOCATION + (rivalIndex * RIVAL_MEMORY_SIZE))
 
 // $760794: (8-bit) Second Rival Information
 //          
@@ -1302,7 +1369,7 @@ function masterRaceWon() => byte(MASTER_RACE_WON_MEMORY_LOCATION)
 HIROSHIMA_STRAIGHT_MATCH_WON_BIT = 0
 HARUNA_LEVIN_TRUENO_CUP_WON_BIT = 1
 AKAGI_ROTARY_MATCH_WON_BIT = 2
-URA_ROKKA_V-LINE_WON_BIT = 3
+URA_ROKKA_VLINE_WON_BIT = 3
 OMOTE_ROKKO_BOXER_MATCH_WON_BIT = 4
 SHIGA_KUSATSU_SPECIAL_CAR_ROUND_WON_BIT = 5
 NIKKO_RIVAL_CAR_MATCH_WON_BIT = 6
@@ -1399,6 +1466,14 @@ GROUP_R_VALUE = 0
 GROUP_J_VALUE = 1
 GROUP_A_VALUE = 2
 GROUP_B_VALUE = 3
+
+groupLookup = {
+    GROUP_R_VALUE: "Group R",
+    GROUP_J_VALUE: "Group J",
+    GROUP_A_VALUE: "Group A",
+    GROUP_B_VALUE: "Group B"
+}
+
 function recordTourGroup() => byte(0x77CEB4)
 
 // $77DBE4: (32-bit) Play time
@@ -1438,8 +1513,8 @@ function inGameMapLocation() => byte(0x77DC34)
 //          0x00 = Downhill
 //          0x01 = Climb
 function inGameClimbDownhill() => byte(0x77DC35)
-DOWNHILL_CLIMB_VALUE =0
-CLIMB_VALUE = 1
+// DOWNHILL_VALUE =0
+// CLIMB_VALUE = 1
 
 // $77DC36: (8-bit) Weather
 //          
@@ -1450,20 +1525,12 @@ CLIMB_VALUE = 1
 //          0x04 = Storm
 //          0x05 = Snowstorm
 function inGameWeather() => byte(0x77DC36)
-SUNNY_VALUE = 0
-RAIN_VALUE = 1
-SNOW_VALUE = 2
-CLOUDY_VALUE = 3
-STORM_VALUE = 4
-SNOWSTORM_VALUE = 5
 
 // $77DC37: (8-bit) Time of Day in Game
 //          
 //          0x00 = Day Time
 //          0x01 = Night Time
 function inGameTimeOfDay() => byte(0x77DC37)
-DAYTIME_VALUE = 0
-NIGHTTIME_VALUE = 1
 
 // $77DC38: (16-bit) Race Starting Location
 //          
@@ -1756,6 +1823,9 @@ RACE_IN_PROGRESS_VALUE = 0
 WON_RACE_VALUE = 1
 LOST_RACE_VALUE = 2
 function winStatus() => byte(0x77EAF9)
+
+function justWonRace() => winStatus() == WON_RACE_VALUE &&
+                          prev(winStatus()) == RACE_IN_PROGRESS_VALUE
 
 // $77EB20: (8-bit) Display name of Opponent
 //          
@@ -2128,7 +2198,10 @@ function displayNameOfOpponent() => byte(0x77EB20)
 //          
 //          0x00 = Level 1
 //          0x09 = Level 10
-function gymKhanaInGame() => byte(0x77EB70)
+function gymkhanaLevelInGame() => byte(0x77EB70)
+
+FIRST_GYMKHANA_COURSE = 0
+LAST_GYMKHANA_COURSE = 9
 
 // $77EBBC: (8-bit) Car Type being Driven
 //          
@@ -2198,11 +2271,13 @@ function timeInFramesTARace() => dword(0xB8879C)
 //          (it seems the 4th byte is 4 miliseconds.  The third byte is seconds, with the carry over carried to the miliseconds value, up to 3 miliseconds, the second bit is unusable (in that format,  anything there is > 10 minutes) and the first byte is minutes, but also *2 (because 1 = +1 and 2 = 1)
 function lostTimeInTimeAttack() => dword(0xB887CC)
 
+// this is in centiseconds.
 function calculateTotalTimeInTimeAttack() {
-    minutesLost = (word(0xB887CC) + 1)/ 2
-    secondsLost = byte(0xB887CE) & 0x3f 
-    milisecondsLost = (byte(0xB887CE) & 0xC0) >> 6 + (byte(0xB887CF) & 0xFF) << 2
-    return timeInFramesTARace() * 1000/60 + (minutesLost * 60*1000) - (secondsLost * 1000 ) - milisecondsLost
+    minutesLost = (word(0xB887CC)) * 3000 // x/2*60*100
+    secondsLost = sum_of(range(0,99), i => (byte(0xB887CE) & 0x3f))
+    additionalMillisecondsLost = (byte(0xB887CF)) * 0.4
+    totalTimeLost = (minutesLost) + (secondsLost) + additionalMillisecondsLost
+    return timeInFramesTARace() * 1.66666 + totalTimeLost
 }
 
 // $B887D0: (32-bit) Number of "Hits" in Time attack mode.
@@ -2255,6 +2330,9 @@ function gymkhanaResults() => byte(0xB88E16)
 //          0x08 = Gymkhana CA
 //          0x09 = Practice (TA)
 //          0x0a = Practice (CA)
+//          0x0b = Record ChallengeTime Attack
+//          0x0c = Record Challenge Course Attack
+//          0x0d = Record Tour
 function uiForRace() => byte(0xB92789)
 UI_TA_ATTACK = 0
 UI_SP_HEAD_TO_HEAD = 1
@@ -2264,8 +2342,15 @@ UI_TAC_ATTACK = 5
 UI_GYM_TA = 7
 UI_GYM_CA = 8
 UI_PRACTICE_TA = 9
-UI_PRACTICE_CA = 10
+UI_PRACTICE_CA = 0xa
+UI_RECORD_CHALLENGE_TA = 0xb
+UI_RECORD_CHALLENGE_CA = 0xc
+UI_RECORD_TOUR = 0xd
 
+function recordChallengeTAMode() => uiForRace() == UI_RECORD_CHALLENGE_TA
+function recordChallengeCAMode() => uiForRace() == UI_RECORD_CHALLENGE_CA
+function recordChallengeGymkhanaTAMode() => uiForRace() == UI_GYM_TA
+function recordChallengeGymkhanaCAMode() => uiForRace() == UI_GYM_CA
 
 // $B927A8: (Float) Current Speed of Player's Car
 //          
@@ -2279,7 +2364,16 @@ function playerPastSpeedMPH(targetSpeed) => currentSpeedPlayersCarMPH() >= targe
 //          0x00 = Time Attack
 //          0x01 = CA Attack
 //          0x02 = Gymkhana
+TIME_ATTACK_MODE_VALUE = 0
+CA_ATTACK_MODE_VALUE = 1
 function modeSelectRecordChallengeFrontEnd() => byte(0xDE4239)
+
+
+recordChallengeModeLookup = 
+{
+    TIME_ATTACK_MODE_VALUE: "Time Attack",
+    CA_ATTACK_MODE_VALUE: "CA Attack"
+}
 
 // $DE423C: (8-bit) Course Selected for Record Challenge
 //          
@@ -2639,4 +2733,283 @@ function achievementActive()
            notSaving()
 }
 
+function leaderboardCourse(courseId, direction)
+{
+    leaderboard(
+        title = format("Record Challenge: Fastest Time on {0} {1}",  ingameCourseLookup[courseId], directionLookup[direction]),
+        description = format("Record the fastest time on {0} {1} in Time Attack Mode in Record Challenge Mode", ingameCourseLookup[courseId], directionLookup[direction] ),
+        start = 
+        (
+            justFinishedGameplay() &&
+            winStatus() == WON_RACE_VALUE &&
+            recordChallengeMode() &&
+            courseInGame() == courseId &&
+            achievementActive() && 
+            inGameClimbDownhill() == direction &&
+            recordChallengeTAMode()
 
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = calculateTotalTimeInTimeAttack(), // MILLISECONDS is centiseconds. See: https://docs.retroachievements.org/Leaderboards/#value-format
+        lower_is_better = true,
+        format = "MILLISECS"
+    )
+
+    leaderboard(
+        title = format("Record Challenge: CA Attack on {0} {1}",  ingameCourseLookup[courseId], directionLookup[direction]),
+        description = format("Finish with the best CA score on {0} {1} in Time Attack Mode in Record Challenge Mode", ingameCourseLookup[courseId], directionLookup[direction] ),
+        start = 
+        (
+            justFinishedGameplay() &&
+            winStatus() == WON_RACE_VALUE &&
+            recordChallengeMode() &&
+            courseInGame() == courseId &&
+            achievementActive() && 
+            inGameClimbDownhill() == direction &&
+            recordChallengeCAMode()
+
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = totalScoreCAMode(), 
+        format = "VALUE"
+    )
+}
+for key in ingameCourseLookup
+{
+    if (key != GYMKHANA_COURSE_INDEX)
+    {
+        leaderboardCourse(key, DOWNHILL_VALUE)
+        leaderboardCourse(key, CLIMB_VALUE)
+    }
+
+
+}
+
+for target in range(FIRST_GYMKHANA_COURSE, LAST_GYMKHANA_COURSE)
+{
+    leaderboard(
+        title = format("Record Challenge: Fastest Time Gymkhana {0}",  target + 1),
+        description = format("Record the fastest time on TA Course {0} in Gymkhana Mode in Record Challenge Mode", target + 1 ),
+        start = 
+        (
+            justFinishedGameplay() &&
+            winStatus() == WON_RACE_VALUE &&
+            recordChallengeMode() &&   
+            courseInGame() == GYMKHANA_COURSE_INDEX &&
+            gymkhanaLevelInGame() ==  target &&
+            achievementActive() &&
+            recordChallengeGymkhanaTAMode()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = calculateTotalTimeInTimeAttack(), // MILLISECONDS is centiseconds. 
+        lower_is_better = true,
+        format = "MILLISECS"
+        )
+}
+
+for target in range(FIRST_GYMKHANA_COURSE, LAST_GYMKHANA_COURSE)
+{
+    leaderboard(
+        title = format("Record Challenge: Highest Score Gymkhana {0}",  target + 1),
+        description = format("Finish CA Course {0} with the highest score in Gymkhana Mode in Record Challenge Mode", target + 1 ),
+        start = 
+        (
+            justFinishedGameplay() &&
+            winStatus() == WON_RACE_VALUE &&
+            recordChallengeMode() &&   
+            courseInGame() == GYMKHANA_COURSE_INDEX &&
+            gymkhanaLevelInGame() ==  target &&
+            achievementActive() &&
+            recordChallengeGymkhanaCAMode()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = totalScoreCAMode(), // MILLISECONDS is centiseconds. 
+        format = "VALUE"
+        )
+}
+
+
+CAR = "Car"
+TRACK = "Track"
+CREATOR = "Creator"
+DIRECTION = "Direction"
+ID = "AchievementID"
+TIME = "Time"
+ACHIEVEMENT_NAME = "Title"
+WEATHER = "Weather"
+TIMEOFDAY = "TimeOfDay"
+TIMESTRING = "DisplayString"
+MODE = "Mode"
+SCORE = "Score"
+function timeConversion(minutes, seconds, millisecond = 0) => ((minutes * 60) +seconds) * 60 + millisecond
+
+specificLeaderboard =
+[
+    { 
+        TRACK: AKAGI_COURSE_INDEX,
+        CAR: MITSUBISHI_MIRAGE_CYBORG_ZR,
+        CREATOR: "Borysewicz",
+        DIRECTION: DOWNHILL_VALUE,
+        WEATHER: CLOUDY_VALUE,
+        TIMEOFDAY: NIGHTTIME_VALUE,
+        ID: 94793,
+        MODE: TIME_ATTACK_MODE_VALUE,
+        TIME: timeConversion(5,00),
+        ACHIEVEMENT_NAME: "Ghost King of Akagi",
+        TIMESTRING: "5:00"
+    },
+    { 
+        TRACK: URA_ROKKA_COURSE_INDEX,
+        CAR: DAIHATSU_MIDGET_II_R_TYPE_K100P,
+        CREATOR: "Cipher47",
+        ID: 94794,
+        MODE: TIME_ATTACK_MODE_VALUE,
+        DIRECTION: DOWNHILL_VALUE,
+        WEATHER: STORM_VALUE,
+        TIMEOFDAY: NIGHTTIME_VALUE,
+        TIME: timeConversion(6,00),
+        ACHIEVEMENT_NAME: "Hauler King of ShinKanjou",
+        TIMESTRING: "6:00"
+    },
+    { 
+        TRACK: HARUNA_COURSE_INDEX,
+        CAR: TOYOTO_TRUENO_3DOOR_GT_APEX_AE86,
+        CREATOR: "PacoAlcantara",
+        ID: -1,
+        MODE: CA_ATTACK_MODE_VALUE,
+        DIRECTION: DOWNHILL_VALUE,
+        WEATHER: SUNNY_VALUE,
+        TIMEOFDAY: NIGHTTIME_VALUE,
+        ACHIEVEMENT_NAME: "Tofu King of Haruna",
+        SCORE: 1000000        
+    }
+]
+
+function specificLeaderboardTimeAttack(data)
+{
+    leaderboard(    
+        title = format("Record Challenge: Fastest {1} {2} on {0}",  ingameCourseLookup[data[TRACK]],  shortCarNameLookup[data[CAR]], directionLookup[data[DIRECTION]]),
+        description = format("Record the fastest time on {0}/{3}/{4}/{5} while driving the Normal Car of {1} in Time Attack in Record Challenge Mode. Thanks to {2} For the suggestion", 
+                             ingameCourseLookup[data[TRACK]], 
+                             carLookup[data[CAR]], 
+                             data[CREATOR], 
+                             directionLookup[data[DIRECTION]], 
+                             weatherLookup[data[WEATHER]], 
+                             timeOfDayLookup[data[TIMEOFDAY]],
+                             recordChallengeModeLookup[data[MODE]]),
+        start = 
+        (
+            justFinishedGameplay() &&
+            winStatus() == WON_RACE_VALUE &&
+            recordChallengeMode() &&
+            courseInGame() == data[TRACK] &&
+            inGameClimbDownhill() == data[DIRECTION] &&
+            inGameCarDriven() == data[CAR] &&
+            inGameWeather() == data[WEATHER] &&
+            inGameTimeOfDay() == data[TIMEOFDAY] &&
+            isNormalCar() &&
+            achievementActive() && 
+            recordChallengeTAMode()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = calculateTotalTimeInTimeAttack(), // MILLISECONDS is centiseconds. See above
+        lower_is_better = true,
+        format = "MILLISECS"
+    )
+
+}
+
+function specificLeaderboardCAAttack(data)
+{
+    leaderboard(    
+        title = format("Record Challenge: CA Attack {1} {2} on {0}",  ingameCourseLookup[data[TRACK]],  shortCarNameLookup[data[CAR]], directionLookup[data[DIRECTION]]),
+        description = format("Finish with the best CA Score on {0}/{3}/{4}/{5} while driving the Normal Car of {1} in CA Attack in Record Challenge Mode. Thanks to {2} For the suggestion", 
+                             ingameCourseLookup[data[TRACK]], 
+                             carLookup[data[CAR]], 
+                             data[CREATOR], 
+                             directionLookup[data[DIRECTION]], 
+                             weatherLookup[data[WEATHER]], 
+                             timeOfDayLookup[data[TIMEOFDAY]],
+                             recordChallengeModeLookup[data[MODE]]),
+        start = 
+        (
+            justFinishedGameplay() &&
+            winStatus() == WON_RACE_VALUE &&
+            recordChallengeMode() &&
+            courseInGame() == data[TRACK] &&
+            inGameClimbDownhill() == data[DIRECTION] &&
+            inGameCarDriven() == data[CAR] &&
+            inGameWeather() == data[WEATHER] &&
+            inGameTimeOfDay() == data[TIMEOFDAY] &&
+            isNormalCar() &&
+            achievementActive() && 
+            recordChallengeCAMode()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = totalScoreCAMode(), 
+        format = "VALUE"
+    )
+
+}
+
+
+for data in specificLeaderboard 
+{
+    if data[MODE] == TIME_ATTACK_MODE_VALUE
+    {
+        specificLeaderboardTimeAttack(data)
+    }
+    else if data[MODE] == CA_ATTACK_MODE_VALUE
+    {
+        specificLeaderboardCAAttack(data)
+    }
+
+    
+//    achievement(title = data[ACHIEVEMENT_NAME],
+//                description = format("Beat {0} on {1} while driving the Default Car of {2} in Time Trial Mode.  Thanks to {3} for designing this achievement", data[TIMESTRING], TrackLookup[data[TRACK]], CarName[data[CAR]], data[CREATOR]),
+//                points = 5,
+//                trigger = isDriving() && 
+//                          triggerJustFinishedTimeAttack() && 
+//                          timeAttackMode() && 
+//                          prev(timeTimeAttackMode()) > 0 &&
+//                          prev(timeTimeAttackMode()) < data[TIME] &&
+//                          timeAttackTrackId() == data[TRACK] &&
+//                          carCheck(data[CAR]) &&
+//                          isDefaultCar()
+//
+//    )
+
+}
+
+
+
+for groupIndex in groupLookup
+{
+    for index in range(FIRST_RECORD_TOUR_COURSE, LAST_RECORD_TOUR_COURSE) 
+    {
+        leaderboard(    
+            title = format("Record Tour: Fastest Group {1} Stage {0}", index + 1, groupLookup[groupIndex]),
+            description = format("Record the fastest time on {0} in Group{1} in Record Tour mode", recordTourLookup[index], groupLookup[groupIndex] ),
+            start = 
+            (
+                justFinishedGameplay() &&
+                winStatus() == WON_RACE_VALUE &&
+                recordTourMode() &&
+                recordTourStage() == index &&
+                recordTourGroup() == groupIndex &&
+                achievementActive()
+            ),
+            cancel = always_false(),
+            submit = always_true(),
+            value = calculateTotalTimeInTimeAttack(), // MILLISECONDS is centiseconds. See above
+            lower_is_better = true,
+            format = "MILLISECS"
+        )
+    }
+}
