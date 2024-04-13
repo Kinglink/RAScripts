@@ -291,106 +291,106 @@ carLookup =
 
 opponentLookup = 
 {
-    0x0: "Ground Zero (Ground Zero)",
+    0x0: "Ground Zero",
     0x1: "Lil Giant",
     0x2: "Disciple 86",
     0x3: "Hi-Rev",
     0x4: "Drifty",
-    0x5: "Melon Gripper (Team Leader: Hakone Stalkers)",
+    0x5: "Melon Gripper",
     0x6: "Hi-Fi",
     0x7: "Tofu Maniac",
-    0x8: "Eternal Splash (Hi-Gambler)",
-    0x9: "Special Scent (Supporter)",
-    0xa: "Mr. Switchback (Supporter)",
-    0xb: "Kaniyana Blockbuster (Supporter)",
-    0xc: "Mr. Mitsu (Slasher, Stage 1)",
-    0xd: "Night Flight (Medalist)",
-    0xe: "FR Benchmark (Hi Gambler)",
-    0xf: "Primal Hill (Trickster)",
-    0x10: "Lightning Shift (Trickster)",
+    0x8: "Eternal Splash",
+    0x9: "Special Scent",
+    0xa: "Mr. Switchback",
+    0xb: "Kaniyana Blockbuster",
+    0xc: "Mr. Mitsu",
+    0xd: "Night Flight",
+    0xe: "FR Benchmark",
+    0xf: "Primal Hill",
+    0x10: "Lightning Shift",
     0x11: "Keihin Shadow",
     0x12: "Miracle Runner",
-    0x13: "Hakone King (Team Leader: h-dd)",
+    0x13: "Hakone King",
     0x14: "Terror Sign",
     0x15: "Kojiro Itsukujina",
     0x16: "River Ruler",
     0x17: "Gold Press",
     0x18: "Spring Storm",
     0x19: "Maple Red",
-    0x1a: "Vorpal Weapon (Team Leader: Street Snap)",
-    0x1b: "Battleship Kure (Supporter)",
+    0x1a: "Vorpal Weapon",
+    0x1b: "Battleship Kure",
     0x1c: "Gogo Noroyana",
-    0x1d: "Setouchi Queens (Team Leader: Wiz Raspberry)",
-    0x1e: "Whirlpool (Supporter)",
-    0x1f: "Dominator (Slasher)",
-    0x20: "Spring Wind (Supporter)",
-    0x21: "Big Blue (Medalist)",
-    0x22: "Hyper Crank (Hi Gambler)",
-    0x23: "Black Onyx (Trickster)",
-    0x24: "Lash Messiah (Hi Gambler)",
-    0x25: "Mist Shower (Trickster)",
-    0x26: "Sakura Sprinter (Trickster)",
-    0x27: "Mt. Noro Emperess (Trickster)",
+    0x1d: "Setouchi Queens",
+    0x1e: "Whirlpool",
+    0x1f: "Dominator",
+    0x20: "Spring Wind",
+    0x21: "Big Blue",
+    0x22: "Hyper Crank",
+    0x23: "Black Onyx",
+    0x24: "Lash Messiah",
+    0x25: "Mist Shower",
+    0x26: "Sakura Sprinter",
+    0x27: "Mt. Noro Emperess",
     0x28: "Yuushu Flirt",
-    0x29: "Climb Hunter (Hi Gambler)",
+    0x29: "Climb Hunter",
     0x2a: "Jet Set",
-    0x2b: "Rocket Dash (Team Leader: Skyliner R)",
-    0x2c: "Street Honage (Hi Gambler)",
-    0x2d: "Under the Stars (Supporter)",
-    0x2e: "Ridge Pirate (Supporter)",
-    0x2f: "Glittering Gaze (Medalist)",
-    0x30: "Street Tester (Trickster)",
-    0x31: "Metro Roller (Trickster)",
+    0x2b: "Rocket Dash",
+    0x2c: "Street Honage",
+    0x2d: "Under the Stars",
+    0x2e: "Ridge Pirate",
+    0x2f: "Glittering Gaze",
+    0x30: "Street Tester",
+    0x31: "Metro Roller",
     0x32: "Valiant Inokuchi",
     0x33: "Autumn Lord",
     0x34: "Tail Cracker",
     0x35: "Ikaho Gatekeeper",
     0x36: "Death Sentence",
     0x37: "Groove 9",
-    0x38: "Turbolicious (Team Leader: Spiral Sliders)",
+    0x38: "Turbolicious",
     0x39: "Rage",
     0x3a: "Death",
-    0x3b: "Destruction (Team Leader: Haruna Hillclimb Club)",
+    0x3b: "Destruction",
     0x3c: "Aerial R",
     0x3d: "Mad Dog",
     0x3e: "Local Hero",
-    0x3f: "Haruna Moon (Supporter)",
-    0x40: "Saudade (Supporter)",
-    0x41: "Last Supper (Supporter)",
-    0x42: "Guardian (Slasher)",
-    0x43: "PT Sprint (Medalist)",
-    0x44: "Natural Corner (Hi Gambler)",
-    0x45: "Drift Wood (Trickster)",
-    0x46: "1st Kingdom (Kingdom Twelve)",
-    0x47: "Backstab (Thirteen Devils)",
+    0x3f: "Haruna Moon",
+    0x40: "Saudade",
+    0x41: "Last Supper",
+    0x42: "Guardian",
+    0x43: "PT Sprint",
+    0x44: "Natural Corner",
+    0x45: "Drift Wood",
+    0x46: "1st Kingdom",
+    0x47: "Backstab",
     0x48: "Fake",
     0x49: "Rev SR",
-    0x4a: "Total FR (Team Leader: Haruna Starlights)",
+    0x4a: "Total FR",
     0x4b: "Counter-rev",
     0x4c: "Highway Lyrics",
     0x4d: "Night Groove",
     0x4e: "Night Pressure",
-    0x4f: "Night Rise (Team Leader: Ashanti Rise)",
+    0x4f: "Night Rise",
     0x50: "Drift Source",
     0x51: "Lil Meteor",
     0x52: "Norma FR Style",
     0x53: "Konica FR Style",
-    0x54: "Osaka FR Style (Team Leader: Nissan FR Style)",
+    0x54: "Osaka FR Style",
     0x55: "Minor Hatch",
     0x56: "German Trend",
-    0x57: "Pretty Boy (Supporter)",
-    0x58: "Hog Muffler (Supporter)",
-    0x59: "Silver Rose (Supporter)",
-    0x5a: "Eternal Wanderer (Slasher)",
-    0x5b: "Speed Raid (Trickster)",
+    0x57: "Pretty Boy",
+    0x58: "Hog Muffler",
+    0x59: "Silver Rose",
+    0x5a: "Eternal Wanderer",
+    0x5b: "Speed Raid",
     0x5c: "HC Top",
-    0x5d: "D. Slick (Team Leader: Akagi Big Blue)",
-    0x5e: "Cyclone (Trickster)",
-    0x5f: "Redeye (Trickster)",
-    0x60: "Northern Lights (Trickster)",
-    0x61: "Passing Night (Trickster)",
-    0x62: "Heaven's Sword (Kingdom Twelve)",
-    0x63: "Bloodhound (Thirteen Devils)",
+    0x5d: "D. Slick",
+    0x5e: "Cyclone",
+    0x5f: "Redeye",
+    0x60: "Northern Lights",
+    0x61: "Passing Night",
+    0x62: "Heaven's Sword",
+    0x63: "Bloodhound",
     0x64: "True Pleiades",
     0x65: "Hikam Strawberry",
     0x66: "Sugar Wind",
@@ -400,42 +400,42 @@ opponentLookup =
     0x6a: "Hillclimb Guy #2",
     0x6b: "Hillclimb Guy #3",
     0x6c: "Hillclimb Guy #4",
-    0x6d: "Hillclimb Guy #1 (Team Leader: Hillclimb Guys)",
+    0x6d: "Hillclimb Guy #1",
     0x6e: "Wild Range",
-    0x6f: "Hell's Fury (Hi Gambler)",
-    0x70: "Master Pete (Supporter)",
-    0x71: "Ever Clip (Supporter)",
-    0x72: "Lyrical Style (Supporter)",
-    0x73: "Alchemist (Slasher)",
-    0x74: "Enchantress (Medalist)",
-    0x75: "Wandering Destiny (Hi Gambler)",
-    0x76: "Dark Fear (Trickster)",
-    0x77: "Rose Rain (Trickster)",
-    0x78: "Brave Silence (Trickster)",
-    0x79: "Hyper Beat (Trickster)",
-    0x7a: "Nuts & Bolts (Trickster)",
-    0x7b: "Gladiator (Kingdom Twelve)",
-    0x7c: "Gloomy Angel (Thirteen Devils)",
+    0x6f: "Hell's Fury",
+    0x70: "Master Pete",
+    0x71: "Ever Clip",
+    0x72: "Lyrical Style",
+    0x73: "Alchemist",
+    0x74: "Enchantress",
+    0x75: "Wandering Destiny",
+    0x76: "Dark Fear",
+    0x77: "Rose Rain",
+    0x78: "Brave Silence",
+    0x79: "Hyper Beat",
+    0x7a: "Nuts & Bolts",
+    0x7b: "Gladiator",
+    0x7c: "Gloomy Angel",
     0x7d: "Immortal Reaper",
     0x7e: "R Pride",
-    0x7f: "Brake Fest (Hi Gambler)",
-    0x80: "Night Striker (Hi Gambler)",
-    0x81: "Tiny Kim (Medalist)",
+    0x7f: "Brake Fest",
+    0x80: "Night Striker",
+    0x81: "Tiny Kim",
     0x82: "FR Search",
-    0x83: "Mohair Legend R (Team Leader: Adult Night)",
-    0x84: "Dynamite Fang (Supporter)",
-    0x85: "Midnight Prowler (Supporter)",
-    0x86: "Street Fossil (Kingdom Twelve)",
+    0x83: "Mohair Legend R",
+    0x84: "Dynamite Fang",
+    0x85: "Midnight Prowler",
+    0x86: "Street Fossil",
     0x87: "Sign Love",
     0x88: "Gumma Giant",
-    0x89: "Performance Shifter (Hi Gambler)",
-    0x8a: "Skill Factory (Hi Gambler)",
-    0x8b: "F2.8 (Medalist)",
-    0x8c: "Kayo Spark (Trickster)",
+    0x89: "Performance Shifter",
+    0x8a: "Skill Factory",
+    0x8b: "F2.8",
+    0x8c: "Kayo Spark",
     0x8d: "Skirt Checker",
-    0x8e: "Full-on C121 (Team Leader: Love Boat)",
-    0x8f: "Bottom Feeder (Supporter)",
-    0x90: "Heartbreaker (Thirteen Devils)",
+    0x8e: "Full-on C121",
+    0x8f: "Bottom Feeder",
+    0x90: "Heartbreaker",
     0x91: "Performance Drifter",
     0x92: "Indy A",
     0x93: "Night Requiem",
@@ -443,154 +443,154 @@ opponentLookup =
     0x95: "Love Match",
     0x96: "Bloody Saturn",
     0x97: "MY",
-    0x98: "Gulf Omen (Team Leader: 60 Seconds)",
+    0x98: "Gulf Omen",
     0x99: "Customer Satisfaction",
     0x9a: "Insurgency",
     0x9b: "Downhill Guy #2",
     0x9c: "Downhill Guy #3",
     0x9d: "Downhill Guy #4",
-    0x9e: "Downhill Guy #1 (Team Leader: Downhill Guys)",
-    0x9f: "Winding Core (Hi Gambler)",
-    0xa0: "Impart (Supporter)",
-    0xa1: "Racer's Sonata (Supporter)",
-    0xa2: "Plasma Baby (Supporter)",
-    0xa3: "Last Leg (Slasher)",
-    0xa4: "Alter (Trickster)",
-    0xa5: "X-Line (Trickster)",
-    0xa6: "SS Middle Aged (Hi Gambler)",
-    0xa7: "Light Schneider (Trickster)",
-    0xa8: "Book of Rhymes (Trickster)",
-    0xa9: "Mortal Drift (Trickster)",
-    0xaa: "Drift Core (Trickster)",
+    0x9e: "Downhill Guy #1",
+    0x9f: "Winding Core",
+    0xa0: "Impart",
+    0xa1: "Racer's Sonata",
+    0xa2: "Plasma Baby",
+    0xa3: "Last Leg",
+    0xa4: "Alter",
+    0xa5: "X-Line",
+    0xa6: "SS Middle Aged",
+    0xa7: "Light Schneider",
+    0xa8: "Book of Rhymes",
+    0xa9: "Mortal Drift",
+    0xaa: "Drift Core",
     0xab: "Flowerbed",
-    0xac: "Spit Shine (Team Leader: Westside)",
-    0xad: "Act of War (Kingdom Twelve)",
-    0xae: "Dying Star (Thirteen Devils)",
+    0xac: "Spit Shine",
+    0xad: "Act of War",
+    0xae: "Dying Star",
     0xaf: "Gearhead",
     0xb0: "200-Miles",
     0xb1: "Shrine Dynamo",
-    0xb2: "Deputy Shiga (Team Leader: LaVern)",
+    0xb2: "Deputy Shiga",
     0xb3: "Drift Survival",
     0xb4: "Ceasefire",
-    0xb5: "Ca Rush (Hi Gambler)",
+    0xb5: "Ca Rush",
     0xb6: "Street Review",
     0xb7: "Shining Tours",
     0xb8: "Love Christina",
     0xb9: "Street Rise",
     0xba: "Zenith Kukupa",
     0xbb: "Solar Barrage",
-    0xbc: "Future Shock (Team Leader: Extra Large)",
+    0xbc: "Future Shock",
     0xbd: "Drift Rail",
-    0xbe: "Keats Love (Supporter)",
-    0xbf: "Drift Spot (Supporter)",
-    0xc0: "Skywalker (Supporter)",
-    0xc1: "New Moon (Slasher)",
-    0xc2: "Dirty Version (Medalist)",
-    0xc3: "Spooks (Trickster)",
-    0xc4: "Razor Edge (Hi Gambler)",
-    0xc5: "Son of Pain (Hi Gambler)",
-    0xc6: "Holy Skills (Trickster)",
-    0xc7: "Pure Power (Trickster)",
+    0xbe: "Keats Love",
+    0xbf: "Drift Spot",
+    0xc0: "Skywalker",
+    0xc1: "New Moon",
+    0xc2: "Dirty Version",
+    0xc3: "Spooks",
+    0xc4: "Razor Edge",
+    0xc5: "Son of Pain",
+    0xc6: "Holy Skills",
+    0xc7: "Pure Power",
     0xc8: "Bloodshot",
     0xc9: "Sane Asylum",
-    0xca: "Dope Color (Team Leader: Street Dreams)",
-    0xcb: "King's Chariot (Kingdom Twelve)",
-    0xcc: "Midnight Rose (Thirteen Devils)",
+    0xca: "Dope Color",
+    0xcb: "King's Chariot",
+    0xcc: "Midnight Rose",
     0xcd: "Chiba Hawaiian",
     0xce: "Meiji Force SR",
     0xcf: "Vintage Style",
-    0xd0: "Bosworth Master (Team Leader: God's Favorite)",
+    0xd0: "Bosworth Master",
     0xd1: "Nikon Premium",
     0xd2: "Workout",
     0xd3: "Napoleon Miyazawa",
     0xd4: "Club Koishikawa",
-    0xd5: "Akira Nise (Team Leader: True Shutoko Unit 1)",
+    0xd5: "Akira Nise",
     0xd6: "Early India",
-    0xd7: "Quick Mouse (Hi Gambler)",
+    0xd7: "Quick Mouse",
     0xd8: "Wagon Counter",
     0xd9: "YM Spy R",
     0xda: "Sakurai Champ",
-    0xdb: "Death Metal Greed (Team Leader: True Shutoko Unit 2)",
-    0xdc: "Magnitude 7 (Supporter)",
-    0xdd: "Stormy Boyz (Supporter)",
-    0xde: "Pistol Rhyme (Supporter)",
-    0xdf: "True Champion (Slasher)",
-    0xe0: "Tribal (Trickster)",
-    0xe1: "Lady Elliot (Trickster)",
-    0xe2: "Death Ruse (Hi Gambler)",
-    0xe3: "Sacred Flurry (Hi Gambler)",
-    0xe4: "Benzo (Trickster)",
-    0xe5: "Drop Knowledge (Trickster)",
-    0xe6: "Executioner on Wheels (Kingdom Twelve)",
-    0xe7: "Tailgunner (Thirteen Devils)",
-    0xe8: "Inline Fever (Trickster)",
+    0xdb: "Death Metal Greed",
+    0xdc: "Magnitude 7",
+    0xdd: "Stormy Boyz",
+    0xde: "Pistol Rhyme",
+    0xdf: "True Champion",
+    0xe0: "Tribal",
+    0xe1: "Lady Elliot",
+    0xe2: "Death Ruse",
+    0xe3: "Sacred Flurry",
+    0xe4: "Benzo",
+    0xe5: "Drop Knowledge",
+    0xe6: "Executioner on Wheels",
+    0xe7: "Tailgunner",
+    0xe8: "Inline Fever",
     0xe9: "King Works",
-    0xea: "4WD Chief (Team Leader: The Presidents)",
-    0xeb: "MR (Trickster)",
+    0xea: "4WD Chief",
+    0xeb: "MR",
     0xec: "Mystery Princess",
     0xed: "True Warrior",
-    0xee: "Gale Moment (Team Leader: Bay Racing)",
-    0xef: "Legendary Schneider (Trickster)",
+    0xee: "Gale Moment",
+    0xef: "Legendary Schneider",
     0xf0: "Chougamori Breeze",
     0xf1: "Magical Karma",
-    0xf2: "Yaita Slicer (Hi Gambler)",
+    0xf2: "Yaita Slicer",
     0xf3: "King Steer",
     0xf4: "King Shift",
-    0xf5: "King Foot (Team Leader: Extreme Seminar)",
-    0xf6: "Tochigi Slicer (Medalist)",
-    0xf7: "Animal Scent (Supporter)",
-    0xf8: "Muhai Emblem (Kingdom Twelve)",
-    0xf9: "Shadow Eyes (Thirteen Devils)",
+    0xf5: "King Foot",
+    0xf6: "Tochigi Slicer",
+    0xf7: "Animal Scent",
+    0xf8: "Muhai Emblem",
+    0xf9: "Shadow Eyes",
     0xfa: "Nana Beans",
     0xfb: "Tendo Storm",
     0xfc: "Everdrift",
     0xfd: "Storm Surge",
-    0xfe: "Double AI (Team Leader: Black Eyed Beans)",
+    0xfe: "Double AI",
     0xff: "Zoom Zoom Zoom",
     0x100: "Platinum Split",
     0x101: "Katta D1",
     0x102: "Whiteout",
     0x103: "Rusty Forest",
-    0x104: "Zao Tempest (Team Leader: Blue Avalanche)",
-    0x105: "King Kajou (Hi Gambler)",
-    0x106: "Frost Wave (Supporter)",
-    0x107: "Snowman (Supporter)",
-    0x108: "Divine Gorge (Supporter)",
-    0x109: "Yeti Fang (Absolute Emperor)",
-    0x10a: "Downhill Dinosaur (Trickster)",
-    0x10b: "Wailing Pheonix (Trickster)",
-    0x10c: "Solemn Tidings (Hi Gambler)",
-    0x10d: "Snowflake Road (Trickster)",
+    0x104: "Zao Tempest",
+    0x105: "King Kajou",
+    0x106: "Frost Wave",
+    0x107: "Snowman",
+    0x108: "Divine Gorge",
+    0x109: "Yeti Fang",
+    0x10a: "Downhill Dinosaur",
+    0x10b: "Wailing Pheonix",
+    0x10c: "Solemn Tidings",
+    0x10d: "Snowflake Road",
     0x10e: "Blue 'n Yellow 1",
     0x10f: "Blue 'n Yellow 2",
-    0x110: "Blue 'n Yellow 3 (Team Leader: Snow Inspectors)",
-    0x111: "Lionel (Kingdom Twelve)",
-    0x112: "Grief Plate (Thirteen Devils)",
+    0x110: "Blue 'n Yellow 3",
+    0x111: "Lionel",
+    0x112: "Grief Plate",
     0x113: "99VA",
     0x114: "Drift Slayer",
     0x115: "Moon Splash",
-    0x116: "Foot Beat (Team Leader: Breakform)",
+    0x116: "Foot Beat",
     0x117: "Scared Tree",
-    0x118: "Distortion (Hi Gambler)",
+    0x118: "Distortion",
     0x119: "Ragga China",
     0x11a: "Lanevoism",
-    0x11b: "Jizo's Fury (Team Leader: Wicked Skillz)",
+    0x11b: "Jizo's Fury",
     0x11c: "Right-Brained",
-    0x11d: "Mighty Crown (Supporter)",
-    0x11e: "Camellia (Supporter)",
+    0x11d: "Mighty Crown",
+    0x11e: "Camellia",
     0x11f: "Taylor Ito",
     0x120: "Dabada Kafuri",
-    0x121: "Club Bastard (Team Leader: Speed Usher)",
-    0x122: "Reign Supreme (Miracles Summit)",
-    0x123: "Alt Bayern (Trickster)",
-    0x124: "Live Counter (Medalist)",
-    0x125: "Light Banshee (Hi Gambler)",
-    0x126: "Devil's Advocate (Trickster)",
-    0x127: "Limp Grip (Trickster)",
-    0x128: "Rotary Commander (Trickster)",
-    0x129: "Dark Paladin (Trickster)",
-    0x12a: "Timber Slash (Kingdom Twelve)",
-    0x12b: "Dream Fiend (Thirteen Devils)",
+    0x121: "Club Bastard",
+    0x122: "Reign Supreme",
+    0x123: "Alt Bayern",
+    0x124: "Live Counter",
+    0x125: "Light Banshee",
+    0x126: "Devil's Advocate",
+    0x127: "Limp Grip",
+    0x128: "Rotary Commander",
+    0x129: "Dark Paladin",
+    0x12a: "Timber Slash",
+    0x12b: "Dream Fiend",
     0x12c: "Taushubetsu Star",
     0x12d: "Line Hysterics",
     0x12e: "Limestone Drip",
@@ -598,58 +598,787 @@ opponentLookup =
     0x130: "Onnetou Glare",
     0x131: "El Matador",
     0x132: "Scuderia Spectre",
-    0x133: "McCrash (Team Leader: Team WR)",
-    0x134: "Rage of Nauman (Hi Gambler)",
+    0x133: "McCrash",
+    0x134: "Rage of Nauman",
     0x135: "Tailslide Dash",
     0x136: "Cutoff Demon",
-    0x137: "Team Steward (Team Leader: Pleiades Spirits)",
-    0x138: "Greatest Line (Hi Gambler)",
+    0x137: "Team Steward",
+    0x138: "Greatest Line",
     0x139: "Snowlight",
     0x13a: "Pride of Nupuka",
-    0x13b: "Killer Kickback (Supporter)",
-    0x13c: "Mountain Pride (Supporter)",
-    0x13d: "Aurora Stream (Supporter)",
+    0x13b: "Killer Kickback",
+    0x13c: "Mountain Pride",
+    0x13d: "Aurora Stream",
     0x13e: "LAT43N",
     0x13f: "Roy's Lover",
-    0x140: "God Shift Bunta (Trickster)",
-    0x141: "High Empress (Trickster)",
-    0x142: "Kaido President (Kingdom Twelve)",
-    0x143: "Emperor Speed (Thirteen Devils)",
-    0x144: "Blackout (Emotional King)",
+    0x140: "God Shift Bunta",
+    0x141: "High Empress",
+    0x142: "Kaido President",
+    0x143: "Emperor Speed",
+    0x144: "Blackout",
     0x145: "Shirakaba White",
     0x146: "Shall We Drift",
     0x147: "Crystal Wonder",
-    0x148: "Venus Kirigamine (Team Leader: Heavy Nation)",
-    0x149: "Sawa Ghost (Hi Gambler)",
-    0x14a: "Peacful Marsh (Trickster)",
-    0x14b: "Iceman (Trickster)",
-    0x14c: "Ootsuka Demon (Thirteen Devils)",
+    0x148: "Venus Kirigamine",
+    0x149: "Sawa Ghost",
+    0x14a: "Peacful Marsh",
+    0x14b: "Iceman",
+    0x14c: "Ootsuka Demon",
     0x14d: "Alpen Hill",
-    0x14e: "Killer Bee (Supporter)",
-    0x14f: "I Scream Truck (Supporter)",
+    0x14e: "Killer Bee",
+    0x14f: "I Scream Truck",
     0x150: "Wall of Murodou",
     0x151: "Tateyama DH1",
-    0x152: "Kurobe Think Tank (Team Leader: Quarterbank)",
-    0x153: "Big Catch (Hi Gambler)",
-    0x154: "Forbidden Spear (Kingdom Twelve)",
+    0x152: "Kurobe Think Tank",
+    0x153: "Big Catch",
+    0x154: "Forbidden Spear",
     0x155: "Sagami Express",
     0x156: "Takosan Tengu",
     0x157: "Hammer of the Saint",
-    0x158: "Yokuouin Keyman (Team Leader: Fresh Air)",
-    0x159: "Gang S (Hi Gambler)",
-    0x15a: "Street Carriage (Trickster)",
+    0x158: "Yokuouin Keyman",
+    0x159: "Gang S",
+    0x15a: "Street Carriage",
     0x15b: "Tamba Track Line",
-    0x15c: "GT (Trickster)",
-    0x15d: "Sitar Kaneyama (Thirteen Devils)",
+    0x15c: "GT",
+    0x15d: "Sitar Kaneyama",
     0x15e: "Nightmare",
     0x15f: "Winter Tornado",
-    0x160: "Haunted Shore (Team Leader: Sodom's Revival)",
+    0x160: "Haunted Shore",
     0x161: "Blacky",
     0x162: "Dream",
     0x163: "Funin",
     0x164: "Chief Musclehead",
     0x020f:"Twenty Master",
 }
+
+GROUND_ZERO = 0x0
+MELON_GRIPPER = 0x5
+MR_MITSU = 0xc 
+NIGHT_FLIGHT = 0xd
+PRIMAL_HILL = 0xf
+LIGHTNING_SHIFT = 0x10
+HAKONE_KING = 0x13
+VORPAL_WEAPON = 0x1a
+SETOUCHI_QUEENS = 0x1d
+DOMINATOR = 0x1f
+BIG_BLUE = 0x21
+BLACK_ONYX = 0x23
+MIST_SHOWER = 0x25
+SAKURA_SPRINTER = 0x26
+MT_NORO_EMPERESS = 0x27
+ROCKET_DASH = 0x2b
+GLITTERING_GAZE = 0x2f
+STREET_TESTER = 0x30
+METRO_ROLLER = 0x31
+TURBOLICIOUS = 0x38
+DESTRUCTION = 0x3b
+GUARDIAN = 0x42
+PT_SPRINT = 0x43
+DRIFT_WOOD = 0x45
+FIRST_KINGDOM = 0x46
+BACKSTAB = 0x47
+TOTAL_FR = 0x4a
+NIGHT_RISE = 0x4f
+OSAKA_FR_STYLE = 0x54
+ETERNAL_WANDERER = 0x5a
+SPEED_RAID = 0x5b
+D_SLICK = 0x5d
+CYCLONE = 0x5e
+REDEYE = 0x5f
+NORTHERN_LIGHTS = 0x60
+PASSING_NIGHT = 0x61
+HEAVENS_SWORD = 0x62
+BLOODHOUND = 0x63
+HILLCLIMB_GUY_1 = 0x6d
+ALCHEMIST = 0x73
+ENCHANTRESS = 0x74
+DARK_FEAR = 0x76
+ROSE_RAIN = 0x77
+BRAVE_SILENCE = 0x78
+HYPER_BEAT = 0x79
+NUTS_AND_BOLTS = 0x7a
+GLADIATOR = 0x7b
+GLOOMY_ANGEL = 0x7c
+TINY_KIM = 0x81
+MOHAIR_LEGEND_R = 0x83
+STREET_FOSSIL = 0x86
+F2_8 = 0x8b
+KAYO_SPARK = 0x8c
+FULL_ON_C121 = 0x8e
+HEARTBREAKER = 0x90
+GULF_OMEN = 0x98
+DOWNHILL_GUY_1 = 0x9e
+LAST_LEG = 0xa3
+ALTER = 0xa4
+X_LINE = 0xa5
+LIGHT_SCHNEIDER = 0xa7
+BOOK_OF_RHYMES = 0xa8
+MORTAL_DRIFT = 0xa9
+DRIFT_CORE = 0xaa
+SPIT_SHINE = 0xac
+ACT_OF_WAR = 0xad
+DYING_STAR = 0xae
+DEPUTY_SHIGA = 0xb2
+FUTURE_SHOCK = 0xbc
+NEW_MOON = 0xc1
+DIRTY_VERSION = 0xc2
+SPOOKS = 0xc3
+HOLY_SKILLS = 0xc6
+PURE_POWER = 0xc7
+DOPE_COLOR = 0xca
+KINGS_CHARIOT = 0xcb
+MIDNIGHT_ROSE = 0xcc
+BOSWORTH_MASTER = 0xd0
+AKIRA_NISE = 0xd5
+DEATH_METAL_GREED = 0xdb
+TRUE_CHAMPION = 0xdf
+TRIBAL = 0xe0
+LADY_ELLIOT = 0xe1
+BENZO = 0xe4
+DROP_KNOWLEDGE = 0xe5
+EXECUTIONER_ON_WHEELS = 0xe6
+TAILGUNNER = 0xe7
+INLINE_FEVER = 0xe8
+FOUR_WHEEL_DRIVE_CHIEF = 0xea
+MR = 0xeb
+GALE_MOMENT = 0xee
+LEGENDARY_SCHNEIDER = 0xef
+KING_FOOT = 0xf5
+TOCHIGI_SLICER = 0xf6
+ANIMAL_SCENT = 0xf7
+MUHAI_EMBLEM = 0xf8
+SHADOW_EYES = 0xf9
+DOUBLE_AI = 0xfe
+ZAO_TEMPEST = 0x104
+YETI_FANG = 0x109
+DOWNHILL_DINOSAUR = 0x10a
+WAILING_PHOENIX = 0x10b
+SNOWFLAKE_ROAD = 0x10d
+BLUE_N_YELLOW_3 = 0x110
+LIONEL = 0x111
+GRIEF_PLATE = 0x112
+FOOT_BEAT = 0x116
+JIZOS_FURY = 0x11b
+CLUB_BASTARD = 0x121
+REIGN_SUPREME = 0x122
+ALT_BAYERN = 0x123
+LIVE_COUNTER = 0x124
+DEVILS_ADVOCATE = 0x126
+LIMP_GRIP = 0x127
+ROTARY_COMMANDER = 0x128
+DARK_PALADIN = 0x129
+TIMBER_SLASH = 0x12a
+DREAM_FIEND = 0x12b
+MCCRASH = 0x133
+TEAM_STEWARD = 0x137
+GOD_SHIFT_BUNTA = 0x140
+HIGH_EMPRESS = 0x141
+KAIDO_PRESIDENT = 0x142
+EMPEROR_SPEED = 0x143
+BLACKOUT = 0x144
+VENUS_KIRIGAMINE = 0x148
+PEACEFUL_MARSH = 0x14a
+ICEMAN = 0x14b
+OOTSUKA_DEMON = 0x14c
+KUROBE_THINK_TANK = 0x152
+FORBIDDEN_SPEAR = 0x154
+YOKUOUIN_KEYMAN = 0x158
+STREET_CARRIAGE = 0x15a
+GT = 0x15c
+SITAR_KANEYAMA = 0x15d
+HAUNTED_SHORE = 0x160
+
+ID = "ID"
+TEAM_NAME = "TEAM_NAME"
+POINTS = "POINTS"
+CAR = "Car"
+TRACK = "Track"
+CREATOR = "Creator"
+DIRECTION = "Direction"
+ID = "AchievementID"
+TIME = "Time"
+ACHIEVEMENT_NAME = "Title"
+WEATHER = "Weather"
+TIMEOFDAY = "TimeOfDay"
+TIMESTRING = "DisplayString"
+MODE = "Mode"
+SCORE = "Score"
+NAME = "Name"
+TITLE = "Title"
+TRIGGER = "Trigger"
+FROM = "FROM"
+COURSE_NAME = "COURSE_NAME"
+DESCRIPTION = "DESCRIPTION"
+STAGES = "STAGES"
+FASTEST_DESCRIPTION = "FASTEST_DESCRIPTION"
+SHORTEST_DESCRIPTION = "SHORTEST_DESCRIPTION"
+
+teamLeaderInfos =
+[
+    {
+        ID: MELON_GRIPPER,
+        TEAM_NAME: "Hakone Stalkers",
+        POINTS:1
+    },
+    {
+        ID: HAKONE_KING,
+        TEAM_NAME: "h-dd",
+        POINTS:1
+    },
+    {
+        ID: VORPAL_WEAPON,
+        TEAM_NAME: "Street Snap",
+        POINTS:1
+    },
+    {
+        ID: SETOUCHI_QUEENS,
+        TEAM_NAME: "Wiz Raspberry",
+        POINTS:1
+    },
+    {
+        ID: ROCKET_DASH,
+        TEAM_NAME: "Skyliner R",
+        POINTS:1
+    },
+    {
+        ID: TURBOLICIOUS,
+        TEAM_NAME: "Spiral Sliders",
+        POINTS:1
+    },
+    {
+        ID: DESTRUCTION,
+        TEAM_NAME: "Haruna Hillclimb Club",
+        POINTS:1
+    },
+    {
+        ID: TOTAL_FR,
+        TEAM_NAME: "Haruna Starlights",
+        POINTS:1
+    },
+    {
+        ID: NIGHT_RISE,
+        TEAM_NAME: "Ashanti Rise",
+        POINTS:1
+    },
+    {
+        ID: OSAKA_FR_STYLE,
+        TEAM_NAME: "Nissan FR Style",
+        POINTS:1
+    },
+    {
+        ID: D_SLICK,
+        TEAM_NAME: "Akagi Big Blue",
+        POINTS:1
+    },
+    {
+        ID: HILLCLIMB_GUY_1,
+        TEAM_NAME: "Hillclimb Guys",
+        POINTS:1
+    },
+    {
+        ID: MOHAIR_LEGEND_R,
+        TEAM_NAME: "Adult Night",
+        POINTS:1
+    },
+    {
+        ID: FULL_ON_C121,
+        TEAM_NAME: "Love Boat",
+        POINTS:1
+    },
+    {
+        ID: GULF_OMEN,
+        TEAM_NAME: "60 Seconds",
+        POINTS:1
+    },
+    {
+        ID: DOWNHILL_GUY_1,
+        TEAM_NAME: "Downhill Guys",
+        POINTS:1
+    },
+    {
+        ID: SPIT_SHINE,
+        TEAM_NAME: "Westside",
+        POINTS:1
+    },
+    {
+        ID: DEPUTY_SHIGA,
+        TEAM_NAME: "LaVern",
+        POINTS:1
+    },
+    {
+        ID: FUTURE_SHOCK,
+        TEAM_NAME: "Extra Large",
+        POINTS:1
+    },
+    {
+        ID: DOPE_COLOR,
+        TEAM_NAME: "Street Dreams",
+        POINTS:1
+    },
+    {
+        ID: BOSWORTH_MASTER,
+        TEAM_NAME: "God's Favorite",
+        POINTS:1
+    },
+    {
+        ID: AKIRA_NISE,
+        TEAM_NAME: "True Shutoko Unit 1",
+        POINTS:1
+    },
+    {
+        ID: DEATH_METAL_GREED,
+        TEAM_NAME: "True Shutoko Unit 2",
+        POINTS:1
+    },
+    {
+        ID: FOUR_WHEEL_DRIVE_CHIEF,
+        TEAM_NAME: "The Presidents",
+        POINTS:1
+    },
+    {
+        ID: GALE_MOMENT,
+        TEAM_NAME: "Bay Racing",
+        POINTS:1
+    },
+    {
+        ID: KING_FOOT,
+        TEAM_NAME: "Extreme Seminar",
+        POINTS:1
+    },
+    {
+        ID: DOUBLE_AI,
+        TEAM_NAME: "Black Eyed Beans",
+        POINTS:1
+    },
+    {
+        ID: ZAO_TEMPEST,
+        TEAM_NAME: "Blue Avalanche",
+        POINTS:1
+    },
+    {
+        ID: BLUE_N_YELLOW_3,
+        TEAM_NAME: "Snow Inspectors",
+        POINTS:1
+    },
+    {
+        ID: FOOT_BEAT,
+        TEAM_NAME: "Breakform",
+        POINTS:1
+    },
+    {
+        ID: JIZOS_FURY,
+        TEAM_NAME: "Wicked Skillz",
+        POINTS:1
+    },
+    {
+        ID: CLUB_BASTARD,
+        TEAM_NAME: "Speed Usher",
+        POINTS:1
+    },
+    {
+        ID: MCCRASH,
+        TEAM_NAME: "Team WR",
+        POINTS:1
+    },
+    {
+        ID: TEAM_STEWARD,
+        TEAM_NAME: "Pleiades Spirits",
+        POINTS:1
+    },
+    {
+        ID: VENUS_KIRIGAMINE,
+        TEAM_NAME: "Heavy Nation",
+        POINTS:1
+    },
+    {
+        ID: KUROBE_THINK_TANK,
+        TEAM_NAME: "Quarterbank",
+        POINTS:1
+    },
+    {
+        ID: YOKUOUIN_KEYMAN,
+        TEAM_NAME: "Fresh Air",
+        POINTS:1
+    },
+    {
+        ID: HAUNTED_SHORE,
+        TEAM_NAME: "Sodom's Revival",
+        POINTS:1
+    }
+]
+
+slasherList =
+[
+    {
+        ID:MR_MITSU,
+        POINTS:1
+    },
+    {
+        ID:DOMINATOR,
+        POINTS:1
+    },
+    {
+        ID:GUARDIAN,
+        POINTS:1
+    },
+    {
+        ID:ETERNAL_WANDERER,
+        POINTS:1
+    },
+    {
+        ID:ALCHEMIST,
+        POINTS:1
+    },
+    {
+        ID:LAST_LEG,
+        POINTS:1
+    },
+    {
+        ID:NEW_MOON,
+        POINTS:1
+    },
+    {
+        ID:TRUE_CHAMPION,
+        POINTS:1
+    }
+]
+
+kingdomTwelveList =
+[
+    {
+        ID: FIRST_KINGDOM,
+        POINTS:1
+    },
+    {
+        ID: HEAVENS_SWORD,
+        POINTS:1
+    },
+    {
+        ID: GLADIATOR,
+        POINTS:1
+    },
+    {
+        ID: STREET_FOSSIL,
+        POINTS:1
+    },
+    {
+        ID: ACT_OF_WAR,
+        POINTS:1
+    },
+    {
+        ID: KINGS_CHARIOT,
+        POINTS:1
+    },
+    {
+        ID: EXECUTIONER_ON_WHEELS,
+        POINTS:1
+    },
+    {
+        ID: MUHAI_EMBLEM,
+        POINTS:1
+    },
+    {
+        ID: LIONEL,
+        POINTS:1
+    },
+    {
+        ID: TIMBER_SLASH,
+        POINTS:1
+    },
+    {
+        ID: KAIDO_PRESIDENT,
+        POINTS:1
+    },
+    {
+        ID: FORBIDDEN_SPEAR,
+        POINTS:1
+    }
+]
+
+thirteenDevilsList =
+[
+    {
+        ID:BACKSTAB,
+        POINTS:1
+    },
+    {
+        ID:BLOODHOUND,
+        POINTS:1
+    },
+    {
+        ID:GLOOMY_ANGEL,
+        POINTS:1
+    },
+    {
+        ID:HEARTBREAKER,
+        POINTS:1
+    },
+    {
+        ID:DYING_STAR,
+        POINTS:1
+    },
+    {
+        ID:MIDNIGHT_ROSE,
+        POINTS:1
+    },
+    {
+        ID:TAILGUNNER,
+        POINTS:1
+    },
+    {
+        ID:SHADOW_EYES,
+        POINTS:1
+    },
+    {
+        ID:GRIEF_PLATE,
+        POINTS:1
+    },
+    {
+        ID:DREAM_FIEND,
+        POINTS:1
+    },
+    {
+        ID:EMPEROR_SPEED,
+        POINTS:1
+    },
+    {
+        ID:OOTSUKA_DEMON,
+        POINTS:1
+    },
+    {
+        ID:SITAR_KANEYAMA,
+        POINTS:1
+    }
+]
+
+eliteList =
+[
+    {
+        ID:REIGN_SUPREME,
+        POINTS:1
+    },
+    {
+        ID:BLACKOUT,
+        POINTS:1
+    },
+    {
+        ID:GROUND_ZERO,  // This is out of order, but this is the order of "Progress" on the finale.,
+        POINTS:1
+    } 
+]
+
+tricksterList =
+[
+    {
+        ID:PRIMAL_HILL,
+        POINTS:1
+    },
+    {
+        ID:LIGHTNING_SHIFT,
+        POINTS:1
+    },
+    {
+        ID:BLACK_ONYX,
+        POINTS:1
+    },
+    {
+        ID:MIST_SHOWER,
+        POINTS:1
+    },
+    {
+        ID:SAKURA_SPRINTER,
+        POINTS:1
+    },
+    {
+        ID:MT_NORO_EMPERESS,
+        POINTS:1
+    },
+    {
+        ID:STREET_TESTER,
+        POINTS:1
+    },
+    {
+        ID:METRO_ROLLER,
+        POINTS:1
+    },
+    {
+        ID:DRIFT_WOOD,
+        POINTS:1
+    },
+    {
+        ID:SPEED_RAID,
+        POINTS:1
+    },
+    {
+        ID:CYCLONE,
+        POINTS:1
+    },
+    {
+        ID:REDEYE,
+        POINTS:1
+    },
+    {
+        ID:NORTHERN_LIGHTS,
+        POINTS:1
+    },
+    {
+        ID:PASSING_NIGHT,
+        POINTS:1
+    },
+    {
+        ID:DARK_FEAR,
+        POINTS:1
+    },
+    {
+        ID:ROSE_RAIN,
+        POINTS:1
+    },
+    {
+        ID:BRAVE_SILENCE,
+        POINTS:1
+    },
+    {
+        ID:HYPER_BEAT,
+        POINTS:1
+    },
+    {
+        ID:NUTS_AND_BOLTS,
+        POINTS:1
+    },
+    {
+        ID:KAYO_SPARK,
+        POINTS:1
+    },
+    {
+        ID:ALTER,
+        POINTS:1
+    },
+    {
+        ID:X_LINE,
+        POINTS:1
+    },
+    {
+        ID:LIGHT_SCHNEIDER,
+        POINTS:1
+    },
+    {
+        ID:BOOK_OF_RHYMES,
+        POINTS:1
+    },
+    {
+        ID:MORTAL_DRIFT,
+        POINTS:1
+    },
+    {
+        ID:DRIFT_CORE,
+        POINTS:1
+    },
+    {
+        ID:SPOOKS,
+        POINTS:1
+    },
+    {
+        ID:HOLY_SKILLS,
+        POINTS:1
+    },
+    {
+        ID:PURE_POWER,
+        POINTS:1
+    },
+    {
+        ID:TRIBAL,
+        POINTS:1
+    },
+    {
+        ID:LADY_ELLIOT,
+        POINTS:1
+    },
+    {
+        ID:BENZO,
+        POINTS:1
+    },
+    {
+        ID:DROP_KNOWLEDGE,
+        POINTS:1
+    },
+    {
+        ID:INLINE_FEVER,
+        POINTS:1
+    },
+    {
+        ID:MR,
+        POINTS:1
+    },
+    {
+        ID:LEGENDARY_SCHNEIDER,
+        POINTS:1
+    },
+    {
+        ID:ANIMAL_SCENT,
+        POINTS:1
+    },
+    {
+        ID:YETI_FANG,
+        POINTS:1
+    },
+    {
+        ID:DOWNHILL_DINOSAUR,
+        POINTS:1
+    },
+    {
+        ID:WAILING_PHOENIX,
+        POINTS:1
+    },
+    {
+        ID:SNOWFLAKE_ROAD,
+        POINTS:1
+    },
+    {
+        ID:ALT_BAYERN,
+        POINTS:1
+    },
+    {
+        ID:DEVILS_ADVOCATE,
+        POINTS:1
+    },
+    {
+        ID:LIMP_GRIP,
+        POINTS:1
+    },
+    {
+        ID:ROTARY_COMMANDER,
+        POINTS:1
+    },
+    {
+        ID:DARK_PALADIN,
+        POINTS:1
+    },
+    {
+        ID:GOD_SHIFT_BUNTA,
+        POINTS:1
+    },
+    {
+        ID:HIGH_EMPRESS,
+        POINTS:1
+    },
+    {
+        ID:PEACEFUL_MARSH,
+        POINTS:1
+    },
+    {
+        ID:ICEMAN,
+        POINTS:1
+    },
+    {
+        ID:STREET_CARRIAGE,
+        POINTS:1
+    },
+    {
+        ID:GT,
+        POINTS:1
+    }
+]
+
 
 
 HAKONE_INDEX = 0
@@ -881,8 +1610,8 @@ function notSaving() => saveGameIndicator() == SAVE_GAME_NOT_ACTIVE
 //          
 //          This changes before 0x003fa984 changes from 1 to 0.
 function recordTourfirstPlayerScore() => byte(0x4CBE8C)
-MAX_SCORE = 36
-function topPlayerScore() => recordTourfirstPlayerScore() == MAX_SCORE
+MAX_SCORE = 66
+function maxPlayerScore() => recordTourfirstPlayerScore() == MAX_SCORE
 
 // $4CBE90: (8-bit) Total Result Record Tour 1st player Score
 //          
@@ -890,6 +1619,13 @@ function topPlayerScore() => recordTourfirstPlayerScore() == MAX_SCORE
 function recordTourfirstPlayerId() => byte(0x4CBE90)
 PLAYER_INDEX = 0x0b
 function didPlayerWinRecordTour() => recordTourfirstPlayerId() == PLAYER_INDEX
+
+// $4cbf25: (16-bit) Record Tour Winner of Stage 
+// 
+//         0x000b = Player
+function recordTourStageWinner() => word(0x4CBF25)
+
+function didPlayerWinRecordTourStage() => recordTourStageWinner() == PLAYER_INDEX
 
 // $75CA38: (32-bit) Player Stat Total Earnings
 function totalEarning() => dword(0x75CA38)
@@ -1004,14 +1740,14 @@ SECOND_RIVAL_WIN_MEMORY_LOCATION = 0x760794
 RIVAL_MEMORY_SIZE = SECOND_RIVAL_WIN_MEMORY_LOCATION - FIRST_RIVAL_WIN_MEMORY_LOCATION
 function lossesFirstRival() => word(lossesFirstRival)
 
-function rivalLoss(rivalIndex) => word(FIRST_RIVAL_LOSS_MEMORY_LOCATION + (rivalIndex * RIVAL_MEMORY_SIZE))
+function rivalLossData(rivalIndex) => word(FIRST_RIVAL_LOSS_MEMORY_LOCATION + (rivalIndex * RIVAL_MEMORY_SIZE))
 
 // $76078E: (16-bit) First Rival Number of times Beaten
 //          
 //          This is the data for Ground Zero  If you have beat him this is 0x01.
 function winsFirstRival() => word(FIRST_RIVAL_WIN_MEMORY_LOCATION)
 
-function rivalWin(rivalIndex) => word(FIRST_RIVAL_WIN_MEMORY_LOCATION + (rivalIndex * RIVAL_MEMORY_SIZE))
+function rivalWinData(rivalIndex) => word(FIRST_RIVAL_WIN_MEMORY_LOCATION + (rivalIndex * RIVAL_MEMORY_SIZE))
 
 // $760790: (8-bit) Rival Met
 //          
@@ -1023,9 +1759,9 @@ function rivalWin(rivalIndex) => word(FIRST_RIVAL_WIN_MEMORY_LOCATION + (rivalIn
 //          Not a bitfield.
 function firstRivalMetFriend() => byte(FIRST_RIVAL_FRIEND_MEMORY_LOCATION)
 
-function rivalFriend(rivalIndex) => byte(FIRST_RIVAL_FRIEND_MEMORY_LOCATION + (rivalIndex * RIVAL_MEMORY_SIZE))
+function rivalFriendData(rivalIndex) => byte(FIRST_RIVAL_FRIEND_MEMORY_LOCATION + (rivalIndex * RIVAL_MEMORY_SIZE))
 
-// $760794: (8-bit) Second Rival Information
+// $760794: (8-bit) Second Rival Win Information
 //          
 //          This is the information for Lil Giant
 function winsSecondRival() => byte(0x760794)
@@ -1130,6 +1866,7 @@ function availableSponsors() => byte(0x768C0C)
 //          bit38 = Evergreen
 //          bit39 = Steiner
 TIED_UP_SPONSORS_MEMORY_LOCATION = 0x768C14
+TIED_UP_SPONSORS_FOUR_OFFSET_MEMORY_LOCATION = 0x768C18
 function tiedUpSponsors() => byte(TIED_UP_SPONSORS_MEMORY_LOCATION)
 
 TAKEOFF_BIT = 0
@@ -1173,8 +1910,21 @@ SILVER_CREEK_BIT = 37
 EVERGREEN_BIT = 38
 STEINER_BIT = 39
 
-function sponsorJustTiedUp(bitIndex) => bit(bitIndex, TIED_UP_SPONSORS_MEMORY_LOCATION) == 1 && 
-                                        prev(bit(bitIndex, TIED_UP_SPONSORS_MEMORY_LOCATION)) == 0
+function sponsorJustTiedUp(bitIndex)
+{
+    if(bitIndex < 32)
+    {
+        return bit(bitIndex, TIED_UP_SPONSORS_MEMORY_LOCATION) == 1 && 
+               prev(bit(bitIndex, TIED_UP_SPONSORS_MEMORY_LOCATION)) == 0
+    }
+    else
+    {
+        return bit(bitIndex - 32, TIED_UP_SPONSORS_FOUR_OFFSET_MEMORY_LOCATION) == 1 && 
+               prev(bit(bitIndex - 32, TIED_UP_SPONSORS_FOUR_OFFSET_MEMORY_LOCATION)) == 0
+    }
+
+}
+
 
 // $768DFC: (40-bit Bit Field) Prizes Earned.
 //          
@@ -1264,6 +2014,65 @@ NOTABLE_TROPHY_BIT = 37
 IMPERIAL_TROPHY_BIT = 38
 CONQUEROR_TROPHY_BIT = 39
 
+medalRivalList =
+{
+    ROOKIE_MEDAL_BIT: NIGHT_FLIGHT,
+    BALAS_MEDAL_BIT: BIG_BLUE,
+    AMBITION_MEDAL_BIT: GLITTERING_GAZE,
+    MYSTIC_MEDAL_BIT: PT_SPRINT,
+    ROOKIE_SHIELD_BIT: ENCHANTRESS,
+    HIREAX_SHIELD_BIT: TINY_KIM,
+    VOTUM_SHIELD_BIT: F2_8,
+    JULIUS_CUP_BIT: DIRTY_VERSION,
+    VIOLENT_WIND_CUP_BIT: TOCHIGI_SLICER,
+    CONSUL_TROPHY_BIT: LIVE_COUNTER
+}
+
+medalLookup =
+{
+    ROOKIE_MEDAL_BIT: "Rookie Medal",
+    BALAS_MEDAL_BIT: "Balas Medal",
+    AMBITION_MEDAL_BIT: "Ambition Medal",
+    MYSTIC_MEDAL_BIT: "Mystic Medal",
+    PERILOUS_MEDAL_BIT: "Perilous Medal",
+    SIDETES_MEDAL_BIT: "Sidetes Medal",
+    BOLDNESS_MEDAL_BIT: "Boldness Medal",
+    COURAGE_MEDAL_BIT: "Courage Medal",
+    KNIGHT_MEDAL_BIT: "Knight Medal",
+    TOP_RANKING_MEDAL_BIT: "Top Ranking Medal",
+    ROOKIE_SHIELD_BIT: "Rookie Shield",
+    HIREAX_SHIELD_BIT: "Hireax Shield",
+    VOTUM_SHIELD_BIT: "Votum Shield",
+    PERTINAX_SHIELD_BIT: "Pertinax Shield",
+    DIVUS_SHIELD_BIT: "Divus Shield",
+    NOBILISSIMUS_SHIELD_BIT: "Nobilissimus Shield",
+    BARONET_TROPHY_BIT: "Baronet Trophy",
+    DUCHESS_TROPHY_BIT: "Duchess Trophy",
+    LEGENDARY_SHIELD_BIT: "Legendary Shield",
+    MASTER_SHIELD_BIT: "Master Shield",
+    JULIUS_CUP_BIT: "Julius Cup",
+    VIOLENT_WIND_CUP_BIT: "Violent Wind Cup",
+    DIDIUS_JULIANUS_CUP_BIT: "Didius Julianus Cup",
+    POPE_CUP_BIT: "Pope Cup",
+    SUBLIMITY_CUP_BIT: "Sublimity Cup",
+    CONSUL_TROPHY_BIT: "Consul Trophy",
+    CAESAR_TROPHY_BIT: "Caesar Trophy",
+    GRYPOS_TROPHY_BIT: "Grypos Trophy",
+    ASIATIKOS_TROPHY_BIT: "Asiatikos Trophy",
+    PRINCE_ELECTOR_TROPHY_BIT: "Prince Elector Trophy",
+    KERAUNOS_TROPHY_BIT: "Keraunos Trophy",
+    PATER_PATRIAE_TROPHY_BIT: "Pater Patriae Trophy",
+    EARL_TROPHY_BIT: "Earl Trophy",
+    BISHOP_TROPHY_BIT: "Bishop Trophy",
+    ARCHDUKE_TROPHY_BIT: "Archduke Trophy",
+    ADEPT_TROPHY_BIT: "Adept Trophy",
+    PROMINENCE_TROPHY_BIT: "Prominence Trophy",
+    NOTABLE_TROPHY_BIT: "Notable Trophy",
+    IMPERIAL_TROPHY_BIT: "Imperial Trophy",
+    CONQUEROR_TROPHY_BIT: "Conqueror Trophy"
+}
+
+
 function prizeJustEarned(bitIndex)
 {
     if(bitIndex < 32)
@@ -1302,18 +2111,31 @@ NORMAL_RACE_CLEARED_MEMORY_LOCATION = 0x768E0C
 NORMAL_RACE_CLEARED_FOUR_BYTE_OFFSET = 0x768E10
 function normalRaceCleared() => byte(NORMAL_RACE_CLEARED_MEMORY_LOCATION)
 
-function unlockedRace(bitIndex) => bit(bitIndex, NORMAL_RACE_CLEARED_MEMORY_LOCATION) == 1 
+function bitForNormalRace(bitIndex)
+{
+    if(bitIndex < 32)
+    {
+        return bit(bitIndex, NORMAL_RACE_CLEARED_MEMORY_LOCATION)
+    }
+    else
+    {
+        return bit(bitIndex - 32, NORMAL_RACE_CLEARED_FOUR_BYTE_OFFSET) 
+    }
 
-function wasLockedRace(bitIndex) => prev(bit(bitIndex,PRIZES_EARNED_MEMORY_LOCATION)) == 0
+}
+
+
+function clearedRace(bitIndex) => bitForNormalRace(bitIndex) == 1 
+
+function wasLockedRace(bitIndex) => prev(bitForNormalRace(bitIndex)) == 0
 
 // Use the Unlock bit or Index, not Course Index
-function wonNormalRace(unlockBit) => unlockedRace((unlockBit* 3) + 0) &&
-                                     unlockedRace((unlockBit* 3) + 1) &&
-                                     unlockedRace((unlockBit* 3) + 2)
+function wonNormalRace(courseIndex) => clearedRace((courseIndex* 3) + 0) &&
+                                     clearedRace((courseIndex* 3) + 1) &&
+                                     clearedRace((courseIndex* 3) + 2)
 
-function justWonNormalRace(unlockBit) => wonNormalRace(unlockBit) &&
-                                         any_of(range(0,2), index => wasLockedRace((unlockBit* 3) + index))
-
+function justWonNormalRace(courseIndex) => wonNormalRace(courseIndex) &&
+                                         any_of(range(0,2), index => wasLockedRace((courseIndex* 3) + index))
 
 // $768E14: (bitfield) Advance Races Won
 //          
@@ -1407,13 +2229,13 @@ function hiroshimaGymkhanaCACleared() => byte(0x768E20)
 HAKONE_TA_CLEARED_MEMORY_LOCATION = 0x768E48
 HIROSHIMA_TA_ClEARED_MEMORY_LOCATION = 0x768E4C
 TA_CLEARED_MEMORY_SIZE = HIROSHIMA_TA_ClEARED_MEMORY_LOCATION - HAKONE_TA_CLEARED_MEMORY_LOCATION
-function hakoneGymkhanaTACleared() => byte(0x768E48)
+function hakoneGymkhanaTACleared() => byte(HAKONE_TA_CLEARED_MEMORY_LOCATION)
 
 // $768E4C: (10-bit bitfield) Hiroshima Gymkhana TA Cleared
 //          
 //          bit0 = Gymkhana Level 1
 //          bit8 (next byte) =  Gymkhana Level 9
-function hiroshimaGymkhanaTACleared() => byte(0x768E4C)
+function hiroshimaGymkhanaTACleared() => byte(HIROSHIMA_TA_ClEARED_MEMORY_LOCATION)
 
 function taClearedJustFinished(course_index) => all_of(range(0,9), bit_index => bit(bit_index, HAKONE_TA_CLEARED_MEMORY_LOCATION + course_index * TA_CLEARED_MEMORY_SIZE) == 1) &&
                                                 any_of(range(0,9), bit_index => prev(bit(bit_index, HAKONE_TA_CLEARED_MEMORY_LOCATION + course_index * TA_CLEARED_MEMORY_SIZE)) == 0)
@@ -1443,8 +2265,10 @@ function taClearedJustFinished(course_index) => all_of(range(0,9), bit_index => 
 //          C-Lv18 = 1930
 //          C-Lv19 = 2280
 //          C-Lv20 = 2680
+LEVEL_TWO_CLEVEL_EXP = 4
 LEVEL_FIVE_CLEVEL_EXP = 70
 LEVEL_TEN_CLEVEL_EXP = 390
+LEVEL_FIFTEEN_CLEVEL_EXP = 1170
 LEVEL_TWENTY_CLEVEL_EXP = 2680
 function cLevelExp() => dword(0x768E74)
 
@@ -2347,6 +3171,7 @@ UI_RECORD_CHALLENGE_TA = 0xb
 UI_RECORD_CHALLENGE_CA = 0xc
 UI_RECORD_TOUR = 0xd
 
+function spHeadToHeadMode() => uiForRace() == UI_SP_HEAD_TO_HEAD
 function recordChallengeTAMode() => uiForRace() == UI_RECORD_CHALLENGE_TA
 function recordChallengeCAMode() => uiForRace() == UI_RECORD_CHALLENGE_CA
 function recordChallengeGymkhanaTAMode() => uiForRace() == UI_GYM_TA
@@ -2733,6 +3558,1001 @@ function achievementActive()
            notSaving()
 }
 
+function calculateMemoryLocation(startingMemory, index, size) => startingMemory + (index * size)
+
+
+function winAchievement(title, description, points, index )
+{
+    achievement(title = title,
+                description = description,
+                points = points,
+                trigger = rivalWinData(index) == 1 &&
+                          prev(rivalWinData(index)) == 0 &&
+                          conquestMode() &&
+                          achievementActive()
+    )
+}
+
+function teamAchievements(data)
+{
+    id = data[ID]
+    winAchievement(title = opponentLookup[id],
+                   description = format("Beat {0} from {1} in Conquest Mode", opponentLookup[id], data[TEAM_NAME]),
+                   points = data[POINTS],
+                   index = id
+                  )
+}
+
+
+
+for teamMember in teamLeaderInfos
+{
+    teamAchievements(teamMember)
+}
+
+for slasher in slasherList
+{
+    winAchievement(title = opponentLookup[slasher[ID]],
+                   description = format("Defeat Slasher {0} in Conquest Mode", opponentLookup[slasher[ID]]),
+                   points = slasher[POINTS],
+                   index = slasher[ID]
+                  )
+}
+
+for opponent in kingdomTwelveList
+{
+    winAchievement(title = opponentLookup[opponent[ID]],
+                   description = format("Defeat {0} from Kingdom Twelve in Conquest Mode", opponentLookup[opponent[ID]]),
+                   points = opponent[POINTS],
+                   index = opponent[ID]
+                  )
+
+}
+
+for devil in thirteenDevilsList
+{
+    winAchievement(title = opponentLookup[devil[ID]],
+                   description = format("Defeat {0} from Thirteen Devils in Conquest Mode", opponentLookup[devil[ID]]),
+                   points = devil[POINTS],
+                   index = devil[ID]
+                  )
+}
+
+for boss in eliteList
+{
+    winAchievement(title = opponentLookup[boss[ID]],
+                   description = format("Defeat {0} in Conquest Mode", opponentLookup[boss[ID]]),
+                   points = boss[POINTS],
+                   index = boss[ID]
+                  )
+}
+
+for trickster in tricksterList
+{
+    winAchievement(title = opponentLookup[trickster[ID]],
+                   description = format("Defeat Trickster {0} from in Conquest Mode", opponentLookup[trickster[ID]]),
+                   points = trickster[POINTS],
+                   index = trickster[ID]
+                  )
+}
+
+
+function twentyMasterAchievement(title, description, points, total)
+{
+    achievement(title = title,
+                description = description,
+                points = points,
+                trigger = twentyMastersLevel() == total &&
+                          prev(twentyMastersLevel()) == total - 1 &&
+                          conquestMode() &&
+                          achievementActive()
+    )
+
+}
+
+twentyMasterAchievement(title = "Who are these guys?",
+                        description = "Defeat Twenty Masters for the first time in Conquest Mode",
+                        points = 10,
+                        total = 1
+                       )
+
+twentyMasterAchievement(title = "Wait How many of these guys are there?",
+                        description = "Defeat Twenty Masters for the first time in Conquest Mode",
+                        points = 10,
+                        total = 21
+                       )
+
+function medalachievement(title, description, points, medal)
+{
+    achievement(title = title,
+                description = description,
+                points = points,
+                trigger = prizeJustEarned(medal)&&
+                          conquestMode() &&
+                          achievementActive()
+    )
+}
+
+
+
+medalData =
+[
+    { 
+        ID: ROOKIE_MEDAL_BIT,
+        FROM: "Rival Night Flight",
+        POINTS: 5
+    },
+    { 
+        ID: BALAS_MEDAL_BIT,
+        FROM: "Rival Big Blue",
+        POINTS: 5
+    },
+    { 
+        ID: AMBITION_MEDAL_BIT,
+        FROM: "Rival Glittering Gaze",
+        POINTS: 5
+    },
+    { 
+        ID: MYSTIC_MEDAL_BIT,
+        FROM: "Rival PT Sprint",
+        POINTS: 5
+    },
+    { 
+        ID: PERILOUS_MEDAL_BIT,
+        FROM: "Hakone NA Fest",
+        POINTS: 5
+    },
+    { 
+        ID: SIDETES_MEDAL_BIT,
+        FROM: "Hiroshima NA Fest",
+        POINTS: 5
+    },
+    { 
+        ID: BOLDNESS_MEDAL_BIT,
+        FROM: "Haruna FF Attack",
+        POINTS: 5
+    },
+    { 
+        ID: COURAGE_MEDAL_BIT,
+        FROM: "Akagi FF Attack",
+        POINTS: 5
+    },
+    { 
+        ID: KNIGHT_MEDAL_BIT,
+        FROM: "Ura Rokko FF Attack",
+        POINTS: 5
+    },
+    { 
+        ID: TOP_RANKING_MEDAL_BIT,
+        FROM: "Omote Rokko Toyota Cup",
+        POINTS: 5
+    },
+    { 
+        ID: ROOKIE_SHIELD_BIT,
+        FROM: "Rival Enchantress",
+        POINTS: 5
+    },
+    { 
+        ID: HIREAX_SHIELD_BIT,
+        FROM: "Rival Tiny Kim",
+        POINTS: 5
+    },
+    { 
+        ID: VOTUM_SHIELD_BIT,
+        FROM: "Rival F2.8",
+        POINTS: 5
+    },
+    { 
+        ID: PERTINAX_SHIELD_BIT,
+        FROM: "Hakone Turbo Fest",
+        POINTS: 5
+    },
+    { 
+        ID: DIVUS_SHIELD_BIT,
+        FROM: "Shiga Kusatsu Nissan Cup",
+        POINTS: 5
+    },
+    { 
+        ID: NOBILISSIMUS_SHIELD_BIT,
+        FROM: "Nikko Honda Cup",
+        POINTS: 5
+    },
+    { 
+        ID: BARONET_TROPHY_BIT,
+        FROM: "Zao Under Litter Cup",
+        POINTS: 5
+    },
+    { 
+        ID: DUCHESS_TROPHY_BIT,
+        FROM: "Aso Lightweight Cup",
+        POINTS: 5
+    },
+    { 
+        ID: LEGENDARY_SHIELD_BIT,
+        FROM: "Hokkaido 4wd Attacker",
+        POINTS: 5
+    },
+    { 
+        ID: MASTER_SHIELD_BIT,
+        FROM: "Hiroshima Turbo Fest",
+        POINTS: 5
+    },
+    { 
+        ID: JULIUS_CUP_BIT,
+        FROM: "Rival Dirty Version",
+        POINTS: 5
+    },
+    { 
+        ID: VIOLENT_WIND_CUP_BIT,
+        FROM: "Rival Tochigi Slicer",
+        POINTS: 5
+    },
+    { 
+        ID: DIDIUS_JULIANUS_CUP_BIT,
+        FROM: "Haruna FR Attack",
+        POINTS: 5
+    },
+    { 
+        ID: POPE_CUP_BIT,
+        FROM: "Akagi FR Attack",
+        POINTS: 5
+    },
+    { 
+        ID: SUBLIMITY_CUP_BIT,
+        FROM: "Ura Rokko FR Attack",
+        POINTS: 5
+    },
+    { 
+        ID: CONSUL_TROPHY_BIT,
+        FROM: "Rival Live Counter",
+        POINTS: 5
+    },
+    { 
+        ID: CAESAR_TROPHY_BIT,
+        FROM: "Omote Rokko Mazda Cup",
+        POINTS: 5
+    },
+    { 
+        ID: GRYPOS_TROPHY_BIT,
+        FROM: "Shiga Kusatsu Mitsubishi Cup",
+        POINTS: 5
+    },
+    { 
+        ID: ASIATIKOS_TROPHY_BIT,
+        FROM: "Nikko Subaru Cup",
+        POINTS: 5
+    },
+    { 
+        ID: PRINCE_ELECTOR_TROPHY_BIT,
+        FROM: "Zao Middle Engine Cup",
+        POINTS: 5
+    },
+    { 
+        ID: KERAUNOS_TROPHY_BIT,
+        FROM: "Omote Rokko Small Car Cup",
+        POINTS: 5
+    },
+    { 
+        ID: PATER_PATRIAE_TROPHY_BIT,
+        FROM: "Shiga Kusatsu Rival Car Match",
+        POINTS: 5
+    },
+    { 
+        ID: EARL_TROPHY_BIT,
+        FROM: "Nikko European Cup",
+        POINTS: 5
+    },
+    { 
+        ID: BISHOP_TROPHY_BIT,
+        FROM: "Zao Heavy Engine Cup",
+        POINTS: 5
+    },
+    { 
+        ID: ARCHDUKE_TROPHY_BIT,
+        FROM: "Aso Middleweight Cup",
+        POINTS: 5
+    },
+    { 
+        ID: ADEPT_TROPHY_BIT,
+        FROM: "Hokkaido Heavyweight Cup",
+        POINTS: 5
+    },
+    { 
+        ID: PROMINENCE_TROPHY_BIT,
+        FROM: "Hokkaido Monster Cup",
+        POINTS: 5
+    },
+    { 
+        ID: NOTABLE_TROPHY_BIT,
+        FROM: "Aso Heavyweight Cup",
+        POINTS: 5
+    },
+    { 
+        ID: IMPERIAL_TROPHY_BIT,
+        FROM: "Hakone Rival Car Match",
+        POINTS: 5
+    },
+    { 
+        ID: CONQUEROR_TROPHY_BIT,
+        FROM: "Hokkaido Giant Cup",
+        POINTS: 5
+    },
+]
+
+for data in medalData
+{
+    id = data[ID]
+    medalachievement(title = medalLookup[id],
+                     description = format("Earn the {0} from {1} in Conquest Mode", medalLookup[id], data[FROM]),
+                     points = data[POINTS],
+                     medal = data[ID]
+    )
+}
+
+function cLevelAchievement(title, description, points, targetExp)
+{
+    achievement(title = title,
+                description = description,
+                points = points,
+                trigger = justPassedCExperience(targetExp) &&
+                          conquestMode() &&
+                          achievementActive()
+    )
+}
+
+cLevelAchievement(title = "Race Noob",
+                  description = "Reach C-Level 5 in Conquest Mode",
+                  points = 3,
+                  targetExp = LEVEL_TWO_CLEVEL_EXP
+                 )
+
+cLevelAchievement(title = "Race Rookie",
+                  description = "Reach C-Level 5 in Conquest Mode",
+                  points = 4,
+                  targetExp = LEVEL_FIVE_CLEVEL_EXP
+                 )
+
+cLevelAchievement(title = "Race Pro",
+                  description = "Reach C-Level 10 in Conquest Mode",
+                  points = 5,
+                  targetExp = LEVEL_TEN_CLEVEL_EXP
+                 )
+
+cLevelAchievement(title = "Race Master",
+                  description = "Reach C-Level 15 in Conquest Mode",
+                  points = 10,
+                  targetExp = LEVEL_FIFTEEN_CLEVEL_EXP
+                 )
+
+cLevelAchievement(title = "Race God",
+                  description = "Reach C-Level 20 in Conquest Mode",
+                  points = 10,
+                  targetExp = LEVEL_TWENTY_CLEVEL_EXP
+                 )
+
+normalCourseListName =
+[
+    {
+        ID: HAKONE_INDEX,
+        COURSE_NAME: "Hakone",
+        POINTS: 5,
+    },
+    {
+        ID: HIROSHIMA_INDEX,
+        COURSE_NAME: "Hiroshima",
+        POINTS: 5,
+    },
+    {
+        ID: HARUNA_INDEX,
+        COURSE_NAME: "Haruna",
+        POINTS: 5,
+    },
+    {
+        ID: AKAGI_INDEX,
+        COURSE_NAME: "Akagi",
+        POINTS: 5,
+    },
+    {
+        ID: URA_ROKKA_INDEX,
+        COURSE_NAME: "Ura Rokko",
+        POINTS: 5,
+    },
+    {
+        ID: OMOTE_ROKKO_INDEX,
+        COURSE_NAME: "Omote Rokko",
+        POINTS: 5,
+    },
+    {
+        ID: SHIGA_KUSATSU_INDEX,
+        COURSE_NAME: "Shiga Kusatsu",
+        POINTS: 5,
+    },
+    {
+        ID: NIKKO_INDEX,
+        COURSE_NAME: "Nikko",
+        POINTS: 5,
+    },
+    {
+        ID: ZAO_INDEX,
+        COURSE_NAME: "Zao",
+        POINTS: 5,
+    },
+    {
+        ID: ASO_INDEX,
+        COURSE_NAME: "Aso",
+        POINTS: 5,
+    },
+    {
+        ID: HOKKAIDO_INDEX,
+        COURSE_NAME: "Hokkaido",
+        POINTS: 5,
+    } 
+]
+
+function normalRaceAchievement(title, description, points, course)
+{
+    achievement(title = title,
+                description = description,
+                points = points,
+                trigger = justWonNormalRace(course) &&
+                          conquestMode() &&
+                          achievementActive()
+    )
+}
+
+for course in normalCourseListName
+{
+    normalRaceAchievement(title = format("{0} Master", course[COURSE_NAME]),
+                          description = format("Clear all three normal courses for {0} in Conquest Mode", course[COURSE_NAME]),
+                          points = course[POINTS],
+                          course = course[ID]
+    )
+}
+
+function gymkhanaTAAchievement(title, description, points, stages)
+{
+    achievement(title = format(title,"TA"),
+                description = format(description, "Time Attack"),
+                points = points,
+                trigger = any_of(stages, stageIndex => taClearedJustFinished(stageIndex)) &&
+                          conquestMode() &&
+                          achievementActive()
+    )
+}
+
+function gymkhanaCAAchievement(title, description, points, stages)
+{
+    achievement(title = format(title,"CA"),
+                description = format(description, "Course Attack"),
+                points = points,
+                trigger = any_of(stages, stageIndex => caClearedJustFinished(stageIndex)) &&
+                          conquestMode() &&
+                          achievementActive()
+    )
+}
+
+// Timings
+// Hakone Gymkhana 13'000 
+// Hiroshima Gymkhana 13'000
+// Haruna 12.5
+// Akagi 12.5
+// Ura Rokko 12.5
+// Omote Rokko 12.0
+// shiga Kusatsu 12.0
+// Nikko 12.0
+// Zao 11.5
+// Aso 11.5
+// Hokkaido 10.5
+
+gymkhanaStageList =
+[
+    {
+        TITLE: "Stage 1 Gymkhana {0}",
+        DESCRIPTION: "Clear all one of Stage 1 Gymkhana {0} (Hakone or  Hiroshima) in Conquest Mode",
+        POINTS: 1,
+        STAGES: [HAKONE_UNLOCK_BIT, HIROSHIMA_UNLOCK_BIT]
+    },
+    {
+        TITLE: "Stage 2 Gymkhana {0}",
+        DESCRIPTION: "Clear all one of Stage 2 Gymkhana {0} (Haruna or Akagi or Ura Rokko) in Conquest Mode",
+        POINTS: 2,
+        STAGES: [HARUNA_UNLOCK_BIT, AKAGI_UNLOCK_BIT, URA_ROKKA_UNLOCK_BIT]
+    },
+    {
+        TITLE: "Stage 3 Gymkhana {0}",
+        DESCRIPTION: "Clear all one of Stage 3 Gymkhana {0} (Omote Rokko or Shiga Kusatsu or Nikko) in Conquest Mode",
+        POINTS: 3,
+        STAGES: [OMOTE_ROKKO_UNLOCK_BIT, SHIGA_KUSATSU_UNLOCK_BIT, NIKKO_UNLOCK_BIT]
+    },
+    {
+        TITLE: "Stage 4 Gymkhana {0}",
+        DESCRIPTION: "Clear all one of Stage 4 Gymkhana {0} (Zao or Aso) in Conquest Mode",
+        POINTS: 4,
+        STAGES: [ZAO_UNLOCK_BIT, ASO_UNLOCK_BIT]
+    },
+    {
+        TITLE: "Stage 5 Gymkhana {0}",
+        DESCRIPTION: "Clear all one of Stage 5 Gymkhana {0} (Hokkaido) in Conquest Mode",
+        POINTS: 5,
+        STAGES: [HOKKAIDO_UNLOCK_BIT]
+    }
+]
+
+for data in gymkhanaStageList
+{
+    gymkhanaCAAchievement(title = data[TITLE],
+                          description = data[DESCRIPTION],
+                          points = data[POINTS],
+                          stages = data[STAGES]
+    )
+    
+    gymkhanaTAAchievement(title = data[TITLE],
+                          description = data[DESCRIPTION],
+                          points = data[POINTS],
+                          stages = data[STAGES]
+    )
+    
+}
+
+
+masterRaceAchievementList =
+[
+    {
+        ID: HIROSHIMA_STRAIGHT_MATCH_WON_BIT,
+        TITLE: "Hiroshima Straight Match",
+        DESCRIPTION: "Clear the Hiroshima Straight Match in Conquest Mode and earn Rom Level 3",
+        POINTS: 5
+    },
+    {
+        ID: HARUNA_LEVIN_TRUENO_CUP_WON_BIT,
+        TITLE: "Haruna Levin/Trueno Cup",
+        DESCRIPTION: "Clear the Haruna Levin/Trueno Cup in Conquest Mode and earn Transmission Level 3",
+        POINTS: 5
+    },
+    {
+        ID: AKAGI_ROTARY_MATCH_WON_BIT,
+        TITLE: "Akagi Rotary Match",
+        DESCRIPTION: "Clear the Akagi Rotary Match in Conquest Mode and earn V-Muffler L Level 3",
+        POINTS: 5
+    },
+    {
+        ID: URA_ROKKA_VLINE_WON_BIT,
+        TITLE: "Ura Rokko V-Line Match",
+        DESCRIPTION: "Clear the Ura Rokka V-Line Match in Conquest Mode and earn Inter Cooler Trm Level 3",
+        POINTS: 5
+    },
+    {
+        ID: OMOTE_ROKKO_BOXER_MATCH_WON_BIT,
+        TITLE: "Omote Rokko Boxer Match",
+        DESCRIPTION: "Clear the Omote Rokko Boxer Match in Conquest Mode and unlock the Genki S2000",
+        POINTS: 5
+    },
+    {
+        ID: SHIGA_KUSATSU_SPECIAL_CAR_ROUND_WON_BIT,
+        TITLE: "Shiga Kusatsu Special Car Round",
+        DESCRIPTION: "Clear the Shiga Kusatsu Special Car Round in Conquest Mode and unlock the mine Skyline",
+        POINTS: 5
+    },
+    {
+        ID: NIKKO_RIVAL_CAR_MATCH_WON_BIT,
+        TITLE: "Nikko Rival Car Match",
+        DESCRIPTION: "Clear the Nikko Rival Car Match in Conquest Mode and unlock the HKS Altezza",
+        POINTS: 5
+    },
+    {
+        ID: ZAO_SKYLINE_AND_Z_STAGE_WON_BIT,
+        TITLE: "Zao Skyline & Z Stage",
+        DESCRIPTION: "Clear the Zao Skyline & Z Stage in Conquest Mode and unlock the HKS Silvia",
+        POINTS: 5
+    },
+    {
+        ID: ASO_50_500_KINGDOM_WON_BIT,
+        TITLE: "Aso 50/500 Kingdom",
+        DESCRIPTION: "Clear the Aso 50/500 Kingdom in Conquest Mode and unlock the MCR GT-R",
+        POINTS: 5
+    },
+    {
+        ID: HOKKAIDO_KAIDO_CHAMPIONSHIP,
+        TITLE: "Hokkaido Kaido Championship",
+        DESCRIPTION: "Clear the Hokkaido Kaido Championship in Conquest Mode and unlock the FIAT Punto Rally",
+        POINTS: 5
+    }
+]
+
+for data in masterRaceAchievementList
+{
+    achievement(title = data[TITLE],
+                description = data[DESCRIPTION],
+                points = data[POINTS],
+                trigger = justWonMasterRace(data[ID]) &&
+                          conquestMode() &&
+                          achievementActive()
+    )
+}
+
+
+for groupIndex in groupLookup
+{
+    achievement(title = groupLookup[groupIndex] + " Champion",
+                description = format("Win the {0} Tour in Record Tour Mode", groupLookup[groupIndex]),
+                points = 5,
+                trigger = recordTourStage() == 11 &&
+                          didPlayerWinRecordTour() &&
+                          justFinishedGameplay() &&
+                          // winStatus() == WON_RACE_VALUE && You don't need to win the race, if they retire they still might win the tour. 
+                          recordTourMode() &&
+                          recordTourStage() == LAST_RECORD_TOUR_COURSE &&
+                          recordTourGroup() == groupIndex &&
+                          achievementActive()
+    )
+}
+
+for groupIndex in groupLookup
+{
+    achievement(title = groupLookup[groupIndex] + " Clean Race",
+                description = format("Win any stage in the {0} Tour with out any hits and still reach first place for the stage in Record Tour Mode", groupLookup[groupIndex]),
+                points = 5,
+                trigger = didPlayerWinRecordTourStage() &&
+                          justFinishedGameplay() &&
+                          winStatus() == WON_RACE_VALUE && // Note this is not "Won" but finished. 
+                          recordTourMode() &&
+                          recordTourStage() == LAST_RECORD_TOUR_COURSE &&
+                          recordTourGroup() == groupIndex &&
+                          maxPlayerScore() &&
+                          achievementActive()
+    )
+}
+
+for groupIndex in groupLookup
+{
+    achievement(title = groupLookup[groupIndex] + " Perfect Season",
+                description = format("Win the {0} Tour with the maximum ({1}) points in Record Tour Mode", groupLookup[groupIndex], MAX_SCORE),
+                points = 5,
+                trigger = recordTourStage() == 11 &&
+                          didPlayerWinRecordTour() &&
+                          justFinishedGameplay() &&
+                          winStatus() == WON_RACE_VALUE &&
+                          recordTourMode() &&
+                          recordTourStage() == LAST_RECORD_TOUR_COURSE &&
+                          recordTourGroup() == groupIndex &&
+                          maxPlayerScore() &&
+                          achievementActive()
+    )
+}
+
+achievement(title = "Not even a scratch",
+            description = format("Win a SP Head to Head race in conquest mode with out losing any SP in Conquest Mode"),
+            points = 5,
+            trigger = trigger_when(justWonRace()) &&
+                        isInGame() &&
+                        spHeadToHeadMode() &&
+                        conquestMode() &&
+                        playerSPFull() &&
+                        achievementActive()
+)
+
+achievement(title = "One-Oh-Oh",
+            description = format("Reach 100 MPH in Conquest Mode"),
+            points = 5,
+            trigger = isInGame() &&
+                      conquestMode() &&
+                      playerPastSpeedMPH(100) &&
+                      achievementActive()
+)
+
+sponsorAchievementList =
+[
+    
+    {
+        ID: TAKEOFF_BIT,
+        TITLE: "Takeoff",
+        POINTS: 5,
+    },
+    {
+        ID: YOURS_BIT,
+        TITLE: "Yours",
+        POINTS: 5,
+    },
+    {
+        ID: AUTOLEIFEN_BIT,
+        TITLE: "Autoleifen",
+        POINTS: 5,
+    },
+    {
+        ID: FULL_AUTO_BIT,
+        TITLE: "Full-auto",
+        POINTS: 5,
+    },
+    {
+        ID: YELLOW_MAGIC_BIT,
+        TITLE: "Yellow Magic",
+        POINTS: 5,
+    },
+    {
+        ID: GRAFITTI_ART_BIT,
+        TITLE: "Grafitti Art",
+        POINTS: 5,
+    },
+    {
+        ID: R_CONCEPT_BIT,
+        TITLE: "R Concept",
+        POINTS: 5,
+    },
+    {
+        ID: SPRINT_RACING_BIT,
+        TITLE: "Sprint Racing",
+        POINTS: 5,
+    },
+    {
+        ID: PRESTIGE_BIT,
+        TITLE: "Prestige",
+        POINTS: 5,
+    },
+    {
+        ID: ATHLETE_BIT,
+        TITLE: "Athlete",
+        POINTS: 5,
+    },
+    {
+        ID: SHIGA_SPEED_BIT,
+        TITLE: "Shiga Speed",
+        POINTS: 5,
+    },
+    {
+        ID: AUTOBAHN_BIT,
+        TITLE: "Autobahn",
+        POINTS: 5,
+    },
+    {
+        ID: FRAME_MASTER_BIT,
+        TITLE: "Frame Master",
+        POINTS: 5,
+    },
+    {
+        ID: YAMAMOTO_ENGINEERING_BIT,
+        TITLE: "Yamamoto Engineering",
+        POINTS: 5,
+    },
+    {
+        ID: KAKINOKI_RACING_BIT,
+        TITLE: "Kakinoki Racing",
+        POINTS: 5,
+    },
+    {
+        ID: OMR_BIT,
+        TITLE: "OMR",
+        POINTS: 5,
+    },
+    {
+        ID: BRIGHTON_BIT,
+        TITLE: "Brighton",
+        POINTS: 5,
+    },
+    {
+        ID: STRADA_BIT,
+        TITLE: "Strada",
+        POINTS: 5,
+    },
+    {
+        ID: HI_FI_BIT,
+        TITLE: "Hi-Fi",
+        POINTS: 5,
+    },
+    {
+        ID: ARTT_BIT,
+        TITLE: "ARTT",
+        POINTS: 5,
+    },
+    {
+        ID: AKIBA_PRECISION_BIT,
+        TITLE: "Akiba Precision",
+        POINTS: 5,
+    },
+    {
+        ID: TARGA_TOP_BIT,
+        TITLE: "Targa Top",
+        POINTS: 5,
+    },
+    {
+        ID: SPEED_LICENSE_BIT,
+        TITLE: "Speed License",
+        POINTS: 5,
+    },
+    {
+        ID: PRO_SPORT_BIT,
+        TITLE: "Pro Sport",
+        POINTS: 5,
+    },
+    {
+        ID: GT_YOUTH_BIT,
+        TITLE: "GT Youth",
+        POINTS: 5,
+    },
+    {
+        ID: WATANABE_AUTOMOBILES_BIT,
+        TITLE: "Watanabe_automobiles",
+        POINTS: 5,
+    },
+    {
+        ID: VELVAINA_BIT,
+        TITLE: "Velvaina",
+        POINTS: 5,
+    },
+    {
+        ID: HIGH_PERFORMANCE_BIT,
+        TITLE: "High Performance",
+        POINTS: 5,
+    },
+    {
+        ID: INDEPENDENT_BIT,
+        TITLE: "Independent",
+        POINTS: 5,
+    },
+    {
+        ID: SPEED_GEAR_BIT,
+        TITLE: "Speed Gear",
+        POINTS: 5,
+    },
+    {
+        ID: TERROR_TUNE_BIT,
+        TITLE: "Terror Tune",
+        POINTS: 5,
+    },
+    {
+        ID: ONE_OFF_BIT,
+        TITLE: "One Off",
+        POINTS: 5,
+    },
+    {
+        ID: S_STYLE_BIT,
+        TITLE: "S-Style",
+        POINTS: 5,
+    },
+    {
+        ID: MAGNESIO_ZERO_BIT,
+        TITLE: "Magnesio Zero",
+        POINTS: 5,
+    },
+    {
+        ID: GAMBINO_RACING_BIT,
+        TITLE: "Gambino Racing",
+        POINTS: 5,
+    },
+    {
+        ID: OMEGA_LINE_BIT,
+        TITLE: "Omega Line",
+        POINTS: 5,
+    },
+    {
+        ID: TECHNOSPEED_BIT,
+        TITLE: "Technospeed",
+        POINTS: 5,
+    },
+    {
+        ID: SILVER_CREEK_BIT,
+        TITLE: "Silver Creek",
+        POINTS: 5,
+    },
+    {
+        ID: EVERGREEN_BIT,
+        TITLE: "Evergreen",
+        POINTS: 5,
+    },
+    {
+        ID: STEINER_BIT,
+        TITLE: "Steiner",
+        POINTS: 5,
+    }
+]
+
+function sponsorAchievement(title, description, points, sponsor)
+{
+    achievement(title = title,
+                description = description,
+                points = points,
+                trigger = sponsorJustTiedUp(sponsor) &&
+                          conquestMode() &&
+                          achievementActive()
+    )                          
+}
+
+for sponsor in sponsorAchievementList
+{
+    sponsorAchievement(title = sponsor[TITLE],
+                       description = format("Tie-up {0} as a sponsor for the first time in Conquest Mode", sponsor[TITLE]),
+                       points = sponsor[POINTS],
+                       sponsor = sponsor[ID]
+    )
+}
+
+function groundZeroBeaten()
+{
+    return rivalWinData(GROUND_ZERO) == 1 &&
+           prev(rivalWinData(GROUND_ZERO)) == 0
+}
+                          
+function emotionalKingBeaten()
+{
+    return rivalWinData(BLACKOUT) == 1 &&
+           prev(rivalWinData(BLACKOUT)) == 0
+}
+
+leaderboardsStageList =
+[
+    {
+        NAME: "Stage 2",
+        FASTEST_DESCRIPTION: "Reach Stage 2 in the shortest time.  Time is based on when the courses unlock, and based on the Player Total Time stat",
+        SHORTEST_DESCRIPTION: "Reach Stage 2 in the fewest days based on the in-game calendar",
+        TRIGGER: stage2JustUnlocked()
+    },
+    {
+        NAME: "Stage 3",
+        FASTEST_DESCRIPTION: "Reach Stage 3 in the shortest time.  Time is based on when the courses unlock, and based on the Player Total Time stat",
+        SHORTEST_DESCRIPTION: "Reach Stage 3 in the fewest days based on the in-game calendar",
+        TRIGGER: stage3JustUnlocked()
+    },
+    {
+        NAME: "Stage 4",
+        FASTEST_DESCRIPTION: "Reach Stage 4 in the shortest time.  Time is based on when the courses unlock, and based on the Player Total Time stat",
+        SHORTEST_DESCRIPTION: "Reach Stage 4 in the fewest days based on the in-game calendar",
+        TRIGGER: stage4JustUnlocked()
+    },
+    {
+        NAME: "Stage 5",
+        FASTEST_DESCRIPTION: "Reach Stage 5 in the shortest time.  Time is based on when the courses unlock, and based on the Player Total Time stat",
+        SHORTEST_DESCRIPTION: "Reach Stage 5 in the fewest days based on the in-game calendar",
+        TRIGGER: finalStageJustUnlocked()
+    },
+    {
+        NAME: "Final Boss Conquered",
+        FASTEST_DESCRIPTION: "Beat Emotional King in the shortest time.",
+        SHORTEST_DESCRIPTION: "Reach Emotional King in the fewest days based on the in-game calendar",
+        TRIGGER: emotionalKingBeaten()
+    },
+    {
+        NAME: "Secret Boss Conquered",
+        FASTEST_DESCRIPTION: "Beat Ground Zero in the shortest time.",
+        SHORTEST_DESCRIPTION: "Reach Ground Zero in the fewest days based on the in-game calendar",
+        TRIGGER: groundZeroBeaten()
+    }
+    
+]
+
+for stage in leaderboardsStageList
+{
+    leaderboard(
+        title = format("Fastest {0}", stage[NAME]),
+        description = stage[FASTEST_DESCRIPTION],
+        start = 
+        (
+            stage[TRIGGER] &&
+            achievementActive() &&
+            conquestMode()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = playTime(),
+        lower_is_better = true,
+        format = "FRAMES"
+    )
+    
+    leaderboard(
+        title = format("Shortest {0} Calendar", stage[NAME]),
+        description = stage[SHORTEST_DESCRIPTION],
+        start = 
+        (
+            stage[TRIGGER] &&
+            achievementActive() &&
+            conquestMode()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = daysPlayed(),
+        lower_is_better = true,
+        format = "VALUE"
+    )
+}
+
 function leaderboardCourse(courseId, direction)
 {
     leaderboard(
@@ -2782,21 +4602,20 @@ for key in ingameCourseLookup
     {
         leaderboardCourse(key, DOWNHILL_VALUE)
         leaderboardCourse(key, CLIMB_VALUE)
-    }
-
-
+    } 
 }
 
 for target in range(FIRST_GYMKHANA_COURSE, LAST_GYMKHANA_COURSE)
 {
     leaderboard(
-        title = format("Record Challenge: Fastest Time Gymkhana {0}",  target + 1),
-        description = format("Record the fastest time on TA Course {0} in Gymkhana Mode in Record Challenge Mode", target + 1 ),
+        title = format("Fastest Time Gymkhana {0}",  target + 1),
+        description = format("Record the fastest time on TA Course {0} for Gymkhana in Conquest Mode or Record Challenge Mode", target + 1 ),
         start = 
         (
             justFinishedGameplay() &&
             winStatus() == WON_RACE_VALUE &&
-            recordChallengeMode() &&   
+            (conquestMode() || 
+             recordChallengeMode()) &&   
             courseInGame() == GYMKHANA_COURSE_INDEX &&
             gymkhanaLevelInGame() ==  target &&
             achievementActive() &&
@@ -2813,13 +4632,14 @@ for target in range(FIRST_GYMKHANA_COURSE, LAST_GYMKHANA_COURSE)
 for target in range(FIRST_GYMKHANA_COURSE, LAST_GYMKHANA_COURSE)
 {
     leaderboard(
-        title = format("Record Challenge: Highest Score Gymkhana {0}",  target + 1),
-        description = format("Finish CA Course {0} with the highest score in Gymkhana Mode in Record Challenge Mode", target + 1 ),
+        title = format("Highest Score Gymkhana {0}",  target + 1),
+        description = format("Finish CA Course {0} with the highest score for Gymkhana in Conquest Mode or Record Challenge Mode", target + 1 ),
         start = 
         (
             justFinishedGameplay() &&
             winStatus() == WON_RACE_VALUE &&
-            recordChallengeMode() &&   
+            (conquestMode() || 
+             recordChallengeMode()) &&   
             courseInGame() == GYMKHANA_COURSE_INDEX &&
             gymkhanaLevelInGame() ==  target &&
             achievementActive() &&
@@ -2833,18 +4653,7 @@ for target in range(FIRST_GYMKHANA_COURSE, LAST_GYMKHANA_COURSE)
 }
 
 
-CAR = "Car"
-TRACK = "Track"
-CREATOR = "Creator"
-DIRECTION = "Direction"
-ID = "AchievementID"
-TIME = "Time"
-ACHIEVEMENT_NAME = "Title"
-WEATHER = "Weather"
-TIMEOFDAY = "TimeOfDay"
-TIMESTRING = "DisplayString"
-MODE = "Mode"
-SCORE = "Score"
+
 function timeConversion(minutes, seconds, millisecond = 0) => ((minutes * 60) +seconds) * 60 + millisecond
 
 specificLeaderboard =
@@ -3013,3 +4822,4 @@ for groupIndex in groupLookup
         )
     }
 }
+
