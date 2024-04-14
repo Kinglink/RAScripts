@@ -2131,6 +2131,43 @@ function bitForNormalRace(bitIndex)
 
 }
 
+normalRaceLookup =
+{
+    0x00: "Hakone CA Cup",
+    0x01: "Hakone TA Cup",
+    0x02: "Hakone TAC Cup",
+    0x03: "Hiroshima CA Cup",
+    0x04: "Hiroshima TA Cup",
+    0x05: "Hiroshima TAC Cup",
+    0x06: "Haruna CA Cup",
+    0x07: "Haruna TA Cup",
+    0x08: "Haruna TAC Cup",
+    0x09: "Akagi CA Cup",
+    0x0a: "Akagi TA Cup",
+    0x0b: "Akagi TAC Cup",
+    0x0c: "Ura Rokko CA Cup",
+    0x0d: "Ura Rokko TA Cup",
+    0x0e: "Ura Rokko TAC Cup",
+    0x0f: "Omote Rokko CA Cup",
+    0x10: "Omote Rokko TA Cup",
+    0x11: "Omote Rokko TAC Cup",
+    0x12: "Shiga Kusatsu CA Cup",
+    0x13: "Shiga Kusatsu TA Cup",
+    0x14: "Shiga Kusatsu TAC Cup",
+    0x15: "Nikko CA Cup",
+    0x16: "Nikko TA Cup",
+    0x17: "Nikko TAC Cup",
+    0x18: "Zao CA Cup",
+    0x19: "Zao TA Cup",
+    0x1a: "Zao TAC Cup",
+    0x1b: "Aso CA Cup",
+    0x1c: "Aso TA Cup",
+    0x1d: "Aso TAC Cup",
+    0x1e: "Hokkaido CA Cup",
+    0x1f: "Hokkaido TA Cup",
+    0x20: "Hokkaido TAC Cup"    
+}
+
 
 function clearedRace(bitIndex) => bitForNormalRace(bitIndex) == 1 
 
@@ -2179,6 +2216,41 @@ function justWonNormalRace(courseIndex) => wonNormalRace(courseIndex) &&
 // All of these are Badges.
 function advanceRacesWon() => byte(0x768E14)
 
+// Not hex, because I didn't convert it.  Oh well. 
+advanceRaceLookup =
+{
+    00: "Hakone NA Fest", 
+    01: "Hakone Turbo Fest", 
+    02: "Hakone Rival Car Match",
+    03: "Hiroshima NA Fest", 
+    04: "Hiroshima Turbo Fest", 
+    05: "Haruna FF Attack",
+    06: "Haruna FR Attack",
+    07: "Akagi FF Attack", 
+    08: "Akagi FR Attack", 
+    09: "Ura Rokko FF Attack",
+    10: "Ura Rokko FR Attack",
+    11: "Omote Rokko Toyota Cup",
+    12: "Omote Rokko Mazda Cup",
+    13: "Omote Rokko Small Car Cup",
+    14: "Shiga Kusatsu Nissan Cup",
+    15: "Shiga Kusatsu Mitsubishi Cup",
+    16: "Shiga Kusatsu Rival Car Match",
+    17: "Nikko Honda Cup",
+    18: "Nikko Subaru Cup",
+    19: "Nikko European Cup",
+    20: "Zao Heavy Engine Cup",
+    21: "Zao Middle Engine Cup",
+    22: "Zao Under Litter Cup",
+    23: "Aso Lightweight Cup",
+    24: "Aso Middleweight Cup",
+    25: "Aso Heavyweight Cup",
+    26: "Hokkaido 4wd Attacker",
+    27: "Hokkaido Heavyweight Cup",
+    28: "Hokkaido Monster Cup",
+    29: "Hokkaido Giant Cup"    
+}
+
 
 // $768E18: (bitfield) Master Race  Won
 //          
@@ -2205,6 +2277,20 @@ NIKKO_RIVAL_CAR_MATCH_WON_BIT = 6
 ZAO_SKYLINE_AND_Z_STAGE_WON_BIT = 7
 ASO_50_500_KINGDOM_WON_BIT = 8
 HOKKAIDO_KAIDO_CHAMPIONSHIP = 9
+
+masterRaceLookup =
+{
+    0x0: "Hiroshima Straight Match",
+    0x1: "Haruna Levin/Trueno Cup",
+    0x2: "Akagi Rotary Match",
+    0x3: "Ura Rokko V-Line Match",
+    0x4: "Omote Rokko Boxer Match",
+    0x5: "Shiga Kusatsu Special Car Round",
+    0x6: "Nikko Rival Car Match",
+    0x7: "Zao Skyline & Z Stage",
+    0x8: "Aso 50/500 Kingdom",
+    0x9: "Hokkaido Kaido Championship"
+}
 
 function justWonMasterRace(wonBit) => bit(wonBit, MASTER_RACE_WON_MEMORY_LOCATION) == 1 && 
                                       prev(bit(wonBit, MASTER_RACE_WON_MEMORY_LOCATION)) == 0
@@ -3025,6 +3111,8 @@ function justWonRace() => winStatus() == WON_RACE_VALUE &&
 //          0x020f Twenty Master
 function displayNameOfOpponent() => byte(0x77EB20)
 
+function displayNameNotZero() => displayNameOfOpponent() != 0
+
 // $77EB70: (8-bit) Gymkhana level in Game
 //          
 //          0x00 = Level 1
@@ -3033,6 +3121,34 @@ function gymkhanaLevelInGame() => byte(0x77EB70)
 
 FIRST_GYMKHANA_COURSE = 0
 LAST_GYMKHANA_COURSE = 9
+
+// $77eba8: (8-bit) Which Normal/Master Race is being played. 
+// 
+//          Also is which bit will unlock   
+//          Same meaning for Normal and Master Race  (which bit) 
+//
+//          Check 0x0077ebb1 for if this is a normal or a Master Race
+function raceBeingPlayed() => byte(0x0077eba8)
+
+// $77ebb1: (8-bit) Normal or Master Race
+//
+//          0x00 = Normal Race 
+//          0x01 = Advance Race
+//          0x02 = Master Race
+//          0x03 = Gymkhana
+//
+//          For which race, check 0x0077eba8
+function raceType() => byte(0x0077ebb1)
+NORMAL_RACE_TYPE_VALUE = 0x00
+ADVANCE_RACE_TYPE_VALUE = 0x01
+MASTER_RACE_TYPE_VALUE = 0x02
+GYMKHANA_TYPE_VALUE = 0x03
+
+function normalRace() => raceType() == NORMAL_RACE_TYPE_VALUE
+function advanceRace() => raceType() == ADVANCE_RACE_TYPE_VALUE
+function masterRace() => raceType() == MASTER_RACE_TYPE_VALUE
+function gymkhanaMode() => raceType() == GYMKHANA_TYPE_VALUE
+
 
 // $77EBBC: (8-bit) Car Type being Driven
 //          
@@ -3179,6 +3295,8 @@ UI_RECORD_CHALLENGE_CA = 0xc
 UI_RECORD_TOUR = 0xd
 
 function spHeadToHeadMode() => uiForRace() == UI_SP_HEAD_TO_HEAD
+function conquestGymkhanaTAMode() => uiForRace() == UI_GYM_TA
+function conquestGymkhanaCAMode() => uiForRace() == UI_GYM_CA
 function recordChallengeTAMode() => uiForRace() == UI_RECORD_CHALLENGE_TA
 function recordChallengeCAMode() => uiForRace() == UI_RECORD_CHALLENGE_CA
 function recordChallengeGymkhanaTAMode() => uiForRace() == UI_GYM_TA
@@ -4872,4 +4990,100 @@ for groupIndex in groupLookup
         )
     }
 }
+
+
+// Conquest Mode Normal Race/Master
+rich_presence_conditional_display(conquestMode() && isInGame() && advanceRace() && !replayActive(),
+                                  "Driving {0} while challenging the {1}",
+                                  rich_presence_lookup("CarLookup", inGameCarDriven(), carLookup),
+                                  rich_presence_lookup("AdvanceRaceLookup", raceBeingPlayed(), advanceRaceLookup)
+)
+
+rich_presence_conditional_display(conquestMode() && isInGame() && masterRace() && !replayActive(),
+                                  "Driving {0} while challenging the {1}",
+                                  rich_presence_lookup("CarLookup", inGameCarDriven(), carLookup),
+                                  rich_presence_lookup("MasterRaceLookup", raceBeingPlayed(), masterRaceLookup)
+)
+
+// Conquest Mode , who is opponent, 
+rich_presence_conditional_display(conquestMode() && isInGame() && displayNameNotZero() && !replayActive(), 
+                                  "Driving {1} while racing against {0}, on {2} {3}",
+                                  rich_presence_lookup("OpponentLookup", displayNameOfOpponent(), opponentLookup),
+                                  rich_presence_lookup("CarLookup", inGameCarDriven(), carLookup),
+                                  rich_presence_lookup("CourseLookup", courseInGame(), ingameCourseLookup),
+                                  rich_presence_lookup("DirectionLookup", inGameClimbDownhill(), directionLookup)
+)
+
+// Conquest Mode Gymkhana
+rich_presence_conditional_display(conquestMode() && isInGame() && gymkhanaMode() && conquestGymkhanaTAMode() && !replayActive(),
+                                  "Driving {0} while challenging the {1} Gymkhana TA Course {2}",
+                                  rich_presence_lookup("CarLookup", inGameCarDriven(), carLookup),
+                                  rich_presence_lookup("CourseLookup", courseInGame(), ingameCourseLookup),
+                                  rich_presence_value("Number", gymkhanaLevelInGame() + 1)
+)
+
+rich_presence_conditional_display(conquestMode() && isInGame() && gymkhanaMode() && conquestGymkhanaCAMode() && !replayActive(),
+                                  "Driving {0} while challenging the {1} Gymkhana CA Course {2}",
+                                  rich_presence_lookup("CarLookup", inGameCarDriven(), carLookup),
+                                  rich_presence_lookup("CourseLookup", courseInGame(), ingameCourseLookup),
+                                  rich_presence_value("Number", gymkhanaLevelInGame() + 1)
+)
+
+rich_presence_conditional_display(conquestMode() && isInGame() && normalRace() && !replayActive(),
+                                  "Driving {0} while challenging the {1}",
+                                  rich_presence_lookup("CarLookup", inGameCarDriven(), carLookup),
+                                  rich_presence_lookup("NormalRaceLookup", raceBeingPlayed(), normalRaceLookup)
+)
+
+// REcord Challenge, level Design. 
+rich_presence_conditional_display(recordChallengeMode() && isInGame() && recordChallengeTAMode() && !replayActive(),
+                                  "Driving {0} while challenging the time attack of {1} {2} in {3}{4}",
+                                  rich_presence_lookup("CarLookup", inGameCarDriven(), carLookup),
+                                  rich_presence_lookup("CourseLookup", courseInGame(), ingameCourseLookup),
+                                  rich_presence_lookup("DirectionLookup", inGameClimbDownhill(), directionLookup),
+                                  rich_presence_lookup("WeatherLookup", inGameWeather(), weatherLookup),
+                                  rich_presence_lookup("TimeOfDayLookup", inGameTimeOfDay(), timeOfDayLookup)
+)
+
+rich_presence_conditional_display(recordChallengeMode() && isInGame() && recordChallengeCAMode() && !replayActive(),
+                                  "Driving {0} while challenging the course attack of {1} {2} in {3}/{4}",
+                                  rich_presence_lookup("CarLookup", inGameCarDriven(), carLookup),
+                                  rich_presence_lookup("CourseLookup", courseInGame(), ingameCourseLookup),
+                                  rich_presence_lookup("DirectionLookup", inGameClimbDownhill(), directionLookup),
+                                  rich_presence_lookup("WeatherLookup", inGameWeather(), weatherLookup),
+                                  rich_presence_lookup("TimeOfDayLookup", inGameTimeOfDay(), timeOfDayLookup)
+)
+
+rich_presence_conditional_display(recordChallengeMode() && isInGame() && recordChallengeGymkhanaTAMode() && !replayActive(),
+                                  "Driving {0} while challenging the time attack of Gymkhana Course {1} in {2}/{3}",
+                                  rich_presence_lookup("CarLookup", inGameCarDriven(), carLookup),
+                                  rich_presence_value("Number", gymkhanaLevelInGame() + 1),
+                                  rich_presence_lookup("WeatherLookup", inGameWeather(), weatherLookup),
+                                  rich_presence_lookup("TimeOfDayLookup", inGameTimeOfDay(), timeOfDayLookup)
+)
+
+rich_presence_conditional_display(recordChallengeMode() && isInGame() && recordChallengeGymkhanaCAMode() && !replayActive(),
+                                  "Driving {0} while challenging the course attack of Gymkhana Course {1} in {2}/{3}",
+                                  rich_presence_lookup("CarLookup", inGameCarDriven(), carLookup),
+                                  rich_presence_value("Number", gymkhanaLevelInGame() + 1),
+                                  rich_presence_lookup("WeatherLookup", inGameWeather(), weatherLookup),
+                                  rich_presence_lookup("TimeOfDayLookup", inGameTimeOfDay(), timeOfDayLookup)
+)
+
+// Record Tour, Group + Stage 
+rich_presence_conditional_display(recordTourMode() && isInGame() && !replayActive(),
+                                  "Driving {0} while challenging Stage {1} ({2}) in {3}",
+                                  rich_presence_lookup("CarLookup", inGameCarDriven(), carLookup),
+                                  rich_presence_value("Number", recordTourStage() + 1),
+                                  rich_presence_lookup("CourseLookup", courseInGame(), ingameCourseLookup),
+                                  rich_presence_lookup("GroupLookup", recordTourGroup(), groupLookup)
+)
+
+// VErsus mode
+rich_presence_conditional_display(versusMode() && isInGame(),
+                                  "Playing Versus Mode")
+
+rich_presence_display("In the menus.")
+
+
 
