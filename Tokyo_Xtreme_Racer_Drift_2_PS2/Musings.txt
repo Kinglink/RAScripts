@@ -41,6 +41,8 @@ The 3-4 named enemies that show their name.
 twenty Master + 1  (21) 
 
 
+Friends 1/10/25
+
 Need to figure out leaderboard for the record Challenge and Record tour.
 
 Which map are you on? 

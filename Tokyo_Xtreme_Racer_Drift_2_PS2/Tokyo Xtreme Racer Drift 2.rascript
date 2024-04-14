@@ -21,6 +21,7 @@ function ContainsKey(dictionary, key_name)
 DAIHATSU_MIDGET_II_R_TYPE_K100P = 0x01
 MITSUBISHI_MIRAGE_CYBORG_ZR = 0x27
 TOYOTO_TRUENO_3DOOR_GT_APEX_AE86 = 0x94
+HONDA_CIVIC_TYPE_R_EK9 = 0x0a
 carLookup =
 {
     0x00: "ASL Garaiya(Garaiya)",
@@ -650,7 +651,8 @@ opponentLookup =
     0x164: "Chief Musclehead",
     0x020f:"Twenty Master",
 }
-
+FIRST_RIVAL_INDEX = 0x0000
+LAST_RIVAL_INDEX = 0x0164
 GROUND_ZERO = 0x0
 MELON_GRIPPER = 0x5
 MR_MITSU = 0xc 
@@ -1547,7 +1549,8 @@ shortCarNameLookup =
 {
     MITSUBISHI_MIRAGE_CYBORG_ZR: "Mirage Cyborg ZR",
     DAIHATSU_MIDGET_II_R_TYPE_K100P: "Midget II",
-    TOYOTO_TRUENO_3DOOR_GT_APEX_AE86: "Trueno GT"
+    TOYOTO_TRUENO_3DOOR_GT_APEX_AE86: "Trueno GT",
+    HONDA_CIVIC_TYPE_R_EK9: "Civic Type R"
 }
 
 SUNNY_VALUE = 0
@@ -1559,7 +1562,7 @@ SNOWSTORM_VALUE = 5
 
 weatherLookup =
 {
-    SUNNY_VALUE: "FINE",
+    SUNNY_VALUE: "Fine",
     RAIN_VALUE: "Rain",
     SNOW_VALUE: "Snow",
     CLOUDY_VALUE: "Cloudy",
@@ -1760,6 +1763,10 @@ function rivalWinData(rivalIndex) => word(FIRST_RIVAL_WIN_MEMORY_LOCATION + (riv
 function firstRivalMetFriend() => byte(FIRST_RIVAL_FRIEND_MEMORY_LOCATION)
 
 function rivalFriendData(rivalIndex) => byte(FIRST_RIVAL_FRIEND_MEMORY_LOCATION + (rivalIndex * RIVAL_MEMORY_SIZE))
+FRIEND_VALUE = 0x03
+
+function countCurrentFriends() => sum_of(range(FIRST_RIVAL_INDEX, LAST_RIVAL_INDEX), i => rivalFriendData(i) / FRIEND_VALUE)
+function countPrevFriends() => sum_of(range(FIRST_RIVAL_INDEX, LAST_RIVAL_INDEX), i => prev(rivalFriendData(i)) / FRIEND_VALUE)
 
 // $760794: (8-bit) Second Rival Win Information
 //          
@@ -4465,6 +4472,37 @@ for sponsor in sponsorAchievementList
     )
 }
 
+// Friends 1/10/25
+function friendAchievement(title, description, points, total)
+{
+    achievement(title = title,
+                description = description,
+                points = points,
+                trigger = measured(countCurrentFriends() >= total) &&
+                          countPrevFriends() <= total - 1 &&
+                          conquestMode() &&
+                          achievementActive()
+    )
+}
+
+friendAchievement(title = "Best Friend",
+                  description = "Make your first friend in Conquest Mode",
+                  points = 3,
+                  total = 1
+                 )
+
+friendAchievement(title = "Friend of Friends",
+                  description = "Make your tenth friend in Conquest Mode",
+                  points = 10,
+                  total = 10
+                 )
+
+friendAchievement(title = "Mr. Popular",
+                  description = "Make your twenty-fifth friend in Conquest Mode",
+                  points = 25,
+                  total = 25
+                 )
+
 function groundZeroBeaten()
 {
     return rivalWinData(GROUND_ZERO) == 1 &&
@@ -4695,6 +4733,18 @@ specificLeaderboard =
         TIMEOFDAY: NIGHTTIME_VALUE,
         ACHIEVEMENT_NAME: "Tofu King of Haruna",
         SCORE: 1000000        
+    },
+    {
+        TRACK: SHIGA_KUSATSU_COURSE_INDEX,
+        CAR: HONDA_CIVIC_TYPE_R_EK9,
+        CREATOR: "nyxxie",
+        ID: -1,
+        MODE: TIME_ATTACK_MODE_VALUE,
+        DIRECTION: DOWNHILL_VALUE,
+        WEATHER: SUNNY_VALUE,
+        TIMEOFDAY: NIGHTTIME_VALUE,
+        ACHIEVEMENT_NAME: "Racer King of Shiga Kusatsu",
+        TIME: timeConversion(5,00)
     }
 ]
 
