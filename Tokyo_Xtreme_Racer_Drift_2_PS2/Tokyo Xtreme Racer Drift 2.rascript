@@ -22,6 +22,12 @@ DAIHATSU_MIDGET_II_R_TYPE_K100P = 0x01
 MITSUBISHI_MIRAGE_CYBORG_ZR = 0x27
 TOYOTO_TRUENO_3DOOR_GT_APEX_AE86 = 0x94
 HONDA_CIVIC_TYPE_R_EK9 = 0x0a
+SUZUKI_ALTO_WORKS_RS_Z_VVT = 0x83
+HONDA_NSX_R_NA1 = 0x15
+NISSAN_MARCH_G = 0x39
+ASL_GARAIYA = 0x00
+NISSAN_SILVIA_S15 = 0x49
+
 carLookup =
 {
     0x00: "ASL Garaiya(Garaiya)",
@@ -814,6 +820,7 @@ DESCRIPTION = "DESCRIPTION"
 STAGES = "STAGES"
 FASTEST_DESCRIPTION = "FASTEST_DESCRIPTION"
 SHORTEST_DESCRIPTION = "SHORTEST_DESCRIPTION"
+GYMKHANA_LEVEL = "GYMKHANA_LEVEL"
 
 teamLeaderInfos =
 [
@@ -1550,7 +1557,12 @@ shortCarNameLookup =
     MITSUBISHI_MIRAGE_CYBORG_ZR: "Mirage Cyborg ZR",
     DAIHATSU_MIDGET_II_R_TYPE_K100P: "Midget II",
     TOYOTO_TRUENO_3DOOR_GT_APEX_AE86: "Trueno GT",
-    HONDA_CIVIC_TYPE_R_EK9: "Civic Type R"
+    HONDA_CIVIC_TYPE_R_EK9: "Civic Type R",
+    SUZUKI_ALTO_WORKS_RS_Z_VVT: "Alto Works RS-Z",
+    HONDA_NSX_R_NA1: "NSX-R",
+    NISSAN_MARCH_G: "March G",
+    ASL_GARAIYA: "Garaiya",
+    NISSAN_SILVIA_S15: "Silvia S15"
 }
 
 SUNNY_VALUE = 0
@@ -4863,6 +4875,64 @@ specificLeaderboard =
         TIMEOFDAY: NIGHTTIME_VALUE,
         ACHIEVEMENT_NAME: "Racer King of Shiga Kusatsu",
         TIME: timeConversion(5,00)
+    },
+    {
+        TRACK: OMOTE_ROKKO_COURSE_INDEX,
+        CAR: SUZUKI_ALTO_WORKS_RS_Z_VVT,
+        CREATOR: "Biendeo",
+        ID: -1,
+        MODE: TIME_ATTACK_MODE_VALUE,
+        DIRECTION: CLIMB_VALUE,
+        WEATHER: CLOUDY_VALUE,
+        TIMEOFDAY: DAYTIME_VALUE,
+        ACHIEVEMENT_NAME: "Pocket Rocket King of Omote Rokko",
+        TIME: timeConversion(2,45)
+    },
+    {
+        TRACK: HIROSHIMA_COURSE_INDEX,
+        CAR: HONDA_NSX_R_NA1,
+        CREATOR: "jintei",
+        ID: -1,
+        MODE: CA_ATTACK_MODE_VALUE,
+        DIRECTION: DOWNHILL_VALUE,
+        WEATHER: SUNNY_VALUE,
+        TIMEOFDAY: NIGHTTIME_VALUE,
+        ACHIEVEMENT_NAME: "Super King of Hiroshima",
+        SCORE: 1000000
+    },
+    {
+        TRACK: GYMKHANA_COURSE_INDEX,
+        GYMKHANA_LEVEL: 9,
+        CAR: ASL_GARAIYA,
+        CREATOR: "Cipher47",
+        ID: 95316,
+        MODE: UI_GYM_TA,
+        WEATHER: CLOUDY_VALUE,
+        ACHIEVEMENT_NAME: "Gymkhana King of Gymkhana",
+        TIME: timeConversion(13,00)
+    },
+    {
+        TRACK: GYMKHANA_COURSE_INDEX,
+        GYMKHANA_LEVEL: 10,
+        CAR: NISSAN_MARCH_G,
+        CREATOR: "Borysewicz",
+        ID: -1,
+        MODE: UI_GYM_CA,
+        WEATHER: SNOW_VALUE,
+        ACHIEVEMENT_NAME: "Gymkhana King of Gymkhana",
+        SCORE: 1000000
+    },
+    {
+        TRACK: NIKKO_COURSE_INDEX,
+        CAR: NISSAN_SILVIA_S15,
+        CREATOR: "jintei",
+        ID: -1,
+        MODE: CA_ATTACK_MODE_VALUE,
+        DIRECTION: DOWNHILL_VALUE,
+        WEATHER: CLOUDY_VALUE,
+        TIMEOFDAY: DAYTIME_VALUE,
+        ACHIEVEMENT_NAME: "Drift King of Nikko",
+        TIME: timeConversion(5,00)
     }
 ]
 
@@ -4904,7 +4974,7 @@ function specificLeaderboardTimeAttack(data)
 function specificLeaderboardCAAttack(data)
 {
     leaderboard(    
-        title = format("Record Challenge: CA Attack {1} {2} on {0}",  ingameCourseLookup[data[TRACK]],  shortCarNameLookup[data[CAR]], directionLookup[data[DIRECTION]]),
+        title = format("Record Challenge: CA {1} {2} on {0}",  ingameCourseLookup[data[TRACK]],  shortCarNameLookup[data[CAR]], directionLookup[data[DIRECTION]]),
         description = format("Finish with the best CA Score on {0}/{3}/{4}/{5} while driving the Normal Car of {1} in CA Attack in Record Challenge Mode. Thanks to {2} For the suggestion", 
                              ingameCourseLookup[data[TRACK]], 
                              carLookup[data[CAR]], 
@@ -4935,6 +5005,63 @@ function specificLeaderboardCAAttack(data)
 
 }
 
+function specificLeaderboardGymkhanaTA(data)
+{
+    leaderboard(    
+        id = data[ID],
+        title = format("Record Challenge: Fastest Gymkhana {1} on {0}",  ingameCourseLookup[data[TRACK]],  data[GYMKHANA_LEVEL]),
+        description = format("Record the fastest time on Gymkhana Course {0} with {3} weather while driving the Normal Car of {1} in Time Attack in Record Challenge Mode. Thanks to {2} For the suggestion", 
+                             data[GYMKHANA_LEVEL], 
+                             carLookup[data[CAR]], 
+                             data[CREATOR],
+                             weatherLookup[data[WEATHER]]),
+        start = 
+        (
+            justFinishedGameplay() &&
+            winStatus() == WON_RACE_VALUE &&
+            recordChallengeMode() &&
+            courseInGame() == data[TRACK] &&
+            gymkhanaLevelInGame() == data[GYMKHANA_LEVEL] - 1 &&
+            inGameCarDriven() == data[CAR] &&
+            inGameWeather() == data[WEATHER] &&
+            achievementActive() &&
+            recordChallengeGymkhanaTAMode()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = calculateTotalTimeInTimeAttack(), // MILLISECONDS is centiseconds. See above
+        lower_is_better = true,
+        format = "MILLISECS"
+    )
+}
+
+function specificLeaderboardGymkhanaCA(data)
+{
+    leaderboard(    
+        title = format("Record Challenge: CA Gymkhana {1} on {0}",  ingameCourseLookup[data[TRACK]],  data[GYMKHANA_LEVEL]),
+        description = format("Finish with the best CA Score on Gymkhana Course {0} with {3} weather while driving the Normal Car of {1} in CA Attack in Record Challenge Mode. Thanks to {2} For the suggestion", 
+                             data[GYMKHANA_LEVEL], 
+                             carLookup[data[CAR]], 
+                             data[CREATOR],
+                             weatherLookup[data[WEATHER]]),
+        start = 
+        (
+            justFinishedGameplay() &&
+            winStatus() == WON_RACE_VALUE &&
+            recordChallengeMode() &&
+            courseInGame() == data[TRACK] &&
+            gymkhanaLevelInGame() == data[GYMKHANA_LEVEL] - 1 &&
+            inGameCarDriven() == data[CAR] &&
+            inGameWeather() == data[WEATHER] &&
+            achievementActive() &&
+            recordChallengeGymkhanaCAMode()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = totalScoreCAMode(), // MILLISECONDS is centiseconds. See above
+        format = "VALUE"
+    )
+}
 
 for data in specificLeaderboard 
 {
@@ -4945,6 +5072,14 @@ for data in specificLeaderboard
     else if data[MODE] == CA_ATTACK_MODE_VALUE
     {
         specificLeaderboardCAAttack(data)
+    }
+    else if data[MODE] == UI_GYM_TA
+    {
+        specificLeaderboardGymkhanaTA(data)
+    }
+    else if data[MODE] == UI_GYM_CA
+    {
+        specificLeaderboardGymkhanaCA(data)
     }
 
     
