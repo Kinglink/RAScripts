@@ -43,6 +43,26 @@ function beatLevel(level) => nextLevel() == level && prev(nextLevel()) == level 
 //        Which scene is going to get loaded and play.
 function nextScene() => byte(0x00C56A)
 
+// 0x00c56c: (8-bit) State Machine
+//
+//          0x00-0x01 = Loading into a new stage. 
+//          0x04 = Gameplay
+//          0x05 = Paused  or post stage screen
+//          0x06 = Main Menu
+//          0x09 = Game Over
+//          0x0b = Demo mode
+//          0x0c = Credits
+//          0x0d = Loading post stage screen
+function stateMachine() => byte(0x00C56C)
+GAMEPLAY_VALUE = 0x04
+PAUSED_VALUE = 0x05
+GAME_OVER_VALUE = 0x09
+POST_STAGE_SCREEN_VALUE = 0x0d
+
+function isGameplayRunning() => stateMachine() == GAMEPLAY_VALUE
+function RPisGameplayActive() => stateMachine() == GAMEPLAY_VALUE || stateMachine() == PAUSED_VALUE
+function RPisPostStageScreen() => stateMachine() == POST_STAGE_SCREEN_VALUE || prior(stateMachine()) == POST_STAGE_SCREEN_VALUE
+
 // $C580: (256-bit bitfield) Health boxes picked up in the level
 //        Will look at 192-bit for level 1.  More on level 2.
 //        
@@ -57,8 +77,7 @@ function nextScene() => byte(0x00C56A)
 PICKUP_BIT_FIELD_MEMORY_LOCATION = 0x00C580
 function pickupBitField() => byte(PICKUP_BIT_FIELD_MEMORY_LOCATION)
 
-function countPickups() => sum_of(range(0,31), index => bitcount(PICKUP_BIT_FIELD_MEMORY_LOCATION + index))
-
+function countPickups(bits) => sum_of(range(0,bits - 1), index => bit(index%8,PICKUP_BIT_FIELD_MEMORY_LOCATION + index/8))
 // $C5E0: (256-bit bitfield) Enemies killed in the level.
 //        
 //        Total Level 1 = 34
@@ -72,8 +91,8 @@ function countPickups() => sum_of(range(0,31), index => bitcount(PICKUP_BIT_FIEL
 ENEMY_BIT_FIELD_MEMORY_LOCATION = 0x00C5E0
 function enemiesBitField() => byte(ENEMY_BIT_FIELD_MEMORY_LOCATION)
 
-function countEnemyBeaten() => sum_of(range(0,31), index => bitcount(ENEMY_BIT_FIELD_MEMORY_LOCATION + index))
-
+function countEnemyBeaten(bits) => sum_of(range(0,bits - 1), index => bit(index%8,ENEMY_BIT_FIELD_MEMORY_LOCATION + index/8))
+function countEnemyJustBeaten() => tally_of(range(0,256), 0,  index => bit(index%8,ENEMY_BIT_FIELD_MEMORY_LOCATION + index/8) == 1 && prev(bit(index%8,ENEMY_BIT_FIELD_MEMORY_LOCATION + index/8)) == 0)
 // $C600: (256-bit bitfield) Secret Areas found in the level.
 //        
 //        Tested the length.
@@ -89,7 +108,7 @@ function countEnemyBeaten() => sum_of(range(0,31), index => bitcount(ENEMY_BIT_F
 SECRET_AREA_BIT_FIELD_MEMORY_LOCATION = 0x00C600
 function secretAreasBitfield() => byte(SECRET_AREA_BIT_FIELD_MEMORY_LOCATION)
 
-function countSecretAreas() => sum_of(range(0,31), index => bitcount(SECRET_AREA_BIT_FIELD_MEMORY_LOCATION + index))
+function countSecretAreas(bits) => sum_of(range(0,bits - 1), index => bit(index%8,SECRET_AREA_BIT_FIELD_MEMORY_LOCATION + index/8))
 
 
 // $D9D4: (8-bit) Lives
@@ -213,74 +232,6 @@ function displayHealth() => byte(0x00E6FC)
 //        0xf460 = Thug 2 Shuriken Rain
 function playerOneAttack() => word_be(0x00E85A)
 
-
-/        
-//        0x6445 = Robin Batarang
-//        0x3846 = Robin Bat Bola
-//        0x3845 = Robin Back Punch
-//        0x0c47 = Robin Staff Charge
-//        0x8a45 = Robin Electro Shield
-//        0xc245 = Robin Homing Batarang
-//        0x9e47 = Robing Traquilizer Dart
-//        0xe845 = Robin Smoke Pellet
-//        0xec47 = Robin Sonic Blast Weapon
-//        0xee58 = Robin Slippery Goo
-//        0x1048 = Robin Heat Gun
-//        0x5c47 = Robin Electro Staff Prod
-//        0xc247 = Robin Wrist Rivets
-//        0xb046 = Robin Bat Cuffs
-//        0xd646 = Robin Rocket Boots
-//        0xc84f = Robin Head cracker
-//        
-//        0xfc99 = Inmate Pepper Spray
-//        0x3c99 = Inmate Knife Hurl (really stick)
-//        0x4698 = Inmate Sparky
-//        0x449a = Inmate Stampede
-//        0xea97 = Inmate Grab n Throw
-//        
-//        0xf8de = Clown Pedal Power
-//        0xa6e0 = Clown Cartwheel
-//        0xbae1 = Clown Sticky Spit
-//        0x9aee = Clown Circus Spin
-//        0xfae1 = Clown Horn
-//        0x1adf = Clown Skip Rock Bomb
-//        0x90e5 = Clown Smash Jump
-//        
-//        0x522c = Thug 1 Chainsaw Blast
-//        0xb42e = Thug 1 Chainsaw Rip
-//        0x3a27 = Thug 1 Homestyle Bomb
-//        0xde27 = Thug 1 Here 'n There
-//        0xea2d = Thug 1 Motosaw
-//        0x0e2f = Thug 1 Pin
-//        
-//        
-//        
-//        0x82b2 = Riddler Thug Electroshield
-//        0xe4ab = Riddler Thug Balloon Bomb
-//        0x56ab = Riddler Thug Portable Hole
-//        0x80b0 = Riddler Thug Stick 'n Reel
-//        0xfaa0 = Riddler Thug Acid Rain
-//        0x8eae = Riddler Thug No-See-Um
-//        
-//        0xc6f0 = Sugar/Spice Jump Warp
-//        0x28ed = Sugar/Spice Pipe Bomb
-//        0xb2ed = Sugar/Spice Handcuffs
-//        0xbcef = Sugar/Spice Slash 'n Whirl
-//        0x20f1 = Sugar/Spice Warp Kick
-//        
-//        
-//        0xea62 = Two Face Kickflip
-//        0x529f = Two Face Cut-Cut
-//        0x305f = Two Face Skidtrap
-//        0x029f = Two Face Buzzsaw
-//        
-//        0x085e = Thug 2 Puff 'o Fire
-//        0xba5e = Thug 2 Ground Roaster
-//        0xe865 = Thug 2 Slash
-//        0xe86d = Thug 2 Shuriken Blast
-//        0xa65d = Thug 2 Hot Air
-//        0xf460 = Thug 2 Shuriken Rain
-
 BATMAN_BATARANG = 0x20ef
 BATMAN_SONIC_PULSE_GLOBE = 0x1a02
 BATMAN_SMOKE_PELLET = 0xe0ef
@@ -292,10 +243,12 @@ BATMAN_BAT_BOLA = 0x46f0
 BATMAN_ELECTRIC_PELLET = 0x66f0
 BATMAN_FORCE_WALL = 0xb0f0
 BATMAN_STICKY_GOO = 0x3802
+BATMAN_THROW_BOMB = 0x00f0
 
 BATMAN_BAT_CUFFS = 0x3ef1
 BATMAN_HOMING_BATARANG = 0xb6ef
 BATMAN_ROCKET_BOOTS = 0x6af1
+BATMAN_HOLOGRAPH_DECOY = 0x16f1
 
 BATMAN_HEAD_CRACKER = 0x2af9
 
@@ -314,6 +267,7 @@ ROBIN_HEAT_GUN = 0x1048
 ROBIN_BAT_CUFFS = 0xb046
 ROBIN_HOMING_BATARANG = 0xc245
 ROBIN_ROCKET_BOOTS = 0xd646
+ROBIN_HOLOGRAPH_DECOY = 0x8846
 
 ROBIN_HEAD_CRACKER = 0xc84f
 
@@ -376,7 +330,8 @@ batmanGadgets =
     BATMAN_BAT_BOLA,
     BATMAN_ELECTRIC_PELLET,
     BATMAN_FORCE_WALL,
-    BATMAN_STICKY_GOO
+    BATMAN_STICKY_GOO,
+    BATMAN_THROW_BOMB
 ]
 
 robinGadgets =
@@ -391,15 +346,8 @@ robinGadgets =
     ROBIN_BAT_BOLA,
     ROBIN_ELECTRO_STAFF_PROD,
     ROBIN_WRIST_RIVETS,
-    ROBIN_HEAT_GUN,
+    ROBIN_HEAT_GUN
  ]
-
-blueprintGadgets = 
-[
-    [BATMAN_BAT_CUFFS, ROBIN_BAT_CUFFS]
-    [BATMAN_HOMING_BATARANG, ROBIN_HOMING_BATARANG],
-    [BATMAN_ROCKET_BOOTS, ROBIN_ROCKET_BOOTS]
-]
 
 headClunker = [BATMAN_HEAD_CRACKER, ROBIN_HEAD_CRACKER]
 
@@ -469,6 +417,63 @@ thug2Attacks =
     THUG2_HOT_AIR,
     THUG2_SHURIKEN_RAIN
 ] 
+
+// doesn't count Batarang or the staff charge/bomb throw
+storyModeGadgets =
+[
+    BATMAN_SONIC_PULSE_GLOBE,
+    BATMAN_SMOKE_PELLET,
+    BATMAN_CAPE_MORPH,
+    BATMAN_FLASH_PELLET,
+    BATMAN_GAS,
+    BATMAN_SLIPPERY_GOO,
+    BATMAN_BAT_BOLA,
+    BATMAN_ELECTRIC_PELLET,
+    BATMAN_FORCE_WALL,
+    BATMAN_STICKY_GOO,
+    ROBIN_SMOKE_PELLET,
+    ROBIN_ELECTRO_SHIELD,
+    ROBIN_TRANQUILIZER_DART,
+    ROBIN_SONIC_BLAST_WEAPON,
+    ROBIN_SLIPPERY_GOO,
+    ROBIN_BAT_BOLA,
+    ROBIN_ELECTRO_STAFF_PROD,
+    ROBIN_WRIST_RIVETS,
+    ROBIN_HEAT_GUN,
+    BATMAN_BAT_CUFFS, 
+    ROBIN_BAT_CUFFS,
+    BATMAN_HOMING_BATARANG, 
+    ROBIN_HOMING_BATARANG,
+    BATMAN_ROCKET_BOOTS, 
+    ROBIN_ROCKET_BOOTS,
+    BATMAN_HOLOGRAPH_DECOY,
+    ROBIN_HOLOGRAPH_DECOY
+    
+]
+
+function usedGadget()
+{
+    return any_of(storyModeGadgets, gadget => playerOneAttack() == gadget)
+}
+
+// $E90D: (8-bit) Menu Screen
+// 
+//          0x19 = Possibly entering Loadout. 
+//          0x1a = Loadout
+//          0x1b = Weapon Choice (Which Weapon)
+//          0x21 = Choose your player
+//          0x22 = Choose your opponent
+//          0x2d = Continue in Training/opening of Main Menu
+//          0x2e = Main Menu
+//          0x2f = Cheat Main Menu 
+
+function menuScreen() => byte(0x00E90D)
+
+CHOSE_YOUR_PLAYER_VALUE = 0x21
+MAIN_MENU_VALUE = 0x2e
+
+function startChoseYourPlayer() => menuScreen() == CHOSE_YOUR_PLAYER_VALUE && prev(menuScreen()) != CHOSE_YOUR_PLAYER_VALUE
+function gameOverTraining() => menuScreen() == MAIN_MENU_VALUE
 
 // $E916: (8-bit) Player's Health
 //        
@@ -558,8 +563,9 @@ NOT_IN_GAME_VALUE = 0x00
 
 // Just in case the game changes that value.
 function isInGame() => inGameCheck() != NOT_IN_GAME_VALUE
+function wasInGame() => prev(inGameCheck()) == IN_GAME_VALUE
 
-function gameOver() => inGameCheck() == NOT_IN_GAME_VALUE && prev(inGameCheck()) == IN_GAME_VALUE
+
 
 // $FB90: (8-bit) Cheat code on main menu progress.
 //        
@@ -690,4 +696,525 @@ function isUsingAnyCheat() => isUsingCheatLevelSelection() ||
                               isUsingCheatEasyKill() || 
                               isUsingCheatWeapons() || 
                               isUsingCheatPauseCheat()
+
+function achievementsAllowed() => !isUsingAnyCheat() && isInGame() && isOnePlayer()
+
+function achievementsAllowedMaybeInGame() => !isUsingAnyCheat() && isOnePlayer()
+
+// we'll go 1-index because of a function I use, and display. 
+FIRST_LEVEL = 0x01
+LAST_LEVEL = 0x08
+
+function startStoryGame() => startChoseYourPlayer() && isStoryMode()
+function beatGame() => beatLevel(LAST_LEVEL)
+function gameOverStory() => stateMachine() == GAME_OVER_VALUE
+
+
+TITLE = "TITLE"
+STAGE = "STAGE"
+ITEMS = "ITEMS"
+ENEMIES = "ENEMIES"
+SECRET_AREAS = "SECRET AREAS"
+FINISHED_LEVEL_VALUE = "FINISHED_LEVEL_VALUE"
+NAME = "NAME"
+CHARACTER = "CHARACTER"
+GADGETS = "GADGETS"
+CHECKER = "CHECKER"
+GLITCHED_PICKUPS = "GLITCHED_PICKUPS"
+BITS = "BITS"
+
+// The "BITS" are math, I could calculate them, but this is more representative of what the values are.  Such as The circus is a full row (128) + 2 more bytes (16)
+levelAchievementData =
+[
+    {
+        TITLE: "Arkham Asylum", 
+        STAGE: 0x01, 
+        ITEMS: 23,
+        ENEMIES: 34,
+        SECRET_AREAS: 9,
+        FINISHED_LEVEL_VALUE: 3,
+        GLITCHED_PICKUPS: false,
+        BITS: 196
+    },
+    {
+        TITLE: "Second Bank of Gotham City",
+        STAGE: 0x02,
+        ITEMS: 38, // one is bugged
+        ENEMIES: 65,
+        SECRET_AREAS: 2,
+        FINISHED_LEVEL_VALUE: 3,
+        GLITCHED_PICKUPS: false,
+        BITS: 240
+    },
+    {
+        TITLE: "The Circus",
+        STAGE: 0x03,
+        ITEMS: 33, // one is bugged
+        ENEMIES: 37,
+        SECRET_AREAS: 6,
+        FINISHED_LEVEL_VALUE: 4,
+        GLITCHED_PICKUPS: true,
+        BITS: (128 + 16)
+    },
+    {
+        TITLE: "Two-Face's Hideout: Warehouse",
+        STAGE: 0x04,
+        ITEMS: 43, // 1 Is Bugged
+        ENEMIES: 65,
+        SECRET_AREAS: 12,
+        FINISHED_LEVEL_VALUE: 4,
+        GLITCHED_PICKUPS: false,
+        BITS: (256 - 32)
+    },
+    {
+        TITLE: "Ritz Gotham",
+        STAGE: 0x05,
+        ITEMS: 13, // 3 are bugged (Damn!)
+        ENEMIES: 42,
+        SECRET_AREAS: 0,
+        FINISHED_LEVEL_VALUE: 5,
+        GLITCHED_PICKUPS: false,
+        BITS: (10 * 8)
+    },
+    {
+        TITLE: "Abandoned Subway Station",
+        STAGE: 0x06,
+        ITEMS: 50,
+        ENEMIES: 61,
+        SECRET_AREAS: 10,
+        FINISHED_LEVEL_VALUE: 5,
+        GLITCHED_PICKUPS: false,
+        BITS: (256 - 32)
+    },
+    {
+        TITLE: "Wayne Manor/Destroyed Batcave",
+        STAGE: 0x07,
+        ITEMS: 20, // 2 are bugged
+        ENEMIES: 33,
+        SECRET_AREAS: 4,
+        FINISHED_LEVEL_VALUE: 10,
+        GLITCHED_PICKUPS: false,
+        BITS: (128 - 16)
+    },
+    {
+        TITLE: "Claw Island",
+        STAGE: 0x08,
+        ITEMS: 20, // 11 Are bugged! WOW!
+        ENEMIES: 31,
+        SECRET_AREAS: 2,
+        FINISHED_LEVEL_VALUE: 25,
+        GLITCHED_PICKUPS: false,
+        BITS: (128 - 16)
+    }
+]
+
+
+for data in levelAchievementData
+{
+    type = "Progression"
+    if(data[STAGE] == 8)
+    {
+        type = "Win_Condition"
+    }
+    achievement(title = data[TITLE],
+                type = type,
+                description = format("Beat level {0} in the story", data[STAGE]),
+                points = data[FINISHED_LEVEL_VALUE],
+                trigger = achievementsAllowed() &&
+                          isStoryMode() &&
+                          beatLevel(data[STAGE])
+    )
+                          
+}
+
+for data in levelAchievementData
+{
+    if(data[SECRET_AREAS] != 0 )
+    {
+        achievement(title = format("{0} Searcher", data[TITLE]),
+                    type = "Missable",
+                    description = format("Beat level {0} with 100% secret areas found", data[STAGE]),
+                    points = 5,
+                    trigger = beatLevel(data[STAGE]) &&
+                              measured(countSecretAreas(data[BITS]) == data[SECRET_AREAS], format = "percent", when = ( achievementsAllowed() && isStoryMode() && (currentLevel() == data[STAGE] - 1)))
+        )
+    }
+
+    description = "Beat level {0} with 100% pickups found"
+    if data[GLITCHED_PICKUPS] == true
+    {
+        description = "Beat level {0} with 100% pickups found, Note end of level total will not be 100 perecent."
+    }
+    achievement(title = format("{0} Scavenger", data[TITLE]),
+                type = "Missable",
+                description = format(description, data[STAGE]),
+                points = 5,
+                trigger = beatLevel(data[STAGE]) &&
+                          measured(countPickups(data[BITS]) >= data[ITEMS], format = "percent", when = ( achievementsAllowed() && isStoryMode() && (currentLevel() == data[STAGE] - 1 ))) 
+    )
+    achievement(title = format("{0} Warrior", data[TITLE]),
+                type = "Missable",
+                description = format("Beat level {0} with 100% enemies beaten", data[STAGE]),
+                points = 5,
+                trigger = beatLevel(data[STAGE]) &&
+                          measured(countEnemyBeaten(data[BITS]) == data[ENEMIES], format = "percent", when = ( achievementsAllowed() && isStoryMode() && (currentLevel() == data[STAGE] - 1)))
+    )
+}
+
+achievement(title = "The Dark Knight",
+            description = "Beat the game on Hard",
+            points = 25,
+            trigger = achievementsAllowed() &&
+                      isStoryMode() &&
+                      beatGame() &&
+                      isHardDifficulty()
+)
+
+function enterLevel(level)
+{
+    if(level == FIRST_LEVEL)
+    {
+        return startStoryGame()
+    }
+    else
+    {
+        return currentLevel() == level - 1 && prev(currentLevel()) == level - 2
+    }
+}
+
+function noDeathLevelAchievement(data)
+{
+    achievement(title = format("{0} Survivor", data[TITLE]),
+                description = format("Beat level {0} without dying on normal difficulty or higher", data[STAGE]),
+                type = "Missable",
+                points = 10,
+                trigger = achievementsAllowed() &&
+                          isStoryMode() &&
+                          once(enterLevel(data[STAGE])) &&
+                          trigger_when( beatLevel(data[STAGE])) &&
+                          never(totalLives() < prev(totalLives())) &&
+                          never(gameOverStory()) &&
+                          isNormalDifficultyOrHarder()
+    )
+}
+
+for data in levelAchievementData
+{
+    noDeathLevelAchievement(data)
+}
+
+achievement(title = "Forgot My Bat Belt",
+            type = "Missable",
+            description = "Beat the game without using any optional or blueprint gadgets normal difficulty or higher (Batarang, Sonic Pulse Globe, Staff Charge, Grappling Hook and Extending Staff are allowed)",
+            points = 10,
+            trigger = achievementsAllowed() &&
+                      isStoryMode() &&
+                      once(startStoryGame()) &&
+                      trigger_when(beatGame()) &&
+                      never(gameOverStory()) && 
+                      never(usedGadget()) &&
+                      isNormalDifficultyOrHarder()
+)
+
+achievement(title = "The Bat",
+            description = "Beat the game as Batman",
+            points = 10,
+            trigger = achievementsAllowed() &&
+                      isStoryMode() &&
+                      beatGame() &&
+                      playerIsBatman()
+)
+
+achievement(title = "Boy Wonder",
+            description = "Beat the game as Robin",
+            points = 10,
+            trigger = achievementsAllowed() &&
+                      isStoryMode() &&
+                      beatGame() &&
+                      playerIsRobin()
+)
+
+gadgetsAchievementList = 
+[
+    {
+        NAME: "Batman",
+        CHARACTER: BATMAN_CHARACTER_VALUE,
+        GADGETS: batmanGadgets,
+        CHECKER: playerIsBatman()
+    },
+    {
+        NAME: "Robin",
+        CHARACTER: ROBIN_CHARACTER_VALUE,
+        GADGETS: robinGadgets,
+        CHECKER: playerIsRobin()
+    }
+]
+
+trainingAchievementList =
+[
+    {
+        NAME: "Inmate",
+        CHARACTER: INMATE_CHARACTER_VALUE,
+        GADGETS: inmateAttacks,
+        CHECKER: playerIsInmate()
+    },
+    {
+        NAME: "Clown",
+        CHARACTER: CLOWN_CHARACTER_VALUE,
+        GADGETS: clownAttacks,
+        CHECKER: playerIsClown()
+    },
+    {
+        NAME: "Thug 1",
+        CHARACTER: THUG1_CHARACTER_VALUE,
+        GADGETS: thug1Attacks,
+        CHECKER: playerIsThug1()
+    },
+    {
+        NAME: "Thug 2",
+        CHARACTER: THUG2_CHARACTER_VALUE,
+        GADGETS: thug2Attacks,
+        CHECKER: playerIsThug2()
+    },
+    {
+        NAME: "Riddler Thug",
+        CHARACTER: RIDDLER_THUG_CHARACTER_VALUE,
+        GADGETS: riddlerThugAttacks,
+        CHECKER: playerIsRiddlerThug()
+    },
+    {
+        NAME: "Sugar",
+        CHARACTER: SUGAR_CHARACTER_VALUE,
+        GADGETS: sugarAttacks,
+        CHECKER: playerIsSugar()
+    },
+    {
+        NAME: "Two Face",
+        CHARACTER: TWO_FACE_CHARACTER_VALUE,
+        GADGETS: twoFaceAttacks,
+        CHECKER: playerIsTwoFace()
+    }
+]
+
+function specialMovesAchievement(data)
+{
+    achievement(title = format("{0} Specialist", data[NAME]),
+                description = format("Use each of {0}'s special moves", data[NAME]),
+                points = 1,
+                trigger = measured(tally_of(data[GADGETS], length(data[GADGETS]), gadget => once(playerOneAttack() == gadget && achievementsAllowed() && data[CHECKER])))
+    )
+}
+
+function trainingModeAchievement(data)
+{
+    achievement(title = format("Labbing with {0}", data[NAME]),
+                description = format("Beat all sixteen levels of training mode with {0}", data[NAME]),
+                points = 5,
+                trigger = achievementsAllowed() &&
+                          isTrainingMode() &&
+                          wonTrainingLevel() &&
+                          characterSelection() == data[CHARACTER]
+    )
+}
+
+function gadgetAchievement(data)
+{
+    achievement(title = format("{0} Specialist", data[NAME]),
+                description = format("Use each of {0}'s normal and optional gadgets (Blueprint gadgets are not counted)", data[NAME]),
+                points = 3,
+                trigger = measured(tally_of(data[GADGETS], length(data[GADGETS]), gadget => once(playerOneAttack() == gadget && achievementsAllowed() && data[CHECKER])))
+    )
+}
+
+for data in gadgetsAchievementList
+{
+    gadgetAchievement(data)
+    trainingModeAchievement(data)
+}
+
+
+for data in trainingAchievementList
+{
+    specialMovesAchievement(data)
+    trainingModeAchievement(data)
+}
+
+blueprintGadgets = 
+[
+    {
+        NAME: "Bat Cuffs", 
+        GADGETS: [BATMAN_BAT_CUFFS, ROBIN_BAT_CUFFS]
+    },
+    {
+        NAME: "Homing Batarang",
+        GADGETS: [BATMAN_HOMING_BATARANG, ROBIN_HOMING_BATARANG]
+    },
+    {
+        NAME: "Rocket Boots",
+        GADGETS: [BATMAN_ROCKET_BOOTS, ROBIN_ROCKET_BOOTS]
+    },
+    {
+        NAME: "Holographic Decoy",
+        GADGETS: [BATMAN_HOLOGRAPH_DECOY, ROBIN_HOLOGRAPH_DECOY]
+    }
+]
+
+
+for data in blueprintGadgets
+{
+    achievement(title = format("{0} Inventor", data[NAME]),
+                type = "Missable",
+                description = format("Build and use {0} as either Batman or Robin", data[NAME]),
+                points = 5,
+                trigger = achievementsAllowed() &&
+                          isStoryMode() &&
+                          any_of(data[GADGETS], gadget => playerOneAttack() == gadget)
+    )
+}
+
+achievement(title = "Headcracker",
+            description = "Use the Headcracker move as either Batman or Robin",
+            points = 1,
+            trigger = achievementsAllowed() &&
+                      any_of(headClunker, gadget => playerOneAttack() == gadget)
+)
+
+leaderboard(    
+        title = "Fastest Clear",
+        description = "Beat the game as fast as possible",
+        start = 
+        (
+            achievementsAllowedMaybeInGame() &&
+            isStoryMode() &&
+            startStoryGame() 
+        ),
+        cancel = gameOverStory(),
+        submit = beatGame(),
+        value = measured(always_true()) && unless(!isGameplayRunning()), // MILLISECONDS is centiseconds. See above
+        format = "FRAMES"
+    )
+
+leaderboard(
+        title = "Fastest Hard Clear",
+        description = "Beat the game as fast as possible on hard",
+        start = 
+        (
+            achievementsAllowedMaybeInGame() &&
+            isStoryMode() &&
+            startStoryGame() &&
+            isHardDifficulty()
+        ),
+        cancel = gameOverStory(),
+        submit = beatGame(),
+        value = measured(always_true()) && unless(!isGameplayRunning()), // MILLISECONDS is centiseconds. See above
+        format = "FRAMES"
+)
+
+leaderboard(    
+        title = "Most Enemies Beaten",
+        description = "Beat the game with the most enemies beaten",
+        start = 
+        (
+            achievementsAllowedMaybeInGame() &&
+            isStoryMode() &&
+            startStoryGame() 
+        ),
+        cancel = always_false(),
+        submit = beatGame() || gameOverStory(),
+        value = measured(countEnemyJustBeaten()), 
+        format = "VALUE"
+)
+
+leaderboard(
+        title = "Most Hard Enemies Beaten",
+        description = "Beat the game with the most enemies beaten",
+        start = 
+        (
+            achievementsAllowedMaybeInGame() &&
+            isStoryMode() &&
+            startStoryGame() &&
+            isHardDifficulty()
+        ),
+        cancel = always_false(),
+        submit = beatGame() || gameOverStory(),
+        value = measured(countEnemyJustBeaten()), 
+        format = "VALUE"
+)
+
+
+leaderboard(    
+        title = "Fastest Training Clear",
+        description = "Beat the Training Mode as fast as possible. Continues are allowed, but time will continue to accrue",
+        start = 
+        (
+            achievementsAllowedMaybeInGame() &&
+            isTrainingMode() &&
+            startChoseYourPlayer() 
+        ),
+        cancel = gameOverTraining(),
+        submit = wonTrainingLevel(),
+        value = measured(always_true()) && unless(!isGameplayRunning()), // MILLISECONDS is centiseconds. See above
+        format = "FRAMES"
+    )
+
+
+characterLookup =
+{
+    BATMAN_CHARACTER_VALUE: "Batman",
+    ROBIN_CHARACTER_VALUE: "Robin",
+    INMATE_CHARACTER_VALUE: "Inmate",
+    CLOWN_CHARACTER_VALUE: "Clown",
+    THUG1_CHARACTER_VALUE: "Thug 1",
+    THUG2_CHARACTER_VALUE: "Thug 2",
+    RIDDLER_THUG_CHARACTER_VALUE: "Riddler Thug",
+    SUGAR_CHARACTER_VALUE: "Sugar",
+    TWO_FACE_CHARACTER_VALUE: "Two-Face"
+}
+
+stageLookup =
+{
+    0x00: "Arkham Asylum",
+    0x01: "Second Bank of Gotham City",
+    0x02: "The Circus",
+    0x03: "Two-Face's Hideout: Warehouse",
+    0x04: "Ritz Gotham",
+    0x05: "Abandoned Subway Station",
+    0x06: "Wayne Manor/Destroyed Batcave",
+    0x07: "Claw Island"
+}
+
+difficultyLookup =
+{
+    EASY_DIFFICULTY_VALUE: "Easy",
+    MEDIUM_DIFFICULTY_VALUE: "Medium",
+    HARD_DIFFICULTY_VALUE: "Hard"
+}
+
+
+rich_presence_conditional_display(  (RPisPostStageScreen()) && isStoryMode(),
+                                    "{0} has finished fighting through {1} on {2} difficulty",
+                                    rich_presence_lookup("CharacterLookup", chosenCharacter(), characterLookup),
+                                    rich_presence_lookup("StageLookup", currentLevel(), stageLookup),
+                                    rich_presence_lookup("DifficultyLookup", gameDifficulty(), difficultyLookup)
+)
+
+rich_presence_conditional_display(  RPisGameplayActive() && isStoryMode(),
+                                    "{0} is fighting through {1} on {2} difficulty",
+                                    rich_presence_lookup("CharacterLookup", chosenCharacter(), characterLookup),
+                                    rich_presence_lookup("StageLookup", currentLevel(), stageLookup),
+                                    rich_presence_lookup("DifficultyLookup", gameDifficulty(), difficultyLookup)
+)
+
+rich_presence_conditional_display( RPisGameplayActive() && isTrainingMode() && wonTrainingLevel(), 
+                                  "{0} has just finished training mode",
+                                  rich_presence_lookup("CharacterLookup", chosenCharacter(), characterLookup)
+                                  
+)
+rich_presence_conditional_display( RPisGameplayActive() && isTrainingMode(), 
+                                  "{0} is beating up baddies in the lab.  Currently set to level {1}",
+                                  rich_presence_lookup("CharacterLookup", chosenCharacter(), characterLookup),
+                                  rich_presence_value("Number", trainingLevel() + 1)
+)
+
+rich_presence_display("In the menus.")
 
