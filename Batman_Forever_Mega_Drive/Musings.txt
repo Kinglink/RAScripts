@@ -5,7 +5,6 @@ Beat game on Hard
 Beat game with out gadget use normal or harder.
 Beat with Robin/Batman
 
-Leaderboard Score
 Leaderboard Time 
 
 Investigated pickup glitch.  Unable to fix at this time.   Left traces in this directory/uploaded to github.
