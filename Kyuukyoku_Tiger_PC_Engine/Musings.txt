@@ -1,0 +1,25 @@
+High score.
+
+Beat each level 
+No death 
+Max Of each color. 
+Secret Yellow 
+9 bombs?
+No continue
+
+Leaderboard score
+
+Max Stars
+
+Beat a level only using Red 
+Beat a level only using blue
+Beat a level only using Green
+Beat a level only using Yellow
+9 1 ups
+
+Loop no continue? (10 levels)
+
+(Find demo flags)
+
+STars Each level
+Dodge for 60 seconds on each boss?
