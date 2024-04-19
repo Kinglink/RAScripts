@@ -23,3 +23,5 @@ Loop no continue? (10 levels)
 
 STars Each level
 Dodge for 60 seconds on each boss?
+
+Secret Credits
