@@ -540,7 +540,7 @@ function playerIsTwoFace() => chosenCharacter() == TWO_FACE_CHARACTER_VALUE
 //        0x0c = Riddler Thug
 //        0x0e = Sugar
 //        0x12 = Two-Face
-function characterSelection() => byte(0x00EAB6)
+//function characterSelection() => byte(0x00EAB6)
 
 // $F838: (8-bit) Training Level
 //        
@@ -759,8 +759,8 @@ levelAchievementData =
     {
         TITLE: "Two-Face's Hideout: Warehouse",
         STAGE: 0x04,
-        ITEMS: 43, // 1 Is Bugged
-        ENEMIES: 65,
+        ITEMS: 42, // 1 Is Bugged
+        ENEMIES: 61,
         SECRET_AREAS: 12,
         FINISHED_LEVEL_VALUE: 4,
         GLITCHED_PICKUPS: false,
@@ -812,10 +812,6 @@ levelAchievementData =
 for data in levelAchievementData
 {
     type = "Progression"
-    if(data[STAGE] == 8)
-    {
-        type = "Win_Condition"
-    }
     achievement(title = data[TITLE],
                 type = type,
                 description = format("Beat level {0} in the story", data[STAGE]),
@@ -1008,12 +1004,13 @@ function specialMovesAchievement(data)
 function trainingModeAchievement(data)
 {
     achievement(title = format("Labbing with {0}", data[NAME]),
+                type = "Win_Condition",
                 description = format("Beat all sixteen levels of training mode with {0}", data[NAME]),
                 points = 5,
                 trigger = achievementsAllowed() &&
                           isTrainingMode() &&
                           wonTrainingLevel() &&
-                          characterSelection() == data[CHARACTER]
+                          data[CHECKER]
     )
 }
 
