@@ -1,7 +1,7 @@
 from PIL import Image
 import os
 
-def resize_apply_black_background_and_alpha_overlay(input_directory, overlay_path, output_directory):
+def resize_apply_black_background_and_alpha_overlay(input_directory, overlay_path, output_directory, suffix=None):
     # Ensure the output directory exists
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
@@ -28,9 +28,18 @@ def resize_apply_black_background_and_alpha_overlay(input_directory, overlay_pat
             # Apply the overlay
             result_image = Image.alpha_composite(composite_image, overlay_image.resize(input_image.size))
 
+            # Define the new file name with suffix if provided
+            if suffix:
+                base_name = os.path.splitext(input_image_name)[0]
+                new_file_name = f"{base_name}_{suffix}.png"
+            else:
+                new_file_name = input_image_name
+
             # Save the result
-            result_image_path = os.path.join(output_directory, input_image_name)
+            result_image_path = os.path.join(output_directory, new_file_name)
             result_image.save(result_image_path)
 
 # Example usage
-resize_apply_black_background_and_alpha_overlay("Generated", "../Overlays/black_border.png", "Output")
+resize_apply_black_background_and_alpha_overlay("Generated", "../Overlays/Gold_Overlay.png", "Output", "Gold")
+resize_apply_black_background_and_alpha_overlay("Generated", "../Overlays/Silver_Overlay.png", "Output", "Silver")
+resize_apply_black_background_and_alpha_overlay("Generated", "../Overlays/Bronze_Overlay.png", "Output", "Bronze")
