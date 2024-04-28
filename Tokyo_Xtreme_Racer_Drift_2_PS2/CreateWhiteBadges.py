@@ -6,9 +6,6 @@ def resize_apply_black_background_and_alpha_overlay(input_directory, overlay_pat
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
 
-    # Load the overlay image
-    overlay_image = Image.open(overlay_path).convert("RGBA")
-
     # Process each PNG image in the input directory
     for input_image_name in os.listdir(input_directory):
         if input_image_name.lower().endswith('.png'):
@@ -19,21 +16,22 @@ def resize_apply_black_background_and_alpha_overlay(input_directory, overlay_pat
             input_image = input_image.resize((64, 64), resample=Image.LANCZOS)
             input_image_rgba = input_image.convert("RGBA")
 
-            # Apply the overlay
-            result_image = Image.alpha_composite(input_image_rgba, overlay_image.resize(input_image.size))
+            # Create a white background
+            white_background = Image.new("RGBA", input_image.size, (255, 255, 255, 255))
+
+            # Blend the white background with the input image using its alpha layer
+            composite_image = Image.alpha_composite(white_background, input_image_rgba)
 
             # Define the new file name with suffix if provided
             if suffix:
                 base_name = os.path.splitext(input_image_name)[0]
-                new_file_name = f"{base_name}_{suffix}.png"
+                new_file_name = f"{base_name}.png"
             else:
                 new_file_name = input_image_name
 
             # Save the result
             result_image_path = os.path.join(output_directory, new_file_name)
-            result_image.save(result_image_path)
+            composite_image.save(result_image_path)
 
 # Example usage
-resize_apply_black_background_and_alpha_overlay("WorkSheet", "../Overlays/Gold_Overlay.png", "Output", "Gold")
-resize_apply_black_background_and_alpha_overlay("WorkSheet", "../Overlays/Silver_Overlay.png", "Output", "Silver")
-resize_apply_black_background_and_alpha_overlay("WorkSheet", "../Overlays/Bronze_Overlay.png", "Output", "Bronze")
+resize_apply_black_background_and_alpha_overlay("Generated", "../Overlays/Gold_Overlay.png", "Output", "Gold")
