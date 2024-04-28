@@ -533,7 +533,7 @@ opponentLookup =
     0xe8: "Inline Fever",
     0xe9: "King Works",
     0xea: "4WD Chief",
-    0xeb: "MR",
+    0xeb: "NR",
     0xec: "Mystery Princess",
     0xed: "True Warrior",
     0xee: "Gale Moment",
@@ -748,7 +748,7 @@ EXECUTIONER_ON_WHEELS = 0xe6
 TAILGUNNER = 0xe7
 INLINE_FEVER = 0xe8
 FOUR_WHEEL_DRIVE_CHIEF = 0xea
-MR = 0xeb
+NR = 0xeb
 GALE_MOMENT = 0xee
 LEGENDARY_SCHNEIDER = 0xef
 KING_FOOT = 0xf5
@@ -827,192 +827,192 @@ teamLeaderInfos =
     {
         ID: MELON_GRIPPER,
         TEAM_NAME: "Hakone Stalkers",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: HAKONE_KING,
         TEAM_NAME: "h-dd",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: VORPAL_WEAPON,
         TEAM_NAME: "Street Snap",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: SETOUCHI_QUEENS,
         TEAM_NAME: "Wiz Raspberry",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: ROCKET_DASH,
         TEAM_NAME: "Skyliner R",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: TURBOLICIOUS,
         TEAM_NAME: "Spiral Sliders",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: DESTRUCTION,
         TEAM_NAME: "Haruna Hillclimb Club",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: TOTAL_FR,
         TEAM_NAME: "Haruna Starlights",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: NIGHT_RISE,
         TEAM_NAME: "Ashanti Rise",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: OSAKA_FR_STYLE,
         TEAM_NAME: "Nissan FR Style",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: D_SLICK,
         TEAM_NAME: "Akagi Big Blue",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: HILLCLIMB_GUY_1,
         TEAM_NAME: "Hillclimb Guys",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: MOHAIR_LEGEND_R,
         TEAM_NAME: "Adult Night",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: FULL_ON_C121,
         TEAM_NAME: "Love Boat",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: GULF_OMEN,
         TEAM_NAME: "60 Seconds",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: DOWNHILL_GUY_1,
         TEAM_NAME: "Downhill Guys",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: SPIT_SHINE,
         TEAM_NAME: "Westside",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: DEPUTY_SHIGA,
         TEAM_NAME: "LaVern",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: FUTURE_SHOCK,
         TEAM_NAME: "Extra Large",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: DOPE_COLOR,
         TEAM_NAME: "Street Dreams",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: BOSWORTH_MASTER,
         TEAM_NAME: "God's Favorite",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: AKIRA_NISE,
         TEAM_NAME: "True Shutoko Unit 1",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: DEATH_METAL_GREED,
         TEAM_NAME: "True Shutoko Unit 2",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: FOUR_WHEEL_DRIVE_CHIEF,
         TEAM_NAME: "The Presidents",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: GALE_MOMENT,
         TEAM_NAME: "Bay Racing",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: KING_FOOT,
         TEAM_NAME: "Extreme Seminar",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: DOUBLE_AI,
         TEAM_NAME: "Black Eyed Beans",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: ZAO_TEMPEST,
         TEAM_NAME: "Blue Avalanche",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: BLUE_N_YELLOW_3,
         TEAM_NAME: "Snow Inspectors",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: FOOT_BEAT,
         TEAM_NAME: "Breakform",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: JIZOS_FURY,
         TEAM_NAME: "Wicked Skillz",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: CLUB_BASTARD,
         TEAM_NAME: "Speed Usher",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: MCCRASH,
         TEAM_NAME: "Team WR",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: TEAM_STEWARD,
         TEAM_NAME: "Pleiades Spirits",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: VENUS_KIRIGAMINE,
         TEAM_NAME: "Heavy Nation",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: KUROBE_THINK_TANK,
         TEAM_NAME: "Quarterbank",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: YOKUOUIN_KEYMAN,
         TEAM_NAME: "Fresh Air",
-        POINTS:1
+        POINTS:4
     },
     {
         ID: HAUNTED_SHORE,
         TEAM_NAME: "Sodom's Revival",
-        POINTS:1
+        POINTS:4
     }
 ]
 
@@ -1020,35 +1020,35 @@ slasherList =
 [
     {
         ID:MR_MITSU,
-        POINTS:1
+        POINTS:5
     },
     {
         ID:DOMINATOR,
-        POINTS:1
+        POINTS:5
     },
     {
         ID:GUARDIAN,
-        POINTS:1
+        POINTS:5
     },
     {
         ID:ETERNAL_WANDERER,
-        POINTS:1
+        POINTS:5
     },
     {
         ID:ALCHEMIST,
-        POINTS:1
+        POINTS:5
     },
     {
         ID:LAST_LEG,
-        POINTS:1
+        POINTS:5
     },
     {
         ID:NEW_MOON,
-        POINTS:1
+        POINTS:5
     },
     {
         ID:TRUE_CHAMPION,
-        POINTS:1
+        POINTS:5
     }
 ]
 
@@ -1056,51 +1056,51 @@ kingdomTwelveList =
 [
     {
         ID: FIRST_KINGDOM,
-        POINTS:1
+        POINTS:10
     },
     {
         ID: HEAVENS_SWORD,
-        POINTS:1
+        POINTS:10
     },
     {
         ID: GLADIATOR,
-        POINTS:1
+        POINTS:10
     },
     {
         ID: STREET_FOSSIL,
-        POINTS:1
+        POINTS:10
     },
     {
         ID: ACT_OF_WAR,
-        POINTS:1
+        POINTS:10
     },
     {
         ID: KINGS_CHARIOT,
-        POINTS:1
+        POINTS:10
     },
     {
         ID: EXECUTIONER_ON_WHEELS,
-        POINTS:1
+        POINTS:10
     },
     {
         ID: MUHAI_EMBLEM,
-        POINTS:1
+        POINTS:10
     },
     {
         ID: LIONEL,
-        POINTS:1
+        POINTS:10
     },
     {
         ID: TIMBER_SLASH,
-        POINTS:1
+        POINTS:10
     },
     {
         ID: KAIDO_PRESIDENT,
-        POINTS:1
+        POINTS:10
     },
     {
         ID: FORBIDDEN_SPEAR,
-        POINTS:1
+        POINTS:10
     }
 ]
 
@@ -1108,55 +1108,55 @@ thirteenDevilsList =
 [
     {
         ID:BACKSTAB,
-        POINTS:1
+        POINTS:10
     },
     {
         ID:BLOODHOUND,
-        POINTS:1
+        POINTS:10
     },
     {
         ID:GLOOMY_ANGEL,
-        POINTS:1
+        POINTS:10
     },
     {
         ID:HEARTBREAKER,
-        POINTS:1
+        POINTS:10
     },
     {
         ID:DYING_STAR,
-        POINTS:1
+        POINTS:10
     },
     {
         ID:MIDNIGHT_ROSE,
-        POINTS:1
+        POINTS:10
     },
     {
         ID:TAILGUNNER,
-        POINTS:1
+        POINTS:10
     },
     {
         ID:SHADOW_EYES,
-        POINTS:1
+        POINTS:10
     },
     {
         ID:GRIEF_PLATE,
-        POINTS:1
+        POINTS:10
     },
     {
         ID:DREAM_FIEND,
-        POINTS:1
+        POINTS:10
     },
     {
         ID:EMPEROR_SPEED,
-        POINTS:1
+        POINTS:10
     },
     {
         ID:OOTSUKA_DEMON,
-        POINTS:1
+        POINTS:10
     },
     {
         ID:SITAR_KANEYAMA,
-        POINTS:1
+        POINTS:10
     }
 ]
 
@@ -1164,15 +1164,15 @@ eliteList =
 [
     {
         ID:REIGN_SUPREME,
-        POINTS:1
+        POINTS:25
     },
     {
         ID:BLACKOUT,
-        POINTS:1
+        POINTS:25
     },
     {
         ID:GROUND_ZERO,  // This is out of order, but this is the order of "Progress" on the finale.,
-        POINTS:1
+        POINTS:50
     } 
 ]
 
@@ -1180,214 +1180,280 @@ tricksterList =
 [
     {
         ID:PRIMAL_HILL,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:LIGHTNING_SHIFT,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:BLACK_ONYX,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:MIST_SHOWER,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:SAKURA_SPRINTER,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:MT_NORO_EMPERESS,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:STREET_TESTER,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:METRO_ROLLER,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:DRIFT_WOOD,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:SPEED_RAID,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:CYCLONE,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:REDEYE,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:NORTHERN_LIGHTS,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:PASSING_NIGHT,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:DARK_FEAR,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:ROSE_RAIN,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:BRAVE_SILENCE,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:HYPER_BEAT,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:NUTS_AND_BOLTS,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:KAYO_SPARK,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:ALTER,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:X_LINE,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:LIGHT_SCHNEIDER,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:BOOK_OF_RHYMES,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:MORTAL_DRIFT,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:DRIFT_CORE,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:SPOOKS,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:HOLY_SKILLS,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:PURE_POWER,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:TRIBAL,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:LADY_ELLIOT,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:BENZO,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:DROP_KNOWLEDGE,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:INLINE_FEVER,
-        POINTS:1
+        POINTS:3
     },
     {
-        ID:MR,
-        POINTS:1
+        ID:NR,
+        POINTS:3
     },
     {
         ID:LEGENDARY_SCHNEIDER,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:ANIMAL_SCENT,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:YETI_FANG,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:DOWNHILL_DINOSAUR,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:WAILING_PHOENIX,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:SNOWFLAKE_ROAD,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:ALT_BAYERN,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:DEVILS_ADVOCATE,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:LIMP_GRIP,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:ROTARY_COMMANDER,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:DARK_PALADIN,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:GOD_SHIFT_BUNTA,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:HIGH_EMPRESS,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:PEACEFUL_MARSH,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:ICEMAN,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:STREET_CARRIAGE,
-        POINTS:1
+        POINTS:3
     },
     {
         ID:GT,
-        POINTS:1
+        POINTS:3
     }
 ]
 
+specialRacers = 
+[
+    {
+        // K.T. 
+        ID: 92, 
+        POINTS: 1
+    },
+    {
+        // Tak 
+        ID: 51,
+        POINTS: 1
+    },
+    {
+        // Ig
+        ID: 72,
+        POINTS: 1
+    },
+    {
+        // Kenji in Initial D
+        ID: 73,
+        POINTS: 1
+    },
+    {
+        // Seiji Iwaki
+        ID: 233,
+        POINTS: 1
+    },
+    {
+        // SHINGO
+        ID: 130,
+        POINTS: 1
+    },
+    {
+        // 180 Nobuhiko Akiyama
+        ID: 180,
+        POINTS: 1
+    },
+    {
+        // Sayuki 
+        ID: 141,
+        POINTS: 1
+    },
+    {
+        // Smiley Sakai 
+        ID: 243,
+        POINTS: 1 
+    },
+    {
+        // Daiki Ninomiya
+        ID: 244,
+        POINTS: 1 
+    }
+]
+
+// Also 234 is Kyoichi Sudo
+// 245 = Tomoyuki Tachi
+// 16 = Real Tak
+// 74 = Cole
+// 93 = Ryosuke
+// 0x8e Mako
+// 131 Takeshi
+// 232 Kai Kogashiwa
+// 320 Bunta! 
+
+// 38 = Shino Ryoko
+// 39 = Morita Sawako 
 
 
 HAKONE_INDEX = 0
@@ -1420,7 +1486,8 @@ function teamIndexOpponent() => byte(0x3B3514)
 //          0x01 = Replay active
 function replayIndicator() => byte(0x3B3520)
 REPLAY_ACTIVE = 0x01
-function replayActive() => replayIndicator() == REPLAY_ACTIVE
+GAMEPLAY_ACTIVE = 0x00
+function replayActive() => replayIndicator() != GAMEPLAY_ACTIVE
 
 // $3B3524: (8-bit) Game Mode when in race
 //          
@@ -1596,6 +1663,8 @@ timeOfDayLookup =
 //          0x00 = Replay active
 //          0x01 = Gameplay Active.
 function altReplayIndicator() => byte(0x3C0070)
+SECOND_GAMEPLAY_ACTIVE = 0x01
+function secondReplayActive() => altReplayIndicator() != SECOND_GAMEPLAY_ACTIVE
 
 // $3FA984: (8-bit) Driving Indicator.
 //          
@@ -1635,12 +1704,13 @@ function recordTourfirstPlayerId() => byte(0x4CBE90)
 PLAYER_INDEX = 0x0b
 function didPlayerWinRecordTour() => recordTourfirstPlayerId() == PLAYER_INDEX
 
-// $4cbf25: (16-bit) Record Tour Winner of Stage 
+// $4cbf24: (16-bit) Record Tour Winner of Stage 
 // 
 //         0x000b = Player
-function recordTourStageWinner() => word(0x4CBF25)
+function recordTourStageWinner() => word(0x4CBF24)
 
 function didPlayerWinRecordTourStage() => recordTourStageWinner() == PLAYER_INDEX
+
 
 // $75CA38: (32-bit) Player Stat Total Earnings
 function totalEarning() => dword(0x75CA38)
@@ -2385,6 +2455,8 @@ function justPassedCExperience(targetExperience) => cLevelExp() >= targetExperie
 //          0x00 = Stage 1
 function recordTourStage() => byte(0x77CEB2)
 
+function didPlayerJustFinishRecordTour() => recordTourStage() == 10 &&justFinishedGameplay()
+
 // $77CEB4: (8-bit) Record Tour Group
 //          
 //          0x00 = Group R
@@ -2468,7 +2540,10 @@ function inGameStartingLocation() => word(0x77DC38)
 
 // $77DC3A: (8-bit) End location of Race
 //          
-//          0x00-0x09
+//          0x00-0x09 for normal locations
+//          0x00 or 0x01 for Short courses. 
+//          Higher is higher on the hill. 
+//          so 9-0 = Downhill  / 0-9 = Uphill
 //          
 //          Control Value (for Pratice)
 function inGameEndLocation() => byte(0x77DC3A)
@@ -3264,6 +3339,19 @@ function currentSectionScore() => dword(0xB887E0)
 //          Starts at 2ee0
 function opponentSP() => word(0xB88878)
 
+// $B8881C: (8-bit) Remaining Corners in CA Attack 0x00b8881c
+//
+//          How many corners remain
+function remainingCornersInCAAttack() => byte(0xB8881C)
+
+// $B88820: (8-bit) Number of Combo Corners in CA
+//
+//          For each corner you get Average or above, this increments by 1.  
+//          Any corner you get less than 1000 on or stop judgement this will reset to 0.
+//
+//          1000 Is "Novice Fighter" However WILL count as combo. 
+function numberOfComboCornersInCA() => byte(0xB88820)
+
 // $B888DC: (Float) Distance From Opponent.
 //          
 //          Recorded in Meters, Displays in Yards (converted in Code I'm sure)
@@ -3691,7 +3779,8 @@ function uncrownedMonarch() => displayValueForCASection() == UNCROWNED_MONARCH &
 
 function achievementActive()
 {
-    return !replayActive() &&
+    return !replayActive() && 
+           !secondReplayActive() &&
            notSaving()
 }
 
@@ -3773,6 +3862,15 @@ for trickster in tricksterList
                   )
 }
 
+for racer in specialRacers
+{
+    winAchievement(title = opponentLookup[racer[ID]],
+                   description = format("Defeat {0} in Conquest Mode", opponentLookup[racer[ID]]),
+                   points = racer[POINTS],
+                   index = racer[ID]
+                  )
+}
+
 
 function twentyMasterAchievement(title, description, points, total)
 {
@@ -3789,12 +3887,12 @@ function twentyMasterAchievement(title, description, points, total)
 
 twentyMasterAchievement(title = "Who are these guys?",
                         description = "Defeat Twenty Masters for the first time in Conquest Mode",
-                        points = 10,
+                        points = 5,
                         total = 1
                        )
 
 twentyMasterAchievement(title = "Wait How many of these guys are there?",
-                        description = "Defeat Twenty Masters for the first time in Conquest Mode",
+                        description = "Defeat Twenty Masters 21 times in Conquest Mode",
                         points = 10,
                         total = 21
                        )
@@ -4038,7 +4136,7 @@ function cLevelAchievement(title, description, points, targetExp)
 }
 
 cLevelAchievement(title = "Race Noob",
-                  description = "Reach C-Level 5 in Conquest Mode",
+                  description = "Reach C-Level 2 in Conquest Mode",
                   points = 3,
                   targetExp = LEVEL_TWO_CLEVEL_EXP
                  )
@@ -4072,37 +4170,37 @@ normalCourseListName =
     {
         ID: HAKONE_INDEX,
         COURSE_NAME: "Hakone",
-        POINTS: 5,
+        POINTS: 2,
     },
     {
         ID: HIROSHIMA_INDEX,
         COURSE_NAME: "Hiroshima",
-        POINTS: 5,
+        POINTS: 2,
     },
     {
         ID: HARUNA_INDEX,
         COURSE_NAME: "Haruna",
-        POINTS: 5,
+        POINTS: 3,
     },
     {
         ID: AKAGI_INDEX,
         COURSE_NAME: "Akagi",
-        POINTS: 5,
+        POINTS: 3,
     },
     {
         ID: URA_ROKKA_INDEX,
         COURSE_NAME: "Ura Rokko",
-        POINTS: 5,
+        POINTS: 4,
     },
     {
         ID: OMOTE_ROKKO_INDEX,
         COURSE_NAME: "Omote Rokko",
-        POINTS: 5,
+        POINTS: 4,
     },
     {
         ID: SHIGA_KUSATSU_INDEX,
         COURSE_NAME: "Shiga Kusatsu",
-        POINTS: 5,
+        POINTS: 4,
     },
     {
         ID: NIKKO_INDEX,
@@ -4313,12 +4411,12 @@ for groupIndex in groupLookup
     achievement(title = groupLookup[groupIndex] + " Champion",
                 description = format("Win the {0} Tour in Record Tour Mode", groupLookup[groupIndex]),
                 points = 5,
-                trigger = recordTourStage() == 11 &&
+                trigger = didPlayerJustFinishRecordTour() &&
                           didPlayerWinRecordTour() &&
-                          justFinishedGameplay() &&
+                          !isInGame() &&
                           // winStatus() == WON_RACE_VALUE && You don't need to win the race, if they retire they still might win the tour. 
                           recordTourMode() &&
-                          recordTourStage() == LAST_RECORD_TOUR_COURSE &&
+                          //recordTourStage() == LAST_RECORD_TOUR_COURSE &&
                           recordTourGroup() == groupIndex &&
                           achievementActive()
     )
@@ -4328,14 +4426,14 @@ for groupIndex in groupLookup
 {
     achievement(title = groupLookup[groupIndex] + " Clean Race",
                 description = format("Win any stage in the {0} Tour with out any hits and still reach first place for the stage in Record Tour Mode", groupLookup[groupIndex]),
-                points = 5,
+                points = 10,
                 trigger = didPlayerWinRecordTourStage() &&
-                          justFinishedGameplay() &&
-                          winStatus() == WON_RACE_VALUE && // Note this is not "Won" but finished. 
+                          trigger_when(justFinishedGameplay() &&
+                                       winStatus() == WON_RACE_VALUE ) && // Note this is not "Won" but finished. )
+                          wasInGame() &&  // So the trigger will work.
                           recordTourMode() &&
-                          recordTourStage() == LAST_RECORD_TOUR_COURSE &&
                           recordTourGroup() == groupIndex &&
-                          maxPlayerScore() &&
+                          hitsInTimeAttack() == 0 &&
                           achievementActive()
     )
 }
@@ -4344,20 +4442,21 @@ for groupIndex in groupLookup
 {
     achievement(title = groupLookup[groupIndex] + " Perfect Season",
                 description = format("Win the {0} Tour with the maximum ({1}) points in Record Tour Mode", groupLookup[groupIndex], MAX_SCORE),
-                points = 5,
-                trigger = recordTourStage() == 11 &&
+                points = 10,
+                type = "Missable",
+                trigger = didPlayerJustFinishRecordTour() &&
                           didPlayerWinRecordTour() &&
-                          justFinishedGameplay() &&
+                          !isInGame() &&
                           winStatus() == WON_RACE_VALUE &&
                           recordTourMode() &&
-                          recordTourStage() == LAST_RECORD_TOUR_COURSE &&
+                          //recordTourStage() == LAST_RECORD_TOUR_COURSE &&
                           recordTourGroup() == groupIndex &&
-                          maxPlayerScore() &&
+                          maxPlayerScore() && 
                           achievementActive()
     )
 }
 
-achievement(title = "Not even a scratch",
+achievement(title = "Not Even a Scratch",
             description = format("Win a SP Head to Head race in conquest mode with out losing any SP in Conquest Mode"),
             points = 5,
             trigger = trigger_when(justWonRace()) &&
@@ -4368,14 +4467,15 @@ achievement(title = "Not even a scratch",
                         achievementActive()
 )
 
-achievement(title = "One-Oh-Oh",
-            description = format("Reach 100 MPH in Conquest Mode"),
-            points = 5,
-            trigger = isInGame() &&
-                      conquestMode() &&
-                      playerPastSpeedMPH(100) &&
-                      achievementActive()
-)
+// Too Easy.
+//achievement(title = "One-Oh-Oh",
+//            description = format("Reach 100 MPH in Conquest Mode"),
+//            points = 3,
+//            trigger = isInGame() &&
+//                      conquestMode() &&
+//                      playerPastSpeedMPH(100) &&
+//                      achievementActive()
+// )
 
 sponsorAchievementList =
 [
@@ -4383,82 +4483,82 @@ sponsorAchievementList =
     {
         ID: TAKEOFF_BIT,
         TITLE: "Takeoff",
-        POINTS: 5,
+        POINTS: 1,
     },
     {
         ID: YOURS_BIT,
         TITLE: "Yours",
-        POINTS: 5,
+        POINTS: 1,
     },
     {
         ID: AUTOLEIFEN_BIT,
         TITLE: "Autoleifen",
-        POINTS: 5,
+        POINTS: 1,
     },
     {
         ID: FULL_AUTO_BIT,
         TITLE: "Full-auto",
-        POINTS: 5,
+        POINTS: 1,
     },
     {
         ID: YELLOW_MAGIC_BIT,
         TITLE: "Yellow Magic",
-        POINTS: 5,
+        POINTS: 2,
     },
     {
         ID: GRAFITTI_ART_BIT,
         TITLE: "Grafitti Art",
-        POINTS: 5,
+        POINTS: 2,
     },
     {
         ID: R_CONCEPT_BIT,
         TITLE: "R Concept",
-        POINTS: 5,
+        POINTS: 2,
     },
     {
         ID: SPRINT_RACING_BIT,
         TITLE: "Sprint Racing",
-        POINTS: 5,
+        POINTS: 2,
     },
     {
         ID: PRESTIGE_BIT,
         TITLE: "Prestige",
-        POINTS: 5,
+        POINTS: 3,
     },
     {
         ID: ATHLETE_BIT,
         TITLE: "Athlete",
-        POINTS: 5,
+        POINTS: 3,
     },
     {
         ID: SHIGA_SPEED_BIT,
         TITLE: "Shiga Speed",
-        POINTS: 5,
+        POINTS: 3,
     },
     {
         ID: AUTOBAHN_BIT,
         TITLE: "Autobahn",
-        POINTS: 5,
+        POINTS: 3,
     },
     {
         ID: FRAME_MASTER_BIT,
         TITLE: "Frame Master",
-        POINTS: 5,
+        POINTS: 4,
     },
     {
         ID: YAMAMOTO_ENGINEERING_BIT,
         TITLE: "Yamamoto Engineering",
-        POINTS: 5,
+        POINTS: 4,
     },
     {
         ID: KAKINOKI_RACING_BIT,
         TITLE: "Kakinoki Racing",
-        POINTS: 5,
+        POINTS: 4,
     },
     {
         ID: OMR_BIT,
         TITLE: "OMR",
-        POINTS: 5,
+        POINTS: 4,
     },
     {
         ID: BRIGHTON_BIT,
@@ -4833,83 +4933,86 @@ specificLeaderboard =
         DIRECTION: DOWNHILL_VALUE,
         WEATHER: CLOUDY_VALUE,
         TIMEOFDAY: NIGHTTIME_VALUE,
-        ID: 94793,
+        ID: 421105,
         MODE: TIME_ATTACK_MODE_VALUE,
-        TIME: timeConversion(5,00),
+        TIME: timeConversion(4,00),
         ACHIEVEMENT_NAME: "Ghost King of Akagi",
-        TIMESTRING: "5:00"
+        TIMESTRING: "4:00"
     },
     { 
         TRACK: URA_ROKKA_COURSE_INDEX,
         CAR: DAIHATSU_MIDGET_II_R_TYPE_K100P,
         CREATOR: "Cipher47",
-        ID: 94794,
+        ID: 421106,
         MODE: TIME_ATTACK_MODE_VALUE,
         DIRECTION: DOWNHILL_VALUE,
         WEATHER: STORM_VALUE,
         TIMEOFDAY: NIGHTTIME_VALUE,
-        TIME: timeConversion(6,00),
+        TIME: timeConversion(2,55),
         ACHIEVEMENT_NAME: "Hauler King of ShinKanjou",
-        TIMESTRING: "6:00"
+        TIMESTRING: "2:55"
     },
     { 
         TRACK: HARUNA_COURSE_INDEX,
         CAR: TOYOTO_TRUENO_3DOOR_GT_APEX_AE86,
         CREATOR: "PacoAlcantara",
-        ID: -1,
+        ID: 421107,
         MODE: CA_ATTACK_MODE_VALUE,
         DIRECTION: DOWNHILL_VALUE,
         WEATHER: SUNNY_VALUE,
         TIMEOFDAY: NIGHTTIME_VALUE,
         ACHIEVEMENT_NAME: "Tofu King of Haruna",
-        SCORE: 1000000        
+        SCORE: (125 * 1000)        
     },
     {
         TRACK: SHIGA_KUSATSU_COURSE_INDEX,
         CAR: HONDA_CIVIC_TYPE_R_EK9,
         CREATOR: "nyxxie",
-        ID: -1,
+        ID: 421108,
         MODE: TIME_ATTACK_MODE_VALUE,
         DIRECTION: DOWNHILL_VALUE,
         WEATHER: SUNNY_VALUE,
         TIMEOFDAY: NIGHTTIME_VALUE,
-        ACHIEVEMENT_NAME: "Racer King of Shiga Kusatsu",
-        TIME: timeConversion(5,00)
+        ACHIEVEMENT_NAME: "Hatchback King of Shiga Kusatsu",
+        TIME: timeConversion(3,15),
+        TIMESTRING: "3:15"
     },
     {
         TRACK: OMOTE_ROKKO_COURSE_INDEX,
         CAR: SUZUKI_ALTO_WORKS_RS_Z_VVT,
         CREATOR: "Biendeo",
-        ID: -1,
+        ID: 421109,
         MODE: TIME_ATTACK_MODE_VALUE,
         DIRECTION: CLIMB_VALUE,
         WEATHER: CLOUDY_VALUE,
         TIMEOFDAY: DAYTIME_VALUE,
-        ACHIEVEMENT_NAME: "Pocket Rocket King of Omote Rokko",
-        TIME: timeConversion(2,45)
+        ACHIEVEMENT_NAME: "Climb King of Omote Rokko",
+        TIME: timeConversion(2,50),
+        TIMESTRING: "2:50"
     },
     {
         TRACK: HIROSHIMA_COURSE_INDEX,
         CAR: HONDA_NSX_R_NA1,
         CREATOR: "jintei",
-        ID: -1,
+        ID: 421110,
         MODE: CA_ATTACK_MODE_VALUE,
         DIRECTION: DOWNHILL_VALUE,
         WEATHER: SUNNY_VALUE,
         TIMEOFDAY: NIGHTTIME_VALUE,
-        ACHIEVEMENT_NAME: "Super King of Hiroshima",
-        SCORE: 1000000
+        ACHIEVEMENT_NAME: "Long King of Hiroshima",
+        SCORE: (60 * 1000)
     },
     {
         TRACK: GYMKHANA_COURSE_INDEX,
         GYMKHANA_LEVEL: 9,
         CAR: ASL_GARAIYA,
         CREATOR: "Cipher47",
-        ID: 95316,
+        ID: -1,
         MODE: UI_GYM_TA,
         WEATHER: CLOUDY_VALUE,
-        ACHIEVEMENT_NAME: "Gymkhana King of Gymkhana",
-        TIME: timeConversion(13,00)
+        ACHIEVEMENT_NAME: "Speed King of Gymkhana",
+        TIME: timeConversion(0,27),
+        TIMESTRING: "0:27"
     },
     {
         TRACK: GYMKHANA_COURSE_INDEX,
@@ -4919,20 +5022,20 @@ specificLeaderboard =
         ID: -1,
         MODE: UI_GYM_CA,
         WEATHER: SNOW_VALUE,
-        ACHIEVEMENT_NAME: "Gymkhana King of Gymkhana",
-        SCORE: 1000000
+        ACHIEVEMENT_NAME: "Drift King of Gymkhana",
+        SCORE: (12 * 1000)
     },
     {
         TRACK: NIKKO_COURSE_INDEX,
         CAR: NISSAN_SILVIA_S15,
         CREATOR: "jintei",
-        ID: -1,
+        ID: 421113,
         MODE: CA_ATTACK_MODE_VALUE,
         DIRECTION: DOWNHILL_VALUE,
         WEATHER: CLOUDY_VALUE,
         TIMEOFDAY: DAYTIME_VALUE,
-        ACHIEVEMENT_NAME: "Drift King of Nikko",
-        TIME: timeConversion(5,00)
+        ACHIEVEMENT_NAME: "Leafy King of Nikko",
+        SCORE: (125 * 1000)
     }
 ]
 
@@ -4969,6 +5072,31 @@ function specificLeaderboardTimeAttack(data)
         format = "MILLISECS"
     )
 
+    achievement( title = data[ACHIEVEMENT_NAME],
+                 description = format("Finish {0}/{3}/{4}/{5} with a time of {1} while driving the Normal Car of {2} in Time Attack in Record Challenge mode.  Thanks to {6} for designing this achievement", 
+                                      ingameCourseLookup[data[TRACK]], 
+                                      data[TIMESTRING], 
+                                      carLookup[data[CAR]], 
+                                      directionLookup[data[DIRECTION]], 
+                                      weatherLookup[data[WEATHER]], 
+                                      timeOfDayLookup[data[TIMEOFDAY]],
+                                      data[CREATOR]),
+                 points = 10,
+                 id = data[ID],
+                 trigger = recordChallengeMode() &&
+                           courseInGame() == data[TRACK] &&
+                           inGameClimbDownhill() == data[DIRECTION] &&
+                           inGameCarDriven() == data[CAR] &&
+                           inGameWeather() == data[WEATHER] &&
+                           inGameTimeOfDay() == data[TIMEOFDAY] &&
+                           isNormalCar() &&
+                           achievementActive() &&
+                           recordChallengeTAMode() &&
+                           trigger_when( calculateTotalTimeInTimeAttack() <= data[TIME] &&
+                                         justFinishedGameplay() &&
+                                         winStatus() == WON_RACE_VALUE)
+    )
+
 }
 
 function specificLeaderboardCAAttack(data)
@@ -5003,6 +5131,32 @@ function specificLeaderboardCAAttack(data)
         format = "VALUE"
     )
 
+    achievement( title = data[ACHIEVEMENT_NAME],
+                 description = format("Finish {0}/{3}/{4}/{5} with a score of {1} or while driving the Normal Car of {2} in CA Attack in Record Challenge mode.  Thanks to {6} for designing this achievement", 
+                                      ingameCourseLookup[data[TRACK]], 
+                                      data[SCORE], 
+                                      carLookup[data[CAR]], 
+                                      directionLookup[data[DIRECTION]], 
+                                      weatherLookup[data[WEATHER]], 
+                                      timeOfDayLookup[data[TIMEOFDAY]],
+                                      data[CREATOR]),
+                 points = 10,
+                 id = data[ID],
+                 trigger = recordChallengeMode() &&
+                           courseInGame() == data[TRACK] &&
+                           inGameClimbDownhill() == data[DIRECTION] &&
+                           inGameCarDriven() == data[CAR] &&
+                           inGameWeather() == data[WEATHER] &&
+                           inGameTimeOfDay() == data[TIMEOFDAY] &&
+                           isNormalCar() &&
+                           achievementActive() &&
+                           recordChallengeCAMode() &&
+                           trigger_when( totalScoreCAMode() >= data[SCORE] &&
+                                         justFinishedGameplay() &&
+                                         winStatus() == WON_RACE_VALUE)
+    )
+    
+
 }
 
 function specificLeaderboardGymkhanaTA(data)
@@ -5033,6 +5187,25 @@ function specificLeaderboardGymkhanaTA(data)
         lower_is_better = true,
         format = "MILLISECS"
     )
+    achievement(title = data[ACHIEVEMENT_NAME],
+                description = format("Finish Gymkhana Course {0} in {1} in Time Attack in Record Challenge mode with {3} weather while driving the Normal Car of {2}.  Thanks to {4} for designing this achievement", 
+                                     data[GYMKHANA_LEVEL], 
+                                     data[TIMESTRING], 
+                                     carLookup[data[CAR]], 
+                                     weatherLookup[data[WEATHER]], 
+                                     data[CREATOR]),
+                points = 10,
+                trigger = recordChallengeMode() &&
+                          courseInGame() == data[TRACK] &&
+                          gymkhanaLevelInGame() == data[GYMKHANA_LEVEL] - 1 &&
+                          inGameCarDriven() == data[CAR] &&
+                          inGameWeather() == data[WEATHER] &&
+                          achievementActive() &&
+                          recordChallengeGymkhanaTAMode() &&
+                          trigger_when( calculateTotalTimeInTimeAttack() <= data[TIME] &&
+                                        justFinishedGameplay() &&
+                                        winStatus() == WON_RACE_VALUE)
+    )
 }
 
 function specificLeaderboardGymkhanaCA(data)
@@ -5061,6 +5234,26 @@ function specificLeaderboardGymkhanaCA(data)
         value = totalScoreCAMode(), // MILLISECONDS is centiseconds. See above
         format = "VALUE"
     )
+    
+    achievement(title = data[ACHIEVEMENT_NAME],
+                description = format("Finish Gymkhana Course {0} with a score of {1} or more in CA Attack in Record Challenge mode with {3} weather while driving the Normal Car of {2}.  Thanks to {4} for designing this achievement", 
+                                     data[GYMKHANA_LEVEL], 
+                                     data[SCORE], 
+                                     carLookup[data[CAR]], 
+                                     weatherLookup[data[WEATHER]], 
+                                     data[CREATOR]),
+                points = 10,
+                trigger = recordChallengeMode() &&
+                          courseInGame() == data[TRACK] &&
+                          gymkhanaLevelInGame() == data[GYMKHANA_LEVEL] - 1 &&
+                          inGameCarDriven() == data[CAR] &&
+                          inGameWeather() == data[WEATHER] &&
+                          achievementActive() &&
+                          recordChallengeGymkhanaCAMode() &&
+                          trigger_when( totalScoreCAMode() >= data[SCORE] &&
+                                        justFinishedGameplay() &&
+                                        winStatus() == WON_RACE_VALUE)
+    )
 }
 
 for data in specificLeaderboard 
@@ -5081,25 +5274,7 @@ for data in specificLeaderboard
     {
         specificLeaderboardGymkhanaCA(data)
     }
-
-    
-//    achievement(title = data[ACHIEVEMENT_NAME],
-//                description = format("Beat {0} on {1} while driving the Default Car of {2} in Time Trial Mode.  Thanks to {3} for designing this achievement", data[TIMESTRING], TrackLookup[data[TRACK]], CarName[data[CAR]], data[CREATOR]),
-//                points = 5,
-//                trigger = isDriving() && 
-//                          triggerJustFinishedTimeAttack() && 
-//                          timeAttackMode() && 
-//                          prev(timeTimeAttackMode()) > 0 &&
-//                          prev(timeTimeAttackMode()) < data[TIME] &&
-//                          timeAttackTrackId() == data[TRACK] &&
-//                          carCheck(data[CAR]) &&
-//                          isDefaultCar()
-//
-//    )
-
 }
-
-
 
 for groupIndex in groupLookup
 {
@@ -5125,6 +5300,65 @@ for groupIndex in groupLookup
         )
     }
 }
+
+totalTurnData = 
+{
+    HAKONE_COURSE_INDEX: 21,
+    HIROSHIMA_COURSE_INDEX: 31,
+    HARUNA_COURSE_INDEX: 31,
+    AKAGI_COURSE_INDEX: 27,
+    URA_ROKKA_COURSE_INDEX: 24,
+    OMOTE_ROKKO_COURSE_INDEX: 19,
+    SHIGA_KUSATSU_COURSE_INDEX: 22,
+    NIKKO_COURSE_INDEX: 30,
+    ZAO_COURSE_INDEX: 30,
+    ASO_COURSE_INDEX: 22,
+    HOKKAIDO_COURSE_INDEX: 26,
+    HAKONE_NANAMAGARI_COURSE_INDEX: 15,
+    USUITROUGE_COURSE_INDEX: 8,
+    MYOGISAN_COURSE_INDEX: 15,
+    HAPPOGAHARA_COURSE_INDEX: 13,
+    YOKOHAMA_COURSE_INDEX: 8,
+    YUKINOOHTANI_COURSE_INDEX: 9,
+    KIRIGAMINE_COURSE_INDEX: 11,
+    OHTARUMI_COURSE_INDEX: 7
+}   
+
+function fullComboRunAchievement(key, corners, direction)
+{
+    achievement(title = format("Full Combo on {0} {1}", ingameCourseLookup[key], directionLookup[direction]),
+                description = format("Finish {0} {1} with a combo on every corner", ingameCourseLookup[key], directionLookup[direction]),
+                points = 5,
+                trigger = once(courseInGame() == key &&
+                               inGameClimbDownhill() == direction &&
+                               remainingCornersInCAAttack() == corners &&
+                               numberOfComboCornersInCA() == 0 &&
+                               isInGame()) &&
+                          trigger_when(numberOfComboCornersInCA() == corners &&
+                                       remainingCornersInCAAttack() == 0) &&
+                          never(numberOfComboCornersInCA() + remainingCornersInCAAttack() != corners) && 
+                          never(remainingCornersInCAAttack() > prev(remainingCornersInCAAttack())) && // Because this is impossible, unless restarting somehow. 
+                          never(numberOfComboCornersInCA() < prev(numberOfComboCornersInCA()) - 1) &&
+                          never(!isInGame()) &&
+                          achievementActive() 
+    )
+}
+
+for data in totalTurnData
+{
+    fullComboRunAchievement(data, totalTurnData[data], DOWNHILL_VALUE)
+    fullComboRunAchievement(data, totalTurnData[data], CLIMB_VALUE)
+}
+
+// This doesn't work, the memory location for Uncrowned Monarch changes randomly.  Probably a pointer, but I'm not hunting for it currently.
+// achievement( title = "Drift Soon-to-be-King",
+//             description = "Earn the 'Uncrowned Monarch' title from any corner",
+//             points = 5,
+//             trigger = achievementActive() &&
+//                       isInGame() &&
+//                       uncrownedMonarch()
+//)
+
 
 
 // Conquest Mode Normal Race/Master
