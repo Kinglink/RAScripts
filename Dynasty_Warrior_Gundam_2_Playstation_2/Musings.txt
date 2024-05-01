@@ -61,13 +61,13 @@ X Need to find demo mode.
 
 X Need to find two player. 
   
-  Need to find Quiz. 
+X  Need to find Quiz. 
 
 X Need to get the Pilot gallery 
 
 X Need to find the Mobile Suit level. 
 
-  Need to find a way to do "Hard" missions, probably mission by mission.  No Interim Save
+X  Need to find a way to do "Hard" missions, probably mission by mission.  No Interim Save
 
 X Mobile Suits started With
     Gundam
@@ -87,3 +87,21 @@ X Mobile Suits started With
     Strike Freedom Gundam
     Infinite Justice Gundam
     Destiny Gundam
+
+Starting Mission Mode characters 
+    Kira Yamato
+    Athrun Zala
+    Shinn Asuka
+    Seabook Arno
+    Uso Ewin
+    Domo Kasshu
+    Master Asia
+    Heero Yuy
+    Millardo Peacecraft
+    Loran Cehack
+
+
+    For "4th Gear" check "usable" and then check if the part is marked as 0x00 and then check the value of the gear. 
+
+
+Need Kills, Need Time. 
