@@ -1163,6 +1163,10 @@ thirteenDevilsList =
 eliteList =
 [
     {
+        ID:YETI_FANG,
+        POINTS:10
+    },
+    {
         ID:REIGN_SUPREME,
         POINTS:25
     },
@@ -1320,14 +1324,6 @@ tricksterList =
     },
     {
         ID:LEGENDARY_SCHNEIDER,
-        POINTS:3
-    },
-    {
-        ID:ANIMAL_SCENT,
-        POINTS:3
-    },
-    {
-        ID:YETI_FANG,
         POINTS:3
     },
     {
@@ -3334,6 +3330,13 @@ function totalScoreCAMode() => dword(0xB887DC)
 //          Unbanked Score for the Current CA section.
 function currentSectionScore() => dword(0xB887E0)
 
+
+// Uncrowned Monarch is any value over 7500
+function uncrownedMonarch() => ( prev(currentSectionScore()) > 7500 && 
+                                 currentSectionScore() == prev(currentSectionScore()) &&  // it decrements over time. 
+                                 prev(totalScoreCAMode()) + prev(currentSectionScore()) <= totalScoreCAMode() )
+
+
 // $B88878: (16-bit) Opponent's SP During head to head.
 //          
 //          Starts at 2ee0
@@ -3774,9 +3777,6 @@ function carChoiceGymkhanaRecordChallengeFrontEnd() => word(0xDE4254)
 //           0x06 = Uncrowned Monarch
 function displayValueForCASection() => byte(0x1781BDC)
 
-UNCROWNED_MONARCH = 0x06
-function uncrownedMonarch() => displayValueForCASection() == UNCROWNED_MONARCH && prev(displayValueForCASection()) != UNCROWNED_MONARCH
-
 function achievementActive()
 {
     return !replayActive() && 
@@ -3789,9 +3789,19 @@ function calculateMemoryLocation(startingMemory, index, size) => startingMemory 
 
 function winAchievement(title, description, points, index )
 {
+    type = "Progression"
+    if (index == BLACKOUT)
+    {
+        type = "Win_Condition"
+    }
+    if (index == GROUND_ZERO)
+    {
+        type = ""
+    }
     achievement(title = title,
                 description = description,
                 points = points,
+                type = type,
                 trigger = rivalWinData(index) == 1 &&
                           prev(rivalWinData(index)) == 0 &&
                           conquestMode() &&
@@ -5350,14 +5360,14 @@ for data in totalTurnData
     fullComboRunAchievement(data, totalTurnData[data], CLIMB_VALUE)
 }
 
-// This doesn't work, the memory location for Uncrowned Monarch changes randomly.  Probably a pointer, but I'm not hunting for it currently.
-// achievement( title = "Drift Soon-to-be-King",
-//             description = "Earn the 'Uncrowned Monarch' title from any corner",
-//             points = 5,
-//             trigger = achievementActive() &&
-//                       isInGame() &&
-//                       uncrownedMonarch()
-//)
+achievement( title = "Drift Soon-to-be-King",
+             description = "Earn the 'Uncrowned Monarch' title from any corner",
+             points = 5,
+             id = 420957,
+             trigger = achievementActive() &&
+                       isInGame() &&
+                       uncrownedMonarch()
+)
 
 
 
