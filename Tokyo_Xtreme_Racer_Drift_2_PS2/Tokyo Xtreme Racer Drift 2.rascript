@@ -4933,7 +4933,7 @@ for target in range(FIRST_GYMKHANA_COURSE, LAST_GYMKHANA_COURSE)
 
 
 
-function timeConversion(minutes, seconds, millisecond = 0) => ((minutes * 60) +seconds) * 60 + millisecond
+function timeConversion(minutes, seconds, millisecond = 0) => ((minutes * 60) +seconds) * 100 + millisecond / 10
 
 specificLeaderboard =
 [
@@ -5213,8 +5213,8 @@ function specificLeaderboardGymkhanaTA(data)
                           inGameWeather() == data[WEATHER] &&
                           achievementActive() &&
                           recordChallengeGymkhanaTAMode() &&
-                          trigger_when( calculateTotalTimeInTimeAttack() <= data[TIME] &&
-                                        justFinishedGameplay() &&
+                          calculateTotalTimeInTimeAttack() <= data[TIME] &&
+                          trigger_when( justFinishedGameplay() &&
                                         winStatus() == WON_RACE_VALUE)
     )
 }
@@ -5464,6 +5464,7 @@ rich_presence_conditional_display(versusMode() && isInGame(),
                                   "Playing Versus Mode")
 
 rich_presence_display("In the menus.")
+
 
 
 
