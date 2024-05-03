@@ -742,7 +742,7 @@ levelDataList =
         TITLE: "Special Stage Half Cleared",
         DESCRIPTION: "Beat half of the Special Stage",
         POINTS: 3,
-        STAGE_INDEX: 0xa,
+        STAGE_INDEX: 0xb,
         ACHIEVEMENT_ID: 415084
     }
 ]
