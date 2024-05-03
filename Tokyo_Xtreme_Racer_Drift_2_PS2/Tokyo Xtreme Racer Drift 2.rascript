@@ -1658,9 +1658,11 @@ timeOfDayLookup =
 //          
 //          0x00 = Replay active
 //          0x01 = Gameplay Active.
-function altReplayIndicator() => byte(0x3C0070)
+//function altReplayIndicator() => byte(0x3C0070)
 SECOND_GAMEPLAY_ACTIVE = 0x01
-function secondReplayActive() => altReplayIndicator() != SECOND_GAMEPLAY_ACTIVE
+
+// THIS IS INCORRECT DONT USE THIS.  The behind the car camera sets this. 
+// function secondReplayActive() => altReplayIndicator() != SECOND_GAMEPLAY_ACTIVE
 
 // $3FA984: (8-bit) Driving Indicator.
 //          
@@ -3780,7 +3782,6 @@ function displayValueForCASection() => byte(0x1781BDC)
 function achievementActive()
 {
     return !replayActive() && 
-           !secondReplayActive() &&
            notSaving()
 }
 
@@ -5102,8 +5103,8 @@ function specificLeaderboardTimeAttack(data)
                            isNormalCar() &&
                            achievementActive() &&
                            recordChallengeTAMode() &&
-                           trigger_when( calculateTotalTimeInTimeAttack() <= data[TIME] &&
-                                         justFinishedGameplay() &&
+                           calculateTotalTimeInTimeAttack() <= data[TIME] &&
+                           trigger_when( justFinishedGameplay() &&
                                          winStatus() == WON_RACE_VALUE)
     )
 
