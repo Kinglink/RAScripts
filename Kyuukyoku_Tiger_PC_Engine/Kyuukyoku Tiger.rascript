@@ -240,6 +240,20 @@ function prevTotalScore() => prev(byte(0x001672)) * 10000000 +
                              prev(byte(0x001677)) * 100 +
                              prev(byte(0x001678)) * 10 +
                              prev(byte(0x001679))
+                             
+function tenThousands() => byte(0x001674) * 100000 +
+                           byte(0x001675) * 10000 +
+                           byte(0x001676) * 1000 +
+                           byte(0x001677) * 100 +
+                           byte(0x001678) * 10 +
+                           byte(0x001679)
+function prevTenThousands() => prev(byte(0x001675)) * 10000 +
+                               prev(byte(0x001676)) * 1000 +
+                               prev(byte(0x001677)) * 100 +
+                               prev(byte(0x001678)) * 10 +
+                               prev(byte(0x001679))
+                             
+function oneupRollover() => tenThousands() < 50000 && prevTenThousands() > 50000
 
 // $167A: (8-bit) Number of Bonus Stars
 //        
@@ -308,7 +322,7 @@ function maxPower() => weaponPower() == MAX_POWER_VALUE
 //        
 //        0x03 = Start
 //        0x00 = No Credits remaining
-function creditsRemaining() => byte(0x001684)
+function creditsRemaining() => low4(0x001684)
 
 function didContinue() => creditsRemaining() < prev(creditsRemaining())
 
@@ -686,7 +700,7 @@ achievement(title = "That's Whose Responsible",
 )
 
 MAX_STAR_TITLE_TEXT = "Max Star {0}"
-MAX_STAR_DESCRIPTION_TEXT = "Get all the bonus stars in {0} and finish the level. Dying resets the count, but does not lock out the achievement"
+MAX_STAR_DESCRIPTION_TEXT = "Get all the bonus stars in {0} and finish the level. Dying resets the count, but does not lock out the achievement.  Getting a 1-up in place of a bonus star will count as a bonus star"
 maxStarAchievements =
 [
     {
@@ -747,17 +761,24 @@ for data in maxStarAchievements {
                 points = data[POINTS],
                 trigger = achievementLockout() &&
                           trigger_when(levelNumber() == data[ID] + 1) &&
-                          measured(prev(bonusStarsLevel()) == totalStars[data[ID]], when = prev(levelNumber()) == data[ID] &&
-                                                                                           isGameplay())
+                          prev(levelNumber()) == data[ID] &&
+                          isGameplay() &&  
+                          ((prev(bonusStarsLevel()) == totalStars[data[ID]]) ||
+                           (prev(bonusStarsLevel()) == totalStars[data[ID]] -1 &&  
+                            once(prev(lives()) + 1 == lives() && 
+                                 !oneupRollover() &&
+                                 prev(levelNumber()) == data[ID] ))) &&
+                          never(didDie()) &&                          
+                          never(didContinue())
     )
 }
 
 DODGE_TITLE_TEXT = "Slick Moves {0}"
 EXTRA_DODGE_INFO = ". Dying, using a bomb, or pausing the game resets the count, but does not lock out the achievement"
-DODGE_DESCRIPTION_TEXT = "Dodge for 60 seconds with out killing the boss on {0}" + EXTRA_DODGE_INFO
-DODGE_DESCRIPTION_TWO_BOSSES_TEXT = "Dodge for 60 seconds with out killing the bosses on {0}" + EXTRA_DODGE_INFO
-DODGE_DESCRIPTION_TWO_LARGE_BOSSES_TEXT = "Dodge for 60 seconds with out killing each of the large bosses on {0}" + EXTRA_DODGE_INFO
-DODGE_DESCRIPTION_TWO_MAIN_BOSSES_TEXT = "Dodge for 60 seconds with out killing the two main bosses on {0}" + EXTRA_DODGE_INFO
+DODGE_DESCRIPTION_TEXT = "Dodge for 30 seconds with out killing the boss on {0}" + EXTRA_DODGE_INFO
+DODGE_DESCRIPTION_TWO_BOSSES_TEXT = "Dodge for 30 seconds with out killing the bosses on {0}" + EXTRA_DODGE_INFO
+DODGE_DESCRIPTION_TWO_LARGE_BOSSES_TEXT = "Dodge for 30 seconds with out killing each of the large bosses on {0}" + EXTRA_DODGE_INFO
+DODGE_DESCRIPTION_TWO_MAIN_BOSSES_TEXT = "Dodge for 30 seconds with out killing the two main bosses on {0}" + EXTRA_DODGE_INFO
 bossDodgeAchievementList =
 [
     {
@@ -908,3 +929,4 @@ rich_presence_display("Level {0} Score {1} Lives {2} Bombs {3}",
                       rich_presence_value("Number", lives()),
                       rich_presence_value("Number", bombsHeld())
                       )
+
