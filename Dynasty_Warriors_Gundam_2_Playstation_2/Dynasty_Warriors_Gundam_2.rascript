@@ -1,6 +1,31 @@
 // Dynasty Warriors: Gundam 2
 // #ID = 20794
 
+// Helper function 
+function ContainsKey(dictionary, key_name)
+{
+    for key in dictionary 
+        if(key == key_name) return true
+    return false
+}
+
+// DATA TAGS
+ID = "ID"
+NAME = "ACHIEVEMENT_NAME"
+DESCRIPTION = "DESCRIPTION"
+POINTS = "POINTS"
+MISSIONS = "MISSIONS"
+CHARACTER = "CHARACTER"
+SUIT = "SUIT"
+HALF_NAME = "HALF_NAME"
+FULL_NAME = "FULL_NAME"
+HALF_DESCRIPTION = "HALF_DESCRIPTION"
+FULL_DESCRIPTION = "FULL_DESCRIPTION"
+HALF_POINTS = "HALF_POINTS"
+FULL_POINTS = "FULL_POINTS"
+UNLOCK = "UNLOCK"
+PARTS = "PARTS"
+
 AMURO_RAY = 0x00
 CHAR_AZNABLE = 0x01
 KAMILLE_BIDAN = 0x02
@@ -74,84 +99,93 @@ BASK_OM = 0x45
 RELENA_DARLIAN = 0x46
 DIANNA_SORIEL = 0x47
 
-FIRST_CHARACTER = AMURO_RAY
-FINAL_SELECTABLE_CHARACTER = KATEJINA_LOOS
-FINAL_CHARACTER = DIANNA_SORIEL
+FIRST_CHARACTER_INDEX = AMURO_RAY
+FINAL_SELECTABLE_CHARACTER_INDEX = KATEJINA_LOOS
+FINAL_CHARACTER_INDEX = DIANNA_SORIEL
 
 characterList = 
 {
-    0x00: "Amuro Ray",
-    0x01: "Char Aznable",
-    0x02: "Kamille Bidan",
-    0x03: "Paptimus Scirocco",
-    0x04: "Haman Karn",
-    0x05: "Judau Ashta",
-    0x06: "Domon Kasshu",
-    0x07: "Master Asia",
-    0x08: "Heero Yuy",
-    0x09: "Milliardo Peacecraft",
-    0x0a: "Loran Cehack",
-    0x0b: "Emma Sheen",
-    0x0c: "Jerid Messa",
-    0x0d: "Elpeo Puru",
-    0x0e: "Puru Two",
-    0x0f: "Roux Louka",
-    0x10: "Kira Yamato",
-    0x11: "Athrun Zala",
-    0x12: "Shinn Asuka",
-    0x13: "Seabook Arno",
-    0x14: "Uso Ewin",
-    0x15: "Kai Shiden",
-    0x16: "Hayato Kobayashi",
-    0x17: "M'Quve",
-    0x18: "Ramba Ral",
-    0x19: "Yazan Gable",
-    0x1a: "Sarah Zabiarov",
-    0x1b: "Reccoa Londe",
-    0x1c: "Glemy Toto",
-    0x1d: "Quess Paraya",
-    0x1e: "Gyunei Guss",
-    0x1f: "Dozle Zabi",
-    0x20: "Sleggar Law",
-    0x21: "Four Murasame",
-    0x22: "Rosamia Badam",
-    0x23: "Gym Ghingham",
-    0x24: "Lacus Clyne", // Final playable. 
-    0x25: "Lunamaria Hawke",
-    0x26: "Cecily Fairchild",
-    0x27: "Katejina Loos",
-    0x28: "Johnny Ridden",
-    0x29: "Fa Yuiry",
-    0x2a: "Lalah Sune",
-    0x2b: "Gaia",
-    0x2c: "Ortega",
-    0x2d: "Mash",
-    0x2e: "Roberto",
-    0x2f: "Apolly Bay",
-    0x30: "Kacricon Cacooler",
-    0x31: "Dunkel Cooper",
-    0x32: "Ramsus Hasr",
-    0x33: "Beecha Oleg",
-    0x34: "Elle Vianno",
-    0x35: "Rezin Schnyder",
-    0x36: "Kayra Su",
-    0x37: "Chan Agi",
-    0x38: "Hathaway Noa",
-    0x39: "Kyoji Kasshu",
-    0x3a: "Crown",
-    0x3b: "Bright Noa",
-    0x3c: "Fraw Bow",
-    0x3d: "Kycilia Zabi",
-    0x3e: "Torres",
-    0x3f: "Henken Bekkener",
-    0x40: "Rain Mikamura",
-    0x41: "Nanai Miguel",
-    0x42: "Leina Ashta",
-    0x43: "Astonaige Medoz",
-    0x44: "Gihren Zabi",
-    0x45: "Bask Om",
-    0x46: "Relena Darlian",
-    0x47: "Dianna Soriel"
+    AMURO_RAY: "Amuro Ray",
+    CHAR_AZNABLE: "Char Aznable",
+    KAMILLE_BIDAN: "Kamille Bidan",
+    PAPTIMUS_SCIROCCO: "Paptimus Scirocco",
+    HAMAN_KARN: "Haman Karn",
+    JUDAU_ASHTA: "Judau Ashta",
+    DOMON_KASSHU: "Domon Kasshu",
+    MASTER_ASIA: "Master Asia",
+    HEERO_YUY: "Heero Yuy",
+    MILLIARDO_PEACECRAFT: "Milliardo Peacecraft",
+    LORAN_CEHACK: "Loran Cehack",
+    EMMA_SHEEN: "Emma Sheen",
+    JERID_MESSA: "Jerid Messa",
+    ELPEO_PURU: "Elpeo Puru",
+    PURU_TWO: "Puru Two",
+    ROUX_LOUKA: "Roux Louka",
+    KIRA_YAMATO: "Kira Yamato",
+    ATHRUN_ZALA: "Athrun Zala",
+    SHINN_ASUKA: "Shinn Asuka",
+    SEABOOK_ARNO: "Seabook Arno",
+    USO_EWIN: "Uso Ewin",
+    KAI_SHIDEN: "Kai Shiden",
+    HAYATO_KOBAYASHI: "Hayato Kobayashi",
+    M_QUVE: "M'Quve",
+    RAMBA_RAL: "Ramba Ral",
+    YAZAN_GABLE: "Yazan Gable",
+    SARAH_ZABIAROV: "Sarah Zabiarov",
+    RECCOA_LONDE: "Reccoa Londe",
+    GLEMY_TOTO: "Glemy Toto",
+    QUESS_PARAYA: "Quess Paraya",
+    GYUNEI_GUSS: "Gyunei Guss",
+    DOZLE_ZABI: "Dozle Zabi",
+    SLEGGAR_LAW: "Sleggar Law",
+    FOUR_MURASAME: "Four Murasame",
+    ROSAMIA_BADAM: "Rosamia Badam",
+    GYM_GHINGHAM: "Gym Ghingham",
+    LACUS_CLYNE: "Lacus Clyne", // Final playable. 
+    LUNAMARIA_HAWKE: "Lunamaria Hawke",
+    CECILY_FAIRCHILD: "Cecily Fairchild",
+    KATEJINA_LOOS: "Katejina Loos",
+    JOHNNY_RIDDEN: "Johnny Ridden",
+    FA_YUIRY: "Fa Yuiry",
+    LALAH_SUNE: "Lalah Sune",
+    GAIA: "Gaia",
+    ORTEGA: "Ortega",
+    MASH: "Mash",
+    ROBERTO: "Roberto",
+    APOLLY_BAY: "Apolly Bay",
+    KACRICON_CACOOLER: "Kacricon Cacooler",
+    DUNKEL_COOPER: "Dunkel Cooper",
+    RAMSUS_HASR: "Ramsus Hasr",
+    BEECHA_OLEG: "Beecha Oleg",
+    ELLE_VIANNO: "Elle Vianno",
+    REZIN_SCHNYDER: "Rezin Schnyder",
+    KAYRA_SU: "Kayra Su",
+    CHAN_AGI: "Chan Agi",
+    HATHAWAY_NOA: "Hathaway Noa",
+    KYOJI_KASSHU: "Kyoji Kasshu",
+    CROWN: "Crown",
+    BRIGHT_NOA: "Bright Noa",
+    FRAW_BOW: "Fraw Bow",
+    KYCILIA_ZABI: "Kycilia Zabi",
+    TORRES: "Torres",
+    HENKEN_BEKKENER: "Henken Bekkener",
+    RAIN_MIKAMURA: "Rain Mikamura",
+    NANAI_MIGUEL: "Nanai Miguel",
+    LEINA_ASHTA: "Leina Ashta",
+    ASTONAIGE_MEDOZ: "Astonaige Medoz",
+    GIHREN_ZABI: "Gihren Zabi",
+    BASK_OM: "Bask Om",
+    RELENA_DARLIAN: "Relena Darlian",
+    DIANNA_SORIEL: "Dianna Soriel"
+}
+
+characterShortNameLookup = 
+{
+    AMURO_RAY: "Amuro",
+    CHAR_AZNABLE: "Char",
+    KAMILLE_BIDAN: "Kamille",
+    JUDAU_ASHTA: "Judau"
+    
 }
 
 missionNameLookup =
@@ -168,7 +202,7 @@ missionNameLookup =
     0x09: "Re-entry to Earth",
     0x0A: "The Duel in Texas",
     0x0B: "A Cosmic Glow",
-    0x0C: "Re-entry to Earth",
+    0x0C: "Re-entry to Earth (Redux)",
     0x0D: "Winds of Jaburo",
     0x0E: "The Storm over Kilimanjaro",
     0x0F: "Run through the Cosmos",
@@ -181,7 +215,7 @@ missionNameLookup =
     0x16: "Cinderella Four",
     0x17: "The Storm over Kilimanjaro",
     0x18: "Scirocco Steps Forward",
-    0x19: "The mirror of Rosamia",
+    0x19: "The Mirror of Rosamia",
     0x1A: "Run through the Cosmos",
     0x1B: "The Burning Earth",
     0x1C: "Puru Two in Gravity",
@@ -202,7 +236,7 @@ missionNameLookup =
     0x2B: "This is why!",
     0x2C: "You Aren't So Special!",
     0x2D: "I'll Show All of You!",
-    0x2E: "This isn't a game to me!",
+    0x2E: "This Isn’t a Game to Me!",
     0x2F: "Departure",
     0x30: "The Threat of the Tomboy",
     0x31: "Broken Bonds",
@@ -220,8 +254,8 @@ missionNameLookup =
     0x3D: "A World Without Friend or Foe",
     0x3E: "Domon Kasshu, Surpass your Master!",
     0x3F: "Proof of Friendship",
-    0x40: "I'll Speak with my fists!",
-    0x41: "Master Asia dies at dawn?",
+    0x40: "I'll Speak with My Fists!",
+    0x41: "Master Asia Dies at Dawn?",
     0x42: "Teacher and Pupil Bond! Last Fight Tears",
     0x43: "Punishment at Jaburo",
     0x44: "Love Megapunch",
@@ -297,9 +331,9 @@ missionNameLookup =
     0x8A: "Heroes of the One Year War 2",
     0x8B: "M'Quve's Vase",
     0x8C: "A Soldier's Heart",
-    0x8D: "The General and the Beast",
+    0x8D: "The General and the Beast (Yazan)",
     0x8E: "Frontline Beast",
-    0x8F: "The General and the Beast",
+    0x8F: "The General and the Beast (Gym)",
     0x90: "For the Loved One",
     0x91: "Farewell, Loved One",
     0x92: "Infiltration in Jupritis",
@@ -518,7 +552,7 @@ missionNameLookup =
     0x167: "You're in my way!",
     0x168: "The Shocking Dark History",
     0x169: "King of Hearts' Challenge",
-    0x16A: "Look! The East burns Crimson Red!",
+    0x16A: "Look! The East Burns Crimson Red!",
     0x16B: "C'mon, c'mon! Bring it on!",
     0x16C: "White Devil",
     0x16D: "The Final Victor",
@@ -695,7 +729,7 @@ NEWTYPE_PLAYGROUND = 0x96
 GYUNEIS_AMBITION_1 = 0x97
 GYUNEIS_AMBITION_2 = 0x98
 THE_PRESTIGE_OF_THE_ZABI_FAMILY_1 = 0x99
-THE_PRESTIGE_OF_THE_ZABI_FAMILY_1 = 0x9A
+THE_PRESTIGE_OF_THE_ZABI_FAMILY_1_ALT = 0x9A
 SLEGGAR_AND_THE_RETURN_TO_JUPITER = 0x9B
 SLEGGAR_AND_THE_CYBER_NEWTYPE = 0x9C
 SLEGGAR_AND_THE_LOVERS = 0x9D
@@ -918,7 +952,7 @@ DONT_UNDERESTIMATE_IT = 0x175
 SCIROCCOS_UTOPIA = 0x176
 GIANT_RED_STAR = 0x177
 GREAT_FREEDOM_GREAT_RESPONSIBILITY = 0x178
-AMURO_RAY = 0x179
+AMURO_RAY_MISSION = 0x179
 CHALLENGE_THE_LEGEND = 0x17A
 ONE_MAN_ARMY = 0x17B
 THE_POWER_OF_BONDS = 0x17C
@@ -1232,7 +1266,7 @@ gyuneiMissionModeMissions =
 dozleMissionModeMissions =
 [
     THE_PRESTIGE_OF_THE_ZABI_FAMILY_1,
-    THE_PRESTIGE_OF_THE_ZABI_FAMILY_1
+    THE_PRESTIGE_OF_THE_ZABI_FAMILY_1_ALT
 ]
 
 sleggarMissionModeMissions = 
@@ -1510,92 +1544,568 @@ extraMissionModeMissions =
     SCIROCCOS_UTOPIA,
     GIANT_RED_STAR,
     GREAT_FREEDOM_GREAT_RESPONSIBILITY,
-    AMURO_RAY,
+    AMURO_RAY_MISSION,
     CHALLENGE_THE_LEGEND,
     ONE_MAN_ARMY,
     THE_POWER_OF_BONDS,
     THE_TRUE_DYNASTY_WARRIORS_GUNDAM,
 ]
 
-FIRST_MISSION_INDEX = RE_ENTRY_TO_EARTH_AMURO
-LAST_MISSION_INDEX = A A_GENERALS_DIGNITY
+FIRST_ORIGINAL_MODE_MISSION_INDEX = RE_ENTRY_TO_EARTH_AMURO
+LAST_ORIGINAL_MODE_MISSION_INDEX = WARRIORS_AGAIN_EPILOGUE
+
+FIRST_MISSION_MODE_MISSION_INDEX = PSYCOFRAME_LIGHT
+LAST_MISSION_MODE_MISSION_INDEX = A_GENERALS_DIGNITY
+
+MISSION_VALUE =
+{
+    1: 3,
+    2: 4,
+    3: 5,
+    4: 5,  
+    5: 5,
+    6: 10,
+    7: 10,
+    8: 10
+}
+
+MISSION_DIFFICULTY = 
+{
+    RE_ENTRY_TO_EARTH_AMURO: 1,
+    THE_BATTLE_OF_ODESSA: 1,
+    TRAGEDY_IN_JABURO: 2,
+    BIG_ZAMS_LAST_STAND: 3,
+    THE_DUEL_IN_TEXAS_AMURO: 3,
+    A_COSMIC_GLOW_AMURO: 4,
+    SPACE_FORTRESS_A_BAOA_QU: 5,
+    LUNA_2_SURRENDERS_AXIS_ACCELERATES_AMURO: 5,
+    LONDO_BELL_REACTS_AXIS_FALLS_AMURO: 5,
+    RE_ENTRY_TO_EARTH_CHAR: 1,
+    THE_DUEL_IN_TEXAS_CHAR: 1,
+    A_COSMIC_GLOW_CHAR: 2,
+    RE_ENTRY_TO_EARTH_CHAR2: 2,
+    WINDS_OF_JABURO_CHAR: 3,
+    THE_STORM_OVER_KILIMANJARO_CHAR: 4,
+    RUN_THROUGH_THE_COSMOS_CHAR: 5,
+    ENEMY_ENCOUNTER_AT_5TH_LUNA: 4,
+    LUNA_2_SURRENDERS_AXIS_ACCELERATES_CHAR: 5,
+    LONDO_BELL_REACTS_AXIS_FALLS_CHAR: 5,
+    RE_ENTRY_TO_EARTH_KAMILLE: 1,
+    WINDS_OF_JABURO_KAMILLE: 1,
+    HONG_KONG_CITY: 2,
+    CINDERELLA_FOUR: 2,
+    THE_STORM_OVER_KILIMANJARO_KAMILLE: 3,
+    SCIROCCO_STEPS_FORWARD: 4,
+    THE_MIRROR_OF_ROSAMIA: 5,
+    RUN_THROUGH_THE_COSMOS_KAMILLE: 5,
+    THE_BURNING_EARTH: 1,
+    PURU_TWO_IN_GRAVITY: 2,
+    VIBRATION: 3,
+    WARRIORS_AGAIN_PRELUDE: 4,
+    WARRIORS_AGAIN_EPILOGUE: 5,
+    PSYCOFRAME_LIGHT: 3,
+    WINGS_OF_LIFE: 3,
+    THE_FIST_THAT_HOPES_TO_GRASP_VICTORY: 4,
+    GUIDING_LIGHT_TO_THE_FUTURE: 4,
+    WILL_MAKES_MIRACLES_HAPPEN: 5,
+    CHARS_WILL: -1,
+    A_UNIQUE_MAN: -1,
+    A_VISION_OF_LALAH: -1,
+    THE_POWER_OF_A_NEWTYPE: -1,
+    CHAR_THE_RED_COMET: -1,
+    WHATS_WRONG_WITH_KAMILLE_BEING_A_MANS_NAME: -1,
+    THIS_IS_WHY: -1,
+    YOU_ARENT_SO_SPECIAL: -1,
+    ILL_SHOW_ALL_OF_YOU: -1,
+    THIS_ISNT_A_GAME_TO_ME: -1,
+    DEPARTURE: -1,
+    THE_THREAT_OF_THE_TOMBOY: -1,
+    BROKEN_BONDS: -1,
+    TO_THE_GRAVITY_WELL: -1,
+    SCIROCCO_LANDS_ON_EARTH: -1,
+    CONCORD: -1,
+    IDEAL: -1,
+    THOUGHT: -1,
+    SYMPATHY: -1,
+    GLORY: -1,
+    SANC_KINGDOM_KNIGHT: -1,
+    FABRICATED_BLOODLINE_DESTINY_PLAN: -1,
+    NUMBER_2500_YEARS_OF_SAMURAI_FAMILY_HISTORY: -1,
+    RISE_UP_HAIL_ZEON: -1,
+    A_WORLD_WITHOUT_FRIEND_OR_FOE: -1,
+    DOMON_KASSHU_SURPASS_YOUR_MASTER: -1,
+    PROOF_OF_FRIENDSHIP: -1,
+    ILL_SPEAK_WITH_MY_FISTS: -1,
+    MASTER_ASIA_DIES_AT_DAWN: -1,
+    TEACHER_AND_PUPIL_BOND_LAST_FIGHT_TEARS: -1,
+    PUNISHMENT_AT_JABURO: -1,
+    LOVE_MEGAPUNCH: -1,
+    CUTE_FIGHTER_GIRL: -1,
+    FIST_OF_TEARS_EXPLODES: -1,
+    MASTER_ASIAS_NAME: -1,
+    THOSE_WHO_OPPOSE_WAR: 1,
+    THOSE_WHO_SEEK_BATTLE: 2,
+    THOSE_WHO_SEEK_TO_BE_RESCUED: 3,
+    THOSE_WHO_FACE_DISASTER: 3,
+    THOSE_WHO_GUIDE_US_TO_PEACE: 4,
+    CHIVALRY_IS_BRAVERY: -1,
+    CHIVALRY_IS_FAIRNESS: -1,
+    CHIVALRY_IS_DEVOTION: -1,
+    CHIVALRY_IS_COURAGE: -1,
+    CHIVALRY_IS_POLITENESS: -1,
+    BROTHERS_REUNITED: -1,
+    WINDS_OF_BATTLE: -1,
+    COEXISTENCE_WITH_OTHERS: -1,
+    AS_THE_PEOPLE_OF_THE_MOON: -1,
+    PRESERVING_THE_SPECIES: -1,
+    ATMOSPHERIC_COMBAT: -1,
+    FIGHTING_GIANT_ENEMIES: -1,
+    SPECIAL_SOLDIER_GUNDAM: -1,
+    ONE_YEAR_WAR_OPERATION_STAR_ONE: -1,
+    COLONY_LASER_DUEL: -1,
+    PREDESTINATION: -1,
+    PRISON_BREAK: -1,
+    THE_DISCIPLINE_OF_A_SOLDIER: -1,
+    TORN_BETWEEN_BOND_AND_TRUST: -1,
+    DAY_OF_DECISION: -1,
+    DESPERATE_COURAGE: -1,
+    PERPLEXED_GIRL: -1,
+    NEVER_ENDING_CONFLICT: -1,
+    DISCORD: -1,
+    RED_AND_BLACK_PURU: -1,
+    MENACE_ON_THE_BATTLEFIELD: -1,
+    HEARTS_PASSING_BY: -1,
+    IRRITATION: -1,
+    SKIES_OF_CONFUSION: -1,
+    RED_AND_BLACK_PURU_TWO: -1,
+    DOUBLE_ZETA_RUN_AWAY: -1,
+    THE_VALLEY_OF_THE_ICEBERG: -1,
+    JUDAU_COME_OUT: -1,
+    YOURE_SO_STUBBORN: -1,
+    TIME_TO_FIND_OUT_LOVER_FRIEND_RIVAL: -1,
+    THE_FIGHT_TO_END_ALL_FIGHTS: -1,
+    TEARS_ON_THE_BATTLEFIELD: -1,
+    PEACE_SINGING_SINGSTRESS: -1,
+    FIGHTING_BREEDS_MORE_FIGHTING: -1,
+    A_FUTURE_BEFORE_THE_BATTLE: -1,
+    IN_THE_SANDSTORM: -1,
+    DEATHMATCH_AT_KILLMANJARO: -1,
+    FREEDOM_JUSTICE_AND_TRUTH: -1,
+    GATES_TO_A_NEW_WORLD: -1,
+    CRIMSON_SOAKED_COSMOS: -1,
+    ETERNAL_CONFLICT: -1,
+    AN_ERA_WITHOUT_LIGHT: -1,
+    CONTRADICTING_JUSTICE: -1,
+    WORLD_IN_PEACE: -1,
+    ETERNAL_FATE: -1,
+    MAYDAY: -1,
+    A_CHILD_LOST_IN_THE_UNIVERSE: -1,
+    WHITE_FANG: -1,
+    MIRACLE_ENCOUNTER: -1,
+    GHOST_OF_DISTURBANCE: -1,
+    HUMANKIND_DESPAIRS: -1,
+    TIME_PASSES_REMORSELESSLY: -1,
+    BOYS_AND_GIRLS_FROM_THE_BATTLEFIELD: -1,
+    BEYOND_THE_TIME: -1,
+    CONNECTING_MANY_LIVES: -1,
+    HEROES_OF_THE_ONE_YEAR_WAR_1: -1,
+    HEROES_OF_THE_ONE_YEAR_WAR_2: -1,
+    MQUVES_VASE: -1,
+    A_SOLDIERS_HEART: -1,
+    THE_GENERAL_AND_THE_BEAST_YAZAN: -1,
+    FRONTLINE_BEAST: -1,
+    THE_GENERAL_AND_THE_BEAST_GHINGHAM: -1,
+    FOR_THE_LOVED_ONE: -1,
+    FAREWELL_LOVED_ONE: -1,
+    INFILTRATION_IN_JUPRITIS: -1,
+    TOO_MUCH_OF_A_WOMAN: -1,
+    ATTRACTED_BY_THE_SCENT_OF_FLOWERS: -1,
+    GOODBYE_DAYS_OF_YOUTH: -1,
+    NEWTYPE_PLAYGROUND: -1,
+    GYUNEIS_AMBITION_1: -1,
+    GYUNEIS_AMBITION_2: -1,
+    THE_PRESTIGE_OF_THE_ZABI_FAMILY_1: -1,
+    THE_PRESTIGE_OF_THE_ZABI_FAMILY_1_ALT: -1,
+    SLEGGAR_AND_THE_RETURN_TO_JUPITER: -1,
+    SLEGGAR_AND_THE_CYBER_NEWTYPE: -1,
+    SLEGGAR_AND_THE_LOVERS: -1,
+    SLEGGAR_AND_THE_SCARY_WOMAN: -1,
+    SLEGGAR_AND_THE_RED_COMET: -1,
+    SPELLBOUND: -1,
+    BROTHERS_AND_SISTERS: -1,
+    FIND_THE_SONGSTRESS: -1,
+    FRIEND_YESTERDAY_ENEMY_TODAY: -1,
+    PRIVATE_LESSON: -1,
+    A_FUTURE_FOR_TWO: -1,
+    BEAUTIFUL_FACE: -1,
+    YOUNGER_BOY: -1,
+    PILOTING_PRACTICE: 0,
+    BEGINNER_BATTLE_DRILL___SURFACE: 1,
+    BEGINNER_BATTLE_DRILL___SPACE: 1,
+    INTERMEDIATE_BATTLE_DRILL___SURFACE: 3,
+    INTERMEDIATE_BATTLE_DRILL___SPACE: 3,
+    ADVANCED_BATTLE_DRILL___SURFACE: 5,
+    ADVANCED_BATTLE_DRILL___SPACE: 5,
+    NUMBER_1000_SHOT_DOWN_ENEMIES: 1,
+    NUMBER_5000_SHOT_DOWN_ENEMIES: 3,
+    NUMBER_10000_SHOT_DOWN_ENEMIES: 3,
+    NUMBER_20000_SHOT_DOWN_ENEMIES: 4,
+    NUMBER_30000_SHOT_DOWN_ENEMIES: 4,
+    NUMBER_40000_SHOT_DOWN_ENEMIES: 5,
+    NUMBER_50000_SHOT_DOWN_ENEMIES: 5,
+    NUMBER_10_COMPLETED_MISSIONS: 1,
+    NUMBER_50_COMPLETED_MISSIONS: 2,
+    NUMBER_100_COMPLETED_MISSIONS: 3,
+    NUMBER_200_TOTAL_COMPLETED_MISSIONS: 3,
+    NUMBER_300_TOTAL_COMPLETED_MISSIONS: 4,
+    FORCED_EVOLUTION: 2,
+    HUMAN_REFORM: 2,
+    CHARS_CHALLENGE: -1,
+    SOLDIERS_BATTLEFIELD_1: 2,
+    SOLDIERS_BATTLEFIELD_2: 4,
+    SOLDIERS_BATTLEFIELD_3: 4,
+    SOLDIERS_BATTLEFIELD_4: 5,
+    BLACK_TETRA_STARS_1: 4,
+    BLACK_TETRA_STARS_2: 5,
+    A_VETERANS_DEED_1: 4,
+    A_VETERANS_DEED_2: 5,
+    THE_FOURTH_YAZAN_CREWMAN_1: 4,
+    THE_FOURTH_YAZAN_CREWMAN_2: 5,
+    REMEMBER_THE_PAST_1: 4,
+    REMEMBER_THE_PAST_2: 4,
+    REMEMBER_THE_PAST_3: 4,
+    REMEMBER_THE_PAST_4: 4,
+    REMEMBER_THE_PAST_5: 4,
+    REMEMBER_THE_PAST_6: 4,
+    REMEMBER_THE_PAST_7: 6,
+    THE_MONSTER_OF_ZEON: 1,
+    HEROES_OF_THE_FEDERATION: 1,
+    THE_MESSENGER_FROM_AXIS: 2,
+    MASS_PRODUCTION_GUNDAM: 2,
+    THIS_IS_NO_ZAKU_MY_FRIEND: 2,
+    GIANT_REVEALED: 2,
+    FOR_THE_GLORY_OF_ZEON: 3,
+    GUARDIANS_OF_NATURE: 3,
+    UNDER_NEO_ZEONS_FLAG: 3,
+    JET_STREAM_ATTACK: 3,
+    SOARING_DRAGON: 4,
+    A_E_U_GS_PRIDE: 4,
+    KNIGHTS_OF_THE_PRINCIPALITY: 4,
+    THE_GENIUS_FROM_JUPRITIS: 5,
+    COMING_FROM_UNDERWATER: 4,
+    WOMENS_WAR: 4,
+    HUNTER: 5,
+    Z_GUNDAM_RETURNS: 5,
+    CHAR_COLLECTION: -1,
+    RED_TRI_STARS: 4,
+    JERIDS_SOUL_PILGRIMAGE: 5,
+    THE_SNAKE_AND_THE_SPIDER: 4,
+    ULTIMATE_BROTHERS: 4,
+    ZAKU_LOVERS_CLUB_1: 3,
+    ZAKU_LOVERS_CLUB_2: 5,
+    QUBELEY_STORM: -1,
+    SOLO_IN_RED_1: 4,
+    SOLO_IN_RED_2: 5,
+    THE_PATH_TO_LEGEND_1: 2,
+    THE_PATH_TO_LEGEND_2: 3,
+    RED_COMETS_GLORY_1: 2,
+    RED_COMETS_GLORY_2: 3,
+    LEGENDARY_SUCCESSOR_1: 2,
+    LEGENDARY_SUCCESSOR_2: 3,
+    A_HUNDRED_YEARS_RADIANCE_1: 2,
+    A_HUNDRED_YEARS_RADIANCE_2: 3,
+    ZETAS_PULSE_1: 2,
+    ZETAS_PULSE_2: 3,
+    GODS_WILL: 3,
+    AXIS_MOTHER_NATURE: 3,
+    THE_ULTIMATE_POWER_1: 2,
+    THE_ULTIMATE_POWER_2: 3,
+    BATTLE_GIRL: 3,
+    THE_STRONGEST_GUNDAM_1: 3,
+    THE_STRONGEST_GUNDAM_2: 4,
+    CRIMSON_REBELS_1: 3,
+    CRIMSON_REBELS_2: 4,
+    FORMULA_PROGRAM: 3,
+    GUNDAM_CALLS_VICTORY: 3,
+    THE_FIST_DWELLING_GOD: 3,
+    THE_PRACTITIONERS_TEACHINGS: 3,
+    GIVE_ME_YOUR_WINGS: -1,
+    PATH_TO_THE_FUTURE: 3,
+    THE_LEGACY_OF_THE_DARK_HISTORY: 3,
+    THE_MESSENGER_OF_FREEDOM: 3,
+    SWORD_OF_JUSTICE: 3,
+    FATE_CONNECTION: 3,
+    ARATAMA: 6,
+    NIGITAMA: 6,
+    GOOD_LUCK_LOSER: 1,
+    JUST_WANTED_TO_GET_ALONG___: 1,
+    HEDGEHOGS_DILEMMA: 1,
+    LOVE_DUEL: 2,
+    LOVE_SPECIAL_ATTACK: 3,
+    BOYS_BE_AMBITIOUS: 3,
+    WOMEN_WHO_LOOK_GOOD_ARMED: 3,
+    VOICES_OF_THE_YOUNG: 3,
+    LAST_GENERATION: 3,
+    COWARD_1: 2,
+    COWARD_2: 3,
+    HAYATOS_REQUEST: 2,
+    KYCILIAS_SECRET_REQUEST: 2,
+    DOZLES_SECRET_REQUEST: 2,
+    YAZANS_CREW_TEST: 4,
+    SARAH_MIGHT_FORGIVE_YOU_BUT_I_WONT: 2,
+    GLEMYS_AMBITION: 3,
+    GYUNEIS_RESCUE: -1,
+    SLEGGARS_FINAL_ATTACK: -1,
+    THINGS_TO_PROTECT: -1,
+    DEVIL_MACHINE: 3,
+    GHINGHAMS_BIG_COMEBACK: 3,
+    DO_YOU_LOVE_SUPER_ACES: 2,
+    I_CAN_HEAR_YOUR_SONG: -1,
+    POWER_IN_HAND_1: 2,
+    POWER_IN_HAND_2: 4,
+    EARTH_DOMINATION_1: 1,
+    EARTH_DOMINATION_2: 2,
+    EARTH_DOMINATION_3: 4,
+    ETERNAL_COMET: -1,
+    EARTH_CONQUEST_1: 1,
+    EARTH_CONQUEST_2: 2,
+    EARTH_CONQUEST_3: 4,
+    CHARS_OFFERING: 5,
+    FREEDOM_TO_SPACE_1: 1,
+    FREEDOM_TO_SPACE_2: 2,
+    FREEDOM_TO_SPACE_3: 4,
+    THE_EARTH_IS_MY_BIRTHPLACE_1: 1,
+    THE_EARTH_IS_MY_BIRTHPLACE_2: 2,
+    THE_EARTH_IS_MY_BIRTHPLACE_3: 4,
+    COLD_MACHIAVELLIAN: 5,
+    FAITH_1: 1,
+    FAITH_2: 3,
+    FREEDOM_TO_SPACE_4: 2,
+    FREEDOM_TO_SPACE_5: 4,
+    JUNK_DEALERS_1: 3,
+    JUNK_DEALERS_2: 5,
+    STOP_ACTING_LIKE_THAT_BROTHER: 3,
+    STOP_ACTING_LIKE_THAT_JUDAU: 5,
+    FOR_WHOM_THE_BELL_TOLLS_1: 1,
+    FOR_WHOM_THE_BELL_TOLLS_2: 3,
+    WHITE_FANGS_RIP_THE_COSMOS: -1,
+    ABOMINABLE_MEMORIES_1: 1,
+    ABOMINABLE_MEMORIES_2: 3,
+    THOSE_WHO_DISTURB_THE_SKIES_1: 2,
+    THOSE_WHO_DISTURB_THE_SKIES_2: 3,
+    THOSE_WHO_DISTURB_THE_SKIES_3: 5,
+    TO_THE_VICTOR_1: 1,
+    TO_THE_VICTOR_2: 3,
+    OPERATION_GIANT_ROLLER: -1,
+    GUNDAM_FIGHT_FIRST_ROUND: 3,
+    GUNDAM_FIGHT_SEMIFINALS: 4,
+    GUNDAM_FIGHT_FINALS: 7,
+    BEHIND_THE_SCENES: 6,
+    BEWILDERED_SOLDIERS: -1,
+    THE_GLASS_KINGDOM: -1,
+    ENDLESS_WALTZ: -1,
+    OPERATION_RETURN_TO_EARTH_1: 3,
+    OPERATION_RETURN_TO_EARTH_2: 4,
+    ALL_OF_THE_COSMOS_1: 2,
+    ALL_OF_THE_COSMOS_2: 4,
+    THE_GREAT_ESCAPE: 3,
+    THE_GREAT_PURSUIT: 3,
+    ALL_OF_THE_COSMOS_3: 5,
+    A_SONG_OF_PEACE_1: 2,
+    A_SONG_OF_PEACE_2: 3,
+    A_SONG_OF_PEACE_3: 4,
+    THE_MIGHTIEST_SURFACE_WEAPON: 5,
+    BALL_IS_YOUR_FRIEND: 5,
+    SEEKING_THE_ULTIMATE_ZAKU: -1,
+    ETERNAL_BINARY_STAR: 6,
+    A_E_U_GS_HOPE: 6,
+    DON_QUIJOTE: 6,
+    IM_A_NEWTYPE____A_CYBER_NEWTYPE: 7,
+    CHARS_CHALLENGE_2: -1,
+    A_DANGEROUS_YOUNG_LADY: -1,
+    CAPTIVE_PRINCESS: 7,
+    BURN_DRAGON: -1,
+    WAR_GODDESS: 7,
+    YAZANS_STRIKE_FORCE_IS_IMMORTAL: 7,
+    TOWARDS_TOMORROW: 7,
+    FIGHTING_SPIRIT: 7,
+    CRIMSON_LIGHTNING: 7,
+    YOURE_IN_MY_WAY: 7,
+    THE_SHOCKING_DARK_HISTORY: -1,
+    KING_OF_HEARTS_CHALLENGE: 7,
+    LOOK_THE_EAST_BURNS_CRIMSON_RED: 7,
+    CMON_CMON_BRING_IT_ON: 7,
+    WHITE_DEVIL: 7,
+    THE_FINAL_VICTOR: 7,
+    MOONLIGHT_BUTTERFLY_VS__WINGS_OF_FIRE: 7,
+    THE_FINAL_POWER: -1,
+    PERSEVERING_JUSTICE: 7,
+    ZERO_VS__EPYON: -1,
+    GET_ALONG: -1,
+    ITS_NOT_ANIME: 7,
+    ZETAS_FIRST_LAUNCH: -1,
+    DONT_UNDERESTIMATE_IT: 8,
+    SCIROCCOS_UTOPIA: -1,
+    GIANT_RED_STAR: 8,
+    GREAT_FREEDOM_GREAT_RESPONSIBILITY: 8,
+    AMURO_RAY_MISSION: 8,
+    CHALLENGE_THE_LEGEND: 8,
+    ONE_MAN_ARMY: 8,
+    THE_POWER_OF_BONDS: 8,
+    THE_TRUE_DYNASTY_WARRIORS_GUNDAM: 8,
+    A_GENERALS_DIGNITY: -1,
+}
+
+GUNDAM = 0x00
+ZAKU_II_CHAR = 0x01
+GELGOOG_CHAR = 0x02
+GUNDAM_MK_II = 0x03
+Z_GUNDAM = 0x04
+HYAKU_SHIKI = 0x05
+GUNDAM_MK_II_Titans = 0x06
+THE_O = 0x07
+QUBELEY = 0x08
+ΖΖ_GUNDAM = 0x09
+QUBELEY_MK_II_Puru = 0x0A
+QUBELEY_MK_II_Puru_Two = 0x0B
+NU_GUNDAM = 0x0C
+SAZABI = 0x0D
+GUNDAM_F91 = 0x0E
+V2_GUNDAM = 0x0F
+BURNING_GUNDAM = 0x10
+MASTER_GUNDAM = 0x11
+WING_GUNDAM_ZERO = 0x12
+GUNDAM_EPYON = 0x13
+TURN_A_GUNDAM = 0x14
+STRIKE_FREEDOM_GUNDAM = 0x15
+INFINITE_JUSTICE_GUNDAM = 0x16
+DESTINY_GUNDAM = 0x17
+MUSHA_GUNDAM = 0x18
+MUSHA_GUNDAM_MK_II = 0x19
+GUNCANNON = 0x1A
+ZGOK_CHAR = 0x1B
+ZEONG = 0x1C
+GELGOOG_JOHNNY = 0x1D
+HAMBRABI = 0x1E
+BYARLANT = 0x1F
+BAUND_DOC = 0x20
+BOLINOAK_SAMMAHN = 0x21
+PALLAS_ATHENE = 0x22
+BAWOO = 0x23
+RE_GZ = 0x24
+JAGD_DOGA_GYUNEI = 0x25
+JAGD_DOGA_QUESS = 0x26
+GOTTRLATAN = 0x27
+TURN_X = 0x28
+GM = 0x29
+BALL = 0x2A
+ZAKU_II = 0x2B
+GOUF = 0x2C
+DOM = 0x2D
+// RICK_DOM = 0xFF // NOT actually in the game. 
+ZGOK = 0x2E
+GYAN = 0x2F
+GELGOOG = 0x30
+ZAKU_TANK = 0x31
+GM_COMMAND = 0x32
+GOUF_FLIGHT_TYPE = 0x33
+GM_II = 0x34
+NEMO = 0x35
+RICK_DIAS = 0x36
+HIZACK = 0x37
+MARASAI = 0x38
+BARZAM = 0x39
+GAZA_C = 0x3A
+MP_QUBELEY = 0x3B
+MP_BAWOO_GLEMY = 0x3C
+MP_BAWOO_AXIS = 0x3D
+GAZA_D = 0x3E
+JEGAN = 0x3F
+GEARA_DOGA_REZIN = 0x40
+GEARA_DOGA = 0x41
+BIG_ZAM = 0x42
+PSYCO_GUNDAM = 0x43
+PSYCO_GUNDAM_MK_II = 0x44
+QUIN_MANTHA = 0x45
+ALPHA_AZIERU = 0x46
+DARK_GUNDAM = 0x47
+
 
 suitNameLookup =
-[
-    0x00: "Gundam",
-    0x01: "Zaku II (Char)",
-    0x02: "Gelgoog (Char)",
-    0x03: "Gundam Mk-II",
-    0x04: "Z Gundam",
-    0x05: "Hyaku Shiki",
-    0x06: "Gundam Mk-II (Titans)",
-    0x07: "The O",
-    0x08: "Qubeley",
-    0x09: "ΖΖ Gundam",
-    0x0A: "Qubeley Mk-II (Puru)",
-    0x0B: "Qubeley Mk-II (Puru Two)",
-    0x0C: "Nu Gundam",
-    0x0D: "Sazabi",
-    0x0E: "Gundam F91",
-    0x0F: "V2 Gundam",
-    0x10: "Burning Gundam",
-    0x11: "Master Gundam",
-    0x12: "Wing Gundam Zero",
-    0x13: "Gundam Epyon",
-    0x14: "Turn A Gundam",
-    0x15: "Strike Freedom Gundam",
-    0x16: "Infinite Justice Gundam",
-    0x17: "Destiny Gundam",
-    0x18: "Musha Gundam",
-    0x19: "Musha Gundam Mk-II",
-    0x1A: "Guncannon",
-    0x1B: "Z'Gok (Char)",
-    0x1C: "Zeong",
-    0x1D: "Gelgoog (Johnny)",
-    0x1E: "Hambrabi",
-    0x1F: "Byarlant",
-    0x20: "Baund Doc",
-    0x21: "Bolinoak Sammahn",
-    0x22: "Pallas Athene",
-    0x23: "Bawoo",
-    0x24: "Re-GZ",
-    0x25: "Jagd Doga (Gyunei)",
-    0x26: "Jagd Doga (Quess)",
-    0x27: "Gottrlatan",
-    0x28: "Turn X",
-    0x29: "GM",
-    0x2A: "Ball",
-    0x2B: "Zaku II",
-    0x2C: "Gouf",
-    0x2D: "Dom",
-    0x2E: "Rick Dom",
-    0x2F: "Z'Gok",
-    0x30: "Gyan",
-    0x31: "Gelgoog",
-    0x32: "Zaku Tank",
-    0x33: "GM Command",
-    0x34: "Gouf Flight Type",
-    0x35: "GM II",
-    0x36: "Nemo",
-    0x37: "Rick Dias",
-    0x38: "Hizack",
-    0x39: "Marasai",
-    0x3A: "Barzam",
-    0x3B: "Gaza C",
-    0x3C: "MP Qubeley",
-    0x3D: "MP Bawoo (Glemy)",
-    0x3E: "MP Bawoo (Axis)",
-    0x3F: "Gaza D",
-    0x40: "Jegan",
-    0x41: "Geara Doga (Rezin)",
-    0x42: "Geara Doga",   // Last selectable
-    0x43: "Big Zam",
-    0x44: "Psyco Gundam",
-    0x45: "Psyco Gundam Mk II",
-    0x46: "Quin Mantha",
-    0x47: "Alpha Azieru",
-    0x48: "Dark Gundam"
-]
+{
+    GUNDAM: "Gundam",
+    ZAKU_II_CHAR: "Zaku II (Char)",
+    GELGOOG_CHAR: "Gelgoog (Char)",
+    GUNDAM_MK_II: "Gundam Mk-II",
+    Z_GUNDAM: "Z Gundam",
+    HYAKU_SHIKI: "Hyaku Shiki",
+    GUNDAM_MK_II_Titans: "Gundam Mk-II (Titans)",
+    THE_O: "The O",
+    QUBELEY: "Qubeley",
+    ΖΖ_GUNDAM: "ΖΖ Gundam",
+    QUBELEY_MK_II_Puru: "Qubeley Mk-II (Puru)",
+    QUBELEY_MK_II_Puru_Two: "Qubeley Mk-II (Puru Two)",
+    NU_GUNDAM: "Nu Gundam",
+    SAZABI: "Sazabi",
+    GUNDAM_F91: "Gundam F91",
+    V2_GUNDAM: "V2 Gundam",
+    BURNING_GUNDAM: "Burning Gundam",
+    MASTER_GUNDAM: "Master Gundam",
+    WING_GUNDAM_ZERO: "Wing Gundam Zero",
+    GUNDAM_EPYON: "Gundam Epyon",
+    TURN_A_GUNDAM: "Turn A Gundam",
+    STRIKE_FREEDOM_GUNDAM: "Strike Freedom Gundam",
+    INFINITE_JUSTICE_GUNDAM: "Infinite Justice Gundam",
+    DESTINY_GUNDAM: "Destiny Gundam",
+    MUSHA_GUNDAM: "Musha Gundam",
+    MUSHA_GUNDAM_MK_II: "Musha Gundam Mk-II",
+    GUNCANNON: "Guncannon",
+    ZGOK_CHAR: "Z'Gok (Char)",
+    ZEONG: "Zeong",
+    GELGOOG_JOHNNY: "Gelgoog (Johnny)",
+    HAMBRABI: "Hambrabi",
+    BYARLANT: "Byarlant",
+    BAUND_DOC: "Baund Doc",
+    BOLINOAK_SAMMAHN: "Bolinoak Sammahn",
+    PALLAS_ATHENE: "Pallas Athene",
+    BAWOO: "Bawoo",
+    RE_GZ: "Re-GZ",
+    JAGD_DOGA_GYUNEI: "Jagd Doga (Gyunei)",
+    JAGD_DOGA_QUESS: "Jagd Doga (Quess)",
+    GOTTRLATAN: "Gottrlatan",
+    TURN_X: "Turn X",
+    GM: "GM",
+    BALL: "Ball",
+    ZAKU_II: "Zaku II",
+    GOUF: "Gouf",
+    DOM: "Dom",
+    ZGOK: "Z'Gok",
+    GYAN: "Gyan",
+    GELGOOG: "Gelgoog",
+    ZAKU_TANK: "Zaku Tank",
+    GM_COMMAND: "GM Command",
+    GOUF_FLIGHT_TYPE: "Gouf Flight Type",
+    GM_II: "GM II",
+    NEMO: "Nemo",
+    RICK_DIAS: "Rick Dias",
+    HIZACK: "Hizack",
+    MARASAI: "Marasai",
+    BARZAM: "Barzam",
+    GAZA_C: "Gaza C",
+    MP_QUBELEY: "MP Qubeley",
+    MP_BAWOO_GLEMY: "MP Bawoo (Glemy)",
+    MP_BAWOO_AXIS: "MP Bawoo (Axis)",
+    GAZA_D: "Gaza D",
+    JEGAN: "Jegan",
+    GEARA_DOGA_REZIN: "Geara Doga (Rezin)",
+    GEARA_DOGA: "Geara Doga",   // Last selectable
+    BIG_ZAM: "Big Zam",
+    PSYCO_GUNDAM: "Psyco Gundam",
+    PSYCO_GUNDAM_MK_II: "Psyco Gundam Mk II",
+    QUIN_MANTHA: "Quin Mantha",
+    ALPHA_AZIERU: "Alpha Azieru",
+    DARK_GUNDAM: "Dark Gundam"
+}
 
 FIRST_SELECTABLE_SUIT_INDEX = 0x00
 LAST_SELECTABLE_SUIT_INDEX = 0x42
@@ -1612,13 +2122,29 @@ function gameModeSelected() => byte(0x3B4CE8)
 ORIGINAL_MODE_VALUE = 0x00
 MISSION_MODE_VALUE = 0x01
 ITERIM_CONTINUE_VALUE = 0x05
+VERSUS_MODE_VALUE = 0x02
 
-function isOriginalMissionOrIterimContinue()  => gameModeSelected() == ORIGINAL_MODE_VALUE ||
-                                                 gameModeSelected() == MISSION_MODE_VALUE ||
-                                                 gameModeSelected() == ITERIM_CONTINUE_VALUE
-
+function isOriginalMode() => gameModeSelected() == ORIGINAL_MODE_VALUE
+function isMissionMode() => gameModeSelected() == MISSION_MODE_VALUE
 function isIterimMode() => gameModeSelected() == ITERIM_CONTINUE_VALUE 
+function isVersusMode() => gameModeSelected() == VERSUS_MODE_VALUE
 
+function isOriginalMissionOrIterimContinue()  => isOriginalMode() || 
+                                                 isMissionMode() || 
+                                                 isIterimMode()
+
+function isOriginalOrIterimMode() => isOriginalMode() || 
+                                     isIterimMode()
+
+function isMissionOrIterimMode() => isMissionMode() || 
+                                    isIterimMode()  
+
+// $50ff4a: (16-bit)  Total KOs in a Mission
+function totalKOsInMission() => word(0x50ff4a)
+
+
+// $62cb98: (32-bit) Frames SInce beginning of Mission
+function framesSinceMissionStart() => dword(0x62cb98)
 
 // $648FE8: (8-bit) Save Indicator 1
 //          
@@ -1655,9 +2181,9 @@ function justWonMission() => prev(missionCompleteMarker()) == IN_GAME_NOT_WON_MI
                              missionCompleteMarker() == IN_GAME_WON_MISSION_VALUE
 
 // Values are below.
-AMURO_RAY_NAME=MEMORY_LOCATION = 0x68DA26
-CHAR_AZABLE_NAME=MEMORY_LOCATION = 0x68DA76
-CHARACTER_MEMORY_OFFSET = CHAR_AZABLE_NAME_MEMORY_LOCATION - AMURO_RAY_NAME_MEMORY_LOCATION
+AMURO_RAY_NAME_MEMORY_LOCATION = 0x68DA26
+CHAR_AZNABLE_NAME_MEMORY_LOCATION = 0x68DA76
+CHARACTER_MEMORY_OFFSET = CHAR_AZNABLE_NAME_MEMORY_LOCATION - AMURO_RAY_NAME_MEMORY_LOCATION
 AMURO_LICENSE_BITFIELD_MEMORY_LOCATION = 0x68DA28
 CHARACTER_LICENSE_OFFSET = AMURO_LICENSE_BITFIELD_MEMORY_LOCATION - AMURO_RAY_NAME_MEMORY_LOCATION
 AMURO_MISSION_INFO_MEMORY_LOCATION = 0x68DA2C
@@ -1666,9 +2192,21 @@ AMURO_LEVEL_MEMORY_LOCATION = 0x68DA33
 CHARACTER_LEVEL_OFFSET = AMURO_LEVEL_MEMORY_LOCATION - AMURO_RAY_NAME_MEMORY_LOCATION
 AMURO_SKILL_LIST_MEMORY_LOCATION = 0x68DA48
 CHARACTER_SKILL_LIST_OFFSET = AMURO_SKILL_LIST_MEMORY_LOCATION - AMURO_RAY_NAME_MEMORY_LOCATION
+FINAL_CHARACTER_SKILL_LIST_OFFSET = CHARACTER_SKILL_LIST_OFFSET + 5
+FINAL_CHARACTER_LICENSE_OFFSET = CHARACTER_LICENSE_OFFSET + 2
 
-function characterValueMemory(character, offset) => MEMORY_LOCATION + (character * CHARACTER_MEMORY_OFFSET) + offset
 
+FULL_SKILL_COUNT = 36
+HALF_SKILL_COUNT = 18
+FULL_LICENSE_COUNT = 24
+HALF_LICENSE_COUNT = 12
+function characterValueMemory(character, offset) => AMURO_RAY_NAME_MEMORY_LOCATION + (character * CHARACTER_MEMORY_OFFSET) + offset
+
+function characterSkillCount(character) => sum_of( range(CHARACTER_SKILL_LIST_OFFSET, FINAL_CHARACTER_SKILL_LIST_OFFSET), offset => bitcount(characterValueMemory(character, offset)))
+function characterPrevSkillCount(character) => sum_of(range(CHARACTER_SKILL_LIST_OFFSET, FINAL_CHARACTER_SKILL_LIST_OFFSET), offset => prev(bitcount(characterValueMemory(character, offset))))
+
+function characterLicenseCount(character) => sum_of(range(CHARACTER_LICENSE_OFFSET, FINAL_CHARACTER_LICENSE_OFFSET), offset => bitcount(characterValueMemory(character, offset)))
+function characterPrevLicenseCount(character) => sum_of(range(CHARACTER_LICENSE_OFFSET, FINAL_CHARACTER_LICENSE_OFFSET), offset => prev(bitcount(characterValueMemory(character, offset))))
 
 // $68DA26: (16-bit) Amuro Ray's Name and character model.
 // function amuroRayName() => word(0x68DA26)
@@ -1745,11 +2283,25 @@ SUIT_PART1_RANK_OFFSET = FIRST_SUIT_PART1_RANK_MEMORY_LOCATION - FIRST_SUIT_DISP
 FIRST_SUIT_PART2_RANK_MEMORY_LOCATION = 0x691A83
 PART_MEMORY_OFFSET = FIRST_SUIT_PART2_RANK_MEMORY_LOCATION - FIRST_SUIT_PART1_RANK_MEMORY_LOCATION
 FIRST_SUIT_PART1_ABILITY_MEMORY_LOCATION = 0x691A74
-PART_RANK_OFFSET = FIRST_SUIT_PART1_ABILITY_MEMORY_LOCATION - FIRST_SUIT_PART1_RANK_MEMORY_LOCATION
+PART_ABILITY_OFFSET = FIRST_SUIT_PART1_ABILITY_MEMORY_LOCATION - FIRST_SUIT_PART1_RANK_MEMORY_LOCATION
+FIRST_SUIT_PART1_SUIT_INDEX_MEMORY_LOCATION = 0x691A70
+PART_SUIT_INDEX_OFFSET = FIRST_SUIT_PART1_SUIT_INDEX_MEMORY_LOCATION - FIRST_SUIT_PART1_RANK_MEMORY_LOCATION
+FIRST_SUIT_PART1_TYPE_MEMORY_LOCATION = 0x691A72
+PART_TYPE_OFFSET = FIRST_SUIT_PART1_TYPE_MEMORY_LOCATION - FIRST_SUIT_PART1_RANK_MEMORY_LOCATION
+UNOWNED_PART_VALUE = 0x03E7
+UNOWNED_PART_TYPE_VALUE = 0x05
 
 function suitValueMemory(suit, offset) => FIRST_SUIT_DISPLAY_IMAGE_MEMORY_LOCATION + (suit * SUIT_DISPLAY_IMAGE_MEMORY_OFFSET) + offset
 
+function suitUnlockValueMemory(suit) => bit0(suitValueMemory(suit, SUIT_OWNERSHIP_OFFSET))
+
 function suitPartMemory(suit, part, offset) => suitValueMemory(suit, SUIT_PART1_RANK_OFFSET) + (part * PART_MEMORY_OFFSET) + offset
+
+function suitPartRank(suit, part) => byte(suitPartMemory(suit, part, PART_RANK_OFFSET))
+
+// Note this is true for all three part pieces as well as 5 part pieces. 
+function checkRank4Part(suit, part) => suitPartRank(suit, part) == 0x03 && word(suitPartMemory(suit, part, PART_SUIT_INDEX_OFFSET)) != UNOWNED_PART_VALUE && byte(suitPartMemory(suit, part, PART_TYPE_OFFSET)) == part
+function checkprevRank4Part(suit, part) => prev(suitPartRank(suit, part)) == 0x03 && prev(word(suitPartMemory(suit, part, PART_SUIT_INDEX_OFFSET))) != UNOWNED_PART_VALUE && prev(byte(suitPartMemory(suit, part, PART_TYPE_OFFSET))) == part
 
 // $691A56: (bitfield) Gundam (Suit 1) Ownership
 //          
@@ -1767,6 +2319,11 @@ function suitPartMemory(suit, part, offset) => suitValueMemory(suit, SUIT_PART1_
 //          Torso, Left Arm, Right Arm, Left Leg, Right Leg
 // function suit1ownedPieces() => byte(0x691A68)
 
+// $691A70: (16-bit) Gundam (Suit 1) Part 1 Suit Index
+//          0x03e7(999) = not owned. 
+//          Same value as Suit Index if owned. (0x00 = Gundam, 0x01 = Char's Zaku II)
+
+
 // $691A72: (8-bit) Gundam (Suit 1) Part 1 Type
 //          
 //          0x00 = Torso
@@ -1781,7 +2338,7 @@ function suitPartMemory(suit, part, offset) => suitValueMemory(suit, SUIT_PART1_
 //          0x00 = Rank 1
 //          0x01 = Rank 2
 //          0x02 = Rank 3
-//          0x04 = Rank 4
+//          0x03 = Rank 4
 // function suit1Part1Rank() => byte(0x691A73)
 
 // $691A74: (8-bit) Gundam (Suit 1) Part 1 Ability
@@ -1867,19 +2424,19 @@ function suitPartMemory(suit, part, offset) => suitValueMemory(suit, SUIT_PART1_
 //          
 //          0x01 doesn't appear to mark complete.
 AMURO_FIRST_MISSION_COMPLETE_MEMORY_LOCATION = 0x6965E0
-AMURO_FIRST_MISSION_TOTAL_MEMORY_LOCATION = 0x6965E4
+AMURO_FIRST_MISSION_TOTAL_MEMORY_LOCATION = 0x696630
 AMURO_SECOND_MISSION_COMPLETE_MEMORY_LOCATION = 0x696634
 MISSION_COMPLETE_MEMORY_OFFSET = AMURO_SECOND_MISSION_COMPLETE_MEMORY_LOCATION - AMURO_FIRST_MISSION_COMPLETE_MEMORY_LOCATION
 MISSION_COMPLETE_CHARACTER_OFFSET = 1  // it's one byte.
 
-function missionCompleteMemoryLookup(mission) => AMURO_FIRST_MISSION_TOTAL_MEMORY_LOCATION + (mission * MISSION_COMPLETE_MEMORY_OFFSET)
+function missionCompleteMemoryLookup(mission) => bit2(AMURO_FIRST_MISSION_TOTAL_MEMORY_LOCATION + (mission * MISSION_COMPLETE_MEMORY_OFFSET))
 
 // Only should be used by Hayato or Kai. 
-function missionCompleteCharacterMemoryLookup(mission, character) => AMURO_FIRST_MISSION_COMPLETE_MEMORY_LOCATION + (character * MISSION_COMPLETE_CHARACTER_OFFSET) + (mission * MISSION_COMPLETE_MEMORY_OFFSET)
+function missionCompleteCharacterMemoryLookup(mission, character) => bit2(AMURO_FIRST_MISSION_COMPLETE_MEMORY_LOCATION + (character * MISSION_COMPLETE_CHARACTER_OFFSET) + (mission * MISSION_COMPLETE_MEMORY_OFFSET))
 
 function amuroFirstOriginalMission() => byte(0x6965E0)
 
-// $696634: (8-bit) Amuro's 1st Story Total Mission complete status. 
+// $696630: (8-bit) Amuro's 1st Story Total Mission complete status. 
 //
 //          Set to 0x04 when any player wins. 
 
@@ -1902,6 +2459,126 @@ function amuroSecondStorySecondMission() => byte(0x696880)
 //          
 //          Starts around 0x3b  becomes 0x7 when Beaten
 function amuroFirstMissionMode() => byte(0x697060)
+
+AMURO_FRIEND_DISPLAY_MEMORY_LOCATION = 0x6A1DC0
+CHAR_FRIEND_DISPLAY_MEMORY_LOCATION = 0x6A2460
+AMURO_FRIEND_LEVEL_MEMORY_LOCATION = 0x6A1E10
+FRIENDS_CHARACTER_OFFSET = CHAR_FRIEND_DISPLAY_MEMORY_LOCATION - AMURO_FRIEND_DISPLAY_MEMORY_LOCATION
+FRIEND_VISIBLE_OFFSET = 1
+FRIEND_LEVEL_OFFSET = 2
+
+function calculateFriend(character, index)
+{
+    // return (byte(AMURO_FRIEND_DISPLAY_MEMORY_LOCATION + (character * FRIENDS_CHARACTER_OFFSET) + index * FRIEND_VISIBLE_OFFSET)  & 16) *
+     //      word(AMURO_FRIEND_LEVEL_MEMORY_LOCATION + (character * FRIENDS_CHARACTER_OFFSET) + index * FRIEND_LEVEL_OFFSET) / (800 * 16)
+    return word(AMURO_FRIEND_LEVEL_MEMORY_LOCATION + (character * FRIENDS_CHARACTER_OFFSET) + index * FRIEND_LEVEL_OFFSET) / 800    
+}
+
+function calculateVisibleFriend(character, index) =>  bit4(AMURO_FRIEND_DISPLAY_MEMORY_LOCATION + (character * FRIENDS_CHARACTER_OFFSET) + index * FRIEND_VISIBLE_OFFSET)
+
+function calculatePrevFriend(character, index)
+{
+//    return prev(bit4(AMURO_FRIEND_DISPLAY_MEMORY_LOCATION + (character * FRIENDS_CHARACTER_OFFSET) + index * FRIEND_VISIBLE_OFFSET)) *
+  //         prev(word(AMURO_FRIEND_LEVEL_MEMORY_LOCATION + (character * FRIENDS_CHARACTER_OFFSET) + index * FRIEND_LEVEL_OFFSET)) / 800
+      return prev(word(AMURO_FRIEND_LEVEL_MEMORY_LOCATION + (character * FRIENDS_CHARACTER_OFFSET) + index * FRIEND_LEVEL_OFFSET)) / 800 
+}
+
+function calculatePrevVisibleFriend(character, index) =>  prev(bit4(AMURO_FRIEND_DISPLAY_MEMORY_LOCATION + (character * FRIENDS_CHARACTER_OFFSET) + index * FRIEND_VISIBLE_OFFSET))
+
+// Removed Crown, Kacricon, and Kyoji  They are not friendable. 
+friendList = 
+[
+    AMURO_RAY,
+    CHAR_AZNABLE,
+    KAMILLE_BIDAN,
+    PAPTIMUS_SCIROCCO,
+    HAMAN_KARN,
+    JUDAU_ASHTA,
+    DOMON_KASSHU,
+    MASTER_ASIA,
+    HEERO_YUY,
+    MILLIARDO_PEACECRAFT,
+    LORAN_CEHACK,
+    EMMA_SHEEN,
+    JERID_MESSA,
+    ELPEO_PURU,
+    PURU_TWO,
+    ROUX_LOUKA,
+    KIRA_YAMATO,
+    ATHRUN_ZALA,
+    SHINN_ASUKA,
+    SEABOOK_ARNO,
+    USO_EWIN,
+    KAI_SHIDEN,
+    HAYATO_KOBAYASHI,
+    M_QUVE,
+    RAMBA_RAL,
+    YAZAN_GABLE,
+    SARAH_ZABIAROV,
+    RECCOA_LONDE,
+    GLEMY_TOTO,
+    QUESS_PARAYA,
+    GYUNEI_GUSS,
+    DOZLE_ZABI,
+    SLEGGAR_LAW,
+    FOUR_MURASAME,
+    ROSAMIA_BADAM,
+    GYM_GHINGHAM,
+    LACUS_CLYNE,
+    LUNAMARIA_HAWKE,
+    CECILY_FAIRCHILD,
+    KATEJINA_LOOS,
+    JOHNNY_RIDDEN,
+    FA_YUIRY,
+    LALAH_SUNE,
+    GAIA,
+    ORTEGA,
+    MASH,
+    ROBERTO,
+    APOLLY_BAY,
+    DUNKEL_COOPER,
+    RAMSUS_HASR,
+    BEECHA_OLEG,
+    ELLE_VIANNO,
+    REZIN_SCHNYDER,
+    KAYRA_SU,
+    CHAN_AGI,
+    HATHAWAY_NOA,
+    BRIGHT_NOA,
+    FRAW_BOW,
+    KYCILIA_ZABI,
+    TORRES,
+    HENKEN_BEKKENER,
+    RAIN_MIKAMURA,
+    NANAI_MIGUEL,
+    LEINA_ASHTA,
+    ASTONAIGE_MEDOZ,
+    GIHREN_ZABI,
+    BASK_OM,
+    RELENA_DARLIAN,
+    DIANNA_SORIEL
+]
+
+function countFriends(character){
+    return sum_of(friendList, friendIndex =>
+                        calculateFriend(character, friendIndex) )
+}
+
+function countVisibleFriends(character){
+    return sum_of(friendList, friendIndex => 
+                        calculateVisibleFriend(character, friendIndex) )
+}
+
+function countPrevFriends(character){
+    return sum_of(friendList, friendIndex => 
+                        calculatePrevFriend(character, friendIndex))
+}
+
+function countPrevVisibleFriends(character){
+    return sum_of(friendList, friendIndex => 
+                        calculatePrevVisibleFriend(character, friendIndex) )
+}
+
 
 // $6A1DC0: (8-bitfield of 71 elements))  Amuro's Friend display status
 //          
@@ -2046,6 +2723,8 @@ function selectedCharacter() => byte(0x6CE470)
 //          0x01 = Medium
 //          0x02 = Hard
 function difficultySelected() => byte(0x6CE47C)
+HARD_DIFFICULTY_VALUE = 0x02
+function isHardDifficulty() => difficultySelected() == HARD_DIFFICULTY_VALUE
 
 // $6CE484: (8-bit) Which mission is chosen from the menu.
 //          
@@ -2434,7 +3113,7 @@ function difficultySelected() => byte(0x6CE47C)
 //          0x17C = The Power of Bonds
 //          0x17D = The True DYNASTY WARRIORS: Gundam
 //          0x17E = A General's Dignity
-function missionsSelected() => byte(0x6CE484)
+function missionsSelected() => word(0x6CE484)
 
 // $6CE485: (8-bit) Demo Detector
 //          
@@ -2445,12 +3124,22 @@ function missionsSelected() => byte(0x6CE484)
 //          Probably shouldn't require it for MSL or anything else that might occur outside of a level.
 function demoDetector() => byte(0x6CE485)
 NOT_DEMO_MODE_VALUE = 0x00
-function isNotDemoMode() => demoDetector() == NOT_DEMO_MODE_VALUE
+function isNotDemoMode() => always_true() //demoDetector() == NOT_DEMO_MODE_VALUE 
 
 // $6CE488: (8-bit) Selected character in Original Mode
 //          
 //          Note: Use  0x006ce470  instead, this is just information for the Original mode itself.
 function selectedCharacterOriginalMission() => byte(0x6CE488)
+
+
+// $6CE4C5: (8-bit)  Two Player Mode Detection
+//
+// 0x00 = Single Player (Or Versus) 
+// 0x01 = Second Player Joining in Original Mode or Mission Mode. 
+function twoPlayerMode() => byte(0x6CE4C5)
+TWO_PLAYER_VALUE = 0x01
+
+function isTwoPlayerMode() => twoPlayerMode() == TWO_PLAYER_VALUE || isVersusMode()
 
 // $6CE4E2: (8-bit) Selected Suit
 //          
@@ -2541,7 +3230,7 @@ function mobileSuitLabLevel() => word(0x6CFC50)
 
 MAX_MOBILE_SUIT_LAB_LEVEL = 0x09
 
-function reachedMobileSuitLabLevel(level) => prev(mobileSuitLabLevel()) < level && mobileSuitLabLevel() == level
+function reachedMobileSuitLabLevel(level) => prev(mobileSuitLabLevel()) < level - 1 && mobileSuitLabLevel() == level - 1
 
 // $6CFC54: (32-bit) Mobile Suit Lab Experience
 //          
@@ -2582,14 +3271,15 @@ function charAznableSecondCampaign() => byte(0x6CFE66)
 //          79 entries in the Character Gallery 
 // function characterGalleryFirstEntryName() => word(0x6D0F1C)
 CHARACTER_GALLERY_FIRST_NAME = 0x6D0F1C
-CHARACTER_GALLERY_SECOND_NAME = 0x6D0F2C
+CHARACTER_GALLERY_SECOND_NAME = 0x006d0f28 // trust me on this. 
 CHARACTER_GALLERY_FIRST_UNLOCK = 0x6D0F20
 CHARACTER_GALLERY_CHARACTER_OFFSET = CHARACTER_GALLERY_SECOND_NAME - CHARACTER_GALLERY_FIRST_NAME
 
 FIRST_CHARACTER_GALLERY_INDEX = 0
 LAST_CHARACTER_GALLERY_INDEX = 78
+STARTING_CHARACTER_GALLERY_COUNT = 14
 
-function characterGalleryEntryData(character) => CHARACTER_GALLERY_FIRST_UNLOCK + (CHARACTER_GALLERY_CHARACTER_OFFSET * offset)
+function characterGalleryEntryData(character) => bit0(CHARACTER_GALLERY_FIRST_UNLOCK + (CHARACTER_GALLERY_CHARACTER_OFFSET * character))
 
 // $6D0F1E: (8-bit) Character Gallery First entry Amuro Ray Image
 //          
@@ -2628,14 +3318,25 @@ function characterGalleryEntryData(character) => CHARACTER_GALLERY_FIRST_UNLOCK 
 //          There are 72 Suits (including this one) 
 //function mobileSuitGalleryFirstSuitVisible() => byte(0x6D1520)
 
+// $6d1528: (32-bit) Gallery Loaded Check
+// 
+//          0x00000000 = Game is rebooted. 
+//          0x00010101 = Gallery is loaded. 
+function galleryLoadedCheck() => tbyte(0x6d1528)
+GALLERY_LOADED_VALUE = 0x00010101
+
+// This is the first numbers for the second Gundam Suit 
+function galleryActive() => galleryLoadedCheck() == GALLERY_LOADED_VALUE
+
 MOBILE_SUIT_GALLERY_FIRST_SUIT_VISIBILITY_MEMORY_LOCATION = 0x6D1520
 MOBILE_SUIT_GALLERY_SECOND_SUIT_VISIBILITY_MEMORY_LOCATION = 0x6D152C
 MOBILE_SUIT_GALLERY_SUIT_OFFSET = MOBILE_SUIT_GALLERY_SECOND_SUIT_VISIBILITY_MEMORY_LOCATION - MOBILE_SUIT_GALLERY_FIRST_SUIT_VISIBILITY_MEMORY_LOCATION
 
 FIRST_MOBILE_SUIT_GALLERY_INDEX = 0
 LAST_MOBILE_SUIT_GALLERY_INDEX = 71
+STARTING_SUIT_GALLERY_COUNT = 14
 
-function mobileSuitGallerySuitVisibility(suit) => byte(MOBILE_SUIT_GALLERY_FIRST_SUIT_VISIBILITY_MEMORY_LOCATION + (MOBILE_SUIT_GALLERY_SUIT_OFFSET * suit))
+function mobileSuitGallerySuitVisibility(suit) => bit0(MOBILE_SUIT_GALLERY_FIRST_SUIT_VISIBILITY_MEMORY_LOCATION + (MOBILE_SUIT_GALLERY_SUIT_OFFSET * suit))
 
 // $6D152C: (bitfield) Mobile Suit Gallery Second Suit
 //          
@@ -2662,7 +3363,7 @@ BATTLE_SHIP_GALLERY_SHIP_OFFSET = BATTLE_SHIP_GALLERY_SECOND_SHIP_VISIBILITY_MEM
 FIRST_BATTLE_SHIP_GALLERY_INDEX = 0
 LAST_BATTLE_SHIP_GALLERY_INDEX = 9
 
-function battleshipGalleryShipVisibility(ship) => byte(BATTLE_SHIP_GALLERY_FIRST_SHIP_VISIBILITY_MEMORY_LOCATION + (BATTLE_SHIP_GALLERY_SHIP_OFFSET * ship))
+function battleshipGalleryShipVisibility(ship) => bit0(BATTLE_SHIP_GALLERY_FIRST_SHIP_VISIBILITY_MEMORY_LOCATION + (BATTLE_SHIP_GALLERY_SHIP_OFFSET * ship))
 
 
 // $6D1B2C: (bitfield) BattleShip Gallery Second ship
@@ -2696,17 +3397,17 @@ function firstMovieGalleryDescription() => byte(0x6D1BDC)
 //          Previous three bytes is repeating which movie it is.  Then the next movie.  For 64 movies.  Final movie display information at 0x006d1cd9
 //function firstMovieGalleryUnlock() => byte(0x6D1BDD)
 
-MOVIE_GALLERY_FIRST_MOVIE_UNLOCK_MEMORY_LOCATION = 0x6D1BDD
-MOVIE_GALLERY_SECOND_MOVIE_UNLOCK_MEMORY_LOCATION = 0x6D1BDE1
+MOVIE_GALLERY_FIRST_MOVIE_UNLOCK_MEMORY_LOCATION =  0x6D1BDD
+MOVIE_GALLERY_SECOND_MOVIE_UNLOCK_MEMORY_LOCATION = 0x6d1be1
 MOVIE_GALLERY_MOVIE_OFFSET = MOVIE_GALLERY_SECOND_MOVIE_UNLOCK_MEMORY_LOCATION - MOVIE_GALLERY_FIRST_MOVIE_UNLOCK_MEMORY_LOCATION
 
 FIRST_MOVIE_GALLERY_INDEX = 0
 LAST_MOVIE_GALLERY_INDEX = 63
 
-function movieGalleryUnlock(movie) => byte(MOVIE_GALLERY_FIRST_MOVIE_UNLOCK_MEMORY_LOCATION + (MOVIE_GALLERY_MOVIE_OFFSET * movie))
+function movieGalleryUnlock(movie) => bit0(MOVIE_GALLERY_FIRST_MOVIE_UNLOCK_MEMORY_LOCATION + (MOVIE_GALLERY_MOVIE_OFFSET * movie))
 
 
-// $6D1BDE1: (8-bit bitfield)  Movie Gallery Second movie Unlock
+// $6d1be1: (8-bit bitfield)  Movie Gallery Second movie Unlock
 //
 //          bit0 = Visible
 //          bit1 = New Flag
@@ -2719,7 +3420,12 @@ function movieGalleryUnlock(movie) => byte(MOVIE_GALLERY_FIRST_MOVIE_UNLOCK_MEMO
 //          bit1 = New Flag
 // 
 // 
-function loveIsThePulseUnlock() => byte(0x6D1CCD)
+function loveIsThePulseUnlock() => bit0(0x6D1CCD)
+
+// $6f8b73: (8-bit) In Game check 
+//          Only for use with RP 
+//          Likely part of a handler. 
+function inGameCheckRP() => byte(0x6F8B73)
 
 // $6FDABF: (8-bit) Save Indicator 3
 //          
@@ -2736,9 +3442,1572 @@ function isSaveIndicator3Ok() => saveIndicator3() != SAVE_INDICATOR_3_NOT_OK_VAL
 // $1B1DBBC: (32-bit) Which message is being viewed in the Terminal
 //           
 //           0xbd = Dynasty Warriors: Gundam 2 Quiz
-//           0xbe = Dynasty Warriors: Gundam 2 Quiz
+//           0xbe = Dynasty Warriors: Gundam 2 Quiz Expert 
 function messageViewedTeriminal() => dword(0x1B1DBBC)
+DYNASTY_WARRIORS_GUNDAM_2_NOVICE_QUIZ = 0xBD
+DYNASTY_WARRIORS_GUNDAM_2_EXPERT_QUIZ = 0xBE
 
 // $1B1E874: (8-bit) Number of correct answers to the Dynasty Warriors Gundam Quizes.
 function correctAnswersQuiz() => byte(0x1B1E874)
+
+
+function achievementActive() => galleryActive() && isSaveIndicator1OK() && isSaveIndicator2OK() && isSaveIndicator3Ok()
+function achievementActiveForGallery() => isSaveIndicator1OK() && isSaveIndicator2OK() && isSaveIndicator3Ok()  // && isSaveIndicator1OK() && isSaveIndicator2OK() && isSaveIndicator3Ok()
+// NOTE! don't mark anything missable with this. 
+function singlePlayer() => !isTwoPlayerMode()
+
+achievement( title = "One down, 381 to go",
+             description = "Complete your first mission in single player",
+             points = 1,
+             trigger = achievementActive() &&
+                       isNotDemoMode() &&
+                       justWonMission() &&
+                       singlePlayer() &&
+                       isOriginalMissionOrIterimContinue()
+)
+
+originalMissionData =
+[
+    {
+        ID: -1,
+        NAME: "The White Devil",
+        DESCRIPTION: "Amuro's The One Year War Story",
+        POINTS: 5,
+        MISSIONS: amuroFirstStoryMissions,
+        CHARACTER: AMURO_RAY
+    },
+    {
+        ID: -1,
+        NAME: "The Red Comet",
+        DESCRIPTION: "Char's The One Year War Story",
+        POINTS: 5,
+        MISSIONS: charFirstStoryMissions,
+        CHARACTER: CHAR_AZNABLE
+    },
+    {
+        ID: -1,
+        NAME: "He's a Man!",
+        DESCRIPTION: "Kamille's Original Story Missions",
+        POINTS: 5,
+        MISSIONS: kamilleStoryMissions,
+        CHARACTER: KAMILLE_BIDAN
+    },
+    {
+        ID: -1,
+        NAME: "The Junk Man",
+        DESCRIPTION: "Judau's Original Story Missions",
+        POINTS: 5,
+        MISSIONS: judauStoryMissions,
+        CHARACTER: JUDAU_ASHTA
+    },
+    {
+        ID: -1,
+        NAME: "White Shooting Star",
+        DESCRIPTION: "Amuro's Second Original Storyline",
+        POINTS: 3,
+        MISSIONS: amuroSecondStoryMissions,
+        CHARACTER: AMURO_RAY
+    },
+    {
+        ID: -1,
+        NAME: "Quattro Bajeena",
+        DESCRIPTION: "Char's Counterattack Original Storyline",
+        POINTS: 4,
+        MISSIONS: charSecondStoryMissions,
+        CHARACTER: CHAR_AZNABLE
+    
+    }
+]
+
+function didAnyMissionReset(missionList) => any_of(missionList, 
+                                                   missionIndex => prev(missionCompleteMemoryLookup(missionIndex)) == 1 &&
+                                                                   missionCompleteMemoryLookup(missionIndex) == 0 )
+
+function didAnyCharacterMissionReset(missionList, character) => any_of(missionList, 
+                                                   missionIndex => prev(missionCompleteCharacterMemoryLookup(missionIndex, character)) == 1 &&
+                                                                   missionCompleteCharacterMemoryLookup(missionIndex, character) == 0 )
+
+function originalStoryAchievement(data)
+{
+    achievement( title = data[NAME],
+                 description = format("Complete each mission in {0}", data[DESCRIPTION]),
+                 points = data[POINTS],
+                 type = "Progression",
+                 trigger = achievementActive() &&
+                           isNotDemoMode() &&
+                           isOriginalOrIterimMode() &&
+                           any_of(data[MISSIONS], missionIndex => prev(missionCompleteMemoryLookup(missionIndex)) == 0) &&
+                           measured(tally_of(data[MISSIONS], length(data[MISSIONS]), missionIndex => once(missionCompleteMemoryLookup(missionIndex) == 1))) &&
+                           never(didAnyMissionReset(data[MISSIONS]))
+    )
+                 
+}
+
+for data in originalMissionData
+{
+    originalStoryAchievement(data)
+}
+
+achievement( title = "Love Conquers All",
+             description = "Unlock the secret ending to Kamille's Original Mode Story",
+             points = 5,
+             trigger = achievementActive() &&
+                       isNotDemoMode() &&
+                       prev(loveIsThePulseUnlock()) == 0 &&
+                       loveIsThePulseUnlock() == 1
+)
+
+// Mission Mode 
+function missionModeDescription(name) => format("Complete each story mission in {0} Mission Mode", name)
+
+missionModeData =
+[
+    {
+        ID: -1,
+        NAME: "White Unicorn",
+        DESCRIPTION: "Amuro's",
+        POINTS: 5,
+        MISSIONS: amuroMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "Char Deikun",
+        DESCRIPTION: "Char's",
+        POINTS: 5,
+        MISSIONS: charMissionModeMissions
+    },
+    {
+        ID: -1, 
+        NAME: "The Blue Titan",
+        DESCRIPTION: "Kamille's",
+        POINTS: 5,
+        MISSIONS: kamilleMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "The Man from Jupiter",
+        DESCRIPTION: "Scirooco's",
+        POINTS: 5,
+        MISSIONS: sciroccoMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "The Ghost of Zeon",
+        DESCRIPTION: "Haman's",
+        POINTS: 5,
+        MISSIONS: hamanMissionModeMissions
+    },
+    {
+        ID: -1, 
+        NAME: "Grey Stoke",
+        DESCRIPTION: "Judau's",
+        POINTS: 5,
+        MISSIONS: juduaMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "Gundam of Gundam",
+        DESCRIPTION: "Domon's",
+        POINTS: 5,
+        MISSIONS: domonMissionModeMissions
+    },
+    {
+        ID: -1, 
+        NAME: "Undefeated of the East",
+        DESCRIPTION: "Master Asia's",
+        POINTS: 5,
+        MISSIONS: masterAsiaMissionModeMissions
+    },
+    {
+        ID: -1, 
+        NAME: "Princess Aurora",
+        DESCRIPTION: "Heero's",
+        POINTS: 5,
+        MISSIONS: heeroMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "The Lightning Count",
+        DESCRIPTION: "Millardo's",
+        POINTS: 5,
+        MISSIONS: millardoMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "Laura Rolla",
+        DESCRIPTION: "Loran's",
+        POINTS: 5,
+        MISSIONS: loranMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "Emmy",
+        DESCRIPTION: "Emma's",
+        POINTS: 5,
+        MISSIONS: emmaMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "Jerry Boy",
+        DESCRIPTION: "Jerid's",
+        POINTS: 5,
+        MISSIONS: jeridMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "Bath Girl",
+        DESCRIPTION: "Puru Puru's",
+        POINTS: 5,
+        MISSIONS: puruMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "Puru Squared",
+        DESCRIPTION: "Puru Two's",
+        POINTS: 5,
+        MISSIONS: puruTwoMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "Rock Lox",
+        DESCRIPTION: "Roux's",
+        POINTS: 5,
+        MISSIONS: rouxMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "Ace of the Songstresses Cavalry",
+        DESCRIPTION: "Kira's",
+        POINTS: 5,
+        MISSIONS: kiraMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "Alex Dino",
+        DESCRIPTION: "Athrun's",
+        POINTS: 5,
+        MISSIONS: athrunMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "The 'Freedom Killer'",
+        DESCRIPTION: "Shinn's",
+        POINTS: 5,
+        MISSIONS: shinnMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "Kincade Nau",
+        DESCRIPTION: "Seabook's",
+        POINTS: 5,
+        MISSIONS: seabookMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "It's Uso! It's Uso!",
+        DESCRIPTION: "Uso's",
+        POINTS: 5,
+        MISSIONS: usoMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "The Vase of M'Quve",
+        DESCRIPTION: "M'Quve's",
+        POINTS: 1,
+        MISSIONS: mquveMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "Blue Nova",
+        DESCRIPTION: "Ramba's",
+        POINTS: 1,
+        MISSIONS: rambaMissionModeMissions
+    },
+    {
+        ID: -1, 
+        NAME: "The Beast",
+        DESCRIPTION: "Yazan's",
+        POINTS: 3,
+        MISSIONS: yazanMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "The Redhead Titan",
+        DESCRIPTION: "Sarah's",
+        POINTS: 3,
+        MISSIONS: sarahMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "Mia Archetto",
+        DESCRIPTION: "Reccoa's",
+        POINTS: 3,
+        MISSIONS: ReccoaMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "Zabi's Heir",
+        DESCRIPTION: "Glemy's",
+        POINTS: 3,
+        MISSIONS: glemyMissionModeMissions
+    },
+    {
+        ID: -1, 
+        NAME: "The Quess-tion",
+        DESCRIPTION: "Quess's",
+        POINTS: 1,
+        MISSIONS: quessMissionModeMissions
+    },
+    {
+        ID: -1, 
+        NAME: "Glarv Guss",
+        DESCRIPTION: "Gyunei's",
+        POINTS: 3,
+        MISSIONS: gyuneiMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "The Zabi Brute",
+        DESCRIPTION: "Dozle's",
+        POINTS: 3,
+        MISSIONS: dozleMissionModeMissions
+    },
+    {
+        ID: -1, 
+        NAME: "Lieutenent Junior Grade",
+        DESCRIPTION: "Sleggar's",
+        POINTS: 5,
+        MISSIONS: sleggarMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "One, Two, Three...",
+        DESCRIPTION: "Four's",
+        POINTS: 1,
+        MISSIONS: fourMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "Rosammy",
+        DESCRIPTION: "Rosamia's",
+        POINTS: 1,
+        MISSIONS: rosamiaMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "Physical Education",
+        DESCRIPTION: "Gym's",
+        POINTS: 3,
+        MISSIONS: gymMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "The Songstress",
+        DESCRIPTION: "Lacus's",
+        POINTS: 3,
+        MISSIONS: lacusMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "Luna",
+        DESCRIPTION: "Lunamaria's",
+        POINTS: 3,
+        MISSIONS: lunamariaMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "Miss Countryside",
+        DESCRIPTION: "Cecily's",
+        POINTS: 1,
+        MISSIONS: cecilyMissionModeMissions
+    },
+    {
+        ID: -1,
+        NAME: "The Navigator",
+        DESCRIPTION: "Katejina's",
+        POINTS: 1,
+        MISSIONS: katejinaMissionModeMissions
+    }
+]
+
+function missionModeAchievement(data) 
+{
+    achievement( title = data[NAME],
+                 description = missionModeDescription(data[DESCRIPTION]),
+                 points = data[POINTS],
+                 type = "Progression",
+                 trigger = achievementActive() &&
+                           isNotDemoMode() &&
+                           isMissionOrIterimMode() &&
+                           any_of(data[MISSIONS], missionIndex => prev(missionCompleteMemoryLookup(missionIndex)) == 0) &&
+                           measured(tally_of(data[MISSIONS], length(data[MISSIONS]), missionIndex => once( missionCompleteMemoryLookup(missionIndex) == 1)))&&
+                           never(didAnyMissionReset(data[MISSIONS]))
+    )
+}
+
+for data in missionModeData
+{
+    missionModeAchievement(data)
+}
+
+missionModeSpecialCharactersData = 
+[
+    {
+        ID: -1,
+        NAME: "The Reporter",
+        DESCRIPTION: "Kai's",
+        POINTS: 3,
+        MISSIONS: kaiMissionsModeMissions,
+        CHARACTER: KAI_SHIDEN
+    },
+    {
+        ID: -1,
+        NAME: "The Guardian",
+        DESCRIPTION: "Hayato's",
+        POINTS: 3,
+        MISSIONS: hayatoMissionsModeMissions,
+        CHARACTER: HAYATO_KOBAYASHI
+    }
+
+]
+
+function missionModeSpecialCharacterAchievement(data) 
+{
+    achievement( title = data[NAME],
+                 description = missionModeDescription(data[DESCRIPTION]),
+                 points = data[POINTS],
+                 type = "Progression",
+                 trigger = achievementActive() &&
+                           isNotDemoMode() &&
+                           isMissionOrIterimMode() &&
+                           any_of(data[MISSIONS], missionIndex => prev(missionCompleteCharacterMemoryLookup(missionIndex, data[CHARACTER])) == 0) &&
+                           measured(tally_of(data[MISSIONS], length(data[MISSIONS]), missionIndex => once(missionCompleteCharacterMemoryLookup(missionIndex, data[CHARACTER]) == 1)))&&
+                           never(didAnyCharacterMissionReset(data[MISSIONS], data[CHARACTER]))
+    )
+}
+
+for data in missionModeSpecialCharactersData
+{
+    missionModeSpecialCharacterAchievement(data)
+}
+
+
+additionMissionsData =
+[
+    {
+        ID: -1,
+        HALF_NAME: "Free?  How About Half Price?",
+        FULL_NAME: "Free?  I'll Take Them All",
+        HALF_DESCRIPTION: "Complete half of the Free Missions",
+        FULL_DESCRIPTION: "Complete all of the Free Missions",
+        HALF_POINTS: 25, 
+        FULL_POINTS: 50,
+        MISSIONS: freeMissionModeMissions
+    },
+    {
+        ID: -1, 
+        HALF_NAME: "Gunpla Collector",
+        FULL_NAME: "World-Class Collection",
+        HALF_DESCRIPTION: "Complete half of the Collection Missions",
+        FULL_DESCRIPTION: "Complete all of the Collection Missions",
+        HALF_POINTS: 10,
+        FULL_POINTS: 25,
+        MISSIONS: collectionMissionModeMissions
+    },
+    {
+        ID: -1,
+        HALF_NAME: "License to Kill",
+        FULL_NAME: "License to Thrill",
+        HALF_DESCRIPTION: "Complete half of the License Missions",
+        FULL_DESCRIPTION: "Complete all of the License Missions",
+        HALF_POINTS: 10, 
+        FULL_POINTS: 25,
+        MISSIONS: licenseMissionModeMissions
+    },
+    {
+        ID: -1,
+        HALF_NAME: "Friendship is Magic",
+        FULL_NAME: "The Real Treasure is the Friends We Made Along the Way",
+        HALF_DESCRIPTION: "Complete half of the Friendship Missions",
+        FULL_DESCRIPTION: "Complete all of the Friendship Missions",
+        HALF_POINTS: 25, 
+        FULL_POINTS: 50,
+        MISSIONS: friendshipMissionModeMissions
+    },
+    {
+        ID: -1,
+        HALF_NAME: "Even More Missions",
+        FULL_NAME: "And All The Rest",
+        HALF_DESCRIPTION: "Complete half of the Extra Missions",
+        FULL_DESCRIPTION: "Complete all of the Extra Missions",
+        HALF_POINTS: 25, 
+        FULL_POINTS: 50,
+        MISSIONS: extraMissionModeMissions
+    }
+]
+
+function additionMissionAchievements(data)
+{
+    half_target = length(data[MISSIONS]) / 2
+    achievement( title = data[HALF_NAME],
+                 description = data[HALF_DESCRIPTION],
+                 points = data[HALF_POINTS],
+                 trigger = achievementActive() &&
+                           isNotDemoMode() &&
+                           isMissionOrIterimMode() &&
+                           sum_of(data[MISSIONS], missionIndex => prev(missionCompleteMemoryLookup(missionIndex))) < half_target &&
+                           measured(sum_of(data[MISSIONS], missionIndex => missionCompleteMemoryLookup(missionIndex)) == half_target)
+    )
+    
+    achievement( title = data[FULL_NAME],
+                 description = data[FULL_DESCRIPTION],
+                 points = data[FULL_POINTS],
+                 trigger = achievementActive() &&
+                           isNotDemoMode() &&
+                           isMissionOrIterimMode() &&
+                           any_of(data[MISSIONS], missionIndex => prev(missionCompleteMemoryLookup(missionIndex)) == 0) &&
+                           measured(tally_of(data[MISSIONS], length(data[MISSIONS]), missionIndex => once(missionCompleteMemoryLookup(missionIndex) == 1)))&&
+                           never(didAnyMissionReset(data[MISSIONS]))
+    )
+}
+
+for data in additionMissionsData
+{
+    additionMissionAchievements(data)
+}
+
+
+
+unlockCharacterData =
+[
+   
+    {
+        CHARACTER: PAPTIMUS_SCIROCCO,
+        ID: -1,
+        NAME: "Paptimus Scirocco",
+        DESCRIPTION: "Unlock Paptimus Scirocco for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: HAMAN_KARN,
+        ID: -1,
+        NAME: "Haman Karn",
+        DESCRIPTION: "Unlock Haman Karn for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: EMMA_SHEEN,
+        ID: -1,
+        NAME: "Emma Sheen",
+        DESCRIPTION: "Unlock Emma Sheen for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: JERID_MESSA,
+        ID: -1,
+        NAME: "Jerid Messa",
+        DESCRIPTION: "Unlock Jerid Messa for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: ELPEO_PURU,
+        ID: -1,
+        NAME: "Elpeo Puru",
+        DESCRIPTION: "Unlock Elpeo Puru for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: PURU_TWO,
+        ID: -1,
+        NAME: "Puru Two",
+        DESCRIPTION: "Unlock Puru Two for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: ROUX_LOUKA,
+        ID: -1,
+        NAME: "Roux Louka",
+        DESCRIPTION: "Unlock Roux Louka for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: KAI_SHIDEN,
+        ID: -1,
+        NAME: "Kai Shiden",
+        DESCRIPTION: "Unlock Kai Shiden for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: HAYATO_KOBAYASHI,
+        ID: -1,
+        NAME: "Hayato Kobayashi",
+        DESCRIPTION: "Unlock Hayato Kobayashi for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: M_QUVE,
+        ID: -1,
+        NAME: "M'Quve",
+        DESCRIPTION: "Unlock M'Quve for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: RAMBA_RAL,
+        ID: -1,
+        NAME: "Ramba Ral",
+        DESCRIPTION: "Unlock Ramba Ral for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: YAZAN_GABLE,
+        ID: -1,
+        NAME: "Yazan Gable",
+        DESCRIPTION: "Unlock Yazan Gable for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: SARAH_ZABIAROV,
+        ID: -1,
+        NAME: "Sarah Zabiaraov",
+        DESCRIPTION: "Unlock Sarah Zabiaraov for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: RECCOA_LONDE,
+        ID: -1,
+        NAME: "Reccoa Londe",
+        DESCRIPTION: "Unlock Reccoa Londe for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: GLEMY_TOTO,
+        ID: -1,
+        NAME: "Glemy Toto",
+        DESCRIPTION: "Unlock Glemy Toto for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: QUESS_PARAYA,
+        ID: -1,
+        NAME: "Quess Paraya",
+        DESCRIPTION: "Unlock Quess Paraya for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: GYUNEI_GUSS,
+        ID: -1,
+        NAME: "Gyunei Guss",
+        DESCRIPTION: "Unlock Gyunei Guss for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: DOZLE_ZABI,
+        ID: -1,
+        NAME: "Dozle Zabi",
+        DESCRIPTION: "Unlock Dozle Zabi for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: SLEGGAR_LAW,
+        ID: -1,
+        NAME: "Sleggar Law",
+        DESCRIPTION: "Unlock Sleggar Law for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: FOUR_MURASAME,
+        ID: -1,
+        NAME: "Four Murasame",
+        DESCRIPTION: "Unlock Four Murasame for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: ROSAMIA_BADAM,
+        ID: -1,
+        NAME: "Rosamia Badam",
+        DESCRIPTION: "Unlock Rosamia Badam for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: GYM_GHINGHAM,
+        ID: -1,
+        NAME: "Gym Gingham",
+        DESCRIPTION: "Unlock Gym Gingham for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: LACUS_CLYNE,
+        ID: -1,
+        NAME: "Lacus Clyne",
+        DESCRIPTION: "Unlock Lacus Clyne for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: LUNAMARIA_HAWKE,
+        ID: -1,
+        NAME: "Lunamaria Hawke",
+        DESCRIPTION: "Unlock Lunamaria Hawke for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: CECILY_FAIRCHILD,
+        ID: -1,
+        NAME: "Cecily Fairchild",
+        DESCRIPTION: "Unlock Cecily Fairchild for Mission Mode",
+        POINTS: 1
+    },
+    {
+        CHARACTER: KATEJINA_LOOS,
+        ID: -1,
+        NAME: "Katejina Loos",
+        DESCRIPTION: "Unlock Katejina Loos for Mission Mode",
+        POINTS: 1
+    }
+]
+
+function characterUnlockAchievement(data)
+{
+    achievement( title = data[NAME],
+                 description = data[DESCRIPTION],
+                 points = data[POINTS],
+                 trigger = achievementActive() &&
+                           isNotDemoMode() &&
+                           prev(bit1(characterValueMemory(data[CHARACTER], CHARACTER_MISSION_INFO_OFFSET))) == 0 &&
+                           bit1(characterValueMemory(data[CHARACTER], CHARACTER_MISSION_INFO_OFFSET)) == 1
+    )
+}
+
+for data in unlockCharacterData
+{
+    characterUnlockAchievement(data)
+}
+
+mobileSuitData = 
+[
+    {
+        SUIT: GUNDAM, 
+        ID: -1,
+        NAME: "RX-78-2 Gundam",
+        UNLOCK: false
+    },
+    {
+        SUIT: ZAKU_II_CHAR,
+        ID: -1,
+        NAME: "MS-06S Zaku II Commander Type",
+        UNLOCK: false
+    },
+    {
+        SUIT: GELGOOG_CHAR,
+        ID: -1,
+        NAME: "MS-14S Gelgoog Commander Type",
+        UNLOCK: false
+    },
+    {
+        SUIT: GUNDAM_MK_II,
+        ID: -1,
+        NAME: "RX-178 Gundam Mk-II Anti-Earth Union Group",
+        UNLOCK: false
+    },
+    {
+        SUIT: Z_GUNDAM,
+        ID: -1,
+        NAME: "MSZ-006 Zeta Gundam",
+        UNLOCK: false
+    },
+    {
+        SUIT: GUNDAM_MK_II_Titans,
+        ID: -1,
+        NAME: "RX-178 Gundam Mk-II Titans",
+        UNLOCK: false
+    },
+    {
+        SUIT: HYAKU_SHIKI,
+        ID: -1,
+        NAME: "MSN-00100 Hyaku Shiki",
+        UNLOCK: false
+    },
+    {
+        SUIT: THE_O,
+        ID: -1,
+        NAME: "PMX-003 The O",
+        UNLOCK: true
+    },
+    {
+        SUIT: QUBELEY,
+        ID: -1,
+        NAME: "AMX-004 Qubeley",
+        UNLOCK: true
+    },
+    {
+        SUIT: ΖΖ_GUNDAM,
+        ID: -1,
+        NAME: "MSZ-010 ΖΖ Gundam",
+        UNLOCK: false
+    },
+    {
+        SUIT: QUBELEY_MK_II_Puru,
+        ID: -1,
+        NAME: "AMX-004 Qubeley Mk-II Elpeo Ple",
+        UNLOCK: true
+    },
+    {
+        SUIT: QUBELEY_MK_II_Puru_Two,
+        ID: -1,
+        NAME: "AMX-004 Qubeley Mk-II Ple Two",
+        UNLOCK: true
+    },
+    {
+        SUIT: NU_GUNDAM,
+        ID: -1,
+        NAME: "RX-93 ν Gundam",
+        UNLOCK: true
+    },
+    {
+        SUIT: SAZABI,
+        ID: -1,
+        NAME: "MSN-04 Sazabi",
+        UNLOCK: true
+    },
+    {
+        SUIT: GUNDAM_F91,
+        ID: -1,
+        NAME: "F91 Gundam F91",
+        UNLOCK: false
+    },
+    {
+        SUIT: V2_GUNDAM,
+        ID: -1,
+        NAME: "LM314V21 Victory 2 Gundam",
+        UNLOCK: false
+    },
+    {
+        SUIT: BURNING_GUNDAM,
+        ID: -1,
+        NAME: "GF13-017NJII God Gundam",
+        UNLOCK: false
+    },
+    {
+        SUIT: MASTER_GUNDAM,
+        ID: -1,
+        NAME: "GF13-001NHII Master Gundam",
+        UNLOCK: false
+    },
+    {
+        SUIT: WING_GUNDAM_ZERO,
+        ID: -1,
+        NAME: "XXXG-00W0 Wing Gundam Zero",
+        UNLOCK: false
+    },
+    {
+        SUIT: GUNDAM_EPYON,
+        ID: -1,
+        NAME: "OZ-13MS Gundam Epyon",
+        UNLOCK: false
+    },
+    {
+        SUIT: TURN_A_GUNDAM,
+        ID: -1,
+        NAME: "WD-M01 Turn A Gundam",
+        UNLOCK: false
+    },
+    {
+        SUIT: STRIKE_FREEDOM_GUNDAM,
+        ID: -1,
+        NAME: "ZGMF-X20A Strike Freedom Gundam",
+        UNLOCK: false
+    },
+    {
+        SUIT: INFINITE_JUSTICE_GUNDAM,
+        ID: -1,
+        NAME: "ZGMF-X19A ∞ Justice Gundam",
+        UNLOCK: false
+    },
+    {
+        SUIT: DESTINY_GUNDAM,
+        ID: -1,
+        NAME: "ZGMF-X42S Destiny Gundam",
+        UNLOCK: false
+    },
+    {
+        SUIT: MUSHA_GUNDAM,
+        ID: -1,
+        NAME: "Shin Musha Gundam",
+        UNLOCK: true
+    },
+    {
+        SUIT: MUSHA_GUNDAM_MK_II,
+        ID: -1,
+        NAME: "Musha Gundam Mk-II",
+        UNLOCK: true
+    },
+    {
+        SUIT: GUNCANNON,
+        ID: -1,
+        NAME: "RX-77-2 Guncannon",
+        UNLOCK: true
+    },
+    {
+        SUIT: ZGOK_CHAR,
+        ID: -1,
+        NAME: "MSM-07S Z'Gok Commander Type",
+        UNLOCK: true
+    },
+    {
+        SUIT: ZEONG,
+        ID: -1,
+        NAME: "MSN-02 Zeong",
+        UNLOCK: true,
+        PARTS: 3
+    },
+    {
+        SUIT: GELGOOG_JOHNNY,
+        ID: -1,
+        NAME: "MS-14B Gelgoog High Mobility Type",
+        UNLOCK: true
+    },
+    {
+        SUIT: HAMBRABI,
+        ID: -1,
+        NAME: "RX-139 Hambrabi",
+        UNLOCK: true
+    },
+    {
+        SUIT: BYARLANT,
+        ID: -1,
+        NAME: "RX-160 Byarlant",
+        UNLOCK: true
+    },
+    {
+        SUIT: BAUND_DOC,
+        ID: -1,
+        NAME: "NRX-055 Baund Doc",
+        UNLOCK: true
+    },
+    {
+        SUIT: BOLINOAK_SAMMAHN,
+        ID: -1,
+        NAME: "PMX-002 Bolinoak Sammahn",
+        UNLOCK: true
+    },
+    {
+        SUIT: PALLAS_ATHENE,
+        ID: -1,
+        NAME: "PMX-001 Pallas Athene",
+        UNLOCK: true
+    },
+    {
+        SUIT: BAWOO,
+        ID: -1,
+        NAME: "AMX-107 Bawoo",
+        UNLOCK: true
+    },
+    {
+        SUIT: RE_GZ,
+        ID: -1,
+        NAME: "RGZ-91 Re-GZ",
+        UNLOCK: true
+    },
+    {
+        SUIT: JAGD_DOGA_GYUNEI,
+        ID: -1,
+        NAME: "MSN-03 Jagd Doga (Gyunei Guss)",
+        UNLOCK: true
+    },
+    {
+        SUIT: JAGD_DOGA_QUESS,
+        ID: -1,
+        NAME: "MSN-03 Jagd Doga (Quess Paraya)",
+        UNLOCK: true
+    },
+    {
+        SUIT: GOTTRLATAN,
+        ID: -1,
+        NAME: "ZMT-S33S Gottrlatan",
+        UNLOCK: true
+    },
+    {
+        SUIT: TURN_X,
+        ID: -1,
+        NAME: "Concept-X 6-1-2 Turn X",
+        UNLOCK: true
+    },
+    {
+        SUIT: GM,
+        ID: -1,
+        NAME: "RGM-79 GM",
+        UNLOCK: true
+    },
+    {
+        SUIT: BALL,
+        ID: -1,
+        NAME: "RB-79 Ball",
+        UNLOCK: true,
+        PARTS: 3
+    },
+    {
+        SUIT: ZAKU_II,
+        ID: -1,
+        NAME: "MS-06 Zaku II",
+        UNLOCK: true
+    },
+    {
+        SUIT: GOUF,
+        ID: -1,
+        NAME: "MS-07 Gouf",
+        UNLOCK: true
+    },
+    {
+        SUIT: DOM,
+        ID: -1,
+        NAME: "MS-09 Dom",
+        UNLOCK: true
+    },
+    {
+        SUIT: ZGOK,
+        ID: -1,
+        NAME: "MSM-07 Z'Gok",
+        UNLOCK: true
+    },
+    {
+        SUIT: GYAN,
+        ID: -1,
+        NAME: "YMS-15 Gyan",
+        UNLOCK: true
+    },
+    {
+        SUIT: GELGOOG,
+        ID: -1,
+        NAME: "MS-14A Gelgoog",
+        UNLOCK: true
+    },
+    {
+        SUIT: ZAKU_TANK,
+        ID: -1,
+        NAME: "MS-06V Zaku Tank",
+        UNLOCK: true,
+        PARTS: 3
+    },
+    {
+        SUIT: GM_COMMAND,
+        ID: -1,
+        NAME: "RGM-79GS GM Command Space Type",
+        UNLOCK: true
+    },
+    {
+        SUIT: GOUF_FLIGHT_TYPE,
+        ID: -1,
+        NAME: "MS-07H Gouf Flight Test Type",
+        UNLOCK: true
+    },
+    {
+        SUIT: GM_II,
+        ID: -1,
+        NAME: "RMS-179/RGM-79R GM II",
+        UNLOCK: true
+    },
+    {
+        SUIT: NEMO,
+        ID: -1,
+        NAME: "MSA-003 Nemo",
+        UNLOCK: true
+    },
+    {
+        SUIT: RICK_DIAS,
+        ID: -1,
+        NAME: "RMS-099 Rick Dias",
+        UNLOCK: true
+    },
+    {
+        SUIT: HIZACK,
+        ID: -1,
+        NAME: "RMS-106 Hizack",
+        UNLOCK: true
+    },
+    {
+        SUIT: MARASAI,
+        ID: -1,
+        NAME: "RMS-108 Marasai",
+        UNLOCK: true
+    },
+    {
+        SUIT: BARZAM,
+        ID: -1,
+        NAME: "RMS-154 Barzam",
+        UNLOCK: true
+    },
+    {
+        SUIT: GAZA_C,
+        ID: -1,
+        NAME: "AMX-003 Gaza-C",
+        UNLOCK: true
+    },
+    {
+        SUIT: MP_QUBELEY,
+        ID: -1,
+        NAME: "AMX-004G Qubeley Mass Production Type",
+        UNLOCK: true
+    },
+    {
+        SUIT: MP_BAWOO_GLEMY,
+        ID: -1,
+        NAME: "AMX-107 Bawoo (Axis)",
+        UNLOCK: true
+    },
+    {
+        SUIT: MP_BAWOO_AXIS,
+        ID: -1,
+        NAME: "AMX-107 Bawoo (Glemy Faction)",
+        UNLOCK: true
+    },
+    {
+        SUIT: GAZA_D,
+        ID: -1,
+        NAME: "AMX-006 Gaza-D",
+        UNLOCK: true
+    },
+    {
+        SUIT: JEGAN,
+        ID: -1,
+        NAME: "RGM-89 Jegan",
+        UNLOCK: true
+    },
+    {
+        SUIT: GEARA_DOGA_REZIN,
+        ID: -1,
+        NAME: "AMS-119 Geara Doga Rezin Schnyder",
+        UNLOCK: true
+    },
+    {
+        SUIT: GEARA_DOGA,
+        ID: -1,
+        NAME: "AMS-119 Geara Doga",
+        UNLOCK: true
+    },
+]
+
+function mobileSuitAchievements(data)
+{
+    if(data[UNLOCK] == true) 
+    {
+        achievement( title = format("{0} Unlocked", data[NAME]),
+                 description = format("Build or Unlock {0} for Mission Mode", data[NAME]),
+                 points = 3,
+                 trigger = achievementActive() &&
+                           isNotDemoMode() &&
+                           prev(suitUnlockValueMemory(data[SUIT])) == 0 &&
+                           suitUnlockValueMemory(data[SUIT]) == 1
+        )
+    }
+    
+    parts = 5
+    if(ContainsKey(data, PARTS))
+    {
+        parts = data[PARTS]
+    }
+    achievement( title = format("{0} Complete", data[NAME]),
+                 type = "Missable",
+                 description = format("Have Rank 4 parts for all slots of {0}. 'The Power of Bonds' and 'The True DYNASTY WARRIORS: Gundam' must not be completed by any character. ", data[NAME]),
+                 points = 5,
+                 trigger = achievementActive() &&
+                           isNotDemoMode() &&
+                           // Neither of these can be complete. 
+                           missionCompleteMemoryLookup(THE_TRUE_DYNASTY_WARRIORS_GUNDAM) == 0 && 
+                           missionCompleteMemoryLookup(THE_POWER_OF_BONDS) == 0 &&
+                           any_of(range(0, parts - 1), partIndex => !checkprevRank4Part(data[SUIT], partIndex)) &&
+                           all_of(range(0, parts - 1), partIndex => checkRank4Part(data[SUIT], partIndex))
+    )
+}
+
+for data in mobileSuitData
+{
+    mobileSuitAchievements(data)
+}
+
+fullCharacterGalleryCount = LAST_CHARACTER_GALLERY_INDEX - FIRST_CHARACTER_GALLERY_INDEX + 1 - STARTING_CHARACTER_GALLERY_COUNT
+halfTargetCharacterGallery = (LAST_CHARACTER_GALLERY_INDEX - FIRST_CHARACTER_GALLERY_INDEX + 1) / 2
+
+
+achievement( title = "Getting to Know the Gundam Characters",
+             description = "Unlock half of the character gallery entries",
+             points = 5,
+             trigger = achievementActiveForGallery()  &&
+                       sum_of(range(FIRST_CHARACTER_GALLERY_INDEX, LAST_CHARACTER_GALLERY_INDEX), characterIndex => prev(characterGalleryEntryData(characterIndex))) - STARTING_CHARACTER_GALLERY_COUNT < halfTargetCharacterGallery &&
+                       measured(sum_of(range(FIRST_CHARACTER_GALLERY_INDEX, LAST_CHARACTER_GALLERY_INDEX), 
+                                characterIndex => characterGalleryEntryData(characterIndex)) - STARTING_CHARACTER_GALLERY_COUNT >= halfTargetCharacterGallery,
+                                when= galleryActive())
+)
+
+achievement( title = "My Character Collection",
+             description = "Unlock all the character gallery entries",
+             points = 10,
+             trigger = achievementActiveForGallery()  &&
+                       any_of(range(FIRST_CHARACTER_GALLERY_INDEX, LAST_CHARACTER_GALLERY_INDEX), characterIndex => prev(characterGalleryEntryData(characterIndex)) == 0) &&
+                       // 14 characters are unlocked at the beginning. 
+                       measured(sum_of(range(FIRST_CHARACTER_GALLERY_INDEX, LAST_CHARACTER_GALLERY_INDEX), 
+                                characterIndex => characterGalleryEntryData(characterIndex))  - STARTING_CHARACTER_GALLERY_COUNT == fullCharacterGalleryCount,
+                                when= galleryActive())
+)
+fullMobileSuitGalleryCount = LAST_MOBILE_SUIT_GALLERY_INDEX - FIRST_MOBILE_SUIT_GALLERY_INDEX + 1 - STARTING_SUIT_GALLERY_COUNT
+halfTargetMobileSuitGallery =  (LAST_MOBILE_SUIT_GALLERY_INDEX - FIRST_MOBILE_SUIT_GALLERY_INDEX + 1) / 2
+
+achievement( title = "Getting to Know the Gundam Suits",
+             description = "Unlock half of the mobile suit gallery entries",
+             points = 5,
+             trigger = achievementActiveForGallery() &&
+                       sum_of(range(FIRST_MOBILE_SUIT_GALLERY_INDEX, LAST_MOBILE_SUIT_GALLERY_INDEX), suitIndex => prev(mobileSuitGallerySuitVisibility(suitIndex))) - STARTING_SUIT_GALLERY_COUNT < halfTargetMobileSuitGallery  &&
+                       measured(sum_of(range(FIRST_MOBILE_SUIT_GALLERY_INDEX, LAST_MOBILE_SUIT_GALLERY_INDEX), 
+                                suitIndex => mobileSuitGallerySuitVisibility(suitIndex)) - STARTING_SUIT_GALLERY_COUNT  >= halfTargetMobileSuitGallery,
+                                when= galleryActive())
+)
+
+achievement( title = "My Gunpla Collection",
+             description = "Unlock all the mobile suit gallery entries",
+             points = 10,
+             trigger = achievementActiveForGallery() &&
+                       any_of(range(FIRST_MOBILE_SUIT_GALLERY_INDEX, LAST_MOBILE_SUIT_GALLERY_INDEX), suitIndex => prev(mobileSuitGallerySuitVisibility(suitIndex)) == 0) &&
+                       // 14 Suits are unlocked at the beginning. 
+                       measured(sum_of(range(FIRST_MOBILE_SUIT_GALLERY_INDEX, LAST_MOBILE_SUIT_GALLERY_INDEX), 
+                                suitIndex => mobileSuitGallerySuitVisibility(suitIndex))  - STARTING_SUIT_GALLERY_COUNT== fullMobileSuitGalleryCount,
+                                when= galleryActive())
+)
+
+fullBattleShipGalleryCount = LAST_BATTLE_SHIP_GALLERY_INDEX - FIRST_BATTLE_SHIP_GALLERY_INDEX + 1
+
+achievement( title = "My Battleship Collection",
+             description = "Unlock all the battleship gallery entries",
+             points = 10,
+             trigger = achievementActiveForGallery() &&
+                       any_of(range(FIRST_BATTLE_SHIP_GALLERY_INDEX, LAST_BATTLE_SHIP_GALLERY_INDEX), shipIndex => prev(battleshipGalleryShipVisibility(shipIndex)) == 0) &&
+                       measured(sum_of(range(FIRST_BATTLE_SHIP_GALLERY_INDEX, LAST_BATTLE_SHIP_GALLERY_INDEX), shipIndex => battleshipGalleryShipVisibility(shipIndex)) == fullBattleShipGalleryCount,
+                                when= galleryActive())
+)
+
+fullMovieGalleryCount = LAST_MOVIE_GALLERY_INDEX - FIRST_MOVIE_GALLERY_INDEX + 1
+halfMovieGallery = (fullMovieGalleryCount) / 2
+
+achievement( title = "Getting Started With Gundam Movies ",
+             description = "Unlock half of the movie gallery entries",
+             points = 5,
+             trigger = achievementActiveForGallery() &&
+                       sum_of(range(FIRST_MOVIE_GALLERY_INDEX, LAST_MOVIE_GALLERY_INDEX), movieIndex => prev(movieGalleryUnlock(movieIndex))) < halfMovieGallery &&
+                       measured(sum_of(range(FIRST_MOVIE_GALLERY_INDEX, LAST_MOVIE_GALLERY_INDEX), movieIndex => movieGalleryUnlock(movieIndex)) >= halfMovieGallery,
+                                when= galleryActive())
+)
+
+achievement( title = "My Gundam Movie Collection",
+             description = "Unlock all the movie gallery entries",
+             points = 10,
+             trigger = achievementActiveForGallery() &&
+                       any_of(range(FIRST_MOVIE_GALLERY_INDEX, LAST_MOVIE_GALLERY_INDEX), movieIndex => prev(movieGalleryUnlock(movieIndex)) == 0) &&
+                       measured(sum_of(range(FIRST_MOVIE_GALLERY_INDEX, LAST_MOVIE_GALLERY_INDEX), movieIndex => movieGalleryUnlock(movieIndex)) == fullMovieGalleryCount, 
+                                when= galleryActive())
+)
+
+function achievementLeaderboardHardMode(missionName, missionID, description, mode)
+{
+    // Leaderboards can be iterim.
+    modePlusIterim = (mode || isIterimMode()) 
+
+    leaderboard(
+        title = format("Most Kills on {0}",  missionName),
+        description = format("Get the most kills on {0} and win the scenario as a single player", description),
+        start = 
+        (
+            achievementActive() &&
+            isNotDemoMode() &&
+            modePlusIterim &&
+            singlePlayer() &&
+            missionsSelected() == missionID &&
+            justWonMission()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = totalKOsInMission(),
+        format = "VALUE"
+    )
+
+    leaderboard(
+        title = format("Fastest Run on {0}", missionName),
+        description = format("Get through the {0} the fastest as a single player", description),
+        
+        start  =
+        (
+            achievementActive() &&
+            isNotDemoMode() &&
+            modePlusIterim &&
+            singlePlayer() &&
+            missionsSelected() == missionID &&
+            justWonMission()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = framesSinceMissionStart(),
+        format = "FRAMES", 
+        lower_is_better = true 
+    )
+    achievement( title = format("{0} Mastered", missionName),
+                    description = format("Complete Mission {0} on hard difficulty without using an interim save in single player", description),
+                    points = 5,
+                    trigger = achievementActive() &&
+                            isNotDemoMode() &&
+                            mode &&
+                            isHardDifficulty() &&
+                            singlePlayer() &&
+                            missionsSelected() == missionID &&
+                            trigger_when(justWonMission())
+    )
+
+    leaderboard(
+        title = format("Hard: Most Kills on {0}",  missionName),
+        description = format("Get the most kills on {0} and win the scenario on hard difficulty as a single player",  description),
+        start = 
+        (
+            achievementActive() &&
+            isNotDemoMode() &&
+            modePlusIterim &&
+            isHardDifficulty() &&
+            singlePlayer() &&
+            missionsSelected() == missionID &&
+            justWonMission()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = totalKOsInMission(),
+        format = "VALUE"
+    )
+
+    leaderboard(
+        title = format("Hard: Fastest Run on {0}", missionName),
+        description = format("Get through the {0} the fastest on hard difficulty as a single player", description),
+        
+        start  =
+        (
+            achievementActive() &&
+            isNotDemoMode() &&
+            modePlusIterim &&
+            isHardDifficulty() &&
+            singlePlayer() &&
+            missionsSelected() == missionID &&
+            justWonMission()
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = framesSinceMissionStart(),
+        format = "FRAMES", 
+        lower_is_better = true 
+    )
+}
+
+for data in originalMissionData
+{
+    for mission in data[MISSIONS]
+    {
+        achievementLeaderboardHardMode(format("{0}'s {1}", characterShortNameLookup[data[CHARACTER]], missionNameLookup[mission]), 
+                                       mission, 
+                                       format("{0} in {1} in Original Mode", missionNameLookup[mission], data[DESCRIPTION]),
+                                       isOriginalMode())
+        
+    }
+}
+
+for data in missionModeData
+{
+    for mission in data[MISSIONS]
+    {
+            achievementLeaderboardHardMode(missionNameLookup[mission], 
+                                       mission, 
+                                       format("{0} in {1} Mission Mode", missionNameLookup[mission], data[DESCRIPTION]),
+                                       isMissionMode())
+    }
+}
+
+for data in additionMissionsData
+{
+    for mission in data[MISSIONS]
+    {
+        if (mission != PILOTING_PRACTICE)  // the Exception.
+        {
+            achievementLeaderboardHardMode(missionNameLookup[mission], 
+                                           mission, 
+                                           format("{0} in Mission Mode", missionNameLookup[mission]),
+                                           isMissionMode())
+        }
+    }
+}
+
+function correctLicenseNumbers(characterIndex, licenses)
+{
+    if (characterIndex == AMURO_RAY || characterIndex == KAMILLE_BIDAN || characterIndex == JUDAU_ASHTA)
+    {
+        return 3
+    }
+    if (characterIndex == CHAR_AZNABLE)
+    {
+        return 5
+    }
+    
+    return licenses
+}
+
+function checkSkillForCharacter(characterIndex, target) => characterSkillCount(characterIndex) >= target
+
+function checkPrevSkillForCharacter(characterIndex, target) => characterPrevSkillCount(characterIndex) < target
+
+function checkLicenseForCharacter(characterIndex, targetLicenses)
+{
+    if( targetLicenses == 2)
+    {
+        targetLicenses = correctLicenseNumbers(characterIndex, targetLicenses)
+        
+    }
+    return characterLicenseCount(characterIndex) >= targetLicenses
+}
+
+function checkPrevLicenseForCharacter(characterIndex, targetLicenses)
+{
+    if( targetLicenses == 2 && characterIndex == AMURO_RAY || characterIndex == CHAR_AZNABLE)
+    {
+        targetLicense = 3
+    }
+    return characterPrevLicenseCount(characterIndex) < targetLicenses
+}
+
+
+achievement(title = "I learned something",
+            description = "Earn your first skill for any character",
+            points = 2,
+            trigger = achievementActive() &&
+                      isNotDemoMode() &&
+                      any_of(range(FIRST_CHARACTER_INDEX, FINAL_SELECTABLE_CHARACTER_INDEX), 
+                             characterIndex => checkSkillForCharacter(characterIndex, 1) && 
+                                               checkPrevSkillForCharacter(characterIndex, 1))
+)
+
+achievement(title = "Studious Pilot",
+            description = "Earn half the skills for any character",
+            points = 10,
+            trigger = achievementActive() &&
+                      isNotDemoMode() &&
+                      any_of(range(FIRST_CHARACTER_INDEX, FINAL_SELECTABLE_CHARACTER_INDEX), 
+                             characterIndex => measured(checkSkillForCharacter(characterIndex, HALF_SKILL_COUNT), 
+                                                        when=checkPrevSkillForCharacter(characterIndex, HALF_SKILL_COUNT) ))
+)
+
+achievement(title = "Skill Master",
+            description = "Earn all the skills for any character",
+            points = 25,
+            trigger = achievementActive() &&
+                      isNotDemoMode() &&
+                      any_of(range(FIRST_CHARACTER_INDEX, FINAL_SELECTABLE_CHARACTER_INDEX), 
+                             characterIndex => measured(checkSkillForCharacter(characterIndex, FULL_SKILL_COUNT), 
+                                                        when=checkPrevSkillForCharacter(characterIndex, FULL_SKILL_COUNT) ))
+)
+
+achievement(title = "I Got My Gundam License!",
+            description = "Earn your second license for any character. Original Story characters will need one more than the starting number.",
+            points = 3,
+            trigger = achievementActive() &&
+                      isNotDemoMode() &&
+                      any_of(range(FIRST_CHARACTER_INDEX, FINAL_SELECTABLE_CHARACTER_INDEX), 
+                             characterIndex => checkLicenseForCharacter(characterIndex, 2) && 
+                             checkPrevLicenseForCharacter(characterIndex, 2))
+)
+
+achievement(title = "Multi-License Pilot",
+            description = "Earn half the licenses for any character",
+            points = 10,
+            trigger = achievementActive() &&
+                      isNotDemoMode() &&
+                      any_of(range(FIRST_CHARACTER_INDEX, FINAL_SELECTABLE_CHARACTER_INDEX), 
+                             characterIndex => measured(checkLicenseForCharacter(characterIndex, HALF_LICENSE_COUNT), 
+                                                        when=checkPrevLicenseForCharacter(characterIndex, HALF_LICENSE_COUNT)))
+)
+
+achievement(title = "I Can Drive Anything",
+            description = "Earn all the licenses for any character",
+            points = 25,
+            trigger = achievementActive() &&
+                      isNotDemoMode() &&
+                      any_of(range(FIRST_CHARACTER_INDEX, FINAL_SELECTABLE_CHARACTER_INDEX), 
+                             characterIndex => measured(checkLicenseForCharacter(characterIndex, FULL_LICENSE_COUNT), 
+                                                        when=checkPrevLicenseForCharacter(characterIndex, FULL_LICENSE_COUNT)))
+)
+
+// This is - 1 for the current character. (Note that's handled because Amuro is 0x00) 
+// Three characters are not "Friendable", Crown Kyoji and Kacricorn Cacooler
+TOTAL_FRIENDS = FINAL_CHARACTER_INDEX - 3  
+HALF_FRIENDS = (TOTAL_FRIENDS) / 2    
+
+achievement(title = "Mr. Popular",
+            description = "Befriend half of all characters",
+            points = 10,
+            trigger = achievementActive() &&
+                      isNotDemoMode() &&
+                      isMissionOrIterimMode() &&
+                      countFriends(selectedCharacter()) >= HALF_FRIENDS &&  // Could be more than one that goes over the limit. 
+                      countVisibleFriends(selectedCharacter()) >= HALF_FRIENDS && // Likely will be more. 
+                      countPrevFriends(selectedCharacter()) < HALF_FRIENDS &&
+                      selectedCharacter() == prev(selectedCharacter()) // This is due to a problem between Add Address Mem and Add Source Delta 
+)
+//  any_of(range(FIRST_CHARACTER_INDEX, FINAL_SELECTABLE_CHARACTER_INDEX), characterIndex =>  
+//                                countFriends(characterIndex)  == HALF_FRIENDS && countPrevFriends(characterIndex) < (HALF_FRIENDS))
+
+achievement(title = "Everyone Loves Me",
+            description = "Befriend everyone with any character",
+            points = 50,
+            trigger = achievementActive() &&
+                      isNotDemoMode() &&
+                      isMissionOrIterimMode() &&
+                      countFriends(selectedCharacter()) == TOTAL_FRIENDS &&  
+                      countVisibleFriends(selectedCharacter()) >= TOTAL_FRIENDS && // Probably will never be > but maybe. 
+                      countPrevFriends(selectedCharacter()) < TOTAL_FRIENDS &&
+                      selectedCharacter() == prev(selectedCharacter()) // This is due to a problem between Add Address Mem and Add Source Delta 
+                      
+)
+
+achievement(title = "Gundam Researcher",
+            description = "Reach level 2 with the Mobile Suit Lab",
+            points = 3,
+            trigger = achievementActive() &&
+                      reachedMobileSuitLabLevel(2)
+)
+
+achievement(title = "Gundam Engineer",
+            description = "Reach level 5 with the Mobile Suit Lab",
+            points = 5,
+            trigger = achievementActive() &&
+                      reachedMobileSuitLabLevel(5)
+)
+
+achievement(title = "Gundam Professor",
+            description = "Reach level 10 with the Mobile Suit Lab",
+            points = 10,
+            trigger = achievementActive() &&
+                      reachedMobileSuitLabLevel(10)
+)
+
+
+achievement(title = "Dynasty Warrior Gundam 2 Pub Quiz",
+                    description = "Answer the ten Dynasty Warriors: Gundam 2 Quiz questions correctly in one attempt. Re-read the message to try again",
+            points = 3,
+            trigger = achievementActive() &&
+                      messageViewedTeriminal() == DYNASTY_WARRIORS_GUNDAM_2_NOVICE_QUIZ &&
+                      correctAnswersQuiz() == 10 &&
+                      prev(correctAnswersQuiz()) == 9
+)
+
+achievement(title = "Dynasty Warrior Gundam 2 Game Show",
+                    description = "Answer the ten Dynasty Warriors: Gundam 2 Expert Quiz questions correctly in one attempt. Re-read the message to try again",
+            points = 5,
+            trigger = achievementActive() &&
+                      messageViewedTeriminal() == DYNASTY_WARRIORS_GUNDAM_2_EXPERT_QUIZ &&
+                      correctAnswersQuiz() == 10 &&
+                      prev(correctAnswersQuiz()) == 9
+)
+
+// Beat char with a zaku? 
+// 
+// Maybe beat a level in a ball and beat a level in a Zaku (not levels designed for them)
+// 
+// Befriend specific people? 
 
