@@ -4685,7 +4685,7 @@ achievement( title = "My Battleship Collection",
 fullMovieGalleryCount = LAST_MOVIE_GALLERY_INDEX - FIRST_MOVIE_GALLERY_INDEX + 1
 halfMovieGallery = (fullMovieGalleryCount) / 2
 
-achievement( title = "Getting Started With Gundam Movies ",
+achievement( title = "Getting Started With Gundam Movies",
              description = "Unlock half of the movie gallery entries",
              points = 5,
              trigger = achievementActiveForGallery() &&
@@ -5056,9 +5056,9 @@ rich_presence_conditional_display(inGameCheckRP() == 0x00, "In the menus")
 
 rich_presence_conditional_display(isVersusMode(), "In Versus Mode")
 
-rich_presence_display("{0} is fighting in mission: {1} Time: {2} KOs: {3} ",
+rich_presence_display("{0} is fighting in mission: {1} Time: {2} KOs: {3}",
                                     rich_presence_lookup("CharacterNameLookup", selectedCharacter(), characterList),
                                     rich_presence_lookup("MissionNameLookup", missionsSelected(), missionNameLookup),
-                                    rich_presence_value("TIME", framesSinceMissionStart()),
+                                    rich_presence_value("Time", framesSinceMissionStart(), format="FRAMES"),
                                     rich_presence_value("VALUE", totalKOsInMission())
                                  )
