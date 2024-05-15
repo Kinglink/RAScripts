@@ -1521,7 +1521,7 @@ function replayViewerMode() => gameModeInGame() == REPLAY_VIEWER_MODE
 //          0x0a = Ura Rokka
 //          0x0b = Hokkaido
 //          0x0c = Shiga Kusatsu
-//          0x0d = Usuitrouge
+//          0x0d = Usuitouge
 //          0x0e = Myougisan
 //          0x0f = Happogahara
 //          0x10 = Yokohama
@@ -1543,7 +1543,7 @@ HIROSHIMA_COURSE_INDEX = 0x09
 URA_ROKKA_COURSE_INDEX = 0x0a
 HOKKAIDO_COURSE_INDEX = 0x0b
 SHIGA_KUSATSU_COURSE_INDEX = 0x0c
-USUITROUGE_COURSE_INDEX = 0x0d
+USUITOUGE_COURSE_INDEX = 0x0d
 MYOGISAN_COURSE_INDEX = 0x0e
 HAPPOGAHARA_COURSE_INDEX = 0x0f
 YOKOHAMA_COURSE_INDEX = 0x10
@@ -1566,7 +1566,7 @@ ingameCourseLookup =
     URA_ROKKA_COURSE_INDEX: "Ura Rokka",
     HOKKAIDO_COURSE_INDEX: "Hokkaido",
     SHIGA_KUSATSU_COURSE_INDEX: "Shiga Kusatsu",
-    USUITROUGE_COURSE_INDEX: "Usuitrouge",
+    USUITOUGE_COURSE_INDEX: "Usuitouge",
     MYOGISAN_COURSE_INDEX: "Myougisan",
     HAPPOGAHARA_COURSE_INDEX: "Happogahara",
     YOKOHAMA_COURSE_INDEX: "Yokohama",
@@ -2494,7 +2494,7 @@ function playTime() => dword(0x77DBE4)
 //          0x0a = Ura Rokka
 //          0x0b = Hokkaido
 //          0x0c = Shiga Kusatsu
-//          0x0d = Usuitrouge
+//          0x0d = Usuitouge
 //          0x0e = Myougisan
 //          0x0f = Happogahara
 //          0x10 = Yokohama
@@ -4857,7 +4857,7 @@ function leaderboardCourse(courseId, direction)
 
     leaderboard(
         title = format("Record Challenge: CA Attack on {0} {1}",  ingameCourseLookup[courseId], directionLookup[direction]),
-        description = format("Finish with the best CA score on {0} {1} in Time Attack Mode in Record Challenge Mode", ingameCourseLookup[courseId], directionLookup[direction] ),
+        description = format("Finish with the best CA score on {0} {1} in CA Attack Mode in Record Challenge Mode", ingameCourseLookup[courseId], directionLookup[direction] ),
         start = 
         (
             justFinishedGameplay() &&
@@ -5143,7 +5143,7 @@ function specificLeaderboardCAAttack(data)
     )
 
     achievement( title = data[ACHIEVEMENT_NAME],
-                 description = format("Finish {0}/{3}/{4}/{5} with a score of {1} or while driving the Normal Car of {2} in CA Attack in Record Challenge mode.  Thanks to {6} for designing this achievement", 
+                 description = format("Finish {0}/{3}/{4}/{5} with a score of {1} or more while driving the Normal Car of {2} in CA Attack in Record Challenge mode.  Thanks to {6} for designing this achievement", 
                                       ingameCourseLookup[data[TRACK]], 
                                       data[SCORE], 
                                       carLookup[data[CAR]], 
@@ -5326,7 +5326,7 @@ totalTurnData =
     ASO_COURSE_INDEX: 22,
     HOKKAIDO_COURSE_INDEX: 26,
     HAKONE_NANAMAGARI_COURSE_INDEX: 15,
-    USUITROUGE_COURSE_INDEX: 8,
+    USUITOUGE_COURSE_INDEX: 8,
     MYOGISAN_COURSE_INDEX: 15,
     HAPPOGAHARA_COURSE_INDEX: 13,
     YOKOHAMA_COURSE_INDEX: 8,
@@ -5339,7 +5339,7 @@ function fullComboRunAchievement(key, corners, direction)
 {
     achievement(title = format("Full Combo on {0} {1}", ingameCourseLookup[key], directionLookup[direction]),
                 description = format("Finish {0} {1} with a combo on every corner", ingameCourseLookup[key], directionLookup[direction]),
-                points = 5,
+                points = 10,
                 trigger = once(courseInGame() == key &&
                                inGameClimbDownhill() == direction &&
                                remainingCornersInCAAttack() == corners &&
