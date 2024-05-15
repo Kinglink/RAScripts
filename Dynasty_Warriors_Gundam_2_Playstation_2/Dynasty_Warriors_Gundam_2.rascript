@@ -191,7 +191,7 @@ characterShortNameLookup =
 missionNameLookup =
 {
     0x00: "Re-entry to Earth",
-    0x01: "The battle of Odessa",
+    0x01: "The Battle of Odessa",
     0x02: "Tragedy in Jaburo",
     0x03: "Big Zam's Last Stand",
     0x04: "The Duel in Texas",
@@ -206,7 +206,7 @@ missionNameLookup =
     0x0D: "Winds of Jaburo",
     0x0E: "The Storm over Kilimanjaro",
     0x0F: "Run through the Cosmos",
-    0x10: "Enemy encounter at 5th Luna",
+    0x10: "Enemy Encounter at 5th Luna",
     0x11: "Luna 2 Surrenders: Axis Accelerates",
     0x12: "Londo Bell Reacts: Axis Falls",
     0x13: "Re-entry to Earth",
@@ -224,7 +224,7 @@ missionNameLookup =
     0x1F: "Warriors Again (Epilogue)",
     0x20: "Psycoframe Light",
     0x21: "Wings of Life",
-    0x22: "The Fist that Hopes to Grasp Victory",
+    0x22: "The Fist That Hopes to Grasp Victory",
     0x23: "Guiding Light to the Future",
     0x24: "Will Makes Miracles Happen",
     0x25: "Char's Will",
@@ -232,8 +232,8 @@ missionNameLookup =
     0x27: "A Vision of Lalah",
     0x28: "The Power of a Newtype",
     0x29: "Char, The Red Comet",
-    0x2A: "What's wrong with Kamille being a man's name?",
-    0x2B: "This is why!",
+    0x2A: "What’s Wrong with Kamille Being a Man’s Name?",
+    0x2B: "This Is Why!",
     0x2C: "You Aren't So Special!",
     0x2D: "I'll Show All of You!",
     0x2E: "This Isn’t a Game to Me!",
@@ -267,11 +267,11 @@ missionNameLookup =
     0x4A: "Those Who Seek to be Rescued",
     0x4B: "Those Who Face Disaster",
     0x4C: "Those Who Guide Us to Peace",
-    0x4D: "Chivalry is Bravery",
-    0x4E: "Chivalry is Fairness",
-    0x4F: "Chivalry is Devotion",
-    0x50: "Chivalry is Courage",
-    0x51: "Chivalry is Politeness",
+    0x4D: "Chivalry Is Bravery",
+    0x4E: "Chivalry Is Fairness",
+    0x4F: "Chivalry Is Devotion",
+    0x50: "Chivalry Is Courage",
+    0x51: "Chivalry Is Politeness",
     0x52: "Brothers Reunited",
     0x53: "Winds of Battle",
     0x54: "Coexistence with Others",
@@ -401,7 +401,7 @@ missionNameLookup =
     0xD0: "Heroes of the Federation",
     0xD1: "The Messenger From Axis",
     0xD2: "Mass Production Gundam?",
-    0xD3: "This is no Zaku, my Friend!",
+    0xD3: "This Is No Zaku, My Friend!",
     0xD4: "Giant Revealed",
     0xD5: "For the Glory of Zeon!",
     0xD6: "Guardians of Nature",
@@ -457,7 +457,7 @@ missionNameLookup =
     0x108: "Aratama",
     0x109: "Nigitama",
     0x10A: "Good Luck, Loser!",
-    0x10B: "Just wanted to get along...",
+    0x10B: "Just Wanted to Get Along...",
     0x10C: "Hedgehog's Dilemma",
     0x10D: "Love Duel",
     0x10E: "Love Special Attack!",
@@ -471,7 +471,7 @@ missionNameLookup =
     0x116: "Kycilia's Secret Request",
     0x117: "Dozle's Secret Request",
     0x118: "Yazan's Crew Test",
-    0x119: "Sarah might forgive you, but I won't!",
+    0x119: "Sarah Might Forgive You, but I Won’t!",
     0x11A: "Glemy's Ambition",
     0x11B: "Gyunei's Rescue",
     0x11C: "Sleggar's Final Attack",
@@ -503,8 +503,8 @@ missionNameLookup =
     0x136: "Freedom to Space 5",
     0x137: "Junk Dealers 1",
     0x138: "Junk Dealers 2",
-    0x139: "Stop acting like that, Brother!",
-    0x13A: "Stop acting like that, Judau!",
+    0x139: "Stop Acting Like That, Brother!",
+    0x13A: "Stop Acting Like That, Judau!",
     0x13B: "For Whom the Bell Tolls 1",
     0x13C: "For Whom the Bell Tolls 2",
     0x13D: "White Fangs Rip the Cosmos",
@@ -534,7 +534,7 @@ missionNameLookup =
     0x155: "A Song of Peace 2",
     0x156: "A Song of Peace 3",
     0x157: "The Mightiest Surface Weapon",
-    0x158: "Ball is your Friend!",
+    0x158: "Ball Is Your Friend!",
     0x159: "Seeking the Ultimate Zaku",
     0x15A: "Eternal Binary Star",
     0x15B: "A.E.U.G's Hope",
@@ -545,7 +545,7 @@ missionNameLookup =
     0x160: "Captive Princess",
     0x161: "Burn, Dragon",
     0x162: "War Goddess",
-    0x163: "Yazan's Strike Force is Immortal!",
+    0x163: "Yazan’s Strike Force Is Immortal!",
     0x164: "Towards Tomorrow",
     0x165: "Fighting Spirit",
     0x166: "Crimson Lightning",
@@ -553,7 +553,7 @@ missionNameLookup =
     0x168: "The Shocking Dark History",
     0x169: "King of Hearts' Challenge",
     0x16A: "Look! The East Burns Crimson Red!",
-    0x16B: "C'mon, c'mon! Bring it on!",
+    0x16B: "C'mon, C'mon! Bring it on!",
     0x16C: "White Devil",
     0x16D: "The Final Victor",
     0x16E: "Moonlight Butterfly vs. Wings of Fire",
@@ -561,7 +561,7 @@ missionNameLookup =
     0x170: "Persevering Justice",
     0x171: "Zero vs. Epyon",
     0x172: "Get Along!",
-    0x173: "It's not Anime!",
+    0x173: "It’s Not Anime!",
     0x174: "Zeta's First Launch",
     0x175: "Don't Underestimate it!",
     0x176: "Scirocco's Utopia",
@@ -4606,7 +4606,7 @@ function mobileSuitAchievements(data)
     }
     achievement( title = format("{0} Complete", data[NAME]),
                  type = "Missable",
-                 description = format("Have Rank 4 parts for all slots of {0}. 'The Power of Bonds' and 'The True DYNASTY WARRIORS: Gundam' must not be completed by any character. ", data[NAME]),
+                 description = format("Have Rank 4 parts for all slots of {0}. 'The Power of Bonds' and 'The True DYNASTY WARRIORS: Gundam' must not be completed by any character", data[NAME]),
                  points = 5,
                  trigger = achievementActive() &&
                            isNotDemoMode() &&
@@ -4703,12 +4703,37 @@ achievement( title = "My Gundam Movie Collection",
                                 when= galleryActive())
 )
 
+// this is a hack because all the leaderboard IDs are sequencial. 
+LEADERBOARD_ID = 98302
+ACHIEVEMENT_ID = 425441
+
+skipTable =
+{
+    425528: 425530,
+    425545: 425546,
+    425557: 425558,
+    425572: 425573,
+    425582: 425583,
+    425587: 425588,
+    425604: 425605,
+    425614: 425615,
+    425616: 425617,
+    425635: 425636,
+    425640: 425641,
+    425650: 425651,
+    425678: 425679,
+    425666: 425669,
+    425663: 425664,
+    
+}
+
 function achievementLeaderboardHardMode(missionName, missionID, description, mode)
 {
     // Leaderboards can be iterim.
     modePlusIterim = (mode || isIterimMode()) 
 
     leaderboard(
+        id = LEADERBOARD_ID,
         title = format("Most Kills on {0}",  missionName),
         description = format("Get the most kills on {0} and win the scenario as a single player", description),
         start = 
@@ -4725,8 +4750,10 @@ function achievementLeaderboardHardMode(missionName, missionID, description, mod
         value = totalKOsInMission(),
         format = "VALUE"
     )
+    LEADERBOARD_ID = LEADERBOARD_ID + 1
 
     leaderboard(
+        id = LEADERBOARD_ID,
         title = format("Fastest Run on {0}", missionName),
         description = format("Get through the {0} the fastest as a single player", description),
         
@@ -4745,19 +4772,29 @@ function achievementLeaderboardHardMode(missionName, missionID, description, mod
         format = "FRAMES", 
         lower_is_better = true 
     )
-    achievement( title = format("{0} Mastered", missionName),
-                    description = format("Complete Mission {0} on hard difficulty without using an interim save in single player", description),
-                    points = 5,
-                    trigger = achievementActive() &&
-                            isNotDemoMode() &&
-                            mode &&
-                            isHardDifficulty() &&
-                            singlePlayer() &&
-                            missionsSelected() == missionID &&
-                            trigger_when(justWonMission())
+    LEADERBOARD_ID = LEADERBOARD_ID + 1
+    
+    if ContainsKey(skipTable, ACHIEVEMENT_ID)
+    {
+        ACHIEVEMENT_ID = skipTable[ACHIEVEMENT_ID]
+    }
+  
+    achievement( id = ACHIEVEMENT_ID,
+                 title = format("{0} Mastered", missionName),
+                 description = format("Complete Mission {0} on hard difficulty without using an interim save in single player", description),
+                 points = 5,
+                 trigger = achievementActive() &&
+                         isNotDemoMode() &&
+                         mode &&
+                         isHardDifficulty() &&
+                         singlePlayer() &&
+                         missionsSelected() == missionID &&
+                         trigger_when(justWonMission())
     )
+    ACHIEVEMENT_ID = ACHIEVEMENT_ID + 1
 
     leaderboard(
+        id = LEADERBOARD_ID,
         title = format("Hard: Most Kills on {0}",  missionName),
         description = format("Get the most kills on {0} and win the scenario on hard difficulty as a single player",  description),
         start = 
@@ -4775,8 +4812,10 @@ function achievementLeaderboardHardMode(missionName, missionID, description, mod
         value = totalKOsInMission(),
         format = "VALUE"
     )
+    LEADERBOARD_ID = LEADERBOARD_ID + 1
 
     leaderboard(
+        id = LEADERBOARD_ID,
         title = format("Hard: Fastest Run on {0}", missionName),
         description = format("Get through the {0} the fastest on hard difficulty as a single player", description),
         
@@ -4796,6 +4835,7 @@ function achievementLeaderboardHardMode(missionName, missionID, description, mod
         format = "FRAMES", 
         lower_is_better = true 
     )
+    LEADERBOARD_ID = LEADERBOARD_ID + 1
 }
 
 for data in originalMissionData
@@ -4904,7 +4944,7 @@ achievement(title = "Skill Master",
 )
 
 achievement(title = "I Got My Gundam License!",
-            description = "Earn your second license for any character. Original Story characters will need one more than the starting number.",
+            description = "Earn your second license for any character. Original Story characters will need one more than the starting number",
             points = 3,
             trigger = achievementActive() &&
                       isNotDemoMode() &&
@@ -5011,3 +5051,14 @@ achievement(title = "Dynasty Warrior Gundam 2 Game Show",
 // 
 // Befriend specific people? 
 
+
+rich_presence_conditional_display(inGameCheckRP() == 0x00, "In the menus")
+
+rich_presence_conditional_display(isVersusMode(), "In Versus Mode")
+
+rich_presence_display("{0} is fighting in mission: {1} Time: {2} KOs: {3} ",
+                                    rich_presence_lookup("CharacterNameLookup", selectedCharacter(), characterList),
+                                    rich_presence_lookup("MissionNameLookup", missionsSelected(), missionNameLookup),
+                                    rich_presence_value("TIME", framesSinceMissionStart()),
+                                    rich_presence_value("VALUE", totalKOsInMission())
+                                 )
