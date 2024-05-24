@@ -2474,7 +2474,11 @@ function calculateFriend(character, index)
     return word(AMURO_FRIEND_LEVEL_MEMORY_LOCATION + (character * FRIENDS_CHARACTER_OFFSET) + index * FRIEND_LEVEL_OFFSET) / 800    
 }
 
+function calculateSelfAsFriend(character) => word(AMURO_FRIEND_LEVEL_MEMORY_LOCATION + (character * (FRIENDS_CHARACTER_OFFSET+ FRIEND_LEVEL_OFFSET))) / 800 
+
 function calculateVisibleFriend(character, index) =>  bit4(AMURO_FRIEND_DISPLAY_MEMORY_LOCATION + (character * FRIENDS_CHARACTER_OFFSET) + index * FRIEND_VISIBLE_OFFSET)
+
+function calculateSelfAsVisibleFriend(character, index) =>  bit4(AMURO_FRIEND_DISPLAY_MEMORY_LOCATION + (character * (FRIENDS_CHARACTER_OFFSET + FRIEND_VISIBLE_OFFSET)))
 
 function calculatePrevFriend(character, index)
 {
@@ -2482,8 +2486,11 @@ function calculatePrevFriend(character, index)
   //         prev(word(AMURO_FRIEND_LEVEL_MEMORY_LOCATION + (character * FRIENDS_CHARACTER_OFFSET) + index * FRIEND_LEVEL_OFFSET)) / 800
       return prev(word(AMURO_FRIEND_LEVEL_MEMORY_LOCATION + (character * FRIENDS_CHARACTER_OFFSET) + index * FRIEND_LEVEL_OFFSET)) / 800 
 }
+function calculateSelfAsPrevFriend(character) => prev(word(AMURO_FRIEND_LEVEL_MEMORY_LOCATION + (character * (FRIENDS_CHARACTER_OFFSET + FRIEND_LEVEL_OFFSET)))) / 800 
+
 
 function calculatePrevVisibleFriend(character, index) =>  prev(bit4(AMURO_FRIEND_DISPLAY_MEMORY_LOCATION + (character * FRIENDS_CHARACTER_OFFSET) + index * FRIEND_VISIBLE_OFFSET))
+function calculateSelfAsPrevVisibleFriend(character, index) =>  prev(bit4(AMURO_FRIEND_DISPLAY_MEMORY_LOCATION + (character * (FRIENDS_CHARACTER_OFFSET + FRIEND_VISIBLE_OFFSET))))
 
 // Removed Crown, Kacricon, and Kyoji  They are not friendable. 
 friendList = 
@@ -2561,22 +2568,22 @@ friendList =
 
 function countFriends(character){
     return sum_of(friendList, friendIndex =>
-                        calculateFriend(character, friendIndex) )
+                        calculateFriend(character, friendIndex) ) - calculateSelfAsFriend(character)
 }
 
 function countVisibleFriends(character){
     return sum_of(friendList, friendIndex => 
-                        calculateVisibleFriend(character, friendIndex) )
+                        calculateVisibleFriend(character, friendIndex) ) - calculateSelfAsVisibleFriend(character, character) 
 }
 
 function countPrevFriends(character){
     return sum_of(friendList, friendIndex => 
-                        calculatePrevFriend(character, friendIndex))
+                        calculatePrevFriend(character, friendIndex)) - calculateSelfAsPrevFriend(character)
 }
 
 function countPrevVisibleFriends(character){
     return sum_of(friendList, friendIndex => 
-                        calculatePrevVisibleFriend(character, friendIndex) )
+                        calculatePrevVisibleFriend(character, friendIndex) )  - calculateSelfAsPrevVisibleFriend(character, friendIndex)
 }
 
 
