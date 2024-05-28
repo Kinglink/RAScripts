@@ -1990,7 +1990,7 @@ HAMBRABI = 0x1E
 BYARLANT = 0x1F
 BAUND_DOC = 0x20
 BOLINOAK_SAMMAHN = 0x21
-PALLAS_ATHENE = 0x22
+PALACE_ATHENE = 0x22
 BAWOO = 0x23
 RE_GZ = 0x24
 JAGD_DOGA_GYUNEI = 0x25
@@ -2067,7 +2067,7 @@ suitNameLookup =
     BYARLANT: "Byarlant",
     BAUND_DOC: "Baund Doc",
     BOLINOAK_SAMMAHN: "Bolinoak Sammahn",
-    PALLAS_ATHENE: "Pallas Athene",
+    PALACE_ATHENE: "Palace Athene",
     BAWOO: "Bawoo",
     RE_GZ: "Re-GZ",
     JAGD_DOGA_GYUNEI: "Jagd Doga (Gyunei)",
@@ -4397,9 +4397,9 @@ mobileSuitData =
         UNLOCK: true
     },
     {
-        SUIT: PALLAS_ATHENE,
+        SUIT: PALACE_ATHENE,
         ID: -1,
-        NAME: "PMX-001 Pallas Athene",
+        NAME: "PMX-001 Palace Athene",
         UNLOCK: true
     },
     {
