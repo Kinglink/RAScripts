@@ -35,7 +35,16 @@ storyMissionLookup =
     0x1d: "Blind Attack",
     0x1e: "A Nightmarish Machine"
 }
- 
+
+// $22d284: (32-bit) Save Indicator 
+//
+//          0xffffffff = Not Saving
+//          0x0000000b = Save menu or initial save. 
+function saveIndicator() => dword(0x22D284)
+NOT_SAVING_VALUE = 0xFFFFFFFF
+
+function notSaving() => saveIndicator() == NOT_SAVING_VALUE
+
 // $2F394B: (8-bit) Arcade Difficulty 
 //
 //          0x01 = Easy
@@ -266,12 +275,13 @@ weatherLookup =
 //          However if someone turns in the exact same lap. *Shrug* it won't change. 
 function raceTime() => dword(0x3281B0)
 
+// DO NOT USE! THIS IS INCORRECT
 // $3281ba: (8-bit) Front End Check 
 //
 //          0x00 = On the front end  (Especially the initial boot save/load) 
 //          0x01 = In-Game. 
-function frontEndCheck() => byte(0x3281BA)
-function inGame() => frontEndCheck() != 0x00
+// function frontEndCheck() => byte(0x3281BA)
+// function inGame() => frontEndCheck() != 0x00
 
 // $19ECA18: (8-bit) Gameplay Indicator
 //           
@@ -283,14 +293,14 @@ function gameplayIndicator() => byte(0x19ECA18)
 
 
 
-function achievementsActiveCheck() => gameplayIndicator() == 0 && inGame()
+function achievementsActiveCheck() => gameplayIndicator() == 0 && notSaving()
 
 
 achievement(
     title = "Speedy Speed Boy", points = 2,
     description = "Win your first Arcade Race",
     trigger = achievementsActiveCheck() &&
-              any_of (range(0, 42, step=2 ), i => justBeatDriver(i))
+              any_of (range(0, 0x42, step=2 ), i => justBeatDriver(i))
 )
 
 VALUES = "VALUE"
@@ -460,8 +470,8 @@ achievement( title = "There's an Ending?",
              description = "Beat everyone in Arcade Mode twice",
              trigger = achievementsActiveCheck() &&
                         ArcadeMode() &&
-                        all_of(range(0, 42, step=2), index => arcadeWinByIndex(index) >= 2) &&
-                        any_of(range(0, 42, step=2), index => prev(arcadeWinByIndex(index)) == 1)
+                        all_of(range(0, 0x42, step=2), index => arcadeWinByIndex(index) >= 2) &&
+                        any_of(range(0, 0x42, step=2), index => prev(arcadeWinByIndex(index)) == 1)
 )
 
 HARD_TITLE = "HARD_TITLE"
@@ -528,8 +538,7 @@ achievement( title = "Basic Tune Achieved",
              points = 5,
              description = "Earn your first Basic Tune",
              trigger = achievementsActiveCheck() &&
-                       currentCarJustPastedExp(BASIC_TUNE_VALUE) &&
-                       ArcadeMode()
+                       currentCarJustPastedExp(BASIC_TUNE_VALUE)
                        
 )
 
@@ -576,14 +585,14 @@ rich_presence_conditional_display(!achievementsActiveCheck(), "In the Menus")
 for key in configurationsLookup
 {
     rich_presence_conditional_display(ArcadeMode() && timeTrialTrack() == key && timeTrialTrackConfig() == 0,
-                                      "Time Trial: Racing {0} on {1} {2} {3}",
+                                      "Arcade Mode: Racing {0} on {1} {2} {3}",
                                       rich_presence_lookup("OpponentLookup", currentArcadeOpponent(), opponentLookup),
                                       configurationsLookup[key][NAME],
                                       configurationsLookup[key][FIRST_DIRECTION],
                                       rich_presence_lookup("WeatherLookup", timeTrialTrackWeather(), weatherLookup)
     )
     rich_presence_conditional_display(ArcadeMode() && timeTrialTrack() == key && timeTrialTrackConfig() == 1,
-                                      "Time Trial: Racing {0} on {1} {2} {3}",
+                                      "Arcade Mode: Racing {0} on {1} {2} {3}",
                                       rich_presence_lookup("OpponentLookup", currentArcadeOpponent(), opponentLookup),
                                       configurationsLookup[key][NAME],
                                       configurationsLookup[key][SECOND_DIRECTION],
