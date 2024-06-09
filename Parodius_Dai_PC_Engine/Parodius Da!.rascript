@@ -907,7 +907,8 @@ function noHitLevelAchievement(levelData)
                            trigger_when(beatStageNumber(levelData[STAGE_INDEX])) &&
                            never(justLostLife()) &&
                            never(stageNumber() != levelData[STAGE_INDEX] - 1 && stageNumber() != levelData[STAGE_INDEX]) && // You can mouse over other difficulties accidentally.
-                           achievementIsValid()
+                           achievementIsValid() &&
+                           isHardDifficulty()
     )
 }
 
