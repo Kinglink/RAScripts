@@ -50,32 +50,40 @@ function game6Timer() => byte(0x253)
 
 achievement(title = "You Know the Characters!",
             description = "Beat Game 1",
+            type = "Progression",
             points = 1,
             trigger = gameChosen() == 0x00 && finishedLevel(4))
 
 achievement(title = "You Remember the Characters!",
             description = "Beat Game 2",
+            type = "Progression",
             points = 1,
             trigger = gameChosen() == 0x01 && finishedLevel(4))
 
 achievement(title = "You Know the Letters!",
             description = "Beat Game 3",
+            type = "Progression",
             points = 1,
             trigger = gameChosen() == 0x02 && finishedLevel(4))
 
 achievement(title = "You Remember the Letters!",
             description = "Beat Game 4",
+            type = "Progression",
             points = 1,
             trigger = gameChosen() == 0x03 && finishedLevel(4))
 
 achievement(title = "You Can Spell!",
             description = "Beat Game 5",
+            type = "Progression",
             points = 1,
-            trigger = gameChosen() == 0x04 && finishedLevel(0))
+            trigger = gameChosen() == 0x04 && 
+                      prev(gameChosen()) == 0x04 &&
+                      finishedLevel(0)) 
 
 achievement(title = "Spelling Bee",
             description = "Spell 5 words in Game 6 in one round",
             points = 1,
+            type = "Win_Condition",
             trigger = gameChosen() == 0x05 && prev(game6Score()) == 0x03 && game6Score() == 0x04)
 
 achievement(title = "Spelling Master",
