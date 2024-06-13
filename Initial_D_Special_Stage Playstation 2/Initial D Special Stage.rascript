@@ -312,17 +312,17 @@ TITLE = "TITLE"
 DESCRIPTION = "DESCRIPTION"
 
 areaAchievementData = {
-  "Myogi": { VALUES: [0x00, 0x02, 0x04, 0x06], POINTS: 5 },
-  "Usui": { VALUES: [0x08, 0x0a, 0x0c, 0x0e], POINTS: 5 },
-  "Akagi": { VALUES: [0x10, 0x12, 0x14, 0x16], POINTS: 10 },
-  "Akina": { VALUES: [0x18, 0x1a, 0x1c, 0x1e, 0x32], POINTS: 10 },
-  "Happougahara": { VALUES: [0x20, 0x22, 0x24, 0x26], POINTS: 10 },
-  "Irouhazaka": { VALUES: [0x28, 0x2a, 0x2c, 0x2e, 0x30], POINTS: 10 },
-  "Real Myogi": { VALUES: [0x34, 0x36], POINTS: 10 },
-  "Real Usui": { VALUES: [0x38], POINTS: 5 },
-  "Shomaru": { VALUES: [0x3a], POINTS: 5 },
-  "Momiji Line": { VALUES: [0x3c, 0x3e], POINTS: 10 },
-  "Enna Skyline": { VALUES: [0x40, 0x42], POINTS: 10 }
+  "Myogi": { VALUES: [0x00, 0x02, 0x04, 0x06], POINTS: 5, DESCRIPTION: "Myogi"},
+  "Usui": { VALUES: [0x08, 0x0a, 0x0c, 0x0e], POINTS: 5, DESCRIPTION: "Usui"},
+  "Akagi": { VALUES: [0x10, 0x12, 0x14, 0x16], POINTS: 10, DESCRIPTION: "Akagi"},
+  "Akina": { VALUES: [0x18, 0x1a, 0x1c, 0x1e, 0x32], POINTS: 10, DESCRIPTION: "Akina (Including the late-game hidden opponent)"},
+  "Happougahara": { VALUES: [0x20, 0x22, 0x24, 0x26], POINTS: 10, DESCRIPTION: "Happougahara"},
+  "Irouhazaka": { VALUES: [0x28, 0x2a, 0x2c, 0x2e, 0x30], POINTS: 10, DESCRIPTION: "Irouhazaka (Including the hidden opponent)"},
+  "Real Myogi": { VALUES: [0x34, 0x36], POINTS: 10, DESCRIPTION: "Real Myogi"},
+  "Real Usui": { VALUES: [0x38], POINTS: 5, DESCRIPTION: "Real Usui"},
+  "Shomaru": { VALUES: [0x3a], POINTS: 5, DESCRIPTION: "Shomaru"},
+  "Momiji Line": { VALUES: [0x3c, 0x3e], POINTS: 10, DESCRIPTION: "Momiji Line"},
+  "Enna Skyline": { VALUES: [0x40, 0x42], POINTS: 10, DESCRIPTION: "Enna Skyline" }
 }
 
 for key in areaAchievementData
@@ -331,7 +331,7 @@ for key in areaAchievementData
         type = "Progression",
         title = "King of " + key,
         points = areaAchievementData[key][POINTS],
-        description = "Win against all drivers in " + key,
+        description = "Win against all drivers in " + areaAchievementData[key][DESCRIPTION],
         trigger = achievementsActiveCheck() &&
                   all_of(areaAchievementData[key][VALUES], i => driverBeaten(i)) &&
                   any_of(areaAchievementData[key][VALUES], i => driverPrevUnbeaten(i))
@@ -467,11 +467,11 @@ for data in driverAchievementData
 
 achievement( title = "There's an Ending?",
              points = 5,
-             description = "Beat everyone in Arcade Mode twice",
+             description = "Beat everyone in Arcade Mode",
              trigger = achievementsActiveCheck() &&
                         ArcadeMode() &&
-                        all_of(range(0, 0x42, step=2), index => arcadeWinByIndex(index) >= 2) &&
-                        any_of(range(0, 0x42, step=2), index => prev(arcadeWinByIndex(index)) == 1)
+                        all_of(range(0, 0x42, step=2), index => arcadeWinByIndex(index) >= 1) &&
+                        any_of(range(0, 0x42, step=2), index => prev(arcadeWinByIndex(index)) == 0)
 )
 
 HARD_TITLE = "HARD_TITLE"
