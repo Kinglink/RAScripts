@@ -18,6 +18,14 @@ function correctAnswers() => byte(0x00001D)
 //        0x00 = 1 word spelt
 function game6Score() => byte(0x00002A)
 
+// $005a: (8-bit) Main Menu indicator.
+//
+//        0x00 = Main Menu
+//        0x01 = In Game
+function mainMenuIndicator() => byte(0x00005A)
+
+function inGame() => mainMenuIndicator() == 0x01
+
 // $01FA: (8-bit) Which game are you playing.
 //        
 //        0x00 = Open window Find Character
@@ -25,7 +33,7 @@ function game6Score() => byte(0x00002A)
 //        0x00 = Open window Find Letter
 //        0x01 = Closed Window Find Letter
 //        0x00 = Open window Find Spell Word
-//        0x01 = Closed Window Sun Run
+//        0x01 = Closed \Window Sun Run
 function gameChosen() => byte(0x0001FA)
 
 // $020F: (8-bit) Whose mid round cutscene are we seeing.
@@ -52,25 +60,37 @@ achievement(title = "You Know the Characters!",
             description = "Beat Game 1",
             type = "Progression",
             points = 1,
-            trigger = gameChosen() == 0x00 && finishedLevel(4))
+            trigger = gameChosen() == 0x00 && 
+                      finishedLevel(4) && 
+                      inGame()
+)
 
 achievement(title = "You Remember the Characters!",
             description = "Beat Game 2",
             type = "Progression",
             points = 1,
-            trigger = gameChosen() == 0x01 && finishedLevel(4))
+            trigger = gameChosen() == 0x01 && 
+                      finishedLevel(4) && 
+                      inGame()
+)
 
 achievement(title = "You Know the Letters!",
             description = "Beat Game 3",
             type = "Progression",
             points = 1,
-            trigger = gameChosen() == 0x02 && finishedLevel(4))
+            trigger = gameChosen() == 0x02 && 
+                      finishedLevel(4) && 
+                      inGame()
+)
 
 achievement(title = "You Remember the Letters!",
             description = "Beat Game 4",
             type = "Progression",
             points = 1,
-            trigger = gameChosen() == 0x03 && finishedLevel(4))
+            trigger = gameChosen() == 0x03 && 
+                      finishedLevel(4) && 
+                      inGame()
+)
 
 achievement(title = "You Can Spell!",
             description = "Beat Game 5",
@@ -78,35 +98,52 @@ achievement(title = "You Can Spell!",
             points = 1,
             trigger = gameChosen() == 0x04 && 
                       prev(gameChosen()) == 0x04 &&
-                      finishedLevel(0)) 
+                      finishedLevel(0) && 
+                      inGame()
+)
 
 achievement(title = "Spelling Bee",
             description = "Spell 5 words in Game 6 in one round",
             points = 1,
             type = "Win_Condition",
-            trigger = gameChosen() == 0x05 && prev(game6Score()) == 0x03 && game6Score() == 0x04)
+            trigger = gameChosen() == 0x05 && 
+                      prev(game6Score()) == 0x03 && 
+                      game6Score() == 0x04 && 
+                      inGame()
+)
 
 achievement(title = "Spelling Master",
             description = "Spell 10 words in Game 6 in one round",
             points = 3,
-            trigger = gameChosen() == 0x05 && prev(game6Score()) == 0x08 && game6Score() == 0x09)
+            trigger = gameChosen() == 0x05 && 
+                      prev(game6Score()) == 0x08 && 
+                      game6Score() == 0x09 && 
+                      inGame()
+)
 
 achievement(title = "Spelling Wizard",
             description = "Spell 15 words in Game 6 in one round",
             points = 5,
-            trigger = gameChosen() == 0x05 && prev(game6Score()) == 0x0d && game6Score() == 0x0e)
-            
+            trigger = gameChosen() == 0x05 && 
+                      prev(game6Score()) == 0x0d && 
+                      game6Score() == 0x0e && 
+                      inGame()
+ )
+
 achievement(title = "You've Met All Your New Friends",
             description = "Watch all the character round celebrations.  (Game 1-5)",
             points = 3,
-            trigger = measured(tally_of(range(0x00, 0x04), 5, index => once(prev(midRoundCutscene()) == 0x05 && midRoundCutscene() == index))) &&
-                      unless(gameChosen() == 0x05)
+            trigger = measured(tally_of(range(0x00, 0x04), 5, index => once(prev(midRoundCutscene()) == 0x05 && 
+                      midRoundCutscene() == index))) &&
+                      unless(gameChosen() == 0x05) && 
+                      inGame()
 )
 
+rich_presence_conditional_display( !inGame(), "is deciding what to play")
 rich_presence_conditional_display( gameChosen() == 0x0, "is Meeting the Characters")
 rich_presence_conditional_display( gameChosen() == 0x1, "is Remembering the Characters")
 rich_presence_conditional_display( gameChosen() == 0x2, "is Learning the Letters")
 rich_presence_conditional_display( gameChosen() == 0x3, "is Remembering the Letters")
 rich_presence_conditional_display( gameChosen() == 0x4, "is Spelling Words")
 rich_presence_conditional_display( gameChosen() == 0x5, "is Speed Spelling Words")
-rich_presence_display("Is Doing Something Else")
+rich_presence_display("is Doing Something Else")
