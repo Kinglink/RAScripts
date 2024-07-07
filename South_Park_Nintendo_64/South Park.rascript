@@ -277,7 +277,7 @@ for data in levelAchievements
 achievement(
     type = "Missable",
     title = "It’s Coming Right for Us!!", points = 4,
-    description = "Complete Episode 1 - Stage 2 with 0 tanks escaped (or remaining) ",
+    description = "Complete Episode 1 - Stage 2 with 0 tanks escaped (or remaining)",
     id = 115915, published = "6/28/2020 6:11:07 AM", modified = "6/2/2021 1:53:25 PM",
     trigger = currentlyActivatedCheats() == 0 && 
               currentStage() == 2 && 
@@ -293,7 +293,7 @@ achievement(
 achievement(
     type = "Missable",
     title = "You Bastards!", points = 4,
-    description = "Complete Episode 1 - Stage 3 with 0 tanks escaped (or remaining) ",
+    description = "Complete Episode 1 - Stage 3 with 0 tanks escaped (or remaining)",
     id = 115916, published = "6/28/2020 6:11:09 AM", modified = "6/2/2021 1:53:31 PM",
     trigger = currentlyActivatedCheats() == 0 && 
               currentEpisode() == 1 && 
@@ -317,7 +317,7 @@ achievement(
 achievement(
     type = "Missable",
     title = "Aba-ba-chewy-chomp", points = 4,
-    description = "Complete Episode 2 - Stage 1 with 0 tanks escaped (or remaining) ",
+    description = "Complete Episode 2 - Stage 1 with 0 tanks escaped (or remaining)",
     id = 115918, published = "6/28/2020 6:11:12 AM", modified = "6/2/2021 1:50:55 PM",
     trigger = currentlyActivatedCheats() == 0 && 
               currentEpisode() == 2 && 
@@ -329,7 +329,7 @@ achievement(
 achievement(
     type = "Missable",
     title = "No, Shelly Bad. You Good", points = 4,
-    description = "Complete Episode 2 - Stage 2 with 0 tanks escaped (or remaining) ",
+    description = "Complete Episode 2 - Stage 2 with 0 tanks escaped (or remaining)",
     id = 115919, published = "6/28/2020 6:11:14 AM", modified = "6/2/2021 1:51:01 PM",
     trigger = currentlyActivatedCheats() == 0 && 
               currentEpisode() == 2 && 
@@ -352,7 +352,7 @@ achievement(
 achievement(
     type = "Missable",
     title = "Greating Cows of Earth", points = 5,
-    description = "Complete Episode 3 - Stage 1 with 0 tanks escaped (or remaining) ",
+    description = "Complete Episode 3 - Stage 1 with 0 tanks escaped (or remaining)",
     id = 115921, published = "6/28/2020 6:11:16 AM", modified = "6/2/2021 1:51:08 PM",
     trigger = currentlyActivatedCheats() == 0 && 
               currentEpisode() == 3 && 
@@ -364,7 +364,7 @@ achievement(
 achievement(
     type = "Missable",
     title = "That's Carl's Fault. He's New", points = 5,
-    description = "Complete Episode 3 - Stage 2 with 0 tanks escaped (or remaining) ",
+    description = "Complete Episode 3 - Stage 2 with 0 tanks escaped (or remaining)",
     id = 115922, published = "6/28/2020 6:11:18 AM", modified = "6/2/2021 1:51:14 PM",
     trigger = currentlyActivatedCheats() == 0 && 
               currentEpisode() == 3 && 
@@ -397,7 +397,7 @@ achievement(
 achievement(
     type = "Missable",
     title = "I Will Be Your New Best Friend", points = 5,
-    description = "Complete Episode 4 - Stage 1 with 0 tanks escaped (or remaining) ",
+    description = "Complete Episode 4 - Stage 1 with 0 tanks escaped (or remaining)",
     id = 115925, published = "6/28/2020 6:11:23 AM", modified = "6/2/2021 1:51:27 PM",
     trigger = currentlyActivatedCheats() == 0 && 
               currentEpisode() == 4 && 
@@ -409,7 +409,7 @@ achievement(
 achievement(
     type = "Missable",
     title = "A.W.E.S.O.M.E-O Does Not Understand", points = 5,
-    description = "Complete Episode 4 - Stage 2 with 0 tanks escaped (or remaining) ",
+    description = "Complete Episode 4 - Stage 2 with 0 tanks escaped (or remaining)",
     id = 115926, published = "6/28/2020 6:11:24 AM", modified = "6/2/2021 1:51:33 PM",
     trigger = currentlyActivatedCheats() == 0 && 
               currentEpisode() == 4 && 
@@ -432,7 +432,7 @@ achievement(
 achievement(
     type = "Missable",
     title = "S'up Homies", points = 5,
-    description = "Complete Episode 5 - Stage 1 with 0 tanks escaped (or remaining) ",
+    description = "Complete Episode 5 - Stage 1 with 0 tanks escaped (or remaining)",
     id = 115928, published = "6/28/2020 6:11:27 AM", modified = "6/28/2020 8:29:57 AM",
     trigger = currentlyActivatedCheats() == 0 && 
               currentEpisode() == 5 && 
@@ -444,7 +444,7 @@ achievement(
 achievement(
     type = "Missable",
     title = "I Thought I Was in America!", points = 5,
-    description = "Complete Episode 5 - Stage 2 with 0 tanks escaped (or remaining) ",
+    description = "Complete Episode 5 - Stage 2 with 0 tanks escaped (or remaining)",
     id = 115929, published = "6/28/2020 6:11:29 AM", modified = "6/28/2020 8:32:47 AM",
     trigger = currentlyActivatedCheats() == 0 && 
               currentEpisode() == 5 && 
