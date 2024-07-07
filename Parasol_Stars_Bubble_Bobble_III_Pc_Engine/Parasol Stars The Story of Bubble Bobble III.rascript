@@ -50,15 +50,18 @@ function perfectBonusGame() => bonusGameItemsLeft() == 0 && prev(bonusGameItemsL
 //        0xff = "Good" Ending.
 function endCreditsDetector() => byte(0x000B2A)
 
-function goodEnding() => endCreditsDetector() == 0xff && prev(endCreditsDetector()) == 0x00
+GOOD_ENDING_VALUES = 0xff
+function goodEnding() => endCreditsDetector() == GOOD_ENDING_VALUES && 
+                         prev(endCreditsDetector()) != GOOD_ENDING_VALUES
 
 // $0E8A: (8-bit) Second End credit detector
 //        
 //        0x06 = Set on Bad Ending
 function secondEndCreditsDetector() => byte(0x000E8A)
 
-function badEnding() => endCreditsDetector() == 0x01 && 
-                        prev(endCreditsDetector()) == 0x00 &&
+BAD_ENDING_VALUES = 0x01
+function badEnding() => endCreditsDetector() == BAD_ENDING_VALUES && 
+                        prev(endCreditsDetector()) != BAD_ENDING_VALUES &&
                         secondEndCreditsDetector() == 0x06 // This happens before The end credis detec
 
 // $1846: (8-bit) Current state of Powerup
