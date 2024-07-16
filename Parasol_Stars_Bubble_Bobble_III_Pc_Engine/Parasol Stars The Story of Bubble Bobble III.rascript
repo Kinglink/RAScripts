@@ -562,15 +562,16 @@ function noDeathAchievement(data)
                   description = data[DESCRIPTION],
                   type = MISSABLE_TYPE,
                   points= data[POINTS],
-                  trigger = twoPlayerProtection() &&
-                             never(playerLostLife()) &&
-                             never(playerUsedCredit()) &&
-                             once(currentStage() == data[START_STAGE] && alternate_start ) &&
-                             trigger_when((currentStage() == data[END_STAGE] && 
-                                           prev(currentStage()) == data[END_STAGE] - 2
-                                          ) ||
-                                          alternate_trigger
-                             )
+                  trigger = never(secondPlayerActive()) &&
+                            never(gameNotStarted()) &&
+                            never(playerLostLife()) &&
+                            never(playerUsedCredit()) &&
+                            once(currentStage() == data[START_STAGE] && alternate_start ) &&
+                            trigger_when((currentStage() == data[END_STAGE] && 
+                                          prev(currentStage()) == data[END_STAGE] - 2
+                                         ) ||
+                                         alternate_trigger
+                            )
     )
 }
 
