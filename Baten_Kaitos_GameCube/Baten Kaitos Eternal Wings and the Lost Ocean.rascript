@@ -501,6 +501,7 @@ function quzmanFamily() => dword(QUZMAN_FAMILY_MEMORY_LOCATION)
 // $24972F: (bitfield) Quzman Family status
 //          
 //          bit3 = Quzman passing
+GUZMAN_ENDING_LOCATION = 0x24972F
 function quzmanEnding() => byte(0x24972F)
 
 // $249748: (bitfield) Chest Progress
@@ -2386,6 +2387,7 @@ BIT7 = 7
 LOCATION = "Location"
 BIT = "Bit"
 BITS = "Bits"
+ID = "ID"
 TITLE = "Title"
 DESCRIPTION = "Description"
 POINTS = "Points"
@@ -2560,7 +2562,7 @@ bossScriptIdList =
     },
     {
         TITLE:"Our Final Meeting",
-        NAME: "the CHaotic Trio at the Celestial Alps", 
+        NAME: "the Chaotic Trio at the Celestial Alps", 
         POINTS: 10,
         PRIOR: 0x00003ee4,
         POST: 0x00003f48
@@ -3746,8 +3748,7 @@ function cardAchievement(data)
         }
     }
 
-    achievement(id = data[ID],
-                title = data[TITLE],
+    achievement(title = data[TITLE],
                 description = data[DESCRIPTION],
                 type = data[TYPE],
                 points = data[POINTS],
@@ -3842,7 +3843,7 @@ familyLocations =
     { LOCATION: (QUZMAN_FAMILY_MEMORY_LOCATION + 2), BITS: range(BIT0, BIT7) },
     { LOCATION: (QUZMAN_FAMILY_MEMORY_LOCATION + 3), BITS: range(BIT0, BIT7) },
     { LOCATION: (QUZMAN_FAMILY_MEMORY_LOCATION + 4), BITS: range(BIT0, BIT3) },
-    { LOCATION: quzmanEnding(), BITS: [BIT3] }
+    { LOCATION: (GUZMAN_ENDING_LOCATION), BITS: [BIT3] }
 ]
 
 familyAchievements  =
