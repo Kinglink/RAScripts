@@ -6,7 +6,7 @@ import os
 # Comment out any that you don't want. 
 # Paths to the overlays
 overlay_paths = {
-    "Card": "../Overlays/Card Overlay.png",
+    "Card": "../Overlays/Card_Overlay.png",
     "Gold": "../Overlays/Gold Overlay.png",
     "Silver": "../Overlays/Silver Overlay.png",
     "Bronze": "../Overlays/Bronze Overlay.png",
