@@ -2785,7 +2785,6 @@ lootList =
         ],
     PHERKAD: 
         [
-            { LOCATION: lootProgress(), BITS: [BIT0] },
             { LOCATION: lootProgress11(), BITS: [BIT3, BIT4] },
             { LOCATION: lootProgress12(), BITS: [BIT5] },
             { LOCATION: lootProgress13(), BITS: [BIT6] },
