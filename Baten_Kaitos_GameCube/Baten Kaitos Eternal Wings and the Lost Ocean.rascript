@@ -2813,7 +2813,7 @@ lootList =
     CLOUD_PASSAGE: 
         [
             { LOCATION: lootProgress57(), BITS: [BIT6] },
-            { LOCATION: lootProgress81(), BITS: [BIT0] },
+            { LOCATION: lootProgress81(), BITS: [BIT3] },
         ],
     SHELIAK: 
         [
