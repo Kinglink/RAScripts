@@ -1,3 +1,5 @@
+// Due to issues with RA script and new RA integration, these scripts are out of date. 
+
 // Metroid Prime 2: Echoes
 // #ID = 7683
 
@@ -581,8 +583,8 @@ itemAchievement({TYPE: PROGRESSION_TYPE,
                  ZONE: GREAT_TEMPLE,
                  POINTS: 2})
 
-function bossRunsOutOfHPUS() => prev(bossHealthUS()) > 0x00000000 && bossHealthUS() == 0x00000000 && bossHealthVisorCheckUS()
-function bossRunsOutOfHPEU() => prev(bossHealthEU()) > 0x00000000 && bossHealthEU() == 0x00000000 && bossHealthVisorCheckEU()
+function bossRunsOutOfHPUS() => prev(bossHealthUS()) > 0x00000000 && bossHealthUS() <= 0x00000000 && bossHealthVisorCheckUS()
+function bossRunsOutOfHPEU() => prev(bossHealthEU()) > 0x00000000 && bossHealthEU() <= 0x00000000 && bossHealthVisorCheckEU()
 function playerLostHealthUS() => playerHealthUS() < prev(playerHealthUS()) 
 function playerLostHealthEU() => playerHealthEU() < prev(playerHealthEU())
 function playerUsedMissilesUS() => missileCountUS() < prev(missileCountUS())
@@ -590,6 +592,8 @@ function playerUsedMissilesEU() => missileCountEU() < prev(missileCountEU())
 
 EMPEROR_ING_FINAL_FORM_MAX_HEALTH = 1000
 EMPEROR_ING_ID = 0x39
+DARK_MISSILE_TROOPER_NAME_ID = 0x43 
+DARK_MISSILE_TROOPER_MAX_HEALTH = 600
 
 achievement( title = "And Now the Obligatory Countdown",
              description = "Defeat Emperor Ing",
@@ -640,6 +644,33 @@ achievement( title = "Back, Bugs!",
                         saveProtectionEU()
                       )
 )
+
+achievement( title = "Dark Missile Trooper",
+             description = "Defeat Dark Missile Trooper without taking damage or using missiles",
+             points =  2,
+             type = MISSABLE_TYPE,
+             trigger=  ( isUSVersion() && 
+                        once(bossDisplayNameIDUS() == DARK_MISSILE_TROOPER_NAME_ID &&
+                             bossMaxHPUS() == DARK_MISSILE_TROOPER_MAX_HEALTH &&
+                             prev(bossMaxHPUS()) == 0 &&
+                             prev(bossDisplayNameIDUS()) == 0x00 ) &&
+                        trigger_when(bossRunsOutOfHPUS()) &&
+                        saveProtectionUS() &&
+                        never( playerLostHealthUS() && isUSVersion()) &&
+                        never( playerUsedMissilesUS() && isUSVersion())
+                      ) ||
+                      ( isEUVersion() &&
+                        once(bossDisplayNameIDEU() == DARK_MISSILE_TROOPER_NAME_ID &&
+                             bossMaxHPEU() == DARK_MISSILE_TROOPER_MAX_HEALTH &&
+                             prev(bossMaxHPEU()) == 0 &&
+                             prev(bossDisplayNameIDEU()) == 0x00 ) &&
+                        trigger_when(bossRunsOutOfHPEU()) &&
+                        saveProtectionEU() &&
+                        never( playerLostHealthEU() && isEUVersion()) &&
+                        never( playerUsedMissilesEU() && isEUVersion())
+                      )
+)
+
 
 function scanPercentageAchievement(data)
 {
