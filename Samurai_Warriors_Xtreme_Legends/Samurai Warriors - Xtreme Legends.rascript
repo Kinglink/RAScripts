@@ -543,7 +543,7 @@ function itemOwnedBitfield3() => byte(0x501350)
 //          Bit 2=The Kage Scroll
 //          Bit 3=War Baton
 //          Bit 4=Book of Healing
-//          Bit 5=Sheild Wall
+//          Bit 5=Shield Wall
 //          Bit 6=Golden Rune
 //          Bit 7=Book of Earth
 function itemOwnedBitfield4() => byte(0x501351)
@@ -627,7 +627,7 @@ itemLookup=
     KAGE_SCROLL : "The Kage Scroll", 
     WAR_BATON : "War Baton", 
     BOOK_OF_HEALING : "Book of Healing", 
-    SHIELD_WALL : "Sheild Wall", 
+    SHIELD_WALL : "Shield Wall", 
     GOLDEN_RUNE : "Golden Rune", 
     BOOK_OF_EARTH : "Book of Earth", 
     BOOK_OF_WATER : "Book of Water", 
