@@ -545,7 +545,7 @@ function lootProgress35() => 0x249756
 // $249757: (bitfield) Chest progress
 //          
 //          bit0 = Gemma Village Rubber Mud Quest Sacred Helm
-//          bit5 = Opu Quest Secret Information Crimson Oak Blossom
+//          bit4 = Opu Quest Secret Information Crimson Oak Blossom
 function lootProgress36() => 0x249757
 
 // $249758: (bitfield) Chest Progress
@@ -556,6 +556,8 @@ function lootProgress37() => 0x249758
 // $249759: (bitfield) Chest Progress
 //          
 //          bit1 and bt2 = Nashira Bar Pickup Line Quest Shako
+//          Bit 2 is "Pickup line given"  
+//          Bit 1 is "Reward given" 
 function lootProgress38() => 0x249759
 
 // $24975A: (bitfield) Chest Progress
@@ -885,7 +887,7 @@ function lootProgress73() => 0x24986F
 
 // $249874: (bitfield) Quest Progress
 //          
-//          bit0 = Cursa Skating Girl Rubber Mud Quest Light Flare IV
+//          bit4 = Cursa Skating Girl Rubber Mud Quest Light Flare IV
 //          bit3 = Castle ElnathRoyal Crest Quest Rainbow Ash
 function lootProgress74() => 0x249874
 
@@ -1485,6 +1487,12 @@ function magnusSeenStart() => 0x251C18
 //
 //          bit3 = Phoneix Crest Sowzana card
 function phoenixCrestSeenLocation() => 0x251c27
+
+// $251c41: (bitfield) Magnus Seen Value
+//
+//          bit0 = Deadly Heat Scythe (Sibling God Ar)
+//          Other Values not recorded at this time
+function deadlyHeatScytheSeenLocation() => 0x251c41
 
 // $251c7c :bitfield) Magnus Seen Value
 // 
@@ -2716,8 +2724,8 @@ bossBooleanList =
         TITLE:"Disarming",
         NAME: "Sibling God: Ar", 
         POINTS: 5,
-        LOCATION: lootProgress59(),
-        BIT: BIT4,
+        LOCATION: deadlyHeatScytheSeenLocation(),
+        BIT: BIT0,
         TYPE: PROGRESSION
     },
     {
@@ -2729,6 +2737,7 @@ bossBooleanList =
         TYPE: PROGRESSION
     }
 ]
+
 
 function booleanBossAchievement(data) 
 {
@@ -2799,15 +2808,15 @@ lootList =
     NASHIRA: 
         [
             { LOCATION: lootProgress35(), BITS: [BIT2, BIT3] },
-            { LOCATION: lootProgress38(), BITS: [BIT2] },
-            { LOCATION: lootProgress40(), BITS: range(BIT3, BIT7) },
+            { LOCATION: lootProgress38(), BITS: [BIT1] },
+            { LOCATION: lootProgress40(), BITS: [BIT3, BIT4, BIT5, BIT7] },
             { LOCATION: lootProgress41(), BITS: [BIT1, BIT2] },
         ],
     LESSER_CELESTIAL_RIVER: 
         [
             { LOCATION: lootProgress57(), BITS: range(BIT0, BIT5) },
             { LOCATION: lootProgress78(), BITS: [BIT7] },
-            { LOCATION: lootProgress78(), BITS: [BIT0, BIT1] },
+            { LOCATION: lootProgress79(), BITS: [BIT0, BIT1] },
             { LOCATION: lootProgress81(), BITS: [BIT4] },
         ],
     CLOUD_PASSAGE: 
@@ -2858,7 +2867,7 @@ lootList =
     OPU: 
         [
             { LOCATION: lootProgress33(), BITS: [BIT3] },
-            { LOCATION: lootProgress36(), BITS: [BIT5] },
+            { LOCATION: lootProgress36(), BITS: [BIT4] },
             { LOCATION: lootProgress37(), BITS: [BIT0] },
             { LOCATION: lootProgress45(), BITS: range(BIT2, BIT5) },
             { LOCATION: lootProgress51(), BITS: [BIT3] },
@@ -2882,7 +2891,7 @@ lootList =
         ],
     REVERENCE: 
         [
-            { LOCATION: lootProgress75(), BITS: [BIT0, BIT1] },
+            { LOCATION: lootProgress76(), BITS: [BIT0, BIT1] },
         ],
     NEKTON: 
         [
@@ -2893,7 +2902,8 @@ lootList =
         [
             { LOCATION: lootProgress5(), BITS: [BIT6] },
             { LOCATION: lootProgress6(), BITS: range(BIT1, BIT7) },
-            { LOCATION: lootProgress7(), BITS: range(BIT0, BIT5) },
+            { LOCATION: lootProgress7(), BITS: [BIT0] },
+            { LOCATION: lootProgress7(), BITS: range(BIT2, BIT5) },
             { LOCATION: lootProgress14(), BITS: range(BIT0,BIT2) },
         ],
     COCCOLITH: 
@@ -2933,24 +2943,25 @@ lootList =
             { LOCATION: lootProgress44(), BITS: [BIT5, BIT6] },
             { LOCATION: lootProgress45(), BITS: [BIT0, BIT1] },
             { LOCATION: lootProgress52(), BITS: range(BIT3, BIT7) },
-            { LOCATION: lootProgress53(), BITS: range(BIT0, BIT7) },
+            { LOCATION: lootProgress53(), BITS: range(BIT0, BIT4) },
+            { LOCATION: lootProgress53(), BITS: [BIT6, BIT7] },
             { LOCATION: lootProgress54(), BITS: range(BIT1, BIT4) },
         ],
     ICE_CLIFFS: 
         [
             { LOCATION: lootProgress27(), BITS: [BIT5] },
             { LOCATION: lootProgress28(), BITS: [BIT6, BIT7] },
-            { LOCATION: lootProgress43(), BITS: range(BIT0, BIT2) },
-            { LOCATION: lootProgress44(), BITS: [BIT1, BIT2] },
+            { LOCATION: lootProgress29(), BITS: range(BIT0, BIT2) },
         ],
     KAFFALJIDHMA: 
         [
             { LOCATION: lootProgress43(), BITS: range(BIT2, BIT6) },
             { LOCATION: lootProgress56(), BITS: [BIT4, BIT5] },
+            { LOCATION: lootProgress44(), BITS: [BIT1, BIT2] },
         ],
     CURSA: 
         [
-            { LOCATION: lootProgress71(), BITS: [BIT0] },
+            { LOCATION: lootProgress74(), BITS: [BIT4] },
             { LOCATION: lootProgress76(), BITS: range(BIT2, BIT5) },
         ],
     LABYRINTH_OF_DUHR: 
@@ -2997,7 +3008,7 @@ lootList =
     ILLUSORY_FORTRESS: 
         [
             { LOCATION: lootProgress20(), BITS: [BIT6, BIT7] },
-            { LOCATION: lootProgress21(), BITS: range(BIT0, BIT4) },
+            { LOCATION: lootProgress21(), BITS: range(BIT0, BIT3) },
         ],
     GREATER_CELESTIAL_RIVER: 
         [
@@ -3084,7 +3095,7 @@ function collectionAchievement(key)
     }
 
     type = STANDARD
-    if (key == PHANTOM_GOLDOBA || key == BATTLESHIP_GOLDOBA)
+    if (key == PHANTOM_GOLDOBA || key == BATTLESHIP_GOLDOBA || key == LESSER_CELESTIAL_RIVER)
     {
         type = MISSABLE
     }
@@ -3127,8 +3138,8 @@ questList =
         TYPE: MISSABLE
     },
     {
-        TITLE: "Tripadvisor: Sheliak",
-        DESCRIPTION: "Earn the Anklet of Calm Winds by visiting Sheliak", 
+        TITLE: "Tripadvisor: Pherkad",
+        DESCRIPTION: "Earn the Anklet of Calm Winds by visiting Pherkad", 
         POINTS: 2,
         TRIGGER: [
             { LOCATION: lootProgress24(), BITS: [BIT5] }
@@ -3215,7 +3226,7 @@ questList =
         DESCRIPTION: "Earn a Golden Bugle by giving two widows in Kaffaljidhma something to remember their husbands with", 
         POINTS: 3,
         TRIGGER: [
-            { LOCATION: lootProgress34(), BITS: [BIT6] }
+            { LOCATION: lootProgress34(), BITS: [BIT5] }
         ],
         TYPE: MISSABLE
     }
@@ -3432,7 +3443,7 @@ spCombos =
     spCombo141()
 ]
 
-function spComboAchievements(title, targetValue)
+function spComboAchievements(title, targetValue, type)
 {
     points = 5
     if (targetValue == 141)
@@ -3440,6 +3451,7 @@ function spComboAchievements(title, targetValue)
         points = 25
     }
     achievement(title = title,
+                type = type,
                 description = format("Discover {0} SP combos",targetValue),
                 points = points,
                 trigger = saveProtection() && 
@@ -3451,16 +3463,16 @@ function spComboAchievements(title, targetValue)
 TOTAL_SP_COMBOS = 141
 TENTH_SP_TOTAL_COMBOS = TOTAL_SP_COMBOS / 10
 
-spComboAchievements("SP Combos Discovery I", 1 * TENTH_SP_TOTAL_COMBOS)
-spComboAchievements("SP Combos Discovery II", 2 * TENTH_SP_TOTAL_COMBOS)
-spComboAchievements("SP Combos Discovery III", 3 * TENTH_SP_TOTAL_COMBOS)
-spComboAchievements("SP Combos Discovery IV", 4 * TENTH_SP_TOTAL_COMBOS)
-spComboAchievements("SP Combos Discovery V", 5 * TENTH_SP_TOTAL_COMBOS)
-spComboAchievements("SP Combos Discovery VI", 6 * TENTH_SP_TOTAL_COMBOS)
-spComboAchievements("SP Combos Discovery VII", 7 * TENTH_SP_TOTAL_COMBOS)
-spComboAchievements("SP Combos Discovery VIII", 8 * TENTH_SP_TOTAL_COMBOS)
-spComboAchievements("SP Combos Discovery IX", 9 * TENTH_SP_TOTAL_COMBOS)
-spComboAchievements("SP Combos Discovery X", TOTAL_SP_COMBOS)
+spComboAchievements("SP Combo Discovery I", 1 * TENTH_SP_TOTAL_COMBOS, "")
+spComboAchievements("SP Combo Discovery II", 2 * TENTH_SP_TOTAL_COMBOS, "")
+spComboAchievements("SP Combo Discovery III", 3 * TENTH_SP_TOTAL_COMBOS, "")
+spComboAchievements("SP Combo Discovery IV", 4 * TENTH_SP_TOTAL_COMBOS, "")
+spComboAchievements("SP Combo Discovery V", 5 * TENTH_SP_TOTAL_COMBOS, "")
+spComboAchievements("SP Combo Discovery VI", 6 * TENTH_SP_TOTAL_COMBOS, "")
+spComboAchievements("SP Combo Discovery VII", 7 * TENTH_SP_TOTAL_COMBOS, "")
+spComboAchievements("SP Combo Discovery VIII", 8 * TENTH_SP_TOTAL_COMBOS, "")
+spComboAchievements("SP Combo Discovery IX", 9 * TENTH_SP_TOTAL_COMBOS, MISSABLE)
+spComboAchievements("SP Combo Discovery X", TOTAL_SP_COMBOS, MISSABLE)
 
 displayIssues = 
 [    
@@ -3508,7 +3520,7 @@ displayIssues =
 
 
 MAGNUS_TOTAL_BITS = 1216
-MAGNUS_ACHIEVEMENT_CARDS = 1020
+MAGNUS_ACHIEVEMENT_CARDS = 1021
 MAGNUS_TOTAL_CARDS = 1022
 // This is the bit locations of every value 
 fullMagnusLocations = range(0, MAGNUS_TOTAL_BITS - 1)
@@ -3556,8 +3568,7 @@ function calculateCorrectMagnusLocations()
         
         achievementValid = TRUE
         // Hardcoded.
-        if ((targetBit == BIT4 && magnusSeenStart() + offset == splendidHairSeenLocation()) &&
-            (targetBit == BIT0 && magnusSeenStart() + offset == treasuredPaintingSeenLocation()))
+        if ((targetBit == BIT4 && magnusSeenStart() + offset == splendidHairSeenLocation()))
         {
             achievementValid = FALSE
         }
@@ -3591,7 +3602,7 @@ function magnusCollectionAchievement(id, title, targetValue, type)
     }
     achievement(id = id,
                 title = title,
-                description = format("Discover {0} Magnus Cards. Splendid Hair and Treasured Painting are not counted",targetValue),
+                description = format("Discover {0} Magnus Cards. Splendid Hair is not counted",targetValue),
                 type = type,
                 points = points,
                 trigger = saveProtection() && 
@@ -3618,7 +3629,7 @@ cameraAchievementList =
 [
     {
         TITLE: "Portfolio: Sadal Suud" ,
-        DESCRIPTION: " Register a picture in the Magnus Gathering of the Sabre Dragon, the Lord of the Spring, and the Nunkirantula from the Sadal Suud nation", 
+        DESCRIPTION: "Register a picture in the Magnus Gathering of the Sabre Dragon, the Lord of the Spring, and the Nunkirantula from the Sadal Suud nation", 
         POINTS: 5,
         CARDS: [
             { LOCATION: bossCards4(), BITS: [BIT2, BIT3] },
@@ -3723,7 +3734,7 @@ cameraAchievementList =
         POINTS: 10,
         CARDS:[
             { LOCATION: bossCards6(), BITS: range(BIT3, BIT7) },
-            { LOCATION: bossCards1(), BITS: [BIT0] }
+            { LOCATION: bossCards1(), BITS: [BIT5] }
         ],
         TYPE: MISSABLE,
         ID: 403477
@@ -4110,7 +4121,8 @@ function classLevelAchievement(data)
                 description = data[DESCRIPTION],
                 points = data[POINTS],
                 trigger = saveProtection() && 
-                          prev(classValue( data[WHO] )) == PREV_CLASS_VALUE &&
+                          prev(classValue( data[WHO] )) <= PREV_CLASS_VALUE &&
+                          prev(classValue( data[WHO] )) > 0 &&
                           classValue(data[WHO]) == TARGET_CLASS_VALUE
     )
 }
@@ -4251,7 +4263,7 @@ cardHandList  =
                     prev(handValue3()) != PAIR_NINE ) ||
                    (prev(handValue3()) != VOICE &&
                     prev(handValue3()) != NO_CARD_HAND)) &&
-                  finalValue(handValue2()))                  
+                  finalValue(handValue3()))                  
     },
     {
         TITLE: "Fuller House",
@@ -4267,7 +4279,7 @@ cardHandList  =
                    prev(handValue3()) != TRIPLE_NINE ) ||
                   (prev(handValue3()) != VOICE &&
                    prev(handValue3()) != NO_CARD_HAND)) &&
-                 finalValue(handValue2()))
+                 finalValue(handValue3()))
     },
     {
         TITLE: "Fullest House",
@@ -4283,7 +4295,6 @@ cardHandList  =
                    prev(handValue3()) != FOUR_NINES ) ||
                   (prev(handValue3()) != VOICE &&
                    prev(handValue3()) != NO_CARD_HAND)) &&
-                 
                  finalValue(handValue3()))
     },
     {
