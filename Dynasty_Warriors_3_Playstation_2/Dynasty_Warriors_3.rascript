@@ -3445,7 +3445,7 @@ characterDefinition( characterIndex = XiahouDun,
                      unlockMemoryLocation = XiahouDunUnlocked(), 
                      unlockEnabled = false,
                      musouModeAchievementID = 370296, 
-                     musouModeName = "One-eyed Xiahou",
+                     musouModeName = "One-Eyed Xiahou",
                      hardMusouModeAchievementID = 370327, 
                      hardMusouModeName = "Brother Dun")
 characterDefinition( characterIndex = DianWei, 
@@ -3734,216 +3734,216 @@ achievement("The Gang's All Here",
 
 
 createUnlockFourthWeaponAchievement("Fierce Dragon",
-                                    "Unlock Fierce Dragon.", 
+                                    "Unlock Fierce Dragon", 
                                     FierceDragon,
                                     370451)
 createUnlockFourthWeaponAchievement("Blue Moon Dragon",
-                                    "Unlock Blue Moon Dragon.", 
+                                    "Unlock Blue Moon Dragon", 
                                     BlueMoonDragon,
                                     370452)
 createUnlockFourthWeaponAchievement("Viper Blade",
-                                    "Unlock Viper Blade.", 
+                                    "Unlock Viper Blade", 
                                     ViperBlade,
                                     370453)
 createUnlockFourthWeaponAchievement("Kirin Fang",
-                                    "Unlock Kirin Fang.", 
+                                    "Unlock Kirin Fang", 
                                     KirinFang,
                                     370454)
 createUnlockFourthWeaponAchievement("Mad Bull",
-                                    "Unlock Mad Bull.", 
+                                    "Unlock Mad Bull", 
                                     MadBull,
                                     370455)
 createUnlockFourthWeaponAchievement("Stone Crusher",
-                                    "Unlock Stone Crusher.", 
+                                    "Unlock Stone Crusher", 
                                     StoneCrusher,
                                     370456)
 createUnlockFourthWeaponAchievement("Ancients Sword",
-                                    "Unlock Ancients Sword.", 
+                                    "Unlock Ancients Sword", 
                                     AncientsSword,
                                     370457)
 createUnlockFourthWeaponAchievement("Falcon",
-                                    "Unlock Falcon.", 
+                                    "Unlock Falcon", 
                                     Falcon,
                                     370458)
 createUnlockFourthWeaponAchievement("Tiger Slayer",
-                                    "Unlock Tiger Slayer.", 
+                                    "Unlock Tiger Slayer", 
                                     TigerSlayer,
                                     370459)
 createUnlockFourthWeaponAchievement("Gold Globe",
-                                    "Unlock Gold Globe.", 
+                                    "Unlock Gold Globe", 
                                     GoldGlobe,
                                     370460)
 createUnlockFourthWeaponAchievement("Peacock Feather",
-                                    "Unlock Peacock Feather.", 
+                                    "Unlock Peacock Feather", 
                                     PeacockFeather,
                                     370461)
 createUnlockFourthWeaponAchievement("Wrath of Heaven",
-                                    "Unlock Wrath of Heaven.", 
+                                    "Unlock Wrath of Heaven", 
                                     WrathOfHeaven,
                                     370462)
 createUnlockFourthWeaponAchievement("Sky Scorcher",
-                                    "Unlock Sky Scorcher.", 
+                                    "Unlock Sky Scorcher", 
                                     SkyScorcher,
                                     370463)
 createUnlockFourthWeaponAchievement("Sol Chakram",
-                                    "Unlock Sol Chakram.", 
+                                    "Unlock Sol Chakram", 
                                     SolChakram,
                                     370464)
 createUnlockFourthWeaponAchievement("Gold Moon Dragon",
-                                    "Unlock Gold Moon Dragon.", 
+                                    "Unlock Gold Moon Dragon", 
                                     GoldMoonDragon,
                                     370465)
 createUnlockFourthWeaponAchievement("Savage Wolf",
-                                    "Unlock Savage Wolf.", 
+                                    "Unlock Savage Wolf", 
                                     SavageWolf,
                                     370466)
 createUnlockFourthWeaponAchievement("Master Wolf",
-                                    "Unlock Master Wolf.", 
+                                    "Unlock Master Wolf", 
                                     MasterWolf,
                                     370467)
 createUnlockFourthWeaponAchievement("Grand Star",
-                                    "Unlock Grand Star.", 
+                                    "Unlock Grand Star", 
                                     GrandStar,
                                     370468)
 createUnlockFourthWeaponAchievement("Grand Master",
-                                    "Unlock Grand Master.", 
+                                    "Unlock Grand Master", 
                                     GrandMaster,
                                     370469)
 createUnlockFourthWeaponAchievement("Steel Dragon",
-                                    "Unlock Steel Dragon.", 
+                                    "Unlock Steel Dragon", 
                                     SteelDragon,
                                     370470)
 createUnlockFourthWeaponAchievement("Oracle Sword",
-                                    "Unlock Oracle Sword.", 
+                                    "Unlock Oracle Sword", 
                                     OracleSword,
                                     370471)
 createUnlockFourthWeaponAchievement("Demon Fang",
-                                    "Unlock Demon Fang.", 
+                                    "Unlock Demon Fang", 
                                     DemonFang,
                                     370472)
 createUnlockFourthWeaponAchievement("Dragon Breath",
-                                    "Unlock Dragon Breath.", 
+                                    "Unlock Dragon Breath", 
                                     DragonBreath,
                                     370473)
 createUnlockFourthWeaponAchievement("Dark Feather",
-                                    "Unlock Dark Feather.", 
+                                    "Unlock Dark Feather", 
                                     DarkFeather,
                                     370474)
 createUnlockFourthWeaponAchievement("White Tiger",
-                                    "Unlock White Tiger.", 
+                                    "Unlock White Tiger", 
                                     WhiteTiger,
                                     370475)
 createUnlockFourthWeaponAchievement("Sea Master",
-                                    "Unlock Sea Master.", 
+                                    "Unlock Sea Master", 
                                     SeaMaster,
                                     370476)
 createUnlockFourthWeaponAchievement("Blink",
-                                    "Unlock Blink.", 
+                                    "Unlock Blink", 
                                     Blink,
                                     370477)
 createUnlockFourthWeaponAchievement("Volcano Staff",
-                                    "Unlock Volcano Staff.", 
+                                    "Unlock Volcano Staff", 
                                     VolcanoStaff,
                                     370478)
 createUnlockFourthWeaponAchievement("Marauder",
-                                    "Unlock Marauder.", 
+                                    "Unlock Marauder", 
                                     Marauder,
                                     370479)
 createUnlockFourthWeaponAchievement("Peacock Talon",
-                                    "Unlock Peacock Talon.", 
+                                    "Unlock Peacock Talon", 
                                     PeacockTalon,
                                     370480)
 createUnlockFourthWeaponAchievement("Dark Moon Flute",
-                                    "Unlock Dark Moon Flute.", 
+                                    "Unlock Dark Moon Flute", 
                                     DarkMoonFlute,
                                     370481)
 createUnlockFourthWeaponAchievement("Black Shadow",
-                                    "Unlock Black Shadow.", 
+                                    "Unlock Black Shadow", 
                                     BlackShadow,
                                     370482)
 createUnlockFourthWeaponAchievement("Overlord",
-                                    "Unlock Overlord.", 
+                                    "Unlock Overlord", 
                                     Overlord,
                                     370483)
 createUnlockFourthWeaponAchievement("Double Comet",
-                                    "Unlock Double Comet.", 
+                                    "Unlock Double Comet", 
                                     DoubleComet,
                                     370484)
 createUnlockFourthWeaponAchievement("Tornado Staff",
-                                    "Unlock Tornado Staff.", 
+                                    "Unlock Tornado Staff", 
                                     TornadoStaff,
                                     370485)
 createUnlockFourthWeaponAchievement("King of Beasts",
-                                    "Unlock King of Beasts.", 
+                                    "Unlock King of Beasts", 
                                     KingOfBeasts,
                                     370486)
 createUnlockFourthWeaponAchievement("Magma Wheel",
-                                    "Unlock Magma Wheel.", 
+                                    "Unlock Magma Wheel", 
                                     MagmaWheel,
                                     370487)
 createUnlockFourthWeaponAchievement("True Beauty",
-                                    "Unlock True Beauty.", 
+                                    "Unlock True Beauty", 
                                     TrueBeauty,
                                     370488)
 createUnlockFourthWeaponAchievement("True Grace",
-                                    "Unlock True Grace.", 
+                                    "Unlock True Grace", 
                                     TrueGrace,
                                     370489)
 createUnlockFourthWeaponAchievement("Fu Xi's Sword", 
-                                    "Unlock Fu Xi's Sword.", 
+                                    "Unlock Fu Xi's Sword", 
                                     FuXisSword,
                                     370490)
 createUnlockFourthWeaponAchievement("Nu Wa's Rapier", 
-                                    "Unlock Nu Wa's Rapier.", 
+                                    "Unlock Nu Wa's Rapier", 
                                     NuWasRapier,
                                     370491)
 
 createUnlockRareItemAchievement("Red Hare", 
-                                 "Unlock Red Hare.", 
+                                 "Unlock Red Hare", 
                                  RedHare,
                                  370492)
 createUnlockRareItemAchievement("Hex Mark Saddle", 
-                                 "Unlock Hex Mark Saddle.", 
+                                 "Unlock Hex Mark Saddle", 
                                  HexMarkSaddle,
                                  370493)
 createUnlockRareItemAchievement("Imperial Saddle", 
-                                 "Unlock Imperial Saddle.", 
+                                 "Unlock Imperial Saddle", 
                                  ImperialSaddle,
                                  370494)
 createUnlockRareItemAchievement("The Art of War", 
-                                 "Unlock The Art of War.", 
+                                 "Unlock The Art of War", 
                                  ArtOfWar,
                                  370495)
 createUnlockRareItemAchievement("Bodyguard Manual", 
-                                 "Unlock Bodyguard Manual.", 
+                                 "Unlock Bodyguard Manual", 
                                  BodyguardManual,
                                  370496)
 createUnlockRareItemAchievement("The Way of Musou", 
-                                 "Unlock The Way of Musou.", 
+                                 "Unlock The Way of Musou", 
                                  WayOfMusou,
                                  370497)
 createUnlockRareItemAchievement("Survival Guide", 
-                                 "Unlock Survival Guide.", 
+                                 "Unlock Survival Guide", 
                                  SurvivalGuide,
                                  370498)
 createUnlockRareItemAchievement("Defender", 
-                                 "Unlock Defender.", 
+                                 "Unlock Defender", 
                                  Defender,
                                  370499)
 createUnlockRareItemAchievement("Fire Arrows", 
-                                 "Unlock Fire Arrows.", 
+                                 "Unlock Fire Arrows", 
                                  FireArrows,
                                  370500)
 createUnlockRareItemAchievement("Buckler", 
-                                 "Unlock Buckler.", 
+                                 "Unlock Buckler", 
                                  Buckler,
                                  370501)
 createUnlockRareItemAchievement("Power Scroll", 
-                                 "Unlock Power Scroll.", 
+                                 "Unlock Power Scroll", 
                                  PowerScroll,
                                  370502)
 createUnlockRareItemAchievement("Golden Harness", 
-                                 "Unlock Golden Harness.", 
+                                 "Unlock Golden Harness", 
                                  GoldenHarness,
                                  370503)
 
