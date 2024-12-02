@@ -4,7 +4,7 @@
 // NOTE all code notes may change, please check RA for the latest code notes. 
 
 onePlayerString = " [1P]"
-asASinglePlayerString = " as a single player"
+asASinglePlayerString = " as a single player."
 
 
 // Character enumeration
@@ -3370,7 +3370,7 @@ function characterDefinition(
         }
         if(musouModeObject["description"] == "")
         {
-            musouModeObject["description"] = format("Beat {0}'s Musou Mode on any difficulty", name)
+            musouModeObject["description"] = format("Beat {0}'s Musou Mode on any difficulty.", name)
         }
         array_push(musouMode, musouModeObject)
 
@@ -3390,7 +3390,7 @@ function characterDefinition(
         }
         if(hardMusouModeObject["description"] == "")
         {
-            hardMusouModeObject["description"] = format("Beat every stage of {0}'s Musou Mode on hard difficulty{1} in one session", name, asASinglePlayerString)
+            hardMusouModeObject["description"] = format("Beat every stage of {0}'s Musou Mode on Hard in one session {1}", name, asASinglePlayerString)
         }
         array_push(hardMusouMode, hardMusouModeObject)
     }
@@ -3412,7 +3412,7 @@ function characterDefinition(
         }
         if(unlockObject["description"] == "")
         {
-            unlockObject["description"]= format("Unlock {0}", name)
+            unlockObject["description"]= format("Unlock {0}.", name)
         }
         array_push(characterUnlock, unlockObject)
     }
@@ -3720,7 +3720,7 @@ for unlockObject in characterUnlock
 
 // FUTURETODO: Find a way to check save?  May not be important. 
 achievement("The Gang's All Here",
-            "Unlock Lu Xun, Da Qiao, Xu Zhu, Zhen Ji, Ma Chao, and Wei Yan, either through completing one of each faction's musou modes, or having a DW 2 save file", 
+            "Unlock Lu Xun, Da Qiao, Xu Zhu, Zhen Ji, Ma Chao, and Wei Yan, either through completing Musou Mode once with each faction or having a DW2 save file.", 
                 0,
                 trigger = characterNowUnlocked(LuXunUnlocked()) && 
                           characterNowUnlocked(DaQiaoUnlocked()) && 
@@ -3734,216 +3734,216 @@ achievement("The Gang's All Here",
 
 
 createUnlockFourthWeaponAchievement("Fierce Dragon",
-                                    "Unlock Fierce Dragon", 
+                                    "Unlock Fierce Dragon.", 
                                     FierceDragon,
                                     370451)
 createUnlockFourthWeaponAchievement("Blue Moon Dragon",
-                                    "Unlock Blue Moon Dragon", 
+                                    "Unlock Blue Moon Dragon.", 
                                     BlueMoonDragon,
                                     370452)
 createUnlockFourthWeaponAchievement("Viper Blade",
-                                    "Unlock Viper Blade", 
+                                    "Unlock Viper Blade.", 
                                     ViperBlade,
                                     370453)
 createUnlockFourthWeaponAchievement("Kirin Fang",
-                                    "Unlock Kirin Fang", 
+                                    "Unlock Kirin Fang.", 
                                     KirinFang,
                                     370454)
 createUnlockFourthWeaponAchievement("Mad Bull",
-                                    "Unlock Mad Bull", 
+                                    "Unlock Mad Bull.", 
                                     MadBull,
                                     370455)
 createUnlockFourthWeaponAchievement("Stone Crusher",
-                                    "Unlock Stone Crusher", 
+                                    "Unlock Stone Crusher.", 
                                     StoneCrusher,
                                     370456)
 createUnlockFourthWeaponAchievement("Ancients Sword",
-                                    "Unlock Ancients Sword", 
+                                    "Unlock Ancients Sword.", 
                                     AncientsSword,
                                     370457)
 createUnlockFourthWeaponAchievement("Falcon",
-                                    "Unlock Falcon", 
+                                    "Unlock Falcon.", 
                                     Falcon,
                                     370458)
 createUnlockFourthWeaponAchievement("Tiger Slayer",
-                                    "Unlock Tiger Slayer", 
+                                    "Unlock Tiger Slayer.", 
                                     TigerSlayer,
                                     370459)
 createUnlockFourthWeaponAchievement("Gold Globe",
-                                    "Unlock Gold Globe", 
+                                    "Unlock Gold Globe.", 
                                     GoldGlobe,
                                     370460)
 createUnlockFourthWeaponAchievement("Peacock Feather",
-                                    "Unlock Peacock Feather", 
+                                    "Unlock Peacock Feather.", 
                                     PeacockFeather,
                                     370461)
 createUnlockFourthWeaponAchievement("Wrath of Heaven",
-                                    "Unlock Wrath of Heaven", 
+                                    "Unlock Wrath of Heaven.", 
                                     WrathOfHeaven,
                                     370462)
 createUnlockFourthWeaponAchievement("Sky Scorcher",
-                                    "Unlock Sky Scorcher", 
+                                    "Unlock Sky Scorcher.", 
                                     SkyScorcher,
                                     370463)
 createUnlockFourthWeaponAchievement("Sol Chakram",
-                                    "Unlock Sol Chakram", 
+                                    "Unlock Sol Chakram.", 
                                     SolChakram,
                                     370464)
 createUnlockFourthWeaponAchievement("Gold Moon Dragon",
-                                    "Unlock Gold Moon Dragon", 
+                                    "Unlock Gold Moon Dragon.", 
                                     GoldMoonDragon,
                                     370465)
 createUnlockFourthWeaponAchievement("Savage Wolf",
-                                    "Unlock Savage Wolf", 
+                                    "Unlock Savage Wolf.", 
                                     SavageWolf,
                                     370466)
 createUnlockFourthWeaponAchievement("Master Wolf",
-                                    "Unlock Master Wolf", 
+                                    "Unlock Master Wolf.", 
                                     MasterWolf,
                                     370467)
 createUnlockFourthWeaponAchievement("Grand Star",
-                                    "Unlock Grand Star", 
+                                    "Unlock Grand Star.", 
                                     GrandStar,
                                     370468)
 createUnlockFourthWeaponAchievement("Grand Master",
-                                    "Unlock Grand Master", 
+                                    "Unlock Grand Master.", 
                                     GrandMaster,
                                     370469)
 createUnlockFourthWeaponAchievement("Steel Dragon",
-                                    "Unlock Steel Dragon", 
+                                    "Unlock Steel Dragon.", 
                                     SteelDragon,
                                     370470)
 createUnlockFourthWeaponAchievement("Oracle Sword",
-                                    "Unlock Oracle Sword", 
+                                    "Unlock Oracle Sword.", 
                                     OracleSword,
                                     370471)
 createUnlockFourthWeaponAchievement("Demon Fang",
-                                    "Unlock Demon Fang", 
+                                    "Unlock Demon Fang.", 
                                     DemonFang,
                                     370472)
 createUnlockFourthWeaponAchievement("Dragon Breath",
-                                    "Unlock Dragon Breath", 
+                                    "Unlock Dragon Breath.", 
                                     DragonBreath,
                                     370473)
 createUnlockFourthWeaponAchievement("Dark Feather",
-                                    "Unlock Dark Feather", 
+                                    "Unlock Dark Feather.", 
                                     DarkFeather,
                                     370474)
 createUnlockFourthWeaponAchievement("White Tiger",
-                                    "Unlock White Tiger", 
+                                    "Unlock White Tiger.", 
                                     WhiteTiger,
                                     370475)
 createUnlockFourthWeaponAchievement("Sea Master",
-                                    "Unlock Sea Master", 
+                                    "Unlock Sea Master.", 
                                     SeaMaster,
                                     370476)
 createUnlockFourthWeaponAchievement("Blink",
-                                    "Unlock Blink", 
+                                    "Unlock Blink.", 
                                     Blink,
                                     370477)
 createUnlockFourthWeaponAchievement("Volcano Staff",
-                                    "Unlock Volcano Staff", 
+                                    "Unlock Volcano Staff.", 
                                     VolcanoStaff,
                                     370478)
 createUnlockFourthWeaponAchievement("Marauder",
-                                    "Unlock Marauder", 
+                                    "Unlock Marauder.", 
                                     Marauder,
                                     370479)
 createUnlockFourthWeaponAchievement("Peacock Talon",
-                                    "Unlock Peacock Talon", 
+                                    "Unlock Peacock Talon.", 
                                     PeacockTalon,
                                     370480)
 createUnlockFourthWeaponAchievement("Dark Moon Flute",
-                                    "Unlock Dark Moon Flute", 
+                                    "Unlock Dark Moon Flute.", 
                                     DarkMoonFlute,
                                     370481)
 createUnlockFourthWeaponAchievement("Black Shadow",
-                                    "Unlock Black Shadow", 
+                                    "Unlock Black Shadow.", 
                                     BlackShadow,
                                     370482)
 createUnlockFourthWeaponAchievement("Overlord",
-                                    "Unlock Overlord", 
+                                    "Unlock Overlord.", 
                                     Overlord,
                                     370483)
 createUnlockFourthWeaponAchievement("Double Comet",
-                                    "Unlock Double Comet", 
+                                    "Unlock Double Comet.", 
                                     DoubleComet,
                                     370484)
 createUnlockFourthWeaponAchievement("Tornado Staff",
-                                    "Unlock Tornado Staff", 
+                                    "Unlock Tornado Staff.", 
                                     TornadoStaff,
                                     370485)
 createUnlockFourthWeaponAchievement("King of Beasts",
-                                    "Unlock King of Beasts", 
+                                    "Unlock King of Beasts.", 
                                     KingOfBeasts,
                                     370486)
 createUnlockFourthWeaponAchievement("Magma Wheel",
-                                    "Unlock Magma Wheel", 
+                                    "Unlock Magma Wheel.", 
                                     MagmaWheel,
                                     370487)
 createUnlockFourthWeaponAchievement("True Beauty",
-                                    "Unlock True Beauty", 
+                                    "Unlock True Beauty.", 
                                     TrueBeauty,
                                     370488)
 createUnlockFourthWeaponAchievement("True Grace",
-                                    "Unlock True Grace", 
+                                    "Unlock True Grace.", 
                                     TrueGrace,
                                     370489)
 createUnlockFourthWeaponAchievement("Fu Xi's Sword", 
-                                    "Unlock Fu Xi's Sword", 
+                                    "Unlock Fu Xi's Sword.", 
                                     FuXisSword,
                                     370490)
 createUnlockFourthWeaponAchievement("Nu Wa's Rapier", 
-                                    "Unlock Nu Wa's Rapier", 
+                                    "Unlock Nu Wa's Rapier.", 
                                     NuWasRapier,
                                     370491)
 
 createUnlockRareItemAchievement("Red Hare", 
-                                 "Unlock Red Hare", 
+                                 "Unlock Red Hare.", 
                                  RedHare,
                                  370492)
 createUnlockRareItemAchievement("Hex Mark Saddle", 
-                                 "Unlock Hex Mark Saddle", 
+                                 "Unlock Hex Mark Saddle.", 
                                  HexMarkSaddle,
                                  370493)
 createUnlockRareItemAchievement("Imperial Saddle", 
-                                 "Unlock Imperial Saddle", 
+                                 "Unlock Imperial Saddle.", 
                                  ImperialSaddle,
                                  370494)
-createUnlockRareItemAchievement("Art of War", 
-                                 "Unlock Art of War", 
+createUnlockRareItemAchievement("The Art of War", 
+                                 "Unlock The Art of War.", 
                                  ArtOfWar,
                                  370495)
 createUnlockRareItemAchievement("Bodyguard Manual", 
-                                 "Unlock Bodyguard Manual", 
+                                 "Unlock Bodyguard Manual.", 
                                  BodyguardManual,
                                  370496)
-createUnlockRareItemAchievement("Way of Musou", 
-                                 "Unlock Way of Musou", 
+createUnlockRareItemAchievement("The Way of Musou", 
+                                 "Unlock The Way of Musou.", 
                                  WayOfMusou,
                                  370497)
 createUnlockRareItemAchievement("Survival Guide", 
-                                 "Unlock Survival Guide", 
+                                 "Unlock Survival Guide.", 
                                  SurvivalGuide,
                                  370498)
 createUnlockRareItemAchievement("Defender", 
-                                 "Unlock Defender", 
+                                 "Unlock Defender.", 
                                  Defender,
                                  370499)
 createUnlockRareItemAchievement("Fire Arrows", 
-                                 "Unlock Fire Arrows", 
+                                 "Unlock Fire Arrows.", 
                                  FireArrows,
                                  370500)
 createUnlockRareItemAchievement("Buckler", 
-                                 "Unlock Buckler", 
+                                 "Unlock Buckler.", 
                                  Buckler,
                                  370501)
 createUnlockRareItemAchievement("Power Scroll", 
-                                 "Unlock Power Scroll", 
+                                 "Unlock Power Scroll.", 
                                  PowerScroll,
                                  370502)
 createUnlockRareItemAchievement("Golden Harness", 
-                                 "Unlock Golden Harness", 
+                                 "Unlock Golden Harness.", 
                                  GoldenHarness,
                                  370503)
 
@@ -3971,15 +3971,15 @@ function createWeaponTierListAchievement(name, description, points, arrayOfWeapo
 
 // Second tier achievement
 // Note this is EVERY character including Nu Xi and Fu Xi.  It doesn't requiring playing as every character but does require playing many of the characters
-createWeaponTierListAchievement("Get All Tier 2 Weapons",
-        "Collect every tier 2 weapon", 
+createWeaponTierListAchievement("Get All 2nd Weapons",
+        "Collect every 2nd weapon.", 
         5,
         TierTwoWeapons,
         370356)
 // Tier Three achievement, this requires even more waepons then Tier 2, and it's probably going to needed a harder difficulty, which means more leveling of every character.
 // Though this does allow Second player abuse.  
-createWeaponTierListAchievement("Get All Tier 3 Weapons",
-        "Collect every tier 3 weapon", 
+createWeaponTierListAchievement("Get All 3rd Weapons",
+        "Collect every 3rd weapon.", 
         5,
         TierThreeWeapons,
         370357)
@@ -4004,7 +4004,7 @@ NormalItems =
 
 // 1 Collect minor items (Accesories (Should use Add Hits)) 
 achievement("Collect All Common Items",
-            "Collect the first thirteen Items", 
+            "Collect the first thirteen Items.", 
             3,
             trigger = MusouModeOrFreeMode() &&
                       didntpreviouslyOwnAllItems(NormalItems) &&   // As long as we don't already have them all 
@@ -4017,7 +4017,7 @@ achievement("Collect All Common Items",
 
 // This has been replaced, but left the code idea here for subsets. 
 // achievement("[VOID] They Can’t Handle Any More Power",
-//             "The level of grind on this is insane.  Collect the strongest version of all common items", 
+//             "The level of grind on this is insane. Collect the strongest version of all common items.", 
 //             25,
 //             trigger = MusouModeOrFreeMode() &&
 //                       didntpreviouslyMaxItems(NormalItems) &&   // As long as we don't already have them all 
@@ -4052,7 +4052,7 @@ FramesForGuanYuEasterEgg = 700
 
 
 achievement("Guan Yu's Most Difficult Enemy?",
-             "Watch the easter egg intro for Fan Castle", 
+             "Watch the easter egg intro for The Battle at Fan Castle.", 
              2,
              trigger = FreeModeOnly() &&
                        checkFirstPlayerCharacterIndex(GuanYu) &&
@@ -4322,7 +4322,7 @@ stageArray =
 
 // “Beat a Hard mode level with a rank 16 character”  (Missable, and will guard against 2p being above a rank 16 as well, you need to take a completely fresh character to beat this. ) 
 achievement("Nothing Gonna Stop Me",
-            "Beat a hard mode level as a character with no experience points and at rank 16" + asASinglePlayerString, 
+            "Beat a level on Hard as a character with no experience points at Rank 16" + asASinglePlayerString, 
             3,
             trigger = MusouModeOrFreeMode() &&
                       hardModeCheck() &&
@@ -4352,8 +4352,8 @@ function createFeastAchievement()
             )
         
     }
-    achievement("A Feast Fit for Xu Shu",
-        "Enjoy two dim sums and two musou wines in one stage and finish the stage" + asASinglePlayerString + ".  Beware if you're already stuffed (near max health or max musou), you won't be able to enjoy them",
+    achievement("A Feast Fit for Xu Zhu",
+        "Enjoy two Dim Sums and two Musou Wines in one stage and complete it" + asASinglePlayerString + " Beware if you're already stuffed (near max Health or max Musou), you won't be able to enjoy them.",
         2,
         trigger = MusouModeOrFreeMode() &&
                   wonStageCheck() &&
@@ -4369,7 +4369,7 @@ createFeastAchievement()
 
 // “True Legend of the Three Kingdoms”  Beat 1000 enemies on a single level on Hard difficulty.
 achievement("True Legend of the Three Kingdoms",
-            "Earn 1000 Kills on hard mode and finish the stage" + asASinglePlayerString, 
+            "Earn 1000 kills on Hard and finish the stage" + asASinglePlayerString, 
             5,
             trigger = MusouModeOrFreeMode() &&
                       hardModeCheck() &&
@@ -4381,7 +4381,7 @@ achievement("True Legend of the Three Kingdoms",
 )
 
 achievement("All According to Wang Yun’s Plan",
-            "Kill Dong Zhuo at the Battle of Hu Lao Gate as Lu Bu, but avoid killing your love, Diao Chan" + onePlayerString, 
+            "Kill Dong Zhuo at The Battle of Hu Lao Gate as Lu Bu, but avoid killing your love, Diao Chan" + onePlayerString, 
             2,
             trigger = MusouModeOrFreeMode() &&
                       checkFirstPlayerCharacterIndex(LuBu) &&
@@ -4399,7 +4399,7 @@ achievement("All According to Wang Yun’s Plan",
 // - Complete -Insert Night Time Stage- as Diaochan in Free Mode
 //Diaochan was part of the four great beauties of Ancient China and each had an idiom to their name with her's being "Diaochan eclipses the moon"
 achievement("Diao Chan Eclipses the Moon",
-            "Complete Wu Zhang Plain on any side as Diao Chan in Free Mode" + asASinglePlayerString, 
+            "Complete The Battle at Wu Zhang Plains on any side as Diao Chan in Free Mode" + asASinglePlayerString, 
             3,
             trigger = MusouModeOrFreeMode() &&
                       checkStageID(BattleAtWuZhangPlainsStageID) &&
@@ -4413,7 +4413,7 @@ achievement("Diao Chan Eclipses the Moon",
 // Nanman Jackpot - Defeat 7 Officers as Meng Huo during Battle of Nanman with the last being Zhuge Liang.
 // Meng Huo was famously captured by Zhuge Liang during the Southern Campaign (Battle of Nanman) Seven Times.
 achievement("Nanman Jackpot",
-            "Defeat exactly 7 Officers as Meng Huo during Battle of Nanman with the Nanman Forces"  + asASinglePlayerString + " (Kills must be done by the player, bodyguard and other kills will not count)", 
+            "Defeat exactly 7 officers as Meng Huo during The Nanman Campaign with the Nanman Forces"  + asASinglePlayerString + " (Kills must be done by the player, bodyguard and other kills will not count.)", 
             2,
             trigger = MusouModeOrFreeMode() &&
                       checkStageID(NanmanCampaignStageID) &&
@@ -4449,7 +4449,7 @@ achievement("The Fire Deity Incinerates Chi Bi",
 // He Dong What? - Complete The Battle of Changban (Liu Bei) as Dong Zhuo
 // Dong Zhuo I've had some trouble thinking of anything for him, so I came up with the idea of playing him during a stage that is the opposite of his personality of being the most evil guy. The Battle of Changban is the battle where Zhao Yun famously rescued Liu Shan from Cao Cao's army.
 achievement("He Dong What?",
-            "Complete The Battle of Chang Ban on Liu Bei's Side in Free Mode while playing Dong Zhuo" + asASinglePlayerString, 
+            "Complete The Battle of Chang Ban with Liu Bei's Forces in Free Mode as Dong Zhuo" + asASinglePlayerString, 
             2,
             trigger = MusouModeOrFreeMode() &&
                       checkFirstPlayerCharacterIndex(DongZhuo) &&
@@ -4465,7 +4465,7 @@ achievement("He Dong What?",
 // The Way of Peace - Complete The Yellow Turban stage as Zhang Jiao only defeating the necessary enemy generals
 // The book that is said to have inspired Zhang Jiao to start the Yellow Turban rebellion was called The Way of Peace
 achievement("The Way of Peace",
-            "Complete the Yellow Turban's Rebellion as Zhang Jiao in Free Mode only killing the necessary enemy general, and no one else" + asASinglePlayerString, 
+            "Complete The Yellow Turban Rebellion as Zhang Jiao in Free Mode only killing the necessary enemy officers and no one else" + asASinglePlayerString, 
             1,
             trigger = MusouModeOrFreeMode() &&
                       checkStageID(YellowTurbanRebellionStageID) &&
@@ -4482,7 +4482,7 @@ achievement("The Way of Peace",
 )
 
 achievement("I Brought You Into This World, Now I’m Taking You Out of It",
-            "Finish a Challenge mode Endurance killing at least 1000 enemies as Fu Xi or Nu Wa " + asASinglePlayerString, 
+            "In Challenge Mode, kill at least 1000 enemies in Endurance as Fu Xi or Nu Wa " + asASinglePlayerString, 
             5,  // Grindy but not hard. 
             trigger = ChallengeModeOnly() &&
                       CurrentCutsceneLevelIndex() == ChallengeModeEnduranceLevelCutsceneID &&               
@@ -4499,7 +4499,7 @@ achievement("I Brought You Into This World, Now I’m Taking You Out of It",
 
 
 achievement("Raining Death",
-            "Finish a Challenge mode Time Attack in less than 4 minutes" + asASinglePlayerString, 
+            "In Challenge Mode, finish a Time Attack in less than 4 minutes" + asASinglePlayerString, 
             10, // Time attack time is VERY tight.  If you look up videos, be careful, XL has players gain levels, DW 3 does not.   This could even be 25.
             trigger = ChallengeModeOnly() &&
                       CurrentCutsceneLevelIndex() == ChallengeModeTimeAttackLevelCutsceneID &&               
@@ -4538,7 +4538,7 @@ function CreateAchievementsForStage(stage, achievementID, killLeaderboardsID, fa
     // state: a dictionary of stage information. 
     
     achievement(format("Ultimate Challenge: {0}", StageLookup[stage["ID"]]), 
-                format("Beat {0} on hard difficulty without using an in-game save" + asASinglePlayerString, StageLookup[stage["ID"]]),
+                format("Beat {0} on Hard without using an interim save" + asASinglePlayerString, StageLookup[stage["ID"]]),
                 5, 
                 trigger =                                         MusouModeOrFreeMode() &&
                         hardModeCheck() &&
@@ -4603,7 +4603,7 @@ function CreateAchievementsForStageFaction(stage, factionID, achievementID, kill
         factionName = FactionNameLookup[factionID]
         factionForces = FactionForcesLookup[factionID]
         achievement( format("Ultimate Challenge: {0}({1})", StageLookup[stage["ID"]], factionName), 
-                    format("Beat {0} with the {1} on hard difficulty without using an in-game save"+ asASinglePlayerString + ".  This can be done in Free mode", StageLookup[stage["ID"]], factionForces),
+                    format("Beat {0} with the {1} on Hard without using an interim save"+ asASinglePlayerString + ". Free Mode available.", StageLookup[stage["ID"]], factionForces),
                     5, 
                     trigger = MusouModeOrFreeMode() &&
                             hardModeCheck() &&
@@ -4698,7 +4698,7 @@ for stage in stageArray
 }
 
 achievement("So That’s What Everyone Else Was Doing", 
-            "Play the secret ending for independent officers",
+            "Play the secret ending for independent officers.",
             1, 
             // This could be harder, but really if this is playing in any format, this is the video, and I believe it only plays from opening edit. 
             trigger = isSecretEndingPlaying() &&
@@ -4709,7 +4709,7 @@ achievement("So That’s What Everyone Else Was Doing",
 
 // “Beat a level without letting your health drop below 50 percent”  Could be done with UI elements, but considering using a pointer here just to demonstrate that, even if it’s a  less efficent way to do so. 
 achievement( format("None of You Are Even Half as Good as Me"), 
-             format("Beat a level with out letting your health drop below 50 percent on normal or hard, or using an in-game save" + asASinglePlayerString),
+             format("Beat a level without letting your Health drop below 50 percent on Normal or Hard and without an interim save" + asASinglePlayerString),
              3, 
              trigger = normalOrHardCheck() &&
                        triggerJustWonStageCheck() &&
@@ -4749,7 +4749,7 @@ function getMusouModeGeneralKills( musouStages )
 
 leaderboard(
     title = format("Most Kills for a 7 Stage Musou Mode"),
-    description = format("Get the most total kills across each stage a musou mode (No Sun Jian, Liu Bei, or Cao Cao, only first player kills are counted)"),
+    description = format("Get the most total kills across each stage of Musou Mode (No Sun Jian, Liu Bei, or Cao Cao. Only first player kills are counted.)"),
     start = 
     (
         CurrentStagesCompleteMusouMode() == 7 && 
@@ -4770,8 +4770,8 @@ leaderboard(
 )
 
 leaderboard(
-    title = format("Most General kills for a 7 Stage Musou Mode"),
-    description = format("Get the most total kills of general (or named units) across each stage of musou mode (Sun Jian, Liu Bei, or Cao Cao, only first player kills are counted, duplicate kills in the same level are not counted.)"),
+    title = format("Most Officer Kills for a 7 Stage Musou Mode"),
+    description = format("Get the most total officer kills across each stage of Musou Mode (No Sun Jian, Liu Bei, or Cao Cao. Only first player kills not duplicated in the same level are counted.)"),
     start = 
     (
         CurrentStagesCompleteMusouMode() == 7 && 
@@ -4793,7 +4793,7 @@ leaderboard(
 
 leaderboard(
     title = format("Most Kills for a 10 Stage Musou Mode"),
-    description = format("Get the most total kills across each stage a musou mode (No Sun Jian, Liu Bei, or Cao Cao, only first player kills are counted)"),
+    description = format("Get the most total kills across each stage of Musou Mode. (Sun Jian, Liu Bei, or Cao Cao. Only first player kills are counted.)"),
     start = 
     (
         CurrentStagesCompleteMusouMode() == 10 && 
@@ -4816,8 +4816,8 @@ leaderboard(
 )
 
 leaderboard(
-    title = format("Most General kills for a 10 Stage Musou Mode"),
-    description = format("Get the most total kills of general (or named units) across each stage of musou mode (No Sun Jian, Liu Bei, or Cao Cao, only first player kills are counted, duplicate kills in the same level are not counted.)"),
+    title = format("Most Officer Kills for a 10 Stage Musou Mode"),
+    description = format("Get the most total officer kills across each stage of Musou Mode. (Sun Jian, Liu Bei, or Cao Cao. Only first player kills not duplicated in the same level are counted.)"),
     start = 
     (
         CurrentStagesCompleteMusouMode() == 10 && 
@@ -4840,8 +4840,8 @@ leaderboard(
 )
 
 leaderboard(
-    title = format("Most kills in Challenge Mode Endurance"),
-    description = format("Get the most kills in a single Challenge Mode Endurance run" + asASinglePlayerString),
+    title = format("Most Kills in Challenge Mode Endurance"),
+    description = format("In Challenge Mode, get the most kills in a single Endurance run" + asASinglePlayerString),
     start = 
     (
         ChallengeModeOnly() &&
@@ -4858,7 +4858,7 @@ leaderboard(
 
 leaderboard(
     title = format("Fastest Time to Finish Challenge Mode Time Attack"),
-    description = format("Complete Challenge Mode's Time Attack as fast as possible" + asASinglePlayerString),
+    description = format("In Challenge Mode, complete Time Attack as fast as possible" + asASinglePlayerString),
     start = 
     (
         ChallengeModeOnly() &&
