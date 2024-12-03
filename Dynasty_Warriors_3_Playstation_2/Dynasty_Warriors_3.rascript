@@ -3720,7 +3720,7 @@ for unlockObject in characterUnlock
 
 // FUTURETODO: Find a way to check save?  May not be important. 
 achievement("The Gang's All Here",
-            "Unlock Lu Xun, Da Qiao, Xu Zhu, Zhen Ji, Ma Chao, and Wei Yan, either through completing Musou Mode once with each faction or having a DW2 save file.", 
+            "Unlock Lu Xun, Da Qiao, Xu Zhu, Zhen Ji, Ma Chao, and Wei Yan, either through completing Musou Mode once with each faction or having a DW2 save file", 
                 0,
                 trigger = characterNowUnlocked(LuXunUnlocked()) && 
                           characterNowUnlocked(DaQiaoUnlocked()) && 
@@ -3728,7 +3728,7 @@ achievement("The Gang's All Here",
                           characterNowUnlocked(ZhenJiUnlocked()) && 
                           characterNowUnlocked(MaChaoUnlocked()) && 
                           characterNowUnlocked(WeiYanUnlocked()) &&
-                          true, // saveProtection(), // we remove the save protection on this achievement intentionally as it will be done by loading a DW 2 file. 
+                          true, // saveProtection(), // We remove the save protection on this achievement intentionally as it will be done by loading a DW2 file
                 id = 370355
                 )
 
@@ -4004,7 +4004,7 @@ NormalItems =
 
 // 1 Collect minor items (Accesories (Should use Add Hits)) 
 achievement("Collect All Common Items",
-            "Collect the first thirteen Items", 
+            "Collect all thirteen common (blue) items", 
             3,
             trigger = MusouModeOrFreeMode() &&
                       didntpreviouslyOwnAllItems(NormalItems) &&   // As long as we don't already have them all 
@@ -4353,7 +4353,7 @@ function createFeastAchievement()
         
     }
     achievement("A Feast Fit for Xu Zhu",
-        "Enjoy two Dim Sums and two Musou Wines in one stage and complete it" + asASinglePlayerString + "; beware if you're already stuffed (near max Health or max Musou), you won't be able to enjoy them.",
+        "Enjoy two Dim Sums and two Musou Wines in one stage and complete it" + asASinglePlayerString + "; beware if you're already stuffed (near max Health or Musou), you won't be able to enjoy them",
         2,
         trigger = MusouModeOrFreeMode() &&
                   wonStageCheck() &&
@@ -4413,7 +4413,7 @@ achievement("Diao Chan Eclipses the Moon",
 // Nanman Jackpot - Defeat 7 Officers as Meng Huo during Battle of Nanman with the last being Zhuge Liang.
 // Meng Huo was famously captured by Zhuge Liang during the Southern Campaign (Battle of Nanman) Seven Times.
 achievement("Nanman Jackpot",
-            "Defeat exactly 7 officers as Meng Huo during The Nanman Campaign with the Nanman Forces"  + asASinglePlayerString + " (Kills must be done by the player, bodyguard and other kills will not count.)", 
+            "Defeat exactly 7 officers as Meng Huo during The Nanman Campaign with the Nanman Forces"  + asASinglePlayerString + " (Kills must be done by the player, bodyguard and other kills will not count)", 
             2,
             trigger = MusouModeOrFreeMode() &&
                       checkStageID(NanmanCampaignStageID) &&
@@ -4482,7 +4482,7 @@ achievement("The Way of Peace",
 )
 
 achievement("I Brought You Into This World, Now I’m Taking You Out of It",
-            "In Challenge Mode, kill at least 1000 enemies in Endurance as Fu Xi or Nu Wa " + asASinglePlayerString, 
+            "In Challenge Mode, kill at least 1000 enemies in Endurance as Fu Xi or Nu Wa" + asASinglePlayerString, 
             5,  // Grindy but not hard. 
             trigger = ChallengeModeOnly() &&
                       CurrentCutsceneLevelIndex() == ChallengeModeEnduranceLevelCutsceneID &&               
@@ -4698,7 +4698,7 @@ for stage in stageArray
 }
 
 achievement("So That’s What Everyone Else Was Doing", 
-            "Play the secret ending for independent officers.",
+            "Play the secret ending for independent officers",
             1, 
             // This could be harder, but really if this is playing in any format, this is the video, and I believe it only plays from opening edit. 
             trigger = isSecretEndingPlaying() &&
@@ -4709,7 +4709,7 @@ achievement("So That’s What Everyone Else Was Doing",
 
 // “Beat a level without letting your health drop below 50 percent”  Could be done with UI elements, but considering using a pointer here just to demonstrate that, even if it’s a  less efficent way to do so. 
 achievement( format("None of You Are Even Half as Good as Me"), 
-             format("Beat a level without letting your Health drop below 50 percent on Normal or Hard and without an interim save" + asASinglePlayerString),
+             format("Beat a level with no less than 50 percent Health on Normal or Hard without an interim save" + asASinglePlayerString),
              3, 
              trigger = normalOrHardCheck() &&
                        triggerJustWonStageCheck() &&
