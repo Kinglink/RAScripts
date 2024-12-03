@@ -4,7 +4,7 @@
 // NOTE all code notes may change, please check RA for the latest code notes. 
 
 onePlayerString = " [1P]"
-asASinglePlayerString = " as a single player."
+asASinglePlayerString = " as a single player"
 
 
 // Character enumeration
@@ -429,7 +429,7 @@ StageLookup =
     BattleAtFanCastleStageID: "The Battle at Fan Castle", 
     BattleOfMtDingJunStageID: "The Battle of Mt Ding Jun", 
     BattleAtYiLingStageID: "The Battle at Yi Ling", 
-    NanmanCampaignStageID: "Nanman Campaign", 
+    NanmanCampaignStageID: "The Nanman Campaign", 
     BattleOfJieTingStageID: "The Battle of Jie Ting", 
     BattleAtYouTingStageID: "The Battle at You Ting", 
     SiegeAtHeFeiCastleStageID: "Siege at He Fei Castle", 
@@ -3370,7 +3370,7 @@ function characterDefinition(
         }
         if(musouModeObject["description"] == "")
         {
-            musouModeObject["description"] = format("Beat {0}'s Musou Mode on any difficulty.", name)
+            musouModeObject["description"] = format("Beat {0}'s Musou Mode on any difficulty", name)
         }
         array_push(musouMode, musouModeObject)
 
@@ -3412,7 +3412,7 @@ function characterDefinition(
         }
         if(unlockObject["description"] == "")
         {
-            unlockObject["description"]= format("Unlock {0}.", name)
+            unlockObject["description"]= format("Unlock {0}", name)
         }
         array_push(characterUnlock, unlockObject)
     }
@@ -3454,7 +3454,7 @@ characterDefinition( characterIndex = DianWei,
                      musouModeAchievementID = 370297, 
                      musouModeName = "Dian Wei",
                      hardMusouModeAchievementID = 370328, 
-                     hardMusouModeName = "The Man with no Nicknames")
+                     hardMusouModeName = "The Man with No Nicknames")
 characterDefinition( characterIndex = XuZhu, 
                      unlockMemoryLocation = XuZhuUnlocked(), 
                      unlockEnabled = false,
@@ -3972,14 +3972,14 @@ function createWeaponTierListAchievement(name, description, points, arrayOfWeapo
 // Second tier achievement
 // Note this is EVERY character including Nu Xi and Fu Xi.  It doesn't requiring playing as every character but does require playing many of the characters
 createWeaponTierListAchievement("Get All 2nd Weapons",
-        "Collect every 2nd weapon.", 
+        "Collect every 2nd weapon", 
         5,
         TierTwoWeapons,
         370356)
 // Tier Three achievement, this requires even more waepons then Tier 2, and it's probably going to needed a harder difficulty, which means more leveling of every character.
 // Though this does allow Second player abuse.  
 createWeaponTierListAchievement("Get All 3rd Weapons",
-        "Collect every 3rd weapon.", 
+        "Collect every 3rd weapon", 
         5,
         TierThreeWeapons,
         370357)
@@ -4004,7 +4004,7 @@ NormalItems =
 
 // 1 Collect minor items (Accesories (Should use Add Hits)) 
 achievement("Collect All Common Items",
-            "Collect the first thirteen Items.", 
+            "Collect the first thirteen Items", 
             3,
             trigger = MusouModeOrFreeMode() &&
                       didntpreviouslyOwnAllItems(NormalItems) &&   // As long as we don't already have them all 
@@ -4017,7 +4017,7 @@ achievement("Collect All Common Items",
 
 // This has been replaced, but left the code idea here for subsets. 
 // achievement("[VOID] They Can’t Handle Any More Power",
-//             "The level of grind on this is insane. Collect the strongest version of all common items.", 
+//             "The level of grind on this is insane; collect the strongest version of all common items", 
 //             25,
 //             trigger = MusouModeOrFreeMode() &&
 //                       didntpreviouslyMaxItems(NormalItems) &&   // As long as we don't already have them all 
@@ -4052,7 +4052,7 @@ FramesForGuanYuEasterEgg = 700
 
 
 achievement("Guan Yu's Most Difficult Enemy?",
-             "Watch the easter egg intro for The Battle at Fan Castle.", 
+             "Watch the easter egg intro for The Battle at Fan Castle", 
              2,
              trigger = FreeModeOnly() &&
                        checkFirstPlayerCharacterIndex(GuanYu) &&
@@ -4353,7 +4353,7 @@ function createFeastAchievement()
         
     }
     achievement("A Feast Fit for Xu Zhu",
-        "Enjoy two Dim Sums and two Musou Wines in one stage and complete it" + asASinglePlayerString + " Beware if you're already stuffed (near max Health or max Musou), you won't be able to enjoy them.",
+        "Enjoy two Dim Sums and two Musou Wines in one stage and complete it" + asASinglePlayerString + "; beware if you're already stuffed (near max Health or max Musou), you won't be able to enjoy them.",
         2,
         trigger = MusouModeOrFreeMode() &&
                   wonStageCheck() &&
@@ -4603,7 +4603,7 @@ function CreateAchievementsForStageFaction(stage, factionID, achievementID, kill
         factionName = FactionNameLookup[factionID]
         factionForces = FactionForcesLookup[factionID]
         achievement( format("Ultimate Challenge: {0}({1})", StageLookup[stage["ID"]], factionName), 
-                    format("Beat {0} with the {1} on Hard without using an interim save"+ asASinglePlayerString + ". Free Mode available.", StageLookup[stage["ID"]], factionForces),
+                    format("Beat {0} with the {1} on Hard without using an interim save"+ asASinglePlayerString + " (Free Mode available)", StageLookup[stage["ID"]], factionForces),
                     5, 
                     trigger = MusouModeOrFreeMode() &&
                             hardModeCheck() &&
@@ -4749,7 +4749,7 @@ function getMusouModeGeneralKills( musouStages )
 
 leaderboard(
     title = format("Most Kills for a 7 Stage Musou Mode"),
-    description = format("Get the most total kills across each stage of Musou Mode (No Sun Jian, Liu Bei, or Cao Cao. Only first player kills are counted.)"),
+    description = format("Get the most total kills across each stage of Musou Mode (No Sun Jian, Liu Bei, or Cao Cao; only first player kills are counted)"),
     start = 
     (
         CurrentStagesCompleteMusouMode() == 7 && 
@@ -4771,7 +4771,7 @@ leaderboard(
 
 leaderboard(
     title = format("Most Officer Kills for a 7 Stage Musou Mode"),
-    description = format("Get the most total officer kills across each stage of Musou Mode (No Sun Jian, Liu Bei, or Cao Cao. Only first player kills not duplicated in the same level are counted.)"),
+    description = format("Get the most total officer kills across each stage of Musou Mode (No Sun Jian, Liu Bei, or Cao Cao; only first player kills not duplicated in the same level are counted)"),
     start = 
     (
         CurrentStagesCompleteMusouMode() == 7 && 
@@ -4793,7 +4793,7 @@ leaderboard(
 
 leaderboard(
     title = format("Most Kills for a 10 Stage Musou Mode"),
-    description = format("Get the most total kills across each stage of Musou Mode. (Sun Jian, Liu Bei, or Cao Cao. Only first player kills are counted.)"),
+    description = format("Get the most total kills across each stage of Musou Mode (Sun Jian, Liu Bei, or Cao Cao; only first player kills are counted)"),
     start = 
     (
         CurrentStagesCompleteMusouMode() == 10 && 
@@ -4817,7 +4817,7 @@ leaderboard(
 
 leaderboard(
     title = format("Most Officer Kills for a 10 Stage Musou Mode"),
-    description = format("Get the most total officer kills across each stage of Musou Mode. (Sun Jian, Liu Bei, or Cao Cao. Only first player kills not duplicated in the same level are counted.)"),
+    description = format("Get the most total officer kills across each stage of Musou Mode (Sun Jian, Liu Bei, or Cao Cao; only first player kills not duplicated in the same level are counted)"),
     start = 
     (
         CurrentStagesCompleteMusouMode() == 10 && 
