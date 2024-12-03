@@ -81,14 +81,22 @@ function lives() => byte(0x0000A0)
 function justLostLife() => lives() < prev(lives())
 function justGameOver() => lives() == 0 && prev(lives()) == 1
 
-// $00A3: (8-bit) Current level.
+// $00A2: (8-bit) Current level Tens
+
+//        Note this is NOT a control for the day night cycle but is a control for what is displayed to the player.
+function currentRoundTens() => byte(0x0000A2)
+
+// $00A3: (8-bit) Current level Ones
 //        
 //        Note this is NOT a control for the day night cycle but is a control for what is displayed to the player.
-function currentRound() => byte(0x0000A3)
+function currentRoundOnes() => byte(0x0000A3)
 
-function justWonRound() => currentRound() == prev(currentRound()) + 1 && prev(currentRound()) != 0
+function currentRound() => currentRoundTens() * 10 + currentRoundOnes()
+function prevcurrentRound() => prev(currentRoundTens()) * 10 + prev(currentRoundOnes())
 
-function levelSkipped() => currentRound() > prev(currentRound()) + 1
+function justWonRound() => currentRound() == prevcurrentRound() + 1 && prevcurrentRound() != 0
+
+function levelSkipped() => currentRound() > prevcurrentRound() + 1
 
 // $00AB: (8-bit) EXTRA counter
 //        
@@ -143,7 +151,7 @@ function fairTiming() => totalSecondsOfFairShooting() / numberOfFairBanditsShot(
 //        If bit 2 is disabled with out bit4 unfair.  If bit 4 is set Fair shoot.
 //        
 //        If bit 2 and bit 4 is enabled and disabled at the SAME time, death.
-LEFT_DOOR_BADIT_STATS_MEMORY_LOCATION = 0x000461
+LEFT_DOOR_BANDIT_STATS_MEMORY_LOCATION = 0x000461
 function leftDoorBanditStats() => byte(0x000461)
 
 function unfairShot(memoryLocation) => bit2(memoryLocation) == 0 && 
@@ -170,7 +178,7 @@ function banditUnfairKilled(doorType, banditStates) => unfairShot(banditStates) 
 //        If bit 2 is disabled with out bit4 unfair.  If bit 4 is set Fair shoot.
 //        
 //        If bit 2 and bit 4 is enabled and disabled at the SAME time, death.
-MIDDLE_DOOR_BADIT_STATS_MEMORY_LOCATION = 0x000481
+MIDDLE_DOOR_BANDIT_STATS_MEMORY_LOCATION = 0x000481
 function middleDoorBanditStates() => byte(0x000481)
 
 // $0483: (8-bit) Middle door enemy
@@ -188,7 +196,7 @@ function middleDoorType() => byte(0x000483)
 //        If bit 2 is disabled with out bit4 unfair.  If bit 4 is set Fair shoot.
 //        
 //        If bit 2 and bit 4 is enabled and disabled at the SAME time, death.
-RIGHT_DOOR_BADIT_STATS_MEMORY_LOCATION = 0x0004A1
+RIGHT_DOOR_BANDIT_STATS_MEMORY_LOCATION = 0x0004A1
 function rightDoorBanditStates() => byte(0x0004A1)
 
 // $04A3: (8-bit) Right door enemy
@@ -206,8 +214,43 @@ function rightDoorType() => byte(0x0004A3)
 function demoIndicator() => word(0x00075E)
 DEMO_MODE_VALUE = 0x0000
 
-// function notInDemoMode() => demoIndicator() != DEMO_MODE_VALUE
+// $1D65: (40-bit) Left Door Unfair Marker.
+//        
+//        0x8282828282 (Five bytes) = Unfair, any other value (including those that have some 0x82 in bytes, are not the unfair marker.
+LEFT_DOOR_UNFAIR_MARKER_MEMORY_LOCATION = 0x001D65
+function leftDoorUnfairMarker() => byte(0x001D65)
 
+// $1D6E: (40-bit) Middle Door Unfair Marker.
+//        
+//        0x8282828a8a (Five bytes) = Unfair shot.
+//        08282828282 (Five bytes)  = Unfair Display.
+//        
+//        Use the Shot value.  That will always be triggered BEFORE the unfair is displayed.
+MIDDLE_DOOR_UNFAIR_MARKER_MEMORY_LOCATION = 0x001D6E
+function middleDoorUnfairMarker() => byte(0x001D6E)
+
+// $1D77: (40-bit) Right Door Unfair Marker.
+//        
+//        0x8282828a8a (Five bytes) = Unfair shot.
+//        08282828282 (Five bytes)  = Unfair Display.
+//        
+//        Use the Shot value.  That will always be triggered BEFORE the unfair is displayed.
+RIGHT_DOOR_UNFAIR_MARKER_MEMORY_LOCATION = 0x001D77
+function rightDoorUnfairMarker() => byte(0x001D77)
+
+PREV_HIGHER_UNFAIR_MARKER_BYTE = 0x8a
+PREV_LOWER_UNFAIR_MARKER_DWORD = 0x8A828282
+HIGHER_UNFAIR_MARKER_BYTE = 0x82
+LOWER_UNFAIR_MARKER_DWORD = 0x82828282
+function unfairShotDetected(memoryLocation) => dword(memoryLocation) == LOWER_UNFAIR_MARKER_DWORD && 
+                                               byte(memoryLocation + 4) == HIGHER_UNFAIR_MARKER_BYTE &&
+                                               (prev(dword(memoryLocation)) == PREV_LOWER_UNFAIR_MARKER_DWORD || 
+                                                prev(byte(memoryLocation + 4)) == PREV_HIGHER_UNFAIR_MARKER_BYTE)
+
+function unfairShotMade() => unfairShotDetected(LEFT_DOOR_UNFAIR_MARKER_MEMORY_LOCATION) || 
+                             unfairShotDetected(MIDDLE_DOOR_UNFAIR_MARKER_MEMORY_LOCATION) || 
+                             unfairShotDetected(RIGHT_DOOR_UNFAIR_MARKER_MEMORY_LOCATION)
+                                          
 function achievementActive()
 {
     return notInDemoMode() &&
@@ -272,7 +315,7 @@ achievement( title = "Legendary Lawmam",
              points = 50,
              trigger = achievementActive() && 
                        trigger_when(justWonRound() && 
-                                    currentRound() == 12) &&
+                                    currentRound() == 13) &&
                        once(currentRound() == 1) &&
                        never(justGameOver()) &&
                        never(levelSkipped())
@@ -281,7 +324,7 @@ achievement( title = "Legendary Lawmam",
 allDoors = range(1,12)
 
 achievement( title = "Big Deposits",
-             description = "Earn 1000 + 1000 Bonus from a single Bag Drop",
+             description = "Earn 1000 + 1000 Bonus from a single Bag Drop" + achievementInfoString,
              points = 2,
              trigger = achievementActive() &&
                        any_of( allDoors, doorIndex => at1000Bonus(doorIndex) && telleratDoor(doorIndex))
@@ -310,7 +353,7 @@ noDeathAchievementData =
 function noDeathAchievement(data)
 {
     achievement(title = data[TITLE],
-                description = format("Starting at Round 1 Beat Round {0} with out losing a life" + achievementInfoString, data[ROUND]),
+                description = format("Starting at Round 1 reach Round {0} with out losing a life" + achievementInfoString, data[ROUND]),
                 type = "Missable",
                 points = data[POINTS],
                 trigger = achievementActive() && 
@@ -397,9 +440,7 @@ achievement( title = "Gunslinger",
              trigger = achievementActive() &&
                        trigger_when(repeated(2, justWonRound() || justSpentCredit())) &&
                        once(justWonRound() || justSpentCredit()) &&
-                       never(banditUnfairKilled(leftDoorType(), LEFT_DOOR_BADIT_STATS_MEMORY_LOCATION)) &&
-                       never(banditUnfairKilled(middleDoorType(), MIDDLE_DOOR_BADIT_STATS_MEMORY_LOCATION)) &&
-                       never(banditUnfairKilled(rightDoorType(), RIGHT_DOOR_BADIT_STATS_MEMORY_LOCATION)) &&
+                       never(unfairShotMade()) &&
                        never(justLostLife())
 )
 
@@ -407,13 +448,12 @@ achievement( title = "Sharpshooter",
              description = "Finish any round after round 6 with out losing a life or shooting a bandit unfairly" + achievementInfoString,
              points = 10,
              trigger = achievementActive() &&
-                       trigger_when(repeated(2, justWonRound() || justSpentCredit())) &&
+                       trigger_when(repeated(2, justWonRound())) &&
+                       trigger_when(currentRound() > 7) &&
                        once(justWonRound() || justSpentCredit()) &&
-                       never(banditUnfairKilled(leftDoorType(), LEFT_DOOR_BADIT_STATS_MEMORY_LOCATION)) &&
-                       never(banditUnfairKilled(middleDoorType(), MIDDLE_DOOR_BADIT_STATS_MEMORY_LOCATION)) &&
-                       never(banditUnfairKilled(rightDoorType(), RIGHT_DOOR_BADIT_STATS_MEMORY_LOCATION)) &&
+                       never(unfairShotMade()) &&
                        never(justLostLife()) &&
-                       currentRound() > 6
+                       currentRound() >= 7
                     
 )
 
