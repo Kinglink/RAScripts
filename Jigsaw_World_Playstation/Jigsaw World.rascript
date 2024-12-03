@@ -1,6 +1,13 @@
 // Jigsaw World
 // #ID = 14953
 
+ID = "ID"
+NAME = "NAME"
+EASY_POINTS = "EASY_POINTS"
+MEDIUM_POINTS = "MEDIUM_POINTS"
+HARD_POINTS = "HARD_POINTS"
+TYPE = "TYPE"
+
 // $010800: (8-bit) Mode Indicator.
 //          
 //          Appears to be "Main menu Return value"  (Which icon should be selected  when returning to the main menu.)
@@ -18,7 +25,14 @@ STORY_MODE_VALUE = 0x02
 
 function puzzleModeSelected() => modeIndicator() == PUZZLE_MODE_VALUE
 function versusModeSelected() => modeIndicator() == VERSUS_MODE_VALUE
-function storyModeSelected() => modeIndicator() == ALICE_IN_PUZZLELAND_MODE_VALUE
+function storyModeSelected() => modeIndicator() == STORY_MODE_VALUE
+
+// $011000 (8-bit) Mode 1 Set
+//
+//          0x00 = Racing
+//          0x01 = Sports
+//          0x02 = Vacation
+function puzzleSetIndex() => byte(0x011000)
 
 // $011004: (8-bit) Mode 1 Puzzle
 //          
@@ -26,7 +40,7 @@ function storyModeSelected() => modeIndicator() == ALICE_IN_PUZZLELAND_MODE_VALU
 //          0x05 = First Basketball Puzzle
 //          0x0a = First Beaches
 //          0xf = Buildings
-function puzzleChosen() => byte(0x011004)
+function puzzleIndex() => byte(0x011004)
 
 // $011006: (8-bit) Piece Count for Puzzle Mode
 //          
@@ -73,8 +87,14 @@ TANUKI_MODE_ON_VALUE = 0x01
 function puzzleBeatenMarker() => byte(0x01103F)
 PUZZLE_BEATEN_MEMORY_LOCATION = 0x01103F
 SIZE_OF_PUZZLE_BEATEN = 0x01    
-function puzzleBeatenLookup(puzzleIndex) => byte(PUZZLE_BEATEN_MEMORY_LOCATION + (puzzleIndex * SIZE_OF_PUZZLE_BEATEN ))
+function puzzleBeatenLookup(puzzleIndex) => PUZZLE_BEATEN_MEMORY_LOCATION + (puzzleIndex * SIZE_OF_PUZZLE_BEATEN )
 
+function puzzlebeaten24(puzzleIndex) => bit0( puzzleBeatenLookup(puzzleIndex) ) == 1
+function puzzlebeaten96(puzzleIndex) => bit1( puzzleBeatenLookup(puzzleIndex) ) == 1
+function puzzlebeaten150(puzzleIndex) => bit2( puzzleBeatenLookup(puzzleIndex) ) == 1
+
+function puzzleBeatenCount(puzzleIndex) => byte(puzzleBeatenLookup(puzzleIndex)) / byte(puzzleBeatenLookup(puzzleIndex))
+function prevpuzzleBeatenCount(puzzleIndex) => prev(byte( puzzleBeatenLookup(puzzleIndex))) / prev(byte(puzzleBeatenLookup(puzzleIndex)))
 
 
 // $0110B8: (8-bit) Number of Pages Open
@@ -109,14 +129,14 @@ function pagesAvailable() => byte(0x0110B8)
 PuzzleGroups =[
     {
         ID: 0x00,
-        NAME: "RaceTrack"
+        NAME: "Racing"
     },
     {
         ID: 0x01,
         NAME: "Sports"
     },
     {
-        ID: 0xx2,
+        ID: 0x02,
         NAME: "Vacation"
     },
     {
@@ -186,10 +206,10 @@ PuzzleGroups =[
     {
         ID: 0x13,
         NAME: "Birds"
-    }
+    },
     {
         ID: 0x14,
-        NAME: "Photos"
+        NAME: "More Photos"
     },
     {
         ID: 0x15,
@@ -228,56 +248,72 @@ OpponentInfo =
         NAME: "Chasing Rabbits",
         EASY_POINTS: 2,
         MEDIUM_POINTS: 4,
-        HARD_POINTS: 5
+        HARD_POINTS: 5,
+        TYPE: "Progression"
+
     },
     {
         ID: 0x03,
         NAME: "Dealing with Cards",
         EASY_POINTS: 3,
         MEDIUM_POINTS: 4,
-        HARD_POINTS: 5
+        HARD_POINTS: 5,
+        TYPE: "Progression"
+
     },
     {
         ID: 0x04,
         NAME: "Fresh Bacon",
         EASY_POINTS: 3,
         MEDIUM_POINTS: 5,
-        HARD_POINTS: 5
+        HARD_POINTS: 5,
+        TYPE: "Progression"
+
     },
     {
         ID: 0x05,
         NAME: "Two Opponents, One Battle",
         EASY_POINTS: 3,
         MEDIUM_POINTS: 5,
-        HARD_POINTS: 10
+        HARD_POINTS: 10,
+        TYPE: "Progression"
+
     },
     {
         ID: 0x06,
         NAME: "Egg Drop",
         EASY_POINTS: 4,
         MEDIUM_POINTS: 5,
-        HARD_POINTS: 10
+        HARD_POINTS: 10,
+        TYPE: "Progression"
+
     },
     {
         ID: 0x07,
-        NAME: "Gryphon's Roar",
+        NAME: "Pea Tear Griffin",
         EASY_POINTS: 4,
         MEDIUM_POINTS: 5,
-        HARD_POINTS: 10
+        HARD_POINTS: 10,
+        TYPE: "Progression"
+
     },
     {
         ID: 0x08,
         NAME: "Off With Her Head",
         EASY_POINTS: 5,
         MEDIUM_POINTS: 10,
-        HARD_POINTS: 10
+        HARD_POINTS: 10,
+        TYPE: "Progression"
+
     },
     {
         ID: 0x09,
         NAME: "The Moon's Smile",
         EASY_POINTS: 5,
         MEDIUM_POINTS: 10,
-        HARD_POINTS: 25
+        HARD_POINTS: 25,
+        TYPE: "Win_Condition"
+
     }
 ]
 
@@ -345,7 +381,16 @@ function puzzleLandWon() => prev(puzzleLandPlayerState()) == 0x07 && puzzleLandP
 //          0x09 = Finished Run
 function puzzleLandCpuState() => byte(0x0B0BFA)
 
-function puzzleLandCpuPlaying => puzzleLandCpuState() == 0x06
+function puzzleLandCpuPlaying() => puzzleLandCpuState() == 0x06
+
+// $0B0BF4: (8-bit) Puzzleland Player Picture count
+//
+//  0x00 = First Picture
+//  0x01 = Second Picture
+//  0x02 = Third Picture
+function puzzleLandPlayerPicture() => byte(0x0B0BF4)
+
+function puzzleLandPlayerFinalPicture() => puzzleLandPlayerPicture() == 0x02
 
 // $0C6858: (8-bit) Mode 1 Game State
 //          
@@ -363,7 +408,7 @@ function normalModeWon() => prev(normalModeGameState()) == 0x07 && normalModeGam
 
 
 achievement( title = "24-0  Perfect!",
-             description = "Complete any 24 piece Puzzle with out making a mistake (Rotation Mode On)",
+             description = "Complete any 24 piece Puzzle without making a mistake (Rotation Mode On)",
              points = 2,
              trigger = puzzleModeSelected() && 
                        pieceCount24() && 
@@ -374,7 +419,7 @@ achievement( title = "24-0  Perfect!",
 )
 
 achievement( title = "96-0  Perfect!",
-             description = "Complete any 96 piece Puzzle with out making a mistake (Rotation Mode On)",
+             description = "Complete any 96 piece Puzzle without making a mistake (Rotation Mode On)",
              points = 4,
              trigger = puzzleModeSelected() && 
                        pieceCount96() && 
@@ -385,8 +430,8 @@ achievement( title = "96-0  Perfect!",
                        
 )   
 
-achievement( tile = "150-0 Perfect!",
-             description = "Complete any 150 piece Puzzle with out making a mistake (Rotation Mode On)",
+achievement( title = "150-0 Perfect!",
+             description = "Complete any 150 piece Puzzle without making a mistake (Rotation Mode On)",
              points = 5,
              trigger = puzzleModeSelected() && 
                        pieceCount150() && 
@@ -401,9 +446,10 @@ for data in PuzzleGroups
 {
     achievement( title = format("{0} (24 piece)", data[NAME]),
                  description = format("Beat all five {0} puzzles with 24 pieces in one session (Rotation Mode On)", data[NAME]),
-                 points = 5,
-                 trigger = measured(tally_of(range(0, NUMBER_OF_PUZZLES_IN_SET), 5, 
-                                                index => once( puzzleBeatenLookup(index + (data[ID] * NUMBER_OF_PUZZLES_IN_SET)) && 
+                 points = 3,
+                 trigger = measured(tally_of(range(0, NUMBER_OF_PUZZLES_IN_SET - 1), 5, 
+                                                index => once( puzzleIndex() == index &&
+                                                               puzzleSetIndex() == data[ID] && 
                                                                totalCorrect() == 24 &&
                                                                puzzleModeSelected() &&
                                                                pieceCount24() &&
@@ -412,10 +458,11 @@ for data in PuzzleGroups
     ))))
 
     achievement( title = format("{0} (96 piece)", data[NAME]),
-                 description = format("Beat all five {0} puzzles with 96 piecesin one session (Rotation Mode On)", data[NAME]),
-                 points = 10,
+                 description = format("Beat all five {0} puzzles with 96 pieces in one session (Rotation Mode On)", data[NAME]),
+                 points = 5,
                  trigger = measured(tally_of(range(0, NUMBER_OF_PUZZLES_IN_SET), 5, 
-                                                index => once( puzzleBeatenLookup(index + (data[ID] * NUMBER_OF_PUZZLES_IN_SET)) && 
+                                                index => once( puzzleIndex() == index &&
+                                                               puzzleSetIndex() == data[ID] && 
                                                                totalCorrect() == 96 &&
                                                                puzzleModeSelected() &&
                                                                pieceCount96() &&
@@ -425,9 +472,10 @@ for data in PuzzleGroups
 
     achievement( title = format("{0} (150 piece)", data[NAME]),
                  description = format("Beat all five {0} puzzles with 150 pieces in one session (Rotation Mode On)", data[NAME]),
-                 points = 15,
+                 points = 10,
                  trigger = measured(tally_of(range(0, NUMBER_OF_PUZZLES_IN_SET), 5, 
-                                                index => once( puzzleBeatenLookup(index + (data[ID] * NUMBER_OF_PUZZLES_IN_SET)) && 
+                                                index => once( puzzleIndex() == index &&
+                                                               puzzleSetIndex() == data[ID] && 
                                                                totalCorrect() == 150 &&
                                                                puzzleModeSelected() &&
                                                                pieceCount150() &&
@@ -439,22 +487,39 @@ for data in PuzzleGroups
 achievement( title = "Choose Any Puzzle",
              description = "Unlock all the puzzles in the puzzle mode",
              points = 2,
+             type = "Progression",
              trigger = pagesAvailable() == 0x16 &&
                        prev(pagesAvailable()) < 0x16 &&
                        prev(pagesAvailable()) > 0x04 &&  // default
                        puzzleModeSelected()
 )
 
+achievement( title = "Seen it all",
+             description = "Beat each puzzle in the game at any size",
+             points = 10,
+             type = "Progression",
+             trigger = measured(sum_of(range(0, 0x16 * 5 ), 
+                                        index =>  puzzleBeatenCount(index) ) == 0x16 * 5 , 
+                                        when = pagesAvailable() != 0 && puzzleModeSelected())  &&
+                       sum_of(range(0, 0x16 * 5 - 1 ), 
+                                        index => prevpuzzleBeatenCount(index) ) ==  0x16 * 5 - 1  &&
+                       normalModeGameState() > 0x06 && 
+                       normalModeGameState() < 0x09 &&  // probably is 8, but let's allow 7
+                       puzzleModeSelected() 
+)
+                    
+
 for data in OpponentInfo
 {
     achievement( title = format("{0} (Easy)", data[NAME]),
                  description = format("Beat {0} in Alice in Puzzleland", OpponentLookup[data[ID]]),
+                 type = data[TYPE],
                  points = data[EASY_POINTS],
                  trigger = opponentAlice() == data[ID] &&
                            storyModeSelected() &&
-                           PlayerWon() &&
                            puzzleLandWon() &&
-                           puzzleLandCpuPlaying() &&
+                           puzzleLandCpuPlaying() && 
+                           puzzleLandPlayerFinalPicture() &&
                            ( easySelected() || normalSelected() || hardSelected() )
     )
 
@@ -463,9 +528,9 @@ for data in OpponentInfo
                  points = data[MEDIUM_POINTS],
                  trigger = opponentAlice() == data[ID] &&
                            storyModeSelected() &&
-                           PlayerWon() &&
                            puzzleLandWon() &&
                            puzzleLandCpuPlaying() &&
+                           puzzleLandPlayerFinalPicture() &&
                            ( normalSelected() || hardSelected() )
     )
 
@@ -474,15 +539,312 @@ for data in OpponentInfo
                  points = data[HARD_POINTS],
                  trigger = opponentAlice() == data[ID] &&
                            storyModeSelected() &&
-                           PlayerWon() &&
                            puzzleLandWon() &&
                            puzzleLandCpuPlaying() &&
+                           puzzleLandPlayerFinalPicture() &&
                            hardSelected()
     )   
-
 }
 
 
+leaderboard(
+    title = "Fastest 24 Piece Puzzle",
+    description = "Complete any 24 piece puzzle as fast as you can. (One player only, rotation mode on)",
+    start  =
+    (
+        puzzleModeSelected() &&
+        correctPiecesP1() == 24 &&
+        correctPiecesP2() == 0 &&
+        errorPiecesP2() == 0 &&
+        pieceCount24() &&
+        normalModeWon() &&
+        rotationModeOn()
+    ),
+    cancel = always_false(),
+    submit = always_true(),
+    value = framesForPuzzleMode(),
+    format = "FRAMES", 
+    lower_is_better = true 
+)
+
+
+leaderboard(
+    title = "Fastest 96 Piece Puzzle",
+    description = "Complete any 96 piece puzzle as fast as you can. (One player only, rotation mode on)",
+    start  =
+    (
+        puzzleModeSelected() &&
+        correctPiecesP1() == 96 &&
+        correctPiecesP2() == 0 &&
+        errorPiecesP2() == 0 &&
+        pieceCount96() &&
+        normalModeWon() &&
+        rotationModeOn()
+    ),
+    cancel = always_false(),
+    submit = always_true(),
+    value = framesForPuzzleMode(),
+    format = "FRAMES", 
+    lower_is_better = true 
+)
+
+leaderboard(
+    title = "Fastest 150 Piece Puzzle",
+    description = "Complete any 150 piece puzzle as fast as you can. (One player only, rotation mode on)",
+    start  =
+    (
+        puzzleModeSelected() &&
+        correctPiecesP1() == 150 &&
+        correctPiecesP2() == 0 &&
+        errorPiecesP2() == 0 &&
+        pieceCount150() &&
+        normalModeWon() &&
+        rotationModeOn()
+    ),
+    cancel = always_false(),
+    submit = always_true(),
+    value = framesForPuzzleMode(),
+    format = "FRAMES", 
+    lower_is_better = true 
+)
+
+leaderboard(
+    title = "Fastest Perfect 24 Piece Puzzle",
+    description = "Complete any 24 piece puzzle as fast as you can with no errors. (One player only, rotation mode on)",
+    start  =
+    (
+        puzzleModeSelected() &&
+        correctPiecesP1() == 24 &&
+        errorPiecesP1() == 0 &&
+        correctPiecesP2() == 0 &&
+        errorPiecesP2() == 0 &&
+        pieceCount24() &&
+        normalModeWon() &&
+        rotationModeOn()
+    ),
+    cancel = always_false(),
+    submit = always_true(),
+    value = framesForPuzzleMode(),
+    format = "FRAMES", 
+    lower_is_better = true 
+)
+
+
+leaderboard(
+    title = "Fastest Perfect 96 Piece Puzzle",
+    description = "Complete any 96 piece puzzle as fast as you can with no mistakes. (One player only, rotation mode on)",
+    start  =
+    (
+        puzzleModeSelected() &&
+        correctPiecesP1() == 96 &&
+        errorPiecesP1() == 0 &&
+        correctPiecesP2() == 0 &&
+        errorPiecesP2() == 0 &&
+        pieceCount96() &&
+        normalModeWon() &&
+        rotationModeOn()
+    ),
+    cancel = always_false(),
+    submit = always_true(),
+    value = framesForPuzzleMode(),
+    format = "FRAMES", 
+    lower_is_better = true 
+)
+
+leaderboard(
+    title = "Fastest Perfect150 Piece Puzzle",
+    description = "Complete any 150 piece puzzle as fast as you can with no mistakes. (One player only, rotation mode on)",
+    start  =
+    (
+        puzzleModeSelected() &&
+        correctPiecesP1() == 150 &&
+        errorPiecesP1() == 0 &&
+        correctPiecesP2() == 0 &&
+        errorPiecesP2() == 0 &&
+        pieceCount150() &&
+        normalModeWon() &&
+        rotationModeOn()
+    ),
+    cancel = always_false(),
+    submit = always_true(),
+    value = framesForPuzzleMode(),
+    format = "FRAMES", 
+    lower_is_better = true 
+)
+
+
+puzzleNameLookup =
+{
+    0x00: "Racing",
+    0x01: "Sports",
+    0x02: "Vacation",
+    0x03: "Architecture",
+    0x04: "Oni and Demons",
+    0x05: "Streets",
+    0x06: "Anime Babes",
+    0x07: "Beaches",
+    0x08: "Art",
+    0x09: "Tokyo Cityscapes",
+    0x0a: "Cats and Dogs",
+    0x0b: "Other Animals",
+    0x0c: "Photos",
+    0x0d: "Anime Characters",
+    0x0e: "Flowers",
+    0x0f: "Windows",
+    0x10: "Tourism",
+    0x11: "Vehicles",
+    0x12: "Strange Art",
+    0x13: "Birds",
+    0x14: "More photos",
+    0x15: "Random"
+}
+
+puzzleIndexLookup = 
+{
+    0x0: "1",
+    0x1: "2",
+    0x2: "3",
+    0x3: "4",
+    0x4: "5",
+    0x5: "1",
+    0x6: "2",
+    0x7: "3",
+    0x8: "4",
+    0x9: "5",
+    0xa: "1",
+    0xb: "2",
+    0xc: "3",
+    0xd: "4",
+    0xe: "5",
+    0xf: "1",
+    0x10: "2",
+    0x11: "3",
+    0x12: "4",
+    0x13: "5",
+    0x14: "1",
+    0x15: "2",
+    0x16: "3",
+    0x17: "4",
+    0x18: "5",
+    0x19: "1",
+    0x1a: "2",
+    0x1b: "3",
+    0x1c: "4",
+    0x1d: "5",
+    0x1e: "1",
+    0x1f: "2",
+    0x20: "3",
+    0x21: "4",
+    0x22: "5",
+    0x23: "1",
+    0x24: "2",
+    0x25: "3",
+    0x26: "4",
+    0x27: "5",
+    0x28: "1",
+    0x29: "2",
+    0x2a: "3",
+    0x2b: "4",
+    0x2c: "5",
+    0x2d: "1",
+    0x2e: "2",
+    0x2f: "3",
+    0x30: "4",
+    0x31: "5",
+    0x32: "1",
+    0x33: "2",
+    0x34: "3",
+    0x35: "4",
+    0x36: "5",
+    0x37: "1",
+    0x38: "2",
+    0x39: "3",
+    0x3a: "4",
+    0x3b: "5",
+    0x3c: "1",
+    0x3d: "2",
+    0x3e: "3",
+    0x3f: "4",
+    0x40: "5",
+    0x41: "1",
+    0x42: "2",
+    0x43: "3",
+    0x44: "4",
+    0x45: "5",
+    0x46: "1",
+    0x47: "2",
+    0x48: "3",
+    0x49: "4",
+    0x4a: "5",
+    0x4b: "1",
+    0x4c: "2",
+    0x4d: "3",
+    0x4e: "4",
+    0x4f: "5",
+    0x50: "1",
+    0x51: "2",
+    0x52: "3",
+    0x53: "4",
+    0x54: "5",
+    0x55: "1",
+    0x56: "2",
+    0x57: "3",
+    0x58: "4",
+    0x59: "5",
+    0x5a: "1",
+    0x5b: "2",
+    0x5c: "3",
+    0x5d: "4",
+    0x5e: "5",
+    0x5f: "1",
+    0x60: "2",
+    0x61: "3",
+    0x62: "4",
+    0x63: "5",
+    0x64: "1",
+    0x65: "2",
+    0x66: "3",
+    0x67: "4",
+    0x68: "5",
+    0x69: "1",
+    0x6a: "2",
+    0x6b: "3",
+    0x6c: "4",
+    0x6d: "5"
+
+}
+
+PieceCountLookup =
+{
+    0x00: "24",
+    0x01: "96",
+    0x02: "150"
+}
+
+difficultyLookup =
+{
+    0x00: "Easy",
+    0x01: "Normal",
+    0x02: "Hard"
+}
+
+// 0x00 is fade in 0x09 is post game.  Note sometimes this will show when you quit a puzzle mid game but oh well. 
+rich_presence_conditional_display(puzzleModeSelected() && normalModeGameState() > 0x00 && normalModeGameState() < 0x09,
+                                  "Puzzle Mode: {0} Puzzle number {1} {2} Pieces",
+                                  rich_presence_lookup("PuzzleNameLookup", puzzleSetIndex(), puzzleNameLookup), 
+                                  rich_presence_value("Number",puzzleIndex()+1),
+                                  rich_presence_lookup("PieceCountLookup", pieceCount(), PieceCountLookup)
+                                  )
+
+rich_presence_conditional_display(versusModeSelected(), "Versus Mode")
+
+rich_presence_conditional_display(storyModeSelected() && opponentAlice() >= 0x02 && opponentAlice() <= 0x09, 
+                                  "Alice in Puzzleland: Playing against {0} Difficulty: {1}",
+                                  rich_presence_lookup("OpponentLookup", opponentAlice(), OpponentLookup),
+                                  rich_presence_lookup("DifficultySelected", difficultySelected(), difficultyLookup)
+                                  )
+
+rich_presence_display( "In the Menus" )
 
 
 
