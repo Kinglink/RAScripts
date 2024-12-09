@@ -3189,7 +3189,7 @@ function musouComplete(characterIndex)
            checkFirstPlayerCharacterIndex(characterIndex)
 }
 
-function createMusouModeAchievement(musouObject, hardMode = false)
+function createMusouModeAchievement(musouObject)
 {
     // Create an achievement for completing a character's Musou Mode
     // 
@@ -3208,7 +3208,8 @@ function createMusouModeAchievement(musouObject, hardMode = false)
                           wonStageCheck() && 
                           !isTwoPlayerMode() &&
                           saveProtection(),
-                id = musouObject["achievementID"]
+                id = musouObject["achievementID"],
+                type = "progression"
                 )
 }
 
@@ -3262,7 +3263,8 @@ function createUnlockCharacterAchievement(unlockObject)
                           wonStageCheck() && 
                           secondPlayerAllowed() &&
                           saveProtection(),
-                id = unlockObject["achievementID"]
+                id = unlockObject["achievementID"],
+                type = "Progression"
                 )
 }
 
@@ -3294,7 +3296,8 @@ function createUnlockFourthWeaponAchievement(name, description, weaponIndex, ach
                 description + asASinglePlayerString, 
                 5,
                 trigger = targetTrigger && possibleHits,
-                id = achievementID 
+                id = achievementID,
+                type = "missable"
                 )
 }
 
@@ -3729,7 +3732,8 @@ achievement("The Gang's All Here",
                           characterNowUnlocked(MaChaoUnlocked()) && 
                           characterNowUnlocked(WeiYanUnlocked()) &&
                           true, // saveProtection(), // We remove the save protection on this achievement intentionally as it will be done by loading a DW2 file
-                id = 370355
+                id = 370355,
+                type ="progression"
                 )
 
 
@@ -4331,7 +4335,8 @@ achievement("Nothing Gonna Stop Me",
                       !isTwoPlayerMode() &&
                       saveProtection() &&
                       requireInGame(), // This shows up as you set up the next stage if you set the difficulty to hard in the previous one. 
-            id = 370360
+            id = 370360,
+            type = "Missable"
                       
 )
 
@@ -4360,7 +4365,8 @@ function createFeastAchievement()
                   !isTwoPlayerMode() &&
                   saveProtection() &&
                   possibleHits,
-        id = 370361   
+        id = 370361,
+        type = "Missable"
     )
 }
 
