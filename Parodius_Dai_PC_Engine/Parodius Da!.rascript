@@ -8,6 +8,7 @@ function ContainsKey(dictionary, key_name)
     return false
 }
 
+FIRST_LEVEL_NUMBER = 0x0
 
 // $0027: (8-bit) Demo check
 //        
@@ -899,6 +900,11 @@ for data in beatSpecialCharacterData
 
 function noHitLevelAchievement(levelData)
 {
+    level_check = never(stageNumber() != levelData[STAGE_INDEX] - 1 && stageNumber() != levelData[STAGE_INDEX])
+    if levelData[STAGE_INDEX] == 0x8
+    {
+        level_check = never(stageNumber() != levelData[STAGE_INDEX] - 1 && stageNumber() != FIRST_LEVEL_NUMBER)
+    }
     startingCheck = enteringStage(levelData[STAGE_INDEX])
     achievement( title = levelData[TITLE],
                  description = levelData[DESCRIPTION],
@@ -906,7 +912,7 @@ function noHitLevelAchievement(levelData)
                  trigger = once(startingCheck) &&
                            trigger_when(beatStageNumber(levelData[STAGE_INDEX])) &&
                            never(justLostLife()) &&
-                           never(stageNumber() != levelData[STAGE_INDEX] - 1 && stageNumber() != levelData[STAGE_INDEX]) && // You can mouse over other difficulties accidentally.
+                           level_check && // You can mouse over other difficulties accidentally.
                            achievementIsValid() &&
                            isHardDifficulty()
     )
@@ -960,7 +966,7 @@ noHitLevelDataList =
     {
         TITLE: "Fantastic Fortress",
         DESCRIPTION: "Beat Stage 8 without losing a life on hard difficulty",
-        POINTS: 10,
+        POINTS: 25,
         STAGE_INDEX: 0x8            
     }
 ]
@@ -1116,7 +1122,7 @@ bossData =
         STAGE_INDEX: 1,
         BOSS_STARTING_HEALTH: 0x0f,
         BOSS_LOCATION_IN_STAGE: convertToMajorMinor(0x10, 0xc0),
-        BOSS_SPARED_POINTS: 2,
+        BOSS_SPARED_POINTS: 5,
         BOSS_KILLED_POINTS: 1,
         MODE_CHECK: isOnePlayerMode(),
         BOSS_FLEE_CHECK: (boss1MajorTimer() == 0x00 && 
@@ -1132,7 +1138,7 @@ bossData =
         STAGE_INDEX: 2,
         BOSS_STARTING_HEALTH: 0x0c,
         BOSS_LOCATION_IN_STAGE: convertToMajorMinor(0x10, 0xa0),
-        BOSS_SPARED_POINTS: 4,
+        BOSS_SPARED_POINTS: 10,
         BOSS_KILLED_POINTS: 3,
         MODE_CHECK: isOnePlayerMode(),
         BOSS_FLEE_CHECK: (boss2Attacks() == 0x00),
@@ -1149,7 +1155,7 @@ bossData =
         STAGE_INDEX: 4,
         BOSS_STARTING_HEALTH: 0x17,
         BOSS_LOCATION_IN_STAGE: convertToMajorMinor(0x10, 0x49),
-        BOSS_SPARED_POINTS: 10,
+        BOSS_SPARED_POINTS: 25,
         BOSS_KILLED_POINTS: 3,
         MODE_CHECK: isOnePlayerMode(),
         BOSS_FLEE_CHECK: (boss4Attacks() == 0x00),
@@ -1166,8 +1172,8 @@ bossData =
         STAGE_INDEX: 6,
         BOSS_STARTING_HEALTH: 0x06,
         BOSS_LOCATION_IN_STAGE: convertToMajorMinor(0x11, 0x81),
-        BOSS_SPARED_POINTS: 5,
-        BOSS_KILLED_POINTS: 3,
+        BOSS_SPARED_POINTS: 25,
+        BOSS_KILLED_POINTS: 5,
         MODE_CHECK: isOnePlayerMode(),
         BOSS_FLEE_CHECK: (boss6Attacks() == 0x00),
         SPARED_ACHIEVEMENT_ID: 415105,
@@ -1181,7 +1187,7 @@ bossData =
         STAGE_INDEX: 7,
         BOSS_STARTING_HEALTH: 0xf,
         BOSS_LOCATION_IN_STAGE: convertToMajorMinor(0x0a, 0x28),
-        BOSS_SPARED_POINTS: 5,
+        BOSS_SPARED_POINTS: 25,
         BOSS_KILLED_POINTS: 4,
         MODE_CHECK: isOnePlayerMode(),
         BOSS_FLEE_CHECK: ( boss7MajorTimer() == 0x00 && boss7MinorTimer() == 0x00),
@@ -1198,7 +1204,7 @@ bossData =
         BOSS_STARTING_HEALTH: 0x0f,
         BOSS_LOCATION_IN_STAGE: convertToMajorMinor(0x0c, 0x3b),
         SPECIAL_BOSS_VALUE: isLowScoreSpecialBoss(),
-        BOSS_SPARED_POINTS: 10,
+        BOSS_SPARED_POINTS: 25,
         BOSS_KILLED_POINTS: 10,
         MODE_CHECK: isSpecialMode(),
         BOSS_FLEE_CHECK: (thirtyThousandBossAttacks() == 0x00),
@@ -1262,7 +1268,7 @@ CAT_SHIP_STAGE_INDEX = 1
 CAT_SHIP_HEALTH_AMOUNT = 0x08
 achievement(title = "Pardoned Pussycat",
             description = "Spare the Cat Battleship on Stage 1 on hard difficulty without damaging it",
-            points = 3,
+            points = 5,
             id = 415101,
             trigger = once(enteringLocation(CAT_SHIP_ENTER_MAJOR_MINOR, CAT_SHIP_STAGE_INDEX)) &&
                       never(bossDamaged(CAT_MINI_BOSS_HEALTH_MEMORY_LOCATION)) &&
@@ -1299,7 +1305,7 @@ OCTO_LIPS_HEALTH_AMOUNT = 0x08
 OCTO_LIPS_HEALTH_AMOUNT_ALTERNATE = 0x06
 achievement(title = "No PDAs Here",
             description = "Spare the Hot Lips on Stage 3 on hard difficulty without damaging any of them",
-            points = 25,
+            points = 50,
             id = 415125,
             trigger = once(enteringLocation(OCTO_LIPS_MAJOR_MINOR, OCTO_LIPS_STAGE_INDEX)) &&
                       never(any_of(range(0,8, step= 0x1), index => bossDamaged(BOSS_ONE_HEALTH_MEMORY_LOCATION + index))) &&
@@ -1331,13 +1337,13 @@ achievement(title = "So many Kisses",
                             boss3MinorTimer() == 0x00 ) &&
                       achievementIsValid()
 )
-
+ 
 BOSS_5_LEVEL_INDEX = 5
 BOSS_5_MAJOR_MINOR = convertToMajorMinor(0x17, 0xd8)
 
 achievement(title = "Gambler's Anonymous",
             description = "Spare Viva Core on Stage 5 on hard difficulty without damaging her at all",
-            points = 10,
+            points = 25,
             id = 415127,
             trigger = once(enteringLocation(BOSS_5_MAJOR_MINOR, BOSS_5_LEVEL_INDEX)) && 
                       // never(bossDamaged(BOSS_ONE_HEALTH_MEMORY_LOCATION)) &&  // Multi stage boss, so probably could find a way to do this, but let's just check score calculation
@@ -1379,13 +1385,13 @@ FINAL_BOSS_NUMBER_OF_HEALTH = 7
 
 achievement(title = "The Light Ending (Duality of Choice)",
             description = "Spare Golgotha Takobee on Stage 8 without damaging them at all on hard difficulty",
-            points = 1,
+            points = 10,
             id = 415129,
             trigger = once(enteringLocation(FINAL_BOSS_ENTERING_MAJOR_MINOR, FINAL_BOSS_LEVEL_INDEX)) && 
                       never(any_of(range(0,FINAL_BOSS_NUMBER_OF_HEALTH, step= 0x1), index => bossDamaged(FINAL_BOSS_FIRST_HEALTH_LOCATION + index) &&
                                                                                              (finalBossMajorTimer() != 0x00 || 
                                                                                              finalBossMinorTimer() != 0x00))) && 
-                      never(stageNumber() != FINAL_BOSS_LEVEL_INDEX - 1 && stageNumber() != 0  ) &&
+                      never(stageNumber() != FINAL_BOSS_LEVEL_INDEX - 1 && stageNumber() != FIRST_LEVEL_NUMBER  ) &&
                       never(justLostLife()) &&
                       isOnePlayerMode() &&
                       // All arms damaged at the same time (killed) and time has run out
@@ -1401,16 +1407,16 @@ achievement(title = "The Light Ending (Duality of Choice)",
 
 achievement(title = "The Dark Ending (Duality of Choice)",
             description = "Kill Golgotha Takobee on Stage 8 on hard difficulty",
-            points = 1,
+            points = 10,
             id = 415130,
             trigger = once(enteringLocation(FINAL_BOSS_ENTERING_MAJOR_MINOR, FINAL_BOSS_LEVEL_INDEX)) && 
-                      never(stageNumber() != FINAL_BOSS_LEVEL_INDEX - 1 && stageNumber() != 0) &&
+                      never(stageNumber() != FINAL_BOSS_LEVEL_INDEX - 1 && stageNumber() != FIRST_LEVEL_NUMBER) &&
                       never(justLostLife()) &&
                       isOnePlayerMode() &&
-                      trigger_when( all_of(range(0,FINAL_BOSS_NUMBER_OF_HEALTH, step= 0x1), index => once(bossKilled(FINAL_BOSS_FIRST_HEALTH_LOCATION + index)&&
-                                                                                                         (finalBossMajorTimer() != 0x00 || 
-                                                                                                          finalBossMinorTimer() != 0x00))) &&
-                                    boss8exitingLocation() ) &&
+                      trigger_when(  finalBossMajorTimer() != 0x00 &&  
+                                     finalBossMinorTimer() != 0x00 && 
+                                     boss8exitingLocation() &&
+                                     stageNumber() == 0) &&
                       isHardDifficulty() &&
                       never(finalBossMajorTimer() == 0x00 &&  
                             finalBossMinorTimer() == 0x00 && 
@@ -1588,7 +1594,7 @@ scoreAchievementData =
         MODE_CHECK: isOnePlayerMode()
     },
     {
-        TITLE: "A cool million",
+        TITLE: "A Cool million",
         DESCRIPTION: "Score 1,000,000 points in One Player Mode",
         POINTS: 25,
         SCORE: (1000 * 1000),
@@ -1606,7 +1612,7 @@ specialScoreAchievementData =
         MODE_CHECK: isSpecialMode()
     },
     {
-        TITLE: "A cool million",
+        TITLE: "Special Million",
         DESCRIPTION: "Score 1,000,000 points in Special Mode",
         POINTS: 5,
         SCORE: (1000 * 1000),
@@ -1790,4 +1796,5 @@ rich_presence_conditional_display(isSpecialMode() && rpIsValid(), "Special Mode 
 rich_presence_conditional_display(isTwoPlayerMode() && rpIsValid(), "Playing Two Player Mode")
                       
 rich_presence_display("Watching Demos")
+
 
