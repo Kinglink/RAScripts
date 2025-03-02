@@ -172,3 +172,147 @@ What does it feel like to be strong?
 
 //          0x14 = Kimura vs Takeshi Ryuzaki
  does this exist. 
+
+
+
+
+Ippo Vs Miyata Sparring. 
+ 
+Name choices. 
+    The Rematch Bell 
+    Any Good Rookies
+    Picture him as a Fish
+    A Courageous Step Forward
+    My Uppercut
+    Big Chance!!
+    A Totally Different Man 
+    I hit him
+    Smash him up
+    One Last Thing
+    I Still Have One Thing I Want to Try
+    One Centimeter of Destruction
+
+
+    Cut him down Ichiro
+    Now you Opened my eyes
+    Sharp as Ever
+
+Bout 2  
+    He Flipped Him With One Punch
+    You Got a Good Punch, Man
+    I'm Sticking to Featherweight
+
+Bout 3 Oda 
+    Debut
+    Hang in there Rookie
+    No Headbutts
+    C'mon You're patcking a HEavyweight Unit Down there. 
+    The Bigger Dude Always Wins
+    I'm Starting to Get Used to This 
+    Oh God
+    Beating Aoki's Fortune
+    I'm Never Gonna Give Up
+    Sudden Southpaw
+    The Taste of the First Victory
+
+IPPO_VS_YOSHIO_FUJIWARA = 0x03
+    Peek-A-Boo
+    On Purpose
+    Springboard to the Rookie King 
+    What If He Turns Out to be Super-Strong
+    It's Like Someone's Hitting Me With a Rock
+    Ippo's Pushing Him Around
+    He Really Is Strong
+
+IPPO_VS_JASON_OZUMA = 0x04
+    Murder Hook
+    Rookie King opener
+    The Early Bird
+    Stop Ozuma
+    I Just gotta Stop Ozuma San
+    Working, or Not?
+    Not Hurting Me
+    I'm Not Hurt
+    As Long As I Standing Up I Got a Chance
+    Applause for the Defeated
+
+
+IPPO_VS_KENTA_KOBASHI = 0x05
+    The Clinch
+    MAke Him Fight at My pace
+    Keep Stepping in 
+    Spinning His Wheels 
+    Power Packed Punches
+    The Strategy Revealed
+    Cross-Arm Defense
+    The Murder Punch 
+    The Sweet, Dangerous Lure
+    Impossible Dreams
+
+TAKAMURA_VS_YOSHIAKI_YAJIMA = 0x06
+    The Japan MiddleWeight Title Bout
+    
+IPPO_VS_RUICHI_HAYAMI = 0x07
+IPPO_VS_RYO_MASHIBA = 0x08
+IPPO_VS_TAKESHI_SENDO = 0x09
+TATSUYA_KIMURA_VS_SHINJI_KANZAKI = 0x0a
+AOKI_VS_ARMAND_GARCIA = 0x0b
+TAKAMURA_VS_BONCHAI_CHUWATANA = 0x0c
+IPPO_VS_KEIGO_OKITA = 0x0d
+MIYATA_SPARRING_WITH_PAPYO = 0x0e
+MIYATA_VS_JIMMY_SISFA = 0x0f
+IPPO_VS_TAKUMA_SAEKI = 0x10
+KIMURA_VS_HIROSHI_NISHIMURA = 0x11
+AOKI_VS_BULL_USHIDA = 0x12
+AOKI_VS_JACKAL_ITO = 0x13
+KIMURA_VS_TAKESHI_RYUZAKI = 0x14
+IPPO_VS_ALEXANDER_VOLG_ZANGIEV = 0x15
+TAKAMURA_VS_ATSUSHI_TAMAKI = 0x16
+IPPO_VS_EIJI_DATE = 0x17
+SENDO_VS_ALEXANDER_VOLG_ZANGIEV = 0x18
+MIYATA_VS_LEE_CHONPIL = 0x19
+AOKI_VS_SNAKE_THOMAS = 0x1a
+KIMURA_VS_PONE_MOROCOTTE = 0x1b
+IPPO_VS_PONCHAI_CHUWATANA = 0x1c
+TAKAMURA_VS_BEAR = 0x1d
+KIMURA_VS_NEFUMA_OZCA = 0x1e
+AOKI_VS_BOY_ARADE = 0x1f
+TAKAMURA_VS_TAKAAKI_ITO = 0x20
+SENDO_VS_AKIRA_SHIGETA = 0x21
+AOKI_VS_IPPO_SPARRING = 0x22
+IPPO_VS_TAKESHI_SENDO_2 = 0x23
+KIMURA_VS_MIYATA_SPARRING = 0x24
+KIMURA_VS_RYO_MASHIBA = 0x25
+IPPO_VS_KAZUKI_SANADA = 0x26
+MIYATA_VS_ARNIE_CROCODILE_GREGORY = 0x27
+AOKI_VS_PADDY_MAGRAMO = 0x28
+IPPO_VS_HAMMER_NAO = 0x29
+ITAGAKI_VS_FUMITO_MAKINO = 0x2a
+TATSUYA_VS_ARMAND_ALEGRIA = 0x2b
+TAKAMURA_VS_MORRIS_WEST = 0x2c
+IPPO_VS_YI_YONSU = 0x2d
+TAKAMURA_VS_BRIAN_HAWK = 0x2e
+Those who succeed work hard, or something 
+GINPACHI_NEKOTA_VS_DANKICHI_HAMA = 0x2f
+GENJI_KAMOGAWA_VS_GINPACHI_NEKOTA = 0x30
+GENJI_KAMOGAWA_VS_RALPH_ANDERSON = 0x31
+ITAGAKI_VS_HASEO_BARAKI = 0x32
+IPPO_VS_IWAO_SHIMABUKURO = 0x33
+ITAGAKI_VS_TADASHI_NAKAYAMA = 0x34
+AOKI_VS_KATSUTAKA_IMAE = 0x35
+TAKAMURA_VS_RALLY_BERNARD = 0x36
+ALEXANDER_VOLG_ZANGIEV_VS_IPPO = 0x37
+IPPO_VS_RYUHEI_SAWAMURA = 0x38
+ITAGAKI_VS_YOSHIHARU_URAYASU = 0x39
+ITAGAKI_VS_TETSUJI_KIBA = 0x3a
+TATSUYA_VS_ELEKI_BATTERY = 0x3b
+AOKI_VS_PAPAYA_DACHIU = 0x3c
+MIYATA_VS_MEDGERN_DATCHBOY = 0x3d
+TAKAMURA_VS_DAVID_GOLDEN_EAGLE = 0x3e
+ITAGAKI_VS_FUMITO_MAKINO_2 = 0x3f
+IPPO_VS_TAKUZO_KARASAWA = 0x40
+ITAGAKI_VS_KYOUSUKE_IMAI = 0x41
+IPPO_VS_KEIICHI_TAKE = 0x42
+MIYATA_VS_CHE_JOUNBONG = 0x43
+IPPO_VS_MIYATA_2 = 0x44
+EIJI_DATE_VS_RICARDO_MARTINEZ = 0x45
