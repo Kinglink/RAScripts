@@ -27,6 +27,8 @@ HARD_POINTS = "HARD POINTS"
 SPECIAL_POINTS = "SPECIAL POINTS"
 SPECIAL_DESCRIPTION = "SPECIAL DESCRIPTION"
 
+EXHIBITION_RULE = " (no modification to stats, Player Strength <= Cpu Strength)"
+
 // $43AE4D: (8-bit) Win Lost check
 //          
 //          0x00 = Normal gameplay.
@@ -37,29 +39,23 @@ function winLostCheck() => byte(0x43AE4D)
 
 WIN_LOST_CHECK_NORMAL = 0x00
 WIN_LOST_CHECK_NORMAL_ALT = 0x8a
+WIN_LOST_CHECK_NORMAL_SECOND_ALT = 0x40
 WIN_LOST_CHECK_P1_WON = 0x89
 WIN_LOST_CHECK_P1_LOST = 0x0d
 
-function playerJustWon() => winLostCheck() == WIN_LOST_CHECK_P1_WON && (prev(winLostCheck()) == WIN_LOST_CHECK_NORMAL || prev(winLostCheck()) == WIN_LOST_CHECK_NORMAL_ALT)
+function playerJustWon() => winLostCheck() == WIN_LOST_CHECK_P1_WON && (prev(winLostCheck()) == WIN_LOST_CHECK_NORMAL || prev(winLostCheck()) == WIN_LOST_CHECK_NORMAL_ALT || prev(winLostCheck()) == WIN_LOST_CHECK_NORMAL_SECOND_ALT)
 function playerLost() => winLostCheck() == WIN_LOST_CHECK_P1_LOST
 
-// $43B982: (8-bit) Potential Slow mo Check
-//          
-//          0x80 = Normal
-//          0x3b = Slow
-//          0x00 = Knock down.
-function slowMoCheck() => byte(0x43B982)
+// $43B980 : (32-bit) Fight Process speed
+//            
+//            0x3f800000 = Normal Fight Speed
+//            0x40000000 = Knock down speed
+//            0x40000001+ = Slow Mo Speed .  
+function slowMoCheck() => dword(0x43B980)
 
-SLOW_MO_CHECK_NORMAL = 0x80
-SLOW_MO_CHECK_SLOW = 0x3b
-SLOW_MO_CHECK_KNOCK_DOWN = 0x00
-
-
-// $43B983: (8-bit) Potential Slow mo Check
-//          
-//          0x3f = Normal
-//          0x40 = Slow
-function altSlowMoCheck() => byte(0x43B983)
+SLOW_MO_CHECK_NORMAL = 0x3f800000
+SLOW_MO_CHECK_KNOCK_DOWN = 0x40000000
+function isSlowMo() => slowMoCheck() > SLOW_MO_CHECK_KNOCK_DOWN
 
 // $43ED38: (8-bit) Mode selection
 //          
@@ -87,11 +83,16 @@ function isTournamentMode() => modeSelection() == MODE_SELECTION_TOURNAMENT
 function storyModeDifficulty() => byte(0x43ED48)
 function isHardStoryMode() => storyModeDifficulty() == 0x02 && isStoryMode() // This value has NO meaning outside of story mode. 
 
+EASY_DIFFICULTY = 0x00
+NORMAL_DIFFICULTY = 0x01
+HARD_DIFFICULTY = 0x02
+
+
 DifficultyLookup =
 {
-    0x00: "Easy",
-    0x01: "Normal",
-    0x02: "Hard"
+    EASY_DIFFICULTY: "Easy",
+    NORMAL_DIFFICULTY: "Normal",
+    HARD_DIFFICULTY: "Hard"
 }
 
 // $43ED44: (8-bit)  Control value for Story Fight
@@ -242,6 +243,9 @@ IPPO_VS_KEIICHI_TAKE = 0x42
 MIYATA_VS_CHE_JOUNBONG = 0x43
 IPPO_VS_MIYATA_2 = 0x44
 EIJI_DATE_VS_RICARDO_MARTINEZ = 0x45
+
+FIRST_BOUT = IPPO_VS_MIYATA_SPARRING
+LAST_BOUT = EIJI_DATE_VS_RICARDO_MARTINEZ
 
 boutTitleLookup =
 { 
@@ -419,13 +423,13 @@ function player2Human() => bit1(PLAYER_CONTROLLED_BITFIELD) == 0x01
 //          
 //          0x4c4b40 =- In boxing ring and post game
 //          All others are not.
+//          Instead, try 32-bit Compared to  0x006d4930  Also != 0;
 function inMatchCheck() => dword(0x6D492C)
-IN_MATCH_CHECK_VALUE = 0x4C4B40
-ALTERNATE_IN_MATCH_CHECK_VALUE  = 0x004dd1e0 
+function alternateInMatchCheck() => dword(0x6D4930)
 
-function currentlyInMatch() => inMatchCheck() == IN_MATCH_CHECK_VALUE || inMatchCheck() == ALTERNATE_IN_MATCH_CHECK_VALUE 
-function justEnteredMatch() => inMatchCheck() == IN_MATCH_CHECK_VALUE || inMatchCheck() == ALTERNATE_IN_MATCH_CHECK_VALUE && 
-                               (prev(inMatchCheck()) != IN_MATCH_CHECK_VALUE && prev(inMatchCheck()) != ALTERNATE_IN_MATCH_CHECK_VALUE)
+function currentlyInMatch() => inMatchCheck() != 0x00000000 && inMatchCheck() == alternateInMatchCheck()
+function justEnteredMatch() => currentlyInMatch() &&  prev(!currentlyInMatch())
+                               
 
 // $6D7C54: (8-bit) Potential Main player "move"
 //          
@@ -492,7 +496,8 @@ function justEnteredMatch() => inMatchCheck() == IN_MATCH_CHECK_VALUE || inMatch
 //          Takamura Right hook = Momentary Battle
 //          Genji Kamogawa Left hook = Iron Fist
 function P1CurrentMove() => byte(0x6D7C54)
-LEFT_STRAIGHT_MOVE_VALUE = 0x01
+JAB_MOVE_VALUE = 0x01
+LEFT_STRAIGHT_MOVE_VALUE = 0x02
 RIGHT_STRAIGHT_MOVE_VALUE = 0x03
 LEFT_HOOK_MOVE_VALUE = 0x04
 RIGHT_HOOK_MOVE_VALUE = 0x05
@@ -505,9 +510,11 @@ SPECIAL_RIGHT_HOOK_MOVE_VALUE = 0x0d
 
 HIT_BY_LOOK_AWAY_MOVE_VALUE = 0x83
 
-IPPO_GAZELLE_PUNCH_MOVE_VALUE = 0x0a
+IPPO_GAZELLE_PUNCH_MOVE_VALUE = 0xd0 // Due to dempsey, need to handle special. 
 IPPO_DEADLY_SMASH_MOVE_VALUE = 0x0b
-IPPO_DEMPSY_ROLL_MOVE_VALUE = 0x0c
+IPPO_DEMPSY_ROLL_MOVE_VALUE = 0xf0 // Needs special handling
+IPPO_LEFT_DEMPSY_ROLL_MOVE_VALUE = 0xf1 // Needs special handling
+IPPO_RIGHT_DEMPSY_ROLL_MOVE_VALUE = 0xf2 // Needs special handling
 IPPO_JOFRE_UPPER_CUT_MOVE_VALUE = 0x0d
 MASHIBA_CHOPPING_RIGHT_MOVE_VALUE = 0x0b
 MASHIBA_CROSS_ARMED_BLOCK_MOVE_VALUE = 0x0c
@@ -531,7 +538,7 @@ ITAGAKI_SLOW_BATTLE_MOVE_VALUE = 0x0c
 ITAGAKI_MOMENTARY_BATTLE_MOVE_VALUE = 0x0d
 AOKI_DOUBLE_PUNCH_MOVE_VALUE = 0x0a
 AOKI_CORKSCREW_MOVE_VALUE = 0x0b
-AOKI_LOOK_AWAY_MOVE_VALUE = 0x0c
+AOKI_LOOK_AWAY_MOVE_VALUE = 0x82
 AOKI_FROG_PUNCH_MOVE_VALUE = 0x0d
 KIMURA_SLOW_BATTLE_MOVE_VALUE = 0x0a
 KIMURA_DRAGON_FISH_BLOW_MOVE_VALUE = 0x0c
@@ -542,7 +549,29 @@ TAKAMURA_MOMENTARY_BATTLE_MOVE_VALUE = 0x0d
 GENJI_IRON_FIST_MOVE_VALUE = 0x0c
 
 
-function checkP1CurrentMove(value) => P1CurrentMove() == value
+function checkP1CurrentMove(value){
+    if (value == IPPO_DEMPSY_ROLL_MOVE_VALUE)
+    {
+        // This is a special case because he throws 0x0c and then 0x0a back and forth.) 
+        return checkP1CurrentMove(IPPO_LEFT_DEMPSY_ROLL_MOVE_VALUE) || 
+               checkP1CurrentMove(IPPO_RIGHT_DEMPSY_ROLL_MOVE_VALUE)
+    }
+    if (value == IPPO_LEFT_DEMPSY_ROLL_MOVE_VALUE)
+    {
+        // This is a special case because he throws 0x0c and then 0x0a back and forth.) 
+        return P1CurrentMove() == 0xc
+    }
+    if (value == IPPO_RIGHT_DEMPSY_ROLL_MOVE_VALUE)
+    {
+        return ( P1CurrentMove() == 0xa && prior(P1CurrentMove()) == 0x0c)
+    }
+    if (value == IPPO_GAZELLE_PUNCH_MOVE_VALUE)
+    {
+        // This is a special case to avoid Dempsey Roll.
+        return P1CurrentMove() == 0xa && prior(P1CurrentMove()) != 0x0c
+    }
+    return P1CurrentMove() == value
+}
 function P1JustMoved(value) => P1CurrentMove() == value && prev(P1CurrentMove()) != value
 
 
@@ -658,7 +687,11 @@ function P2JustDowned() => P2DownedStatus() == JUST_DOWNED_VALUE && prev(P2Downe
 function P2StoppedDown() => P2DownedStatus() == DOWN_STATUS_NORMAL_VALUE && prev(P2DownedStatus()) != DOWN_STATUS_NORMAL_VALUE
 
 function P1UsedMoveToKnockDown(value) => once (P2JustDowned() && checkP1CurrentMove(value) && never(P2StoppedDown()))
-function slowMoToKnockDown() => once(slowMoCheck() == SLOW_MO_CHECK_KNOCK_DOWN && prev(slowMoCheck()) == SLOW_MO_CHECK_SLOW  && P2JustDowned() && never(P2StoppedDown())) 
+function slowMoToKnockDown() => once(slowMoCheck() == SLOW_MO_CHECK_KNOCK_DOWN && 
+                                (
+                                    prev(isSlowMo())
+                                ) && 
+                                P2JustDowned() && never(P2StoppedDown()))  
 
 function moveLanded(move) => checkP1CurrentMove(move) && attackLanded() 
 function lookAwayLanded() => checkP1CurrentMove(AOKI_LOOK_AWAY_MOVE_VALUE) && P2JustMoved(HIT_BY_LOOK_AWAY_MOVE_VALUE)
@@ -743,6 +776,7 @@ function lookAwayLanded() => checkP1CurrentMove(AOKI_LOOK_AWAY_MOVE_VALUE) && P2
 //          0x85 = Ginpachi Nekota (Young)
 //          0x86 = Dankichi Hama (Young)
 //          0x8a = Ralph Anderson
+//          0x115 = BroccoMan
 //          0x116 = Genji Kamogaw (Old)
 //          0x117 = Ginpachi Nekota(Old)
 //          0x118 = Dankichi Hama(Old)
@@ -825,6 +859,7 @@ EXHIBITION_CHARACTER_GENJI_KAMOGAWA_YOUNG = 0x89
 EXHIBITION_CHARACTER_GINPACHI_NEKOTA_YOUNG = 0x85
 EXHIBITION_CHARACTER_DANKICHI_HAMA_YOUNG = 0x86
 EXHIBITION_CHARACTER_RALPH_ANDERSON = 0x8a
+EXHIBITION_CHARACTER_BROCCOMAN = 0x115
 EXHIBITION_CHARACTER_GENJI_KAMOGAWA_OLD = 0x116
 EXHIBITION_CHARACTER_GINPACHI_NEKOTA_OLD = 0x117
 EXHIBITION_CHARACTER_DANKICHI_HAMA_OLD = 0x118
@@ -838,14 +873,14 @@ CharacterNameLookup =
     EXHIBITION_CHARACTER_JASON_OZUMA: "Jason Ozuma",
     EXHIBITION_CHARACTER_KENTA_KOBASHI: "Kenta Kobashi",
     EXHIBITION_CHARACTER_RUICHI_HAYAMI: "Ruichi Hayami",
-    EXHIBITION_CHARACTER_RYO_MASHIBA_FEATHERWEIGHT: "Ryo Mashiba",
-    EXHIBITION_CHARACTER_RYO_MASHIBA_JR_LIGHTWEIGHT: "Ryo Mashiba",
+    EXHIBITION_CHARACTER_RYO_MASHIBA_FEATHERWEIGHT: "Ryo Mashiba(Featherweight)",
+    EXHIBITION_CHARACTER_RYO_MASHIBA_JR_LIGHTWEIGHT: "Ryo Mashiba(Jr. LightWeight)",
     EXHIBITION_CHARACTER_TAKESHI_SENDO: "Takeshi Sendo",
     EXHIBITION_CHARACTER_KEIGO_OKITA: "Keigo Okita",
     EXHIBITION_CHARACTER_TAKUMA_SAEKI: "Takuma Saeki",
     EXHIBITION_CHARACTER_VOLG_ZANGIEV: "Alexander Volg Zangiev",
-    EXHIBITION_CHARACTER_EIJI_DATE_YOUNG: "Eiji Date",
-    EXHIBITION_CHARACTER_EIJI_DATE_OLD: "Eiji Date",
+    EXHIBITION_CHARACTER_EIJI_DATE_YOUNG: "Eiji Date (Young)",
+    EXHIBITION_CHARACTER_EIJI_DATE_OLD: "Eiji Date (Old)",
     EXHIBITION_CHARACTER_PONCHAI_CHUWATANA_FEATHERWEIGHT: "Ponchai Chuwatana",
     EXHIBITION_CHARACTER_KAZUKI_SANADA: "Kazuki Sanada",
     EXHIBITION_CHARACTER_HAMMER_NAO_GUROMICHI: "Hammer Nao",
@@ -855,7 +890,7 @@ CharacterNameLookup =
     EXHIBITION_CHARACTER_TAKUZO_KARASAWA: "Takuzo Karasawa",
     EXHIBITION_CHARACTER_KEIICHI_TAKE: "Keiichi Take",
     EXHIBITION_CHARACTER_RICARDO_MARTINEZ: "Ricardo Martinez",
-    EXHIBITION_CHARACTER_ICHIRO_MIYATA_EARLY_EXHIBITION: "Ichiro Miyata",
+    EXHIBITION_CHARACTER_ICHIRO_MIYATA_EARLY_EXHIBITION: "Ichiro Miyata(Training Gear)",
     EXHIBITION_CHARACTER_ICHIRO_MIYATA_FINAL_EXHIBITION: "Ichiro Miyata",
     EXHIBITION_CHARACTER_LUNSAKU_PAUDY: "Lunsaku Paudy",
     EXHIBITION_CHARACTER_PAYAO: "Payao",
@@ -892,8 +927,8 @@ CharacterNameLookup =
     EXHIBITION_CHARACTER_KATSUTAKA_IMAE: "Katsutaka Imae",
     EXHIBITION_CHARACTER_ELEKI_BATTERY: "Eleki Battery",
     EXHIBITION_CHARACTER_PAPAYA_DACHIU: "Papaya Dachiu",
-    EXHIBITION_CHARACTER_MAMORU_TAKAMURA_SKINNY_EXHIBITION: "Mamoru Takamura",
-    EXHIBITION_CHARACTER_MAMORU_TAKAMURA_MIDDLE_WEIGHT: "Mamoru Takamura",
+    EXHIBITION_CHARACTER_MAMORU_TAKAMURA_SKINNY_EXHIBITION: "Mamoru Takamura(Jr. Middleweight)",
+    EXHIBITION_CHARACTER_MAMORU_TAKAMURA_MIDDLE_WEIGHT: "Mamoru Takamura (Middleweight)",
     EXHIBITION_CHARACTER_BONCHAI_CHUWATANA: "Bonchai Chuwatana",
     EXHIBITION_CHARACTER_ATSUSHI_TAMAKI: "Atsushi Tamaki",
     EXHIBITION_CHARACTER_YOSHIAKI_YAJIMA: "Yoshiaki Yajima",
@@ -907,6 +942,7 @@ CharacterNameLookup =
     EXHIBITION_CHARACTER_GINPACHI_NEKOTA_YOUNG: "Ginpachi Nekota (Young)",
     EXHIBITION_CHARACTER_DANKICHI_HAMA_YOUNG: "Dankichi Hama (Young)",
     EXHIBITION_CHARACTER_RALPH_ANDERSON: "Ralph Anderson",
+    EXHIBITION_CHARACTER_BROCCOMAN: "Broccoman",
     EXHIBITION_CHARACTER_GENJI_KAMOGAWA_OLD: "Genji Kamogawa (Old)",
     EXHIBITION_CHARACTER_GINPACHI_NEKOTA_OLD: "Ginpachi Nekota (Old)",
     EXHIBITION_CHARACTER_DANKICHI_HAMA_OLD: "Dankichi Hama (Old)"
@@ -924,6 +960,7 @@ MAX_TIME_VALUE = 60*60*3
 function timeInSecond() => timeInFrames() / 60
 
 function storyModeConfigCheck() => currentlyInMatch() && isStoryMode()
+function specialStoryModeConfigCheck() => never( !currentlyInMatch()) && isStoryMode()
 
 function exhibitionModeConfigCheck() => 
                         isExhibitionMode() &&
@@ -940,54 +977,54 @@ story_data =
 [
     { 
         ID: IPPO_VS_MIYATA_SPARRING, 
-        EASY_TITLE: "The Rookie vs the Prodigy",
-        HARD_TITLE: "Next Time It'll Be For Real",
-        SPECIAL_TITLE: "Your Special Move",
+        EASY_TITLE: "A Courageous Step Forward",
+        HARD_TITLE: "I Still Have One Thing I Want to Try",
+        SPECIAL_TITLE: "One Centimeter of Destruction",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_JOFRE_UPPER_CUT_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Jofre Uppercut to Knock Out Miyata.",
         SPECIAL_POINTS: 5
     },
     { 
         ID: IPPO_VS_NAOYA_OGAWA, 
-        EASY_TITLE: "Pro Test",
-        HARD_TITLE: "<REPLACE>IPPO VS NAOYA OGAWA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>IPPO VS NAOYA OGAWA(SPECIAL)",
+        EASY_TITLE: "I'm Sticking to Featherweight",
+        HARD_TITLE: "You Got a Good Punch, Man)",
+        SPECIAL_TITLE: "He Flipped Him With One Punch",
         SPECIAL_RESET: P1JustDowned(),
         SPECIAL_DESCRIPTION: "without getting knocked down",
         SPECIAL_POINTS: 3
     },
     { 
         ID: IPPO_VS_YUSUKE_ODA, 
-        EASY_TITLE: "Pro Debut Match",
-        HARD_TITLE: "<REPLACE>IPPO VS YUSUKE ODA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>IPPO VS YUSUKE ODA(SPECIAL)",
+        EASY_TITLE: "Beating's Aoki's Fortune",
+        HARD_TITLE: "The Taste of the First Victory",
+        SPECIAL_TITLE: "I'm Starting to Get Used to this",
         SPECIAL_RESET: P1JustDowned(),
-        SPECIAL_DESCRIPTION: "without getting knocked down",
-        SPECIAL_POINTS: 3
+        SPECIAL_DESCRIPTION: "Using a Right Straight to Knock Out Oda.",
+        SPECIAL_POINTS: 4
     },
     { 
         ID: IPPO_VS_YOSHIO_FUJIWARA, 
-        EASY_TITLE: "The First Professional Match",
-        HARD_TITLE: "<REPLACE>IPPO VS YOSHIO FUJIWARA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>IPPO VS YOSHIO FUJIWARA(SPECIAL)",
+        EASY_TITLE: "Springboard to the Rookie King",
+        HARD_TITLE: "He Really Is Strong",
+        SPECIAL_TITLE: "It's Like Someone's Hitting Me With a Rock",
         SPECIAL_CHECK: (P1UsedMoveToKnockDown(LEFT_UPPER_MOVE_VALUE) || P1UsedMoveToKnockDown(RIGHT_UPPER_MOVE_VALUE)),
         SPECIAL_DESCRIPTION: "using a (normal) Uppercut to Knock Out Fujiwara."
     }, 
     { 
         ID: IPPO_VS_JASON_OZUMA, 
-        EASY_TITLE: "East Japan Rookie King Tournament First Round",
-        HARD_TITLE: "<REPLACE>IPPO VS JASON OZUMA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>IPPO VS JASON OZUMA(SPECIAL)",
+        EASY_TITLE: "Rookie King Opener",
+        HARD_TITLE: "Stop Ozuma",
+        SPECIAL_TITLE: "Applause for the Defeated",
         SPECIAL_RESET: checkP1CurrentMove(IPPO_JOFRE_UPPER_CUT_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "Without throwing a Jofre Uppercut"
     },
     { 
         ID: IPPO_VS_KENTA_KOBASHI, 
-        EASY_TITLE: "East Japan Rookie King Tournament Quarter Finals",
-        HARD_TITLE: "<REPLACE>IPPO VS KENTA KOBASHI(HARD)",
-        SPECIAL_TITLE: "<REPLACE>IPPO VS KENTA KOBASHI(SPECIAL)",
-        SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_JOFRE_UPPER_CUT_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Jofre Uppercut to Knock Out Kobashi."
+        EASY_TITLE: "The Sweet, Dangerous Lure",
+        HARD_TITLE: "Impossible Dreams",
+        SPECIAL_TITLE: "Power Packed Punches",
+        SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_STRAIGHT_MOVE_VALUE),
+        SPECIAL_DESCRIPTION: "using a Right Straightto Knock Out Kobashi."
     },
     { 
         ID: IPPO_VS_RUICHI_HAYAMI, 
@@ -1080,16 +1117,16 @@ story_data =
     { 
         ID: IPPO_VS_ALEXANDER_VOLG_ZANGIEV, 
         EASY_TITLE: "White Fang",
-        HARD_TITLE: "<REPLACE>IPPO VS VOLG ZANGIEV(HARD)",
-        SPECIAL_TITLE: "<REPLACE>IPPO VS VOLG ZANGIEV(SPECIAL)",
+        HARD_TITLE: "Defanging the Wolf",
+        SPECIAL_TITLE: "Gazelle Vs Wolf",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_GAZELLE_PUNCH_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Gazelle Punch to Knock Out Zangiev."
     },
     { 
         ID: IPPO_VS_EIJI_DATE, 
         EASY_TITLE: "Challenge for the Champion",
-        HARD_TITLE: "<REPLACE>IPPO VS EIJI DATE(HARD)",
-        SPECIAL_TITLE: "<REPLACE>IPPO VS EIJI DATE(SPECIAL)",
+        HARD_TITLE: "Claiming the National Championship",
+        SPECIAL_TITLE: "The Hero Never Loses",
         SPECIAL_CHECK: currentRound() > 5,
         SPECIAL_DESCRIPTION: "reach the 6th round and win."
     },
@@ -1098,8 +1135,8 @@ story_data =
         EASY_TITLE: "<REPLACE>TAKESHI SENDO VS VOLG ZANGIEV",
         HARD_TITLE: "<REPLACE>TAKESHI SENDO VS VOLG ZANGIEV(HARD)",
         SPECIAL_TITLE: "<REPLACE>TAKESHI SENDO VS VOLG ZANGIEV(SPECIAL)",
-        SPECIAL_CHECK: P1UsedMoveToKnockDown(SENDO_DEADLY_SMASH_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Deadly Smash to Knock Out Zangiev."
+        SPECIAL_CHECK: P1UsedMoveToKnockDown(SENDO_ULTRA_LOW_SMASH_MOVE_VALUE),
+        SPECIAL_DESCRIPTION: "using a Ultra Low Smash to Knock Out Zangiev."
     },
     { 
         ID: MIYATA_VS_LEE_CHONPIL, 
@@ -1138,8 +1175,8 @@ story_data =
         EASY_TITLE: "<REPLACE>TAKUMURA VS BEAR",
         HARD_TITLE: "<REPLACE>TAKUMURA VS BEAR(HARD)",
         SPECIAL_TITLE: "<REPLACE>TAKUMURA VS BEAR(SPECIAL)",
-        SPECIAL_RESET: timeInFrames() > 60*60,
-        SPECIAL_DESCRIPTION: "win the match in under 60 seconds."
+        SPECIAL_RESET: timeInFrames() > 15*60,
+        SPECIAL_DESCRIPTION: "win the match in under 15 seconds."
     },
     { 
         ID: TAKAMURA_VS_TAKAAKI_ITO, 
@@ -1219,6 +1256,14 @@ story_data =
         SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_JOFRE_UPPER_CUT_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Jofre Uppercut to Knock Out Nao."
     },
+    {
+        ID: ITAGAKI_VS_FUMITO_MAKINO,
+        EASY_TITLE: "Itagaki's Pro Debut",
+        HARD_TITLE: "<REPLACE>ITAGAKI VS FUMITO MAKINO(HARD)",
+        SPECIAL_TITLE: "<REPLACE>ITAGAKI VS FUMITO MAKINO(SPECIAL)",
+        SPECIAL_CHECK: slowMoToKnockDown() && P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
+        SPECIAL_DESCRIPTION: "and use a Right Hook to Knock Out Makino while using the Slow Battle Special Move."
+    },
     { 
         ID: TATSUYA_VS_ARMAND_ALEGRIA, 
         EASY_TITLE: "Apocolypse Now Semi-Final <Replace>>",
@@ -1239,15 +1284,15 @@ story_data =
         ID: IPPO_VS_YI_YONSU, 
         EASY_TITLE: "Battle of Hawk Opening Match <Replace?>",
         HARD_TITLE: "<REPLACE>IPPO VS YI YONSU(HARD)",
-        SPECIAL_TITLE: "<REPLACE>IPPO VS YI YONSU(SPECIAL)",
-        SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_DEMPSY_ROLL_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Dempsey Roll to Knock Out Yonsu."
+        SPECIAL_TITLE: "A Promise to Takamura",
+        SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_DEMPSY_ROLL_MOVE_VALUE) && currentRound() == 1,
+        SPECIAL_DESCRIPTION: "using a Dempsey Roll to Knock Out Yonsu in the first round."
     },
     { 
         ID: TAKAMURA_VS_BRIAN_HAWK, 
         EASY_TITLE: "Battle of Hawk",
-        HARD_TITLE: "<REPLACE>TAKAMURA VS BRIAN HAWK(HARD)",
-        SPECIAL_TITLE: "<REPLACE>TAKAMURA VS BRIAN HAWK(SPECIAL)",
+        HARD_TITLE: "For Japan's Honor",
+        SPECIAL_TITLE: "A License to Kill",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_STRAIGHT_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Right Straight to Knock Out Hawk."
     },
@@ -1264,8 +1309,8 @@ story_data =
         EASY_TITLE: "<REPLACE>GENJI KAMOGAWA VS GINPACHI NEKOTA",
         HARD_TITLE: "<REPLACE>GENJI KAMOGAWA VS GINPACHI NEKOTA(HARD)",
         SPECIAL_TITLE: "<REPLACE>GENJI KAMOGAWA VS GINPACHI NEKOTA(SPECIAL)",
-        SPECIAL_CHECK: P1UsedMoveToKnockDown(GENJI_IRON_FIST_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using an Iron Fist to Knock Out Nekota."
+        SPECIAL_CHECK: P1UsedMoveToKnockDown(LEFT_HOOK_MOVE_VALUE),
+        SPECIAL_DESCRIPTION: "using an Left Hook to Knock Out Nekota."
     },
     {
         ID: GENJI_KAMOGAWA_VS_RALPH_ANDERSON,
@@ -1293,7 +1338,7 @@ story_data =
                                             moveLanded(AOKI_DOUBLE_PUNCH_MOVE_VALUE), 
                                             moveLanded(AOKI_FROG_PUNCH_MOVE_VALUE),
                                             lookAwayLanded()], 
-                                            3, 
+                                            4, 
                                             move => once(move)
                                             )
                                 ),
@@ -1356,14 +1401,6 @@ story_data =
         SPECIAL_DESCRIPTION: "and use either a right straight or a left straight to Knock Out Golden Eagle while using the Slow Battle Special Move."
     },
     {
-        ID: ITAGAKI_VS_FUMITO_MAKINO,
-        EASY_TITLE: "Itagaki's Pro Debut",
-        HARD_TITLE: "<REPLACE>ITAGAKI VS FUMITO MAKINO(HARD)",
-        SPECIAL_TITLE: "<REPLACE>ITAGAKI VS FUMITO MAKINO(SPECIAL)",
-        SPECIAL_CHECK: slowMoToKnockDown() && P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "and use a Right Hook to Knock Out Makino while using the Slow Battle Special Move."
-    },
-    {
         ID: IPPO_VS_TAKUZO_KARASAWA,
         EASY_TITLE: "The Challenge for the 6th Defence",
         HARD_TITLE: "<REPLACE>IPPO VS TAKUZO KARASAWA(HARD)",
@@ -1402,15 +1439,16 @@ story_data =
         SPECIAL_TITLE: "Using Everything I Learned",
         SPECIAL_CHECK: measured(tally_of(
                                          [IPPO_DEADLY_SMASH_MOVE_VALUE, 
-                                          IPPO_DEMPSY_ROLL_MOVE_VALUE, 
+                                          IPPO_LEFT_DEMPSY_ROLL_MOVE_VALUE, 
+                                          IPPO_RIGHT_DEMPSY_ROLL_MOVE_VALUE, 
                                           IPPO_GAZELLE_PUNCH_MOVE_VALUE, 
                                           IPPO_JOFRE_UPPER_CUT_MOVE_VALUE
                                          ], 
-                                         4, 
+                                         5, 
                                          move => once(moveLanded(move))
                                         )
                                 ),
-        SPECIAL_DESCRIPTION: "land a Deadly Smash, Dempsey Roll, Gazelle Punch, and Jofre Uppercut during the match and then win."
+        SPECIAL_DESCRIPTION: "land a Deadly Smash, Gazelle Punch, Jofre Uppercut and both the left and right hook of a Dempsey Roll during the match and then win."
     },
 ]
 
@@ -1483,13 +1521,13 @@ function SpecialStoryAchievement(data)
     achievement(title = data[SPECIAL_TITLE],
                 description = format("Beat Story mission for {0} on Hard Difficulty {1}", boutTitleLookup[data[ID]], specialDescription),
                 points = points,
-                trigger = storyModeConfigCheck() && 
+                trigger = specialStoryModeConfigCheck() && 
                           trigger_when(playerJustWon()) && 
                           currentStoryFightIndex() == data[ID] &&
-                          isStoryMode() &&
+                          isHardStoryMode() &&
                           special_check &&
                           special_reset &&
-                          never(!isStoryMode()) &&
+                          never(!isHardStoryMode()) &&
                           never( currentStoryFightIndex() != data[ID])
     )
                           
@@ -1599,6 +1637,14 @@ specialStoryBouts =
         SPECIAL_TITLE: "<REPLACE>ITAGAKI vs TETSUJI KIBA(SPECIAL)",
         SPECIAL_CHECK: slowMoToKnockDown(),
         SPECIAL_DESCRIPTION: "and Knock Out Kiba while using the Slow Battle Special Move."
+    },
+    {
+        ID: ITAGAKI_VS_FUMITO_MAKINO_2,
+        EASY_TITLE: "Itagaki's REmatch",
+        HARD_TITLE: "<REPLACE>ITAGAKI VS FUMITO MAKINO(HARD)",
+        SPECIAL_TITLE: "<REPLACE>ITAGAKI VS FUMITO MAKINO(SPECIAL)",
+        SPECIAL_CHECK: slowMoToKnockDown() && P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
+        SPECIAL_DESCRIPTION: "and use a Right Hook to Knock Out Makino while using the Slow Battle Special Move."
     },
     {
         ID: EIJI_DATE_VS_RICARDO_MARTINEZ,
@@ -1714,7 +1760,7 @@ exhibitionBattles =
 for data in exhibitionBattles
 {
     achievement(title = data[TITLE],
-                description = format("As {0}, win a bout against {1} in Exhibition Mode", 
+                description = format("As {0}, win a bout against {1} in Exhibition Mode" + EXHIBITION_RULE, 
                                      CharacterNameLookup[data[PLAYER_CHARACTER]], 
                                      CharacterNameLookup[data[OPPONENT_CHARACTER]]),
                 points = 5,
@@ -1737,7 +1783,7 @@ for data in exhibitionBattles
 // },
 
 achievement(title = "The Rivalry Resolved",
-            description = format("Win a match as {0} or {1} against {2} in Exhibition Mode", 
+            description = format("Win a match as {0} or {1} against {2} in Exhibition Mode" + EXHIBITION_RULE, 
                                  CharacterNameLookup[EXHIBITION_CHARACTER_GENJI_KAMOGAWA_OLD],
                                  CharacterNameLookup[EXHIBITION_CHARACTER_GINPACHI_NEKOTA_OLD],
                                  CharacterNameLookup[EXHIBITION_CHARACTER_DANKICHI_HAMA_OLD]),
@@ -1759,7 +1805,7 @@ achievement(title = "The Rivalry Resolved",
 // }
 
 achievement(title = "Kimura's Dream",
-            description = format("As Kimura, land a single hit on Takamura in Exhibition Mode"),
+            description = format("As Kimura, land a single hit on Takamura in Exhibition Mode"+ EXHIBITION_RULE),
             points = 1,
             trigger = exhibitionModeConfigCheck() &&
                       trigger_when(attackLanded()) && 
@@ -1805,25 +1851,68 @@ achievement(title = "Aoki's Dream",
 
 achievement(title = "The Dangerous Chopping Right",
             description = format("As Mashiba (Featherweight), win a match against Ippo (Exhibition) and finish the battle with a Chopping Right in Exhibition Mode"),
-            points = 1,
+            points = 5,
             trigger = exhibitionModeConfigCheck() && 
                       trigger_when(attackLanded()) && 
                       P1UsedMoveToKnockDown(MASHIBA_CHOPPING_RIGHT_MOVE_VALUE) &&
                       once( currentRound() == 1 && 
                             timeInSecond() == 0) &&
                       P1CharacterIndex() == EXHIBITION_CHARACTER_MASARU_AOKI_EXHIBITION &&
-                      ( P2CharacterIndex() == EXHIBITION_CHARACTER_MAMORU_TAKAMURA_SKINNY_EXHIBITION ||
-                        P2CharacterIndex() == EXHIBITION_CHARACTER_MAMORU_TAKAMURA_MIDDLE_WEIGHT
-                      ) &&
+                      P2CharacterIndex() == EXHIBITION_CHARACTER_IPPO_EXHIBITION &&
                       never(!isExhibitionMode())
                           
 )
 
+achievement(title = "Maybe The Hair Held Him Back",
+            description = format("As Broccoman, win a match in Exhibition Mode" + EXHIBITION_RULE),
+            points = 3,
+            trigger = exhibitionModeConfigCheck() && 
+                      trigger_when(playerJustWon()) && 
+                      once( currentRound() == 1 && 
+                            timeInSecond() == 0) &&
+                      P1CharacterIndex() == EXHIBITION_CHARACTER_BROCCOMAN &&
+                      once( currentRound() == 1 && 
+                            timeInSecond() == 0) &&
+                      never(!isExhibitionMode())
+            )
+
+
+
+
+function leaderboardByDifficulty(bout_index, difficulty)
+{
+ 
+    leaderboard(
+        title = format("{0}: {1} Speedrun", boutTitleLookup[bout_index], DifficultyLookup[difficulty]),
+        description = format("Win the Story match {0} as fast as possible on {1} Difficulty" ,  boutTitleLookup[bout_index], DifficultyLookup[difficulty]),
+        
+        start  =
+        (
+            storyModeConfigCheck() && 
+            playerJustWon() && 
+            currentStoryFightIndex() == bout_index &&
+            storyModeDifficulty() == difficulty
+        ),
+        cancel = always_false(),
+        submit = always_true(),
+        value = timeInFrames() + (MAX_TIME_VALUE * (currentRound() - 1)),
+        format = "FRAMES", 
+        lower_is_better = true 
+    )
+}
+for index in range(FIRST_BOUT,LAST_BOUT)
+{
+    leaderboardByDifficulty(index, EASY_DIFFICULTY)
+    leaderboardByDifficulty(index, NORMAL_DIFFICULTY)
+    leaderboardByDifficulty(index, HARD_DIFFICULTY)
+}
+
+    
 rich_presence_conditional_display(isStoryMode() && currentlyInMatch(), 
                                   "is currently playing the story match between {0}. Round: {1} Time: {2} Difficulty: {3}",
                                   rich_presence_lookup("Match", currentStoryFightIndex(), boutTitleLookup),
                                   rich_presence_value("Number", currentRound()),
-                                  rich_presence_value("FRAMES", timeInSecond()),
+                                  rich_presence_value("FRAMES", timeInSecond(),"SECS"),
                                   rich_presence_lookup("Difficulty", storyModeDifficulty(), DifficultyLookup))
 
 rich_presence_conditional_display(isExhibitionMode() && currentlyInMatch() &&
@@ -1832,7 +1921,7 @@ rich_presence_conditional_display(isExhibitionMode() && currentlyInMatch() &&
                                   rich_presence_lookup("Character", P1CharacterIndex(), CharacterNameLookup),
                                   rich_presence_lookup("Character", P2CharacterIndex(), CharacterNameLookup),
                                   rich_presence_value("Number", currentRound()),
-                                  rich_presence_value("FRAMES", timeInSecond()))
+                                  rich_presence_value("FRAMES", timeInSecond(),"SECS"))
 
 rich_presence_conditional_display(isExhibitionMode() && currentlyInMatch() &&
                                   player1Human() && !player2Human(), 
@@ -1840,7 +1929,7 @@ rich_presence_conditional_display(isExhibitionMode() && currentlyInMatch() &&
                                   rich_presence_lookup("Character", P1CharacterIndex(), CharacterNameLookup),
                                   rich_presence_lookup("Character", P2CharacterIndex(), CharacterNameLookup),
                                   rich_presence_value("Number", currentRound()),
-                                  rich_presence_value("FRAMES", timeInSecond()))
+                                  rich_presence_value("FRAMES", timeInSecond(),"SECS"))
 
 rich_presence_conditional_display(isExhibitionMode() && currentlyInMatch() &&
                                   !player1Human() && player2Human(), 
@@ -1848,7 +1937,7 @@ rich_presence_conditional_display(isExhibitionMode() && currentlyInMatch() &&
                                   rich_presence_lookup("Character", P1CharacterIndex(), CharacterNameLookup),
                                   rich_presence_lookup("Character", P2CharacterIndex(), CharacterNameLookup),
                                   rich_presence_value("Number", currentRound()),
-                                  rich_presence_value("FRAMES", timeInSecond()))
+                                  rich_presence_value("FRAMES", timeInSecond(),"SECS"))
 
 rich_presence_conditional_display(isExhibitionMode() && currentlyInMatch() &&
                                   !player1Human() && !player2Human(), 
@@ -1856,7 +1945,7 @@ rich_presence_conditional_display(isExhibitionMode() && currentlyInMatch() &&
                                   rich_presence_lookup("Character", P1CharacterIndex(), CharacterNameLookup),
                                   rich_presence_lookup("Character", P2CharacterIndex(), CharacterNameLookup),
                                   rich_presence_value("Number", currentRound()),
-                                  rich_presence_value("FRAMES", timeInSecond()))
+                                  rich_presence_value("FRAMES", timeInSecond(),"SECS"))
 
 rich_presence_conditional_display(isTournamentMode() && currentlyInMatch() &&
                                   player1Human() && player2Human(), 
@@ -1864,7 +1953,7 @@ rich_presence_conditional_display(isTournamentMode() && currentlyInMatch() &&
                                   rich_presence_lookup("Character", P1CharacterIndex(), CharacterNameLookup),
                                   rich_presence_lookup("Character", P2CharacterIndex(), CharacterNameLookup),
                                   rich_presence_value("Number", currentRound()),
-                                  rich_presence_value("FRAMES", timeInSecond()))
+                                  rich_presence_value("FRAMES", timeInSecond(),"SECS"))
 
 rich_presence_conditional_display(isTournamentMode() && currentlyInMatch() &&
                                   player1Human() && !player2Human(), 
@@ -1872,7 +1961,7 @@ rich_presence_conditional_display(isTournamentMode() && currentlyInMatch() &&
                                   rich_presence_lookup("Character", P1CharacterIndex(), CharacterNameLookup),
                                   rich_presence_lookup("Character", P2CharacterIndex(), CharacterNameLookup),
                                   rich_presence_value("Number", currentRound()),
-                                  rich_presence_value("FRAMES", timeInSecond()))
+                                  rich_presence_value("FRAMES", timeInSecond(),"SECS"))
 
 rich_presence_conditional_display(isTournamentMode() && currentlyInMatch() &&
                                   !player1Human() && player2Human(), 
@@ -1880,7 +1969,7 @@ rich_presence_conditional_display(isTournamentMode() && currentlyInMatch() &&
                                   rich_presence_lookup("Character", P1CharacterIndex(), CharacterNameLookup),
                                   rich_presence_lookup("Character", P2CharacterIndex(), CharacterNameLookup),
                                   rich_presence_value("Number", currentRound()),
-                                  rich_presence_value("FRAMES", timeInSecond()))
+                                  rich_presence_value("FRAMES", timeInSecond(),"SECS"))
 
 rich_presence_conditional_display(isTournamentMode() && currentlyInMatch() &&
                                   !player1Human() && !player2Human(), 
@@ -1888,7 +1977,7 @@ rich_presence_conditional_display(isTournamentMode() && currentlyInMatch() &&
                                   rich_presence_lookup("Character", P1CharacterIndex(), CharacterNameLookup),
                                   rich_presence_lookup("Character", P2CharacterIndex(), CharacterNameLookup),
                                   rich_presence_value("Number", currentRound()),
-                                  rich_presence_value("FRAMES", timeInSecond()))
+                                  rich_presence_value("FRAMES", timeInSecond(),"SECS"))
 
 rich_presence_display("In Menus") 
 
