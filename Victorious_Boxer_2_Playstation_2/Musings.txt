@@ -251,15 +251,88 @@ IPPO_VS_KENTA_KOBASHI = 0x05
 
 TAKAMURA_VS_YOSHIAKI_YAJIMA = 0x06
     The Japan MiddleWeight Title Bout
-    
+    Golden Card
+    I'll Take It for You in One Sec.
+    I Kinda Owe You That Much...
+    Springboard to the World Stage
+    His First Humiliating Knockdown 
+    Champion
+    You Actually Think I could Lose?!
+    The Challenger Strikes Back 
+
 IPPO_VS_RUICHI_HAYAMI = 0x07
+    The East Japan Rookie King Tournament Semi Final
+    Pretty Boy vs Pumpkin-Faced Boy
+    Trick Up His Sleeve
+    Unforeseen
+    Defeating the Shotgun
+    Windmill Theory
+    Fro Everyone's Sake
+    Power Through Like A Boar!!
+    Cornered
+    Ropeside Battle
+    Muzzling the Shotgun
+    An Upset?!
+    You're Just A Rookie...
+    
+
+
 IPPO_VS_RYO_MASHIBA = 0x08
+    All Japan Rookie King Tournament
+    Hitman Vs. Peek-a-boo
+    If You're This Good...
+    An Eerie Whisper
+    Shattered Hand, Unbroken Spirit
+    Lefty Loosey
+    Go For The Chin
+    Mashiba Stands Tall
+    Prodigious Perseverance
+    Here Comes the Right
+    The Hitman Returns
+
 IPPO_VS_TAKESHI_SENDO = 0x09
+    
+    Overwhelming Feeling of Awe
+    Hard Puncher's Fight
+    Tiger of Naniwa
+    The Revived Right Fist
+    Modified Version Smash
+    Replicate the Smash! 
+    The Words HE Spoke Back Then
+    Ippo Should Try The Smash Too? 
+    That which Looks So Similar
+    Trying to Hit a Smash
+    Sendou, Floored
+    Complete Beatdown
+    Second Out
+    All-Japan Rookie King Tournament Decided
+
 TATSUYA_KIMURA_VS_SHINJI_KANZAKI = 0x0a
+    User Your Legs
+    Go Around Him
+    A Tough Match
+    Keep It Going
 AOKI_VS_ARMAND_GARCIA = 0x0b
+    His Favorite Mud Fight
+    Lucky Punch
 TAKAMURA_VS_BONCHAI_CHUWATANA = 0x0c
+    One Panel Fight
+    Easy KO Victory
+    The Main Event
 IPPO_VS_KEIGO_OKITA = 0x0d
+    New and Old Rookie King Fight
+    Dynamite Punch 
+    Cork Screw
+    Date Lite
+    The Admired Style 
+    Okita's Admiration
+
 MIYATA_SPARRING_WITH_PAPYO = 0x0e
+    The Man Who Never Laughs
+    A Counter to Surpass All Counters
+    Your Punch is Light
+    
+
 MIYATA_VS_JIMMY_SISFA = 0x0f
 IPPO_VS_TAKUMA_SAEKI = 0x10
 KIMURA_VS_HIROSHI_NISHIMURA = 0x11
@@ -292,7 +365,7 @@ TATSUYA_VS_ARMAND_ALEGRIA = 0x2b
 TAKAMURA_VS_MORRIS_WEST = 0x2c
 IPPO_VS_YI_YONSU = 0x2d
 TAKAMURA_VS_BRIAN_HAWK = 0x2e
-Those who succeed work hard, or something 
+    Those who succeed work hard, or something 
 GINPACHI_NEKOTA_VS_DANKICHI_HAMA = 0x2f
 GENJI_KAMOGAWA_VS_GINPACHI_NEKOTA = 0x30
 GENJI_KAMOGAWA_VS_RALPH_ANDERSON = 0x31

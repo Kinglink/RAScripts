@@ -1028,57 +1028,57 @@ story_data =
     },
     { 
         ID: IPPO_VS_RUICHI_HAYAMI, 
-        EASY_TITLE: "East Japan Rookie King Tournament Semi Finals",
-        HARD_TITLE: "<REPLACE>IPPO VS RUICHI HAYAMI(HARD)",
-        SPECIAL_TITLE: "<REPLACE>IPPO VS RUICHI HAYAMI(SPECIAL)",
+        EASY_TITLE: "East Japan Rookie King Tournament Semi Final",
+        HARD_TITLE: "Fall of the Prodigy",
+        SPECIAL_TITLE: "Muzzling the Shotgun",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_JOFRE_UPPER_CUT_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Jofre Uppercut to Knock Out Hayami."
     },
     { 
         ID: IPPO_VS_RYO_MASHIBA, 
-        EASY_TITLE: "East Japan Rookie King Tournament Finals",
-        HARD_TITLE: "<REPLACE>IPPO VS RYO MASHIBA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>IPPO VS RYO MASHIBA(SPECIAL)",
+        EASY_TITLE: "East Japan Rookie King Final",
+        HARD_TITLE: "Shattered Hand, Unbroken Spirit",
+        SPECIAL_TITLE: "Here Comes the Right",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_STRAIGHT_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Right Straight to Knock Out Mashiba."
     },
     { 
         ID: IPPO_VS_TAKESHI_SENDO, 
-        EASY_TITLE: "All Japan Rookie King Tournament",
-        HARD_TITLE: "<REPLACE>IPPO VS TAKESHI SENDO(HARD)",
-        SPECIAL_TITLE: "Stealing Sendo's Move",
+        EASY_TITLE: "All-Japan Rookie King Tournament",
+        HARD_TITLE: "Rocky of Naniwa",
+        SPECIAL_TITLE: "Trying to Hit a Smash",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_DEADLY_SMASH_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Deadly Smash to Knock Out Sendo."
     },
     { 
         ID: TATSUYA_KIMURA_VS_SHINJI_KANZAKI, 
-        EASY_TITLE: "Flight Semi_finals <Replace?>",
-        HARD_TITLE: "<REPLACE>KIMURA VS SHINJI KANZAKI(HARD)",
-        SPECIAL_TITLE: "<REPLACE>KIMURA VS SHINJI KANZAKI(SPECIAL)",
+        EASY_TITLE: "A Tough Match",
+        HARD_TITLE: "Go Around Him",
+        SPECIAL_TITLE: "Use Your Legs",
         SPECIAL_CHECK: slowMoToKnockDown(),
         SPECIAL_DESCRIPTION: "and Knock Out Kanzaki while using the Slow Battle Special Move."
     },
     { 
         ID: AOKI_VS_ARMAND_GARCIA, 
-        EASY_TITLE: "Flight Semi-Finals<Replace?>",
-        HARD_TITLE: "<REPLACE>AOKI VS ARMAND GARCIA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>AOKI VS ARMAND GARCIA(SPECIAL)",
+        EASY_TITLE: "Keep It Going",
+        HARD_TITLE: "His Favorite Mud Fight",
+        SPECIAL_TITLE: "Lucky Punch",
         SPECIAL_CHECK: (P1UsedMoveToKnockDown(AOKI_CORKSCREW_MOVE_VALUE) || P1UsedMoveToKnockDown(AOKI_DOUBLE_PUNCH_MOVE_VALUE)),
         SPECIAL_DESCRIPTION: "using a Corkscrew or Double Punch to Knock Out Garcia."
     },
     { 
         ID: IPPO_VS_KEIGO_OKITA, 
-        EASY_TITLE: "Two Rookie Kings",
-        HARD_TITLE: "<REPLACE>IPPO VS KEIGO OKITA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>IPPO VS KEIGO OKITA(SPECIAL)",
+        EASY_TITLE: "New and Old Rookie King Fight",
+        HARD_TITLE: "Date Lite",
+        SPECIAL_TITLE: "Dynamite Punch",
         SPECIAL_RESET: currentRound() != 1,
         SPECIAL_DESCRIPTION: "in the first round."
     },
     { 
         ID: MIYATA_SPARRING_WITH_PAPYO, 
-        EASY_TITLE: "<REPLACE>MIYATA VS PAPAYA DACHIU",
-        HARD_TITLE: "<REPLACE>MIYATA VS PAPAYA DACHIU(HARD)",
-        SPECIAL_TITLE: "<REPLACE>MIYATA VS PAPAYA DACHIU(SPECIAL)",
+        EASY_TITLE: "The Man Who Never Laughs",
+        HARD_TITLE: "Your Punch is Light",
+        SPECIAL_TITLE: "A Counter to Surpass All Counters",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(MIYATA_JOLT_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Jolt to Knock Out Papaya."
     },
@@ -1544,17 +1544,17 @@ specialStoryBouts =
 [
     {
         ID: TAKAMURA_VS_YOSHIAKI_YAJIMA,
-        EASY_TITLE: "Takamura's Ascension to the Japanese Throne",
-        HARD_TITLE: "<REPLACE>TAKAMURA VS YOSHIAKI YAJIMA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>TAKAMURA VS YOSHIAKI YAJIMA(SPECIAL)",
+        EASY_TITLE: "The Japan MiddleWeight Title Bou",
+        HARD_TITLE: "I'll Take It for You in One Sec",
+        SPECIAL_TITLE: "You Actually Think I could Lose?!",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_UPPER_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Right Uppercut to Knock Out Yajima."
     },
     {
         ID: TAKAMURA_VS_BONCHAI_CHUWATANA,
-        EASY_TITLE: "Flight", // not sure if it's the right title. <Replace?>
-        HARD_TITLE: "<REPLACE>TAKAMURA VS BONCHAI_CHUWATANA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>TAKAMURA VS BONCHAI CHUWATANA(SPECIAL)",
+        EASY_TITLE: "Flight", 
+        HARD_TITLE: "One Panel Fight",
+        SPECIAL_TITLE: "Easy KO Victory",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Right Hook to Knock Out Chuwatana."
     },
@@ -1693,12 +1693,12 @@ exhibitionBattles =
     {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_RYO_MASHIBA_FEATHERWEIGHT,
         OPPONENT_CHARACTER: EXHIBITION_CHARACTER_ICHIRO_MIYATA_FINAL_EXHIBITION,
-        TITLE: "Miyata's Fall"
+        TITLE: "The One-Legged Fight" // Updated
     },
     {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_ICHIRO_MIYATA_FINAL_EXHIBITION,
         OPPONENT_CHARACTER: EXHIBITION_CHARACTER_RYO_MASHIBA_FEATHERWEIGHT,
-        TITLE: "Miyata's Vengence"
+        TITLE: "Because He's Waiting for Me" // updated
     },
     {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_EIJI_DATE_OLD,
