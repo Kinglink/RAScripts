@@ -334,15 +334,87 @@ MIYATA_SPARRING_WITH_PAPYO = 0x0e
     
 
 MIYATA_VS_JIMMY_SISFA = 0x0f
+    Odds 30 to 1
+    Double Edged Sword
+    Lowly Strugling Underdog
+    JOLT
+    Stranger in a Foreign Land
+    Ultimate Counter Blow
+    Squall
+    Timing and Heart
+    A Son Rising Above His Father
+    A Single Moment of Laughter
+
 IPPO_VS_TAKUMA_SAEKI = 0x10
+    Strongest Fists Vs. Fastest Man
+    Speed Star
+    Come With Everything You Have
+    Acceleration
+    Vanishing Hand and Feet
+    The Blind Spot
+    For Everyone Who Was Worried About Me
+    I Wanted to Show Them I Was Alright Now 
+    One Hit 
+    Focus On Each Punch
+    Don't Fall Down
+    Safety Zone
+    A Damage Called Fear
+    The Declaration to Keep Standing
+
 KIMURA_VS_HIROSHI_NISHIMURA = 0x11
 AOKI_VS_BULL_USHIDA = 0x12
 AOKI_VS_JACKAL_ITO = 0x13
+    Frog Man 
+    The Light and Shadow In The Ring
+
 KIMURA_VS_TAKESHI_RYUZAKI = 0x14
+
 IPPO_VS_ALEXANDER_VOLG_ZANGIEV = 0x15
+    Caged Beast 
+    White Fang
+    Class A Tournament Finals
+    Wolf Vs. Gazelle
+    CAn't Run 
+    Trade hits
+    The Worlf that was too Kind
+    The Hunt Begins
+    BELIEVE
+    The Desperate Gazelle
+    What Lies Ahead
+    Supassing Natural Talent
+    The Eternal WAr of Attrition
+
 TAKAMURA_VS_ATSUSHI_TAMAKI = 0x16
+    The Power of the King 
+    Special POwer for Champions 
+    The Champion's Fist
+    Most Consecutive KOs
+    Three-Notch-Down
+    Takamura Is Invincible
+    The Burden of Being a Champion
+    A Champions's Fist is Special
+
 IPPO_VS_EIJI_DATE = 0x17
+    Your Punches are Light 
+    Conversation of Fists
+    Incredible Fighting Spirit
+    Explosion from Point-Blank Range
+    Ambush
+    I'm Fighting the Champion
+    Empty Response
+    Power and Courage
+    Youth vs. Experience
+    Angry God
+    What is Searched for in the ring
+    Prohibited Finishing Blow 
+
 SENDO_VS_ALEXANDER_VOLG_ZANGIEV = 0x18
+    The Tiger and the Wolf
+    Determination
+    Their eyes
+    A Vicious Wolf's Attack
+
+
 MIYATA_VS_LEE_CHONPIL = 0x19
 AOKI_VS_SNAKE_THOMAS = 0x1a
 KIMURA_VS_PONE_MOROCOTTE = 0x1b

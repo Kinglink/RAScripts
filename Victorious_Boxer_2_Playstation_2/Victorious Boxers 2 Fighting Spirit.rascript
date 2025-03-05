@@ -1084,24 +1084,24 @@ story_data =
     },
     { 
         ID: MIYATA_VS_JIMMY_SISFA, 
-        EASY_TITLE: "<REPLACE>MIYATA VS JIMMY SISFA",
-        HARD_TITLE: "<REPLACE>MIYATA VS JIMMY SISFA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>MIYATA VS JIMMY SISFA(SPECIAL)",
+        EASY_TITLE: "Double Edged Sword",
+        HARD_TITLE: "A Single Moment of Laughter",
+        SPECIAL_TITLE: "Timing and Heart",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(MIYATA_JOLT_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Jolt to Knock Out Sisfa."
     },
     { 
         ID: IPPO_VS_TAKUMA_SAEKI, 
         EASY_TITLE: "Speed Star",
-        HARD_TITLE: "<REPLACE>IPPO VS TAKUMA SAEKI(HARD)",
-        SPECIAL_TITLE: "<REPLACE>IPPO VS TAKUMA SAEKI(SPECIAL)",
+        HARD_TITLE: "The Declaration to Keep Standing",
+        SPECIAL_TITLE: "A Damage Called Fear",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_JOFRE_UPPER_CUT_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Jofre Uppercut to Knock Out Saeki."
     },
     { 
         ID: KIMURA_VS_HIROSHI_NISHIMURA, 
         EASY_TITLE: "Kimura's Class-A Tournament First Round",
-        HARD_TITLE: "<REPLACE>KIMURA VS NISHIMURA_HIROSHI(HARD)",
+        HARD_TITLE: "A Win is a Win",
         SPECIAL_TITLE: "Going the Distance",
         SPECIAL_CHECK: currentRound() >= 6,
         SPECIAL_DESCRIPTION: "reach the 6th round and win."
@@ -1109,30 +1109,30 @@ story_data =
     { 
         ID: AOKI_VS_BULL_USHIDA, 
         EASY_TITLE: "Aoki's Class-A Tournament First Round",
-        HARD_TITLE: "<REPLACE>AOKI VS BULL USHIDA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>AOKI VS BULL USHIDA(SPECIAL)",
+        HARD_TITLE: "Aoki's Secret Weapon",
+        SPECIAL_TITLE: "Leap Frog Man",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(AOKI_FROG_PUNCH_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Frog Punch to Knock Out Ushida."
     },
     { 
         ID: IPPO_VS_ALEXANDER_VOLG_ZANGIEV, 
         EASY_TITLE: "White Fang",
-        HARD_TITLE: "Defanging the Wolf",
+        HARD_TITLE: "The Eternal War of Attrition",
         SPECIAL_TITLE: "Gazelle Vs Wolf",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_GAZELLE_PUNCH_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Gazelle Punch to Knock Out Zangiev."
     },
     { 
         ID: IPPO_VS_EIJI_DATE, 
-        EASY_TITLE: "Challenge for the Champion",
-        HARD_TITLE: "Claiming the National Championship",
-        SPECIAL_TITLE: "The Hero Never Loses",
+        EASY_TITLE: "Youth Vs. Experience",
+        HARD_TITLE: "Explosion from Point-Blank Range",
+        SPECIAL_TITLE: "Past Your Limits",
         SPECIAL_CHECK: currentRound() > 5,
         SPECIAL_DESCRIPTION: "reach the 6th round and win."
     },
     { 
         ID: SENDO_VS_ALEXANDER_VOLG_ZANGIEV, 
-        EASY_TITLE: "<REPLACE>TAKESHI SENDO VS VOLG ZANGIEV",
+        EASY_TITLE: "The Tiger and the Wolf",
         HARD_TITLE: "<REPLACE>TAKESHI SENDO VS VOLG ZANGIEV(HARD)",
         SPECIAL_TITLE: "<REPLACE>TAKESHI SENDO VS VOLG ZANGIEV(SPECIAL)",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(SENDO_ULTRA_LOW_SMASH_MOVE_VALUE),
@@ -1561,26 +1561,27 @@ specialStoryBouts =
     {   
         ID: AOKI_VS_JACKAL_ITO,
         EASY_TITLE: "Frog Vs Jackal",
-        HARD_TITLE: "<REPLACE>AOKI VS JACKAL ITO(Hard)",
-        SPECIAL_TITLE: "<REPLACE>AOKI VS JACKAL ITO(SPECIAL)",
+        HARD_TITLE: "The Light and Shadow In The Ring",
+        SPECIAL_TITLE: "Open the Champaign Bottle",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(AOKI_CORKSCREW_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Corkscrew to Knock Out Ito."
     },
     {
         ID: KIMURA_VS_TAKESHI_RYUZAKI,
         EASY_TITLE: "KIMURA VS TAKESHI RYUZAKI",
-        HARD_TITLE: "<REPLACE>KIMURA VS TAKESHI RYUZAKI(HARD)",
-        SPECIAL_TITLE: "<REPLACE>KIMURA VS TAKESHI RYUZAKI(SPECIAL)",
+        HARD_TITLE: "High Pace From the Very Beginning",
+        SPECIAL_TITLE: "Extra Round",
         SPECIAL_CHECK: slowMoToKnockDown(),
         SPECIAL_DESCRIPTION: "and Knock OUt Takeshi while using the Slow Battle Special Move ."
     },
     {
         ID: TAKAMURA_VS_ATSUSHI_TAMAKI,
-        EASY_TITLE: "<REPLACE>TAKAMURA VS ATSUSHI TAMAKI",
-        HARD_TITLE: "<REPLACE>TAKAMURA VS ATSUSHI TAMAKI(HARD)",
-        SPECIAL_TITLE: "<REPLACE>TAKAMURA VS ATSUSHI TAMAKI(SPECIAL)",
-        SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Right Hook to Knock Out Tamaki."
+        EASY_TITLE: "The Power of the King",
+        HARD_TITLE: "The Champion's Fist",
+        SPECIAL_TITLE: "Takamura is InvincibleD",
+        SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE) ||
+                       P1UsedMoveToKnockDown(LEFT_HOOK_MOVE_VALUE),
+        SPECIAL_DESCRIPTION: "using a Hook to Knock Out Tamaki."
     },
     {
         ID: KIMURA_VS_NEFUMA_OZCA,
@@ -1703,7 +1704,7 @@ exhibitionBattles =
     {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_EIJI_DATE_OLD,
         OPPONENT_CHARACTER: EXHIBITION_CHARACTER_IPPO_EXHIBITION,
-        TITLE: "The Real Challenge for the Champion"
+        TITLE: "The Heart Break Shot"
     },
     {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_KYOUSUKE_IMAI,
