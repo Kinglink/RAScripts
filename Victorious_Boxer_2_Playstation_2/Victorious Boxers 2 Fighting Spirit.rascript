@@ -1133,48 +1133,48 @@ story_data =
     { 
         ID: SENDO_VS_ALEXANDER_VOLG_ZANGIEV, 
         EASY_TITLE: "The Tiger and the Wolf",
-        HARD_TITLE: "<REPLACE>TAKESHI SENDO VS VOLG ZANGIEV(HARD)",
-        SPECIAL_TITLE: "<REPLACE>TAKESHI SENDO VS VOLG ZANGIEV(SPECIAL)",
-        SPECIAL_CHECK: P1UsedMoveToKnockDown(SENDO_ULTRA_LOW_SMASH_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Ultra Low Smash to Knock Out Zangiev."
+        HARD_TITLE: "Two Beasts",
+        SPECIAL_TITLE: "Challenge Him Head On",
+        SPECIAL_CHECK: P1UsedMoveToKnockDown(SENDO_DEADLY_SMASH_MOVE_VALUE),
+        SPECIAL_DESCRIPTION: "using a Deadly Smash to Knock Out Zangiev."
     },
     { 
         ID: MIYATA_VS_LEE_CHONPIL, 
-        EASY_TITLE: "<REPLACE>MIYATA VS LEE CHONPIL",
-        HARD_TITLE: "<REPLACE>MIYATA VS LEE_CHONPIL(HARD)",
-        SPECIAL_TITLE: "<REPLACE>MIYATA VS LEE CHONPIL(SPECIAL)",
+        EASY_TITLE: "Return From Overseas",
+        HARD_TITLE: "1st Homecoming Fight",
+        SPECIAL_TITLE: "Fighting an After Image",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(MIYATA_JOLT_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Jolt to Knock Out Chonpil."
     },
     { 
         ID: AOKI_VS_SNAKE_THOMAS, 
         EASY_TITLE: "Aoki's Road Back",
-        HARD_TITLE: "<REPLACE>AOKI VS SNAKE THOMAS(HARD)",
-        SPECIAL_TITLE: "<REPLACE>AOKI VS SNAKE THOMAS(SPECIAL)",
+        HARD_TITLE: "The Frog Vs. The Snake",
+        SPECIAL_TITLE: "I Have Something to Protect",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Right Hook to Knock Out Thomas."
     },
     { 
         ID: KIMURA_VS_PONE_MOROCOTTE, 
         EASY_TITLE: "Kimura's Road Back",
-        HARD_TITLE: "<REPLACE>KIMURA VS PONE MOROCOTTE(HARD)",
-        SPECIAL_TITLE: "<REPLACE>KIMURA VS PONE MOROCOTTE(SPECIAL)",
-        SPECIAL_CHECK: slowMoToKnockDown(),
-        SPECIAL_DESCRIPTION: "and Knock Out Morocotte while using the Slow Battle Special Move."
+        HARD_TITLE: "I Have Nothing to Fear Now",
+        SPECIAL_TITLE: "I Don't Have Anyhting to Lose Anymore",
+        SPECIAL_CHECK: P1UsedMoveToKnockDown(LEFT_HOOK_MOVE_VALUE),
+        SPECIAL_DESCRIPTION: "using a Left Hook to Knock Out Morocotte."
     },
     { 
         ID: IPPO_VS_PONCHAI_CHUWATANA, 
-        EASY_TITLE: "The Road Back",
-        HARD_TITLE: "<REPLACE>IPPO VS PONCHAI CHUWATANA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>IPPO VS PONCHAI CHUWATANA(SPECIAL)",
+        EASY_TITLE: "The Face of a Boxer",
+        HARD_TITLE: "What Did You Learn From That Loss!!",
+        SPECIAL_TITLE: "Is This the Answer You Came Up With---?!",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_DEMPSY_ROLL_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Dempsey Roll to Knock Out Chuwatana."
     },
     { 
         ID: TAKAMURA_VS_BEAR, 
-        EASY_TITLE: "<REPLACE>TAKUMURA VS BEAR",
-        HARD_TITLE: "<REPLACE>TAKUMURA VS BEAR(HARD)",
-        SPECIAL_TITLE: "<REPLACE>TAKUMURA VS BEAR(SPECIAL)",
+        EASY_TITLE: "Japan's Greatest Beast ",
+        HARD_TITLE: "It's Either Kill or Be Killed",
+        SPECIAL_TITLE: "I'll Keep Going Until you Fall",
         SPECIAL_RESET: timeInFrames() > 15*60,
         SPECIAL_DESCRIPTION: "win the match in under 15 seconds."
     },
@@ -1184,22 +1184,21 @@ story_data =
         HARD_TITLE: "Those who rules the Left...",
         SPECIAL_TITLE: "Will Rule the World",
         SPECIAL_RESET: P1RightThrown(),
-        SPECIAL_DESCRIPTION: "win the match without throwing a right punch."
-        
+        SPECIAL_DESCRIPTION: "win the match without throwing a punch with your right hand."
     },
     { 
         ID: SENDO_VS_AKIRA_SHIGETA, 
-        EASY_TITLE: "<REPLACE>SENDO VS AKIRA SHIGETA",
-        HARD_TITLE: "<REPLACE>SENDO VS AKIRA SHIGETA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>SENDO VS AKIRA SHIGETA(SPECIAL)",
+        EASY_TITLE: "Two Fighters",
+        HARD_TITLE: "The Tiger's Rage",
+        SPECIAL_TITLE: "King's Farewell Gift",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(SENDO_DEADLY_SMASH_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Deadly Smash to Knock Out Shigeta."
     },
     { 
         ID: AOKI_VS_IPPO_SPARRING, 
-        EASY_TITLE: "<REPLACE>AOKI VS IPPO",
-        HARD_TITLE: "<REPLACE>AOKI VS IPPO(HARD)",
-        SPECIAL_TITLE: "<REPLACE>AOKI VS IPPO(SPECIAL)",
+        EASY_TITLE: "Dojo Duel Number 6",
+        HARD_TITLE: "Stopping Ippo's KO Streak",
+        SPECIAL_TITLE: "Everything I Got",
         SPECIAL_CHECK: measured(tally_of(
                                          [AOKI_CORKSCREW_MOVE_VALUE, AOKI_DOUBLE_PUNCH_MOVE_VALUE, AOKI_FROG_PUNCH_MOVE_VALUE], 
                                          3, 
@@ -1211,24 +1210,24 @@ story_data =
     { 
         ID: IPPO_VS_TAKESHI_SENDO_2, 
         EASY_TITLE: "Lallapallooza",
-        HARD_TITLE: "Ascending the Throne",
-        SPECIAL_TITLE: "<REPLACE>IPPO VS SENDO(SPECIAL)",
+        HARD_TITLE: "The Day Makunouchi Becomes King",
+        SPECIAL_TITLE: "The Greatest Weapon",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_DEMPSY_ROLL_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Dempsey Roll to Knock Out Sendo."
     },
     { 
         ID: KIMURA_VS_MIYATA_SPARRING, 
-        EASY_TITLE: "<REPLACE>KIMURA Vs MIYATA",
-        HARD_TITLE: "<REPLACE>KIMURA Vs MIYATA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>KIMURA Vs MIYATA(SPECIAL)",
+        EASY_TITLE: "Preparing to Fight the Reaper",
+        HARD_TITLE: "The Future Weapon",
+        SPECIAL_TITLE: "What The Fish Taught Me",
         SPECIAL_CHECK: measured( repeated(3, rightHookLanded() && checkP1CurrentMove(KIMURA_DRAGON_FISH_BLOW_MOVE_VALUE))),
         SPECIAL_DESCRIPTION: "land 3 Dragon Fish Blow, where the right fist also connects." 
     },
     { 
         ID: KIMURA_VS_RYO_MASHIBA, 
         EASY_TITLE: "Execution",
-        HARD_TITLE: "<REPLACE>KIMURA VS RYO_MASHIBA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>KIMURA VS RYO MASHIBA(SPECIAL)",
+        HARD_TITLE: "Scene of Carnage",
+        SPECIAL_TITLE: "If This Fist Can Reach",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(KIMURA_DRAGON_FISH_BLOW_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Dragon Fish Blow to Knock Out Mashiba."
     },
@@ -1434,8 +1433,8 @@ story_data =
     },
     {
         ID: IPPO_VS_MIYATA_2,
-        EASY_TITLE: "The Fated Fight",
-        HARD_TITLE: "What Does It Mean to be Strong",
+        EASY_TITLE: "The Promised  Fight",
+        HARD_TITLE: "What It Mean to Be Strong",
         SPECIAL_TITLE: "Using Everything I Learned",
         SPECIAL_CHECK: measured(tally_of(
                                          [IPPO_DEADLY_SMASH_MOVE_VALUE, 
@@ -1585,17 +1584,17 @@ specialStoryBouts =
     },
     {
         ID: KIMURA_VS_NEFUMA_OZCA,
-        EASY_TITLE: "Something Will Happen!? Semi-Final Match <Replace?>",
-        HARD_TITLE: "<REPLACE>TATSUYA VS NEFUMA OZCA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>TATSUYA VS NEFUMA OZCA(SPECIAL)",
+        EASY_TITLE: "Shaking Hall",
+        HARD_TITLE: "Confidence from Training Camp",
+        SPECIAL_TITLE: "Rush Rush",
         SPECIAL_CHECK: slowMoToKnockDown(),
         SPECIAL_DESCRIPTION: "and Knock Out Ozca while using the Slow Battle Special Move."
     },
     {
         ID: AOKI_VS_BOY_ARADE,
-        EASY_TITLE: "Something Will Happen!? Semi-Final Match <Replace?>",
-        HARD_TITLE: "<REPLACE>AOKI VS BOY ARADE(HARD)",
-        SPECIAL_TITLE: "<REPLACE>AOKI VS BOY ARADE(SPECIAL)",
+        EASY_TITLE: "Stick to Him-Dani!",
+        HARD_TITLE: "Fight With Your Spirit-Dani",
+        SPECIAL_TITLE: "Show Some Guts-Dani!",
         SPECIAL_CHECK: is_TKO(),
         SPECIAL_DESCRIPTION: "win by TKO."
     },

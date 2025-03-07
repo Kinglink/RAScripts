@@ -413,21 +413,107 @@ SENDO_VS_ALEXANDER_VOLG_ZANGIEV = 0x18
     Determination
     Their eyes
     A Vicious Wolf's Attack
+    Last Card
+    Challenge Him Head On.
+    Two Beasts
+    Winner and Loser
+    Sayonara
 
 
 MIYATA_VS_LEE_CHONPIL = 0x19
+    Return From Overseas
+    1st Homecoming Fight
+    Fighting an After Image 
+
 AOKI_VS_SNAKE_THOMAS = 0x1a
+    The Frog
+    Frog Vs Snake
+    I have someone to protect
+
 KIMURA_VS_PONE_MOROCOTTE = 0x1b
+    Show Us a Ko
+    I Have Nothing to Fear Now 
+    I Don't Have Anything to Lose Anymore
 IPPO_VS_PONCHAI_CHUWATANA = 0x1c
+    Time of Revival
+    The Face of a Boxer
+    Control the Pace 
+    He Has No Where Left to Run 
+    The Center is Open 
+    "What Did You Learn From That Loss!!"
+    Classic Blow 
+    Just Show Me!!  
+    Is This the Answer You Came Up With---?!
 TAKAMURA_VS_BEAR = 0x1d
+    Japan's Greatest Beast 
+    I Got No Choice 
+    It's Either Kill or Be killed
+    I Can't Let Myself Fall Like This 
+    They're Waiting for Mean
+    
 KIMURA_VS_NEFUMA_OZCA = 0x1e
+    Shaking Hall 
+    This is Your Chance
+    Rush Rush
+    Confidence from Training Camp
 AOKI_VS_BOY_ARADE = 0x1f
+    You Need to Cheer For Him
+    Stick to Him-Dani!
+    Fight With Your Spirit-Dani
+    Show Some Guts-DAni!
 TAKAMURA_VS_TAKAAKI_ITO = 0x20
+    No Quotes needed. 
+    EASY_TITLE: "Something will happen",
+        HARD_TITLE: "Those who rules the Left...",
+        SPECIAL_TITLE: "Will Rule the World",
 SENDO_VS_AKIRA_SHIGETA = 0x21
+    Two Fighters
+    Southpaw's Secret
+    I'll break him in the next round 
+    Boxer with Only Strength
+    STadium in Despair
+    First Title Defense 
+    Answer to the Fans' Call 
+    Then Sendo Strategy
+    The King's Throne 
+    Japan's Greatest
+    Boxing isn't a simple fight
+    King's Farewell Gift 
+
 AOKI_VS_IPPO_SPARRING = 0x22
+    Dojo Duels Number 6
+    Stopping Ippo's Ko Streak
 IPPO_VS_TAKESHI_SENDO_2 = 0x23
+    A Battle Between Two Men
+    An Explosive Match
+    The Deciding Match 
+    The Tension of REd and Blue 
+    Lallapallooza
+    The Day Makunouchi Becomes King
+    Not pulling other names until I find the special check. 
+    The Greatest Weapon
+    Dead OR ALive
+    
+    
 KIMURA_VS_MIYATA_SPARRING = 0x24
+    Lessons In Silence
+    The Future Weapon
+    What the Fish Taught Me. 
+
 KIMURA_VS_RYO_MASHIBA = 0x25
+    Execution
+    Shining Ring
+    God Of Death
+    FAther And Son
+    Cold Sweat
+    Premonition of Danger
+    Blind Spot 
+    Sister!
+    Greatest Challenger
+    If This Fist Can Reach
+    Scene of Carnage
+    I May have Underestimated Him 
+    
 IPPO_VS_KAZUKI_SANADA = 0x26
 MIYATA_VS_ARNIE_CROCODILE_GREGORY = 0x27
 AOKI_VS_PADDY_MAGRAMO = 0x28
