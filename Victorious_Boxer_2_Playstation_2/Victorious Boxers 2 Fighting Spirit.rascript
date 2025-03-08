@@ -1233,9 +1233,9 @@ story_data =
     },
     { 
         ID: IPPO_VS_KAZUKI_SANADA, 
-        EASY_TITLE: "First Step",
-        HARD_TITLE: "<REPLACE>IPPO VS KAZUKI SANADA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>IPPO VS KAZUKI SANADA(SPECIAL)",
+        EASY_TITLE: "Champion Vs Champion",
+        HARD_TITLE: "When the Last Fist Falls",
+        SPECIAL_TITLE: "A Suicide Dash",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_DEMPSY_ROLL_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Dempsey Roll to Knock Out Sanada."
     },
@@ -1250,16 +1250,16 @@ story_data =
     { 
         ID: IPPO_VS_HAMMER_NAO, 
         EASY_TITLE: "Proof of Power",
-        HARD_TITLE: "<REPLACE>IPPO VS HAMMER NAO(HARD)",
-        SPECIAL_TITLE: "<REPLACE>IPPO VS HAMMER NAO(SPECIAL)",
-        SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_JOFRE_UPPER_CUT_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Jofre Uppercut to Knock Out Nao."
+        HARD_TITLE: "Senpai and Kouhai",
+        SPECIAL_TITLE: "Final Lesson",
+        SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
+        SPECIAL_DESCRIPTION: "using a Right Hook to Knock Out Hammer"
     },
     {
         ID: ITAGAKI_VS_FUMITO_MAKINO,
         EASY_TITLE: "Itagaki's Pro Debut",
-        HARD_TITLE: "<REPLACE>ITAGAKI VS FUMITO MAKINO(HARD)",
-        SPECIAL_TITLE: "<REPLACE>ITAGAKI VS FUMITO MAKINO(SPECIAL)",
+        HARD_TITLE: "A Clean Version of the Fight",
+        SPECIAL_TITLE: "He's Not Moving Like a Rookie",
         SPECIAL_CHECK: slowMoToKnockDown() && P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "and use a Right Hook to Knock Out Makino while using the Slow Battle Special Move."
     },
@@ -1600,9 +1600,9 @@ specialStoryBouts =
     },
     {
         ID: AOKI_VS_PADDY_MAGRAMO,
-        EASY_TITLE: "Proof Of Power Semi-Final ",
-        HARD_TITLE: "<REPLACE>AOKI VS PADDY MAGRAMO(HARD)",
-        SPECIAL_TITLE: "<REPLACE>AOKI VS PADDY MAGRAMO(SPECIAL)",
+        EASY_TITLE: "Underdog Hunter",
+        HARD_TITLE: "A Hideous Match",
+        SPECIAL_TITLE: "I Can't Believe It Hit",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(AOKI_FROG_PUNCH_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Frog Punch to Knock Out Magramo."
     },
@@ -1649,8 +1649,8 @@ specialStoryBouts =
     {
         ID: EIJI_DATE_VS_RICARDO_MARTINEZ,
         EASY_TITLE: "Revenge",
-        HARD_TITLE: "King Date",
-        SPECIAL_TITLE: "Break His Heart",
+        HARD_TITLE: "Broken Heart",
+        SPECIAL_TITLE: "I Will Take Your Life",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(DATE_CORKSCREW_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Corkscrew to Knock Out Martinez."        
     }
@@ -1668,12 +1668,27 @@ exhibitionBattles =
     {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_RICARDO_MARTINEZ,
         OPPONENT_CHARACTER: EXHIBITION_CHARACTER_EIJI_DATE_YOUNG,
-        TITLE: "A Young World Champion Defense"
+        TITLE: "A Sad End, Eiji Date"
     },
     {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_RICARDO_MARTINEZ,
         OPPONENT_CHARACTER: EXHIBITION_CHARACTER_EIJI_DATE_OLD,
+        TITLE: "Goodbye, Eiji Date"
+    },
+    {
+        PLAYER_CHARACTER: EXHIBITION_CHARACTER_RICARDO_MARTINEZ,
+        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_TAKESHI_SENDO,
         TITLE: "Canon: Revenge!"
+    },
+    {
+        PLAYER_CHARACTER: EXHIBITION_CHARACTER_TAKESHI_SENDO,
+        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_RICARDO_MARTINEZ,
+        TITLE: "Canon: Revenge!"
+    },
+    {
+        PLAYER_CHARACTER: EXHIBITION_CHARACTER_IPPO_EXHIBITION,
+        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_RICARDO_MARTINEZ,
+        TITLE: "Perhaps One Day"
     },
     {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_RYUHEI_SAWAMURA,
@@ -1740,6 +1755,11 @@ exhibitionBattles =
         OPPONENT_CHARACTER: EXHIBITION_CHARACTER_IPPO_EXHIBITION,
         TITLE: "The Final Showdown"
     },
+    {   
+        PLAYER_CHARACTER: EXHIBITION_CHARACTER_HAMMER_NAO_GUROMICHI,
+        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_IPPO_EXHIBITION,
+        TITLE: "Tell Him I've Gotten Strong with Every Punch I Throw in the Ring!!"
+    }
     {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_MASARU_AOKI_EXHIBITION, 
         OPPONENT_CHARACTER: EXHIBITION_CHARACTER_HIROSHI_YAMANAKA,

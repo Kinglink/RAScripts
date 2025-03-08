@@ -513,12 +513,64 @@ KIMURA_VS_RYO_MASHIBA = 0x25
     If This Fist Can Reach
     Scene of Carnage
     I May have Underestimated Him 
-    
+
 IPPO_VS_KAZUKI_SANADA = 0x26
+    Young KO King
+    Champion Vs Champion
+    Close Range
+    That's My Distance
+    Eye of The Storm
+    Vital Points
+    Release from Hell 
+    Banzai Attack
+    Dempsey Roll at the Limits
+    When the Last Fist Falls
+    I just wanted to know what True  Strength Is 
+    A Suicide Dash
+    
+
 MIYATA_VS_ARNIE_CROCODILE_GREGORY = 0x27
+    An Oath Made on a Counter
+    Other Worldy Speed
+    The Moment the Cross is Painted
+    Bloody Cross
+    A Fist that is Alive and a Fist that is dead
+    An Unfulfilled Oath
+    Take This Thought!
+    Energy For One Hit
+    His Equalizing Blade
+    The Embodiment of Miyata's Pride
+    Japanese Warrior Spirit 
+    No Lucky Punches
+    It is Those Living Fists That Create Miracles
+    A Full-Body Counter
+
 AOKI_VS_PADDY_MAGRAMO = 0x28
+    A Hideous Match
+    I Can't Believe It Hit
+    Underdog Hunter
 IPPO_VS_HAMMER_NAO = 0x29
+    Proof Of Power
+    I've Gotten Strong.
+    RAising of the Curtain
+    Senpai and Kouhai
+    The Reversal of the Angry God
+    I Don't Want To Hit Him Anymore
+    Irrated Combination
+    Terms of Being Pro
+    To Devote Yourself to the Fight
+    
+    Life-Threatening Revenge
+    You Don't Know What It's Like To Lose
+    Heartless Combination
+    I Never Taught Him How to Take The Belt
+
 ITAGAKI_VS_FUMITO_MAKINO = 0x2a
+    The Pro's Ring
+    A Clean Version of the Fight
+    Cannon Fodder
+    Start Your Rookie Legend Off Right 
+
 TATSUYA_VS_ARMAND_ALEGRIA = 0x2b
 TAKAMURA_VS_MORRIS_WEST = 0x2c
 IPPO_VS_YI_YONSU = 0x2d
@@ -547,3 +599,17 @@ IPPO_VS_KEIICHI_TAKE = 0x42
 MIYATA_VS_CHE_JOUNBONG = 0x43
 IPPO_VS_MIYATA_2 = 0x44
 EIJI_DATE_VS_RICARDO_MARTINEZ = 0x45
+    Magnificent Beginning
+    7 Year Focus
+    Word Class Vessel
+    Unreachable Summit
+    A Loud Greeting
+    Erase That Shadow
+    Devil's Back
+    Broken Heart
+    A Magic Punch
+    Possibility of a Miracle
+    I Will Take Your Life 
+    Farewell Samurai
+    A Samurai That I Met In Japan
+    Welcome Home Eiji-San
