@@ -1265,73 +1265,73 @@ story_data =
     },
     { 
         ID: TATSUYA_VS_ARMAND_ALEGRIA, 
-        EASY_TITLE: "Apocolypse Now Semi-Final <Replace>>",
-        HARD_TITLE: "<REPLACE>TATSUYA VS ARMAND ALLEGARIA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>TATSUYA VS ARMAND ALLEGARIA(SPECIAL)",
+        EASY_TITLE: "I'm No Hunter",
+        HARD_TITLE: "Taking His Time",
+        SPECIAL_TITLE: "Going the Distance",
         SPECIAL_CHECK: currentRound() >= 10,
         SPECIAL_DESCRIPTION: "win the match in the 10th round (or by decision)."
     },
     { 
         ID: TAKAMURA_VS_MORRIS_WEST, 
         EASY_TITLE: "Apocalypse Now",
-        HARD_TITLE: "<REPLACE>TAKAMURA VS MORRIS WEST(HARD)",
-        SPECIAL_TITLE: "<REPLACE>TAKAMURA VS MORRIS WEST(SPECIAL)",
+        HARD_TITLE: "Wild Hawk",
+        SPECIAL_TITLE: "I Am Takamura Mamoru-Sama!!",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_STRAIGHT_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Right Straight to Knock Out West."
     },
     { 
         ID: IPPO_VS_YI_YONSU, 
-        EASY_TITLE: "Battle of Hawk Opening Match <Replace?>",
-        HARD_TITLE: "<REPLACE>IPPO VS YI YONSU(HARD)",
+        EASY_TITLE: "Annihilation Request",
+        HARD_TITLE: "I'll Do What I'm Best At!!",
         SPECIAL_TITLE: "A Promise to Takamura",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_DEMPSY_ROLL_MOVE_VALUE) && currentRound() == 1,
         SPECIAL_DESCRIPTION: "using a Dempsey Roll to Knock Out Yonsu in the first round."
     },
     { 
         ID: TAKAMURA_VS_BRIAN_HAWK, 
-        EASY_TITLE: "Battle of Hawk",
-        HARD_TITLE: "For Japan's Honor",
-        SPECIAL_TITLE: "A License to Kill",
+        EASY_TITLE: "Battle of The Hawks",
+        HARD_TITLE: "Not Everyone Who Works HArd Is Rewarded",
+        SPECIAL_TITLE: "However, All Those Who Succeed Have Worked Hard",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_STRAIGHT_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Right Straight to Knock Out Hawk."
     },
     {
         ID: GINPACHI_NEKOTA_VS_DANKICHI_HAMA,
-        EASY_TITLE: "<REPLACE>GINPACHI NEKOTA VS DANKICHI HAMA",
-        HARD_TITLE: "<REPLACE>GINPACHI NEKOTA VS DANKICHI HAMA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>GINPACHI NEKOTA VS DANKICHI HAMA(SPECIAL)",
+        EASY_TITLE: "The Untold Origin Story",
+        HARD_TITLE: "I Won-Dani",
+        SPECIAL_TITLE: "For Yuki's Honor",
         SPECIAL_CHECK: slowMoToKnockDown(),
         SPECIAL_DESCRIPTION: "and Knock Out Hama while using the Slow Battle Special Move."
     },
     {
         ID: GENJI_KAMOGAWA_VS_GINPACHI_NEKOTA,
-        EASY_TITLE: "<REPLACE>GENJI KAMOGAWA VS GINPACHI NEKOTA",
-        HARD_TITLE: "<REPLACE>GENJI KAMOGAWA VS GINPACHI NEKOTA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>GENJI KAMOGAWA VS GINPACHI NEKOTA(SPECIAL)",
+        EASY_TITLE: "Friends, Enemies, Boxers!",
+        HARD_TITLE: "I'd Like to Stay LIke This Forever",
+        SPECIAL_TITLE: "I've Never Taken a Punch So Painful",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(LEFT_HOOK_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using an Left Hook to Knock Out Nekota."
     },
     {
         ID: GENJI_KAMOGAWA_VS_RALPH_ANDERSON,
-        EASY_TITLE: "<REPLACE>GENJI KAMOGAWA VS RALPH ANDERSON",
-        HARD_TITLE: "<REPLACE>GENJI KAMOGAWA VS RALPH ANDERSON(HARD)",
-        SPECIAL_TITLE: "<REPLACE>GENJI KAMOGAWA VS RALPH ANDERSON(SPECIAL)",
+        EASY_TITLE: "The Spirit Behind One Punch",
+        HARD_TITLE: "You Haven't Faced My Fists Yet",
+        SPECIAL_TITLE: "Tekken",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(GENJI_IRON_FIST_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using an Iron Fist to Knock Out Anderson."
     },
     {
         ID: IPPO_VS_IWAO_SHIMABUKURO,
         EASY_TITLE: "Submarine Wars",
-        HARD_TITLE: "<REPLACE>IPPO VS IWAO SHIMABUKURO(HARD)",
-        SPECIAL_TITLE: "<REPLACE>IPPO VS IWAO SHIMABUKURO(SPECIAL)",
-        SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Right Hook to Knock Out Shimabukuro."
+        HARD_TITLE: "Zero-Distance Battle",
+        SPECIAL_TITLE: "The Strength to Use the Dempsey Roll",
+        SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_DEMPSY_ROLL_MOVE_VALUE) && currentRound() == 1,
+        SPECIAL_DESCRIPTION: "using a Dempsey Roll to Knock Out Shimabukuro."
     },
     {
         ID: AOKI_VS_KATSUTAKA_IMAE,
-        EASY_TITLE: "Boxing Martial Arts",
-        HARD_TITLE: "<REPLACE>AOKI VS KATSUTAKE IMAE(HARD)",
-        SPECIAL_TITLE: "<REPLACE>AOKI VS KATSUTAKE IMAE(SPECIAL)",
+        EASY_TITLE: "Goddess of Victory",
+        HARD_TITLE: "My Secret Weapon",
+        SPECIAL_TITLE: "Giant Gamble",
         SPECIAL_CHECK: measured( tally_of(
                                             [moveLanded(AOKI_CORKSCREW_MOVE_VALUE), 
                                             moveLanded(AOKI_DOUBLE_PUNCH_MOVE_VALUE), 
@@ -1346,10 +1346,10 @@ story_data =
     {
         ID: TAKAMURA_VS_RALLY_BERNARD,
         EASY_TITLE: "King of Hawk",
-        HARD_TITLE: "<REPLACE>TAKAMURA VS RALLY BERNARD(HARD)",
-        SPECIAL_TITLE: "<REPLACE>TAKAMURA VS RALLY BERNARD(SPECIAL)",
+        HARD_TITLE: "Treacherous King",
+        SPECIAL_TITLE: "Idiot, You Just Have to Glance Away",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_STRAIGHT_MOVE_VALUE) && once(checkP1CurrentMove(TAKAMURA_LOOK_AWAY_MOVE_VALUE)),
-        SPECIAL_DESCRIPTION: "using a Right Straight and Look Away to Knock Out Bernard."
+        SPECIAL_DESCRIPTION: "use a Look Away during the match and then use a Right Hook to Knock out Rally (or Larry) Bernard."
     },
     {
         ID: ALEXANDER_VOLG_ZANGIEV_VS_IPPO,
@@ -1608,17 +1608,17 @@ specialStoryBouts =
     },
     {
         ID: ITAGAKI_VS_HASEO_BARAKI,
-        EASY_TITLE: "Memory of Omega Semi Final <REPLACE?>",
-        HARD_TITLE: "<REPLACE>ITAGAKI HASEO BARAKI(HARD)",
-        SPECIAL_TITLE: "<REPLACE>ITAGAKI HASEO BARAKI(SPECIAL)",
+        EASY_TITLE: "Itagaki's Come Back",
+        HARD_TITLE: "Itagaki's First Pro Win",
+        SPECIAL_TITLE: "Blink And You'll Miss It",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Right Hook to Knock Out Baraki."
     },
     {
         ID: ITAGAKI_VS_TADASHI_NAKAYAMA,
-        EASY_TITLE: "<REPLACE>ITAGAKI TADASHI NAKAYAMA", // not in the book? 
-        HARD_TITLE: "<REPLACE>ITAGAKI TADASHI NAKAYAMA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>ITAGAKI TADASHI NAKAYAMA(SPECIAL)",
+        EASY_TITLE: "I Learned a Lesson", // not in the book? 
+        HARD_TITLE: "Backflip Win",
+        SPECIAL_TITLE: "Take Your Time",
         SPECIAL_CHECK: slowMoToKnockDown(),
         SPECIAL_DESCRIPTION: "and Knock Out Nakayama while using the Slow Battle Special Move."
     },
@@ -1640,7 +1640,7 @@ specialStoryBouts =
     },
     {
         ID: ITAGAKI_VS_FUMITO_MAKINO_2,
-        EASY_TITLE: "Itagaki's REmatch",
+        EASY_TITLE: "Itagaki's Rematch",
         HARD_TITLE: "<REPLACE>ITAGAKI VS FUMITO MAKINO(HARD)",
         SPECIAL_TITLE: "<REPLACE>ITAGAKI VS FUMITO MAKINO(SPECIAL)",
         SPECIAL_CHECK: slowMoToKnockDown() && P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),

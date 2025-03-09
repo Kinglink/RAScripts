@@ -572,18 +572,79 @@ ITAGAKI_VS_FUMITO_MAKINO = 0x2a
     Start Your Rookie Legend Off Right 
 
 TATSUYA_VS_ARMAND_ALEGRIA = 0x2b
+    Going The Distance
+    I'm No Hunter
+    Taking His Time
+    (These suck, his fight sucks.  Let's never talk about this one again. )
 TAKAMURA_VS_MORRIS_WEST = 0x2c
+    Wild Hawk
+    Apocolypse Now 
+    Screwed Up Weight Training
+    Dark Clouds
+    Takamura's Punches Are Light!!
+    I Wanted to Surpass Everything
+    MY Identity
+    I ReAally Don't Like It!!
+    Who The Hell Do You People Think I Am?
+    I Am Takamura Mamoru-Sama!!
+    Fury
+
 IPPO_VS_YI_YONSU = 0x2d
+    I'll Just Do My Best
+    Annihilation Request
+    A Promise to Takamura
 TAKAMURA_VS_BRIAN_HAWK = 0x2e
-    Those who succeed work hard, or something 
+    EASY_TITLE: "Battle of The Hawks",
+        HARD_TITLE: "Not Everyone Who Works HArd Is Rewarded",
+        SPECIAL_TITLE: "However, All Those Who Succeed Have Worked Hard" 
+
+        No quotes needed.
 GINPACHI_NEKOTA_VS_DANKICHI_HAMA = 0x2f
 GENJI_KAMOGAWA_VS_GINPACHI_NEKOTA = 0x30
 GENJI_KAMOGAWA_VS_RALPH_ANDERSON = 0x31
 ITAGAKI_VS_HASEO_BARAKI = 0x32
 IPPO_VS_IWAO_SHIMABUKURO = 0x33
+    Submarine Wars
+    Into The Sea
+    Now Come at Me!!
+    Zero-Distance Battle
+    Swimming in the Sea
+    Bottom of the Sea
+    I Need to Gather Strength
+    The Strength To Use The Dempsey Roll
+    Endless Road Under the Sea
+    Fight with a Smile 
+    A Pure Boxer
 ITAGAKI_VS_TADASHI_NAKAYAMA = 0x34
+    I Learned a Lesson
+
 AOKI_VS_KATSUTAKA_IMAE = 0x35
+    Goddess of Victory 
+    Gong of Fate
+    Special Seal 
+    Doubtful Composition 
+    Patience
+    The Most Detestiable boxer
+    Lies or Truth
+    The Dreams of a Man who Can't Fly 
+    What's He Hiding This Time
+    My Secret Weapon
+    Giant Gamble
+    The Belt's Close!!
+    100% Feint
+    A Fighter with Such a Powerful Spirit
+    The Man is Truly Strong!!
+    Conclusive Difference
+    Man&Woman
+    Muddy Tenacity
+    What I wanted
 TAKAMURA_VS_RALLY_BERNARD = 0x36
+    King of Hawk
+    I Have a Secret Weapon
+    Treacherous King
+    What the !@#$ were you thinking Dumb!@#!!
+    Idiot, You Just Have to Glance Away
+    Cheese Champion
 ALEXANDER_VOLG_ZANGIEV_VS_IPPO = 0x37
 IPPO_VS_RYUHEI_SAWAMURA = 0x38
 ITAGAKI_VS_YOSHIHARU_URAYASU = 0x39
