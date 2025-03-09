@@ -1353,25 +1353,25 @@ story_data =
     },
     {
         ID: ALEXANDER_VOLG_ZANGIEV_VS_IPPO,
-        EASY_TITLE: "<REPLACE>ALEXANDER VOLG ZANGIEV VS IPPO",
-        HARD_TITLE: "<REPLACE>ALEXANDER VOLG ZANGIEV VS IPPO(HARD)",
-        SPECIAL_TITLE: "<REPLACE>ALEXANDER VOLG ZANGIEV VS IPPO(SPECIAL)",
-        SPECIAL_CHECK: P1UsedMoveToKnockDown(VOLG_WHITE_FANG_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a White Fang to Knock Out Ippo."
+        EASY_TITLE: "Vorg's Challenge",
+        HARD_TITLE: "Udachi Chibe, Shinoke",
+        SPECIAL_TITLE: "Sayonara",
+        SPECIAL_CHECK: P1UsedMoveToKnockDown(Right Hook),
+        SPECIAL_DESCRIPTION: "using a Right Hook to Knock Out Ippo."
     },
     {
         ID: IPPO_VS_RYUHEI_SAWAMURA,
         EASY_TITLE: "Dragon Slayer",
-        HARD_TITLE: "<REPLACE>IPPO VS RYUHEI SAWAMURA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>IPPO VS RYUHEI SAWAMURA(SPECIAL)",
+        HARD_TITLE: "Pendulum Champion",
+        SPECIAL_TITLE: "Devastating Anti-Counter",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_DEMPSY_ROLL_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Dempsey Roll to Knock Out Sawamura."
     },
     {
         ID: TATSUYA_VS_ELEKI_BATTERY,
-        EASY_TITLE: "A Passing Point Opening<REplace?>",
-        HARD_TITLE: "<REPLACE>TATSUYA VS ELEKI BATTERY(HARD)",
-        SPECIAL_TITLE: "<REPLACE>TATSUYA VS ELEKI BATTERY(SPECIAL)",
+        EASY_TITLE: "Kimura Rhapsody",
+        HARD_TITLE: "First It's My Turn",
+        SPECIAL_TITLE: "His Weakness is His Body!",
         SPECIAL_CHECK: (P1UsedMoveToKnockDown(LEFT_UPPER_MOVE_VALUE) || P1UsedMoveToKnockDown(RIGHT_UPPER_MOVE_VALUE)),
         SPECIAL_DESCRIPTION: "using an Uppercut to Knock Out Battery."
     },
@@ -1624,19 +1624,19 @@ specialStoryBouts =
     },
     {
         ID: ITAGAKI_VS_YOSHIHARU_URAYASU,
-        EASY_TITLE: "<REPLACE>ITAGAKI vs YOSHIHARU URAYASU", // Not in book 
-        HARD_TITLE: "<REPLACE>ITAGAKI vs YOSHIHARU URAYASU(HARD)",
-        SPECIAL_TITLE: "<REPLACE>ITAGAKI vs YOSHIHARU URAYASU(SPECIAL)",
+        EASY_TITLE: "Fishing BoatMakunouchi's Gym",
+        HARD_TITLE: "I See",
+        SPECIAL_TITLE: "I'll Never Lose Sight of your Back, My Goal!!",
         SPECIAL_CHECK: slowMoToKnockDown(),
         SPECIAL_DESCRIPTION: "and Knock Out Urayasu while using the Slow Battle Special Move."
     },
     {
         ID: ITAGAKI_VS_TETSUJI_KIBA,
-        EASY_TITLE: "<REPLACE>ITAGAKI vs TETSUJI KIBA", // Not in book
-        HARD_TITLE: "<REPLACE>ITAGAKI vs TETSUJI KIBA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>ITAGAKI vs TETSUJI KIBA(SPECIAL)",
-        SPECIAL_CHECK: slowMoToKnockDown(),
-        SPECIAL_DESCRIPTION: "and Knock Out Kiba while using the Slow Battle Special Move."
+        EASY_TITLE: "Fight From A Distance", // Not in book
+        HARD_TITLE: "Use Your Legs",
+        SPECIAL_TITLE: "Test Yourself",
+        SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_STRAIGHT_MOVE_VALUE),
+        SPECIAL_DESCRIPTION: "and use a Right Straight To Knock Out Kiba."
     },
     {
         ID: ITAGAKI_VS_FUMITO_MAKINO_2,

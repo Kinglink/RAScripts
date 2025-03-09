@@ -646,13 +646,64 @@ TAKAMURA_VS_RALLY_BERNARD = 0x36
     Idiot, You Just Have to Glance Away
     Cheese Champion
 ALEXANDER_VOLG_ZANGIEV_VS_IPPO = 0x37
+    I will Retrun to the Ring
+    I Must Fill This Void 
+    Sayonara
+    I'll Only Look Forward 
+    Vorg's Challenge
+    This is My Challenge
+    His Farewell Gift
+    The True Mind of a Boxer 
+    Udachi Tebe, Synok
 IPPO_VS_RYUHEI_SAWAMURA = 0x38
+    In The Ring
+    The HEro and The Villain 
+    Dragon Slayer 
+    A Face of Fury
+    Fists of Fury 
+    Sawamura's Miscalculation
+    Don't Look Down Upon Boxing!!
+    True Form
+    Bullet
+    Mkunouchi-Killer
+    Shocking Flash
+    The Senkou's Trick
+    Pendulum Champion
+    The Spice of Patience
+    Dempsey's Complete Destruction
+    CArnival of Delight
+    The Fight Must Go On
+    The Reason He Can't Fall
+    Major Gamble
+    Possibilites of Figure Eight
+    Help Vs. Hatred
+    Pinch Practice
+    Sway Timing
+    Devastating Anti-Counter
 ITAGAKI_VS_YOSHIHARU_URAYASU = 0x39
+    Fishing Boat MAkunouchi's Gym
+    I see
+    I'll Never Lose Sight of Your Back
+    My Goal
 ITAGAKI_VS_TETSUJI_KIBA = 0x3a
+    Fight From A Distance
+    Face of a Pro
+    Use Your Legs
+    Test Yourself
 TATSUYA_VS_ELEKI_BATTERY = 0x3b
+    Arena Debut
+    First It's My Turn
+    Don't Forget About Your Promise!!
+    I'll Up It to High Gear
+    Kimura Rhapsody
+    His Weakness is ____
 AOKI_VS_PAPAYA_DACHIU = 0x3c
+    It's Up to me to get the Audience Back Into it 
+    Prepare Yourself Papaya
+    Papaya's True Colors 
 MIYATA_VS_MEDGERN_DATCHBOY = 0x3d
 TAKAMURA_VS_DAVID_GOLDEN_EAGLE = 0x3e
+    Leave It To Me!!
 ITAGAKI_VS_FUMITO_MAKINO_2 = 0x3f
 IPPO_VS_TAKUZO_KARASAWA = 0x40
 ITAGAKI_VS_KYOUSUKE_IMAI = 0x41
