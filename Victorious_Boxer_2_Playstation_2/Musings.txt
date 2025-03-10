@@ -701,15 +701,124 @@ AOKI_VS_PAPAYA_DACHIU = 0x3c
     It's Up to me to get the Audience Back Into it 
     Prepare Yourself Papaya
     Papaya's True Colors 
+    The Jaw is a Human's Natural Weakness.
+    If They Have a Bulls Eye, Then Aim For It
+    Why Doesn't He Have The Mole!?
+    He Moved His Mole
+    It was a Trick!!
+    They have the Same Smell 
+    Villain vs Villain
+    So Evenly Matched
 MIYATA_VS_MEDGERN_DATCHBOY = 0x3d
+    Speed That Surpasses The Limits
+    Speaking Fist
+    A Boxer's Pride
+    THe Champion's Blade
+    Counter! Counter!!
 TAKAMURA_VS_DAVID_GOLDEN_EAGLE = 0x3e
     Leave It To Me!!
+    Hawk Vs. Eagle
+    Hard-Fought Prelude
+    Ominous Pressure
+    Unparalleled Boxing
+    The Eagle's Eye
+    Frustration
+    Rough Vs Reason
+    Caged Hawk
+    Ultimate Instinct Against The Ultimate Logic
+    Unseen Damage 
+    Inescapable Distance
+    Unimaginable Strategy
+    Swooping Hawk
+    Unforgettable Teachings
+    The Worst Possible Situation
+    Amplified Anxiety
+    Cynical Change
+    Crimson Development
+    Bloody Brawl
+    The Crash of Power and Technique
+    A True Rival
+    This is a good Handicap
+    He Looks Like a Demon
+    Combatant's Heated Feelings
+    Blood Soaked Battle
+    A Hard Won Victory
+    I Can't Stop Swinging
 ITAGAKI_VS_FUMITO_MAKINO_2 = 0x3f
+    What He Was Born With
+    He's a Natural
+    The Gap That Can't Be Filled
+    The Weed's Painful Memory
+    When Makino's Heart Breaks
+    When His Heart Breaks
+    There's Nothing to Be Afraid of Any More 
 IPPO_VS_TAKUZO_KARASAWA = 0x40
+    The Challenger's Excitement
+    The Approaching Champion
+    Karasawa in the Palm of His Hand
+    The Remaining 30 Seconds
+    Ippo's Focus
+    The One Controlling the Match
+    The Crooked Circumference
+    Premonition of Progress
+    The Last Counterattack
+    Light and Darkness in the Ring
+    The Seal on the Finishing Blow 
 ITAGAKI_VS_KYOUSUKE_IMAI = 0x41
+    Itagaki's Choice
+    Speed Vs Power
+    Overcome the Pressure
+    Offense and Defense At Point Black Mode
+    Go-Go Mode
+    Beyond One's Self
+    A Brave Man's Field Of Vision
+    Boxing High
+    I'll Use My Feet
+    I Must Go Forward!!
+    Frightening Speed
+    A Pro Boxer
+    A Heavy Hitter's Theory
+    Fearsome Destructive Power
+    Irrational Boxing
+    The Trainer's Words
+    Their Choices
+    The Figures of My Senpai
+    What Ippo Can Do
+    Within the Fading Conciousness
+    The Difference Between Imai and Itagaki
+
 IPPO_VS_KEIICHI_TAKE = 0x42
+    Veteran Challenger
+    Where's the Weakness?
+    Confused Distance
+    Specality Distance
+    Poisoned Fangs
+    Power Duel
+    Familiar Scene
+    Immortal Challenge
+    What Take's Done
+    Ominous Shadow
+    Trapped
+    More of the Same
+    Fighting Head On
+    Fearless Challenger
+    Going Past The Limits
+    Weakling
+    The Finishing Blow
+    Ruthless Right Hook
 MIYATA_VS_CHE_JOUNBONG = 0x43
+    Spoiled Brat
+    Anti-Makunoichi Plan
+    The Enemy Outside The Ring
+    Wingless Champion
+    Rusted Blade
+    The Worst Match Ever
+    I Can't Waste any time here...
+    So Don't Get In My Way
 IPPO_VS_MIYATA_2 = 0x44
+    "The Promised Fight",
+"What It Means to Be Strong",
+E: "Using Everything I Learned",
 EIJI_DATE_VS_RICARDO_MARTINEZ = 0x45
     Magnificent Beginning
     7 Year Focus

@@ -1377,64 +1377,64 @@ story_data =
     },
     {
         ID: AOKI_VS_PAPAYA_DACHIU,
-        EASY_TITLE: "A Passing Point Opening<REplace?>",
-        HARD_TITLE: "<REPLACE>AOKI VS PAPAYA DACHIU(HARD)",
-        SPECIAL_TITLE: "<REPLACE>AOKI VS PAPAYA DACHIU(SPECIAL)",
-        SPECIAL_CHECK: (P1UsedMoveToKnockDown(LEFT_UPPER_MOVE_VALUE) || P1UsedMoveToKnockDown(RIGHT_UPPER_MOVE_VALUE)),
-        SPECIAL_DESCRIPTION: "using an Uppercut to Knock Out Papaya."
+        EASY_TITLE: "Prepare Yourself Papaya",
+        HARD_TITLE: "So Evenly Matched",
+        SPECIAL_TITLE: "They Have the Same Smell",
+        SPECIAL_CHECK: P1UsedMoveToKnockDown(AOKI_DOUBLE_PUNCH_MOVE_VALUE),
+        SPECIAL_DESCRIPTION: "using a Double Punch to Knock Out Papaya."
     },
     {
         ID: MIYATA_VS_MEDGERN_DATCHBOY,
-        EASY_TITLE: "<REPLACE>MIYATA VS MEDGERN DATCHBOY",
-        HARD_TITLE: "<REPLACE>MIYATA VS MEDGERN DATCHBOY(HARD)",
-        SPECIAL_TITLE: "<REPLACE>MIYATA VS MEDGERN DATCHBOY(SPECIAL)",
+        EASY_TITLE: "Speed That Surpasses The Limits",
+        HARD_TITLE: "Speaking Fist",
+        SPECIAL_TITLE: "Incomplete Evolved Counter",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(MIYATA_JOLT_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Jolt to Knock Out Datchboy."
     },
     {
         ID: TAKAMURA_VS_DAVID_GOLDEN_EAGLE,
         EASY_TITLE: "A Passing Point",
-        HARD_TITLE: "<REPLACE>TAKAMURA VS DAVID GOLDEN EAGLE(HARD)",
-        SPECIAL_TITLE: "<REPLACE>TAKAMURA VS DAVID GOLDEN EAGLE(SPECIAL)",
-        SPECIAL_CHECK: slowMoToKnockDown() && (P1UsedMoveToKnockDown(RIGHT_STRAIGHT_MOVE_VALUE) || P1UsedMoveToKnockDown(LEFT_STRAIGHT_MOVE_VALUE)),
+        HARD_TITLE: "Hawk Vs. Eagle",
+        SPECIAL_TITLE: "Beyond a Death Match",
+        SPECIAL_CHECK: slowMbroccolioToKnockDown() && (P1UsedMoveToKnockDown(RIGHT_STRAIGHT_MOVE_VALUE) || P1UsedMoveToKnockDown(LEFT_STRAIGHT_MOVE_VALUE)),
         SPECIAL_DESCRIPTION: "and use either a right straight or a left straight to Knock Out Golden Eagle while using the Slow Battle Special Move."
     },
     {
         ID: IPPO_VS_TAKUZO_KARASAWA,
-        EASY_TITLE: "The Challenge for the 6th Defence",
-        HARD_TITLE: "<REPLACE>IPPO VS TAKUZO KARASAWA(HARD)",
-        SPECIAL_TITLE: "<REPLACE>IPPO VS TAKUZO KARASAWA(SPECIAL)",
+        EASY_TITLE: "Karasawa in the Palm of His Hand",
+        HARD_TITLE: "The One Controlling the Match",
+        SPECIAL_TITLE: "The Seal on the Finishing Blow ",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(LEFT_HOOK_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Left Hook to Knock Out Karasawa."
     },
     {
         ID: ITAGAKI_VS_KYOUSUKE_IMAI,
-        EASY_TITLE: "Itagaki's Easter Japan Rookie King Tournament Finals",
-        HARD_TITLE: "<REPLACE>ITAGAKI VS IMAI(HARD)",
-        SPECIAL_TITLE: "<REPLACE>ITAGAKI VS IMAI(SPECIAL)",
+        EASY_TITLE: "Process of Evolution",
+        HARD_TITLE: "Next Time for the Title",
+        SPECIAL_TITLE: "Gattsun Gattsun!!",
         SPECIAL_CHECK: slowMoToKnockDown(),
         SPECIAL_DESCRIPTION: "and Knock Out Imai while using the Slow Battle Special Move."
     },
     {
         ID: IPPO_VS_KEIICHI_TAKE,
-        EASY_TITLE: "The Challenge for the 7th Defence",
-        HARD_TITLE: "<REPLACE>IPPO VS KEIICHI TAKE(HARD)",
-        SPECIAL_TITLE: "<REPLACE>IPPO VS KEIICHI TAKE(SPECIAL)",
+        EASY_TITLE: "Fearless Challenger",
+        HARD_TITLE: "Going Past The Limits",
+        SPECIAL_TITLE: "Ruthless Right Hook",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(LEFT_HOOK_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Left Hook to Knock Out Take."
     },
     {
         ID: MIYATA_VS_CHE_JOUNBONG,
-        EASY_TITLE: "<REPLACE>MIYATA VS CHE JOUNBONG",
-        HARD_TITLE: "<REPLACE>MIYATA VS CHE JOUNBONG(HARD)",
-        SPECIAL_TITLE: "<REPLACE>MIYATA VS CHE JOUNBONG(SPECIAL)",
-        SPECIAL_CHECK: (P1UsedMoveToKnockDown(LEFT_HOOK_MOVE_VALUE) || P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE)),
-        SPECIAL_DESCRIPTION: "using a Hook to Knock Out Jounbong."
+        EASY_TITLE: "Wingless Champion",
+        HARD_TITLE: "I Can't Waste My Time Here",
+        SPECIAL_TITLE: "So Don't Get in My Way",
+        SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
+        SPECIAL_DESCRIPTION: "using a Right Hook to Knock Out Jounbong."
     },
     {
         ID: IPPO_VS_MIYATA_2,
-        EASY_TITLE: "The Promised  Fight",
-        HARD_TITLE: "What It Mean to Be Strong",
+        EASY_TITLE: "The Promised Match",
+        HARD_TITLE: "What It Means to Be Strong",
         SPECIAL_TITLE: "Using Everything I Learned",
         SPECIAL_CHECK: measured(tally_of(
                                          [IPPO_DEADLY_SMASH_MOVE_VALUE, 
@@ -1640,9 +1640,9 @@ specialStoryBouts =
     },
     {
         ID: ITAGAKI_VS_FUMITO_MAKINO_2,
-        EASY_TITLE: "Itagaki's Rematch",
-        HARD_TITLE: "<REPLACE>ITAGAKI VS FUMITO MAKINO(HARD)",
-        SPECIAL_TITLE: "<REPLACE>ITAGAKI VS FUMITO MAKINO(SPECIAL)",
+        EASY_TITLE: "Weed Vs Elite",
+        HARD_TITLE: "When His Heart Breaks",
+        SPECIAL_TITLE: "There's Nothing to Be Afraid of Any More",
         SPECIAL_CHECK: slowMoToKnockDown() && P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "and use a Right Hook to Knock Out Makino while using the Slow Battle Special Move."
     },
@@ -1678,12 +1678,12 @@ exhibitionBattles =
     {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_RICARDO_MARTINEZ,
         OPPONENT_CHARACTER: EXHIBITION_CHARACTER_TAKESHI_SENDO,
-        TITLE: "Canon: Revenge!"
+        TITLE: "Hajime No Ippo 2025"
     },
     {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_TAKESHI_SENDO,
         OPPONENT_CHARACTER: EXHIBITION_CHARACTER_RICARDO_MARTINEZ,
-        TITLE: "Canon: Revenge!"
+        TITLE: "The Strongest in the World"
     },
     {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_IPPO_EXHIBITION,
@@ -1698,12 +1698,12 @@ exhibitionBattles =
     {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_RYO_MASHIBA_FEATHERWEIGHT,
         OPPONENT_CHARACTER: EXHIBITION_CHARACTER_RYUHEI_SAWAMURA,
-        TITLE: "Reverse Chaos"
+        TITLE: "For My Sister's Honor"
     },
     {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_RYO_MASHIBA_JR_LIGHTWEIGHT,
         OPPONENT_CHARACTER: EXHIBITION_CHARACTER_TATSUYA_KIMURA,
-        TITLE: "Canon: Execution"
+        TITLE: "The Grim Reaper Execution"
     },
     {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_RYO_MASHIBA_FEATHERWEIGHT,
@@ -1728,7 +1728,7 @@ exhibitionBattles =
     {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_KYOUSUKE_IMAI,
         OPPONENT_CHARACTER: EXHIBITION_CHARACTER_MANABU_ITAGAKI_EXHIBITION,
-        TITLE: "Imai's Ascension to the Throne"
+        TITLE: "Heir to the Throne"
     },
     {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_BEAR,
@@ -1743,12 +1743,12 @@ exhibitionBattles =
     {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_KATSUTAKA_IMAE,
         OPPONENT_CHARACTER: EXHIBITION_CHARACTER_MASARU_AOKI_EXHIBITION,
-        TITLE: "The Real Boxing Martial Arts"
+        TITLE: "Conclusive Difference"
     },
     {
         PLAYER_CHARACTER:EXHIBITION_CHARACTER_ICHIRO_MIYATA_EARLY_EXHIBITION,
         OPPONENT_CHARACTER: EXHIBITION_CHARACTER_IPPO_FIRST_SPARRING,
-        TITLE: "The Prodigy and the Rookie"
+        TITLE: "His First Time in The Ring"
     },
     {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_ICHIRO_MIYATA_FINAL_EXHIBITION,
@@ -1768,7 +1768,7 @@ exhibitionBattles =
     {    // These are Story stages but aren't actually selectable. 
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_TAKESHI_RYUZAKI,
         OPPONENT_CHARACTER: EXHIBITION_CHARACTER_TATSUYA_KIMURA,
-        TITLE: "Canon KIMURA VS TAKESHI RYUZAKI"
+        TITLE: "Extra Rounds"
     },
     {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_JACKAL_ITO,
