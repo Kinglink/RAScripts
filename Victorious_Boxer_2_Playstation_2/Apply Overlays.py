@@ -10,11 +10,12 @@ overlay_paths = {
     "Gold": "../Overlays/Gold Overlay.png",
     "Silver": "../Overlays/Silver Overlay.png",
     "Bronze": "../Overlays/Bronze Overlay.png",
+    "Ring": "../Overlays/Ring_Overlay.png",
     "":None,
 #    "Red_No_Overlay": "../Overlays/Red_No_Overlay.png",
 }
 
-base_overlays = ["Card"]
+base_overlays = ["Ring"]
 
 def apply_overlays_and_save(base_image, overlays, base_file_name, output_dir, with_no = False, with_red_no = False):
     for overlay_name, overlay_path in overlays.items():
