@@ -1,9 +1,17 @@
 from PIL import Image
 import os
 import math
+import sys
+# Check if the correct number of arguments is provided
+if len(sys.argv) != 3:
+    print("Usage: python quiltGenerator.py <input_dir> <output_filename>")
+    sys.exit(1)
 
+# Get the input directory and output filename from the command line arguments
+input_dir = sys.argv[1]
+output_filename = sys.argv[2]
 # Directory containing the images you want to combine
-input_dir = "Generated"
+# input_dir = "Output"
 
 # Output directory where the quilt will be saved
 output_dir = "quilt"
@@ -45,4 +53,11 @@ for i, image_filename in enumerate(image_files):
     quilt.paste(image, (x, y))
 
 # Save the quilt
-quilt.save(os.path.join(output_dir, "quilt_output.png"))
+# Ensure the output filename has a .png extension if it doesn't already
+if not output_filename.lower().endswith('.png'):
+    output_filename += '.png'
+
+# Save the quilt
+quilt.save(os.path.join(output_dir, output_filename))
+print (f"Input Directory: {input_dir}")
+print (f"Output Filename: {output_filename}")
