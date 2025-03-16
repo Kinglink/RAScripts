@@ -987,7 +987,7 @@ story_data =
     { 
         ID: IPPO_VS_NAOYA_OGAWA, 
         EASY_TITLE: "I'm Sticking to Featherweight",
-        HARD_TITLE: "You Got a Good Punch, Man)",
+        HARD_TITLE: "You Got a Good Punch, Man",
         SPECIAL_TITLE: "He Flipped Him With One Punch",
         SPECIAL_RESET: P1JustDowned(),
         SPECIAL_DESCRIPTION: "without getting knocked down",
@@ -1356,7 +1356,7 @@ story_data =
         EASY_TITLE: "Vorg's Challenge",
         HARD_TITLE: "Udachi Chibe, Shinoke",
         SPECIAL_TITLE: "Sayonara",
-        SPECIAL_CHECK: P1UsedMoveToKnockDown(Right Hook),
+        SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Right Hook to Knock Out Ippo."
     },
     {
@@ -1396,7 +1396,7 @@ story_data =
         EASY_TITLE: "A Passing Point",
         HARD_TITLE: "Hawk Vs. Eagle",
         SPECIAL_TITLE: "Beyond a Death Match",
-        SPECIAL_CHECK: slowMbroccolioToKnockDown() && (P1UsedMoveToKnockDown(RIGHT_STRAIGHT_MOVE_VALUE) || P1UsedMoveToKnockDown(LEFT_STRAIGHT_MOVE_VALUE)),
+        SPECIAL_CHECK: slowMoToKnockDown() && (P1UsedMoveToKnockDown(RIGHT_STRAIGHT_MOVE_VALUE) || P1UsedMoveToKnockDown(LEFT_STRAIGHT_MOVE_VALUE)),
         SPECIAL_DESCRIPTION: "and use either a right straight or a left straight to Knock Out Golden Eagle while using the Slow Battle Special Move."
     },
     {
@@ -1451,7 +1451,7 @@ story_data =
     },
 ]
 
-function EasyStoryAchievement(data)
+function EasyStoryAchievement(data, type = "")
 {
     points = 5
     if (ContainsKey(data, EASY_POINTS))
@@ -1461,6 +1461,7 @@ function EasyStoryAchievement(data)
     achievement(title = data[EASY_TITLE],
                 description = format("Beat Story mission for {0}", boutTitleLookup[data[ID]]),
                 points = 5,
+                type = type,
                 trigger = storyModeConfigCheck() && 
                           playerJustWon() && 
                           currentStoryFightIndex() == data[ID] 
@@ -1488,7 +1489,8 @@ function start_bout(id)
 {
     return once( currentStoryFightIndex() == id && 
                  currentRound() == 1 &&
-                 timeInSecond() == 0
+                 timeInSecond() < 0.5  
+                 // matches start when the time in frames is not 0.  So we'll give it a little leeway
                )
            
 }
@@ -1534,7 +1536,7 @@ function SpecialStoryAchievement(data)
 
 for data in story_data
 {
-    EasyStoryAchievement(data)
+    EasyStoryAchievement(data, "Progression")
     HardStoryAchievement(data)
     SpecialStoryAchievement(data)
 }
@@ -1578,8 +1580,8 @@ specialStoryBouts =
         EASY_TITLE: "The Power of the King",
         HARD_TITLE: "The Champion's Fist",
         SPECIAL_TITLE: "Takamura is InvincibleD",
-        SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE) ||
-                       P1UsedMoveToKnockDown(LEFT_HOOK_MOVE_VALUE),
+        SPECIAL_CHECK: (P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE) ||
+                       P1UsedMoveToKnockDown(LEFT_HOOK_MOVE_VALUE)),
         SPECIAL_DESCRIPTION: "using a Hook to Knock Out Tamaki."
     },
     {
@@ -1665,15 +1667,96 @@ for data in specialStoryBouts
 
 exhibitionBattles = 
 [
+    
+    {
+        PLAYER_CHARACTER: EXHIBITION_CHARACTER_MASARU_AOKI_EXHIBITION, 
+        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_HIROSHI_YAMANAKA,
+        TITLE: "Aoki's Pro Debut Match"
+    },
     {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_RICARDO_MARTINEZ,
         OPPONENT_CHARACTER: EXHIBITION_CHARACTER_EIJI_DATE_YOUNG,
         TITLE: "A Sad End, Eiji Date"
     },
     {
+        PLAYER_CHARACTER:EXHIBITION_CHARACTER_ICHIRO_MIYATA_EARLY_EXHIBITION,
+        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_IPPO_FIRST_SPARRING,
+        TITLE: "His First Time in The Ring"
+    },
+    {
+        PLAYER_CHARACTER: EXHIBITION_CHARACTER_JACKAL_ITO,
+        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_MASARU_AOKI_EXHIBITION,
+        TITLE: "Canon: Jackal Vs Aoki"
+    },
+    {
+        PLAYER_CHARACTER: EXHIBITION_CHARACTER_RYO_MASHIBA_FEATHERWEIGHT,
+        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_ICHIRO_MIYATA_FINAL_EXHIBITION,
+        TITLE: "The One-Legged Fight" // Updated
+    },
+    {
+        PLAYER_CHARACTER: EXHIBITION_CHARACTER_ICHIRO_MIYATA_FINAL_EXHIBITION,
+        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_RYO_MASHIBA_FEATHERWEIGHT,
+        TITLE: "Because He's Waiting for Me" // updated
+    },
+    {
+        PLAYER_CHARACTER: EXHIBITION_CHARACTER_BEAR,
+        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_MAMORU_TAKAMURA_MIDDLE_WEIGHT,
+        TITLE: "How It Really Happened"
+    },
+    {    
+        PLAYER_CHARACTER: EXHIBITION_CHARACTER_TAKESHI_RYUZAKI,
+        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_TATSUYA_KIMURA,
+        TITLE: "Extra Rounds"
+    },
+    {
+        PLAYER_CHARACTER: EXHIBITION_CHARACTER_EIJI_DATE_OLD,
+        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_IPPO_EXHIBITION,
+        TITLE: "The Heart Break Shot"
+    },
+    {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_RICARDO_MARTINEZ,
         OPPONENT_CHARACTER: EXHIBITION_CHARACTER_EIJI_DATE_OLD,
         TITLE: "Goodbye, Eiji Date"
+    },
+    {   
+        PLAYER_CHARACTER: EXHIBITION_CHARACTER_HAMMER_NAO_GUROMICHI,
+        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_IPPO_EXHIBITION,
+        TITLE: "Tell Him I've Gotten Strong with Every Punch I Throw in the Ring"
+    },
+    {
+        PLAYER_CHARACTER: EXHIBITION_CHARACTER_RYO_MASHIBA_JR_LIGHTWEIGHT,
+        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_TATSUYA_KIMURA,
+        TITLE: "The Grim Reaper Execution"
+    },
+    {
+        PLAYER_CHARACTER: EXHIBITION_CHARACTER_RYUHEI_SAWAMURA,
+        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_RYO_MASHIBA_JR_LIGHTWEIGHT,
+        TITLE: "Chaos"
+    },
+    {
+        PLAYER_CHARACTER: EXHIBITION_CHARACTER_RYO_MASHIBA_FEATHERWEIGHT,
+        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_RYUHEI_SAWAMURA,
+        TITLE: "For My Sister's Honor"
+    },
+    {
+        PLAYER_CHARACTER: EXHIBITION_CHARACTER_GENJI_KAMOGAWA_OLD,
+        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_IPPO_EXHIBITION,
+        TITLE: "The Old Man Still Has Moves"
+    },
+    {
+        PLAYER_CHARACTER: EXHIBITION_CHARACTER_KATSUTAKA_IMAE,
+        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_MASARU_AOKI_EXHIBITION,
+        TITLE: "Conclusive Difference"
+    },
+    {
+        PLAYER_CHARACTER: EXHIBITION_CHARACTER_KYOUSUKE_IMAI,
+        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_MANABU_ITAGAKI_EXHIBITION,
+        TITLE: "Heir to the Throne"
+    },
+    {
+        PLAYER_CHARACTER: EXHIBITION_CHARACTER_KYOUSUKE_IMAI,
+        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_IPPO_EXHIBITION,
+        TITLE: "Kyosuke Imai's Dream Match"
     },
     {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_RICARDO_MARTINEZ,
@@ -1691,90 +1774,10 @@ exhibitionBattles =
         TITLE: "Perhaps One Day"
     },
     {
-        PLAYER_CHARACTER: EXHIBITION_CHARACTER_RYUHEI_SAWAMURA,
-        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_RYO_MASHIBA_JR_LIGHTWEIGHT,
-        TITLE: "Chaos"
-    },
-    {
-        PLAYER_CHARACTER: EXHIBITION_CHARACTER_RYO_MASHIBA_FEATHERWEIGHT,
-        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_RYUHEI_SAWAMURA,
-        TITLE: "For My Sister's Honor"
-    },
-    {
-        PLAYER_CHARACTER: EXHIBITION_CHARACTER_RYO_MASHIBA_JR_LIGHTWEIGHT,
-        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_TATSUYA_KIMURA,
-        TITLE: "The Grim Reaper Execution"
-    },
-    {
-        PLAYER_CHARACTER: EXHIBITION_CHARACTER_RYO_MASHIBA_FEATHERWEIGHT,
-        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_ICHIRO_MIYATA_FINAL_EXHIBITION,
-        TITLE: "The One-Legged Fight" // Updated
-    },
-    {
-        PLAYER_CHARACTER: EXHIBITION_CHARACTER_ICHIRO_MIYATA_FINAL_EXHIBITION,
-        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_RYO_MASHIBA_FEATHERWEIGHT,
-        TITLE: "Because He's Waiting for Me" // updated
-    },
-    {
-        PLAYER_CHARACTER: EXHIBITION_CHARACTER_EIJI_DATE_OLD,
-        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_IPPO_EXHIBITION,
-        TITLE: "The Heart Break Shot"
-    },
-    {
-        PLAYER_CHARACTER: EXHIBITION_CHARACTER_KYOUSUKE_IMAI,
-        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_IPPO_EXHIBITION,
-        TITLE: "Kyosuke Imai's Dream Match"
-    },
-    {
-        PLAYER_CHARACTER: EXHIBITION_CHARACTER_KYOUSUKE_IMAI,
-        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_MANABU_ITAGAKI_EXHIBITION,
-        TITLE: "Heir to the Throne"
-    },
-    {
-        PLAYER_CHARACTER: EXHIBITION_CHARACTER_BEAR,
-        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_MAMORU_TAKAMURA_MIDDLE_WEIGHT,
-        TITLE: "How It Really Happened"
-    },
-    {
-        PLAYER_CHARACTER: EXHIBITION_CHARACTER_GENJI_KAMOGAWA_OLD,
-        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_IPPO_EXHIBITION,
-        TITLE: "The Old Man Still Has Moves"
-    },
-    {
-        PLAYER_CHARACTER: EXHIBITION_CHARACTER_KATSUTAKA_IMAE,
-        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_MASARU_AOKI_EXHIBITION,
-        TITLE: "Conclusive Difference"
-    },
-    {
-        PLAYER_CHARACTER:EXHIBITION_CHARACTER_ICHIRO_MIYATA_EARLY_EXHIBITION,
-        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_IPPO_FIRST_SPARRING,
-        TITLE: "His First Time in The Ring"
-    },
-    {
         PLAYER_CHARACTER: EXHIBITION_CHARACTER_ICHIRO_MIYATA_FINAL_EXHIBITION,
         OPPONENT_CHARACTER: EXHIBITION_CHARACTER_IPPO_EXHIBITION,
         TITLE: "The Final Showdown"
     },
-    {   
-        PLAYER_CHARACTER: EXHIBITION_CHARACTER_HAMMER_NAO_GUROMICHI,
-        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_IPPO_EXHIBITION,
-        TITLE: "Tell Him I've Gotten Strong with Every Punch I Throw in the Ring!!"
-    }
-    {
-        PLAYER_CHARACTER: EXHIBITION_CHARACTER_MASARU_AOKI_EXHIBITION, 
-        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_HIROSHI_YAMANAKA,
-        TITLE: "Aoki's Pro Debut Match"
-    },
-    {    // These are Story stages but aren't actually selectable. 
-        PLAYER_CHARACTER: EXHIBITION_CHARACTER_TAKESHI_RYUZAKI,
-        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_TATSUYA_KIMURA,
-        TITLE: "Extra Rounds"
-    },
-    {
-        PLAYER_CHARACTER: EXHIBITION_CHARACTER_JACKAL_ITO,
-        OPPONENT_CHARACTER: EXHIBITION_CHARACTER_MASARU_AOKI_EXHIBITION,
-        TITLE: "Canon: Jackal Vs Aoki"
-    }
 ]
 
 for data in exhibitionBattles
