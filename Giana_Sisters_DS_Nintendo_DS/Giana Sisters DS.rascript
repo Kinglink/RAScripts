@@ -569,8 +569,8 @@ achievement(
 function justGotRedFlagComplete(array) => any_of(array, value => value == 0x91 && prev(value) != 0x91)
 
 function redFlagCollectionCheck(arrayRedFlags) {
-    return  measured( tally_of(arrayRedFlags, length(arrayRedFlags), value => once(value == 0x91)), when=!onMainMenu()) && 
-            tally_of(arrayRedFlags, length(arrayRedFlags)-1, value => prev(value) == 0x91)  && // One less
+    return  measured( tally_of(arrayRedFlags, length(arrayRedFlags), value => once(value >= 0x91)), when=!onMainMenu()) && 
+            tally_of(arrayRedFlags, length(arrayRedFlags)-1, value => prev(value) >= 0x91)  && // One less
             justGotRedFlagComplete(arrayRedFlags) &&
             never(onMainMenu())
 }
