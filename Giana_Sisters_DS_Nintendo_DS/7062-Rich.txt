@@ -1,0 +1,30 @@
+Lookup:Form
+0x00=👱🏻‍♀️
+0x01=👩🏻‍🦰
+
+Format:World
+FormatType=VALUE
+
+Format:Stage
+FormatType=VALUE
+
+Format:Lives
+FormatType=VALUE
+
+Format:Jewel
+FormatType=VALUE
+
+Format:Score
+FormatType=SCORE
+
+Display:
+?0xh0a3ce8=h05_0xh0a2fa2=h00?⏳:[Main Menu]
+?0xh0a3ce8=h02_0xh0a2fa2=h00?⏳:[Main Menu] In Options
+?0xh0a3ce8=h01_0xh0a2fa2=h00?⏳:[Main Menu] In Name screen
+?0xh1c69ad=h00_0xh0a3ce8=h07_0xh0a2fa2=h00?Player in 🌎:World Map | ❤️:[@Lives(0xh0a2f2c)]
+?0xh1c69ad=h01_0xh0a3ce8=h07_0xh0a2fa2=h00?Player) in 🌎:World Map | ❤️:[@Lives(0xh0a2f2c)]
+?0xh1c69ad=h02_0xh0a3ce8=h07_0xh0a2fa2=h00?Player in 🌎:World Map | ❤️:[@Lives(0xh0a2f2c)]
+?0xh1c69ad=h00_0xh0a3ce8=h03_0xh0a2fa2>h00?@Form(0xh0a2f2d) 🚩:[@World(0xh0a2fa3)-@Stage(0xh0a2fa2)] ❤️:[@Lives(0xh0a2f2c)] 💎:[@Jewel(0xh0a2f2e*1)] | 💯:@Score(0xX0a2f30*1)
+?0xh1c69ad=h01_0xh0a3ce8=h03_0xh0a2fa2>h00?@Form(0xh0a2f2d)) 🚩:[@World(0xh0a2fa3)-@Stage(0xh0a2fa2)] ❤️:[@Lives(0xh0a2f2c)] 💎:[@Jewel(0xh0a2f2e*1)] | 💯:@Score(0xX0a2f30*1)
+?0xh1c69ad=h02_0xh0a3ce8=h03_0xh0a2fa2>h00?@Form(0xh0a2f2d) 🚩:[@World(0xh0a2fa3)-@Stage(0xh0a2fa2)] ❤️:[@Lives(0xh0a2f2c)] 💎:[@Jewel(0xh0a2f2e*1)] | 💯:@Score(0xX0a2f30*1)
+ʕ•́ᴥ•̀ʔ Waiting for the Game to Start...
