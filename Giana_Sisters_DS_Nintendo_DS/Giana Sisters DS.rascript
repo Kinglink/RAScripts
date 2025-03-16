@@ -955,33 +955,3 @@ achievement(
     trigger = flag_achievements_champion() > 0 && flag_achievements_perfect() > 0 && never(low4(0x0A3CE8) != 7) &&
               stage_level() == 0 && world_id() == 0
 )
-
-achievement(
-    title = "DEMOTED AS UNWELCOME CONCEPT - ???", points = 1,
-    description = "What is the name of the character that this game was inspired by? [Write in one of the Save Slots]",
-    id = 130966, badge = "144216", published = "10/27/2020 7:23:33 PM", modified = "1/9/2025 10:48:48 PM",
-    trigger = screen_id() == 1 && stage_level() == 0 && world_id() == 0 &&
-              ((byte(pointer_for_name_currently_being_entered() + 0x00087E) == 109 &&
-                byte(pointer_for_name_currently_being_entered() + 0x000880) == 97 &&
-                byte(pointer_for_name_currently_being_entered() + 0x000882) == 114 &&
-                byte(pointer_for_name_currently_being_entered() + 0x000884) == 105 &&
-                byte(pointer_for_name_currently_being_entered() + 0x000886) == 111) ||
-               (byte(pointer_for_name_currently_being_entered() + 0x00087E) == 77 &&
-                byte(pointer_for_name_currently_being_entered() + 0x000880) == 97 &&
-                byte(pointer_for_name_currently_being_entered() + 0x000882) == 114 &&
-                byte(pointer_for_name_currently_being_entered() + 0x000884) == 105 &&
-                byte(pointer_for_name_currently_being_entered() + 0x000886) == 111) ||
-               (byte(pointer_for_name_currently_being_entered() + 0x00087E) == 77 &&
-                byte(pointer_for_name_currently_being_entered() + 0x000880) == 65 &&
-                byte(pointer_for_name_currently_being_entered() + 0x000882) == 82 &&
-                byte(pointer_for_name_currently_being_entered() + 0x000884) == 73 &&
-                byte(pointer_for_name_currently_being_entered() + 0x000886) == 79))
-)
-
-achievement(
-    title = "DEMOTED AS UNWELCOME CONCEPT - Hello! That's My Crazy Form", points = 3,
-    description = "Shoot 150 energy balls",
-    id = 130965, badge = "144208", published = "10/27/2020 7:22:21 PM", modified = "1/9/2025 10:47:18 PM",
-    trigger = unless(screen_id() != 3) && unless(stage_level() == 0) && unless(world_id() == 0) &&
-              measured(repeated(150, forms_geni() == 1 && p1_control_bit7() > prev(p1_control_bit7())))
-)
