@@ -43,70 +43,6 @@ function current_car_owned() => byte(0x000B60)
 // $0B62: Current Car - ID
 function current_car_id() => byte(0x000B62)
 
-// $0B63: Current Car - Engine Own Flags
-function current_car_engine_own_flags() => bit1(0x000B63)
-function current_car_engine_own_flags() => bit2(0x000B63)
-function current_car_engine_own_flags() => byte(0x000B63)
-
-// $0B64: Current Car - Muffler Own Flags
-function current_car_muffler_own_flags() => bit1(0x000B64)
-function current_car_muffler_own_flags() => bit2(0x000B64)
-function current_car_muffler_own_flags() => byte(0x000B64)
-
-// $0B65: Current Car - Transmission Own Flags
-function current_car_transmission_own_flags() => bit1(0x000B65)
-function current_car_transmission_own_flags() => bit2(0x000B65)
-function current_car_transmission_own_flags() => byte(0x000B65)
-
-// $0B66: Current Car - Clutch Own Flags
-function current_car_clutch_own_flags() => bit1(0x000B66)
-function current_car_clutch_own_flags() => bit2(0x000B66)
-function current_car_clutch_own_flags() => byte(0x000B66)
-
-// $0B67: Current Car - Suspension Own Flags
-function current_car_suspension_own_flags() => bit1(0x000B67)
-function current_car_suspension_own_flags() => bit2(0x000B67)
-function current_car_suspension_own_flags() => byte(0x000B67)
-
-// $0B68: Current Car - Tires + Wheels Own Flags
-function current_car_tires_wheels_own_flags() => bit1(0x000B68)
-function current_car_tires_wheels_own_flags() => bit2(0x000B68)
-function current_car_tires_wheels_own_flags() => bit3(0x000B68)
-function current_car_tires_wheels_own_flags() => bit4(0x000B68)
-function current_car_tires_wheels_own_flags() => byte(0x000B68)
-
-// $0B69: Current Car - Body Tune Own Flags
-function current_car_body_tune_own_flags() => bit1(0x000B69)
-function current_car_body_tune_own_flags() => bit2(0x000B69)
-function current_car_body_tune_own_flags() => byte(0x000B69)
-
-// $0B6A: Current Car - F. Bumper Own Flags
-function current_car_f_bumper_own_flags() => bit1(0x000B6A)
-function current_car_f_bumper_own_flags() => bit2(0x000B6A)
-function current_car_f_bumper_own_flags() => bit3(0x000B6A)
-function current_car_f_bumper_own_flags() => bit4(0x000B6A)
-function current_car_f_bumper_own_flags() => byte(0x000B6A)
-
-// $0B6B: Current Car - R. Bumper Own Flags
-function current_car_r_bumper_own_flags() => bit1(0x000B6B)
-function current_car_r_bumper_own_flags() => bit2(0x000B6B)
-function current_car_r_bumper_own_flags() => bit3(0x000B6B)
-function current_car_r_bumper_own_flags() => bit4(0x000B6B)
-function current_car_r_bumper_own_flags() => byte(0x000B6B)
-
-// $0B6C: Current Car - Spoiler Own Flags
-function current_car_spoiler_own_flags() => bit1(0x000B6C)
-function current_car_spoiler_own_flags() => bit2(0x000B6C)
-function current_car_spoiler_own_flags() => bit3(0x000B6C)
-function current_car_spoiler_own_flags() => bit4(0x000B6C)
-function current_car_spoiler_own_flags() => byte(0x000B6C)
-
-// $0B6D: Current Car - Side Skirt Own Flags
-function current_car_side_skirt_own_flags() => bit1(0x000B6D)
-function current_car_side_skirt_own_flags() => bit2(0x000B6D)
-function current_car_side_skirt_own_flags() => bit3(0x000B6D)
-function current_car_side_skirt_own_flags() => bit4(0x000B6D)
-function current_car_side_skirt_own_flags() => byte(0x000B6D)
 
 // $0B6E: Current Car - Engine
 function current_car_engine() => byte(0x000B6E)
@@ -206,7 +142,6 @@ function money() => byte(0x0014A4)
 //        02=Time Attack
 //        03=Free Run
 function current_gamemode() => byte(0x001B14)
-function current_gamemode() => dword(0x001B14)
 
 // $1E50: Current Track
 //        00=Tokyo 1
@@ -664,7 +599,6 @@ function time_attack_00_0x_0() => byte(0x005793)
 function time_attack_00_00_x() => byte(0x005794)
 
 // $5F50: Current Progress in Track
-function current_progress_in_track() => byte(0x005F50)
 function current_progress_in_track() => dword(0x005F50)
 
 // $5F7C: Player Meter
@@ -672,8 +606,6 @@ function current_progress_in_track() => dword(0x005F50)
 function player_meter() => byte(0x005F7C)
 
 // $66D0: Current Stage in Quick Race
-function current_stage_in_quick_race() => byte(0x0066D0)
-function current_stage_in_quick_race() => word(0x0066D0)
 function current_stage_in_quick_race() => dword(0x0066D0)
 
 // $6870: [Options]
@@ -683,381 +615,14 @@ function options() => byte(0x006870)
 // $6894: SFX Is Playing
 function sfx_is_playing() => byte(0x006894)
 
-achievement(
-    title = "Tokyo 2", points = 5, type="progression",
-    description = "Unlock Tokyo 2.",
-    id = 200878, badge = "223154", published = "3/1/2022 4:51:05 AM", modified = "3/1/2022 5:17:41 AM",
-    trigger = current_menu() == 7 && prev(unlock_flag_tokyo_2()) == 0 && unlock_flag_tokyo_2() == 1
-)
+function TimeToValue(tenMinutes, oneMinutes, tenSeconds, oneSeconds, tenthSecond) =>
+    tenMinutes * 60000 + oneMinutes * 6000 + tenSeconds * 1000 +
+                 oneSeconds * 100 + tenthSecond * 10
 
-achievement(
-    title = "Los Angeles 1", points = 5, type="progression",
-    description = "Unlock Los Angeles 1.",
-    id = 200879, badge = "223155", published = "3/1/2022 4:51:06 AM", modified = "3/1/2022 5:17:42 AM",
-    trigger = current_menu() == 7 && prev(unlock_flag_los_angeles_1()) == 0 && unlock_flag_los_angeles_1() == 1
-)
+function compareAgainstTime(tenMinutes, oneMinutes, tenSeconds, oneSeconds, tenthSecond) =>
+    TimeToValue(time_attack_x0_00_0(), time_attack_0x_00_0(), time_attack_00_x0_0(), time_attack_00_0x_0(), time_attack_00_00_x()) < 
+        TimeToValue(tenMinutes, oneMinutes, tenSeconds, oneSeconds, tenthSecond)
 
-achievement(
-    title = "Los Angeles 2", points = 5, type="progression",
-    description = "Unlock Los Angeles 2.",
-    id = 200880, badge = "223156", published = "3/1/2022 4:51:06 AM", modified = "3/1/2022 5:17:42 AM",
-    trigger = current_menu() == 7 && prev(unlock_flag_los_angeles_2()) == 0 && unlock_flag_los_angeles_2() == 1
-)
-
-achievement(
-    title = "London 1", points = 5, type="progression",
-    description = "Unlock London 1.",
-    id = 200881, badge = "223157", published = "3/1/2022 4:51:06 AM", modified = "3/1/2022 5:17:42 AM",
-    trigger = current_menu() == 7 && prev(unlock_flag_london_1()) == 0 && unlock_flag_london_1() == 1
-)
-
-achievement(
-    title = "London 2", points = 5, type="progression",
-    description = "Unlock London 2.",
-    id = 200882, badge = "223158", published = "3/1/2022 4:51:07 AM", modified = "3/1/2022 5:17:43 AM",
-    trigger = current_menu() == 7 && prev(unlock_flag_london_2()) == 0 && unlock_flag_london_2() == 1
-)
-
-achievement(
-    title = "Street Sharks", points = 5, type="progression",
-    description = "Defeat all Street Sharks rivals.",
-    id = 200858, badge = "223123", published = "3/1/2022 4:50:58 AM", modified = "3/1/2022 4:50:58 AM",
-    trigger = measured((street_sharks_white_shark() + street_sharks_tiger_shark() + street_sharks_basking_shark() +
-                  street_sharks_whale_shark() + street_sharks_hammerhead_shark() + street_sharks_bull_shark()) == 6
-              ) &&
-              (prev(street_sharks_white_shark()) + prev(street_sharks_tiger_shark()) +
-              prev(street_sharks_basking_shark()) + prev(street_sharks_whale_shark()) +
-              prev(street_sharks_hammerhead_shark()) + prev(street_sharks_bull_shark())) == 5
-)
-
-achievement(
-    title = "Ace of Clubz", points = 5, type="progression",
-    description = "Defeat all Ace of Clubz rivals.",
-    id = 200859, badge = "223124", published = "3/1/2022 4:50:59 AM", modified = "3/2/2022 3:50:53 AM",
-    trigger = measured((ace_of_clubz_dream_driver() + ace_of_clubz_keep_it_simple() + ace_of_clubz_speed_limit() +
-                  ace_of_clubz_madd_hatter() + ace_of_clubz_rising_son() + ace_of_clubz_slow_rider()) == 6
-              ) &&
-              (prev(ace_of_clubz_dream_driver()) + prev(ace_of_clubz_keep_it_simple()) +
-              prev(ace_of_clubz_speed_limit()) + prev(ace_of_clubz_madd_hatter()) + prev(ace_of_clubz_rising_son()) +
-              prev(ace_of_clubz_slow_rider())) == 5
-)
-
-achievement(
-    title = "Knights", points = 5, type="progression",
-    description = "Defeat all Knights rivals.",
-    id = 200860, badge = "223125", published = "3/1/2022 4:50:59 AM", modified = "3/1/2022 4:50:59 AM",
-    trigger = measured((knights_white_knight() + knights_green_knight() + knights_blue_knight() + knights_red_knight() +
-                  knights_black_knight() + knights_purple_knight()) == 6
-              ) &&
-              (prev(knights_white_knight()) + prev(knights_green_knight()) + prev(knights_blue_knight()) +
-              prev(knights_red_knight()) + prev(knights_black_knight()) + prev(knights_purple_knight())) == 5
-)
-
-achievement(
-    title = "Interplanetary", points = 5, type="progression",
-    description = "Defeat all Interplanetary rivals.",
-    id = 200861, badge = "223126", published = "3/1/2022 4:50:59 AM", modified = "3/1/2022 4:50:59 AM",
-    trigger = measured((interplanetary_spaced_out() + interplanetary_starlight() + interplanetary_space_probe() +
-                  interplanetary_satellite_seeker() + interplanetary_moondust() + interplanetary_blast_off()) == 6
-              ) &&
-              (prev(interplanetary_spaced_out()) + prev(interplanetary_starlight()) + prev(interplanetary_space_probe())
-              + prev(interplanetary_satellite_seeker()) + prev(interplanetary_moondust()) +
-              prev(interplanetary_blast_off())) == 5
-)
-
-achievement(
-    title = "Jesters", points = 5, type="progression",
-    description = "Defeat all Jesters rivals.",
-    id = 200862, badge = "223127", published = "3/1/2022 4:51:00 AM", modified = "3/1/2022 4:51:00 AM",
-    trigger = measured((jesters_silent_death() + jesters_stealthy_lord() + jesters_quick_death() + jesters_long_night()
-                  + jesters_marauder() + jesters_thunder()) == 6
-              ) &&
-              (prev(jesters_silent_death()) + prev(jesters_stealthy_lord()) + prev(jesters_quick_death()) +
-              prev(jesters_long_night()) + prev(jesters_marauder()) + prev(jesters_thunder())) == 5
-)
-
-achievement(
-    title = "Sunny Daze", points = 5, type="progression",
-    description = "Defeat all Sunny Daze rivals.",
-    id = 200863, badge = "223128", published = "3/1/2022 4:51:00 AM", modified = "3/1/2022 4:51:00 AM",
-    trigger = measured((sunny_daze_daze_dreamer() + sunny_daze_rainy_daze() + sunny_daze_skool_daze() +
-                  sunny_daze_summer_daze() + sunny_daze_dogg_daze() + sunny_daze_special_daze()) == 6
-              ) &&
-              (prev(sunny_daze_daze_dreamer()) + prev(sunny_daze_rainy_daze()) + prev(sunny_daze_skool_daze()) +
-              prev(sunny_daze_summer_daze()) + prev(sunny_daze_dogg_daze()) + prev(sunny_daze_special_daze())) == 5
-)
-
-achievement(
-    title = "Blades", points = 5, type="progression",
-    description = "Defeat all Blades rivals.",
-    id = 200864, badge = "223129", published = "3/1/2022 4:51:00 AM", modified = "3/1/2022 4:51:00 AM",
-    trigger = measured((blades_scimitar() + blades_rapier() + blades_dagger() + blades_broadsword() + blades_claymore()
-                  + blades_cutlass()) == 6
-              ) &&
-              (prev(blades_scimitar()) + prev(blades_rapier()) + prev(blades_dagger()) + prev(blades_broadsword()) +
-              prev(blades_claymore()) + prev(blades_cutlass())) == 5
-)
-
-achievement(
-    title = "Free Spirits", points = 5, type="progression",
-    description = "Defeat all Free Spirits rivals.",
-    id = 200865, badge = "223130", published = "3/1/2022 4:51:01 AM", modified = "3/1/2022 4:51:01 AM",
-    trigger = measured((free_spirits_wylde_and_free() + free_spirits_deep_thought() + free_spirits_restless_soul() +
-                  free_spirits_oriental_host() + free_spirits_auburn_beauty() + free_spirits_lowrider()) == 6
-              ) &&
-              (prev(free_spirits_wylde_and_free()) + prev(free_spirits_deep_thought()) +
-              prev(free_spirits_restless_soul()) + prev(free_spirits_oriental_host()) +
-              prev(free_spirits_auburn_beauty()) + prev(free_spirits_lowrider())) == 5
-)
-
-achievement(
-    title = "Perfect Form", points = 5, type="progression",
-    description = "Defeat all Perfect Form rivals.",
-    id = 200866, badge = "223131", published = "3/1/2022 4:51:01 AM", modified = "3/1/2022 4:51:01 AM",
-    trigger = measured((perfect_form_lean_n_mean() + perfect_form_mr_physique() + perfect_form_white_line_cowboy() +
-                  perfect_form_major_feat() + perfect_form_new_approach() + perfect_form_skater_gurl()) == 6
-              ) &&
-              (prev(perfect_form_lean_n_mean()) + prev(perfect_form_mr_physique()) +
-              prev(perfect_form_white_line_cowboy()) + prev(perfect_form_major_feat()) +
-              prev(perfect_form_new_approach()) + prev(perfect_form_skater_gurl())) == 5
-)
-
-achievement(
-    title = "Scorpio", points = 5, type="progression",
-    description = "Defeat all Scorpio rivals.",
-    id = 200867, badge = "223132", published = "3/1/2022 4:51:01 AM", modified = "3/1/2022 4:51:01 AM",
-    trigger = measured((scorpio_random_attitude() + scorpio_rebel_red() + scorpio_highlander() + scorpio_true_identity()
-                  + scorpio_d_o_a() + scorpio_dirty_work()) == 6
-              ) &&
-              (prev(scorpio_random_attitude()) + prev(scorpio_rebel_red()) + prev(scorpio_highlander()) +
-              prev(scorpio_true_identity()) + prev(scorpio_d_o_a()) + prev(scorpio_dirty_work())) == 5
-)
-
-achievement(
-    title = "Global Racers", points = 5, type="progression",
-    description = "Defeat all Global Racers rivals.",
-    id = 200868, badge = "223133", published = "3/1/2022 4:51:02 AM", modified = "3/1/2022 4:51:02 AM",
-    trigger = measured((global_racers_so_near_so_far() + global_racers_polar_night() + global_racers_outback_ollie() +
-                  global_racers_rap_artist() + global_racers_driving_ambition() + global_racers_aim2please()) == 6
-              ) &&
-              (prev(global_racers_so_near_so_far()) + prev(global_racers_polar_night()) +
-              prev(global_racers_outback_ollie()) + prev(global_racers_rap_artist()) +
-              prev(global_racers_driving_ambition()) + prev(global_racers_aim2please())) == 5
-)
-
-achievement(
-    title = "Poisoned Heart", points = 5, type="progression",
-    description = "Defeat all Poisoned Heart rivals.",
-    id = 200869, badge = "223134", published = "3/1/2022 4:51:02 AM", modified = "3/1/2022 4:51:02 AM",
-    trigger = measured((poisoned_heart_wrecker_ray() + poisoned_heart_strange_adventurer() + poisoned_heart_grey_lady()
-                  + poisoned_heart_fate_on_four_wheels() + poisoned_heart_killa_ladee() + poisoned_heart_flirt_in_a_skirt()) == 6
-              ) &&
-              (prev(poisoned_heart_wrecker_ray()) + prev(poisoned_heart_strange_adventurer()) +
-              prev(poisoned_heart_grey_lady()) + prev(poisoned_heart_fate_on_four_wheels()) +
-              prev(poisoned_heart_killa_ladee()) + prev(poisoned_heart_flirt_in_a_skirt())) == 5
-)
-
-achievement(
-    title = "Dragons", points = 5, type="progression",
-    description = "Defeat all Dragons rivals.",
-    id = 200870, badge = "223135", published = "3/1/2022 4:51:02 AM", modified = "3/1/2022 4:51:02 AM",
-    trigger = measured((dragons_big_n_ugly() + dragons_musclebound() + dragons_big_dave() + dragons_pumpin_iron() +
-                  dragons_punchdrunk() + dragons_200_pound_weight()) == 6
-              ) &&
-              (prev(dragons_big_n_ugly()) + prev(dragons_musclebound()) + prev(dragons_big_dave()) +
-              prev(dragons_pumpin_iron()) + prev(dragons_punchdrunk()) + prev(dragons_200_pound_weight())) == 5
-)
-
-achievement(
-    title = "Wingz", points = 5, type="progression",
-    description = "Defeat all Wingz rivals.",
-    id = 200871, badge = "223136", published = "3/1/2022 4:51:03 AM", modified = "3/1/2022 4:51:03 AM",
-    trigger = measured((wingz_thermal_glider() + wingz_sailplane_sal() + wingz_hi_flyte() + wingz_last_of_the_breed() +
-                  wingz_landing_zone() + wingz_cloud_rider()) == 6
-              ) &&
-              (prev(wingz_thermal_glider()) + prev(wingz_sailplane_sal()) + prev(wingz_hi_flyte()) +
-              prev(wingz_last_of_the_breed()) + prev(wingz_landing_zone()) + prev(wingz_cloud_rider())) == 5
-)
-
-achievement(
-    title = "Roadkill", points = 5, type="progression",
-    description = "Defeat all Roadkill rivals.",
-    id = 200872, badge = "223137", published = "3/1/2022 4:51:03 AM", modified = "3/1/2022 4:51:03 AM",
-    trigger = measured((roadkill_suicide_bio() + roadkill_hangin_high() + roadkill_mike_the_knife() +
-                  roadkill_grimm_reepa() + roadkill_sy_an_ide() + roadkill_heart_attack()) == 6
-              ) &&
-              (prev(roadkill_suicide_bio()) + prev(roadkill_hangin_high()) + prev(roadkill_mike_the_knife()) +
-              prev(roadkill_grimm_reepa()) + prev(roadkill_sy_an_ide()) + prev(roadkill_heart_attack())) == 5
-)
-
-achievement(
-    title = "Burnin' Rubba", points = 5, type="progression",
-    description = "Defeat all Burnin' Rubba rivals.",
-    id = 200873, badge = "223138", published = "3/1/2022 4:51:03 AM", modified = "3/1/2022 4:51:03 AM",
-    trigger = measured((burnin_rubba_flyin_fish() + burnin_rubba_speed_addict() + burnin_rubba_virtual_reality() +
-                  burnin_rubba_duck_blind() + burnin_rubba_bend_n_burn() + burnin_rubba_peek_a_boo()) == 6
-              ) &&
-              (prev(burnin_rubba_flyin_fish()) + prev(burnin_rubba_speed_addict()) +
-              prev(burnin_rubba_virtual_reality()) + prev(burnin_rubba_duck_blind()) + prev(burnin_rubba_bend_n_burn())
-              + prev(burnin_rubba_peek_a_boo())) == 5
-)
-
-achievement(
-    title = "Wanderers I", points = 10, type="progression",
-    description = "Defeat 8 of the Wanderers.",
-    id = 200874, badge = "223139", published = "3/1/2022 4:51:04 AM", modified = "3/1/2022 4:51:04 AM",
-    trigger = measured((wanderer_ultimate_dream() + wanderer_velvet_smooth() + wanderer_roobik_lube() +
-                  wanderer_demon_weird() + wanderer_rainman() + wanderer_steamy_windoze() + wanderer_undertaker() +
-                  wanderer_coffee_n_cream() + wanderer_castaway() + wanderer_manic_drummer() + wanderer_freedom_gunner() +
-                  wanderer_master_blaster() + wanderer_devil_s_due() + wanderer_street_genius() + wanderer_dark_n_moody() +
-                  wanderer_eternal_flame() + wanderer_lady_luck() + wanderer_smartie() + wanderer_road_rage() +
-                  wanderer_half_a_hero() + wanderer_grooving_down() + wanderer_grifter() + wanderer_perfectionist() +
-                  wanderer_uncle_carbunkle() + wanderer_windbreak() + wanderer_burnt_toast() + wanderer_pickpocket() +
-                  wanderer_jackhammer() + wanderer_fried_dust() + wanderer_quartz_alarm() +
-                  wanderer_peanut_butter_sandwich() + wanderer_library_card()) == 8
-              ) &&
-              (prev(wanderer_ultimate_dream()) + prev(wanderer_velvet_smooth()) + prev(wanderer_roobik_lube()) +
-              prev(wanderer_demon_weird()) + prev(wanderer_rainman()) + prev(wanderer_steamy_windoze()) +
-              prev(wanderer_undertaker()) + prev(wanderer_coffee_n_cream()) + prev(wanderer_castaway()) +
-              prev(wanderer_manic_drummer()) + prev(wanderer_freedom_gunner()) + prev(wanderer_master_blaster()) +
-              prev(wanderer_devil_s_due()) + prev(wanderer_street_genius()) + prev(wanderer_dark_n_moody()) +
-              prev(wanderer_eternal_flame()) + prev(wanderer_lady_luck()) + prev(wanderer_smartie()) +
-              prev(wanderer_road_rage()) + prev(wanderer_half_a_hero()) + prev(wanderer_grooving_down()) +
-              prev(wanderer_grifter()) + prev(wanderer_perfectionist()) + prev(wanderer_uncle_carbunkle()) +
-              prev(wanderer_windbreak()) + prev(wanderer_burnt_toast()) + prev(wanderer_pickpocket()) +
-              prev(wanderer_jackhammer()) + prev(wanderer_fried_dust()) + prev(wanderer_quartz_alarm()) +
-              prev(wanderer_peanut_butter_sandwich()) + prev(wanderer_library_card())) == 7
-)
-
-achievement(
-    title = "Wanderers II", points = 10, type="progression",
-    description = "Defeat 16 of the Wanderers.",
-    id = 200875, badge = "223140", published = "3/1/2022 4:51:04 AM", modified = "3/1/2022 4:51:04 AM",
-    trigger = measured((wanderer_ultimate_dream() + wanderer_velvet_smooth() + wanderer_roobik_lube() +
-                  wanderer_demon_weird() + wanderer_rainman() + wanderer_steamy_windoze() + wanderer_undertaker() +
-                  wanderer_coffee_n_cream() + wanderer_castaway() + wanderer_manic_drummer() + wanderer_freedom_gunner() +
-                  wanderer_master_blaster() + wanderer_devil_s_due() + wanderer_street_genius() + wanderer_dark_n_moody() +
-                  wanderer_eternal_flame() + wanderer_lady_luck() + wanderer_smartie() + wanderer_road_rage() +
-                  wanderer_half_a_hero() + wanderer_grooving_down() + wanderer_grifter() + wanderer_perfectionist() +
-                  wanderer_uncle_carbunkle() + wanderer_windbreak() + wanderer_burnt_toast() + wanderer_pickpocket() +
-                  wanderer_jackhammer() + wanderer_fried_dust() + wanderer_quartz_alarm() +
-                  wanderer_peanut_butter_sandwich() + wanderer_library_card()) == 16
-              ) &&
-              (prev(wanderer_ultimate_dream()) + prev(wanderer_velvet_smooth()) + prev(wanderer_roobik_lube()) +
-              prev(wanderer_demon_weird()) + prev(wanderer_rainman()) + prev(wanderer_steamy_windoze()) +
-              prev(wanderer_undertaker()) + prev(wanderer_coffee_n_cream()) + prev(wanderer_castaway()) +
-              prev(wanderer_manic_drummer()) + prev(wanderer_freedom_gunner()) + prev(wanderer_master_blaster()) +
-              prev(wanderer_devil_s_due()) + prev(wanderer_street_genius()) + prev(wanderer_dark_n_moody()) +
-              prev(wanderer_eternal_flame()) + prev(wanderer_lady_luck()) + prev(wanderer_smartie()) +
-              prev(wanderer_road_rage()) + prev(wanderer_half_a_hero()) + prev(wanderer_grooving_down()) +
-              prev(wanderer_grifter()) + prev(wanderer_perfectionist()) + prev(wanderer_uncle_carbunkle()) +
-              prev(wanderer_windbreak()) + prev(wanderer_burnt_toast()) + prev(wanderer_pickpocket()) +
-              prev(wanderer_jackhammer()) + prev(wanderer_fried_dust()) + prev(wanderer_quartz_alarm()) +
-              prev(wanderer_peanut_butter_sandwich()) + prev(wanderer_library_card())) == 15
-)
-
-achievement(
-    title = "Wanderers III", points = 10, type="progression",
-    description = "Defeat 24 of the Wanderers.",
-    id = 200876, badge = "223141", published = "3/1/2022 4:51:04 AM", modified = "3/1/2022 4:51:04 AM",
-    trigger = measured((wanderer_ultimate_dream() + wanderer_velvet_smooth() + wanderer_roobik_lube() +
-                  wanderer_demon_weird() + wanderer_rainman() + wanderer_steamy_windoze() + wanderer_undertaker() +
-                  wanderer_coffee_n_cream() + wanderer_castaway() + wanderer_manic_drummer() + wanderer_freedom_gunner() +
-                  wanderer_master_blaster() + wanderer_devil_s_due() + wanderer_street_genius() + wanderer_dark_n_moody() +
-                  wanderer_eternal_flame() + wanderer_lady_luck() + wanderer_smartie() + wanderer_road_rage() +
-                  wanderer_half_a_hero() + wanderer_grooving_down() + wanderer_grifter() + wanderer_perfectionist() +
-                  wanderer_uncle_carbunkle() + wanderer_windbreak() + wanderer_burnt_toast() + wanderer_pickpocket() +
-                  wanderer_jackhammer() + wanderer_fried_dust() + wanderer_quartz_alarm() +
-                  wanderer_peanut_butter_sandwich() + wanderer_library_card()) == 24
-              ) &&
-              (prev(wanderer_ultimate_dream()) + prev(wanderer_velvet_smooth()) + prev(wanderer_roobik_lube()) +
-              prev(wanderer_demon_weird()) + prev(wanderer_rainman()) + prev(wanderer_steamy_windoze()) +
-              prev(wanderer_undertaker()) + prev(wanderer_coffee_n_cream()) + prev(wanderer_castaway()) +
-              prev(wanderer_manic_drummer()) + prev(wanderer_freedom_gunner()) + prev(wanderer_master_blaster()) +
-              prev(wanderer_devil_s_due()) + prev(wanderer_street_genius()) + prev(wanderer_dark_n_moody()) +
-              prev(wanderer_eternal_flame()) + prev(wanderer_lady_luck()) + prev(wanderer_smartie()) +
-              prev(wanderer_road_rage()) + prev(wanderer_half_a_hero()) + prev(wanderer_grooving_down()) +
-              prev(wanderer_grifter()) + prev(wanderer_perfectionist()) + prev(wanderer_uncle_carbunkle()) +
-              prev(wanderer_windbreak()) + prev(wanderer_burnt_toast()) + prev(wanderer_pickpocket()) +
-              prev(wanderer_jackhammer()) + prev(wanderer_fried_dust()) + prev(wanderer_quartz_alarm()) +
-              prev(wanderer_peanut_butter_sandwich()) + prev(wanderer_library_card())) == 23
-)
-
-achievement(
-    title = "Wanderers IV", points = 25, type="progression",
-    description = "Defeat All 32 Wanderers.",
-    id = 200877, badge = "223142", published = "3/1/2022 4:51:05 AM", modified = "3/6/2022 6:16:17 AM",
-    trigger = measured((wanderer_ultimate_dream() + wanderer_velvet_smooth() + wanderer_roobik_lube() +
-                  wanderer_demon_weird() + wanderer_rainman() + wanderer_steamy_windoze() + wanderer_undertaker() +
-                  wanderer_coffee_n_cream() + wanderer_castaway() + wanderer_manic_drummer() + wanderer_freedom_gunner() +
-                  wanderer_master_blaster() + wanderer_devil_s_due() + wanderer_street_genius() + wanderer_dark_n_moody() +
-                  wanderer_eternal_flame() + wanderer_lady_luck() + wanderer_smartie() + wanderer_road_rage() +
-                  wanderer_half_a_hero() + wanderer_grooving_down() + wanderer_grifter() + wanderer_perfectionist() +
-                  wanderer_uncle_carbunkle() + wanderer_windbreak() + wanderer_burnt_toast() + wanderer_pickpocket() +
-                  wanderer_jackhammer() + wanderer_fried_dust() + wanderer_quartz_alarm() +
-                  wanderer_peanut_butter_sandwich() + wanderer_library_card()) == 32
-              ) &&
-              (prev(wanderer_ultimate_dream()) + prev(wanderer_velvet_smooth()) + prev(wanderer_roobik_lube()) +
-              prev(wanderer_demon_weird()) + prev(wanderer_rainman()) + prev(wanderer_steamy_windoze()) +
-              prev(wanderer_undertaker()) + prev(wanderer_coffee_n_cream()) + prev(wanderer_castaway()) +
-              prev(wanderer_manic_drummer()) + prev(wanderer_freedom_gunner()) + prev(wanderer_master_blaster()) +
-              prev(wanderer_devil_s_due()) + prev(wanderer_street_genius()) + prev(wanderer_dark_n_moody()) +
-              prev(wanderer_eternal_flame()) + prev(wanderer_lady_luck()) + prev(wanderer_smartie()) +
-              prev(wanderer_road_rage()) + prev(wanderer_half_a_hero()) + prev(wanderer_grooving_down()) +
-              prev(wanderer_grifter()) + prev(wanderer_perfectionist()) + prev(wanderer_uncle_carbunkle()) +
-              prev(wanderer_windbreak()) + prev(wanderer_burnt_toast()) + prev(wanderer_pickpocket()) +
-              prev(wanderer_jackhammer()) + prev(wanderer_fried_dust()) + prev(wanderer_quartz_alarm()) +
-              prev(wanderer_peanut_butter_sandwich()) + prev(wanderer_library_card())) == 31
-)
-
-achievement(
-    title = "Collector", points = 5,
-    description = "Fill your Garage.",
-    id = 200883, badge = "223148", published = "3/1/2022 4:51:07 AM", modified = "3/6/2022 2:59:37 AM",
-    trigger = measured((current_car_owned() + car_2_owned() + car_3_owned() + car_4_owned()) == 4) &&
-              (prev(current_car_owned()) + prev(car_2_owned()) + prev(car_3_owned()) + prev(car_4_owned())) == 3
-)
-
-achievement(
-    title = "Tuner", points = 10,
-    description = "Purchase all possible Parts for a single car.",
-    id = 200884, badge = "223149", published = "3/1/2022 4:51:07 AM", modified = "3/1/2022 4:51:07 AM",
-    trigger = measured((current_car_engine_own_flags() + current_car_engine_own_flags() +
-                  current_car_muffler_own_flags() + current_car_muffler_own_flags() + current_car_transmission_own_flags() +
-                  current_car_transmission_own_flags() + current_car_clutch_own_flags() + current_car_clutch_own_flags() +
-                  current_car_suspension_own_flags() + current_car_suspension_own_flags() +
-                  current_car_tires_wheels_own_flags() + current_car_tires_wheels_own_flags() +
-                  current_car_tires_wheels_own_flags() + current_car_tires_wheels_own_flags() +
-                  current_car_body_tune_own_flags() + current_car_body_tune_own_flags() + current_car_f_bumper_own_flags() +
-                  current_car_f_bumper_own_flags() + current_car_f_bumper_own_flags() + current_car_f_bumper_own_flags() +
-                  current_car_r_bumper_own_flags() + current_car_r_bumper_own_flags() + current_car_r_bumper_own_flags() +
-                  current_car_r_bumper_own_flags() + current_car_spoiler_own_flags() + current_car_spoiler_own_flags() +
-                  current_car_spoiler_own_flags() + current_car_spoiler_own_flags() + current_car_side_skirt_own_flags() +
-                  current_car_side_skirt_own_flags() + current_car_side_skirt_own_flags() +
-                  current_car_side_skirt_own_flags()) == 32
-              ) &&
-              (prev(current_car_engine_own_flags()) + prev(current_car_engine_own_flags()) +
-              prev(current_car_muffler_own_flags()) + prev(current_car_muffler_own_flags()) +
-              prev(current_car_transmission_own_flags()) + prev(current_car_transmission_own_flags()) +
-              prev(current_car_clutch_own_flags()) + prev(current_car_clutch_own_flags()) +
-              prev(current_car_suspension_own_flags()) + prev(current_car_suspension_own_flags()) +
-              prev(current_car_tires_wheels_own_flags()) + prev(current_car_tires_wheels_own_flags()) +
-              prev(current_car_tires_wheels_own_flags()) + prev(current_car_tires_wheels_own_flags()) +
-              prev(current_car_body_tune_own_flags()) + prev(current_car_body_tune_own_flags()) +
-              prev(current_car_f_bumper_own_flags()) + prev(current_car_f_bumper_own_flags()) +
-              prev(current_car_f_bumper_own_flags()) + prev(current_car_f_bumper_own_flags()) +
-              prev(current_car_r_bumper_own_flags()) + prev(current_car_r_bumper_own_flags()) +
-              prev(current_car_r_bumper_own_flags()) + prev(current_car_r_bumper_own_flags()) +
-              prev(current_car_spoiler_own_flags()) + prev(current_car_spoiler_own_flags()) +
-              prev(current_car_spoiler_own_flags()) + prev(current_car_spoiler_own_flags()) +
-              prev(current_car_side_skirt_own_flags()) + prev(current_car_side_skirt_own_flags()) +
-              prev(current_car_side_skirt_own_flags()) + prev(current_car_side_skirt_own_flags())) == 31 &&
-              never((current_menu() == 39 || prev(current_menu()) == 39 || current_menu() == 40 ||
-                  prev(current_menu()) == 40 || current_menu() == 41 || prev(current_menu()) == 41 ||
-                  current_menu() == 42 || prev(current_menu()) == 42 || current_menu() == 43 ||
-                  prev(current_menu()) == 43 || current_menu() == 44 || prev(current_menu()) == 44)
-              )
-)
 achievement(
     title = "Time Attack - Tokyo 1", points = 10,
     description = "Complete Tokyo 1 Time Attack in 09.20.0 or less.",
@@ -1070,10 +635,7 @@ achievement(
                   current_progress_in_track() == 2048) && current_progress_in_track() == 2559) &&
                   prev(current_progress_in_track()) == 0 && current_progress_in_track() == 1
               ) &&
-              ((time_attack_0x_00_0() < 9) ||
-               (time_attack_0x_00_0() == 9 && time_attack_00_x0_0() < 2) ||
-               (time_attack_0x_00_0() == 9 && time_attack_00_x0_0() == 2 && time_attack_00_0x_0() == 0 &&
-                time_attack_00_00_x() == 0))
+              (compareAgainstTime(0, 9, 2, 0, 0))
 )
 
 achievement(
@@ -1088,11 +650,7 @@ achievement(
                   current_progress_in_track() == 3584) && current_progress_in_track() == 4032) &&
                   prev(current_progress_in_track()) == 0 && current_progress_in_track() == 1
               ) &&
-              ((time_attack_x0_00_0() == 0) ||
-               (time_attack_x0_00_0() == 1 && time_attack_0x_00_0() < 5) ||
-               (time_attack_x0_00_0() == 1 && time_attack_0x_00_0() == 5 && time_attack_00_x0_0() < 1) ||
-               (time_attack_x0_00_0() == 1 && time_attack_0x_00_0() == 5 && time_attack_00_x0_0() == 1 &&
-                time_attack_00_0x_0() == 0 && time_attack_00_00_x() == 0))
+              (compareAgainstTime(1, 5, 1, 0, 0))
 )
 
 achievement(
@@ -1107,11 +665,7 @@ achievement(
                   current_progress_in_track() == 4096) && current_progress_in_track() == 4380) &&
                   prev(current_progress_in_track()) == 0 && current_progress_in_track() == 1
               ) &&
-              ((time_attack_x0_00_0() == 0) ||
-               (time_attack_x0_00_0() == 1 && time_attack_0x_00_0() < 6) ||
-               (time_attack_x0_00_0() == 1 && time_attack_0x_00_0() == 6 && time_attack_00_x0_0() < 1) ||
-               (time_attack_x0_00_0() == 1 && time_attack_0x_00_0() == 6 && time_attack_00_x0_0() == 1 &&
-                time_attack_00_0x_0() == 0 && time_attack_00_00_x() == 0))
+              ((compareAgainstTime(1, 6, 1, 0, 0))
 )
 
 achievement(
@@ -1126,11 +680,7 @@ achievement(
                   current_progress_in_track() == 4096) && current_progress_in_track() == 6564) &&
                   prev(current_progress_in_track()) == 0 && current_progress_in_track() == 1
               ) &&
-              ((time_attack_x0_00_0() <= 1) ||
-               (time_attack_x0_00_0() == 2 && time_attack_0x_00_0() < 3) ||
-               (time_attack_x0_00_0() == 2 && time_attack_0x_00_0() == 3 && time_attack_00_x0_0() < 4) ||
-               (time_attack_x0_00_0() == 2 && time_attack_0x_00_0() == 3 && time_attack_00_x0_0() == 4 &&
-                time_attack_00_0x_0() == 0 && time_attack_00_00_x() == 0))
+              (compareAgainstTime(2, 3, 4, 0, 0))
 )
 
 achievement(
@@ -1145,11 +695,7 @@ achievement(
                   current_progress_in_track() == 2816) && current_progress_in_track() == 3190) &&
                   prev(current_progress_in_track()) == 0 && current_progress_in_track() == 1
               ) &&
-              ((time_attack_x0_00_0() == 0) ||
-               (time_attack_x0_00_0() == 1 && time_attack_0x_00_0() < 1) ||
-               (time_attack_x0_00_0() == 1 && time_attack_0x_00_0() == 1 && time_attack_00_x0_0() < 5) ||
-               (time_attack_x0_00_0() == 1 && time_attack_0x_00_0() == 1 && time_attack_00_x0_0() == 5 &&
-                time_attack_00_0x_0() == 0 && time_attack_00_00_x() == 0))
+              (compareAgainstTime(1, 1, 5, 0, 0))
 )
 
 achievement(
@@ -1164,28 +710,5 @@ achievement(
                   current_progress_in_track() == 2816) && current_progress_in_track() == 3623) &&
                   prev(current_progress_in_track()) == 0 && current_progress_in_track() == 1
               ) &&
-              ((time_attack_x0_00_0() == 0) ||
-               (time_attack_x0_00_0() == 1 && time_attack_0x_00_0() < 3) ||
-               (time_attack_x0_00_0() == 1 && time_attack_0x_00_0() == 3 && time_attack_00_x0_0() < 3) ||
-               (time_attack_x0_00_0() == 1 && time_attack_0x_00_0() == 3 && time_attack_00_x0_0() == 3 &&
-                time_attack_00_0x_0() == 0 && time_attack_00_00_x() == 0))
+              (compareAgainstTime(1, 3, 3, 0, 0))
 )
-
-achievement(
-    title = "The True Racing Experience", points = 4,
-    description = "Defeat any Rival in Manual Gear.",
-    id = 201008, badge = "223282", published = "3/1/2022 11:03:21 PM", modified = "3/1/2022 11:03:21 PM",
-    trigger = trigger_when(prev(player_meter()) == 53) && trigger_when(player_meter() == 54) && options() == 1 &&
-              (current_menu() == 7 || current_menu() == 52) && rival_meter() != 0
-)
-
-
-achievement(
-    title = "DEMOTED AS UNWELCOME CONCEPT - More Like Free Points", points = 1,
-    description = "Try out Free Run mode.",
-    id = 201007, badge = "223281", published = "3/1/2022 11:03:21 PM", modified = "4/7/2025 5:17:19 PM",
-    trigger = current_gamemode() == 3 && current_menu() == 104 &&
-              current_progress_in_track() != prev(current_progress_in_track())
-)
-
-
