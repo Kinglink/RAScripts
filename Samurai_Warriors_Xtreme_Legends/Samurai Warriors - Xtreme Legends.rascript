@@ -2692,7 +2692,7 @@ CharacterNameLookup =
     NOBUNAGA: "Nobunaga Oda",
     MITSUHIDE: "Mitsuhide Akechi",
     GOEMON: "Goemon Ishikawa",
-    KENSHIN: "Kenshin Uesagi",
+    KENSHIN: "Kenshin Uesugi",
     OICHI: "Oichi",
     OKUNI: "Okuni",
     KUNOICHI: "Kunoichi",
@@ -3434,7 +3434,7 @@ HANZO_FIRST_ENDING =  0x0d
 RANMARU_FIRST_ENDING =  0x0e 
 HIDEYOSHI_FIRST_ENDING =  0x0f 
 YOSHIMOTO_FIRST_ENDING =  0x10 
-TADAKTSU_FIRST_ENDING =  0x11 
+TADAKATSU_FIRST_ENDING =  0x11 
 INA_FIRST_ENDING =  0x12 
 YUKIMURA_SECOND_ENDING =  0x13 
 KENJI_SECOND_ENDING =  0x14 
@@ -3453,7 +3453,7 @@ HANZO_SECOND_ENDING =  0x20
 RANMARU_SECOND_ENDING =  0x21 
 HIDEYOSHI_SECOND_ENDING =  0x22 
 YOSHIMOTO_SECOND_ENDING =  0x23 
-TADAKTSU_SECOND_ENDING =  0x24 
+TADAKATSU_SECOND_ENDING =  0x24 
 INA_SECOND_ENDING =  0x25 
 OKUNI_NOBUNAGA_ENDING = 0x26 
 OKUNI_NOH_ENDING = 0x27 
@@ -3487,7 +3487,7 @@ endingNameLookup =
     RANMARU_FIRST_ENDING:  "The Next Life",
     HIDEYOSHI_FIRST_ENDING:  "The Mighty Conqueror",
     YOSHIMOTO_FIRST_ENDING:  "The Mighty Warrior",
-    TADAKTSU_FIRST_ENDING:  "Loyalty",
+    TADAKATSU_FIRST_ENDING:  "Loyalty",
     INA_FIRST_ENDING:  "Something to Protect",
     YUKIMURA_SECOND_ENDING: "Endless Battle",
     KENJI_SECOND_ENDING:  "War is but a Dream",
@@ -3506,7 +3506,7 @@ endingNameLookup =
     RANMARU_SECOND_ENDING:  "True Intent",
     HIDEYOSHI_SECOND_ENDING:  "A Dream within a Dream",
     YOSHIMOTO_SECOND_ENDING:  "Way of the Warrior",
-    TADAKTSU_SECOND_ENDING:  "The Impartial Spear",
+    TADAKATSU_SECOND_ENDING:  "The Impartial Spear",
     INA_SECOND_ENDING:  "Precious Life",
     OKUNI_NOBUNAGA_ENDING: "Dreams and Illusions (Nobunaga)",
     OKUNI_NOH_ENDING: "Dreams and Illusions (Noh)",
@@ -3540,7 +3540,7 @@ endingDescriptionLookup =
     RANMARU_FIRST_ENDING: "Ranmaru Mori's first ending" ,
     HIDEYOSHI_FIRST_ENDING: "Hideyoshi Hashiba's first ending" ,
     YOSHIMOTO_FIRST_ENDING: "Yoshimoto Imagawa's first ending" ,
-    TADAKTSU_FIRST_ENDING: "Tadaktsu Honda's first ending" ,
+    TADAKATSU_FIRST_ENDING: "Tadakatsu Honda's first ending" ,
     INA_FIRST_ENDING: "Ina's first ending" ,
     YUKIMURA_SECOND_ENDING: "Yukimura Sanada's second ending",
     KENJI_SECOND_ENDING: "Kenji Maeda's second ending",
@@ -3559,7 +3559,7 @@ endingDescriptionLookup =
     RANMARU_SECOND_ENDING: "Ranmaru Mori's second ending",
     HIDEYOSHI_SECOND_ENDING: "Hideyoshi Hashiba's second ending",
     YOSHIMOTO_SECOND_ENDING: "Yoshimoto Imagawa's second ending",
-    TADAKTSU_SECOND_ENDING: "Tadaktsu Honda's second ending",
+    TADAKATSU_SECOND_ENDING: "Tadakatsu Honda's second ending",
     INA_SECOND_ENDING: "Ina's second ending",
     OKUNI_NOBUNAGA_ENDING: "Okuni's alternate endings with Nobunaga",
     OKUNI_NOH_ENDING: "Okuni's alternate endings with Noh",
@@ -3969,7 +3969,7 @@ function playerJustFinishedChallenge() => prev( gameplayIndicator()) == IN_GAME 
 //          0x0e = Ranmaru 1 "The Next Life"
 //          0x0f = Hideyoshi 1 "The Mighty Conqueror"
 //          0x10 = Yoshimoto 1 "The Mighty Warrior"
-//          0x11 = Tadaktsu 1 "Loyalty"
+//          0x11 = Tadakatsu 1 "Loyalty"
 //          0x12 = Ina 1 "Something to Protect"
 //          0x13 = Yukimura 2 :"Endless Battle"
 //          0x14 = Kenji 2 "War is but a Dream"
@@ -3988,7 +3988,7 @@ function playerJustFinishedChallenge() => prev( gameplayIndicator()) == IN_GAME 
 //          0x21 = Ranmaru 2 "True Intent"
 //          0x22 = Hideyoshi 2 "A Dream within a Dream"
 //          0x23 = Yoshimoto 2 "Way of the Warrior"
-//          0x24 = Tadaktsu 2 "The Impartial Spear"
+//          0x24 = Tadakatsu 2 "The Impartial Spear"
 //          0x25 = Ina 2 "Precious Life"
 //          0x26 = Okuni/Nobunaga "Dreams and Illusions"
 //          0x27 = Okuni/Noh "Dreams and Illusions"
