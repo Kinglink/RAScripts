@@ -43,8 +43,22 @@ WIN_LOST_CHECK_NORMAL_SECOND_ALT = 0x40
 WIN_LOST_CHECK_P1_WON = 0x89
 WIN_LOST_CHECK_P1_LOST = 0x0d
 
-function playerJustWon() => winLostCheck() == WIN_LOST_CHECK_P1_WON && (prev(winLostCheck()) == WIN_LOST_CHECK_NORMAL || prev(winLostCheck()) == WIN_LOST_CHECK_NORMAL_ALT || prev(winLostCheck()) == WIN_LOST_CHECK_NORMAL_SECOND_ALT)
+// The Bear has special logic. 
+
+WIN_LOST_CHECK_BEAR_NORMAL = 0x09
+WIN_LOST_CHECK_BEAR_WON = 0x00
+
+function playerJustWon(index)
+{
+    if (index ==TAKAMURA_VS_BEAR) 
+        return playerJustBeatBear()
+    else
+        return playerJustWonNormal()
+}
+
+function playerJustWonNormal() => winLostCheck() == WIN_LOST_CHECK_P1_WON && (prev(winLostCheck()) == WIN_LOST_CHECK_NORMAL || prev(winLostCheck()) == WIN_LOST_CHECK_NORMAL_ALT || prev(winLostCheck()) == WIN_LOST_CHECK_NORMAL_SECOND_ALT)
 function playerLost() => winLostCheck() == WIN_LOST_CHECK_P1_LOST
+function playerJustBeatBear() => winLostCheck() == WIN_LOST_CHECK_BEAR_WON && prev(winLostCheck()) == WIN_LOST_CHECK_BEAR_NORMAL
 
 // $43B980 : (32-bit) Fight Process speed
 //            
@@ -1172,11 +1186,11 @@ story_data =
     },
     { 
         ID: TAKAMURA_VS_BEAR, 
-        EASY_TITLE: "Japan's Greatest Beast ",
+        EASY_TITLE: "Japan's Greatest Beast",
         HARD_TITLE: "It's Either Kill or Be Killed",
         SPECIAL_TITLE: "I'll Keep Going Until you Fall",
-        SPECIAL_RESET: timeInFrames() > 15*60,
-        SPECIAL_DESCRIPTION: "win the match in under 15 seconds."
+        SPECIAL_RESET: timeInFrames() > 60*60,
+        SPECIAL_DESCRIPTION: "win the match in under 1 minute."
     },
     { 
         ID: TAKAMURA_VS_TAKAAKI_ITO, 
@@ -1403,7 +1417,7 @@ story_data =
         ID: IPPO_VS_TAKUZO_KARASAWA,
         EASY_TITLE: "Karasawa in the Palm of His Hand",
         HARD_TITLE: "The One Controlling the Match",
-        SPECIAL_TITLE: "The Seal on the Finishing Blow ",
+        SPECIAL_TITLE: "The Seal on the Finishing Blow",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(LEFT_HOOK_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Left Hook to Knock Out Karasawa."
     },
@@ -1463,7 +1477,7 @@ function EasyStoryAchievement(data, type = "")
                 points = 5,
                 type = type,
                 trigger = storyModeConfigCheck() && 
-                          playerJustWon() && 
+                          playerJustWon(data[ID]) && 
                           currentStoryFightIndex() == data[ID] 
                 )
 }
@@ -1479,7 +1493,7 @@ function HardStoryAchievement(data)
                 description = format("Beat Story mission for {0} on Hard Difficulty", boutTitleLookup[data[ID]]),
                 points = points,
                 trigger = storyModeConfigCheck() && 
-                          playerJustWon() && 
+                          playerJustWon(data[ID]) && 
                           currentStoryFightIndex() == data[ID] &&
                           isHardStoryMode()
                 )
@@ -1523,7 +1537,7 @@ function SpecialStoryAchievement(data)
                 description = format("Beat Story mission for {0} on Hard Difficulty {1}", boutTitleLookup[data[ID]], specialDescription),
                 points = points,
                 trigger = specialStoryModeConfigCheck() && 
-                          trigger_when(playerJustWon()) && 
+                          trigger_when(playerJustWon(data[ID])) && 
                           currentStoryFightIndex() == data[ID] &&
                           isHardStoryMode() &&
                           special_check &&
@@ -1788,7 +1802,7 @@ for data in exhibitionBattles
                                      CharacterNameLookup[data[OPPONENT_CHARACTER]]),
                 points = 5,
                 trigger = exhibitionModeConfigCheck() && 
-                          trigger_when(playerJustWon()) && 
+                          trigger_when(playerJustWon(0x00)) && 
                           once( currentRound() == 1 && 
                                 timeInSecond() == 0) &&
                           P1CharacterIndex() == data[PLAYER_CHARACTER] &&
@@ -1812,7 +1826,7 @@ achievement(title = "The Rivalry Resolved",
                                  CharacterNameLookup[EXHIBITION_CHARACTER_DANKICHI_HAMA_OLD]),
             points = 5,
             trigger = exhibitionModeConfigCheck() && 
-                      trigger_when(playerJustWon()) && 
+                      trigger_when(playerJustWon(0x00)) && 
                       once( currentRound() == 1 && 
                             timeInSecond() == 0) &&
                       (P1CharacterIndex() == EXHIBITION_CHARACTER_GENJI_KAMOGAWA_OLD || P1CharacterIndex() == EXHIBITION_CHARACTER_GINPACHI_NEKOTA_OLD) &&
@@ -1890,7 +1904,7 @@ achievement(title = "Maybe The Hair Held Him Back",
             description = format("As Broccoman, win a match in Exhibition Mode" + EXHIBITION_RULE),
             points = 3,
             trigger = exhibitionModeConfigCheck() && 
-                      trigger_when(playerJustWon()) && 
+                      trigger_when(playerJustWon(0x00)) && 
                       once( currentRound() == 1 && 
                             timeInSecond() == 0) &&
                       P1CharacterIndex() == EXHIBITION_CHARACTER_BROCCOMAN &&
@@ -1912,7 +1926,7 @@ function leaderboardByDifficulty(bout_index, difficulty)
         start  =
         (
             storyModeConfigCheck() && 
-            playerJustWon() && 
+            playerJustWon(bout_index) && 
             currentStoryFightIndex() == bout_index &&
             storyModeDifficulty() == difficulty
         ),
