@@ -620,7 +620,7 @@ function TimeToValue(tenMinutes, oneMinutes, tenSeconds, oneSeconds, tenthSecond
                  oneSeconds * 100 + tenthSecond * 10
 
 function compareAgainstTime(tenMinutes, oneMinutes, tenSeconds, oneSeconds, tenthSecond) =>
-    TimeToValue(time_attack_x0_00_0(), time_attack_0x_00_0(), time_attack_00_x0_0(), time_attack_00_0x_0(), time_attack_00_00_x()) < 
+    TimeToValue(time_attack_x0_00_0(), time_attack_0x_00_0(), time_attack_00_x0_0(), time_attack_00_0x_0(), time_attack_00_00_x()) <= 
         TimeToValue(tenMinutes, oneMinutes, tenSeconds, oneSeconds, tenthSecond)
 
 achievement(
@@ -665,7 +665,7 @@ achievement(
                   current_progress_in_track() == 4096) && current_progress_in_track() == 4380) &&
                   prev(current_progress_in_track()) == 0 && current_progress_in_track() == 1
               ) &&
-              ((compareAgainstTime(1, 6, 1, 0, 0))
+              (compareAgainstTime(1, 6, 1, 0, 0))
 )
 
 achievement(
