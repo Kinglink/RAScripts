@@ -33,5 +33,6 @@ achievement(
               trigger_when(current_stage_in_quick_race() == 50) && once(current_stage_in_quick_race() == 0) &&
               never(rival_meter() == 54) &&
               ((current_gamemode() == 1) ||
-               (measured(current_stage_in_quick_race() == 50, when=current_menu() == 52) && always_false()))
+               (measured(current_stage_in_quick_race() == 50, when=current_menu() == 52 && once(current_stage_in_quick_race() == 0)) && always_false()))
+               // When using this you'll have to delete Always_false, and add it in RALibRetro Manually. 
 )
