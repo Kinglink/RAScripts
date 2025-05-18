@@ -995,7 +995,7 @@ story_data =
         HARD_TITLE: "I Still Have One Thing I Want to Try",
         SPECIAL_TITLE: "One Centimeter of Destruction",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_JOFRE_UPPER_CUT_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Jofre Uppercut to Knock Out Miyata.",
+        SPECIAL_DESCRIPTION: "using a Jofre Uppercut to Knock Out Miyata",
         SPECIAL_POINTS: 5
     },
     { 
@@ -1013,7 +1013,7 @@ story_data =
         HARD_TITLE: "The Taste of the First Victory",
         SPECIAL_TITLE: "I'm Starting to Get Used to this",
         SPECIAL_RESET: P1JustDowned(),
-        SPECIAL_DESCRIPTION: "Using a Right Straight to Knock Out Oda.",
+        SPECIAL_DESCRIPTION: "Using a Right Straight to Knock Out Oda",
         SPECIAL_POINTS: 4
     },
     { 
@@ -1022,7 +1022,7 @@ story_data =
         HARD_TITLE: "He Really Is Strong",
         SPECIAL_TITLE: "It's Like Someone's Hitting Me With a Rock",
         SPECIAL_CHECK: (P1UsedMoveToKnockDown(LEFT_UPPER_MOVE_VALUE) || P1UsedMoveToKnockDown(RIGHT_UPPER_MOVE_VALUE)),
-        SPECIAL_DESCRIPTION: "using a (normal) Uppercut to Knock Out Fujiwara."
+        SPECIAL_DESCRIPTION: "using a (normal) Uppercut to Knock Out Fujiwara"
     }, 
     { 
         ID: IPPO_VS_JASON_OZUMA, 
@@ -1038,7 +1038,7 @@ story_data =
         HARD_TITLE: "Impossible Dreams",
         SPECIAL_TITLE: "Power Packed Punches",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_STRAIGHT_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Right Straightto Knock Out Kobashi."
+        SPECIAL_DESCRIPTION: "using a Right Straightto Knock Out Kobashi"
     },
     { 
         ID: IPPO_VS_RUICHI_HAYAMI, 
@@ -1046,7 +1046,7 @@ story_data =
         HARD_TITLE: "Fall of the Prodigy",
         SPECIAL_TITLE: "Muzzling the Shotgun",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_JOFRE_UPPER_CUT_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Jofre Uppercut to Knock Out Hayami."
+        SPECIAL_DESCRIPTION: "using a Jofre Uppercut to Knock Out Hayami"
     },
     { 
         ID: IPPO_VS_RYO_MASHIBA, 
@@ -1054,7 +1054,7 @@ story_data =
         HARD_TITLE: "Shattered Hand, Unbroken Spirit",
         SPECIAL_TITLE: "Here Comes the Right",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_STRAIGHT_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Right Straight to Knock Out Mashiba."
+        SPECIAL_DESCRIPTION: "using a Right Straight to Knock Out Mashiba"
     },
     { 
         ID: IPPO_VS_TAKESHI_SENDO, 
@@ -1062,7 +1062,7 @@ story_data =
         HARD_TITLE: "Rocky of Naniwa",
         SPECIAL_TITLE: "Trying to Hit a Smash",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_DEADLY_SMASH_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Deadly Smash to Knock Out Sendo."
+        SPECIAL_DESCRIPTION: "using a Deadly Smash to Knock Out Sendo"
     },
     { 
         ID: TATSUYA_KIMURA_VS_SHINJI_KANZAKI, 
@@ -1070,7 +1070,7 @@ story_data =
         HARD_TITLE: "Go Around Him",
         SPECIAL_TITLE: "Use Your Legs",
         SPECIAL_CHECK: slowMoToKnockDown(),
-        SPECIAL_DESCRIPTION: "and Knock Out Kanzaki while using the Slow Battle Special Move."
+        SPECIAL_DESCRIPTION: "and Knock Out Kanzaki while using the Slow Battle Special Move"
     },
     { 
         ID: AOKI_VS_ARMAND_GARCIA, 
@@ -1078,7 +1078,7 @@ story_data =
         HARD_TITLE: "His Favorite Mud Fight",
         SPECIAL_TITLE: "Lucky Punch",
         SPECIAL_CHECK: (P1UsedMoveToKnockDown(AOKI_CORKSCREW_MOVE_VALUE) || P1UsedMoveToKnockDown(AOKI_DOUBLE_PUNCH_MOVE_VALUE)),
-        SPECIAL_DESCRIPTION: "using a Corkscrew or Double Punch to Knock Out Garcia."
+        SPECIAL_DESCRIPTION: "using a Corkscrew or Double Punch to Knock Out Garcia"
     },
     { 
         ID: IPPO_VS_KEIGO_OKITA, 
@@ -1086,7 +1086,7 @@ story_data =
         HARD_TITLE: "Date Lite",
         SPECIAL_TITLE: "Dynamite Punch",
         SPECIAL_RESET: currentRound() != 1,
-        SPECIAL_DESCRIPTION: "in the first round."
+        SPECIAL_DESCRIPTION: "in the first round"
     },
     { 
         ID: MIYATA_SPARRING_WITH_PAPYO, 
@@ -1094,7 +1094,7 @@ story_data =
         HARD_TITLE: "Your Punch is Light",
         SPECIAL_TITLE: "A Counter to Surpass All Counters",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(MIYATA_JOLT_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Jolt to Knock Out Papaya."
+        SPECIAL_DESCRIPTION: "using a Jolt to Knock Out Papaya"
     },
     { 
         ID: MIYATA_VS_JIMMY_SISFA, 
@@ -1102,7 +1102,7 @@ story_data =
         HARD_TITLE: "A Single Moment of Laughter",
         SPECIAL_TITLE: "Timing and Heart",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(MIYATA_JOLT_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Jolt to Knock Out Sisfa."
+        SPECIAL_DESCRIPTION: "using a Jolt to Knock Out Sisfa"
     },
     { 
         ID: IPPO_VS_TAKUMA_SAEKI, 
@@ -1110,7 +1110,7 @@ story_data =
         HARD_TITLE: "The Declaration to Keep Standing",
         SPECIAL_TITLE: "A Damage Called Fear",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_JOFRE_UPPER_CUT_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Jofre Uppercut to Knock Out Saeki."
+        SPECIAL_DESCRIPTION: "using a Jofre Uppercut to Knock Out Saeki"
     },
     { 
         ID: KIMURA_VS_HIROSHI_NISHIMURA, 
@@ -1118,7 +1118,7 @@ story_data =
         HARD_TITLE: "A Win is a Win",
         SPECIAL_TITLE: "Going the Distance",
         SPECIAL_CHECK: currentRound() >= 6,
-        SPECIAL_DESCRIPTION: "reach the 6th round and win."
+        SPECIAL_DESCRIPTION: "reach the 6th round and win"
     },
     { 
         ID: AOKI_VS_BULL_USHIDA, 
@@ -1126,7 +1126,7 @@ story_data =
         HARD_TITLE: "Aoki's Secret Weapon",
         SPECIAL_TITLE: "Leap Frog Man",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(AOKI_FROG_PUNCH_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Frog Punch to Knock Out Ushida."
+        SPECIAL_DESCRIPTION: "using a Frog Punch to Knock Out Ushida"
     },
     { 
         ID: IPPO_VS_ALEXANDER_VOLG_ZANGIEV, 
@@ -1134,7 +1134,7 @@ story_data =
         HARD_TITLE: "The Eternal War of Attrition",
         SPECIAL_TITLE: "Gazelle Vs Wolf",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_GAZELLE_PUNCH_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Gazelle Punch to Knock Out Zangiev."
+        SPECIAL_DESCRIPTION: "using a Gazelle Punch to Knock Out Zangiev"
     },
     { 
         ID: IPPO_VS_EIJI_DATE, 
@@ -1142,7 +1142,7 @@ story_data =
         HARD_TITLE: "Explosion from Point-Blank Range",
         SPECIAL_TITLE: "Past Your Limits",
         SPECIAL_CHECK: currentRound() > 5,
-        SPECIAL_DESCRIPTION: "reach the 6th round and win."
+        SPECIAL_DESCRIPTION: "reach the 6th round and win"
     },
     { 
         ID: SENDO_VS_ALEXANDER_VOLG_ZANGIEV, 
@@ -1150,7 +1150,7 @@ story_data =
         HARD_TITLE: "Two Beasts",
         SPECIAL_TITLE: "Challenge Him Head On",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(SENDO_DEADLY_SMASH_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Deadly Smash to Knock Out Zangiev."
+        SPECIAL_DESCRIPTION: "using a Deadly Smash to Knock Out Zangiev"
     },
     { 
         ID: MIYATA_VS_LEE_CHONPIL, 
@@ -1158,7 +1158,7 @@ story_data =
         HARD_TITLE: "1st Homecoming Fight",
         SPECIAL_TITLE: "Fighting an After Image",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(MIYATA_JOLT_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Jolt to Knock Out Chonpil."
+        SPECIAL_DESCRIPTION: "using a Jolt to Knock Out Chonpil"
     },
     { 
         ID: AOKI_VS_SNAKE_THOMAS, 
@@ -1166,7 +1166,7 @@ story_data =
         HARD_TITLE: "The Frog Vs. The Snake",
         SPECIAL_TITLE: "I Have Something to Protect",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Right Hook to Knock Out Thomas."
+        SPECIAL_DESCRIPTION: "using a Right Hook to Knock Out Thomas"
     },
     { 
         ID: KIMURA_VS_PONE_MOROCOTTE, 
@@ -1174,7 +1174,7 @@ story_data =
         HARD_TITLE: "I Have Nothing to Fear Now",
         SPECIAL_TITLE: "I Don't Have Anyhting to Lose Anymore",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(LEFT_HOOK_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Left Hook to Knock Out Morocotte."
+        SPECIAL_DESCRIPTION: "using a Left Hook to Knock Out Morocotte"
     },
     { 
         ID: IPPO_VS_PONCHAI_CHUWATANA, 
@@ -1182,7 +1182,7 @@ story_data =
         HARD_TITLE: "What Did You Learn From That Loss!!",
         SPECIAL_TITLE: "Is This the Answer You Came Up With---?!",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_DEMPSY_ROLL_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Dempsey Roll to Knock Out Chuwatana."
+        SPECIAL_DESCRIPTION: "using a Dempsey Roll to Knock Out Chuwatana"
     },
     { 
         ID: TAKAMURA_VS_BEAR, 
@@ -1190,7 +1190,7 @@ story_data =
         HARD_TITLE: "It's Either Kill or Be Killed",
         SPECIAL_TITLE: "I'll Keep Going Until you Fall",
         SPECIAL_RESET: timeInFrames() > 60*60,
-        SPECIAL_DESCRIPTION: "win the match in under 1 minute."
+        SPECIAL_DESCRIPTION: "win the match in under 1 minute"
     },
     { 
         ID: TAKAMURA_VS_TAKAAKI_ITO, 
@@ -1198,7 +1198,7 @@ story_data =
         HARD_TITLE: "Those who rules the Left...",
         SPECIAL_TITLE: "Will Rule the World",
         SPECIAL_RESET: P1RightThrown(),
-        SPECIAL_DESCRIPTION: "win the match without throwing a punch with your right hand."
+        SPECIAL_DESCRIPTION: "win the match without throwing a punch with your right hand"
     },
     { 
         ID: SENDO_VS_AKIRA_SHIGETA, 
@@ -1206,7 +1206,7 @@ story_data =
         HARD_TITLE: "The Tiger's Rage",
         SPECIAL_TITLE: "King's Farewell Gift",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(SENDO_DEADLY_SMASH_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Deadly Smash to Knock Out Shigeta."
+        SPECIAL_DESCRIPTION: "using a Deadly Smash to Knock Out Shigeta"
     },
     { 
         ID: AOKI_VS_IPPO_SPARRING, 
@@ -1219,7 +1219,7 @@ story_data =
                                          move => once(moveLanded(move))
                                         )
                                 ),
-        SPECIAL_DESCRIPTION: "landing a Corkscrew, Double Punch, and Frog Punch during the spar and winning."
+        SPECIAL_DESCRIPTION: "landing a Corkscrew, Double Punch, and Frog Punch during the spar and winning"
     },
     { 
         ID: IPPO_VS_TAKESHI_SENDO_2, 
@@ -1227,7 +1227,7 @@ story_data =
         HARD_TITLE: "The Day Makunouchi Becomes King",
         SPECIAL_TITLE: "The Greatest Weapon",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_DEMPSY_ROLL_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Dempsey Roll to Knock Out Sendo."
+        SPECIAL_DESCRIPTION: "using a Dempsey Roll to Knock Out Sendo"
     },
     { 
         ID: KIMURA_VS_MIYATA_SPARRING, 
@@ -1235,7 +1235,7 @@ story_data =
         HARD_TITLE: "The Future Weapon",
         SPECIAL_TITLE: "What The Fish Taught Me",
         SPECIAL_CHECK: measured( repeated(3, rightHookLanded() && checkP1CurrentMove(KIMURA_DRAGON_FISH_BLOW_MOVE_VALUE))),
-        SPECIAL_DESCRIPTION: "land 3 Dragon Fish Blow, where the right fist also connects." 
+        SPECIAL_DESCRIPTION: "land 3 Dragon Fish Blow, where the right fist also connects" 
     },
     { 
         ID: KIMURA_VS_RYO_MASHIBA, 
@@ -1243,7 +1243,7 @@ story_data =
         HARD_TITLE: "Scene of Carnage",
         SPECIAL_TITLE: "If This Fist Can Reach",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(KIMURA_DRAGON_FISH_BLOW_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Dragon Fish Blow to Knock Out Mashiba."
+        SPECIAL_DESCRIPTION: "using a Dragon Fish Blow to Knock Out Mashiba"
     },
     { 
         ID: IPPO_VS_KAZUKI_SANADA, 
@@ -1251,7 +1251,7 @@ story_data =
         HARD_TITLE: "When the Last Fist Falls",
         SPECIAL_TITLE: "A Suicide Dash",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_DEMPSY_ROLL_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Dempsey Roll to Knock Out Sanada."
+        SPECIAL_DESCRIPTION: "using a Dempsey Roll to Knock Out Sanada"
     },
     { 
         ID: MIYATA_VS_ARNIE_CROCODILE_GREGORY, 
@@ -1259,7 +1259,7 @@ story_data =
         HARD_TITLE: "Defanging the Crocdile",
         SPECIAL_TITLE: "Using All Your Strength to Defeat The Bloody Cross",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(MIYATA_JOLT_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Jolt to Knock Out Gregory."
+        SPECIAL_DESCRIPTION: "using a Jolt to Knock Out Gregory"
     },
     { 
         ID: IPPO_VS_HAMMER_NAO, 
@@ -1269,21 +1269,13 @@ story_data =
         SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
         SPECIAL_DESCRIPTION: "using a Right Hook to Knock Out Hammer"
     },
-    {
-        ID: ITAGAKI_VS_FUMITO_MAKINO,
-        EASY_TITLE: "Itagaki's Pro Debut",
-        HARD_TITLE: "A Clean Version of the Fight",
-        SPECIAL_TITLE: "He's Not Moving Like a Rookie",
-        SPECIAL_CHECK: slowMoToKnockDown() && P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "and use a Right Hook to Knock Out Makino while using the Slow Battle Special Move."
-    },
     { 
         ID: TATSUYA_VS_ARMAND_ALEGRIA, 
         EASY_TITLE: "I'm No Hunter",
         HARD_TITLE: "Taking His Time",
         SPECIAL_TITLE: "Going the Distance",
         SPECIAL_CHECK: currentRound() >= 10,
-        SPECIAL_DESCRIPTION: "win the match in the 10th round (or by decision)."
+        SPECIAL_DESCRIPTION: "win the match in the 10th round (or by decision)"
     },
     { 
         ID: TAKAMURA_VS_MORRIS_WEST, 
@@ -1291,7 +1283,7 @@ story_data =
         HARD_TITLE: "Wild Hawk",
         SPECIAL_TITLE: "I Am Takamura Mamoru-Sama!!",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_STRAIGHT_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Right Straight to Knock Out West."
+        SPECIAL_DESCRIPTION: "using a Right Straight to Knock Out West"
     },
     { 
         ID: IPPO_VS_YI_YONSU, 
@@ -1299,7 +1291,7 @@ story_data =
         HARD_TITLE: "I'll Do What I'm Best At!!",
         SPECIAL_TITLE: "A Promise to Takamura",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_DEMPSY_ROLL_MOVE_VALUE) && currentRound() == 1,
-        SPECIAL_DESCRIPTION: "using a Dempsey Roll to Knock Out Yonsu in the first round."
+        SPECIAL_DESCRIPTION: "using a Dempsey Roll to Knock Out Yonsu in the first round"
     },
     { 
         ID: TAKAMURA_VS_BRIAN_HAWK, 
@@ -1307,7 +1299,7 @@ story_data =
         HARD_TITLE: "Not Everyone Who Works HArd Is Rewarded",
         SPECIAL_TITLE: "However, All Those Who Succeed Have Worked Hard",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_STRAIGHT_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Right Straight to Knock Out Hawk."
+        SPECIAL_DESCRIPTION: "using a Right Straight to Knock Out Hawk"
     },
     {
         ID: GINPACHI_NEKOTA_VS_DANKICHI_HAMA,
@@ -1315,7 +1307,7 @@ story_data =
         HARD_TITLE: "I Won-Dani",
         SPECIAL_TITLE: "For Yuki's Honor",
         SPECIAL_CHECK: slowMoToKnockDown(),
-        SPECIAL_DESCRIPTION: "and Knock Out Hama while using the Slow Battle Special Move."
+        SPECIAL_DESCRIPTION: "and Knock Out Hama while using the Slow Battle Special Move"
     },
     {
         ID: GENJI_KAMOGAWA_VS_GINPACHI_NEKOTA,
@@ -1323,7 +1315,7 @@ story_data =
         HARD_TITLE: "I'd Like to Stay LIke This Forever",
         SPECIAL_TITLE: "I've Never Taken a Punch So Painful",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(LEFT_HOOK_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using an Left Hook to Knock Out Nekota."
+        SPECIAL_DESCRIPTION: "using an Left Hook to Knock Out Nekota"
     },
     {
         ID: GENJI_KAMOGAWA_VS_RALPH_ANDERSON,
@@ -1331,15 +1323,15 @@ story_data =
         HARD_TITLE: "You Haven't Faced My Fists Yet",
         SPECIAL_TITLE: "Tekken",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(GENJI_IRON_FIST_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using an Iron Fist to Knock Out Anderson."
+        SPECIAL_DESCRIPTION: "using an Iron Fist to Knock Out Anderson"
     },
     {
         ID: IPPO_VS_IWAO_SHIMABUKURO,
         EASY_TITLE: "Submarine Wars",
         HARD_TITLE: "Zero-Distance Battle",
         SPECIAL_TITLE: "The Strength to Use the Dempsey Roll",
-        SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_DEMPSY_ROLL_MOVE_VALUE) && currentRound() == 1,
-        SPECIAL_DESCRIPTION: "using a Dempsey Roll to Knock Out Shimabukuro."
+        SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_DEMPSY_ROLL_MOVE_VALUE),
+        SPECIAL_DESCRIPTION: "using a Dempsey Roll to Knock Out Shimabukuro"
     },
     {
         ID: AOKI_VS_KATSUTAKA_IMAE,
@@ -1355,7 +1347,7 @@ story_data =
                                             move => once(move)
                                             )
                                 ),
-        SPECIAL_DESCRIPTION: "land a Corkscrew, Double Punch, Frog Punch, and Look Away during the spar and winning."
+        SPECIAL_DESCRIPTION: "land a Corkscrew, Double Punch, Frog Punch, and Look Away during the spar and winning"
     },
     {
         ID: TAKAMURA_VS_RALLY_BERNARD,
@@ -1363,7 +1355,7 @@ story_data =
         HARD_TITLE: "Treacherous King",
         SPECIAL_TITLE: "Idiot, You Just Have to Glance Away",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_STRAIGHT_MOVE_VALUE) && once(checkP1CurrentMove(TAKAMURA_LOOK_AWAY_MOVE_VALUE)),
-        SPECIAL_DESCRIPTION: "use a Look Away during the match and then use a Right Hook to Knock out Rally (or Larry) Bernard."
+        SPECIAL_DESCRIPTION: "use a Look Away during the match and then use a Right Hook to Knock out Rally (or Larry) Bernard"
     },
     {
         ID: ALEXANDER_VOLG_ZANGIEV_VS_IPPO,
@@ -1371,7 +1363,7 @@ story_data =
         HARD_TITLE: "Udachi Chibe, Shinoke",
         SPECIAL_TITLE: "Sayonara",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Right Hook to Knock Out Ippo."
+        SPECIAL_DESCRIPTION: "using a Right Hook to Knock Out Ippo"
     },
     {
         ID: IPPO_VS_RYUHEI_SAWAMURA,
@@ -1379,7 +1371,7 @@ story_data =
         HARD_TITLE: "Pendulum Champion",
         SPECIAL_TITLE: "Devastating Anti-Counter",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(IPPO_DEMPSY_ROLL_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Dempsey Roll to Knock Out Sawamura."
+        SPECIAL_DESCRIPTION: "using a Dempsey Roll to Knock Out Sawamura"
     },
     {
         ID: TATSUYA_VS_ELEKI_BATTERY,
@@ -1387,7 +1379,7 @@ story_data =
         HARD_TITLE: "First It's My Turn",
         SPECIAL_TITLE: "His Weakness is His Body!",
         SPECIAL_CHECK: (P1UsedMoveToKnockDown(LEFT_UPPER_MOVE_VALUE) || P1UsedMoveToKnockDown(RIGHT_UPPER_MOVE_VALUE)),
-        SPECIAL_DESCRIPTION: "using an Uppercut to Knock Out Battery."
+        SPECIAL_DESCRIPTION: "using an Uppercut to Knock Out Battery"
     },
     {
         ID: AOKI_VS_PAPAYA_DACHIU,
@@ -1395,7 +1387,7 @@ story_data =
         HARD_TITLE: "So Evenly Matched",
         SPECIAL_TITLE: "They Have the Same Smell",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(AOKI_DOUBLE_PUNCH_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Double Punch to Knock Out Papaya."
+        SPECIAL_DESCRIPTION: "using a Double Punch to Knock Out Papaya"
     },
     {
         ID: MIYATA_VS_MEDGERN_DATCHBOY,
@@ -1403,7 +1395,7 @@ story_data =
         HARD_TITLE: "Speaking Fist",
         SPECIAL_TITLE: "Incomplete Evolved Counter",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(MIYATA_JOLT_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Jolt to Knock Out Datchboy."
+        SPECIAL_DESCRIPTION: "using a Jolt to Knock Out Datchboy"
     },
     {
         ID: TAKAMURA_VS_DAVID_GOLDEN_EAGLE,
@@ -1411,7 +1403,7 @@ story_data =
         HARD_TITLE: "Hawk Vs. Eagle",
         SPECIAL_TITLE: "Beyond a Death Match",
         SPECIAL_CHECK: slowMoToKnockDown() && (P1UsedMoveToKnockDown(RIGHT_STRAIGHT_MOVE_VALUE) || P1UsedMoveToKnockDown(LEFT_STRAIGHT_MOVE_VALUE)),
-        SPECIAL_DESCRIPTION: "and use either a right straight or a left straight to Knock Out Golden Eagle while using the Slow Battle Special Move."
+        SPECIAL_DESCRIPTION: "and use either a right straight or a left straight to Knock Out Golden Eagle while using the Slow Battle Special Move"
     },
     {
         ID: IPPO_VS_TAKUZO_KARASAWA,
@@ -1419,7 +1411,7 @@ story_data =
         HARD_TITLE: "The One Controlling the Match",
         SPECIAL_TITLE: "The Seal on the Finishing Blow",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(LEFT_HOOK_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Left Hook to Knock Out Karasawa."
+        SPECIAL_DESCRIPTION: "using a Left Hook to Knock Out Karasawa"
     },
     {
         ID: ITAGAKI_VS_KYOUSUKE_IMAI,
@@ -1427,7 +1419,7 @@ story_data =
         HARD_TITLE: "Next Time for the Title",
         SPECIAL_TITLE: "Gattsun Gattsun!!",
         SPECIAL_CHECK: slowMoToKnockDown(),
-        SPECIAL_DESCRIPTION: "and Knock Out Imai while using the Slow Battle Special Move."
+        SPECIAL_DESCRIPTION: "and Knock Out Imai while using the Slow Battle Special Move"
     },
     {
         ID: IPPO_VS_KEIICHI_TAKE,
@@ -1435,7 +1427,7 @@ story_data =
         HARD_TITLE: "Going Past The Limits",
         SPECIAL_TITLE: "Ruthless Right Hook",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(LEFT_HOOK_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Left Hook to Knock Out Take."
+        SPECIAL_DESCRIPTION: "using a Left Hook to Knock Out Take"
     },
     {
         ID: MIYATA_VS_CHE_JOUNBONG,
@@ -1443,7 +1435,15 @@ story_data =
         HARD_TITLE: "I Can't Waste My Time Here",
         SPECIAL_TITLE: "So Don't Get in My Way",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Right Hook to Knock Out Jounbong."
+        SPECIAL_DESCRIPTION: "using a Right Hook to Knock Out Jounbong"
+    },
+    {
+        ID: ITAGAKI_VS_FUMITO_MAKINO_2,
+        EASY_TITLE: "Weed Vs Elite",
+        HARD_TITLE: "When His Heart Breaks",
+        SPECIAL_TITLE: "There's Nothing to Be Afraid of Any More",
+        SPECIAL_CHECK: slowMoToKnockDown() && P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
+        SPECIAL_DESCRIPTION: "and use a Right Hook to Knock Out Makino while using the Slow Battle Special Move"
     },
     {
         ID: IPPO_VS_MIYATA_2,
@@ -1461,7 +1461,7 @@ story_data =
                                          move => once(moveLanded(move))
                                         )
                                 ),
-        SPECIAL_DESCRIPTION: "land a Deadly Smash, Gazelle Punch, Jofre Uppercut and both the left and right hook of a Dempsey Roll during the match and then win."
+        SPECIAL_DESCRIPTION: "land a Deadly Smash, Gazelle Punch, Jofre Uppercut and both the left and right hook of a Dempsey Roll during the match and then win"
     },
 ]
 
@@ -1563,7 +1563,7 @@ specialStoryBouts =
         HARD_TITLE: "I'll Take It for You in One Sec",
         SPECIAL_TITLE: "You Actually Think I could Lose?!",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_UPPER_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Right Uppercut to Knock Out Yajima."
+        SPECIAL_DESCRIPTION: "using a Right Uppercut to Knock Out Yajima"
     },
     {
         ID: TAKAMURA_VS_BONCHAI_CHUWATANA,
@@ -1571,7 +1571,7 @@ specialStoryBouts =
         HARD_TITLE: "One Panel Fight",
         SPECIAL_TITLE: "Easy KO Victory",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Right Hook to Knock Out Chuwatana."
+        SPECIAL_DESCRIPTION: "using a Right Hook to Knock Out Chuwatana"
     },
     {   
         ID: AOKI_VS_JACKAL_ITO,
@@ -1579,7 +1579,7 @@ specialStoryBouts =
         HARD_TITLE: "The Light and Shadow In The Ring",
         SPECIAL_TITLE: "Open the Champaign Bottle",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(AOKI_CORKSCREW_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Corkscrew to Knock Out Ito."
+        SPECIAL_DESCRIPTION: "using a Corkscrew to Knock Out Ito"
     },
     {
         ID: KIMURA_VS_TAKESHI_RYUZAKI,
@@ -1587,7 +1587,7 @@ specialStoryBouts =
         HARD_TITLE: "High Pace From the Very Beginning",
         SPECIAL_TITLE: "Extra Round",
         SPECIAL_CHECK: slowMoToKnockDown(),
-        SPECIAL_DESCRIPTION: "and Knock OUt Takeshi while using the Slow Battle Special Move ."
+        SPECIAL_DESCRIPTION: "and Knock Out Takeshi while using the Slow Battle Special Move"
     },
     {
         ID: TAKAMURA_VS_ATSUSHI_TAMAKI,
@@ -1596,7 +1596,7 @@ specialStoryBouts =
         SPECIAL_TITLE: "Takamura is InvincibleD",
         SPECIAL_CHECK: (P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE) ||
                        P1UsedMoveToKnockDown(LEFT_HOOK_MOVE_VALUE)),
-        SPECIAL_DESCRIPTION: "using a Hook to Knock Out Tamaki."
+        SPECIAL_DESCRIPTION: "using a Hook to Knock Out Tamaki"
     },
     {
         ID: KIMURA_VS_NEFUMA_OZCA,
@@ -1604,7 +1604,7 @@ specialStoryBouts =
         HARD_TITLE: "Confidence from Training Camp",
         SPECIAL_TITLE: "Rush Rush",
         SPECIAL_CHECK: slowMoToKnockDown(),
-        SPECIAL_DESCRIPTION: "and Knock Out Ozca while using the Slow Battle Special Move."
+        SPECIAL_DESCRIPTION: "and Knock Out Ozca while using the Slow Battle Special Move"
     },
     {
         ID: AOKI_VS_BOY_ARADE,
@@ -1612,7 +1612,7 @@ specialStoryBouts =
         HARD_TITLE: "Fight With Your Spirit-Dani",
         SPECIAL_TITLE: "Show Some Guts-Dani!",
         SPECIAL_CHECK: is_TKO(),
-        SPECIAL_DESCRIPTION: "win by TKO."
+        SPECIAL_DESCRIPTION: "win by TKO"
     },
     {
         ID: AOKI_VS_PADDY_MAGRAMO,
@@ -1620,7 +1620,7 @@ specialStoryBouts =
         HARD_TITLE: "A Hideous Match",
         SPECIAL_TITLE: "I Can't Believe It Hit",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(AOKI_FROG_PUNCH_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Frog Punch to Knock Out Magramo."
+        SPECIAL_DESCRIPTION: "using a Frog Punch to Knock Out Magramo"
     },
     {
         ID: ITAGAKI_VS_HASEO_BARAKI,
@@ -1628,7 +1628,7 @@ specialStoryBouts =
         HARD_TITLE: "Itagaki's First Pro Win",
         SPECIAL_TITLE: "Blink And You'll Miss It",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Right Hook to Knock Out Baraki."
+        SPECIAL_DESCRIPTION: "using a Right Hook to Knock Out Baraki"
     },
     {
         ID: ITAGAKI_VS_TADASHI_NAKAYAMA,
@@ -1636,7 +1636,7 @@ specialStoryBouts =
         HARD_TITLE: "Backflip Win",
         SPECIAL_TITLE: "Take Your Time",
         SPECIAL_CHECK: slowMoToKnockDown(),
-        SPECIAL_DESCRIPTION: "and Knock Out Nakayama while using the Slow Battle Special Move."
+        SPECIAL_DESCRIPTION: "and Knock Out Nakayama while using the Slow Battle Special Move"
     },
     {
         ID: ITAGAKI_VS_YOSHIHARU_URAYASU,
@@ -1644,7 +1644,7 @@ specialStoryBouts =
         HARD_TITLE: "I See",
         SPECIAL_TITLE: "I'll Never Lose Sight of your Back, My Goal!!",
         SPECIAL_CHECK: slowMoToKnockDown(),
-        SPECIAL_DESCRIPTION: "and Knock Out Urayasu while using the Slow Battle Special Move."
+        SPECIAL_DESCRIPTION: "and Knock Out Urayasu while using the Slow Battle Special Move"
     },
     {
         ID: ITAGAKI_VS_TETSUJI_KIBA,
@@ -1652,15 +1652,7 @@ specialStoryBouts =
         HARD_TITLE: "Use Your Legs",
         SPECIAL_TITLE: "Test Yourself",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_STRAIGHT_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "and use a Right Straight To Knock Out Kiba."
-    },
-    {
-        ID: ITAGAKI_VS_FUMITO_MAKINO_2,
-        EASY_TITLE: "Weed Vs Elite",
-        HARD_TITLE: "When His Heart Breaks",
-        SPECIAL_TITLE: "There's Nothing to Be Afraid of Any More",
-        SPECIAL_CHECK: slowMoToKnockDown() && P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "and use a Right Hook to Knock Out Makino while using the Slow Battle Special Move."
+        SPECIAL_DESCRIPTION: "and use a Right Straight To Knock Out Kiba"
     },
     {
         ID: EIJI_DATE_VS_RICARDO_MARTINEZ,
@@ -1668,8 +1660,16 @@ specialStoryBouts =
         HARD_TITLE: "Broken Heart",
         SPECIAL_TITLE: "I Will Take Your Life",
         SPECIAL_CHECK: P1UsedMoveToKnockDown(DATE_CORKSCREW_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Corkscrew to Knock Out Martinez."        
-    }
+        SPECIAL_DESCRIPTION: "using a Corkscrew to Knock Out Martinez"        
+    },
+    {
+        ID: ITAGAKI_VS_FUMITO_MAKINO,
+        EASY_TITLE: "Itagaki's Pro Debut",
+        HARD_TITLE: "A Clean Version of the Fight",
+        SPECIAL_TITLE: "He's Not Moving Like a Rookie",
+        SPECIAL_CHECK: slowMoToKnockDown() && P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
+        SPECIAL_DESCRIPTION: "and use a Right Hook to Knock Out Makino while using the Slow Battle Special Move"
+    }   
 ]
 
 for data in specialStoryBouts
@@ -1887,17 +1887,14 @@ achievement(title = "Aoki's Dream",
 // },
 
 achievement(title = "The Dangerous Chopping Right",
-            description = format("As Mashiba (Featherweight), win a match against Ippo (Exhibition) and finish the battle with a Chopping Right in Exhibition Mode"),
+            description = format("As Mashiba (Featherweight), win a match against Ippo (Boxing Trunks) and finish the battle with a Chopping Right in Exhibition Mode"),
             points = 5,
             trigger = exhibitionModeConfigCheck() && 
-                      trigger_when(attackLanded()) && 
+                      trigger_when(playerJustWon(0x00)) && 
                       P1UsedMoveToKnockDown(MASHIBA_CHOPPING_RIGHT_MOVE_VALUE) &&
-                      once( currentRound() == 1 && 
-                            timeInSecond() == 0) &&
-                      P1CharacterIndex() == EXHIBITION_CHARACTER_MASARU_AOKI_EXHIBITION &&
+                      P1CharacterIndex() == EXHIBITION_CHARACTER_RYO_MASHIBA_FEATHERWEIGHT &&
                       P2CharacterIndex() == EXHIBITION_CHARACTER_IPPO_EXHIBITION &&
                       never(!isExhibitionMode())
-                          
 )
 
 achievement(title = "Maybe The Hair Held Him Back",
@@ -1908,8 +1905,6 @@ achievement(title = "Maybe The Hair Held Him Back",
                       once( currentRound() == 1 && 
                             timeInSecond() == 0) &&
                       P1CharacterIndex() == EXHIBITION_CHARACTER_BROCCOMAN &&
-                      once( currentRound() == 1 && 
-                            timeInSecond() == 0) &&
                       never(!isExhibitionMode())
             )
 
