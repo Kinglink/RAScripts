@@ -34,7 +34,7 @@ Book of Immortality no death?
 
 Plasma Generator Ox
 
-Music Unlocks
+Music Unlocks /// Not needed because it's also the stage played.
 
 Character Gallery Unlock 
 
