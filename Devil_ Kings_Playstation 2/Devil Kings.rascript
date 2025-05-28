@@ -5,6 +5,7 @@
 // For Dictionaries. 
 ACHIEVEMENT_NAME = "Achievement Name"
 ACHIEVEMENT_DESCRIPTION = "Achievement Description"
+ACHIEVEMENT_POINTS = "Achievement_Points" 
 ITEM_ID = "Item ID"
 CHARACTER_ID = "Character ID"
 FIRST_ITEM = "First Item"
@@ -12,8 +13,8 @@ SECOND_ITEM = "Second Item"
 THIRD_ITEM = "Third Item"
 CONQUEST_TITLE = "Conquest_Title"
 HARD_CONQUEST_TITLE = "Hard_Conquest_Title"
-LEVEL_TWENTY_TITLE = "Level_Twenty_Title"
 LEVEL_TEN_TITLE = "Level_Ten_Title"
+LEVEL_FIVE_TITLE = "Level_Five_Title"
 WEAPON_ACHIEVEMENT_TITLE = "Weapon_Achievement_Title"
 TIME_RUN_ACHIEVEMENT_NAME = "Time_Run_Achievement_Name"
 HARD_TIME_RUN_ACHIEVEMENT_NAME = "Hard_Time_Run_Achievement_Name"  
@@ -59,7 +60,8 @@ function numberOfNamedEnemiesKilled() => byte(0x54AE38)
 //          We don't need that, we can live with this.
 function winCheck() => byte(0x54C404)
 
-function didPlayerJustWin() => winCheck() == 0x01 && prev(winCheck()) == 0x00
+// Sometimes there's a "Death animation, which sets previous to 0x03.  We'll just say not 0x01
+function didPlayerJustWin() => winCheck() == 0x01 && prev(winCheck()) != 0x01
 
 // $55CA70: (8-bit) Expected Scorpio Saved Level
 //          
@@ -523,10 +525,10 @@ function warriorsCodeHonorItemOwned() => byte(0x55EB6F)
 //          bit 9 = Puff
 //          bit 10= Q-Ball
 //          bit 11 = Iron Ox
-function characterUnlocksFirst() => word(0x55EB70)
+function characterUnlocksFirst() => word(0x005610e4)
 
-CHARACTER_UNLOCK_FIRST_LOCATION = 0x55EB70
-CHARACTER_UNLOCK_SECOND_LOCATION = 0x55EB71
+CHARACTER_UNLOCK_FIRST_LOCATION = 0x005610e4
+CHARACTER_UNLOCK_SECOND_LOCATION = 0x005610e5
 
 function justUnlockedAllCharacters() => measured(bitcount(CHARACTER_UNLOCK_FIRST_LOCATION) +
                                        bitcount(CHARACTER_UNLOCK_SECOND_LOCATION) == 12) && 
@@ -543,7 +545,7 @@ function justUnlockedAllCharacters() => measured(bitcount(CHARACTER_UNLOCK_FIRST
 //          Bit 5 = Leveling Kush(Zaan)
 //          Bit 6 = Storm of the Great Plains (Irdene)
 //          Bit 7 = Landing at Nanvia (Arslan)
-function stageUnlockfirst() => byte(0x55EB74)
+function stageUnlockfirst() => byte(0x005610e8)
 
 // $55EB75: (8-bit) Stage Unlock
 //          
@@ -555,23 +557,23 @@ function stageUnlockfirst() => byte(0x55EB74)
 //          Bit 5 = Divide & Conquer Faylinn (Lark)
 //          Bit 6 = Pilgrimage to Cathedral City (Q-Ball)
 //          Bit 7 = Crossing the River Styx (Reaper)
-function stageUnlockSecond() => byte(0x55EB75)
+function stageUnlockSecond() => byte(0x005610e9)
 
 // $55EB76: (8-bit) Stage Unlock
 //          
 //          Bit 0 = Border Control
 //          Bit 1 = Battle at Riverglen(Frost)
-function stageUnlockThird() => byte(0x55EB76)
+function stageUnlockThird() => byte(0x005610ea)
 
-STAGE_UNLOCK_FIRST_LOCATION = 0x55EB74
-STAGE_UNLOCK_SECOND_LOCATION = 0x55EB75
-STAGE_UNLOCK_THIRD_LOCATION = 0x55EB76
+STAGE_UNLOCK_FIRST_LOCATION = 0x005610e8
+STAGE_UNLOCK_SECOND_LOCATION = 0x005610e9
+STAGE_UNLOCK_THIRD_LOCATION = 0x005610ea
 function justUnlockedAllStages() => measured(bitcount(STAGE_UNLOCK_FIRST_LOCATION) +
                                     bitcount(STAGE_UNLOCK_SECOND_LOCATION) +
-                                    bitcount(STAGE_UNLOCK_THIRD_LOCATION) == 12) && 
+                                    bitcount(STAGE_UNLOCK_THIRD_LOCATION) == 18) && 
                                     prev(bitcount(STAGE_UNLOCK_FIRST_LOCATION)) +
                                     prev(bitcount(STAGE_UNLOCK_SECOND_LOCATION)) +
-                                    prev(bitcount(STAGE_UNLOCK_THIRD_LOCATION)) == 11
+                                    prev(bitcount(STAGE_UNLOCK_THIRD_LOCATION)) == 17
 
 // $55EBDC: (35-bit bitfield) Music Unlocks
 function musicUnlocks() => byte(0x55EBDC)
@@ -632,7 +634,7 @@ WEAPON_LEVEL_OFFSET = DEVIL_KING_WEAPON_LEVEL_LOCATION - DEVIL_KING_SAVE_LOCATIO
 function justUnlockedAllWeapons(char_index) => measured(sum_of(range(0,5), 
                                                     index => byte(findInGameSaveLocation(char_index) + WEAPON_LEVEL_OFFSET + index) / byte(findInGameSaveLocation(char_index) + WEAPON_LEVEL_OFFSET + index)) == 6) &&
                                                any_of(range(0,5), 
-                                                    index => byte(findInGameSaveLocation(char_index) + WEAPON_LEVEL_OFFSET + index) == 0)
+                                                    index => prev(byte(findInGameSaveLocation(char_index) + WEAPON_LEVEL_OFFSET + index)) == 0)
 
 function justReachedLevel90(char_index) => any_of(range(0,5), 
                                                     index => byte(findInGameSaveLocation(char_index) + WEAPON_LEVEL_OFFSET + index) >= 90 &&
@@ -1047,7 +1049,7 @@ TRIO_ITEM_ACHIEVEMENTS =
         THIRD_ITEM: CURSED_CLOAK_ITEM_ID,
     },
     {
-        ACHIEVEMENT_NAME: "I Learned a Lot",
+        ACHIEVEMENT_NAME: "I Learned Not to Play the Lotto",
         ACHIEVEMENT_DESCRIPTION: "Beat a level with Top Lottery Ticket, Middle Lottery Ticket, and Bottom Lottery Ticket equipped",
         FIRST_ITEM: TOP_LOTTERY_TICKET_FRAGMENT_ITEM_ID,
         SECOND_ITEM: MIDDLE_LOTTERY_TICKET_FRAGMENT_ITEM_ID,
@@ -1137,7 +1139,7 @@ function achievementForConquestMode(name, characterId, isHardMode)
         points = 25 
     }
 
-    type_string = "Progression"
+    type_string = "Win_condition"
     if ( isHardMode )
     {
         type_string = ""
@@ -1177,85 +1179,85 @@ CharacterAchievementData =
     AZURE_DRAGON_ID: {
         CONQUEST_TITLE: "Care for a Date?",
         HARD_CONQUEST_TITLE: "A Date with a King",
-        LEVEL_TEN_TITLE: "One-Eyed Dragon of Oshu",
-        LEVEL_TWENTY_TITLE: "Masamune Date",
+        LEVEL_FIVE_TITLE: "One-Eyed Dragon of Oshu",
+        LEVEL_TEN_TITLE: "Masamune Date",
         WEAPON_ACHIEVEMENT_TITLE: "Six Dragon Blades",
     },
     SCORPIO_ID: {
         CONQUEST_TITLE: "Where's Sub-Zero?",
         HARD_CONQUEST_TITLE: "Scorpion King",
-        LEVEL_TEN_TITLE: "Crimson Demon of War",
-        LEVEL_TWENTY_TITLE: "Yukimura Sanada",
+        LEVEL_FIVE_TITLE: "Crimson Demon of War",
+        LEVEL_TEN_TITLE: "Yukimura Sanada",
         WEAPON_ACHIEVEMENT_TITLE: "Six Legendary Spears",
     },
     DEVIL_KING_ID: {
         CONQUEST_TITLE: "The Devil You Know",
         HARD_CONQUEST_TITLE: "The Great Unifier",
-        LEVEL_TEN_TITLE: "Demon Daimyo",
-        LEVEL_TWENTY_TITLE: "Nobunaga Oda",
+        LEVEL_FIVE_TITLE: "Demon Daimyo",
+        LEVEL_TEN_TITLE: "Nobunaga Oda",
         WEAPON_ACHIEVEMENT_TITLE: "Six Dark Blades",
     },
     LADY_BUTTERFLY_ID: {
         CONQUEST_TITLE: "For the Love of the Lord",
         HARD_CONQUEST_TITLE: "Madame Butterfly",
-        LEVEL_TEN_TITLE: "Lady No",
-        LEVEL_TWENTY_TITLE: "Nohime",
+        LEVEL_FIVE_TITLE: "Lady No",
+        LEVEL_TEN_TITLE: "Nohime",
         WEAPON_ACHIEVEMENT_TITLE: "Twelve Pistols"
     },
     RED_MINOTAUR_ID: {
         CONQUEST_TITLE: "The Great Strategist",
         HARD_CONQUEST_TITLE: "Come to the Labyrinth",
-        LEVEL_TEN_TITLE: "Tiger of Kai",
-        LEVEL_TWENTY_TITLE: "Shingen Takeda",
+        LEVEL_FIVE_TITLE: "Tiger of Kai",
+        LEVEL_TEN_TITLE: "Shingen Takeda",
         WEAPON_ACHIEVEMENT_TITLE: "Six Giant Axes"
     },
     FROST_ID: {
         CONQUEST_TITLE: "The Frozen Heart",
         HARD_CONQUEST_TITLE: "Master of the Wheel",
-        LEVEL_TEN_TITLE: "Dragon of Echigo",
-        LEVEL_TWENTY_TITLE: "Kenshin Uesugi",
+        LEVEL_FIVE_TITLE: "Dragon of Echigo",
+        LEVEL_TEN_TITLE: "Kenshin Uesugi",
         WEAPON_ACHIEVEMENT_TITLE: "Six Frozen Blades",
     },
     HORNET_ID: {
         CONQUEST_TITLE: "The Hornet's Sting",
         HARD_CONQUEST_TITLE: "The Boy King",
-        LEVEL_TEN_TITLE: "Ranboushi",
-        LEVEL_TWENTY_TITLE: "Ranmaru Mori",
+        LEVEL_FIVE_TITLE: "Ranboushi",
+        LEVEL_TEN_TITLE: "Ranmaru Mori",
         WEAPON_ACHIEVEMENT_TITLE: "Six Longbows",
     },
     PUFF_ID: {
         CONQUEST_TITLE: "Would you like a Puff-Puff? ",
         HARD_CONQUEST_TITLE: "Puff Puff Pass",
-        LEVEL_TEN_TITLE: "Hammer of the East",
-        LEVEL_TWENTY_TITLE: "Itsuki",
+        LEVEL_FIVE_TITLE: "Hammer of the East",
+        LEVEL_TEN_TITLE: "Itsuki",
         WEAPON_ACHIEVEMENT_TITLE: "Six Giant Hammers",
     },
     TALON_ID: {
         CONQUEST_TITLE: "I am the Wind",
         HARD_CONQUEST_TITLE: "Master Ninja",
-        LEVEL_TEN_TITLE: "Monkey Jump",
-        LEVEL_TWENTY_TITLE: "Sasuke Sarutobi",
+        LEVEL_FIVE_TITLE: "Monkey Jump",
+        LEVEL_TEN_TITLE: "Sasuke Sarutobi",
         WEAPON_ACHIEVEMENT_TITLE: "Six Windy Shurikens",
     },
     Q_BALL_ID: {
         CONQUEST_TITLE: "Mech Warrior",
         HARD_CONQUEST_TITLE: "Bazooka Joe",
-        LEVEL_TEN_TITLE: "The Monk Missionary",
-        LEVEL_TWENTY_TITLE: "Xavi",
+        LEVEL_FIVE_TITLE: "The Monk Missionary",
+        LEVEL_TEN_TITLE: "Xavi",
         WEAPON_ACHIEVEMENT_TITLE: "Twelve Bazookas",
     },
     IRON_OX_ID: {
         CONQUEST_TITLE: "Hondam",
         HARD_CONQUEST_TITLE: "The Iron King",
-        LEVEL_TEN_TITLE: "Honda Heihachiro",
-        LEVEL_TWENTY_TITLE: "Tadakatsu Honda",
+        LEVEL_FIVE_TITLE: "Honda Heihachiro",
+        LEVEL_TEN_TITLE: "Tadakatsu Honda",
         WEAPON_ACHIEVEMENT_TITLE: "Six Great Spears",
     },
     VENUS_ID: {
         CONQUEST_TITLE: "The Lady of the Rafters",
         HARD_CONQUEST_TITLE: "The Deadly Beauty",
-        LEVEL_TEN_TITLE: "Kunoichi",
-        LEVEL_TWENTY_TITLE: "Kasuga",
+        LEVEL_FIVE_TITLE: "Kunoichi",
+        LEVEL_TEN_TITLE: "Kasuga",
         WEAPON_ACHIEVEMENT_TITLE: "Six Ring Shurikens",
     }
 }
@@ -1272,23 +1274,30 @@ for key in correctOrderOfCharacter
 
 for key in correctOrderOfCharacter
 {
+   achievement( title = CharacterAchievementData[key][LEVEL_FIVE_TITLE],
+                 description = format("Level {0} to level 5", PlayerNameLookup[key]),
+                 points = 25,
+                 trigger = ConquestOrFreeMode() &&
+                           prev(findCharacterLevel(key)) < 5 &&
+                           findCharacterLevel(key) == 5
+    )
    achievement( title = CharacterAchievementData[key][LEVEL_TEN_TITLE],
                  description = format("Level {0} to level 10", PlayerNameLookup[key]),
                  points = 25,
                  trigger = ConquestOrFreeMode() &&
-                           prev(findCharacterLevel(key)) >= 8 &&
                            prev(findCharacterLevel(key)) < 10 &&
                            findCharacterLevel(key) == 10
     )
-   achievement( title = CharacterAchievementData[key][LEVEL_TWENTY_TITLE],
-                 description = format("Level {0} to level 20", PlayerNameLookup[key]),
-                 points = 25,
-                 trigger = ConquestOrFreeMode() &&
-                           prev(findCharacterLevel(key)) >= 18 &&
-                           prev(findCharacterLevel(key)) < 20 &&
-                           findCharacterLevel(key) == 20
-    )
 }  
+
+achievement( title = "The Highest of the High",
+                description = format("Level any character to level 20"),
+                points = 25,
+                trigger = ConquestOrFreeMode() &&
+                        prev(findCharacterLevel(currentPlayerId())) < 20 &&
+                        findCharacterLevel(currentPlayerId()) == 20
+)
+
 
 for key in correctOrderOfCharacter
 {
@@ -1480,7 +1489,7 @@ for dictionary in CHARACTER_SPECIFIC_ITEMS
     characterID = dictionary[CHARACTER_ID]
     achievement( title = dictionary[ACHIEVEMENT_NAME],
                  description = format("Beat a stage as {0} using the {1}", PlayerNameLookup[characterID], ItemNameLookup[dictionary[ITEM_ID]]),
-                 points = 10,
+                 points = 3,
                  trigger = ConquestOrFreeMode() &&
                            justWonABattle() &&
                            currentPlayerId() == characterID &&
@@ -1490,7 +1499,7 @@ for dictionary in CHARACTER_SPECIFIC_ITEMS
 
 achievement( title = "What was the point of that?",
              description = "Beat a level with three character specific weapons (Power Shot, Headdress of the Minotaur, Hammer Displacer or Plasma Generator) on the wrong character.",
-             points = 5,
+             points = 2,
              trigger = ConquestOrFreeMode() &&
                        justWonABattle_trigger() &&
                        tally_of(CHARACTER_SPECIFIC_ITEMS, 3, characterDict => once(itemEquipped(currentPlayerId(), characterDict[ITEM_ID]) && characterDict[CHARACTER_ID] != currentPlayerId())) &&
@@ -1499,7 +1508,7 @@ achievement( title = "What was the point of that?",
 
 achievement( title = "Playing A Different Tune",
             description = "Beat a level with the Rally Pipe equipped",
-            points = 5,
+            points = 2,
             trigger = ConquestOrFreeMode() &&
                       justWonABattle_trigger() &&
                       itemEquipped(currentPlayerId(), RALLY_PIPE_ITEM_ID)
@@ -1543,27 +1552,34 @@ achievement( title = "What's Fury Drive?",
              trigger = ConquestOrFreeMode() &&
                        justWonABattle_trigger() &&
                        once(startedMission()) &&
-                       never(usedMusou()) && 
+                       never(usedMusou() && framesInLevel() > 0 ) && 
                        never(!isInGameScreen())
 )
+
+
 
 achievement( title = "Winners Don't Use Drugs",
              description = "Beat a stage with out healing (or gaining health in any way)",
-             points = 5,
+             points = 10,
              trigger = ConquestOrFreeMode() &&
                        justWonABattle_trigger() &&
                        once(startedMission()) &&
-                       never(PlayerGainedHealth()) && 
+                       never(PlayerGainedHealth() && framesInLevel() > 0 ) && 
                        never(!isInGameScreen())
 )
 
-achievement( title = "Defend the Wall",
-             description = "Beat Deadwood Counteroffensive with out losing any Ally Strength from Enemy Calvary",
-             points = 10,
-             trigger = ConquestOrFreeMode() &&
-                       justWonASpecificBattle_trigger(DEADWOOD_COUNTEROFFENSIVE_ID) &&
-                       perfectGuardDurability()
-)
+
+// this didn't work once.  Not worth investigating, We have the secrets
+// There might be a way to do this with number of allies left alive, but ... ehhh I don't really care too much, it's a one-off
+
+
+// achievement( title = "Defend the Wall",
+//              description = "Beat Deadwood Counteroffensive with out losing any Ally Strength from Enemy Calvary",
+//              points = 10,
+//              trigger = ConquestOrFreeMode() &&
+//                        justWonASpecificBattle_trigger(DEADWOOD_COUNTEROFFENSIVE_ID) &&
+//                        perfectGuardDurability()
+// )
 
 SpecialBonusLookup = 
 {
@@ -1585,38 +1601,51 @@ SpecialBonusLookup =
 SpecialBonusAchievement = 
 {
     RUSE_AT_RIVERGLEN_ID:  { ACHIEVEMENT_NAME: "Shhh.... It's a Surprise",
-                             ACHIEVEMENT_DESCRIPTION: "Kill all the messengers in Ruse at Riverglen"},
+                             ACHIEVEMENT_DESCRIPTION: "Kill all the messengers in Ruse at Riverglen",
+                             ACHIEVEMENT_POINTS: 10},
     SIEGE_OF_DARK_SPIRE_ID: { ACHIEVEMENT_NAME: "That Was a Long Fuse",
-                              ACHIEVEMENT_DESCRIPTION: "Blow up the gate in Siege of Dark Spire"},
+                              ACHIEVEMENT_DESCRIPTION: "Blow up the gate in Siege of Dark Spire",
+                              ACHIEVEMENT_POINTS: 3},
     LEVELING_KUSH_ID: { ACHIEVEMENT_NAME: "Come Out, Come Out, Wherever You Are",
-                        ACHIEVEMENT_DESCRIPTION: "Lure out Zaan in Leveling Kush"},
+                        ACHIEVEMENT_DESCRIPTION: "Lure out Zaan in Leveling Kush",
+                        ACHIEVEMENT_POINTS: 4},
     STORM_OF_THE_GREAT_PLAIN_ID: { ACHIEVEMENT_NAME: "The Greatest Warrior Falls",
-                                    ACHIEVEMENT_DESCRIPTION: "Defeat Iron Ox in Storm of the Great Plain"},
+                                    ACHIEVEMENT_DESCRIPTION: "Defeat Iron Ox in Storm of the Great Plain",
+                                    ACHIEVEMENT_POINTS: 10},
     LANDING_AT_NANVIA_ID: { ACHIEVEMENT_NAME: "Gun Down",
-                            ACHIEVEMENT_DESCRIPTION: "Kill Gun Captain in Landing at Nanvia"},
+                            ACHIEVEMENT_DESCRIPTION: "Kill Gun Captain in Landing at Nanvia",
+                            ACHIEVEMENT_POINTS: 3},
     FALL_OF_THE_HIGH_TEMPLE_ID: { ACHIEVEMENT_NAME: "No One Escapes",
-                                  ACHIEVEMENT_DESCRIPTION: "Defeat all of the Guard Captains in Fall of the High Temple"},
+                                  ACHIEVEMENT_DESCRIPTION: "Defeat all of the Guard Captains in Fall of the High Temple",
+                                  ACHIEVEMENT_POINTS: 3},
     CHASE_AT_THE_TABLELANDS_ID: { ACHIEVEMENT_NAME: "Chasing the Dragon",
-                                   ACHIEVEMENT_DESCRIPTION: "Defeat Azure Dragon before he reaches his stronghold in Chase at the Tablelands"},
+                                   ACHIEVEMENT_DESCRIPTION: "Defeat Azure Dragon before he reaches his stronghold in Chase at the Tablelands",
+                                   ACHIEVEMENT_POINTS: 4},
     TWISTED_HIGH_TEMPLE_ID: { ACHIEVEMENT_NAME: "Closing the Temple",
-                              ACHIEVEMENT_DESCRIPTION: "Defeat all of the Guard Captains in Twisted High Temple"},
+                              ACHIEVEMENT_DESCRIPTION: "Defeat all of the Guard Captains in Twisted High Temple",
+                              ACHIEVEMENT_POINTS: 3},
     DEADWOOD_COUNTEROFFENSIVE_ID: { ACHIEVEMENT_NAME: "The Deadwood Trio",
-                                    ACHIEVEMENT_DESCRIPTION: "Defeat Scorpio and Talon in Deadwood Counteroffensive"},
+                                    ACHIEVEMENT_DESCRIPTION: "Defeat Scorpio and Talon in Deadwood Counteroffensive",
+                                    ACHIEVEMENT_POINTS: 4},
     DIVIDE_AND_CONQUER_FAYLINN_ID: { ACHIEVEMENT_NAME: "Divorce on a Battlefield",
-                                      ACHIEVEMENT_DESCRIPTION: "Prevent Lark and Bramble from Joining Forces in Divide and Conquer Faylinn"},
+                                      ACHIEVEMENT_DESCRIPTION: "Prevent Lark and Bramble from Joining Forces in Divide and Conquer Faylinn",
+                                      ACHIEVEMENT_POINTS: 5},
     CROSSING_THE_RIVER_STYX_ID: { ACHIEVEMENT_NAME: "Don't Fear the Reaper",
-                                  ACHIEVEMENT_DESCRIPTION: "Prevent Reaper from forming his line at Devil's Point in Crossing the River Styx"},
+                                  ACHIEVEMENT_DESCRIPTION: "Prevent Reaper from forming his line at Devil's Point in Crossing the River Styx",
+                                  ACHIEVEMENT_POINTS: 5},
     BORDER_PATROL_ID: { ACHIEVEMENT_NAME: "Rampant Violence",
-                        ACHIEVEMENT_DESCRIPTION: "Defeat all of the Guard Captains in Border Patrol"},
+                        ACHIEVEMENT_DESCRIPTION: "Defeat all of the Guard Captains in Border Patrol",
+                        ACHIEVEMENT_POINTS: 5},
     BATTLE_AT_RIVERGLEN_ID: { ACHIEVEMENT_NAME: "Venus Fly Trap",
-                              ACHIEVEMENT_DESCRIPTION: "Defeat Venus in Battle at Riverglen"},                            
+                              ACHIEVEMENT_DESCRIPTION: "Defeat Venus in Battle at Riverglen",
+                              ACHIEVEMENT_POINTS: 3},                            
 }
 
 for stageId in SpecialBonusLookup
 {
     achievement( title = SpecialBonusAchievement[stageId][ACHIEVEMENT_NAME],
                  description = SpecialBonusAchievement[stageId][ACHIEVEMENT_DESCRIPTION],
-                 points = 5,
+                 points = SpecialBonusAchievement[stageId][ACHIEVEMENT_POINTS],
                  trigger = ConquestOrFreeMode() &&
                            inSpoilsOfWarScreen() &&
                            JustEarnedSpecialBonus() &&
