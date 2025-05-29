@@ -876,6 +876,9 @@ function ConquestOrFreeMode() => (modeId() == CONQUEST_MODE_ID ||
                                  saveProtection()  // adding SaveProtection here because everything uses this, and rather than have to check it everywhere, just do it here.
 function ConquestMode() => modeId() == CONQUEST_MODE_ID  && 
                            saveProtection() // same.
+function ConquestModeForCharacterUnlock() => modeId() == CONQUEST_MODE_ID &&  // Need to change the save protection on this one achievement.  Don't use this function. 
+                            screenState() == LOAD_SAVE_SCREEN_STATE && 
+                            prior(screenState()) == TOTAL_CONQUEST_SCREEN_STATE
 function DemoMode() => modeId() == DEMO_MODE_ID
 function GalleryMode() => modeId() == GALLERY_MODE_ID
 function OptionsMode() => modeId() == OPTIONS_MODE_ID
@@ -977,7 +980,7 @@ function JustEarnedSpecialBonus() => specialBonusforLevel() == SPECIAL_BONUS_TRI
 CHARACTER_SPECIFIC_ITEMS = 
 [
     {
-        ACHIEVEMENT_NAME: "Better than a gun",
+        ACHIEVEMENT_NAME: "Better than a Gun",
         ACHIEVEMENT_DESCRIPTION: "Beat a stage with Devil King using the Grenade Launcher",
         ITEM_ID: POWER_SHOT_ITEM_ID,
         CHARACTER_ID: DEVIL_KING_ID
@@ -1317,12 +1320,12 @@ achievement( title = "A Legendary Weapon",
 )
 
 
-achievement( title = "The Treasure is the Friends We Made Along the Way",
+achievement( title = "The Real Treasure is the Friends We Made Along the Way",
              description = "Unlock all of the characters",
              type = "Progression",
              points = 10,
              trigger = justUnlockedAllCharacters() && 
-                       ConquestMode()
+                       ConquestModeForCharacterUnlock()
 )
 
 achievement( title = "The Beginning of a Collection",
@@ -1491,7 +1494,7 @@ for dictionary in CHARACTER_SPECIFIC_ITEMS
                  description = format("Beat a stage as {0} using the {1}", PlayerNameLookup[characterID], ItemNameLookup[dictionary[ITEM_ID]]),
                  points = 3,
                  trigger = ConquestOrFreeMode() &&
-                           justWonABattle() &&
+                           justWonABattle_trigger() &&
                            currentPlayerId() == characterID &&
                            itemEquipped(characterID, dictionary[ITEM_ID])
     )
