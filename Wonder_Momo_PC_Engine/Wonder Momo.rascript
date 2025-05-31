@@ -239,67 +239,67 @@ function hitlessAchievement(data)
 hitlessAchievement({TITLE: "Crazy Crab", 
                   DESCRIPTION: "Beat the first act without taking damage", 
                   LEVEL_VALUE: 1, 
-                  POINTS: 1}
+                  POINTS: 5}
 )   
 
 hitlessAchievement({TITLE: "Glorious Golden God", 
                   DESCRIPTION: "Beat the second act without taking damage", 
                   LEVEL_VALUE: 2, 
-                  POINTS: 2}
+                  POINTS: 5}
 )
 
 hitlessAchievement({TITLE: "Gang of Golden Gods", 
                   DESCRIPTION: "Beat the third act without taking damage", 
                   LEVEL_VALUE: 3, 
-                  POINTS: 2}
+                  POINTS: 5}
 )
 
 hitlessAchievement({TITLE: "Breaking the Dancer's Leg", 
                   DESCRIPTION: "Beat the fourth act without taking damage", 
                   LEVEL_VALUE: 4, 
-                  POINTS: 3}
+                  POINTS: 10}
 )
 
 hitlessAchievement({TITLE: "Bouncing Crab", 
                   DESCRIPTION: "Beat the fifth act without taking damage", 
                   LEVEL_VALUE: 5, 
-                  POINTS: 3}
+                  POINTS: 25}
 )
 
 hitlessAchievement({TITLE: "Dodging Acroballs", 
                   DESCRIPTION: "Beat the sixth act without taking damage", 
                   LEVEL_VALUE: 6, 
-                  POINTS: 4}
+                  POINTS: 25}
 )
 
 hitlessAchievement({TITLE: "The Crab Brought a Friend", 
                   DESCRIPTION: "Beat the seventh act without taking damage", 
                   LEVEL_VALUE: 7, 
-                  POINTS: 4}
+                  POINTS: 25}
 )
 
 hitlessAchievement({TITLE: "No Ninjas Allowed", 
                   DESCRIPTION: "Beat the eighth act without taking damage", 
                   LEVEL_VALUE: 8, 
-                  POINTS: 5}
+                  POINTS: 25}
 )
 
 hitlessAchievement({TITLE: "Double the Guns, Double the Misses", 
                   DESCRIPTION: "Beat the ninth act without taking damage", 
                   LEVEL_VALUE: 9, 
-                  POINTS: 5}
+                  POINTS: 25}
 )
 
 hitlessAchievement({TITLE: "Gold Doesn't Bounce", 
                   DESCRIPTION: "Beat the tenth act without taking damage", 
                   LEVEL_VALUE: 10, 
-                  POINTS: 10}
+                  POINTS: 25}
 )
 
 hitlessAchievement({TITLE: "Ninja's Nightmare", 
                   DESCRIPTION: "Beat the eleventh act without taking damage", 
                   LEVEL_VALUE: 11, 
-                  POINTS: 10}
+                  POINTS: 25}
 )
 
 hitlessAchievement({TITLE: "You Might Not Have Noticed But Your Brain Did", 
