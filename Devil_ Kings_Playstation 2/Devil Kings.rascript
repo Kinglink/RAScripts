@@ -830,10 +830,10 @@ FROST_ID = 0x06
 HORNET_ID = 0x07
 PUFF_ID = 0x08
 TALON_ID = 0x09
-Q_BALL_ID = 0x0A
-IRON_OX_ID = 0x0B
-REAPER_ID = 0x0C // Unused
-ZAAN_ID = 0x0D // Unused
+Q_BALL_ID = 0x0B
+IRON_OX_ID = 0x0D
+REAPER_ID = 0x0A // Unused
+ZAAN_ID = 0x0C // Unused
 BRAMBLE_ID = 0x0E // Unused
 VENUS_ID = 0x0F  // Actually used! 
 
@@ -1038,7 +1038,7 @@ TRIO_ITEM_ACHIEVEMENTS =
         THIRD_ITEM: BOUNTY_CHEST_III_ITEM_ID,
     },
     {
-        ACHIEVEMENT_NAME: "Doth thou desire the power?",
+        ACHIEVEMENT_NAME: "Doth Thou Desire the Power?",
         ACHIEVEMENT_DESCRIPTION: "Beat a level with Red Mask of Demoness, Blue Mask of Demoness, and White Mask of Demoness equipped",
         FIRST_ITEM: RED_MASK_OF_DEMONESS_ITEM_ID,
         SECOND_ITEM: BLUE_MASK_OF_DEMONESS_ITEM_ID,
@@ -1119,6 +1119,7 @@ function justWonASpecificBattleAndDifficulty_trigger(stageIndex, difficultyIndex
 achievement( title = "The First Victory",
              description = "Win a stage, any stage.",
              points = 2,
+             type = "Progression",
              trigger = justWonABattle()
 )
 
@@ -1188,7 +1189,7 @@ CharacterAchievementData =
     },
     SCORPIO_ID: {
         CONQUEST_TITLE: "Where's Sub-Zero?",
-        HARD_CONQUEST_TITLE: "Scorpion King",
+        HARD_CONQUEST_TITLE: "Scorpio King",
         LEVEL_FIVE_TITLE: "Crimson Demon of War",
         LEVEL_TEN_TITLE: "Yukimura Sanada",
         WEAPON_ACHIEVEMENT_TITLE: "Six Legendary Spears",
@@ -1229,7 +1230,7 @@ CharacterAchievementData =
         WEAPON_ACHIEVEMENT_TITLE: "Six Longbows",
     },
     PUFF_ID: {
-        CONQUEST_TITLE: "Would you like a Puff-Puff? ",
+        CONQUEST_TITLE: "Would you like a Puff-Puff?",
         HARD_CONQUEST_TITLE: "Puff Puff Pass",
         LEVEL_FIVE_TITLE: "Hammer of the East",
         LEVEL_TEN_TITLE: "Itsuki",
@@ -1282,14 +1283,18 @@ for key in correctOrderOfCharacter
                  points = 25,
                  trigger = ConquestOrFreeMode() &&
                            prev(findCharacterLevel(key)) < 5 &&
-                           findCharacterLevel(key) == 5
+                           findCharacterLevel(key) >= 5 &&
+                           inSpoilsOfWarScreen()
+
     )
    achievement( title = CharacterAchievementData[key][LEVEL_TEN_TITLE],
                  description = format("Level {0} to level 10", PlayerNameLookup[key]),
                  points = 25,
                  trigger = ConquestOrFreeMode() &&
                            prev(findCharacterLevel(key)) < 10 &&
-                           findCharacterLevel(key) == 10
+                           findCharacterLevel(key) >= 10 &&
+                           inSpoilsOfWarScreen()
+
     )
 }  
 
@@ -1322,7 +1327,6 @@ achievement( title = "A Legendary Weapon",
 
 achievement( title = "The Real Treasure is the Friends We Made Along the Way",
              description = "Unlock all of the characters",
-             type = "Progression",
              points = 10,
              trigger = justUnlockedAllCharacters() && 
                        ConquestModeForCharacterUnlock()
@@ -1433,7 +1437,7 @@ STAGE_ACHIEVEMENTS =
     },
     FALL_OF_THE_HIGH_TEMPLE_ID : {
                 TIME_RUN_ACHIEVEMENT_NAME: "Falling Speed Run",
-                HARD_TIME_RUN_ACHIEVEMENT_NAME: "Falling Speed Run",
+                HARD_TIME_RUN_ACHIEVEMENT_NAME: "Falling Ultra Speed Run",
     },
     CHASE_AT_THE_TABLELANDS_ID : {
                 TIME_RUN_ACHIEVEMENT_NAME: "Chasing Speed Run",
@@ -1453,7 +1457,7 @@ STAGE_ACHIEVEMENTS =
     },
     DIVIDE_AND_CONQUER_FAYLINN_ID : {
                 TIME_RUN_ACHIEVEMENT_NAME: "Dividing Speed Run",
-                HARD_TIME_RUN_ACHIEVEMENT_NAME: "Divided Ultra Speed Run",
+                HARD_TIME_RUN_ACHIEVEMENT_NAME: "Dividing Ultra Speed Run",
     },
     PILGRIMAGE_TO_CATHEDRAL_CITY_ID : {
                 TIME_RUN_ACHIEVEMENT_NAME: "Pilgrimage Speed Run",
@@ -1533,7 +1537,7 @@ achievement( title = "A Learned Slayer",
                        numberOfNamedEnemiesKilled() >= 10
 )
 
-achievement( title = "Combo master", 
+achievement( title = "Combo Master", 
              description = "Earn 500 a combo of 500 hits",
              points = 10,
              trigger = ConquestOrFreeMode() &&
@@ -1603,7 +1607,7 @@ SpecialBonusLookup =
 
 SpecialBonusAchievement = 
 {
-    RUSE_AT_RIVERGLEN_ID:  { ACHIEVEMENT_NAME: "Shhh.... It's a Surprise",
+    RUSE_AT_RIVERGLEN_ID:  { ACHIEVEMENT_NAME: "Shhh... It's a Surprise",
                              ACHIEVEMENT_DESCRIPTION: "Kill all the messengers in Ruse at Riverglen",
                              ACHIEVEMENT_POINTS: 10},
     SIEGE_OF_DARK_SPIRE_ID: { ACHIEVEMENT_NAME: "That Was a Long Fuse",
