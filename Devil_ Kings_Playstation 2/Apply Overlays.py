@@ -3,67 +3,45 @@
 from PIL import Image
 import os
 
-# Comment out any that you don't want. 
-# Paths to the overlays
-overlay_paths = {
-    "Card": "../Overlays/Card_Overlay.png",
-    "Gold": "../Overlays/Gold Overlay.png",
-    "Silver": "../Overlays/Silver Overlay.png",
-    "Bronze": "../Overlays/Bronze Overlay.png",
-    "Ring": "../Overlays/Ring_Overlay.png",
-    "":None,
-#    "Red_No_Overlay": "../Overlays/Red_No_Overlay.png",
-}
-
-base_overlays = ["Ring"]
-
-def apply_overlays_and_save(base_image, overlays, base_file_name, output_dir, with_no = False, with_red_no = False):
-    for overlay_name, overlay_path in overlays.items():
-        composition = Image.new("RGBA", base_image.size, (0, 0, 0, 255))
-          # If the base image has transparency, fill transparent parts with black
-        base_image_filled = Image.new("RGBA", base_image.size)
-        base_image_filled.paste((0, 0, 0, 255), [0, 0, base_image.size[0], base_image.size[1]])
-        base_image_filled.paste(base_image, (0, 0), base_image)
-        
-        composition.paste(base_image_filled, (0, 0))
-        if (with_no):
-            noOverlay_image = Image.open(overlay_paths["No_Overlay"])
-            composition.paste(noOverlay_image, (0, 0), noOverlay_image)
-        if (with_red_no):
-            redNoOverlay_image = Image.open(overlay_paths["Red_No_Overlay"])
-            composition.paste(redNoOverlay_image, (0, 0), redNoOverlay_image)
-        if(overlay_path):
-            overlay_image = Image.open(overlay_path)
-            composition.paste(overlay_image, (0, 0), overlay_image)
-        
-        # Save the composition
-        output_filename = f"{base_file_name}_{overlay_name}.png"
-        if (with_no):
-            output_filename = f"{base_file_name}_{overlay_name}_with_no.png"
-        if (with_red_no):
-            output_filename = f"{base_file_name}_{overlay_name}_with_red_no.png"
-        output_path = os.path.join(output_dir, output_filename)
-        composition.save(output_path)
-        overlay_image.close()
-
-# Directory to save the final compositions
-output_dir = "Output"
-if not os.path.exists(output_dir):
-    os.makedirs(output_dir)
-
-# Directory containing the base images
+# Directory for input images
 generated_dir = "Generated"
+output_dir = "Output"
 
-# Process each .png file in the Generated directory
+# Define overlay presets here
+# Each entry is a tuple: (output_subfolder, list of overlay paths)
+overlay_presets = [
+    ("Border_Only", ["../Overlays/Devil_Kings_Frame.png"]),
+    ("Border_with_No", ["../Overlays/White_No_Overlay.png", "../Overlays/Devil_Kings_Frame.png"]),
+    ("Border_with_Star", ["../Overlays/Devil_Kings_Frame.png", "../Overlays/Corner_Star.png"]),
+    ("Border_with_Question", ["../Overlays/Devil_Kings_Frame.png", "../Overlays/Question_mark.png"]),
+    
+]
+
+# Ensure output folders exist
+for folder_name, _ in overlay_presets:
+    folder_path = os.path.join(output_dir, folder_name)
+    os.makedirs(folder_path, exist_ok=True)
+
+def compose_and_save(base_image, overlays, output_path):
+    composition = Image.new("RGBA", base_image.size, (0, 0, 0, 255))
+    filled_base = Image.new("RGBA", base_image.size)
+    filled_base.paste((0, 0, 0, 255), [0, 0, base_image.size[0], base_image.size[1]])
+    filled_base.paste(base_image, (0, 0), base_image)
+    composition.paste(filled_base, (0, 0))
+
+    for overlay_path in overlays:
+        if overlay_path:
+            with Image.open(overlay_path) as overlay_image:
+                composition.paste(overlay_image, (0, 0), overlay_image)
+
+    composition.save(output_path)
+
+# Process images
 for file_name in os.listdir(generated_dir):
     if file_name.endswith(".png"):
-        base_file_path = os.path.join(generated_dir, file_name)
-        base_file_name = os.path.splitext(file_name)[0]
-        base_image = Image.open(base_file_path).convert("RGBA")
-
-        # Apply each overlay (Gold, Silver, Bronze)
-        apply_overlays_and_save(base_image, {k: overlay_paths[k] for k in base_overlays}, base_file_name, output_dir)
-
-        
-        # Close the base image
-        base_image.close()
+        base_path = os.path.join(generated_dir, file_name)
+        base_name = os.path.splitext(file_name)[0]
+        with Image.open(base_path).convert("RGBA") as base_image:
+            for folder_name, overlay_paths in overlay_presets:
+                output_path = os.path.join(output_dir, folder_name, f"{base_name}_{folder_name}.png")
+                compose_and_save(base_image, overlay_paths, output_path)
