@@ -583,16 +583,16 @@ function musicUnlocks() => byte(0x55EBDC)
 //          Not listing them all 0x01 = unlocked 0x00 = locked.
 //          
 //          Starts with Game Opening (always unlocked) and ends with Credits (Always unlocked?)
-function movieUnlocks() => byte(0x55EBE4)
+function movieUnlocks() => byte(0x00561158)
 
-MOVIE_UNLOCK_FIRST_LOCATION = 0x55EBE4
-MOVIE_UNLOCK_SECOND_LOCATION = 0x55EBE5
-MOVIE_UNLOCK_THIRD_LOCATION = 0x55EBE6
-MOVIE_UNLOCK_FOURTH_LOCATION = 0x55EBE7
-function justUnlockedAllMovies() => bitcount(MOVIE_UNLOCK_FIRST_LOCATION) +
+MOVIE_UNLOCK_FIRST_LOCATION = 0x00561158
+MOVIE_UNLOCK_SECOND_LOCATION = 0x00561159
+MOVIE_UNLOCK_THIRD_LOCATION = 0x0056115a
+MOVIE_UNLOCK_FOURTH_LOCATION = 0x0056115b
+function justUnlockedAllMovies() => measured(bitcount(MOVIE_UNLOCK_FIRST_LOCATION) +
                                     bitcount(MOVIE_UNLOCK_SECOND_LOCATION) +
                                     bitcount(MOVIE_UNLOCK_THIRD_LOCATION) +
-                                    bitcount(MOVIE_UNLOCK_FOURTH_LOCATION) == 28 && 
+                                    bitcount(MOVIE_UNLOCK_FOURTH_LOCATION) == 29) && 
                                     prev(bitcount(MOVIE_UNLOCK_FIRST_LOCATION)) +
                                     prev(bitcount(MOVIE_UNLOCK_SECOND_LOCATION)) +
                                     prev(bitcount(MOVIE_UNLOCK_THIRD_LOCATION)) +
@@ -600,7 +600,7 @@ function justUnlockedAllMovies() => bitcount(MOVIE_UNLOCK_FIRST_LOCATION) +
                                     prev(bitcount(MOVIE_UNLOCK_FIRST_LOCATION)) +
                                     prev(bitcount(MOVIE_UNLOCK_SECOND_LOCATION)) +
                                     prev(bitcount(MOVIE_UNLOCK_THIRD_LOCATION)) +
-                                    prev(bitcount(MOVIE_UNLOCK_FOURTH_LOCATION)) < 28
+                                    prev(bitcount(MOVIE_UNLOCK_FOURTH_LOCATION)) < 29
 
 // $55EFE4: (8-bit) Expected Lark In Game Level
 function ingameFirstSaveFileLark() => byte(0x55EFE4)
@@ -1280,7 +1280,7 @@ for key in correctOrderOfCharacter
 {
    achievement( title = CharacterAchievementData[key][LEVEL_FIVE_TITLE],
                  description = format("Level {0} to level 5", PlayerNameLookup[key]),
-                 points = 25,
+                 points = 5,
                  trigger = ConquestOrFreeMode() &&
                            prev(findCharacterLevel(key)) < 5 &&
                            findCharacterLevel(key) >= 5 &&
@@ -1289,7 +1289,7 @@ for key in correctOrderOfCharacter
     )
    achievement( title = CharacterAchievementData[key][LEVEL_TEN_TITLE],
                  description = format("Level {0} to level 10", PlayerNameLookup[key]),
-                 points = 25,
+                 points = 10,
                  trigger = ConquestOrFreeMode() &&
                            prev(findCharacterLevel(key)) < 10 &&
                            findCharacterLevel(key) >= 10 &&
@@ -1310,7 +1310,7 @@ achievement( title = "The Highest of the High",
 for key in correctOrderOfCharacter
 {
    achievement( title = CharacterAchievementData[key][WEAPON_ACHIEVEMENT_TITLE],
-                 description = format("Earn all six wearpons for {0}", PlayerNameLookup[key]),
+                 description = format("Earn all six weapons for {0}", PlayerNameLookup[key]),
                  points = 25,
                  trigger = ConquestOrFreeMode() &&
                            justUnlockedAllWeapons(key)
@@ -1367,8 +1367,8 @@ achievement( title = "Improved Gear",
              trigger = ConquestOrFreeMode() &&
                        measured(sum_of(range(SPARTAN_BRACE_ITEM_ID,HEALTH_RING_ITEM_ID), 
                                         index => byte(FIRST_ITEM_LOCATION + index) / 90) == 4) &&
-                                sum_of(range(SPARTAN_BRACE_ITEM_ID,WARRIORS_CODE_HONOR_ITEM_ID), 
-                                        index => prev(byte(FIRST_ITEM_LOCATION + index)) / prev(byte(FIRST_ITEM_LOCATION + index))) < 4
+                                sum_of(range(SPARTAN_BRACE_ITEM_ID,HEALTH_RING_ITEM_ID), 
+                                        index => prev(byte(FIRST_ITEM_LOCATION + index) / 90) ) < 4
 )
 
 achievement( title = "World Traveler", 
