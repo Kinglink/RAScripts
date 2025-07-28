@@ -60,8 +60,6 @@ function numberOfNamedEnemiesKilled() => byte(0x54AE38)
 //          We don't need that, we can live with this.
 function winCheck() => byte(0x54C404)
 
-// Sometimes there's a "Death animation, which sets previous to 0x03.  We'll just say not 0x01
-function didPlayerJustWin() => winCheck() == 0x01 && prev(winCheck()) != 0x01
 
 // $55CA70: (8-bit) Expected Scorpio Saved Level
 //          
@@ -596,7 +594,7 @@ function justUnlockedAllMovies() => measured(bitcount(MOVIE_UNLOCK_FIRST_LOCATIO
                                     prev(bitcount(MOVIE_UNLOCK_FIRST_LOCATION)) +
                                     prev(bitcount(MOVIE_UNLOCK_SECOND_LOCATION)) +
                                     prev(bitcount(MOVIE_UNLOCK_THIRD_LOCATION)) +
-                                    prev(bitcount(MOVIE_UNLOCK_FOURTH_LOCATION)) >= 25 && 
+                                    prev(bitcount(MOVIE_UNLOCK_FOURTH_LOCATION)) >= 27 && 
                                     prev(bitcount(MOVIE_UNLOCK_FIRST_LOCATION)) +
                                     prev(bitcount(MOVIE_UNLOCK_SECOND_LOCATION)) +
                                     prev(bitcount(MOVIE_UNLOCK_THIRD_LOCATION)) +
@@ -796,6 +794,12 @@ function startedMission() => isInGameScreen() && prev(screenState()) == PREPARE_
 function saveProtection() => screenState() < LOAD_SAVE_SCREEN_STATE && 
                              screenState() >= IN_GAME_STATE
 
+function saveProtectionWithPrepare() => screenState() >= PREPARE_SCREEN_STATE
+
+                             
+// The win bit is sticky.  Don't use that, instead use this. 
+function didPlayerJustWin() => inSpoilsOfWarScreen() && prev(isInGameScreen())
+
 // $563C74: (8-bit) Current player.
 //          
 //          0x00 = Lark
@@ -874,6 +878,9 @@ OPTIONS_MODE_ID = 0x04
 function ConquestOrFreeMode() => (modeId() == CONQUEST_MODE_ID || 
                                   modeId() == FREE_MODE_ID) && 
                                  saveProtection()  // adding SaveProtection here because everything uses this, and rather than have to check it everywhere, just do it here.
+function ConquestOrFreeModeAllowPrepare() => (modeId() == CONQUEST_MODE_ID ||   // The Cineophile can occur on the prepare Screen state? 
+                                  modeId() == FREE_MODE_ID) && 
+                                 (saveProtectionWithPrepare()) // adding SaveProtection here because everything uses this, and rather than have to check it everywhere, just do it here.
 function ConquestMode() => modeId() == CONQUEST_MODE_ID  && 
                            saveProtection() // same.
 function ConquestModeForCharacterUnlock() => modeId() == CONQUEST_MODE_ID &&  // Need to change the save protection on this one achievement.  Don't use this function. 
@@ -901,6 +908,7 @@ function totalHitCounter() => dword(0x17C93A4)
 //
 //           This is the true value.
 function totalKillCounter() => dword(0x17C93B8)
+function totalKillPostGame() => dword(0x00601d48)
 
 // $17C93E4: (32-bit)  Fury Drive Level (Musou Level)
 //           
@@ -921,6 +929,8 @@ function usedMusou() => prev(furyDriveStoredLevel()) < furyDriveStoredLevel()  |
 //           
 //           60 fps
 function framesInLevel() => dword(0x017C9444)
+
+function framesPostLevel() => dword(0x563bfc)
 
 // $1D94678: (8-bit) Guard Durability in Border control
 //           
@@ -1095,11 +1105,11 @@ TRIO_ITEM_ACHIEVEMENTS =
     }
 ]
 
-function justWonABattle() => isInGameScreen() &&
+function justWonABattle() => prev(isInGameScreen()) &&
                              didPlayerJustWin() &&
                              ConquestOrFreeMode()  // shouldn't be needed, as screen state should be enough.
 
-function justWonABattle_trigger() => isInGameScreen() &&
+function justWonABattle_trigger() => prev(isInGameScreen()) &&
                              trigger_when(didPlayerJustWin()) &&
                              ConquestOrFreeMode()  // shouldn't be needed, as screen state should be enough.
 
@@ -1510,7 +1520,7 @@ achievement( title = "What was the point of that?",
              trigger = ConquestOrFreeMode() &&
                        justWonABattle_trigger() &&
                        tally_of(CHARACTER_SPECIFIC_ITEMS, 3, characterDict => once(itemEquipped(currentPlayerId(), characterDict[ITEM_ID]) && characterDict[CHARACTER_ID] != currentPlayerId())) &&
-                       never(!isInGameScreen())
+                       never(!isInGameScreen() && !inSpoilsOfWarScreen())
 )   
 
 achievement( title = "Playing A Different Tune",
@@ -1524,7 +1534,7 @@ achievement( title = "Playing A Different Tune",
 achievement( title = "Cineophile",
              description = "Unlock all of the movies in the Gallery",
              points = 10,
-             trigger = ConquestOrFreeMode() &&
+             trigger = ConquestOrFreeModeAllowPrepare() &&
                        justUnlockedAllMovies()
 )
 
@@ -1538,7 +1548,7 @@ achievement( title = "A Learned Slayer",
 )
 
 achievement( title = "Combo Master", 
-             description = "Earn 500 a combo of 500 hits",
+             description = "Earn a combo of 500 hits",
              points = 10,
              trigger = ConquestOrFreeMode() &&
                        prev(totalHitCounter()) < 500 &&
@@ -1550,29 +1560,31 @@ achievement( title = "A True Warrior of the Sengoku Era",
              points = 10,
              trigger = ConquestOrFreeMode() &&
                        justWonABattle_trigger() &&
-                       totalKillCounter() >= 1000
+                       ( totalKillCounter() >= 1000 || 
+                         (totalKillPostGame() >= 1000 && 
+                          totalKillCounter() == 0))   // the location of the kill counter is in a different place.  That place doesn't change until after the next level. 
 )
 
 achievement( title = "What's Fury Drive?",
-             description = "Beat a stage with out using Fury Drive",
+             description = "Beat a stage without using Fury Drive",
              points = 5,
              trigger = ConquestOrFreeMode() &&
                        justWonABattle_trigger() &&
                        once(startedMission()) &&
-                       never(usedMusou() && framesInLevel() > 0 ) && 
-                       never(!isInGameScreen())
+                       never(usedMusou() && framesInLevel() > 0  ) && 
+                       never(!isInGameScreen() && !inSpoilsOfWarScreen())
 )
 
 
 
 achievement( title = "Winners Don't Use Drugs",
-             description = "Beat a stage with out healing (or gaining health in any way)",
+             description = "Beat a stage without healing (or gaining health in any way)",
              points = 10,
              trigger = ConquestOrFreeMode() &&
                        justWonABattle_trigger() &&
                        once(startedMission()) &&
                        never(PlayerGainedHealth() && framesInLevel() > 0 ) && 
-                       never(!isInGameScreen())
+                       never(!isInGameScreen() && !inSpoilsOfWarScreen())
 )
 
 
@@ -1669,30 +1681,28 @@ function killsLeaderboard(stageIndex, difficultyIndex)
         description = format("Get the most kills on {0} and win the stage on {1} difficulty",  StageNameLookup[stageIndex], DifficultyNameLookup[difficultyIndex]) ,
         start = 
         (
-            justWonASpecificBattleAndDifficulty(stageIndex, difficultyIndex) &&
-            framesInLevel() != 0
+            justWonASpecificBattleAndDifficulty(stageIndex, difficultyIndex)
+            
         ),
         cancel = always_false(),
         submit = always_true(),
-        value = totalKillCounter(),
+        value = totalKillPostGame(),
         format = "VALUE"
     )
 }
 
-function KoLeaderboard(stageIndex, difficultyIndex)
+function speedLeaderboard(stageIndex, difficultyIndex)
 {
     leaderboard(
         title = format("Fastest Clear on {1} {0}",  StageNameLookup[stageIndex], DifficultyNameLookup[difficultyIndex]),
         description = format("Finish {0} as quick as possible on {1} difficulty",  StageNameLookup[stageIndex], DifficultyNameLookup[difficultyIndex]) ,
         start = 
         (
-            justWonASpecificBattleAndDifficulty(stageIndex, difficultyIndex) &&
-            framesInLevel() != 0 
-
+            justWonASpecificBattleAndDifficulty(stageIndex, difficultyIndex)
         ),
         cancel = always_false(),
         submit = always_true(),
-        value = framesInLevel(),
+        value = framesPostLevel(),
         format = "FRAMES", 
         lower_is_better = true 
     )
@@ -1707,7 +1717,11 @@ for index in StageNameLookup
     }
     for difficultyIndex in DifficultyNameLookup
     {
-        KoLeaderboard(index, difficultyIndex)
+        if (index != BORDER_PATROL_ID) // Timed level.
+        {
+            speedLeaderboard(index, difficultyIndex)
+        }
+        
         
     }
 }
