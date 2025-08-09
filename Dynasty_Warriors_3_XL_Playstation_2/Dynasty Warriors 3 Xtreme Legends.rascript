@@ -29,12 +29,41 @@ NOVICE_MODE_VALUE = 0x01
 function isNoviceMode() => NoviceModeIndicator() == NOVICE_MODE_VALUE
 
 
+// $29CCF8: (32-bit) Lu Bu's third outfit
+//
+//          0x00 = No Outfit
+//          0x01 = Lu Bu's third outfit is unlocked
+//          Any other = No Outfit
+function LuBuThirdOutfitIndicator() => dword(0x29CCF8)
+
+LU_BU_NO_OUTFIT_VALUE = 0x00
+LU_BU_THIRD_OUTFIT_VALUE = 0x01
+
+function justUnlockedLuBuThirdOutfit() => LuBuThirdOutfitIndicator() == LU_BU_THIRD_OUTFIT_VALUE &&
+                                          prev(LuBuThirdOutfitIndicator()) == LU_BU_NO_OUTFIT_VALUE
+
+// $29CCFC: (32-bit) Sun Shang Xiang's third outfit
+//
+//          0x00 = No Outfit
+//          0x01 = SSX's third outfit is unlocked
+//          Any other = No Outfit
+function SunShangXiangThirdOutfitIndicator() => dword(0x29CCFC)  
+
+SUN_SHANG_XIANG_NO_OUTFIT_VALUE = 0x00
+SUN_SHANG_XIANG_THIRD_OUTFIT_VALUE = 0x01
+
+function justUnlockedSunShangXiangThirdOutfit() => SunShangXiangThirdOutfitIndicator() == SUN_SHANG_XIANG_THIRD_OUTFIT_VALUE &&
+                                                   prev(SunShangXiangThirdOutfitIndicator()) == SUN_SHANG_XIANG_NO_OUTFIT_VALUE
+
 // $2AFF77: Off by one of the Array of every playable character.  
 //          Appears to be 24 Bytes between characters.  
 //          Starts with 16 bit Heatlh, 16 bit Musou, 8 bit Attack, 8 bit Defense , 
 //                  Array of 5 8-bit equipped Items, 
 //                  32 bit of Experience, 32 bit marker of Class? 
 //                  And finally 8-bit for stages complete.
+
+
+
 function InfoOnArray() => byte(0x2AFF77)
 
 // $2AFF78: (16-bit) Stored Zhao Yun's Max Life
@@ -804,6 +833,9 @@ FIRST_TYPE_WEAPON_OWNED_MEMORY_LOCATION = 0x2B03AA
 
 function WeaponOwnedCheck(index) => word(FIRST_TYPE_WEAPON_OWNED_MEMORY_LOCATION + (index * OFFSET_FOR_WEAPONS)) == (index * 0x101)
 
+function justUnlockedWeapon(index) => !prev(WeaponOwnedCheck(index)) &&
+                                      WeaponOwnedCheck(index)
+
 // $2B13A8: (Array of 10 16-bit Values) BG Equipments
 //          
 //          SImilar to the normal Items.     Starts with Index (Always the same or 28 if None) And then power.   0x9 likely doesn't have a power.
@@ -1543,7 +1575,7 @@ MusouModeData =
 function SaveProtection() => isNotLoading() && !isTwoPlayerMode() && IsInGame()
 
 
- achievement(name = "Let's Get Xtreme!"],
+achievement(name = "Let's Get Xtreme!",
                 description = format("Beat a level, any level!"),
                 points = 2,
                 trigger =  IsInMusouModeOrFreeMode() && 
@@ -1561,7 +1593,8 @@ function CreateMusouModeAchievement(characterIndex)
                 points = 5,
                 trigger = IsInMusouMode() &&
                           isMusouModeComplete() &&
-                          SaveProtection(),
+                          SaveProtection() &&
+                          CurrentPlayerID() == characterIndex,
                 type = "progression"
                 )
 }
@@ -1576,7 +1609,7 @@ function createDifficultyMusouModeAchievement(characterIndex, title, targetDiffi
                                             targetMusouStages,  
                                             index => once( StageIndex() == index && 
                                                  prev(StageIndex()) == index - 1 &&&&
-                                                 CurrentPlayerID == characterIndex && 
+                                                 CurrentPlayerID() == characterIndex && 
                                                  DifficultyLookupValueAndAbove(targetDifficultyLookupValue) &&
                                                  IsInMusouMode() &&
                                                  wonStageCheck() && 
@@ -1618,6 +1651,18 @@ for index in range(ZHAO_YUN_ID, FU_XI_ID - 1)
     {
         createVeryHardMusouModeAchievement(index)
     }
+}
+
+for index in range(FIRST_FIFTH_WEAPON, LAST_FIFTH_WEAPON)
+{
+    achievement(name = format("{0}", Weapon_Name_Lookup[index]),
+                description = format("Get the fifth weapon for {0}", CharacterNameLookup[index - FIRST_FIFTH_WEAPON]),
+                points = 10,
+                trigger = IsInMusouModeFreeModeOrChallengeMode() &&
+                          justUnlockedWeapon(index) &&
+                          secondPlayerAllowed()
+                type = "progression"
+    )
 }
 
 NewNormalItems =
@@ -1705,7 +1750,7 @@ achievement("Even More Items!",
             trigger = IsInMusouModeFreeModeOrChallengeMode() &&
                       didntpreviouslyOwnAllItems(NewNormalItems) &&   // As long as we don't already have them all 
                       measured(ownAllItems(NewNormalItems)) &&
-                      never(!wonStageCheck()) &&
+                      wonStageCheck() &&
                       secondPlayerAllowed() &&
                       saveProtection()
 )
@@ -1716,7 +1761,7 @@ achievement("Maxed Out",
             trigger = IsInMusouModeFreeModeOrChallengeMode() &&
                       didntpreviouslyMaxItems(NewNormalItems) && // As long as we don't already have them all at true max
                       measured(ownAllMaxItems(NewNormalItems)) &&
-                      never(!wonStageCheck()) &&
+                      wonStageCheck() &&
                       secondPlayerAllowed() &&
                       saveProtection()
 )   
@@ -1726,21 +1771,21 @@ achievement("The Real Grind Begins",
             10,
             trigger = IsInMusouModeFreeModeOrChallengeMode() &&
                       anyItemJustPassedOverMaxLevel(NewNormalItems) && // As long as we don't already have them all at true max
-                      never(!wonStageCheck()) &&
+                      wonStageCheck() &&
                       secondPlayerAllowed() &&
                       saveProtection()
 )
 
-achievement("Fully Locked and Loaded",
-            "Get all common items to their item break max level",
-            25,
-            trigger = IsInMusouModeFreeModeOrChallengeMode() &&
-                      didntpreviouslyTrueMaxItem(NewNormalItems) && // As long as we don't already have them all at true max
-                      measured(allItemsTrueMaxLevel(NewNormalItems)) &&
-                      never(!wonStageCheck()) &&
-                      secondPlayerAllowed() &&
-                      saveProtection()
-)
+// achievement("Fully Locked and Loaded",
+//             "Get all common items to their item break max level",
+//             25,
+//             trigger = IsInMusouModeFreeModeOrChallengeMode() &&
+//                       didntpreviouslyTrueMaxItem(NewNormalItems) && // As long as we don't already have them all at true max
+//                       measured(allItemsTrueMaxLevel(NewNormalItems)) &&
+//                       never(!wonStageCheck()) &&
+//                       secondPlayerAllowed() &&
+//                       saveProtection()
+// )
 
 NewRedItems = range(FIRST_NEW_RED_ITEM_ID, LAST_NEW_RED_ITEM_ID)
 
@@ -1752,6 +1797,7 @@ for itemId in NewRedItems
                 trigger = IsInMusouModeFreeModeOrChallengeMode() &&
                           justUnlockedItem(itemId) && 
                           secondPlayerAllowed() &&
+                          wonStageCheck() &&
                           saveProtection()
     )
 }
@@ -1770,7 +1816,7 @@ achievement("Equip the Body Guards",
             trigger = IsInMusouModeFreeModeOrChallengeMode() &&
                       didntpreviouslyOwnAllBGItems(BodyguardCommonItems)
                       measured(ownAllBGItems(BodyguardCommonItems)) &&
-                      never(!wonStageCheck()) &&
+                      wonStageCheck() &&
                       secondPlayerAllowed() &&
                       saveProtection()
 )
@@ -1781,7 +1827,7 @@ achievement("Buff Body Guards",
             trigger = IsInMusouModeFreeModeOrChallengeMode() &&
                       didntpreviouslyMaxBGItems(BodyguardCommonItems) && // As long as we don't already have them all at true max
                       measured(ownAllMaxBGItems(BodyguardCommonItems)) &&
-                      never(!wonStageCheck()) &&
+                      wonStageCheck() &&
                       secondPlayerAllowed() &&
                       saveProtection()
 )
@@ -1792,7 +1838,7 @@ achievement("Super Buff Body Guards",
             trigger = IsInMusouModeFreeModeOrChallengeMode() &&
                       didntpreviouslyTrueMaxBGItem(BodyguardCommonItems) && // As long as we don't already have them all at true max
                       measured(allBGItemsTrueMaxLevel(BodyguardCommonItems)) &&
-                      never(!wonStageCheck()) &&
+                      wonStageCheck() &&
                       secondPlayerAllowed() &&
                       saveProtection()
 )
@@ -1825,12 +1871,84 @@ for categoryId in BG_CATEGORY_LOOKUP
 
 }
 
-Beat all the challenge modes, probably to a higher level then required.
+achievement(name = "Solo Run",
+                description = format("Beat a level with 0 bodyguards"),
+                points = 2,
+                trigger =  IsInMusouModeOrFreeMode() && 
+                           trigger_when(justWonStageCheck()) &&
+                           saveProtection() &&
+                           NumberBodyGuardsSelected() == 0 &&
+                           BodyguardID() == TRADITIONAL_BODYGUARD_ID
+)
 
-Combo Point achievements (Basically a tutorial for Item break)
 
-No Bodyguard run
+achievement(name = "Solo Run Very Hard Edition",
+                description = format("Beat a level with 0 bodyguards on Very Hard"),
+                points = 2,
+                trigger =  IsInMusouModeOrFreeMode() && 
+                           trigger_when(justWonStageCheck()) &&
+                           saveProtection() &&
+                           NumberBodyGuardsSelected() == 0 &&
+                           BodyguardID() == TRADITIONAL_BODYGUARD_ID &&
+                           DifficultyLookupValueAndAbove(VERY_HARD_DIFFICULTY_LOOKUP_VALUE)
+)
 
-Married Couple Runs 
+ACHIEVEMENT_NAME = "THE_HOLY_COUPLE"
+FIRST_NAME = "FIRST_NAME"
+SECOND_NAME = "SECOND_NAME"
 
-Leaderboards
+MarriedCoupleLists = 
+[
+    { ACHIEVEMENT_NAME: "United in the Southlands", FIRST_NAME:SUN_CE_ID, SECOND_NAME:DA_QIAO_ID },
+    { ACHIEVEMENT_NAME: "Phoenix and the Beauty", FIRST_NAME:ZHOU_YU_ID, SECOND_NAME:XIAO_QIAO_ID},
+    { ACHIEVEMENT_NAME: "The Marriage of Kingdom", FIRST_NAME:LIU_BEI_ID, SECOND_NAME:SUN_SHANG_XIANG_ID},
+    { ACHIEVEMENT_NAME: "Heart of the Emperor", FIRST_NAME:CAO_PI_ID, SECOND_NAME:ZHEN_JI_ID },
+    { ACHIEVEMENT_NAME: "Beauty and the Beast", FIRST_NAME:LU_BU_ID, SECOND_NAME:DIAO_CHAN_ID },
+    { ACHIEVEMENT_NAME: "Blinded by Beauty", FIRST_NAME:DONG_ZHUO_ID, SECOND_NAME:DIAO_CHAN_ID },
+    { ACHIEVEMENT_NAME: "Fire and Fury", FIRST_NAME:MENG_HUO_ID, SECOND_NAME:ZHU_RONG_ID },
+    { ACHIEVEMENT_NAME: "God-Tier Romance", FU_XI_ID, NU_WA_ID}
+]
+
+for data in MarriedCoupleLists
+{
+    achievement(name = data[ACHIEVEMENT_NAME],
+                description = format("Beat a level while playing as {0} with {1} as a bodyguard, or vice versa", CharacterNameLookup[data[FIRST_NAME]], CharacterNameLookup[data[SECOND_NAME]]),
+                points = 5,
+                trigger = IsInMusouModeOrFreeMode() && 
+                          trigger_when(justWonStageCheck()) &&
+                          saveProtection() &&
+                          (( CurrentPlayerID() == data[FIRST_NAME] &&
+                           BodyguardID() == data[SECOND_NAME]) ||
+                            (CurrentPlayerID() == data[SECOND_NAME] && 
+                            BodyguardID() == data[FIRST_NAME]))
+}
+
+achievement( name = "Taking Down the Strongest ",
+             description = "Get LuBu's third outfit",
+             points = 25,
+             trigger = IsInMusouModeFreeModeOrChallengeMode() &&
+                       justUnlockedLuBuThirdOutfit() && 
+                       saveProtection() &&
+                       wonStageCheck() &&
+                       secondPlayerAllowed()
+)
+
+achievement( name = "Was it Worth it?",
+             description = "Get Sun Shang Xiang's third outfit",
+             points = 25,
+             trigger = IsInMusouModeFreeModeOrChallengeMode() &&
+                       justUnlockedSunShangXiangThirdOutfit() && 
+                       saveProtection() &&
+                       wonStageCheck() &&
+                       secondPlayerAllowed()
+)
+
+// Leaderboards
+
+Leaderbboard
+
+
+
+Change the Missions to per level. 
+
+REal presence
