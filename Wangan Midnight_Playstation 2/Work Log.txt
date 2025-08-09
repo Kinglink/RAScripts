@@ -1,0 +1,85 @@
+Starting something new.  This is a work log for the Wangan Midnight Playstation 2 game translation project, mostly because I'll probably want to make a video on this and forget a LOT of what I did, like I did with TXR3 and the year between finishing the project, and making a video. 
+
+So let's log what I think is important here. 
+
+
+Day 1 8/6/2025
+
+Unzipped the ISO.  REalized the .000 is the target file needed to unzip. 
+
+Tried multiple program
+
+Reached out to the Ivan Genki Unpackter Tool. on Git. 
+
+
+Day 2.   8/7/2025
+
+Got a working file for quickBMS. 
+
+Found Tm2s.  
+
+Unpacked those with Noesis, 
+
+Couldn't find the game over textures. 
+
+Found a few names. 
+
+Downloaded Rainbow
+
+Plan for tomorrow is to use Rainbow to modify ONE file, do a full unzip and rezip and try to change one or two images.   Hopefully Character names. 
+
+
+
+Day 3  8/8/2025
+Going to create the unzip and recreate files. (unfortunately the later is manual with apache right now) .
+
+But May run into issues with file size changing.  Let's not worry about that yet, first attempt is name changing 
+
+So we're using Apache as well right now. 
+
+
+End Day 3.   8/8/2025
+
+Ok so I got it work.  This is going to be a lot of work and has a HUGE limit, but here's what I did when successful. 
+
+Unpack the ISO with 7zip, this step DOES NOT MATTER.  I just need access to the CDDATA.000 File. 
+
+From there I used QuickBMS with the Tokyo Xtreme Racer zero script to unpack the CDDATA.000 file.   
+(NOte the wangan midnight script will NOT work, that uses the same system as the Genki Unpacker Tool from above.)  TXR Zero script works great. 
+
+That gives us a folder with a bunch of TM2 files.  
+
+From there I used Rainbow to open the Tm2 folder and then the file I want, I exported the images.   
+
+I edited the image in GIMP, I just wrote "REINA" over it.  I had found the image because of exports before that I dumped out from Noesis but remember that can't import it (Or supposidly it can but I couldn't make it work). 
+
+Once the image was edited, I then imported the image back into Rainbow and saved the file. 
+
+NOTE! IN the next step I say you have to use the same directories as the quickBMS Unpack.  That's because you appear to HAVE to, if you move the files around, it appears to fail. DO NOT DO THAT. 
+
+From there I used quickBMS and used -w -r with the same parameters as the unpack to rezip the files.  The directories MUST be the same, otherwise this fails? 
+
+Then I take the modified CDDATA.000 (check the modified date just in case).  And added it with Apache to the ISO.  
+
+NOTE: This failed after doing it a second time on the same file?  Might need a clean ISO, be careful with that. 
+
+Finally, load the new ISO, (Hashes the same) and ... BAM new image, where I wanted it. 
+
+Things that might be useful: 
+- Documenting what each TM2 file is for. 
+- Creating a overlay, so the TM2 files can be exported, and the change files copied over.  Just in case the work in progress is lost, the changed files will not be. 
+
+Things I need to do: 
+- Find out if all the text is in the TM2 files (Appears to be no)
+- Find out HOW PS2 games handle text in the data. 
+- Look in the Data and try to find some of the text. (use Reina's Name maybe?  Or the "PS2 Boot information" text.   Hopefully that's in Ascii, if not... Well that'll make thing MUCH harder.
+- Look for "How to translate PS2 Games" THat might be useful when digging in memory. 
+
+Things that will be needed:  
+- Translator (maybe)
+- Artist to clean up images (mandatory) 
+- Someone who did this before? (Maybe) 
+
+Next step I think will be to figure out the additional text locations, once that's settled, that might be everything I need.  However we WILL have issues with text length.  There's also the potential that the size of the CDDATA.000 will change and change the disks' LBA.  If that happens, this gets a lot more complicated..  But I believe the file is near the end of the disk so i might not be a real issue. 
+
+May take a couple days to try to finish off DW3 XL, but I might be tempted to take another peak.  We'll see. 
