@@ -162,8 +162,8 @@ CHARACTER_MEMORY_OFSET = GUAN_YU_EXPERIENCE_MEMORY_LOCATION - ZHAO_YUN_EXPERIENC
 function StoredItemsArray() => byte(0x2B0350)
 STARTING_ITEM_MEMORY_LOCATION = 0x2B0350
 
-function itemLevelLookup(itemId) => STARTING_ITEM_MEMORY_LOCATION + itemId * 2 + 1
-function itemIdLookup(itemId) => STARTING_ITEM_MEMORY_LOCATION + itemId * 2
+function itemLevelLookup(itemId) => byte(STARTING_ITEM_MEMORY_LOCATION + itemId * 2 + 1)
+function itemIdLookup(itemId) => byte(STARTING_ITEM_MEMORY_LOCATION + itemId * 2)
 
 // Common Items ID 
 SPEED_SCROLL_ID = 0x00
@@ -178,7 +178,7 @@ HORNED_HELMET_ID = 0x08
 CAVALRY_ARMOR_ID = 0x09
 SEVEN_STAR_ORB_ID = 0x0a
 WIND_SCROLL_ID = 0x0b
-ELIXIR = 0x0c
+ELIXER_ID = 0x0c
 
 // Rare items
 RED_HARE_ID = 0x0d
@@ -215,7 +215,7 @@ INVALID_ITEM_ID = 0x28
 FIRST_NEW_BLUE_ITEM_ID = MOUNTAIN_QUIVER_ID
 LAST_NEW_BLUE_ITEM_ID = BRONZE_FLASK_ID
 
-FIRST_NEW_RED_ITEM_ID = DIVINE_HELM_ID_ID
+FIRST_NEW_RED_ITEM_ID = DIVINE_HELM_ID
 LAST_NEW_RED_ITEM_ID = MUSOU_ARMOR_ID
 
 ItemNameLookup = 
@@ -232,7 +232,7 @@ ItemNameLookup =
     CAVALRY_ARMOR_ID : "Cavalry Armor",
     SEVEN_STAR_ORB_ID : "Seven Star Orb",
     WIND_SCROLL_ID : "Wind Scroll",
-    ELIXIR : "Elixir",
+    ELIXER_ID : "Elixer",
     RED_HARE_ID : "Red Hare Saddle",
     HEXMARK_SADDLE_ID : "Hex Mark Saddle",
     IMPERIAL_SADDLE_ID : "Imperial Saddle",
@@ -854,8 +854,8 @@ function BGEquipmentArray() => word(0x2B13A8)
 
 BGEQUIPMENT_MEMORY_LOCATION = 0x2B13A8
 
-function bgItemsLevelLookup(itemId) => BGEQUIPMENT_MEMORY_LOCATION + itemId * 2 + 1
-function bgItemsIdLookup(itemId) => BGEQUIPMENT_MEMORY_LOCATION + itemId * 2
+function bgItemsLevelLookup(itemId) => byte(BGEQUIPMENT_MEMORY_LOCATION + itemId * 2 + 1)
+function bgItemsIdLookup(itemId) => byte(BGEQUIPMENT_MEMORY_LOCATION + itemId * 2)
 
 BG_PEACOCK_URN_ID = 0x00
 BG_DRAGON_AMULET_ID = 0x01
@@ -865,11 +865,11 @@ BG_HUANGS_BOW_ID = 0x04
 BG_SHELL_ARMOR_ID = 0x05
 BG_SPEED_SCROLL_ID = 0x06
 BG_WIND_SCROLL_ID = 0x07
-BG_ELIXIR_ID = 0x08
+BG_ELIXER_ID = 0x08
 BG_HEALING_SCROLL_ID = 0x09
 
-BodyguardCommonItems = range(BG_PEACOCK_URN_ID, BG_ELXIER_ID)
-BodyguardRedItems = [BG_HEALING_SCROLL_ID])
+BodyguardCommonItems = range(BG_PEACOCK_URN_ID, BG_ELIXER_ID)
+BodyguardRedItems = [BG_HEALING_SCROLL_ID]
 
 Bodyguard_Item_lookup =
 {
@@ -881,7 +881,7 @@ Bodyguard_Item_lookup =
     BG_SHELL_ARMOR_ID : "BG Shell Armor",
     BG_SPEED_SCROLL_ID : "BG Speed Scroll",
     BG_WIND_SCROLL_ID : "BG Wind Scroll",
-    BG_ELIXIR_ID : "BG Elixer",
+    BG_ELIXER_ID : "BG Elixer",
     BG_HEALING_SCROLL_ID : "BG Healing Scroll"
 }
 
@@ -946,7 +946,7 @@ function FirstBodyguardWeaponValue() => byte(0x2B13CB)
 
 BODYGUARD_WEAPON_MEMORY_LOCATION = 0x2B13CB
 
-function BGWeaponOwnedCheck(index) => byte(BODYGUARD_WEAPON_MEMORY_LOCATION + (SIZE_OF_BG_WEAPON * index) + ) == index
+function BGWeaponOwnedCheck(index) => byte(BODYGUARD_WEAPON_MEMORY_LOCATION + (SIZE_OF_BG_WEAPON * index)) == index
 
 
 IRON_SWORD_ID = 0x00
@@ -1002,6 +1002,185 @@ BG_CATEGORY_LOOKUP =
 // There's three in a category, but you immediately get the first. 
 function BGCategorytoArray(category) => [category * 3 + 1, category * 3 + 2]
 
+// $2B15D4: (32-bit) First Bodyguard Unit Experience
+//
+// Experience goes up to 99999. This updates after the count up (but before the save).
+//
+// Bodyguard Experience Milestones:
+//   1000    - +1 Defense
+//   2000    - +1 Defense
+//   4000    - +1 Defense
+//   6000    - +1 Rank
+//   8000    - +1 Defense
+//  10000    - +1 Rank
+//  13000    - +1 Defense
+//  16000    - +1 Rank
+//  19000    - +1 Defense
+//  23000    - +1 Defense
+//  25000    - Increase to 4 bodyguards
+//  27000    - +1 Defense
+//  30000    - "Fighter" Title
+//  31000    - +1 Defense
+//  35000    - +1 Defense
+//  39000    - +1 Defense
+//  44000    - +1 Attack
+//  49000    - +1 Life/Musou
+//  50000    - Increase to 6 bodyguards
+//  54000    - +1 Attack
+//  59000    - +1 Life/Musou
+//  60000    - "Warrior" Title
+//  64000    - +1 Attack
+//  69000    - +1 Life/Musou
+//  75000    - Increase to 8 bodyguards
+//  75000    - +1 Attack
+//  81000    - +1 Life/Musou
+//  87000    - +1 Attack
+//  90000    - "Elite" Title
+//  93000    - +1 Life/Musou
+//  99999    - +1 Attack
+
+function FirstBodyguardUnitExperience() => dword(0x2B15D4)
+FIRST_BODYGUARD_EXPERIENCE_MEMORY_LOCATION = 0x2B15D4
+
+// $2B1684: (32-bit) Second Bodyguard Unit Experience
+SECOND_BODYGUARD_EXPERIENCE_MEMORY_LOCATION = 0x2B1684
+BODYGUARD_EXPERIENCE_OFFSET = 0xB0
+
+function BodyguardExperienceLookup(index) => FIRST_BODYGUARD_EXPERIENCE_MEMORY_LOCATION + (index * BODYGUARD_EXPERIENCE_OFFSET)
+
+function justPassedExperienceLevel(target) => any_of(range (0, 3), i => prev(dword(BodyguardExperienceLookup(i))) < target && dword(BodyguardExperienceLookup(i)) >= target)
+
+BODYGUARD_TITLES = 
+{
+    30000 : "Fighter",
+    60000 : "Warrior",
+    90000 : "Elite"
+}
+
+MAX_BODYGUARD_EXPERIENCE = 99999
+
+
+// $2D0398: (32-bit): Player's faction during stage.
+//
+//          Changing this modifies the team's name on the pause menu.
+//
+//          Values:
+//          0x00 = Han Forces
+//          0x01 = Allied Forces
+//          0x02 = Wei Forces
+//          0x03 = Wu Forces
+//          0x04 = Shu Forces
+//          0x05 = Yellow Turbans
+//          0x06 = Nanman Forces
+//          0x07 = Cao Cao's Forces
+//          0x08 = Sun Jian's Forces
+//          0x09 = Sun Ce's Forces
+//          0x0a = Sun Quan's Forces
+//          0x0b = Liu Bei's Forces
+//          0x0c = Guan Yu's Forces
+//          0x0d = Dong Zhuo's Forces
+//          0x0e = Yuan Shao's Forces
+//          0x0f = Zhang Xiu's Forces
+//          0x10 = Liu Biao's Forces
+//          0x11 = Liu Zhang's Forces
+//          0x12 = Bandits
+//          0x13 = Rogues
+//          0x14 = Pirates
+//          0x15 = Diao Chan's Forces
+//          0x16 = Lu Bu's Forces
+//          0x17 = Nanman Forces (again)
+//          0x18 = Nanman Forces (third time)
+function PlayerFaction() => dword(0x2D0398)
+
+
+// Faction IDs
+NO_FACTION_ID = 0xff
+HAN_FORCES_FACTION_ID = 0x00 
+ALLIED_FORCES_FACTION_ID = 0x01 
+WEI_FORCES_FACTION_ID = 0x02 
+WU_FORCES_FACTION_ID = 0x03 
+SHU_FORCES_FACTION_ID = 0x04 
+YELLOW_TURBAN_FACTION_ID = 0x05 
+NANMAN_FORCES_FACTION_ID = 0x06 
+CAO_CAO_FORCES_FACTION_ID = 0x07 
+SUN_JIAN_FORCES_FACTION_ID = 0x08 
+SUN_CE_FORCES_FACTION_ID = 0x09 
+SUN_QUAN_FORCES_FACTION_ID = 0x0a 
+LIU_BEI_FORCES_FACTION_ID = 0x0b 
+GUAN_YU_FORCES_FACTION_ID = 0x0c 
+DONG_ZHUO_FORCES_FACTION_ID = 0x0d 
+YUAN_SHAO_FORCES_FACTION_ID = 0x0e 
+ZHANG_XIU_FORCES_FACTION_ID = 0x0f 
+LIU_BIAO_FORCES_FACTION_ID = 0x10 
+LIU_ZHANG_FORCES_FACTION_ID = 0x11 
+BANDITS_FACTION_ID = 0x12 
+ROGUES_FACTION_ID = 0x13 
+PIRATES_FACTION_ID = 0x14 
+DIAO_CHAN_FORCES_FACTION_ID = 0x15
+LU_BU_FORCES_FACTION_ID = 0x16
+MENG_HUO_FORCES_FACTION_ID = 0x17 // Listed asz Nanman Forces Siege of He Fei, but this is Meng Huo's forces in the game.
+ZHU_RONG_FORCES_FACTION_ID = 0x18 // Listed as Nanman Forces in the game, but this is Zhu Rong's Forces are used in the game.  This is the one that appears in the Battle of He Fei.
+
+// Faction Names
+FactionNameLookup = 
+{
+    HAN_FORCES_FACTION_ID: "Han",
+    ALLIED_FORCES_FACTION_ID: "Allies",
+    WEI_FORCES_FACTION_ID: "Wei",
+    WU_FORCES_FACTION_ID: "Wu",
+    SHU_FORCES_FACTION_ID: "Shu",
+    YELLOW_TURBAN_FACTION_ID: "Yellow Turbans",
+    NANMAN_FORCES_FACTION_ID: "Nanman",
+    CAO_CAO_FORCES_FACTION_ID: "Cao Cao",
+    SUN_JIAN_FORCES_FACTION_ID: "Sun Jian",
+    SUN_CE_FORCES_FACTION_ID: "Sun Ce",
+    SUN_QUAN_FORCES_FACTION_ID: "Sun Quan",
+    LIU_BEI_FORCES_FACTION_ID: "Liu Bei",
+    GUAN_YU_FORCES_FACTION_ID: "Guan Yu",
+    DONG_ZHUO_FORCES_FACTION_ID: "Dong Zhuo",
+    YUAN_SHAO_FORCES_FACTION_ID: "Yuan Shao",
+    ZHANG_XIU_FORCES_FACTION_ID: "Zhang Xiu",
+    LIU_BIAO_FORCES_FACTION_ID: "Liu Biao",
+    LIU_ZHANG_FORCES_FACTION_ID: "Liu Zhang",
+    BANDITS_FACTION_ID: "Bandits",
+    ROGUES_FACTION_ID: "Rogues",
+    PIRATES_FACTION_ID: "Pirates",
+    DIAO_CHAN_FORCES_FACTION_ID: "Diao Chan",
+    LU_BU_FORCES_FACTION_ID: "Lu Bu",
+    MENG_HUO_FORCES_FACTION_ID: "Meng Huo",
+    ZHU_RONG_FORCES_FACTION_ID: "Zhu Rong"
+}
+
+FactionForcesLookup = 
+{
+    HAN_FORCES_FACTION_ID: "Han Forces",
+    ALLIED_FORCES_FACTION_ID: "Allied Forces",
+    WEI_FORCES_FACTION_ID: "Wei Forces",
+    WU_FORCES_FACTION_ID: "Wu Forces",
+    SHU_FORCES_FACTION_ID: "Shu Forces",
+    YELLOW_TURBAN_FACTION_ID: "Yellow Turbans",
+    NANMAN_FORCES_FACTION_ID: "Nanman Forces",
+    CAO_CAO_FORCES_FACTION_ID: "Cao Cao's Forces",
+    SUN_JIAN_FORCES_FACTION_ID: "Sun Jian's Forces",
+    SUN_CE_FORCES_FACTION_ID: "Sun Ce's Forces",
+    SUN_QUAN_FORCES_FACTION_ID: "Sun Quan's Forces",
+    LIU_BEI_FORCES_FACTION_ID: "Liu Bei's Forces",
+    GUAN_YU_FORCES_FACTION_ID: "Guan Yu's Forces",
+    DONG_ZHUO_FORCES_FACTION_ID: "Dong Zhuo's Forces",
+    YUAN_SHAO_FORCES_FACTION_ID: "Yuan Shao's Forces",
+    ZHANG_XIU_FORCES_FACTION_ID: "Zhang Xiu's Forces",
+    LIU_BIAO_FORCES_FACTION_ID: "Liu Biao's Forces",
+    LIU_ZHANG_FORCES_FACTION_ID: "Liu Zhang's Forces",
+    BANDITS_FACTION_ID: "Bandits",
+    ROGUES_FACTION_ID: "Rogues",
+    PIRATES_FACTION_ID: "Pirates",
+    DIAO_CHAN_FORCES_FACTION_ID: "Diao Chan's Forces",
+    LU_BU_FORCES_FACTION_ID: "Lu Bu's Forces",
+    MENG_HUO_FORCES_FACTION_ID: "Meng Huo's Forces",
+    ZHU_RONG_FORCES_FACTION_ID: "Zhu Rong's Forces"
+}
+
+
 
 // $2D0640: (32-bit) Main Player Pointer
 //          
@@ -1009,6 +1188,30 @@ function BGCategorytoArray(category) => [category * 3 + 1, category * 3 + 2]
 //          
 //          Note other locations appear to be 0x003022d0, 0x0030262c, 0x00334968, 0x003497b0, 0x004b03c 0,0x004b03c4
 function MainPlayerPointer() => byte(0x2D0640)
+// $2D0760: (32-bit) Loading Musou stage indicator 1
+//
+//          This is the indicators for when loading a stage (continuing)
+//          0x0440 = Loading musou Stage. Maybe others
+function LoadingMusouStageIndicator1() => dword(0x2D0760)
+
+// $2D0760: (32-bit) Loading Musou stage indicator 1
+//
+//          This is the indicator for when loading a stage (continuing)
+//          0x0440 = Loading Musou Stage. Maybe others
+function LoadingMusouStageIndicator1() => dword(0x2D0760)
+LOADING_MUSOU_STAGE_INDICATOR1_VALUE = 0x0440
+
+// $2D0768: (32-bit) Loading Musou stage indicator 2
+//
+//          This is the indicator for when loading a stage (continuing)
+//          0x01c0 = Loading Musou Stage. Maybe others
+function LoadingMusouStageIndicator2() => dword(0x2D0768)
+LOADING_MUSOU_STAGE_INDICATOR2_VALUE = 0x01c0
+
+// Helper function to check if both Musou stage indicator is loading
+function IsLoadingMusouStage() => 
+    LoadingMusouStageIndicator1() == LOADING_MUSOU_STAGE_INDICATOR1_VALUE &&
+    LoadingMusouStageIndicator2() == LOADING_MUSOU_STAGE_INDICATOR2_VALUE
 
 
 // $2D07AC: (8-bit) Xtreme Mode Indicator.
@@ -1024,21 +1227,53 @@ XTREME_MODE_ID = 0x01
 
 function IsOriginalMode() => XtremeModeIndicator() == ORIGINAL_MODE_ID
 function IsXtremeMode() => XtremeModeIndicator() == XTREME_MODE_ID
-// $2D0E0C: (32-bit) Demo Mode indicator.
+// $2D0E64: (32-bit) Alternate Demo Indicator
 //
-//          If you are in the game this is set to 0x10.
-//          0x00 = Demo mode, player has never tried to start the game.
-//          0x01-0x045e (or higher): Game is counting up when user has input SOME input on the main menu.
-//          0x0010 = Game is in game.
+//          0x0000 = In game or menu
+//          0x0395 = In demo (or video)
+//          Other values: counting up to 0x0395.
+//          May be 0x10 or 0x13 on entering a game
+function DemoIndicator() => dword(0x2D0E64)
+
+DEMO_VALUE = 0x0395
+
+function IsDemoMode() => DemoIndicator() == DEMO_VALUE
+function IsInGame() => DemoIndicator() != DEMO_VALUE
+
+// $2D13EC: (8-bit) Challenge Mode for Xtreme Mode selector
 //
-//          Note: 0x0010 is part of 0x01-0x045e, but it's only a frame of overlap.
-function DemoModeIndicator() => dword(0x2D0E0C)
+//          0x00 = Speed Demon
+//          0x01 = Balancing Act
+//          0x02 = Combo Master
+//          0x03 = Iron Man
+//
+//          0x2D141C or 0x2D142C may also be relevant.
+//
+//          Note: The Original mode also works here, but achievements are only for Xtreme mode.
+//          Use 0x2D07AC to check if this is Xtreme mode.
+function ChallengeModeSelector() => byte(0x2D13EC)
 
-IN_GAME_VALUE = 0x10
+XtremeChallengeLookUp = 
+{
+    0x00 : "Speed Demon",
+    0x01 : "Balancing Act",
+    0x02 : "Combo Master",
+    0x03 : "Iron Man"
+}
 
-function IsDemoMode() => DemoModeIndicator() != IN_GAME_VALUE
-function IsInGame() => DemoModeIndicator() == IN_GAME_VALUE
+OriginalChallengeLookUp = 
+{
+    0x00 : "Endurance",
+    0x01 : "Time Attack"
+}
 
+// $334900: (32-bit) Time for current stage
+//
+//          60 Frames per second
+function getStageTime() => dword(0x334900)
+
+// Helper to get seconds elapsed in the current stage
+function getSecondsElapsed() => getStageTime() / 60
 
 // $33490D: (8-bit) Map/Level Index
 //          
@@ -1105,6 +1340,7 @@ BATTLE_AT_WU_ZHANG_PLAINS_STAGE_ID = 0x13
 MOUNTAIN_BANDIT_CAMPAIGN_STAGE_ID = 0x14
 RAID_ON_THE_ROGUE_FORTRESS_STAGE_ID = 0x15
 PIRATE_ATTACK_ON_THE_HIGH_SEAS_STAGE_ID = 0x16
+OUT_OF_BOUNDS_STAGE_ID = 0x17 
 
 OriginalMapNameLookup = 
 {
@@ -1159,6 +1395,15 @@ XtremeMapNameLookup =
     RAID_ON_THE_ROGUE_FORTRESS_STAGE_ID : "Raid on the Rogue Fortress",
     PIRATE_ATTACK_ON_THE_HIGH_SEAS_STAGE_ID : "Pirate Attack on the High Seas" 
 }
+
+
+// $334944: (32-bit) First Player K.O. Count
+//
+//          Set to 0 on entering a stage, and counts up on each kill.
+//          There's a similar number at 0x471924, but this is the main counter.
+//          Also used for the Knock outs in Challenge Xtreme Balancing Act.
+function getFirstPlayerStageKillCount() => dword(0x334944)
+
 
 // $334970: (8-bit) Current Player Index.
 //          
@@ -1298,7 +1543,10 @@ CharacterNameLookup =
 
 
 // $334997: (8-bit) Number of Bodyguards selected
-function NumberBodyGuardsSelected() => byte(0x334997)
+function NumberBodyGuardsSelected() => byte(0x334996)
+
+// $334A00: (8-bit) Second Player.  (used for Real Presence)
+function SecondPlayer() => byte(0x334A00)
 
 // $334A0C: (8-bit) Control Value for 2 Player
 //          
@@ -1311,6 +1559,7 @@ function TwoPlayerIndicator() => byte(0x334A0C)
 SINGLE_PLAYER_VALUE = 0x00
 
 function isSinglePlayer() => TwoPlayerIndicator() == SINGLE_PLAYER_VALUE
+function isTwoPlayerMode() => TwoPlayerIndicator() != SINGLE_PLAYER_VALUE
 
 // $334AF1: (8-bit) Stage Index for Musou Mode
 //          
@@ -1318,7 +1567,7 @@ function isSinglePlayer() => TwoPlayerIndicator() == SINGLE_PLAYER_VALUE
 //          0x02 = Second level
 //          0x06 = Seventh Stage
 //          0x07 = Musou Finished. (Note this is for 7 stage characters)
-function stageIndex() => byte(0x334AF1)
+function howManStagesBeat() => byte(0x334AF1)
 
 function isFactionLeader(characterIndex) => characterIndex == SUN_JIAN_ID || 
                                             characterIndex == CAO_CAO_ID || 
@@ -1339,10 +1588,12 @@ function numberofMusouStages(characterIndex)
     }
 }
 
-function isMusouModeComplete(characterIndex) => Stageindex() >= numberofMusouStages(characterIndex) &&
-                                                prev(Stageindex()) >= numberofMusouStages(characterIndex) - 1
+function isMusouModeComplete(characterIndex) => howManStagesBeat() >= numberofMusouStages(characterIndex) &&
+                                                prev(howManStagesBeat()) == numberofMusouStages(characterIndex) - 1
 
-
+function leaderboardCompleteCheck(characterIndex) => (howManStagesBeat() == 10 || 
+                                        (!isFactionLeader(characterIndex) && 
+                                         howManStagesBeat() == 7))
 // $334AF4: (4-bit Low) Gameplay mode
 //          
 //          This does not get cleared when returning to main menu with select+Start quick reset.
@@ -1406,7 +1657,7 @@ function DifficultyLookupValue(LookupValue)
     }
     else if (LookupValue == EASY_DIFFICULTY_LOOKUP_VALUE)
     {
-        return (not isNoviceMode()) && DifficultyInGame() == EASY_DIFFICULTY_REAL_VALUE
+        return ( !isNoviceMode()) && DifficultyInGame() == EASY_DIFFICULTY_REAL_VALUE
     }
     else if (LookupValue == NORMAL_DIFFICULTY_LOOKUP_VALUE)
     {
@@ -1463,6 +1714,14 @@ DifficultyNameLookup =
     VERY_HARD_DIFFICULTY_LOOKUP_VALUE : "Very Hard"
 }
 
+RPDifficultyNameLookup =
+{
+    EASY_DIFFICULTY_REAL_VALUE : "Easy",
+    NORMAL_DIFFICULTY_REAL_VALUE : "Normal",
+    HARD_DIFFICULTY_REAL_VALUE : "Hard",
+    VERY_HARD_DIFFICULTY_REAL_VALUE : "Very Hard"
+}
+
 // $587B94: (32-bit) Possible Win/Loss Indicator.
 //          
 //          0xffffffff = Main game
@@ -1474,15 +1733,15 @@ DifficultyNameLookup =
 //          Also can use 0x00587c35, 0x00588055, 0x005880f5
 function WinLossIndicator() => dword(0x587B94)
 
-MAIN_GAMEPLAY_WIN_VALUE = 0xFFFFFFFF
-WON_MATCH_VALUE = 0x000001FC
+MAIN_GAMEPLAY_VALUE = 0xFFFFFFFF
+WON_MATCH_VALUE = 0x00000FC
 TIME_OUT_VALUE = 0x000002FC
 DIED_VALUE = 0x000003FC
 
 function justWonStageCheck()
 {
     return WinLossIndicator() == WON_MATCH_VALUE &&
-           prev(WinLossIndicator()) != MAIN_GAMEPLAY_WIN_VALUE
+           prev(WinLossIndicator()) == MAIN_GAMEPLAY_VALUE
 
 }
 
@@ -1529,105 +1788,105 @@ MusouModeData =
                     HARD_MUSOU_ACHIEVEMENT_ID : "Master of the Way Of Peace",
                     VERY_HARD_MUSOU_ACHIEVEMENT_ID : "The Yellowest Turban",
     },
-    MENG_HUO_ID: { MUSOU_ACHIEVEMENT_ID : "King Meng Hu", 
+    MENG_HUO_ID: { MUSOU_ACHIEVEMENT_ID : "King Meng Huo", 
                     HARD_MUSOU_ACHIEVEMENT_ID : "Great King",
                     VERY_HARD_MUSOU_ACHIEVEMENT_ID : "He Puts the Man in Nanman",
     },
     ZHU_RONG_ID: { MUSOU_ACHIEVEMENT_ID : "Lady Zhurong", 
                     HARD_MUSOU_ACHIEVEMENT_ID : "Goddess of Fire",
                     VERY_HARD_MUSOU_ACHIEVEMENT_ID : "Queen of Nanzhong",
-    }
-    ZHAO_YUN_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Thousand Man General"}
-    GUAN_YU_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The God of War"} 
-    ZHANG_FEI_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Angry Brother"}
-    XIAHOU_DUN_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "One Eyed General"}
-    DIAN_WEI_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "Axe Man"}
-    XU_ZHU_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "Tiger Fool "}
-    ZHOU_YU_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "Soy Sauce"}
-    LU_XUN_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Tactician of Wu"}
-    TAISHI_CI_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "You'll find me between the Clubs"}
-    ZHUGE_LIANG_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "Feather Fan"}
-    CAO_CAO_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Warlord"}
-    SUN_SHANG_XIANG_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "SSX"}
-    LIU_BEI_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Benevolent"}
-    SUN_JIAN_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Old Tiger"}
-    SUN_QUAN_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Little Conquerer"}
-    MA_CHAO_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Horseman"}
+    },
+    ZHAO_YUN_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Thousand Man General"},
+    GUAN_YU_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The God of War"} ,
+    ZHANG_FEI_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Angry Brother"},
+    XIAHOU_DUN_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "One Eyed General"},
+    DIAN_WEI_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "Axe Man"},
+    XU_ZHU_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "Tiger Fool "},
+    ZHOU_YU_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "Soy Sauce"},
+    LU_XUN_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Tactician of Wu"},
+    TAISHI_CI_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "You'll Find Me Between the Clubs"},
+    ZHUGE_LIANG_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "Feather Fan"},
+    CAO_CAO_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Warlord"},
+    SUN_SHANG_XIANG_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "SSX"},
+    LIU_BEI_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Benevolent"},
+    SUN_JIAN_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Old Tiger"},
+    SUN_QUAN_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Little Conquerer"},
+    MA_CHAO_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Horseman"},
     HUANG_ZHONG_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Old Archer of Shu"},
-    XIAHOU_YUAN_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Skilled Archer of Wei"}
-    ZHANG_LIAO_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Forgiven General"}
-    SIMA_YI_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Last Man Standing"}
-    LU_MENG_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Pikeman"}
-    GAN_NING_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Pirate"}
-    JIANG_WEI_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Entrusted Strategist"}
-    XU_HUANG_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Polearm General"}
-    ZHANG_HE_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Flamboyant General"}
-    ZHEN_JI_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Lady of Wei}
-    HUANG_GAI_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "Full Package"}
-    SUN_CE_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "Elder Brother"}
-    WEI_YAN_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Taciturn General"}
-    PANG_TONG_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Clever Strategist"}
-    DA_QIAO_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "Elder Sister"}
+    XIAHOU_YUAN_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Skilled Archer of Wei"},
+    ZHANG_LIAO_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Forgiven General"},
+    SIMA_YI_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Last Man Standing"},
+    LU_MENG_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Pikeman"},
+    GAN_NING_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Pirate"},
+    JIANG_WEI_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Entrusted Strategist"},
+    XU_HUANG_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Polearm General"},
+    ZHANG_HE_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Flamboyant General"},
+    ZHEN_JI_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Lady of Wei"},
+    HUANG_GAI_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "Full Package"},
+    SUN_CE_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "Elder Brother"},
+    WEI_YAN_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Taciturn General"},
+    PANG_TONG_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "The Clever Strategist"},
+    DA_QIAO_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "Elder Sister"},
     XIAO_QIAO_ID: { VERY_HARD_MUSOU_ACHIEVEMENT_ID: "Younger Sister"}  
 }
 
 
-function SaveProtection() => isNotLoading() && !isTwoPlayerMode() && IsInGame()
+function saveProtection() => isNotLoading() && !IsLoadingMusouStage() && !isTwoPlayerMode() && IsInGame()
 
 
-achievement(name = "Let's Get Xtreme!",
-                description = format("Beat a level, any level!"),
+achievement(title = "Let's Get Xtreme!",
+                description = "Beat a level, any level!",
                 points = 2,
                 trigger =  IsInMusouModeOrFreeMode() && 
                            justWonStageCheck() &&
-                           saveProtection()
+                           saveProtection(),
                 type = "progression"
 )
 
 
 
-function CreateMusouModeAchievement(characterIndex)
+function createMusouModeAchievement(characterIndex)
 {
-    achievement(name = MusouModeData[characterIndex][MUSOU_ACHIEVEMENT_ID],
-                description = format("Beat {0}'s Musou Mode on any difficulty", CharacterNameLookup[characterIndex])
-                points = 5,
+    achievement(title = MusouModeData[characterIndex][MUSOU_ACHIEVEMENT_ID],
+                description = format("Beat {0}'s musou mode on any difficulty", CharacterNameLookup[characterIndex]),
+                points = 10,
                 trigger = IsInMusouMode() &&
-                          isMusouModeComplete() &&
-                          SaveProtection() &&
+                          isMusouModeComplete(characterIndex) &&
+                          saveProtection() &&
                           CurrentPlayerID() == characterIndex,
                 type = "progression"
                 )
 }
 
-function createDifficultyMusouModeAchievement(characterIndex, title, targetDifficultyLookupValue)
+function createDifficultyMusouModeAchievement(characterIndex, title, targetDifficultyLookupValue,points)
 {
-    targetMusouStages = numberofMusouStages(characterIndex)
-    achievement(name = title
-                description = format("Beat {0}'s Musou Mode on {1}", CharacterNameLookup[characterIndex], DifficultyNameLookup[targetDifficultyValue]),
-                points = 10,
-                trigger = measured(tally_of(range(1,targetMusouStages), 
-                                            targetMusouStages,  
-                                            index => once( StageIndex() == index && 
-                                                 prev(StageIndex()) == index - 1 &&&&
-                                                 CurrentPlayerID() == characterIndex && 
-                                                 DifficultyLookupValueAndAbove(targetDifficultyLookupValue) &&
-                                                 IsInMusouMode() &&
-                                                 wonStageCheck() && 
-                                                 saveProtection()
-                                                 )
-                                           )
-                                  )
-                )
+    for stageIndex in range(1, numberofMusouStages(characterIndex))
+    {
+        romanNumerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
+        numeral = romanNumerals[stageIndex - 1]
+        achievement(
+            title = format("{0} {1}", title, numeral, DifficultyNameLookup[targetDifficultyLookupValue]),
+            description = format("Beat stage {1} of {0}'s Musou Mode on {2}", CharacterNameLookup[characterIndex], stageIndex, DifficultyNameLookup[targetDifficultyLookupValue]),
+            points = points,
+            trigger = IsInMusouMode() &&
+                      howManStagesBeat() == stageIndex &&
+                      prev(howManStagesBeat()) == stageIndex - 1 &&
+                      CurrentPlayerID() == characterIndex &&
+                      DifficultyLookupValueAndAbove(targetDifficultyLookupValue) &&
+                      wonStageCheck() &&
+                      saveProtection()
+        )
+    }
 }
 
 function createHardMusouModeAchievement(characterIndex)
 {
-    createDifficultyMusouModeAchievement(characterIndex, MusouModeData[characterIndex][HARD_MUSOU_ACHIEVEMENT_ID], HARD_DIFFICULTY_LOOKUP_VALUE)
+    createDifficultyMusouModeAchievement(characterIndex, MusouModeData[characterIndex][HARD_MUSOU_ACHIEVEMENT_ID], HARD_DIFFICULTY_LOOKUP_VALUE, 5)
 }
 
 function createVeryHardMusouModeAchievement(characterIndex)
 {
-    createDifficultyMusouModeAchievement(characterIndex, MusouModeData[characterIndex][VERY_HARD_MUSOU_ACHIEVEMENT_ID], VERY_HARD_DIFFICULTY_LOOKUP_VALUE)
+    createDifficultyMusouModeAchievement(characterIndex, MusouModeData[characterIndex][VERY_HARD_MUSOU_ACHIEVEMENT_ID], VERY_HARD_DIFFICULTY_LOOKUP_VALUE, 10)
 }
 
 for index in NewMusouModes
@@ -1640,27 +1899,19 @@ for index in NewMusouModes
     createHardMusouModeAchievement(index)
 }
 
-for index in NewMusouModes
+for index in MusouModeData
 {
     createVeryHardMusouModeAchievement(index)
 }
 
-for index in range(ZHAO_YUN_ID, FU_XI_ID - 1)
-{
-    if ContainsKey(MusouModeData, index)
-    {
-        createVeryHardMusouModeAchievement(index)
-    }
-}
-
 for index in range(FIRST_FIFTH_WEAPON, LAST_FIFTH_WEAPON)
 {
-    achievement(name = format("{0}", Weapon_Name_Lookup[index]),
+    achievement(title = format("{0}", Weapon_Name_Lookup[index]),
                 description = format("Get the fifth weapon for {0}", CharacterNameLookup[index - FIRST_FIFTH_WEAPON]),
                 points = 10,
                 trigger = IsInMusouModeFreeModeOrChallengeMode() &&
-                          justUnlockedWeapon(index) &&
-                          secondPlayerAllowed()
+                          saveProtection() &&
+                          justUnlockedWeapon(index),
                 type = "progression"
     )
 }
@@ -1668,7 +1919,7 @@ for index in range(FIRST_FIFTH_WEAPON, LAST_FIFTH_WEAPON)
 NewNormalItems =
 [
     MOUNTAIN_QUIVER_ID,
-    MOUNTAIN_BOW_ID,
+    MOUNTAIN_POUCH_ID,
     BRONZE_FLASK_ID
 ]
 
@@ -1686,7 +1937,7 @@ AllCommonItems =
     CAVALRY_ARMOR_ID,
     SEVEN_STAR_ORB_ID,
     WIND_SCROLL_ID,
-    ELIXIR,
+    ELIXER_ID,
     MOUNTAIN_QUIVER_ID,
     MOUNTAIN_POUCH_ID,
     BRONZE_FLASK_ID
@@ -1701,7 +1952,7 @@ LEVEL_32_ITEM_DATA = {MAX_LEVEL_TAG: 32, SUPER_MAX_LEVEL_TAG: 40 }
 LEVEL_40_ITEM_DATA = {MAX_LEVEL_TAG: 40, SUPER_MAX_LEVEL_TAG: 50 }
 LEVEL_60_ITEM_DATA = {MAX_LEVEL_TAG: 60, SUPER_MAX_LEVEL_TAG: 75 }  
 NormalItems = 
-[
+{
     SPEED_SCROLL_ID: LEVEL_16_ITEM_DATA,
     WING_BOOTS_ID: LEVEL_16_ITEM_DATA,
     DRAGON_AMULET_ID: LEVEL_60_ITEM_DATA,
@@ -1714,10 +1965,13 @@ NormalItems =
     CAVALRY_ARMOR_ID: LEVEL_40_ITEM_DATA,
     SEVEN_STAR_ORB_ID: LEVEL_20_ITEM_DATA,
     WIND_SCROLL_ID: LEVEL_20_ITEM_DATA,
-    ELIXIR_ID: LEVEL_20_ITEM_DATA,
+    ELIXER_ID: LEVEL_20_ITEM_DATA,
     MOUNTAIN_QUIVER_ID: LEVEL_32_ITEM_DATA,
     MOUNTAIN_POUCH_ID: LEVEL_20_ITEM_DATA,
     BRONZE_FLASK_ID: LEVEL_12_ITEM_DATA,
+}
+BodyguardCommonItems =
+{
     BG_PEACOCK_URN_ID: LEVEL_32_ITEM_DATA,
     BG_DRAGON_AMULET_ID: LEVEL_32_ITEM_DATA,
     BG_TIGER_AMULET_ID: LEVEL_20_ITEM_DATA,
@@ -1726,32 +1980,31 @@ NormalItems =
     BG_SHELL_ARMOR_ID: LEVEL_12_ITEM_DATA,
     BG_SPEED_SCROLL_ID: LEVEL_12_ITEM_DATA,
     BG_WIND_SCROLL_ID: LEVEL_12_ITEM_DATA,
-    BG_ELIXIR_ID: LEVEL_12_ITEM_DATA
-]
+    BG_ELIXER_ID: LEVEL_12_ITEM_DATA
+}
 
 function justUnlockedItem(itemID) => itemIdLookup(itemID) != INVALID_ITEM_ID && 
                                      prev(itemIdLookup(itemID)) == INVALID_ITEM_ID
 
-function didntpreviouslyOwnAllItems(array) => any_of(array, itemID => prev(itemIdLookup(itemID) == INVALID_ITEM_ID ))
-function ownAllItems(array) => tally_of(array, length(array), itemID => itemIdLookup(itemID) == itemID)
+function didntpreviouslyOwnAllItems(array) => any_of(array, itemID => prev(itemIdLookup(itemID)) == INVALID_ITEM_ID )
+function ownAllItems(array) => tally_of(array, length(array), itemID => once(itemIdLookup(itemID) == itemID))
 function didntpreviouslyMaxItems(array) => any_of(array, item_id => prev(itemLevelLookup(item_id)) < NormalItems[item_id][MAX_LEVEL_TAG] )
-function ownAllMaxItems(array) => tally_of(array, length(array), item_id => itemLevelLookup(item_id) >= NormalItems[item_id][MAX_LEVEL_TAG])
+function ownAllMaxItems(array) => tally_of(array, length(array), item_id => once(itemLevelLookup(item_id) >= NormalItems[item_id][MAX_LEVEL_TAG]))
 function anyItemJustPassedOverMaxLevel(array) => any_of(array, itemID => itemLevelLookup(itemID) > NormalItems[itemID][MAX_LEVEL_TAG] && 
                                                                          prev(itemLevelLookup(itemID)) <= NormalItems[itemID][MAX_LEVEL_TAG])
 function didntpreviouslyTrueMaxItem(array) => any_of(array, itemID => prev(itemLevelLookup(itemID)) < NormalItems[itemID][SUPER_MAX_LEVEL_TAG])
-function allItemsTrueMaxLevel(array) => tally_of(array, length(array), itemID => itemLevelLookup(itemID) >= NormalItems[itemID][SUPER_MAX_LEVEL_TAG])
+function allItemsTrueMaxLevel(array) => tally_of(array, length(array), itemID => once(itemLevelLookup(itemID) >= NormalItems[itemID][SUPER_MAX_LEVEL_TAG]))
 
 
 
 
-achievement("Even More Items!",
+achievement("Even More Items",
             "Collect the three new common (blue) items", 
             3,
             trigger = IsInMusouModeFreeModeOrChallengeMode() &&
                       didntpreviouslyOwnAllItems(NewNormalItems) &&   // As long as we don't already have them all 
                       measured(ownAllItems(NewNormalItems)) &&
                       wonStageCheck() &&
-                      secondPlayerAllowed() &&
                       saveProtection()
 )
 
@@ -1762,7 +2015,6 @@ achievement("Maxed Out",
                       didntpreviouslyMaxItems(NewNormalItems) && // As long as we don't already have them all at true max
                       measured(ownAllMaxItems(NewNormalItems)) &&
                       wonStageCheck() &&
-                      secondPlayerAllowed() &&
                       saveProtection()
 )   
 
@@ -1770,9 +2022,8 @@ achievement("The Real Grind Begins",
             "Get your first item break.  Which is when a common item is over its 'max level'",
             10,
             trigger = IsInMusouModeFreeModeOrChallengeMode() &&
-                      anyItemJustPassedOverMaxLevel(NewNormalItems) && // As long as we don't already have them all at true max
+                      anyItemJustPassedOverMaxLevel(AllCommonItems) && // As long as we don't already have them all at true max
                       wonStageCheck() &&
-                      secondPlayerAllowed() &&
                       saveProtection()
 )
 
@@ -1791,33 +2042,33 @@ NewRedItems = range(FIRST_NEW_RED_ITEM_ID, LAST_NEW_RED_ITEM_ID)
 
 for itemId in NewRedItems
 {
-    achievement(name = format("{0}", itemNameLookup(itemId)),
-                description = format("Unlock {0}", itemNameLookup(itemId)),
+    achievement(title = format("{0}", ItemNameLookup[itemId]),
+                description = format("Unlock {0}", ItemNameLookup[itemId]),
                 points = 5,
                 trigger = IsInMusouModeFreeModeOrChallengeMode() &&
                           justUnlockedItem(itemId) && 
-                          secondPlayerAllowed() &&
                           wonStageCheck() &&
                           saveProtection()
     )
 }
 
+function justUnlockedBGItem(itemID) => bgItemsIdLookup(itemID) != INVALID_ITEM_ID && 
+                                     prev(bgItemsIdLookup(itemID)) == INVALID_ITEM_ID
 
 function didntpreviouslyOwnAllBGItems(array) => any_of(array, itemID => prev(bgItemsIdLookup(itemID) == INVALID_ITEM_ID ))
-function ownAllBGItems(array) => tally_of(array, length(array), itemID => bgItemIdLookup(itemID) == itemID)
-function didntpreviouslyMaxBGItems(array) => any_of(array, item_id => prev(bgItemLevelLookup(item_id)) < NormalItems[item_id][MAX_LEVEL_TAG] )
-function ownAllMaxBGItems(array) => tally_of(array, length(array), item_id => bgItemLevelLookup(item_id) >= NormalItems[item_id][MAX_LEVEL_TAG])
-function didntpreviouslyTrueMaxBGItem(array) => any_of(array, itemID => prev(bgItemLevelLookup(itemID)) < NormalItems[itemID][SUPER_MAX_LEVEL_TAG])
-function allBGItemsTrueMaxLevel(array) => tally_of(array, length(array), itemID => bgItemLevelLookup(itemID) >= NormalItems[itemID][SUPER_MAX_LEVEL_TAG])
+function ownAllBGItems(array) => tally_of(array, length(array), itemID => once(bgItemsIdLookup(itemID) == itemID))
+function didntpreviouslyMaxBGItems(array) => any_of(array, item_id => prev(bgItemsLevelLookup(item_id)) < NormalItems[item_id][MAX_LEVEL_TAG] )
+function ownAllMaxBGItems(array) => tally_of(array, length(array), item_id => once(bgItemsLevelLookup(item_id) >= NormalItems[item_id][MAX_LEVEL_TAG]))
+function didntpreviouslyTrueMaxBGItem(array) => any_of(array, itemID => prev(bgItemsLevelLookup(itemID)) < NormalItems[itemID][SUPER_MAX_LEVEL_TAG])
+function allBGItemsTrueMaxLevel(array) => tally_of(array, length(array), itemID => once(bgItemsLevelLookup(itemID) >= NormalItems[itemID][SUPER_MAX_LEVEL_TAG]))
 
 achievement("Equip the Body Guards",
             "Collect all the common bodyguard items", 
-            3,
+            5,
             trigger = IsInMusouModeFreeModeOrChallengeMode() &&
-                      didntpreviouslyOwnAllBGItems(BodyguardCommonItems)
+                      didntpreviouslyOwnAllBGItems(BodyguardCommonItems) &&
                       measured(ownAllBGItems(BodyguardCommonItems)) &&
                       wonStageCheck() &&
-                      secondPlayerAllowed() &&
                       saveProtection()
 )
 
@@ -1828,41 +2079,38 @@ achievement("Buff Body Guards",
                       didntpreviouslyMaxBGItems(BodyguardCommonItems) && // As long as we don't already have them all at true max
                       measured(ownAllMaxBGItems(BodyguardCommonItems)) &&
                       wonStageCheck() &&
-                      secondPlayerAllowed() &&
                       saveProtection()
 )
 
-achievement("Super Buff Body Guards",
-            "Get all the common bodyguard items to their true max level",
-            25,
-            trigger = IsInMusouModeFreeModeOrChallengeMode() &&
-                      didntpreviouslyTrueMaxBGItem(BodyguardCommonItems) && // As long as we don't already have them all at true max
-                      measured(allBGItemsTrueMaxLevel(BodyguardCommonItems)) &&
-                      wonStageCheck() &&
-                      secondPlayerAllowed() &&
-                      saveProtection()
-)
+// achievement("Super Buff Body Guards",
+//             "Get all the common bodyguard items to their true max level",
+//             25,
+//             trigger = IsInMusouModeFreeModeOrChallengeMode() &&
+//                       didntpreviouslyTrueMaxBGItem(BodyguardCommonItems) && // As long as we don't already have them all at true max
+//                       measured(allBGItemsTrueMaxLevel(BodyguardCommonItems)) &&
+//                       wonStageCheck() &&
+//                       saveProtection()
+// )
 
 for itemId in BodyguardRedItems
 {
-    achievement(name = format("{0}", bgItemNameLookup(itemId)),
-                description = format("Unlock {0}", bgItemNameLookup(itemId)),
-                points = 5,
+    achievement(title = format("{0}", Bodyguard_Item_lookup[itemId]),
+                description = format("Unlock {0}", Bodyguard_Item_lookup[itemId]),
+                points = 10,
                 trigger = IsInMusouModeFreeModeOrChallengeMode() &&
-                          justUnlockedItem(itemId) && 
-                          secondPlayerAllowed() &&
+                          justUnlockedBGItem(itemId) && 
                           saveProtection()
     )
 }
 
-function didntpreviouslyOwnAllBGWeapons(array) => any_of(array, weaponID => !prev(bgWeaponIdLookup(weaponID)))
-function ownAllBGWeapons(array) => tally_of(array, length(array), weaponID => bgWeaponIdLookup(weaponID) == weaponID) 
+function didntpreviouslyOwnAllBGWeapons(array) => any_of(array, weaponID => !prev(BGWeaponOwnedCheck(weaponID)))
+function ownAllBGWeapons(array) => tally_of(array, length(array), weaponID => once(BGWeaponOwnedCheck(weaponID))) 
 
 for categoryId in BG_CATEGORY_LOOKUP
 {
-    achievement(name = format("Bodyguard {0} Weapons", BG_CATEGORY_LOOKUP[categoryId]),
+    achievement(title = format("Bodyguard {0} Weapons", BG_CATEGORY_LOOKUP[categoryId]),
                 description = format("Get all three {0} Bodyguard Weapons", BG_CATEGORY_LOOKUP[categoryId]),
-                points = 3,
+                points = 4,
                 trigger = IsInMusouModeFreeModeOrChallengeMode() &&
                           measured(ownAllBGWeapons(BGCategorytoArray(categoryId))) &&
                           didntpreviouslyOwnAllBGWeapons(BGCategorytoArray(categoryId)) &&
@@ -1871,7 +2119,7 @@ for categoryId in BG_CATEGORY_LOOKUP
 
 }
 
-achievement(name = "Solo Run",
+achievement(title = "Solo Run",
                 description = format("Beat a level with 0 bodyguards"),
                 points = 2,
                 trigger =  IsInMusouModeOrFreeMode() && 
@@ -1882,9 +2130,9 @@ achievement(name = "Solo Run",
 )
 
 
-achievement(name = "Solo Run Very Hard Edition",
+achievement(title = "Solo Run Very Hard Edition",
                 description = format("Beat a level with 0 bodyguards on Very Hard"),
-                points = 2,
+                points = 10,
                 trigger =  IsInMusouModeOrFreeMode() && 
                            trigger_when(justWonStageCheck()) &&
                            saveProtection() &&
@@ -1902,16 +2150,15 @@ MarriedCoupleLists =
     { ACHIEVEMENT_NAME: "United in the Southlands", FIRST_NAME:SUN_CE_ID, SECOND_NAME:DA_QIAO_ID },
     { ACHIEVEMENT_NAME: "Phoenix and the Beauty", FIRST_NAME:ZHOU_YU_ID, SECOND_NAME:XIAO_QIAO_ID},
     { ACHIEVEMENT_NAME: "The Marriage of Kingdom", FIRST_NAME:LIU_BEI_ID, SECOND_NAME:SUN_SHANG_XIANG_ID},
-    { ACHIEVEMENT_NAME: "Heart of the Emperor", FIRST_NAME:CAO_PI_ID, SECOND_NAME:ZHEN_JI_ID },
     { ACHIEVEMENT_NAME: "Beauty and the Beast", FIRST_NAME:LU_BU_ID, SECOND_NAME:DIAO_CHAN_ID },
     { ACHIEVEMENT_NAME: "Blinded by Beauty", FIRST_NAME:DONG_ZHUO_ID, SECOND_NAME:DIAO_CHAN_ID },
     { ACHIEVEMENT_NAME: "Fire and Fury", FIRST_NAME:MENG_HUO_ID, SECOND_NAME:ZHU_RONG_ID },
-    { ACHIEVEMENT_NAME: "God-Tier Romance", FU_XI_ID, NU_WA_ID}
+    { ACHIEVEMENT_NAME: "God-Tier Romance", FIRST_NAME:FU_XI_ID, SECOND_NAME:NU_WA_ID}
 ]
 
 for data in MarriedCoupleLists
 {
-    achievement(name = data[ACHIEVEMENT_NAME],
+    achievement(title = data[ACHIEVEMENT_NAME],
                 description = format("Beat a level while playing as {0} with {1} as a bodyguard, or vice versa", CharacterNameLookup[data[FIRST_NAME]], CharacterNameLookup[data[SECOND_NAME]]),
                 points = 5,
                 trigger = IsInMusouModeOrFreeMode() && 
@@ -1921,34 +2168,513 @@ for data in MarriedCoupleLists
                            BodyguardID() == data[SECOND_NAME]) ||
                             (CurrentPlayerID() == data[SECOND_NAME] && 
                             BodyguardID() == data[FIRST_NAME]))
+                )
 }
 
-achievement( name = "Taking Down the Strongest ",
-             description = "Get LuBu's third outfit",
+for title in BODYGUARD_TITLES
+{
+    achievement(title = format("Leader of {0}", BODYGUARD_TITLES[title]),
+                description = format("Help your bodyguards earn the title: {0}", BODYGUARD_TITLES[title]),
+                points = 10,
+                trigger = IsInMusouModeFreeModeOrChallengeMode() &&
+                          justPassedExperienceLevel(title) && 
+                          saveProtection() &&
+                          wonStageCheck() 
+    )
+}
+
+achievement(title = format("Uber Bodyguards"),
+            description = format("Max out the experience of one bodyguard team"),
+            points = 25,
+            trigger = IsInMusouModeFreeModeOrChallengeMode() &&
+                        justPassedExperienceLevel(MAX_BODYGUARD_EXPERIENCE) && 
+                        saveProtection() &&
+                        wonStageCheck() 
+)
+
+achievement(title = "Taking Down the Strongest ",
+             description = "Get Lu Bu's third outfit",
              points = 25,
              trigger = IsInMusouModeFreeModeOrChallengeMode() &&
                        justUnlockedLuBuThirdOutfit() && 
                        saveProtection() &&
-                       wonStageCheck() &&
-                       secondPlayerAllowed()
+                       wonStageCheck() 
 )
 
-achievement( name = "Was it Worth it?",
+achievement(title = "Was it Worth it?",
              description = "Get Sun Shang Xiang's third outfit",
              points = 25,
              trigger = IsInMusouModeFreeModeOrChallengeMode() &&
                        justUnlockedSunShangXiangThirdOutfit() && 
                        saveProtection() &&
-                       wonStageCheck() &&
-                       secondPlayerAllowed()
+                       wonStageCheck() 
 )
 
+
+
+ID_ARRAY_VALUE = "ID"
+FIRST_SIDE_ID = "FirstSideID"
+SECOND_SIDE_ID = "SecondSideID"
+THIRD_SIDE_ID = "ThirdSideID"
+FOURTH_SIDE_ID = "FourthSideID"
 // Leaderboards
 
-Leaderbboard
+// Copied and modified from DW3 
+
+
+OriginalStageArray = 
+[
+    {
+        ID_ARRAY_VALUE: YELLOW_TURBAN_REBELLION_STAGE_ID, 
+        FIRST_SIDE_ID: HAN_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: YELLOW_TURBAN_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_AT_HU_LAO_GATE_STAGE_ID, 
+        FIRST_SIDE_ID: ALLIED_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: DONG_ZHUO_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: SURPRISE_ATTACK_ON_LIU_BIAO_STAGE_ID, 
+        FIRST_SIDE_ID: SUN_JIAN_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: LIU_BIAO_FORCES_FACTION_ID 
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_AT_WAN_CASTLE_STAGE_ID, 
+        FIRST_SIDE_ID: CAO_CAO_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: ZHANG_XIU_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: ASSAULT_ON_THE_WU_TERRITORY_STAGE_ID, 
+        FIRST_SIDE_ID: SUN_CE_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: ALLIED_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_AT_GUAN_DU_STAGE_ID, 
+        FIRST_SIDE_ID: CAO_CAO_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: YUAN_SHAO_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: GUAN_YUS_ESCAPE_STAGE_ID, 
+        FIRST_SIDE_ID: GUAN_YU_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: CAO_CAO_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_OF_CHANG_BAN_STAGE_ID, 
+        FIRST_SIDE_ID: LIU_BEI_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: CAO_CAO_FORCES_FACTION_ID 
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_OF_CHI_BI_STAGE_ID, 
+        FIRST_SIDE_ID: ALLIED_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: CAO_CAO_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: ASSAULT_ON_CHENG_DU_STAGE_ID, 
+        FIRST_SIDE_ID: LIU_BEI_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: LIU_ZHANG_FORCES_FACTION_ID 
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_AT_TONG_GATE_STAGE_ID, 
+        FIRST_SIDE_ID: ALLIED_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: CAO_CAO_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_AT_HE_FEI_STAGE_ID, 
+        FIRST_SIDE_ID: WEI_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: WU_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_AT_FAN_CASTLE_STAGE_ID, 
+        FIRST_SIDE_ID: SHU_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: ALLIED_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_OF_MT_DING_JUN_STAGE_ID, 
+        FIRST_SIDE_ID: SHU_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: WEI_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_AT_YI_LING_STAGE_ID, 
+        FIRST_SIDE_ID: SHU_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: WU_FORCES_FACTION_ID 
+    },
+    {
+        ID_ARRAY_VALUE: NANMAN_CAMPAIGN_STAGE_ID, 
+        FIRST_SIDE_ID: SHU_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: WU_FORCES_FACTION_ID, 
+        THIRD_SIDE_ID: NANMAN_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_OF_JIE_TING_STAGE_ID, 
+        FIRST_SIDE_ID: SHU_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: WEI_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_AT_YOU_TING_STAGE_ID, 
+        FIRST_SIDE_ID: WEI_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: WU_FORCES_FACTION_ID 
+    },
+    {
+        ID_ARRAY_VALUE: SIEGE_AT_HE_FEI_CASTLE_STAGE_ID, 
+        FIRST_SIDE_ID: WEI_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: WU_FORCES_FACTION_ID 
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_AT_WU_ZHANG_PLAINS_STAGE_ID, 
+        FIRST_SIDE_ID: SHU_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: WEI_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: MOUNTAIN_BANDIT_CAMPAIGN_STAGE_ID 
+        // No Factions needed 
+    },
+    {
+        ID_ARRAY_VALUE: RAID_ON_THE_ROGUE_FORTRESS_STAGE_ID
+        // No Factions needed 
+    },
+    {
+        ID_ARRAY_VALUE: PIRATE_ATTACK_ON_THE_HIGH_SEAS_STAGE_ID
+        // No Factions needed 
+    }
+]
+
+XtremeStageArray =
+[
+    {
+        ID_ARRAY_VALUE: YELLOW_TURBAN_REBELLION_STAGE_ID, 
+        FIRST_SIDE_ID: YELLOW_TURBAN_FACTION_ID, 
+        SECOND_SIDE_ID: NANMAN_FORCES_FACTION_ID 
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_AT_HU_LAO_GATE_STAGE_ID, 
+        FIRST_SIDE_ID: DONG_ZHUO_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: ALLIED_FORCES_FACTION_ID, 
+        THIRD_SIDE_ID: NANMAN_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: SURPRISE_ATTACK_ON_LIU_BIAO_STAGE_ID, 
+        FIRST_SIDE_ID: YELLOW_TURBAN_FACTION_ID 
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_AT_WAN_CASTLE_STAGE_ID, 
+        FIRST_SIDE_ID: DONG_ZHUO_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: ASSAULT_ON_THE_WU_TERRITORY_STAGE_ID, 
+        FIRST_SIDE_ID: NANMAN_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_AT_GUAN_DU_STAGE_ID, 
+        FIRST_SIDE_ID: DONG_ZHUO_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: YUAN_SHAO_FORCES_FACTION_ID 
+    },
+    {
+        ID_ARRAY_VALUE: GUAN_YUS_ESCAPE_STAGE_ID, 
+        FIRST_SIDE_ID: LU_BU_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: DONG_ZHUO_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_OF_CHANG_BAN_STAGE_ID, 
+        FIRST_SIDE_ID: DONG_ZHUO_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: YUAN_SHAO_FORCES_FACTION_ID,
+        THIRD_SIDE_ID: YELLOW_TURBAN_FACTION_ID,
+        FOURTH_SIDE_ID: NANMAN_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_OF_CHI_BI_STAGE_ID, 
+        FIRST_SIDE_ID: LU_BU_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: DONG_ZHUO_FORCES_FACTION_ID,
+        THIRD_SIDE_ID: YELLOW_TURBAN_FACTION_ID,
+        FOURTH_SIDE_ID: NANMAN_FORCES_FACTION_ID,
+    },
+    {
+        ID_ARRAY_VALUE: ASSAULT_ON_CHENG_DU_STAGE_ID, 
+        FIRST_SIDE_ID: NANMAN_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_AT_TONG_GATE_STAGE_ID, 
+        FIRST_SIDE_ID: DONG_ZHUO_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_AT_HE_FEI_STAGE_ID, 
+        FIRST_SIDE_ID: DONG_ZHUO_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: YUAN_SHAO_FORCES_FACTION_ID,
+        THIRD_SIDE_ID: NANMAN_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_AT_FAN_CASTLE_STAGE_ID, 
+        FIRST_SIDE_ID: YUAN_SHAO_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_OF_MT_DING_JUN_STAGE_ID, 
+        FIRST_SIDE_ID: DONG_ZHUO_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_AT_YI_LING_STAGE_ID, 
+        FIRST_SIDE_ID: DONG_ZHUO_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: YELLOW_TURBAN_FACTION_ID,
+        THIRD_SIDE_ID: NANMAN_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: NANMAN_CAMPAIGN_STAGE_ID, 
+        FIRST_SIDE_ID: YELLOW_TURBAN_FACTION_ID,
+        THIRD_SIDE_ID : NANMAN_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_OF_JIE_TING_STAGE_ID,
+        FIRST_SIDE_ID: YUAN_SHAO_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_AT_YOU_TING_STAGE_ID,
+        FIRST_SIDE_ID: NANMAN_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: SIEGE_AT_HE_FEI_CASTLE_STAGE_ID,
+        FIRST_SIDE_ID: DONG_ZHUO_FORCES_FACTION_ID,
+        SECOND_SIDE_ID: MENG_HUO_FORCES_FACTION_ID,
+        THIRD_SIDE_ID: ZHU_RONG_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: BATTLE_AT_WU_ZHANG_PLAINS_STAGE_ID, 
+        FIRST_SIDE_ID: DONG_ZHUO_FORCES_FACTION_ID, 
+        SECOND_SIDE_ID: YUAN_SHAO_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: MOUNTAIN_BANDIT_CAMPAIGN_STAGE_ID,
+        FIRST_SIDE_ID: YELLOW_TURBAN_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: RAID_ON_THE_ROGUE_FORTRESS_STAGE_ID,
+        FIRST_SIDE_ID: DONG_ZHUO_FORCES_FACTION_ID
+    },
+    {
+        ID_ARRAY_VALUE: PIRATE_ATTACK_ON_THE_HIGH_SEAS_STAGE_ID,
+        FIRST_SIDE_ID: NANMAN_CAMPAIGN_STAGE_ID
+    }
+]
+
+
+function easyleaderboard( title, description, start, value, format, lower_is_better)
+{
+
+    leaderboard(
+        title = title,
+        description = description,
+        start = start,
+        cancel = always_false(),
+        submit = always_true(),
+        value = value,
+        format = format,
+        lower_is_better = lower_is_better
+    )
+}
+
+
+function leaderboardGenerator( start_condition, faction, map_string)
+{
+
+    if ( faction != NO_FACTION_ID)
+    {
+        start_condition = start_condition&& PlayerFaction() == faction
+    }
+    
+    start_condition_very_hard =
+    (
+        start_condition &&
+        DifficultyLookupValueAndAbove(VERY_HARD_DIFFICULTY_LOOKUP_VALUE)
+    )
+
+    
+    kill_count = getFirstPlayerStageKillCount()
+
+    time_elapsed = getSecondsElapsed()
+
+    faction_title = ""
+    faction_string = ""
+
+    if (faction != NO_FACTION_ID)
+    {
+        faction_title = format(" - {0}", FactionNameLookup[faction])
+        faction_string = format(" as {0}", FactionForcesLookup[faction])
+    }
+
+    easyleaderboard(
+        title = format("Most Kills on {0}{1}", map_string, faction_title),
+        description = format("Get the most kills on {0}{1} and win the stage", map_string, faction_string),
+        start = start_condition,
+        value = kill_count,
+        format = "VALUE",
+        lower_is_better = false
+    )
+
+    easyleaderboard(
+        title = format("Most Kills on {0}{1} - Very Hard", map_string, faction_title),
+        description = format("Get the most kills on {0}{1} on Very Hard and win the stage", map_string, faction_string),
+        start = start_condition_very_hard,
+        value = kill_count,
+        format = "VALUE",
+        lower_is_better = false
+    )
+
+    easyleaderboard(
+        title = format("Fastest Run on {0}{1}", map_string, faction_title),
+        description = format("Get through the stage {0}{1} the fastest", map_string, faction_string),
+        start = start_condition,
+        value = time_elapsed,
+        format = "SECS",
+        lower_is_better = true
+    )
+
+    easyleaderboard(
+        title = format("Fastest Run on {0}{1} - Very Hard", map_string, faction_title),
+        description = format("Get through the stage {0}{1} the fastest on Very Hard", map_string, faction_string),
+        start = start_condition_very_hard,
+        value = time_elapsed,
+        format = "SECS",
+        lower_is_better = true
+    )
+}
+
+function processArrayForLeaderboards(array, start_conditionXLOriginal, LookupTable)
+{
+    for entry in array
+    {
+        start_condition = 
+        (
+            IsInMusouModeOrFreeMode() &&
+            MapIndex() == entry[ID_ARRAY_VALUE] &&
+            !isTwoPlayerMode() &&
+            justWonStageCheck() &&
+            start_conditionXLOriginal
+        )   
+
+        map_string = LookupTable[entry[ID_ARRAY_VALUE]]
+
+        done_something = false
+        if ContainsKey(entry, FIRST_SIDE_ID)
+        {
+            leaderboardGenerator(start_condition, entry[FIRST_SIDE_ID], map_string)
+            done_something = true
+        } 
+        if ContainsKey(entry, SECOND_SIDE_ID)
+        {
+            leaderboardGenerator(start_condition, entry[SECOND_SIDE_ID], map_string)
+            done_something = true
+        }
+        if ContainsKey(entry, THIRD_SIDE_ID)
+        {
+            leaderboardGenerator(start_condition, entry[THIRD_SIDE_ID], map_string)
+            done_something = true
+        }
+        if ContainsKey(entry, FOURTH_SIDE_ID)
+        {
+            leaderboardGenerator(start_condition, entry[FOURTH_SIDE_ID], map_string)
+            done_something = true
+        }
+        if !done_something
+        {
+            leaderboardGenerator(start_condition, NO_FACTION_ID, map_string)
+        }
+    }
+}
+
+processArrayForLeaderboards(XtremeStageArray, IsXtremeMode(), XtremeMapNameLookup)
+processArrayForLeaderboards(OriginalStageArray, IsOriginalMode(), OriginalMapNameLookup)
+
+// Versus mode             is playing Versus.
+rich_presence_conditional_display(IsInVersusMode(), "In Versus Mode")
+
+// Main Menu or not in any mode?   Menus
+rich_presence_conditional_display(!IsInMusouModeFreeModeOrChallengeMode(), "In Menus")
+
+// Demo check 
+// Note: This will misfire sometimes, due to watching a demo, however once the player enters the real game, this will be cleaned up. 
+rich_presence_conditional_display(IsDemoMode(), "Watching Demos")
+
+
+// If in unknown stage, but not actually in the end of stage screen. 
+rich_presence_conditional_display( MapIndex() >= OUT_OF_BOUNDS_STAGE_ID, "In Menus")
+
+rich_presence_conditional_display(IsXtremeMode() && IsInChallengeMode(), "{0} is testing their strength in {1} mode",
+                                  rich_presence_lookup("Character", CurrentPlayerID(), CharacterNameLookup), 
+                                  rich_presence_lookup("XLChallengeType", ChallengeModeSelector(), XtremeChallengeLookUp))
+
+// Challenge mode Endurance         Character, is testing his strength killing as many as he can. 
+// Challenge mode Time attack       Character, is testing his strength killing as many as he can. 
+rich_presence_conditional_display(IsOriginalMode() && IsInChallengeMode(), "{0} is testing their strength in {1} mode",
+                                  rich_presence_lookup("Character", CurrentPlayerID(), CharacterNameLookup), 
+                                  rich_presence_lookup("ChallengeType", ChallengeModeSelector(), OriginalChallengeLookUp))
+
+rich_presence_conditional_display(IsInMusouMode() && 
+                                  isTwoPlayerMode() && 
+                                  leaderboardCompleteCheck(CurrentPlayerID()),
+                                  "{0} has finished their Musou Mode with some help from {1}",
+                                  rich_presence_lookup("Character", CurrentPlayerID(), CharacterNameLookup),
+                                  rich_presence_lookup("Character", SecondPlayer(), CharacterNameLookup))
+
+
+rich_presence_conditional_display(IsInMusouMode() && 
+                                  leaderboardCompleteCheck(CurrentPlayerID()),
+                                  "{0} has finished their Musou Mode",
+                                  rich_presence_lookup("Character", CurrentPlayerID(), CharacterNameLookup))
 
 
 
-Change the Missions to per level. 
+// In stage 2 player       1 Player character, and 2 player character is fighting in Stage name, difficulty.  
+rich_presence_conditional_display(IsInMusouModeOrFreeMode() && isTwoPlayerMode() && isNoviceMode() && IsXtremeMode(), "{0} and {1} is fighting through {2} ({3}):  Difficulty Novice",
+                                  rich_presence_lookup("Character", CurrentPlayerID(), CharacterNameLookup), 
+                                  rich_presence_lookup("Character", SecondPlayer(), CharacterNameLookup), 
+                                  rich_presence_lookup("XLStage", MapIndex(), XtremeMapNameLookup),
+                                  rich_presence_lookup("Faction", PlayerFaction(), FactionNameLookup))
 
-REal presence
+rich_presence_conditional_display(IsInMusouModeOrFreeMode() && isTwoPlayerMode() && IsXtremeMode(), "{0} and {1} is fighting through {2} ({3}):  Difficulty {4}",
+                                  rich_presence_lookup("Character", CurrentPlayerID(), CharacterNameLookup), 
+                                  rich_presence_lookup("Character", SecondPlayer(), CharacterNameLookup), 
+                                  rich_presence_lookup("XLStage", MapIndex(), XtremeMapNameLookup),
+                                  rich_presence_lookup("Faction", PlayerFaction(), FactionNameLookup),
+                                  rich_presence_lookup("Difficulty", DifficultyInGame(), RPDifficultyNameLookup))
+
+// In stage 2 player       1 Player character, and 2 player character is fighting in Stage name, difficulty.  
+rich_presence_conditional_display(IsInMusouModeOrFreeMode() && isTwoPlayerMode() && isNoviceMode(), "{0} and {1} is fighting through {2} ({3}):  Difficulty Novice",
+                                  rich_presence_lookup("Character", CurrentPlayerID(), CharacterNameLookup), 
+                                  rich_presence_lookup("Character", SecondPlayer(), CharacterNameLookup), 
+                                  rich_presence_lookup("Stage", MapIndex(), OriginalMapNameLookup),
+                                  rich_presence_lookup("Faction", PlayerFaction(), FactionNameLookup))
+
+rich_presence_conditional_display(IsInMusouModeOrFreeMode() && isTwoPlayerMode(), "{0} and {1} is fighting through {2} ({3}):  Difficulty {4}",
+                                  rich_presence_lookup("Character", CurrentPlayerID(), CharacterNameLookup), 
+                                  rich_presence_lookup("Character", SecondPlayer(), CharacterNameLookup), 
+                                  rich_presence_lookup("Stage", MapIndex(), OriginalMapNameLookup),
+                                  rich_presence_lookup("Faction", PlayerFaction(), FactionNameLookup),
+                                  rich_presence_lookup("Difficulty", DifficultyInGame(), RPDifficultyNameLookup))
+
+
+
+// In stage 1 player       1 Player character is fighting in Stage name, difficulty.  
+rich_presence_conditional_display(IsInMusouModeOrFreeMode() && isNoviceMode() && IsXtremeMode(), "{0} is fighting through {1} ({2}):  Difficulty Novice",
+                                  rich_presence_lookup("Character", CurrentPlayerID(), CharacterNameLookup), 
+                                  rich_presence_lookup("XLStage", MapIndex(), XtremeMapNameLookup),
+                                  rich_presence_lookup("Faction", PlayerFaction(), FactionNameLookup))
+
+rich_presence_conditional_display(IsInMusouModeOrFreeMode() && IsXtremeMode(), "{0} is fighting through {1} ({2}):  Difficulty {3}",
+                                  rich_presence_lookup("Character", CurrentPlayerID(), CharacterNameLookup), 
+                                  rich_presence_lookup("XLStage", MapIndex(), XtremeMapNameLookup),
+                                  rich_presence_lookup("Faction", PlayerFaction(), FactionNameLookup),
+                                  rich_presence_lookup("Difficulty", DifficultyInGame(), RPDifficultyNameLookup))
+
+// In stage 1 player       1 Player character is fighting in Stage name, difficulty.  
+rich_presence_conditional_display(IsInMusouModeOrFreeMode() && isNoviceMode(), "{0} is fighting through {1} ({2}):  Difficulty Novice",
+                                  rich_presence_lookup("Character", CurrentPlayerID(), CharacterNameLookup), 
+                                  rich_presence_lookup("Stage", MapIndex(), OriginalMapNameLookup),
+                                  rich_presence_lookup("Faction", PlayerFaction(), FactionNameLookup))
+
+rich_presence_conditional_display(IsInMusouModeOrFreeMode(), "{0} is fighting through {1} ({2}):  Difficulty {3}",
+                                  rich_presence_lookup("Character", CurrentPlayerID(), CharacterNameLookup), 
+                                  rich_presence_lookup("Stage", MapIndex(), OriginalMapNameLookup),
+                                  rich_presence_lookup("Faction", PlayerFaction(), FactionNameLookup),
+                                  rich_presence_lookup("Difficulty", DifficultyInGame(), RPDifficultyNameLookup))
+// Unknown 
+rich_presence_display("In Menus.") //Intentionally slightly different to say "issue with RP, with out saying issue with RP"
+
+// Move items to subset
