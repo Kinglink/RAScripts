@@ -1,0 +1,77 @@
+[b]Any Call outs?[/b]
+
+Yes, the reason we have individual stage achievements is DaleRedfield (And additional icons).  The Icon was made by Raiichi, total praise to both of them.
+
+[b]Why did you make this set?[/b]
+
+Always was planning to make the Xtreme Legends set but for what ever reason never got around to it. 
+
+[b]Ok but why did you split these up?[/b]  
+
+Laziness... well kind of.  I also fundamentally think unlocking characters is the best part of DW 3.  So I wanted to allow that. 
+
+Plus using items and weapons you can get in DW 5 would trivialize DW 3.   Just doesn't make sense to allow XL with the base games.  (Yes that means I have opinions on the others.)
+
+[b]What do I need to start this set?[/b]
+
+I would say beat the DW 3 base set... try to master it, when you're completely done (At least maxed the characters, and the items as much as you plan to) Then import that save. 
+
+As to how to import that save.... it depends on how you have PCSX2 set up.   I use folders, so I had to copy the save file between the two. 
+
+Also you should have a DW 3 iso, I can't give you that, or help you with that, but to unlock a majority of the characters you will need the original game.   
+
+I looked into patching that out, it didn't seem as easy as DW 5 so... yeah sorry.  It's annoying I know. 
+
+[b]What is the game's difficulty level?[/b]  
+
+This game is harder than most Dynasty Warriors games, except maybe Dynasty Warriors 2 for obvious reasons. But it's challenging but doable. 
+
+Normal mode is quite hard with a level zero character, so leveling up is crucial.    
+
+[b]Why do you allow Novice Mode?[/b]
+
+I have a fundamental belief that if you beat a game no matter the difficulty, you should earn a "Beaten" This is something I feel strongly about. 
+
+All limiting it to Normal mode would do is get people to download a save (which is against the rules) or run through the game a second time... Meh.   Enjoy the game your way.  I'll challenge you later. 
+
+[b]Why is everyone required to do very hard?[/b]
+
+Because the game added Very Hard for all characters... 
+
+[b]Why can't I earn hard mode and Very hard Musou Mode in free mode?[/b]
+
+Laziness...  Also just play through their story mode.  If you do something really stupid, just beat up to that level in Novice...  
+
+PS. I noticed in Novice bosses still felt like they had a decent amount of HP even with maxed characters?  *shrug* 
+
+[b]Anything Missable?[/b]  
+
+No... unless you play two players.  The game does lock out the second player. And some items (Red items and Fifth weapons) are only earnable 1 time.  I'm not marking them as missable, but... well they technically are.  Just don't play 2 player. 
+
+[b]Where are the challenges for challenge modes?[/b]  
+
+There are already red items for challenge mode. The logic for Iron Man mode is complex, so I just went with a red item a piece instead.  No leaderboards for similar reasons. 
+
+[b]How do I item break?[/b]  
+
+While there's a guide on GameFAQs, it's complex and involved I think.  Basically combo, a lot.  It's beyond my current ability, but practicing with the combo challenge is recommended by the guide.  Good luck.   Maybe it's a total myth (it's almost certainly not) 
+
+[b]Is the third outfit a little too hard to get?[/b]
+
+Lu Bu is a special stage, so of course it's going to be here.   SSX I'll be honest, I see it unlocking I haven't earned it myself.  Good luck with that one.
+
+[b]Zhuge Liang/Sima Yi are terrible[/b]
+
+That's the fun of this set and making you play every character.  Hey at least it's not SW XL 5th weapon on Chaos only hard...    Also abuse the saves. 
+
+[b]I have a good idea for a measure or trigger! [/b] 
+
+Let me know I think I got most of them but I'm sure there's more.[/b]
+
+[b]How should I do the subset?[/b]
+
+If you are going for item breaks ever save your game before the final boss.  If you get a Max level Item, switch to the subset with that continue and beat the boss again, you should have the SAME item (item drop is decided on pick up)  
+
+Do NOT save after the boss or you'll kill your in-game save.
+
+
