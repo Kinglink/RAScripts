@@ -95,3 +95,8 @@ Also built some OCR scripts. ADded to this directory.
 Currently trying to find a lot of shift-jis text, to try to find where the strings come from. 
 
 The line 普通の高校生だった is an example.   Might be OCR but can't find it there. 
+
+
+
+Upcoming: 
+Next step will probably be to remove all the images, and see if what I think is text... Is actually text, and not an image.
