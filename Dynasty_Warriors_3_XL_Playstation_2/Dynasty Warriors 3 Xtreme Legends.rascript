@@ -1378,7 +1378,7 @@ XtremeMapNameLookup =
     ASSAULT_ON_THE_WU_TERRITORY_STAGE_ID : "Assault on the Wu Territory",
     BATTLE_AT_GUAN_DU_STAGE_ID : "Battle at Guan Du",
     GUAN_YUS_ESCAPE_STAGE_ID : "Diao Chan's Escape",
-    BATTLE_OF_CHANG_BAN_STAGE_ID : "Wu Navy Skirmish",
+    BATTLE_OF_CHANG_BAN_STAGE_ID : "Battle of Chang Ban",
     BATTLE_OF_CHI_BI_STAGE_ID : "Battle of Chi Bi",
     ASSAULT_ON_CHENG_DU_STAGE_ID : "Assault on Cheng Du",
     BATTLE_AT_TONG_GATE_STAGE_ID : "Battle at Tong Gate",
@@ -1393,7 +1393,7 @@ XtremeMapNameLookup =
     BATTLE_AT_WU_ZHANG_PLAINS_STAGE_ID : "Battle at Wu Zhang Plains",
     MOUNTAIN_BANDIT_CAMPAIGN_STAGE_ID : "Mountain Bandit Campaign",
     RAID_ON_THE_ROGUE_FORTRESS_STAGE_ID : "Raid on the Rogue Fortress",
-    PIRATE_ATTACK_ON_THE_HIGH_SEAS_STAGE_ID : "Pirate Attack on the High Seas" 
+    PIRATE_ATTACK_ON_THE_HIGH_SEAS_STAGE_ID : "Wu Navy Skirmish" 
 }
 
 
@@ -2450,7 +2450,7 @@ XtremeStageArray =
     },
     {
         ID_ARRAY_VALUE: PIRATE_ATTACK_ON_THE_HIGH_SEAS_STAGE_ID,
-        FIRST_SIDE_ID: NANMAN_CAMPAIGN_STAGE_ID
+        FIRST_SIDE_ID: NANMAN_FORCES_FACTION_ID
     }
 ]
 
