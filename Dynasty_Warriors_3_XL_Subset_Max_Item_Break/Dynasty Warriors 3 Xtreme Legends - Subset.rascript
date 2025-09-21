@@ -1936,10 +1936,10 @@ function justUnlockedBGItem(itemID) => bgItemsIdLookup(itemID) != INVALID_ITEM_I
 
 function didntpreviouslyOwnAllBGItems(array) => any_of(array, itemID => prev(bgItemsIdLookup(itemID) == INVALID_ITEM_ID ))
 function ownAllBGItems(array) => tally_of(array, length(array), itemID => once(bgItemsIdLookup(itemID) == itemID))
-function didntpreviouslyMaxBGItems(array) => any_of(array, item_id => prev(bgItemsLevelLookup(item_id)) < NormalItems[item_id][MAX_LEVEL_TAG] )
-function ownAllMaxBGItems(array) => tally_of(array, length(array), item_id => once(bgItemsLevelLookup(item_id) >= NormalItems[item_id][MAX_LEVEL_TAG]))
-function didntpreviouslyTrueMaxBGItem(array) => any_of(array, itemID => prev(bgItemsLevelLookup(itemID)) < NormalItems[itemID][SUPER_MAX_LEVEL_TAG])
-function allBGItemsTrueMaxLevel(array) => tally_of(array, length(array), itemID => once(bgItemsLevelLookup(itemID) >= NormalItems[itemID][SUPER_MAX_LEVEL_TAG]))
+function didntpreviouslyMaxBGItems(array) => any_of(array, item_id => prev(bgItemsLevelLookup(item_id)) < BodyguardCommonItems[item_id][MAX_LEVEL_TAG] )
+function ownAllMaxBGItems(array) => tally_of(array, length(array), item_id => once(bgItemsLevelLookup(item_id) >= BodyguardCommonItems[item_id][MAX_LEVEL_TAG]))
+function didntpreviouslyTrueMaxBGItem(array) => any_of(array, itemID => prev(bgItemsLevelLookup(itemID)) < BodyguardCommonItems[itemID][SUPER_MAX_LEVEL_TAG])
+function allBGItemsTrueMaxLevel(array) => tally_of(array, length(array), itemID => once(bgItemsLevelLookup(itemID) >= BodyguardCommonItems[itemID][SUPER_MAX_LEVEL_TAG]))
 
 
 for itemId in BodyguardCommonItems
