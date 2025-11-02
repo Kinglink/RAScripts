@@ -1920,7 +1920,7 @@ function allItemsTrueMaxLevel(array) => tally_of(array, length(array), itemID =>
 for itemId in AllCommonItems
 {
     achievement(title = format("Item Break - {0}", ItemNameLookup[itemId]),
-                description = format("Raise {0} to its true max level", ItemNameLookup[itemId]),
+                description = format("Raise {0} to level {1}, its true max level.", ItemNameLookup[itemId], NormalItems[itemId][SUPER_MAX_LEVEL_TAG]),
                 points = 5,
                 trigger = IsInMusouModeFreeModeOrChallengeMode() &&
                           itemIdLookup(itemId) != INVALID_ITEM_ID &&
@@ -1945,7 +1945,7 @@ function allBGItemsTrueMaxLevel(array) => tally_of(array, length(array), itemID 
 for itemId in BodyguardCommonItems
 {
     achievement(title = format("Item Break - {0}", Bodyguard_Item_lookup[itemId]),
-                description = format("Get {0} to its true max level", Bodyguard_Item_lookup[itemId]),
+                description = format("Raise {0} to level {1}, its true max level", Bodyguard_Item_lookup[itemId], BodyguardCommonItems[itemId][SUPER_MAX_LEVEL_TAG] ),
                 points = 5,
                 trigger = IsInMusouModeFreeModeOrChallengeMode() &&
                           bgItemsIdLookup(itemId) != INVALID_ITEM_ID &&
