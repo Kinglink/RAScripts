@@ -2,7 +2,7 @@ from PIL import Image
 import os
 
 input_dir = "Ripped"
-output_dir = "Generated"
+output_dir = "Output"
 
 def process_image(input_image_path, output_image_path):
     # Open the image
