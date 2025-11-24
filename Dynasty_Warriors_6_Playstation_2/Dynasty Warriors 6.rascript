@@ -98,7 +98,10 @@ function ComboPointer() => dword(0x3CDC98)
 OFFSET_FOR_ACTUAL_COMBO = 0xA58
 
 function ActualComboNumber() => dword( ComboPointer() + OFFSET_FOR_ACTUAL_COMBO )
-function JustHitComboNumber(comboNumber) => (ActualComboNumber() == comboNumber) && (prev(ActualComboNumber()) != comboNumber)
+function JustHitComboNumber(comboNumber) => (ActualComboNumber() >= comboNumber) && 
+                                            (prev(ActualComboNumber()) < comboNumber) && 
+                                            ComboPointer() != 0 && 
+                                            ComboPointer() == prev(ComboPointer())
 
 // $4D50B8: (32-bit) Game State
 // 
@@ -483,7 +486,7 @@ function FirstHorseGaze() => dword(0x6FBEA8)
 //          
 //          0x1f = Shadow Runner King
 //          0x23 = Red Hare King
-//          0x0b = Grey King
+//          0x1b = Grey King
 //          0x17 = Auburn King
 //          0x13 = Ebon King
 //          0x0f = Dapple King
@@ -509,7 +512,7 @@ function GetHorseTitle(horseId) => dword( HORSE_MEMORY_OFFSET * horseId + FIRST_
 
 SHADOW_KING_TITLE = 0x1f
 RED_HARE_KING_TITLE = 0x23
-GREY_KING_TITLE = 0x0b
+GREY_KING_TITLE = 0x1b
 AUBURN_KING_TITLE = 0x17
 EBON_KING_TITLE = 0x13
 DAPPLE_KING_TITLE = 0x0f
@@ -1208,8 +1211,8 @@ AdditionalCharacter =
 ChallengeModeData = 
 {
     RAMPAGE_STAGE_CHALLENGE_ID: {WIN_TARGET: FirstPlayerKills() > 1500, WIN_ACHIEVEMENT_NAME: "Be Like the Hulk", WIN_ACHIEVEMENT_DESCRIPTION: "Earn more than 1500 kills in Rampage Challenge"},
-    SUDDEN_DEATH_STAGE_CHALLENGE_ID: {WIN_TARGET: FirstPlayerKills() > 200, WIN_ACHIEVEMENT_NAME: "Glass Cannon", WIN_ACHIEVEMENT_DESCRIPTION: "Earn more than 200 kills in Sudden Death Challenge"},
-    SPEED_RUN_STAGE_CHALLENGE_ID: {WIN_TARGET: FramesInBattle() > ((3)*60+30)*60, WIN_ACHIEVEMENT_NAME: "Be Like the Flash", WIN_ACHIEVEMENT_DESCRIPTION: "Complete the Speed Run Challenge in under 3 minutes"},
+    SUDDEN_DEATH_STAGE_CHALLENGE_ID: {WIN_TARGET: FirstPlayerKills() > 200, WIN_ACHIEVEMENT_NAME: "Be Like a Glass Cannon", WIN_ACHIEVEMENT_DESCRIPTION: "Earn more than 200 kills in Sudden Death Challenge"},
+    SPEED_RUN_STAGE_CHALLENGE_ID: {WIN_TARGET: FramesInBattle() < ((3)*60+30)*60, WIN_ACHIEVEMENT_NAME: "Be Like the Flash", WIN_ACHIEVEMENT_DESCRIPTION: "Complete the Speed Run Challenge in under 3 minutes 30 seconds"},
     HAVOC_STAGE_CHALLENGE_ID: {WIN_TARGET: FirstPlayerKills() > 200, WIN_ACHIEVEMENT_NAME: "Be Like Havoc", WIN_ACHIEVEMENT_DESCRIPTION: "Earn more than 200 kills in Havoc Challenge"},
     GAUNTLET_STAGE_CHALLENGE_ID: {WIN_TARGET: FirstPlayerKills() > 1500, WIN_ACHIEVEMENT_NAME: "Be Like Lu Bu", WIN_ACHIEVEMENT_DESCRIPTION: "Earn more than 1500 kills in Gauntlet Challenge"}
 }
@@ -1427,7 +1430,7 @@ function BaseMusouModeAchievement(characterIndex)
 function MasterMusouModeAchievement(characterIndex)
 {
     createMusouModeAchievement(MusouModeAchievementNames[characterIndex][MASTER_ACHIEVEMENT_TITLE], 
-                               format("Beat {0}'s musou mode on Master difficulty", CharacterNameLookup[characterIndex]),
+                               format("Beat {0}'s musou mode on Master or Chaos difficulty", CharacterNameLookup[characterIndex]),
                                characterIndex, false, DifficultySetting() >= MASTER_DIFFICULTY_VALUE, 25)
 }
 
@@ -1440,7 +1443,7 @@ function ChaosMusouModeAchievement(characterIndex)
         numeral = romanNumerals[stageIndex - 1]
         achievement(
             title = format("{0} {1}", title, numeral),
-            description = format("Beat stage {1} of {0}'s Musou Mode on Chaos difficulty", title, stageIndex),
+            description = format("Beat stage {1} of {0}'s Musou Mode on Chaos difficulty", CharacterNameLookup[characterIndex], stageIndex),
             points = 25,
             trigger = IsInMusouMode() &&
                       GeneralProtection() &&
@@ -1513,7 +1516,7 @@ for CharacterId in AdditionalCharacter
 for CharacterId in AdditionalCharacter
 {
     achievement ( title = AdditionalCharacter[CharacterId][BEAT_LEVEL_NAME],
-                      description = format("Beat {0}({1}) on Master difficulty as {2} while beating all three targets", 
+                      description = format("Beat {0}({1}) on Master or Chaos difficulty as {2} while beating all three targets", 
                                            StageNameLookup[AdditionalCharacter[CharacterId][BEAT_LEVEL_ID]],
                                            FactionNameLookup[AdditionalCharacter[CharacterId][BEAT_LEVEL_ID]],
                                            CharacterNameLookup[CharacterId]),
@@ -1542,7 +1545,7 @@ for characterId in CharacterNameLookup
 }
 
 achievement(title = "Combo Master",
-            description = "Hit a 3000 hit combo",
+            description = "Hit a 3000 or more hit combo",
             points = 10,
             trigger = GeneralProtection() &&
                       IsInMusouModeFreeModeOrChallengeMode() &&
@@ -1576,7 +1579,7 @@ for challengeId in ChallengeModeData
     target = always_true()
     if challengeId == SPEED_RUN_STAGE_CHALLENGE_ID
     {
-        target = target && ChallengeModeData[challengeId][WIN_TARGET] && FramesInBattle() < ((3)*60+30)*60
+        target = target && ChallengeModeData[challengeId][WIN_TARGET] && FramesInBattle() < ((3)*60+30)*60 && JustFinishBattle()
     }
     else
     {
