@@ -314,15 +314,17 @@ function convertToMajorMinor(major, minor) => (major * 0x100) + minor
 //        0x07 = Stage 8 (final) resets to 0
 function stageNumber() => byte(0x001D02)
 
-function enteringLocation(majorMinor, stage) => majorMinor == majorMinor() && 
-                                                majorMinor - 1 == prev(majorMinor()) &&
+// Originally this is 1 , but moved to 5 because of Special Stage 30k.   
+function enteringLocation(majorMinor, stage) => majorMinor - 4 == majorMinor() && 
+                                                majorMinor - 5 == prev(majorMinor()) &&
                                                 stageNumber() == stage - 1
+
 
 function exitingLocation(majorMinor, stage) => majorMinor == prev(majorMinor()) && 
                                                 majorMinor + 1 == majorMinor() &&
                                                 stageNumber() == stage - 1
 
-function beforeEnterLocation(majorMinorValue) => majorMinor() < majorMinorValue 
+function beforeEnterLocation(majorMinorValue) => majorMinor() < majorMinorValue - 5
 
 function inLocation(enterMajorMinor, exitMajorMinor, stage) => majorMinor() > (enterMajorMinor - 1) &&
                                                                  majorMinor() < (exitMajorMinor + 1) &&
@@ -782,7 +784,7 @@ achievement( title = "Finished Special",
              points = 5,
              type = "Win_Condition",
              trigger = isSpecialMode() &&
-                       exitingLocation(convertToMajorMinor(0x0c, 0x3a), SPECIAL_STAGE_END_STAGE_INDEX) &&
+                       exitingLocation(convertToMajorMinor(0x0c, 0x3d), SPECIAL_STAGE_END_STAGE_INDEX) &&
                        achievementIsValid()
 )
 
@@ -791,7 +793,7 @@ achievement( title = "Finished Special Normal",
              points = 5,
              trigger = isSpecialMode() &&
                        isNormalDifficultyOrHarder() &&
-                       exitingLocation(convertToMajorMinor(0x0c, 0x3a), SPECIAL_STAGE_END_STAGE_INDEX) &&
+                       exitingLocation(convertToMajorMinor(0x0c, 0x3d), SPECIAL_STAGE_END_STAGE_INDEX) &&
                        achievementIsValid()
 )
 
@@ -800,7 +802,7 @@ achievement( title = "Finished Special Hard",
              points = 10,
              trigger = isSpecialMode() &&
                        isHardDifficulty() &&
-                       exitingLocation(convertToMajorMinor(0x0c, 0x3a), SPECIAL_STAGE_END_STAGE_INDEX) &&
+                       exitingLocation(convertToMajorMinor(0x0c, 0x3d), SPECIAL_STAGE_END_STAGE_INDEX) &&
                        achievementIsValid()
 )
 
@@ -858,7 +860,7 @@ function beatSpecialAchievement(characterData)
                  points = characterData[POINTS],
                  trigger = characterSelect() == characterData[CHARACTER_SELECT_VALUE] &&
                            isSpecialMode() &&
-                           exitingLocation(convertToMajorMinor(0x0c, 0x3a), SPECIAL_STAGE_END_STAGE_INDEX) &&
+                           exitingLocation(convertToMajorMinor(0x0c, 0x3d), SPECIAL_STAGE_END_STAGE_INDEX) &&
                            achievementIsValid()
     )
 }
@@ -1015,7 +1017,8 @@ function bossSparedAchievement(bossData)
     if (ContainsKey(bossData, SPECIAL_BOSS_VALUE))
     {
         stageName = "Special Stage"
-        special_Boss_Check = once(bossData[SPECIAL_BOSS_VALUE])
+        special_Boss_Check = bossData[SPECIAL_BOSS_VALUE]
+        // Just run a second achievement for the special bosses.  No difficulty check.     
         achievement( title = "Junior " + bossData[SPARED_ACHIEVEMENT_NAME],
                  description = "Spare " + bossData[BOSS_NAME] + " on " + stageName + " without damaging them at all",
                  points = bossData[BOSS_SPARED_POINTS],
@@ -1066,11 +1069,11 @@ function bossKilledAchievement(bossData)
     if (ContainsKey(bossData, SPECIAL_BOSS_VALUE))
     {
         stageName = "Special Stage"
-        special_Boss_Check = once(bossData[SPECIAL_BOSS_VALUE])
-        // Just run a second achievement for the special bosses.  No difficulty check.     
+        special_Boss_Check = bossData[SPECIAL_BOSS_VALUE]
+        // This is a  a second achievement (Junior) for the special bosses.  No difficulty check.             
         achievement( title = format("Junior {0}", bossData[KILLED_ACHIEVEMENT_NAME]),
                      id = bossData[JUNIOR_KILLED_ACHIEVEMENT_ID],
-                     description = "Beat " + bossData[BOSS_NAME] + " on " + stageName + "on hard difficulty",
+                     description = "Beat " + bossData[BOSS_NAME] + " on " + stageName,
                      points = bossData[BOSS_KILLED_POINTS],
                      trigger = once(enteringLocation(bossData[BOSS_LOCATION_IN_STAGE], bossData[STAGE_INDEX])) && 
                                bossData[MODE_CHECK] &&
@@ -1203,7 +1206,7 @@ bossData =
         STAGE_INDEX: 0xc,
         BOSS_STARTING_HEALTH: 0x0f,
         BOSS_LOCATION_IN_STAGE: convertToMajorMinor(0x0c, 0x3b),
-        SPECIAL_BOSS_VALUE: isLowScoreSpecialBoss(),
+        SPECIAL_BOSS_VALUE: never(!isLowScoreSpecialBoss()),
         BOSS_SPARED_POINTS: 25,
         BOSS_KILLED_POINTS: 10,
         MODE_CHECK: isSpecialMode(),
@@ -1222,7 +1225,7 @@ bossData =
         STAGE_INDEX: 0xc,
         BOSS_STARTING_HEALTH: 0x0f,
         BOSS_LOCATION_IN_STAGE: convertToMajorMinor(0x0c, 0x3a),
-        SPECIAL_BOSS_VALUE: isNineHundredThousandSpecialBoss(),
+        SPECIAL_BOSS_VALUE: once(isNineHundredThousandSpecialBoss()),
         BOSS_SPARED_POINTS: 25,
         BOSS_KILLED_POINTS: 10,
         MODE_CHECK: isSpecialMode(),
@@ -1240,7 +1243,7 @@ bossData =
         STAGE_INDEX: 0xc,
         BOSS_STARTING_HEALTH: 0x10,
         BOSS_LOCATION_IN_STAGE: convertToMajorMinor(0x0c, 0x3b),
-        SPECIAL_BOSS_VALUE: isOneMillionSpecialBoss(),
+        SPECIAL_BOSS_VALUE: once(isOneMillionSpecialBoss()),
         BOSS_SPARED_POINTS: 25,
         BOSS_KILLED_POINTS: 10,
         MODE_CHECK: isSpecialMode(),
