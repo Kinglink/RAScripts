@@ -1029,7 +1029,9 @@ function bossSparedAchievement(bossData)
                            never(justLostLife()) &&
                            never(beforeEnterLocation(bossData[BOSS_LOCATION_IN_STAGE])) &&
                            bossData[MODE_CHECK] &&
-                           trigger_when( once(bossSpared(bossData[BOSS_STARTING_HEALTH], bossData[BOSS_HEALTH_LOCATION])) && // shouldn't need this
+                           // commenting out the boss spared, because it breaks something.  
+                           // Website code used to not have this, but for some reason the rascript still had it. 
+                           trigger_when( //once(bossSpared(bossData[BOSS_STARTING_HEALTH], bossData[BOSS_HEALTH_LOCATION])) && // shouldn't need this
                                          once(boss_flee_check) &&
                                          exitingLocationCondition ) &&
                            special_Boss_Check &&
@@ -1047,7 +1049,9 @@ function bossSparedAchievement(bossData)
                            never(justLostLife()) &&
                            never(beforeEnterLocation(bossData[BOSS_LOCATION_IN_STAGE])) &&
                            bossData[MODE_CHECK] &&
-                           trigger_when( once(bossSpared(bossData[BOSS_STARTING_HEALTH], bossData[BOSS_HEALTH_LOCATION])) && // shouldn't need this
+                           // commenting out the boss killed, because it breaks something.  
+                           // Website code used to not have this, but for some reason the rascript still had it. 
+                           trigger_when( //once(bossSpared(bossData[BOSS_STARTING_HEALTH], bossData[BOSS_HEALTH_LOCATION])) && // shouldn't need this
                                          once(boss_flee_check) &&
                                          exitingLocationCondition ) &&
                            special_Boss_Check &&
