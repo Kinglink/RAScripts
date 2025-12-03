@@ -315,8 +315,12 @@ function convertToMajorMinor(major, minor) => (major * 0x100) + minor
 function stageNumber() => byte(0x001D02)
 
 // Originally this is 1 , but moved to 5 because of Special Stage 30k.   
-function enteringLocation(majorMinor, stage) => majorMinor - 4 == majorMinor() && 
+function enteringBossLocation(majorMinor, stage) => majorMinor - 4 == majorMinor() && 
                                                 majorMinor - 5 == prev(majorMinor()) &&
+                                                stageNumber() == stage - 1
+
+function enteringStageLocation(majorMinor, stage) => majorMinor - 0 == majorMinor() && 
+                                                majorMinor - 1 == prev(majorMinor()) &&
                                                 stageNumber() == stage - 1
 
 
@@ -625,7 +629,7 @@ function justStartedGame()
 
 function notInGame() => demoCheck1() != DEMO_CHECK1_VALUE || demoCheck2() != DEMO_CHECK2_VALUE
 
-function enteringStage(stage) => enteringLocation(convertToMajorMinor(0x00, 0x41), stage) 
+function enteringStage(stage) => enteringStageLocation(convertToMajorMinor(0x00, 0x41), stage) 
 
 // Pass in the stage so 1 will detect the first stage. 
 function beatStageNumber(stage) 
@@ -1023,7 +1027,7 @@ function bossSparedAchievement(bossData)
                  description = "Spare " + bossData[BOSS_NAME] + " on " + stageName + " without damaging them at all",
                  points = bossData[BOSS_SPARED_POINTS],
                  id = bossData[JUNIOR_SPARED_ACHIEVEMENT_ID],
-                 trigger = once(enteringLocation(bossData[BOSS_LOCATION_IN_STAGE], bossData[STAGE_INDEX])) && 
+                 trigger = once(enteringBossLocation(bossData[BOSS_LOCATION_IN_STAGE], bossData[STAGE_INDEX])) && 
                            never(bossDamaged(bossData[BOSS_HEALTH_LOCATION])) &&
                            never(stageNumber() != bossData[STAGE_INDEX] - 1) &&
                            never(justLostLife()) &&
@@ -1043,7 +1047,7 @@ function bossSparedAchievement(bossData)
                  description = "Spare " + bossData[BOSS_NAME] + " on " + stageName + " on hard difficulty without damaging them at all",
                  points = bossData[BOSS_SPARED_POINTS],
                  id = bossData[SPARED_ACHIEVEMENT_ID],
-                 trigger = once(enteringLocation(bossData[BOSS_LOCATION_IN_STAGE], bossData[STAGE_INDEX])) && 
+                 trigger = once(enteringBossLocation(bossData[BOSS_LOCATION_IN_STAGE], bossData[STAGE_INDEX])) && 
                            never(bossDamaged(bossData[BOSS_HEALTH_LOCATION])) &&
                            never(stageNumber() != bossData[STAGE_INDEX] - 1) &&
                            never(justLostLife()) &&
@@ -1079,7 +1083,7 @@ function bossKilledAchievement(bossData)
                      id = bossData[JUNIOR_KILLED_ACHIEVEMENT_ID],
                      description = "Beat " + bossData[BOSS_NAME] + " on " + stageName,
                      points = bossData[BOSS_KILLED_POINTS],
-                     trigger = once(enteringLocation(bossData[BOSS_LOCATION_IN_STAGE], bossData[STAGE_INDEX])) && 
+                     trigger = once(enteringBossLocation(bossData[BOSS_LOCATION_IN_STAGE], bossData[STAGE_INDEX])) && 
                                bossData[MODE_CHECK] &&
                                never(stageNumber() != bossData[STAGE_INDEX] - 1) &&
                                never(justLostLife()) &&
@@ -1100,7 +1104,7 @@ function bossKilledAchievement(bossData)
                  description = "Beat " + bossData[BOSS_NAME] + " on " + stageName + " on hard difficulty",
                  points = bossData[BOSS_KILLED_POINTS],
                  id = bossData[KILLED_ACHIEVEMENT_ID],
-                 trigger = once(enteringLocation(bossData[BOSS_LOCATION_IN_STAGE], bossData[STAGE_INDEX])) && 
+                 trigger = once(enteringBossLocation(bossData[BOSS_LOCATION_IN_STAGE], bossData[STAGE_INDEX])) && 
                            bossData[MODE_CHECK] &&
                            never(stageNumber() != bossData[STAGE_INDEX] - 1) &&
                            never(justLostLife()) &&
@@ -1277,7 +1281,7 @@ achievement(title = "Pardoned Pussycat",
             description = "Spare the Cat Battleship on Stage 1 on hard difficulty without damaging it",
             points = 5,
             id = 415101,
-            trigger = once(enteringLocation(CAT_SHIP_ENTER_MAJOR_MINOR, CAT_SHIP_STAGE_INDEX)) &&
+            trigger = once(enteringBossLocation(CAT_SHIP_ENTER_MAJOR_MINOR, CAT_SHIP_STAGE_INDEX)) &&
                       never(bossDamaged(CAT_MINI_BOSS_HEALTH_MEMORY_LOCATION)) &&
                       never(stageNumber() != CAT_SHIP_STAGE_INDEX - 1) && 
                       never(justLostLife()) &&
@@ -1292,7 +1296,7 @@ achievement(title = "Kitty Killer",
             description = "Beat the Cat Battleship on Stage 1 on hard difficulty",
             points = 1,
             id = 415113,
-            trigger = once(enteringLocation(CAT_SHIP_ENTER_MAJOR_MINOR, CAT_SHIP_STAGE_INDEX)) &&
+            trigger = once(enteringBossLocation(CAT_SHIP_ENTER_MAJOR_MINOR, CAT_SHIP_STAGE_INDEX)) &&
                       never(stageNumber() != CAT_SHIP_STAGE_INDEX - 1) && 
                       never(justLostLife()) &&
                       isOnePlayerMode() &&
@@ -1314,7 +1318,7 @@ achievement(title = "No PDAs Here",
             description = "Spare the Hot Lips on Stage 3 on hard difficulty without damaging any of them",
             points = 50,
             id = 415125,
-            trigger = once(enteringLocation(OCTO_LIPS_MAJOR_MINOR, OCTO_LIPS_STAGE_INDEX)) &&
+            trigger = once(enteringBossLocation(OCTO_LIPS_MAJOR_MINOR, OCTO_LIPS_STAGE_INDEX)) &&
                       never(any_of(range(0,8, step= 0x1), index => bossDamaged(BOSS_ONE_HEALTH_MEMORY_LOCATION + index))) &&
                       never(stageNumber() != OCTO_LIPS_STAGE_INDEX - 1) && 
                       never(justLostLife()) &&
@@ -1333,7 +1337,7 @@ achievement(title = "So many Kisses",
             description = "Beat all the Hot Lips on Stage 3 on hard difficulty",
             points = 10,
             id = 415126,
-            trigger = once(enteringLocation(OCTO_LIPS_MAJOR_MINOR, OCTO_LIPS_STAGE_INDEX)) &&
+            trigger = once(enteringBossLocation(OCTO_LIPS_MAJOR_MINOR, OCTO_LIPS_STAGE_INDEX)) &&
                       never(stageNumber() != OCTO_LIPS_STAGE_INDEX - 1) && 
                       never(justLostLife()) &&
                       isOnePlayerMode() &&
@@ -1352,7 +1356,7 @@ achievement(title = "Gambler's Anonymous",
             description = "Spare Viva Core on Stage 5 on hard difficulty without damaging her at all",
             points = 25,
             id = 415127,
-            trigger = once(enteringLocation(BOSS_5_MAJOR_MINOR, BOSS_5_LEVEL_INDEX)) && 
+            trigger = once(enteringBossLocation(BOSS_5_MAJOR_MINOR, BOSS_5_LEVEL_INDEX)) && 
                       // never(bossDamaged(BOSS_ONE_HEALTH_MEMORY_LOCATION)) &&  // Multi stage boss, so probably could find a way to do this, but let's just check score calculation
                       never(bcdScoreArcade() >= 500 + prev(bcdScoreArcade())) && // more than 100 points in a single frame.  May have to increase it to 499
                       never(stageNumber() != BOSS_5_LEVEL_INDEX - 1) &&
@@ -1369,7 +1373,7 @@ achievement(title = "Jackpot!",
             description = "Kill Viva Core on Stage 5 on hard difficulty",
             points = 5,
             id = 415128,
-            trigger = once(enteringLocation(BOSS_5_MAJOR_MINOR, BOSS_5_LEVEL_INDEX)) && 
+            trigger = once(enteringBossLocation(BOSS_5_MAJOR_MINOR, BOSS_5_LEVEL_INDEX)) && 
                       never(stageNumber() != BOSS_5_LEVEL_INDEX - 1 ) &&
                       never(justLostLife()) &&
                       isOnePlayerMode() &&
@@ -1394,7 +1398,7 @@ achievement(title = "The Light Ending (Duality of Choice)",
             description = "Spare Golgotha Takobee on Stage 8 without damaging them at all on hard difficulty",
             points = 10,
             id = 415129,
-            trigger = once(enteringLocation(FINAL_BOSS_ENTERING_MAJOR_MINOR, FINAL_BOSS_LEVEL_INDEX)) && 
+            trigger = once(enteringBossLocation(FINAL_BOSS_ENTERING_MAJOR_MINOR, FINAL_BOSS_LEVEL_INDEX)) && 
                       never(any_of(range(0,FINAL_BOSS_NUMBER_OF_HEALTH, step= 0x1), index => bossDamaged(FINAL_BOSS_FIRST_HEALTH_LOCATION + index) &&
                                                                                              (finalBossMajorTimer() != 0x00 || 
                                                                                              finalBossMinorTimer() != 0x00))) && 
@@ -1416,7 +1420,7 @@ achievement(title = "The Dark Ending (Duality of Choice)",
             description = "Kill Golgotha Takobee on Stage 8 on hard difficulty",
             points = 10,
             id = 415130,
-            trigger = once(enteringLocation(FINAL_BOSS_ENTERING_MAJOR_MINOR, FINAL_BOSS_LEVEL_INDEX)) && 
+            trigger = once(enteringBossLocation(FINAL_BOSS_ENTERING_MAJOR_MINOR, FINAL_BOSS_LEVEL_INDEX)) && 
                       never(stageNumber() != FINAL_BOSS_LEVEL_INDEX - 1 && stageNumber() != FIRST_LEVEL_NUMBER) &&
                       never(justLostLife()) &&
                       isOnePlayerMode() &&
