@@ -1189,7 +1189,7 @@ Campaign_Data =
 AdditionalCharacter =
 {
     XU_ZHU_ID: {BEAT_LEVEL_ID: BATTLE_OF_HE_FEI_WEI_FORCES_STAGE_FACTION_ID, BEAT_LEVEL_NAME:"Iron Fist of Wei" , UNLOCK_ACHIEVEMENT_NAME: "Fist of Justice"},
-    XIAHOU_YUAN_ID: {BEAT_LEVEL_ID: BATTLE_OF_MT_DING_JUN_SHU_FORCES_STAGE_FACTION_ID, BEAT_LEVEL_NAME:"DingJun Assault" , UNLOCK_ACHIEVEMENT_NAME: "Mountain Breaker"},
+    XIAHOU_YUAN_ID: {BEAT_LEVEL_ID: BATTLE_OF_MT_DING_JUN_WEI_FORCES_STAGE_FACTION_ID, BEAT_LEVEL_NAME:"DingJun Assault" , UNLOCK_ACHIEVEMENT_NAME: "Mountain Breaker"},
     XU_HUANG_ID: {BEAT_LEVEL_ID: BATTLE_OF_JIE_TING_WEI_FORCES_STAGE_FACTION_ID, BEAT_LEVEL_NAME:"Jie Ting Siege" , UNLOCK_ACHIEVEMENT_NAME: "Iron Resolute"},
     CAO_REN_ID: {BEAT_LEVEL_ID: BATTLE_OF_HE_FEI_WEI_FORCES_STAGE_FACTION_ID, BEAT_LEVEL_NAME:"Iron Wall of Hefei" , UNLOCK_ACHIEVEMENT_NAME: "Castle Sentinel"},
     LU_MENG_ID: {BEAT_LEVEL_ID: BATTLE_OF_HE_FEI_SUN_JIAN_FORCES_STAGE_FACTION_ID, BEAT_LEVEL_NAME:"River Phantom" , UNLOCK_ACHIEVEMENT_NAME: "Hidden Tiger"},
@@ -1235,6 +1235,14 @@ function IsChallengeMode(stageId)
 function IsChallengeModeWithKills() => MapNameId() == RAMPAGE_STAGE_CHALLENGE_ID || MapNameId() == SUDDEN_DEATH_STAGE_CHALLENGE_ID || MapNameId() == HAVOC_STAGE_CHALLENGE_ID || MapNameId() == GAUNTLET_STAGE_CHALLENGE_ID
 function IsChallengeModeWithTime() => MapNameId() == SPEED_RUN_STAGE_CHALLENGE_ID
 
+function GeneralProtectionMinus2P()
+{
+    return !IsInDemo() &&
+           !IsInMainMenu() &&
+           !IsInLoadSaveScreen()
+}
+
+
 function GeneralProtection()
 {
     return isSinglePlayer() &&
@@ -1249,6 +1257,7 @@ function GeneralProtectionForChallenge()
            !IsInMainMenu() &&
            !IsInLoadSaveScreen()
 }
+
 
 
 function easyleaderboard( title, description, start, value, format, lower_is_better)
@@ -1566,9 +1575,9 @@ function horseChecker(kingId)
 for kingId in KingTitleLookup
 {
     achievement( title = KingAchievementTitleLookup[kingId],
-                 description = format("Raise a horse worthy of the {0} title", KingTitleLookup[kingId]),
+                 description = format("Raise a horse worthy of the {0} title (2 Players Allowed)", KingTitleLookup[kingId]),
                  points = 25,
-                 trigger = GeneralProtection() &&
+                 trigger = GeneralProtectionMinus2P() &&
                            IsInMusouModeFreeModeOrChallengeMode() &&
                            horseChecker(kingId)
     )
