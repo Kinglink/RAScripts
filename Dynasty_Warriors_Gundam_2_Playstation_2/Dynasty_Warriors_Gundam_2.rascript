@@ -4912,9 +4912,9 @@ function checkLicenseForCharacter(characterIndex, targetLicenses)
 
 function checkPrevLicenseForCharacter(characterIndex, targetLicenses)
 {
-    if( targetLicenses == 2 && characterIndex == AMURO_RAY || characterIndex == CHAR_AZNABLE)
+    if( targetLicenses == 2)
     {
-        targetLicense = 3
+        targetLicenses = correctLicenseNumbers(characterIndex, targetLicenses)
     }
     return characterPrevLicenseCount(characterIndex) < targetLicenses
 }
