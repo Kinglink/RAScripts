@@ -95,7 +95,7 @@ function lifeLeft() => byte(0x000220)
 
 MAX_LIFE_VALUE = 0x7e
 function maxLifeReached() => lifeLeft() == MAX_LIFE_VALUE
-function justTookDamage() => prev(lifeLeft()) > lifeLeft()
+function justTookDamage() => prev(lifeLeft()) > lifeLeft() && lifeLeft() < MAX_LIFE_VALUE
 
 // $0221: (8-bit) Wonder Amount (HP)
 //        
