@@ -1128,7 +1128,7 @@ function InMissionsTargets1() => dword(0xA11068)
 function InMissionsTargets2() => dword(0xA1106C)
 function InMissionsTargets3() => dword(0xA11070)
 
-function CountMissionTargets() =>  InMissionsTargets1() + InMissionsTargets2() + InMissionsTargets3()
+function CountMissionTargets() =>  InMissionsTargets1() == 1 && InMissionsTargets2() == 1 && InMissionsTargets3() == 1
 
 
 MusouModeAchievementNames = 
@@ -1297,7 +1297,7 @@ function leaderboardGenerator( StageFactionID)
 
     time_elapsed = FramesInBattle()
 
-    stage_name = format("{0}({1})", StageNameLookup[StageFactionID], FactionNameLookup[StageFactionID])
+    stage_name = format("{0} ({1})", StageNameLookup[StageFactionID], FactionNameLookup[StageFactionID])
     
     easyleaderboard(
         title = format("Most Kills on {0}",stage_name),
@@ -1525,7 +1525,7 @@ for CharacterId in AdditionalCharacter
 for CharacterId in AdditionalCharacter
 {
     achievement ( title = AdditionalCharacter[CharacterId][BEAT_LEVEL_NAME],
-                      description = format("Beat {0}({1}) on Master or Chaos difficulty as {2} while beating all three targets", 
+                      description = format("Beat {0} ({1}) on Master or Chaos difficulty as {2} while beating all three targets", 
                                            StageNameLookup[AdditionalCharacter[CharacterId][BEAT_LEVEL_ID]],
                                            FactionNameLookup[AdditionalCharacter[CharacterId][BEAT_LEVEL_ID]],
                                            CharacterNameLookup[CharacterId]),
@@ -1536,7 +1536,7 @@ for CharacterId in AdditionalCharacter
                                 DisplayDifficultSetting() >= MASTER_DIFFICULTY_VALUE &&
                                 MapNameId() == AdditionalCharacter[CharacterId][BEAT_LEVEL_ID] &&
                                 FirstPlayerCharacterId() == CharacterId &&
-                                CountMissionTargets() == 3
+                                CountMissionTargets()
         )
 }
 
@@ -1618,13 +1618,13 @@ rich_presence_conditional_display(IsChallengeModeWithTime(), "Challenge Mode: {0
                                   rich_presence_value("Frames", FramesInBattle()),
                                   rich_presence_lookup("Character", FirstPlayerCharacterId(), CharacterNameLookup))
 
-rich_presence_conditional_display(IsInFreeMode(), "Free Mode: Character: {0} Stage: {1}({2}) Difficulty: {3}",
+rich_presence_conditional_display(IsInFreeMode(), "Free Mode: Character: {0} Stage: {1} ({2}) Difficulty: {3}",
                                   rich_presence_lookup("Character", FirstPlayerCharacterId(), CharacterNameLookup),
                                   rich_presence_lookup("Stage", MapNameId(), StageNameLookup),
                                   rich_presence_lookup("Faction", MapNameId(), FactionNameLookup),
                                   rich_presence_lookup("Difficulty", DisplayDifficultSetting(), DifficultyNameLookup))
 
-rich_presence_conditional_display(IsInMusouMode(), "Musou Mode: Character: {0} Stage: {1}({2}) Difficulty: {3}",
+rich_presence_conditional_display(IsInMusouMode(), "Musou Mode: Character: {0} Stage: {1} ({2}) Difficulty: {3}",
                                   rich_presence_lookup("Character", FirstPlayerCharacterId(), CharacterNameLookup),
                                   rich_presence_lookup("Stage", MapNameId(), StageNameLookup),
                                   rich_presence_lookup("Faction", MapNameId(), FactionNameLookup),
