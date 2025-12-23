@@ -6,7 +6,42 @@ Unlocking characters/buying stuff in the shop
 Historical is three campaign modes. 
 They have different unlock levels. 
 Beat a level with out items? 
-Beat every level on Hard?  Is there a higher difficulty? 
+Beat every level on Chaos
 Murasama Castle, get all tanukis (probably 1/4 1/2 3/4 all)
 The same on Nightmare mode. 
 1000 ko bonus. 
+Buy out the shop 
+Need something special for the characters without Musou Modes. 
+
+Do you "Complete" a stage if you beat it with the objectives? 
+
+Beat all objectives on the highest difficulty, 
+beat all Tactical bonuses on the highest difficulty. 
+
+
+Things needed. 
+
+4th weapon earned? (Do we have this?)   (May need a list for The create a character. )
+Shop Purchases.  (need to know what is buyable. )
+
+Not found 
+Historical Mission choices  Will have to go with Stage Faction pairings
+
+
+Things have
+Campaign mode progress for generic. 
+Current Stage Id (not all stages are available in free mode.  Might need to look into "Completed Status" 
+Character Index (need to verify the numbers) .
+Markers in stage?   NOTE Tactical bonuses can't be tied with Objectives. 
+Clearing a stage = Beating all the tactical one time.   Not a rolling total. 
+Which Mode (musou Free, Historical)?
+Save guard. 
+Which mission are you in in musou mode?  
+Difficulty (Chaos) 
+Stage won identifier
+Time in level
+2P mode? 
+Tanuki's found (Both Nightmare and normal.  54 of each. 
+Murasama Nightmare mode? Stages? 
+KOs?  (what is the bonus?) 
+Item carried/item usage
