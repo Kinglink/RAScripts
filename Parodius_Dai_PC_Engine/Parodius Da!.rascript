@@ -1323,8 +1323,8 @@ achievement(title = "No PDAs Here",
                       never(stageNumber() != OCTO_LIPS_STAGE_INDEX - 1) && 
                       never(justLostLife()) &&
                       isOnePlayerMode() &&
-                      trigger_when( all_of(range(1,7, step= 0x2), index => once(bossSpared(OCTO_LIPS_HEALTH_AMOUNT, BOSS_ONE_HEALTH_MEMORY_LOCATION + index))) && // shouldn't need this
-                                    all_of(range(2,8, step= 0x2), index => once(bossSpared(OCTO_LIPS_HEALTH_AMOUNT_ALTERNATE,BOSS_ONE_HEALTH_MEMORY_LOCATION + index))) && // shouldn't need this
+                      trigger_when( //all_of(range(1,7, step= 0x2), index => once(bossSpared(OCTO_LIPS_HEALTH_AMOUNT, BOSS_ONE_HEALTH_MEMORY_LOCATION + index))) && // shouldn't need this
+                                    //all_of(range(2,8, step= 0x2), index => once(bossSpared(OCTO_LIPS_HEALTH_AMOUNT_ALTERNATE,BOSS_ONE_HEALTH_MEMORY_LOCATION + index))) && // shouldn't need this
                                     exitingLocation(OCTO_LIPS_MAJOR_MINOR, OCTO_LIPS_STAGE_INDEX) &&
                                     once(boss3MajorTimer() == 0x00 && 
                                          boss3MinorTimer() == 0x00)) &&
@@ -1337,7 +1337,7 @@ achievement(title = "So many Kisses",
             description = "Beat all the Hot Lips on Stage 3 on hard difficulty",
             points = 10,
             id = 415126,
-            trigger = once(enteringBossLocation(OCTO_LIPS_MAJOR_MINOR, OCTO_LIPS_STAGE_INDEX)) &&
+            trigger = once(enteringStageLocation(OCTO_LIPS_MAJOR_MINOR, OCTO_LIPS_STAGE_INDEX)) &&
                       never(stageNumber() != OCTO_LIPS_STAGE_INDEX - 1) && 
                       never(justLostLife()) &&
                       isOnePlayerMode() &&
