@@ -19,23 +19,34 @@ function KeijiMaedaCompleteStages() => dword_be(0x653428)
 //          0x05 = Complete Musou Mode
 function NobunagaOdaCompleteStages() => dword_be(0x653430)
 
-// $6535A0: (32-bit BE) Keiji Maeda Unlocked Part 1
-//          
-//          This is set to 1 when he's unlocked.  If this is NOT set to 0x90 it appears he's not selectable.  You also must set 0x00654872 to 0x90
-function KeijiMaedaUnlockPart1() => dword_be(0x6535A0)
 
+// $65450F: (8-bit) Difficulty Selected
+//          
+//          Might be 32-bit BE
+//          
+//          0x00 = Easy
+//          0x01 = Normal
+//          0x02 = Hard
+//          0x03 = Chaos
+//          
+//          Check 0x00787d6f if this is proven false.
+//          
+//          This appears to affect the home screen when you return as well (Which one was last selected)
+function DifficultySelected() => byte(0x65450F)
+
+// This is for tactical Complete tracking 
 // $654630: (bitfield) Completed Stages
 //          
 //          bit0 = Yukimura's First stage
 //          bit4 = Yukimura's Fifth Stage
 //          bit5 = Second character (Keiji?) first stage
-function CompletedMusouStages() => byte(0x654630)
+function TacticallyCompleteStages() => byte(0x654630)
 
 // $654631: (bitfield) Completed Stages Part 2
 //          
 //          bit2 = Nobunaga's first stage
 //          bit6 = Nobunaga's fifth stage
-function CompletedMusouStagesPart2() => byte(0x654631)
+function TacticallyCompleteStagesPart2() => byte(0x654631)
 
 // $65464E: (bitfield) Completed stages for normal Murasame Castle
 //          
@@ -45,7 +56,7 @@ function CompletedMusouStagesPart2() => byte(0x654631)
 //          bit 5 = Aosame Castle (Fourth Stage) worthy of an achievement?
 //          bit 6 = The Plot Thickens
 //          bit 7 = An Unexpected Encounter
-function MurasameCompletePart1() => byte(0x65464E)
+function MurasameCastleCompleteStages() => byte(0x65464E)
 
 // $65464F: (bitfield) Completed stages for normal Murasame Castle  Part 2
 //          
@@ -57,7 +68,7 @@ function MurasameCompletePart1() => byte(0x65464E)
 //          bit 5 = Momosame Castle
 //          bit 6  = The Truth Revealed
 //          bit 7 = The Petrified Village
-function MurasameCompletePart2() => byte(0x65464F)
+function MurasameCastleCompleteStagesPart2() => byte(0x65464F)
 
 // $654650: (bitfield) Complete Stagesfor Murasame Castle Part 3
 //          
@@ -66,14 +77,14 @@ function MurasameCompletePart2() => byte(0x65464F)
 //          bit 2 = Through the Looking Glass (Bonus 2)
 //          bit 3 = Curiouser and Curiouser (Bonus 3)
 //          bit 4 = A Strange Rumor (Nightmare)
-function MurasameCompletePart3() => byte(0x654650)
+function MurasameCastleCompleteStagesPart3() => byte(0x654650)
 
 // $654651: (bitfield) Complete Stagesfor Murasame Castle Part 4
 //          
 //          Same as the original but offset.
 //          
-//          bit 7 = Momosame Castle (Nightmare
-function MurasameCompletePart4() => byte(0x654651)
+//          bit 7 = Momosame Castle (Nightmare)
+function MurasameCastleCompleteStagesPart4() => byte(0x654651)
 
 // $654652: (bitfield) Complete Stagesfor Murasame Castle Part 5
 //          
@@ -81,7 +92,7 @@ function MurasameCompletePart4() => byte(0x654651)
 //          
 //          bit 0 - 5 is the final levels of Nightmare Murasame castle (offset from the original list)
 //          Not sure what bit 6 and bit 7 are Likely messages,  6 was set when I was mucking,  7 gets set eventually, might be tutorial messages?
-function MurasameCompletePart5() => byte(0x654652)
+function MurasameCastleCompleteStagesPart5() => byte(0x654652)
 
 // $654654: (54bit bitfield)   Tanuki Unlocks
 //          
@@ -99,7 +110,7 @@ function TanukiUnlocks() => byte(0x654654)
 //          
 //          bit 0-2:  A Strange rumor on Nightmare Tanukis
 //          bit 3-54, remaining tanukis.
-function TanukiUnlocksNightmare() => byte(0x65465B)
+function NightmareTanukis() => byte(0x65465B)
 
 // $654677: (Bitfield) Weapon Unlock purchases
 //          
@@ -114,11 +125,13 @@ function WeaponUnlockPurchases() => dword_be(0x654677)
 // $6546A8: (32-bit BE) Yukimura Sanada Level
 //          
 //          Note when you load a save, it loads to this location
-function YukimuraLevel() => dword_be(0x6546A8)
+function YukimuraSanadaLevel() => dword_be(0x6546A8)
 
 // $6546BA: (bitfield) Yukimura unlock status.
 //          
 //          bit 4 = New marker
+//          bit 5 = Customize appearance
+//          bit 6 = Unlock Max Stats
 //          bit 7 = Selectable (Not set it will not display.  needs to be unlocked elsewhere too)
 //          
 //          Note this also controls if the character can be purchased.
@@ -139,13 +152,13 @@ function YukimuraUnlockStatus() => byte(0x6546BA)
 //          This changes the power of the weapon, as well as type  (first is normal, second is Power, third is Speed, Fourth is special)
 //          
 //          The first 0xc3 stops the list of weapons, numbers (*including the next weapon) beyond that is ignored.
-function YukimuraFirstWeaponType() => dword_be(0x6546BC)
+function YukimurasFirstWeaponType() => dword_be(0x6546BC)
 
 // $6546E8: (32-bit BE) Yukimura's Second Weapon Type
-function YukimuraSecondWeapon() => dword_be(0x6546E8)
+function YukimurasSecondWeaponType() => dword_be(0x6546E8)
 
 // $654714: (32-bit BE) Yukimura's Third Weapon Type
-function YukimuraThirdWeapon() => dword_be(0x654714)
+function YukimurasThirdWeaponType() => dword_be(0x654714)
 
 // $654860: (32-bit BE) Keiji Maeda Level
 function KeijiMaedaLevel() => dword_be(0x654860)
@@ -153,12 +166,12 @@ function KeijiMaedaLevel() => dword_be(0x654860)
 // $654872: (8-bit) Keiji Maeda Unlocked Part 2
 //          
 //          This is set to 90 when he's unlocked.  If this is NOT set to 0x90 it appears he's not selectable.  You also must set 0x6535a0 to 0x01
-function KeijiMaedaUnlockStatus() => byte(0x654872)
+function KeijiMaedaUnlockedPart2() => byte(0x654872)
 
 // $65B5B0: (32-bit BE) Amount of rice
 //          
 //          Currency for the Dojo
-function RiceCount() => dword_be(0x65B5B0)
+function AmountOfRice() => dword_be(0x65B5B0)
 
 // $65BC6A: (8-bit) Historical Mode Siege of Kawagoe Castle(1-1) completed status.
 //          
@@ -170,7 +183,7 @@ function RiceCount() => dword_be(0x65B5B0)
 //          
 //          0x00= Next Level Locked,
 //          0x01-0x03 = Next Level Unlocked
-function HistoricalStage11Completed() => byte(0x65BC6A)
+function HistoricalStage1_1CompleteStatus() => byte(0x65BC6A)
 
 // $65BC92: (8-bit) Historical Mode Battle of Okehazama(1-2) completed status.
 //          
@@ -182,54 +195,194 @@ function HistoricalStage11Completed() => byte(0x65BC6A)
 //          
 //          0x00= Next Level Locked,
 //          0x01-0x03 = Next Level Unlocked
-function HistoricalStage12CompleteStatus() => byte(0x65BC92)
+function HistoricalModeStage1_2CompleteStatus() => byte(0x65BC92)
+
+// $65BCBA: (8-bit) Historical Mode Battle of Kawanakajima(1-3) completed status.
+//          
+//          The higher this is the more information is filled out on the timeline.
+//          
+//          0x01 = Low beaten
+//          0x02 = Mid Beaten
+//          0x03 = High Beaten (Not sure what value you need for these)
+//          
+//          0x00= Next Level Locked,
+//          0x01-0x03 = Next Level Unlocked
+function HistoricalModeStage1_3CompleteStatus() => byte(0x65BCBA)
+
+// $65BD2E: (16-bit BE) Historical Mode Battle of Nagashino (2-1) Number of Experience earned
+function HistoricalModeStage2-1ExperienceEarned() => word_be(0x65BD2E)
+
+// $65BD30: (16-bit BE) Historical Mode Battle of Nagashino (2-1) Number of Enemies killed
+function HistoricalModeStage2-1EnemiesKilled() => word_be(0x65BD30)
+
+// $65BD32: (8-bit) Historical Mode Battle of Nagashino(2-1) completed status.
+//          
+//          The higher this is the more information is filled out on the timeline.
+//          
+//          0x01 = Low beaten
+//          0x02 = Mid Beaten
+//          0x03 = High Beaten (Not sure what value you need for these)
+//          
+//          0x00= Next Level Locked,
+//          0x01-0x03 = Next Level Unlocked
+function HistoricalModeStage2-1CompleteStatus() => byte(0x65BD32)
 
 // $6A08C8: (Array of 6 32-bit BE) Objective index... Not important should always be 00 -05 unless mission is not tracked then, 0xffffffff Might be useful to check.
-function InGameObjectiveIndex() => dword_be(0x6A08C8)
+function ObjectiveInfoForCurrentMission() => dword_be(0x6A08C8)
 
 // $6A08E0: (32-bit BE Array of 4 ) Current Mission Objective Statuses
 //          
 //          0x00 = In Progress (uncomplete)
 //          0x01 = Successful
 //          0x02 = Failed
-function ObjectiveStatus() => dword_be(0x6A08E0)
+function ObjectiveStatusForCurrentMission() => dword_be(0x6A08E0)
 
 // $6A14F8: (Array of 4 32-bit )  Tactical Bonuses Index
 //          
 //          This is how the game marks a Tactical Bonus Complete, I believe it will always be 0x00, 0x01, 0x02, 0x03.  Maybe 0xffffffff If not active.
-function TacticalBonusIndex() => dword(0x6A14F8)
+function TacticalBonusIndexForCurrentMission() => dword(0x6A14F8)
 
 // $6A1508: (Array of 4 32-bit )  Tactical Bonuse Success Status
 //          
 //          0x00 = Incomplete
 //          0x03 = Cleared (marker shown)
 //          0x04 = Failure (no marker shown)
-function TacticalBonusSuccess() => dword(0x6A1508)
+function TacticalBonusStatusForCurrentMission() => dword(0x6A1508)
+
+// $787D68: (32-bit BE) Mission results
+//          
+//          0x00 = Mission won
+//          0x01 = Time over.
+//          0x03 = Killed
+//          0x04 = Quit
+//          0x05 = Normal Gameplay.
+//          
+//          if this is not set to 0x5, you get result screens when you quit
+function MissionResults() => dword_be(0x787D68)
+
+// $787D6F: (8-bit) Difficulty Selected
+//          
+//          Might be 32-bit BE
+//          
+//          0x00 = Easy
+//          0x01 = Normal
+//          0x02 = Hard
+//          0x03 = Chaos
+//          
+//          Check 0x00787d6f if this is proven false.
+function AlternateDifficultySelected() => byte(0x787D6F)
+
+// $787D78: (32-bit be) Mode Select
+//          
+//          Changes The values in the upper right.
+//          
+//          0x00 =- Story Mode
+//          0x01 = Free Mode
+//          0x02 = Murasame Castle
+//          0x03 = Historical Mode
+//          0x04 = Dojo
+//          
+//          This is NOT a firm control, but does control the title and can be used.
+//          
+//          Bonus point..  THis is set to 04 when loading at the beginning of the game.  This can be a pretty solid save check
+function ModeSelect() => dword_be(0x787D78)
+
+// $787D7C: (32-bit BE) Two Player indicator.
+//          
+//          0x00 = 1 Player.
+//          0x01 = 2 Player.
+//          0x03 = Main Menu potentially
+function TwoPlayerIndicator() => dword_be(0x787D7C)
 
 // $787D94: (32-bit BE)  Stage/Force
 //          
-//          Note: This is only for the script (and maybe characters).  The level loaded is elsewhere.  Likely 0x00787da
+//          This controls the script used.  so 0x03 will pull up The Suruga-Sagami Conflict (Hojo Army).  HOWEVER it won't affect the title, nor the stage load.  Likely to save space at least two variants are on all stages.  So load one map and one "layout"
+//          
+//          Safe to use this to figure out which stage you're in.   But this won't tell you if you're in a stage.
+//          
+//          
+//          Note: This is only for the script (and maybe characters).  The level loaded is elsewhere.  The Map index is 0x00787da0
 //          
 //          This also has values for maps that are only in Historical mode (The first one for instance)
+//          
+//          
 //          
 //          0x00 = Siege of Kawagoe Castle(Hojo Army)   (Historical Mode)
 //          0x01 = Motonari's Return (Uesugi Army)
 //          0x02 = The Suruga-Sagami Conflict (Hojo Army)
-//          0x03 = The Suruga-Sagami Conflict (Hojo Army)
+//          0x03 = The Suruga-Sagami Conflict Takeda Army)
 //          0x04 = The Kanto Campaign (Hojo Army)
 //          0x05 = The Kanto Campaign (Uesugi Army)
 //          0x06 = Battle of Okehazama (Oda Army)
 //          0x07 = Battle of Kawanakajima(Uesugi Army)
 //          0x08 = Battle of Kawanakajima(Takeda Army)
-//          
-//          0x01a = Battle of Nagashino(Oda-Tokugawa Army)
-//          
-//          
+//          0x09 = Battle of Mt. Inaba Castle (Oda)
+//          0xa = Battle of Mt. Inaba Castle (Saito)
+//          0x0b = Invasion of Suruga (?)
+//          0x0c = Battle of Mimase Pass (Takeda Army)
+//          0x0d = Battle of Mimase Pass (Hojo Army)
+//          0x0e = Retreat from Kanegasaki (Oda-Tokugawa Army)
+//          0x0f = Retreat from Kanegasaki  (Azai-Asakura Army)
+//          0x10 = Battle of Anegawa (Oda-Tokugawa Army)
+//          0x11 = Battle of Anegawa (Azai-Asakura Army)
+//          0x12 = Battle of Odani Castle
+//          0x13 = Battle of Odani Castle
+//          0x14 = Confrontation at Lake Yogo
+//          0x15 = Battle of Tonegawa (Hojo-Takeda Army)
+//          0x16 = Battle of Mikatagahara (Takeda Army)
+//          0x17 = Battle of Mikatagahara (Tokugawar Army)
+//          0x18 = The Great Kanto Defense (Hojo Army)  (Hojo story)
+//          0x19 = Confrontation at Nagashino
+//          0x1a = Battle of Nagashino(Oda-Tokugawa Army)
+//          0x1b = Battle of Kizugawa (Mori Army)
+//          0x1c = Battle of Kizugawa (Oda Army)
+//          0x1d = Invasion of Chugoku
+//          0x1e = Battle of Kozuki Castle
+//          0x1f = The Tachibana Crisis
+//          0x20 = Confrontation at Yamazuki
+//          0x21 = Battle of Tetorigawa (Oda Army)
+//          0x22 = Battle of Tetorigawa (Uesugi Army)
+//          0x23 = Confrontation at Shizugatake
+//          0x24 = Struggle for Kai Province
+//          0x25 = Incident at Honnoji (Oda Army)
+//          0x26 = Incident at Honnoji (Akechi Army)
+//          0x27 = Escape through Iga (Tokugawa Army)
+//          0x28 = Battle of Yamazaki (Hashiba Army)
+//          0x29 = Battle of Yamazaki (Akechi Army)
+//          0x2a = Confrontation at Anegawa
+//          0x2b = Battle of Shizugatake (Hashiba Army)
+//          0x2c = Battle of Shizugatake (Shibata Army)
+//          0x2d = Battle of Komaki- Nagakute (Hashiba Army)
+//          0x2e = Battle of Komaki- Nagakute (Tokugawa Army)
+//          0x2f = Conquest of Kyushu (Tachibana Army)
+//          0x30 = Conquest of Kyushu (Shimazu Army)
+//          0x31 = Battle of Ueda Castle (Tokugawa Army)
+//          0x32 = Battle of Ueda Castle (Sanada Army)
+//          0x33 = Conquest of Odawara (Toyotomi Army)
+//          0x34 = Assault on Oshi Castle (Toyotomi Army)
+//          0x35 = Assault on Oshi Castle (Hojo Army)
+//          0x36 = The Kasai Osaki Uprising (Peasant Army)
+//          0x37 = The Kasai Osaki Uprising (Toyotomi Army)
+//          0x38 = The Rescue of Mitsunari
+//          0x39 = Battle of Fushimi Castle
+//          0x3a = Battle of Otsu Castle
+//          0x3b = Battle of Kuzegawa
+//          0x3c = Battle of Sekigahara (Eastern Army)
+//          0x3d = Battle of Sekigahara (Western Army)
+//          0x3e = Flight From Sekigahara
+//          0x3f = Battle of Hasedo (Uesugi Army)
+//          0x40 = Battle of Hasedo (Date Army)
+//          0x41 = Battle of Numata Castle (Tokugawa Army)
+//          0x42 = Battle of Numata Castle (Sanada Army)
+//          0x43 = Conflict at the Ishigaki Plains (Eastern Army)
+//          0x44 = Retreat from the Ishigaki Plains
+//          0x45 = The Osaka Campaign (Tokugawa Army) (historical mission 3-5)
 //          0x46 = The Osaka Campaign (Toyotomi Army)
 //          0x47 = Confrontationat at Mikatagahara(Toyotomi Army)
 //          0x48 = Siege of Kawagoe Castle (Sanada Army) (Though this is set for Murasame castle as well)
+//          0x49= Siege of Kawagoe Castle
 //          0x04a = Osaka Campaign(Hojo Army)
-//          0x04b = Main Menu (Freezing this starts crashing the game.)
+//          0x04b = Main Menu (Freezing this starts crashing the game.)  (Shows Siege of Kawagoe Castle)
 function StageForceIndex() => dword_be(0x787D94)
 
 // $787D98: (32-bit BE) Musrasame Castle Difficulty Index
@@ -244,7 +397,17 @@ function StageForceIndex() => dword_be(0x787D94)
 //          Likely has other uses in other modes.
 //          
 //          Higher numbers pull data.  Likely bad data.  But interesting point.
-function MurasameDifficultYIndex() => dword_be(0x787D98)
+function MusrasameCastleDifficultyIndex() => dword_be(0x787D98)
+
+// $787D9C: (32-bit BE) Musrasame Castle Stage Index
+//          
+//          In Murasame Castle, this controls which level you will play
+//          
+//          0x00 = A Strange Rumor
+//          0x01 = The Mysterious Samurai
+//          0x02 = Follow Takamaru
+//          0x03 = Aosame Castle
+function MusrasameCastleStageIndex() => dword_be(0x787D9C)
 
 // $787DA8: (32-bit BE) Current Player
 //          
@@ -292,71 +455,30 @@ function MurasameDifficultYIndex() => dword_be(0x787D98)
 //          0x22 = Ujiyasu Hojo
 //          0x23 = Hanbei Takenaka
 //          0x24 = Motonari Mori
+//          0x25 = Masanori Fukushima (probably not selectable
+//          0x26 = Aya (probably not selectable)
+//          0x27 = Takamura
+//          
 //          
 //          <I assume the other characters exist, but I don't have values for them>
 //          0x28 = First Character
 //          0x3b = Last Custom Character
-function CurrentPlayerIndex() => dword_be(0x787DA8)
-
-// $787D68: (32-bit BE) Mission results
-//          
-//          0x00 = Mission won
-//          0x01 = Time over.
-//          0x03 = Killed
-//          0x04 = Quit
-//          0x05 = Normal Gameplay.
-//          
-//          if this is not set to 0x5, you get result screens when you quit
-function MissionResult() => dword_be(0x787D68)
-
-// $787D6F: (8-bit) Difficulty Selected
-//          
-//          Might be 32-bit BE
-//          
-//          0x00 = Easy
-//          0x01 = Normal
-//          0x02 = Hard
-//          0x03 = Chaos
-//          
-//          Check 0x00787d6f if this is proven false.
-function DifficultySelected() => byte(0x787D6F)
-
-// $787D78: (32-bit be) Mode Select
-//          
-//          Changes The values in the upper right.
-//          
-//          0x00 =- Story Mode
-//          0x01 = Free Mode
-//          0x02 = Murasame Castle
-//          0x03 = Historical Mode
-//          0x04 = Dojo
-//          
-//          This is NOT a firm control, but does control the title and can be used.
-//          
-//          Bonus point..  THis is set to 04 when loading at the beginning of the game.  This can be a pretty solid save check
-function ModeSelected() => dword_be(0x787D78)
-
-// $787D7C: (32-bit BE) Two Player indicator.
-//          
-//          0x00 = 1 Player.
-//          0x01 = 2 Player.
-//          0x03 = Main Menu potentially
-function TwoPlayerIndicator() => dword_be(0x787D7C)
-
-// $787D9C: (32-bit BE) Musrasame Castle Stage Index
-//          
-//          In Murasame Castle, this controls which level you will play
-//          
-//          0x00 = A Strange Rumor
-//          0x01 = The Mysterious Samurai
-//          0x02 = Follow Takamaru
-//          0x03 = Aosame Castle
-function MurasameCastleStageIndex() => dword_be(0x787D9C)
+function CurrentPlayerID() => dword_be(0x787DA8)
 
 // $78B0CC: (Float BE) Actual Time control. This is Seconds (Floating point value)
 //          
 //          Setting this to 3600 (on a 3600 second mission) Fails the mission immediately.
-function TimeControl() => float_be(0x78B0CC)
+function CurrentTimeSeconds() => float_be(0x78B0CC)
+
+// $78B0FC: (32-bit BE) Character Mission/Level Index
+//          
+//          0x00 = First level of the current player character in Story
+//          0x01 = Second Level of the Current Player Characters in story mode.
+//          
+//          Not sure what it means for Free mode.
+//          
+//          Looks like it works for historical mode, but there's three stories there.
+function CharacterMissionLevelIndex() => dword_be(0x78B0FC)
 
 // $107D6F4: (32-bit BE) KO pointer
 //           
@@ -364,10 +486,7 @@ function TimeControl() => float_be(0x78B0CC)
 function KoPointer() => dword_be(0x107D6F4)
 
 // $107D950: (32-bit BE) Number of Items Player 1 currently has
-function NumberOfItemsCarried() => dword_be(0x107D950)
-
-// $107E708: (32-BE) First Player Kill Count
-function FirstPlayerKillCount() => byte(0x107E708)
+function NumberOfItemsPlayer1CurrentlyHas() => dword_be(0x107D950)
 
 achievement(
     title = "(VOID) Thunder General", points = 3,
