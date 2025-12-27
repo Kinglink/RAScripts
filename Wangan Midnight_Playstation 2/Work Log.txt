@@ -100,3 +100,31 @@ The line 普通の高校生だった is an example.   Might be OCR but can't fin
 
 Upcoming: 
 Next step will probably be to remove all the images, and see if what I think is text... Is actually text, and not an image.
+
+
+
+Day 5 12/22/2025  
+
+There's almost no way we have enough images to make this work. 
+
+Day 6 12/23/2025
+
+I FOUND IT.  Using SJIS_Dump From Rom Hacking I was dumping every file in Ascii and shift-JIS.... And then it happened. 
+
+00000168.mwo is the text file.  It's probably more than just text, but it means we can move forward. 
+
+There's a second .mwo that has more information.   Have not found the memory card screen yet, but that's ok.  We have the "Story"  
+
+As for the information.  We can't use Ascii (darn) but we can use Double Wide SHift-JIS encoded text.   
+
+We don't have the ingame story scenes yet, but for the moment we can move forward with about 1500 lines of text.  
+
+Some other issues.  Text length.  We Might be able to get another line, but we can't use variable length.  
+
+Sometimes the length is shorter than needed and padded, which we can eat into. 
+
+This is great news.  Basically this project went from "This is going to be hard" to "We can translat a significant part of the game.   
+
+And this requires 0 art changes.   SCOREEEEEEEE 
+
+Honestly exstatic at this news. 
