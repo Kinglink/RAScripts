@@ -1402,7 +1402,7 @@ leaderboard(
 
 achievement(title = "Let's Get Xtreme!",
                 description = "Beat a level, any level!",
-                points = 2,
+                points = 1,
                 trigger =  GeneralProtection() &&
                            IsInMusouModeOrFreeMode() &&
                            JustWonBattle(),
@@ -1440,7 +1440,7 @@ function MasterMusouModeAchievement(characterIndex)
 {
     createMusouModeAchievement(MusouModeAchievementNames[characterIndex][MASTER_ACHIEVEMENT_TITLE], 
                                format("Beat {0}'s musou mode on Master or Chaos difficulty", CharacterNameLookup[characterIndex]),
-                               characterIndex, false, DifficultySetting() >= MASTER_DIFFICULTY_VALUE, 25)
+                               characterIndex, false, DifficultySetting() >= MASTER_DIFFICULTY_VALUE, 10)
 }
 
 function ChaosMusouModeAchievement(characterIndex)
@@ -1453,7 +1453,7 @@ function ChaosMusouModeAchievement(characterIndex)
         achievement(
             title = format("{0} {1}", title, numeral),
             description = format("Beat stage {1} of {0}'s Musou Mode on Chaos difficulty", CharacterNameLookup[characterIndex], stageIndex),
-            points = 25,
+            points = 10,
             trigger = IsInMusouMode() &&
                       GeneralProtection() &&
                       JustBeatStageIndexForMusouMode(stageIndex) &&
@@ -1485,7 +1485,7 @@ for stageId in StageNameLookup
     {
         achievement ( title = format("{0} - {1} complete", StageNameLookup[stageId], FactionNameLookup[stageId]),
                       description = format("Earn the three targets for {0} as the {1}", StageNameLookup[stageId], FactionNameLookup[stageId]),
-                      points = 5,
+                      points = 3,
                       trigger = GeneralProtection() &&
                                 IsInMusouModeOrFreeMode() &&
                                 WonStageCheck() &&
@@ -1500,7 +1500,7 @@ for CharacterId in Campaign_Data
     {
         achievement ( title = Campaign_Data[CharacterId][UNLOCK_ACHIEVEMENT_NAME],
                       description = format("Unlock {0}", CharacterNameLookup[CharacterId]),
-                      points = 3,
+                      points = 2,
                       trigger = GeneralProtection() &&
                                 IsInMusouModeOrFreeMode() &&
                                 WonStageCheck() &&
@@ -1514,7 +1514,7 @@ for CharacterId in AdditionalCharacter
 {
     achievement ( title = AdditionalCharacter[CharacterId][UNLOCK_ACHIEVEMENT_NAME],
                       description = format("Unlock {0}", CharacterNameLookup[CharacterId]),
-                      points = 3,
+                      points = 2,
                       trigger = GeneralProtection() &&
                                 IsInMusouModeOrFreeMode() &&
                                 WonStageCheck() &&
@@ -1544,7 +1544,7 @@ for characterId in CharacterNameLookup
 {
     achievement( title = format("Fully Dressed: {0}", CharacterNameLookup[characterId]),
                  description = format("Reach level 25 with {0}", CharacterNameLookup[characterId]),
-                 points = 5,
+                 points = 3,
                  trigger = GeneralProtection() &&
                            IsInMusouModeOrFreeMode() &&
                            WonStageCheck() &&
@@ -1555,7 +1555,7 @@ for characterId in CharacterNameLookup
 
 achievement(title = "Combo Master",
             description = "Hit a 3000 or more hit combo",
-            points = 10,
+            points = 5,
             trigger = GeneralProtection() &&
                       IsInMusouModeFreeModeOrChallengeMode() &&
                       JustHitComboNumber(3000)
