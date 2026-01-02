@@ -3844,7 +3844,7 @@ friendAchievement(title = "Small Gathering",
 friendAchievement(title = "Large Crowd",
                   description = "Make your 100th friend in Conquest Mode",
                   points = 25,
-                  total = 10
+                  total = 100
                  )
 
 friendAchievement(title = "Social Party",
