@@ -205,7 +205,7 @@ missionNameLookup =
     0x0C: "Re-entry to Earth (Redux)",
     0x0D: "Winds of Jaburo",
     0x0E: "The Storm over Kilimanjaro",
-    0x0F: "Run through the Cosmos",
+    0x0F: "Run Through the Cosmos",
     0x10: "Enemy Encounter at 5th Luna",
     0x11: "Luna 2 Surrenders: Axis Accelerates",
     0x12: "Londo Bell Reacts: Axis Falls",
@@ -216,7 +216,7 @@ missionNameLookup =
     0x17: "The Storm over Kilimanjaro",
     0x18: "Scirocco Steps Forward",
     0x19: "The Mirror of Rosamia",
-    0x1A: "Run through the Cosmos",
+    0x1A: "Run Through the Cosmos",
     0x1B: "The Burning Earth",
     0x1C: "Puru Two in Gravity",
     0x1D: "Vibration",
@@ -251,8 +251,8 @@ missionNameLookup =
     0x3A: "Fabricated Bloodline, Destiny Plan",
     0x3B: "2500 Years of Samurai Family History",
     0x3C: "Rise up! Hail Zeon!",
-    0x3D: "A World Without Friend or Foe",
-    0x3E: "Domon Kasshu, Surpass your Master!",
+    0x3D: "A World without Friend or Foe",
+    0x3E: "Domon Kasshu, Surpass Your Master!",
     0x3F: "Proof of Friendship",
     0x40: "I'll Speak with My Fists!",
     0x41: "Master Asia Dies at Dawn?",
@@ -264,7 +264,7 @@ missionNameLookup =
     0x47: "Master Asia's Name",
     0x48: "Those Who Oppose War",
     0x49: "Those Who Seek Battle",
-    0x4A: "Those Who Seek to be Rescued",
+    0x4A: "Those Who Seek to Be Rescued",
     0x4B: "Those Who Face Disaster",
     0x4C: "Those Who Guide Us to Peace",
     0x4D: "Chivalry Is Bravery",
@@ -291,17 +291,17 @@ missionNameLookup =
     0x62: "Perplexed Girl",
     0x63: "Never-ending Conflict",
     0x64: "Discord",
-    0x65: "Red and Black",
+    0x65: "Red and Black (Puru)",
     0x66: "Menace on the Battlefield",
-    0x67: "Hearts Passing By",
+    0x67: "Hearts Passing by",
     0x68: "Irritation",
     0x69: "Skies of Confusion",
-    0x6A: "Red and Black",
+    0x6A: "Red and Black (Puru Two)",
     0x6B: "Double Zeta, Run Away!",
     0x6C: "The Valley of the Iceberg",
     0x6D: "Judau, Come out!",
-    0x6E: "You're So Stubborn",
-    0x6F: "Time to Find Out! Lover, Friend, Rival?",
+    0x6E: "You're so Stubborn",
+    0x6F: "Time to Find out! Lover, Friend, Rival?",
     0x70: "The Fight to End All Fights",
     0x71: "Tears on the Battlefield",
     0x72: "Peace Singing Singstress",
@@ -313,7 +313,7 @@ missionNameLookup =
     0x78: "Gates to a New World",
     0x79: "Crimson Soaked Cosmos",
     0x7A: "Eternal Conflict",
-    0x7B: "An Era Without Light",
+    0x7B: "An Era without Light",
     0x7C: "Contradicting Justice",
     0x7D: "World in Peace",
     0x7E: "Eternal Fate",
@@ -338,13 +338,13 @@ missionNameLookup =
     0x91: "Farewell, Loved One",
     0x92: "Infiltration in Jupritis",
     0x93: "Too Much of a Woman",
-    0x94: "Attracted By the Scent of Flowers",
+    0x94: "Attracted by the Scent of Flowers",
     0x95: "Goodbye Days of Youth",
     0x96: "Newtype Playground",
     0x97: "Gyunei's Ambition 1",
     0x98: "Gyunei's Ambition 2",
     0x99: "The Prestige of the Zabi Family 1",
-    0x9A: "The Prestige of the Zabi Family 1",  // This is correct.
+    0x9A: "The Prestige of the Zabi Family 1(Again)",  // This is technically wrong. It's the same as 0x99
     0x9B: "Sleggar and the Return to Jupiter",
     0x9C: "Sleggar and the Cyber-Newtype",
     0x9D: "Sleggar and the Lovers",
@@ -399,7 +399,7 @@ missionNameLookup =
     0xCE: "Remember the Past 7",
     0xCF: "The Monster of Zeon",
     0xD0: "Heroes of the Federation",
-    0xD1: "The Messenger From Axis",
+    0xD1: "The Messenger from Axis",
     0xD2: "Mass Production Gundam?",
     0xD3: "This Is No Zaku, My Friend!",
     0xD4: "Giant Revealed",
@@ -493,9 +493,9 @@ missionNameLookup =
     0x12C: "Freedom to Space 1",
     0x12D: "Freedom to Space 2",
     0x12E: "Freedom to Space 3",
-    0x12F: "The Earth is my Birthplace 1",
-    0x130: "The Earth is my Birthplace 2",
-    0x131: "The Earth is my Birthplace 3",
+    0x12F: "The Earth is My Birthplace 1",
+    0x130: "The Earth is My Birthplace 2",
+    0x131: "The Earth is My Birthplace 3",
     0x132: "Cold Machiavellian",
     0x133: "Faith 1",
     0x134: "Faith 2",
@@ -549,11 +549,11 @@ missionNameLookup =
     0x164: "Towards Tomorrow",
     0x165: "Fighting Spirit",
     0x166: "Crimson Lightning",
-    0x167: "You're in my way!",
+    0x167: "You're in My Way!",
     0x168: "The Shocking Dark History",
     0x169: "King of Hearts' Challenge",
     0x16A: "Look! The East Burns Crimson Red!",
-    0x16B: "C'mon, C'mon! Bring it on!",
+    0x16B: "C'mon, C'mon! Bring It on!",
     0x16C: "White Devil",
     0x16D: "The Final Victor",
     0x16E: "Moonlight Butterfly vs. Wings of Fire",
@@ -2271,8 +2271,8 @@ function characterPrevLicenseCount(character) => sum_of(range(CHARACTER_LICENSE_
 function suit1DisplayImage() => word(0x691A30)
 
 FIRST_SUIT_DISPLAY_IMAGE_MEMORY_LOCATION = 0x691A30
-SECOND_SUITE_DISPLAY_IMAGE_MEMORY_LOCATION = 0x691AC0
-SUIT_DISPLAY_IMAGE_MEMORY_OFFSET = SECOND_SUITE_DISPLAY_IMAGE_MEMORY_LOCATION - FIRST_SUIT_DISPLAY_IMAGE_MEMORY_LOCATION
+SECOND_SUIT_DISPLAY_IMAGE_MEMORY_LOCATION = 0x691AC0
+SUIT_DISPLAY_IMAGE_MEMORY_OFFSET = SECOND_SUIT_DISPLAY_IMAGE_MEMORY_LOCATION - FIRST_SUIT_DISPLAY_IMAGE_MEMORY_LOCATION
 FIRST_SUIT_OWNERSHIP_MEMORY_LOCATION = 0x691A56
 SUIT_OWNERSHIP_OFFSET = FIRST_SUIT_OWNERSHIP_MEMORY_LOCATION - FIRST_SUIT_DISPLAY_IMAGE_MEMORY_LOCATION
 FIRST_SUIT_OWNED_PIECES_MEMORY_LOCATION = 0x691A68
@@ -2609,7 +2609,7 @@ function amuroFriendLevel() => word(0x6A1E10)
 //
 //          bit4 = Display friendship.
 //
-//          See 0x006ce470 for order.0x006a24600x006a1dc0
+//          See 0x006ce470 for order.
 function charFriendDisplay() => byte(0x6A2460)
 
 // $6C2FC4: (bitfield)(bitfield) Amuro Ray's Mission Mode message titled  "Chan - Emergency Launch Message"
@@ -3325,10 +3325,10 @@ function characterGalleryEntryData(character) => bit0(CHARACTER_GALLERY_FIRST_UN
 //          There are 72 Suits (including this one) 
 //function mobileSuitGalleryFirstSuitVisible() => byte(0x6D1520)
 
-// $6d1528: (32-bit) Gallery Loaded Check
+// $6d1528: (24-bit) Gallery Loaded Check
 // 
-//          0x00000000 = Game is rebooted. 
-//          0x00010101 = Gallery is loaded. 
+//          0x000000 = Game is rebooted. 
+//          0x010101 = Gallery is loaded. 
 function galleryLoadedCheck() => tbyte(0x6d1528)
 GALLERY_LOADED_VALUE = 0x00010101
 
@@ -3463,7 +3463,7 @@ function achievementActiveForGallery() => isSaveIndicator1OK() && isSaveIndicato
 // NOTE! don't mark anything missable with this. 
 function singlePlayer() => !isTwoPlayerMode()
 
-achievement( title = "One down, 381 to go",
+achievement( title = "One down, 381 to Go",
              description = "Complete your first mission in single player",
              points = 1,
              trigger = achievementActive() &&
@@ -3933,8 +3933,8 @@ additionMissionsData =
     },
     {
         ID: -1,
-        HALF_NAME: "Friendship is Magic",
-        FULL_NAME: "The Real Treasure is the Friends We Made Along the Way",
+        HALF_NAME: "Friendship Is Magic",
+        FULL_NAME: "The Real Treasure Is the Friends We Made Along the Way",
         HALF_DESCRIPTION: "Complete half of the Friendship Missions",
         FULL_DESCRIPTION: "Complete all of the Friendship Missions",
         HALF_POINTS: 25, 
@@ -3944,7 +3944,7 @@ additionMissionsData =
     {
         ID: -1,
         HALF_NAME: "Even More Missions",
-        FULL_NAME: "And All The Rest",
+        FULL_NAME: "And All the Rest",
         HALF_DESCRIPTION: "Complete half of the Extra Missions",
         FULL_DESCRIPTION: "Complete all of the Extra Missions",
         HALF_POINTS: 25, 
@@ -4692,7 +4692,7 @@ achievement( title = "My Battleship Collection",
 fullMovieGalleryCount = LAST_MOVIE_GALLERY_INDEX - FIRST_MOVIE_GALLERY_INDEX + 1
 halfMovieGallery = (fullMovieGalleryCount) / 2
 
-achievement( title = "Getting Started With Gundam Movies",
+achievement( title = "Getting Started with Gundam Movies",
              description = "Unlock half of the movie gallery entries",
              points = 5,
              trigger = achievementActiveForGallery() &&
@@ -4920,7 +4920,7 @@ function checkPrevLicenseForCharacter(characterIndex, targetLicenses)
 }
 
 
-achievement(title = "I learned something",
+achievement(title = "I Learned Something",
             description = "Earn your first skill for any character",
             points = 2,
             trigger = achievementActive() &&
