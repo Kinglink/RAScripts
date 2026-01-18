@@ -17,7 +17,7 @@ function bitOffset(InitialLocation, BitValue)
     offset = BitValue / 8
     
     targetBit = BitValue % 8
-    targetLocation = InitialOffset+offset
+    targetLocation = InitialLocation+offset
     return bit(targetBit, targetLocation)
 }
 
@@ -158,7 +158,7 @@ HANBEI_TAKENAKA_PLAYER_ID = 0x23
 MOTONARI_MORI_PLAYER_ID = 0x24
 MASANORI_FUKUSHIMA_PLAYER_ID = 0x25
 AYA_PLAYER_ID = 0x26
-TAKAMURA_PLAYER_ID = 0x27
+TAKAMARU_PLAYER_ID = 0x27
 FIRST_CUSTOM_CHARACTER_PLAYER_ID = 0x28
 SECOND_CUSTOM_CHARACTER_PLAYER_ID = 0x29
 THIRD_CUSTOM_CHARACTER_PLAYER_ID = 0x2A
@@ -226,7 +226,7 @@ CHARACTER_NAME_LOOKUP =
     MOTONARI_MORI_PLAYER_ID: "Motonari Mori",
     MASANORI_FUKUSHIMA_PLAYER_ID: "Masanori Fukushima",
     AYA_PLAYER_ID: "Aya",
-    TAKAMURA_PLAYER_ID: "Takamura",
+    TAKAMARU_PLAYER_ID: "Takamaru",
     FIRST_CUSTOM_CHARACTER_PLAYER_ID: "Custom Character",
     SECOND_CUSTOM_CHARACTER_PLAYER_ID: "Custom Character",
     THIRD_CUSTOM_CHARACTER_PLAYER_ID: "Custom Character",
@@ -284,7 +284,7 @@ PURCHASABLE_CUSTOMIZE_APPEARANCE_UNLOCKS =  range(YUKIMURA_SANADA_PLAYER_ID, MOT
 function MaxStatUnlockBuilder() 
 {
     retValue = range(YUKIMURA_SANADA_PLAYER_ID, MOTONARI_MORI_PLAYER_ID)  
-    array_push(retValue, TAKAMURA_PLAYER_ID)
+    array_push(retValue, TAKAMARU_PLAYER_ID)
     return retValue
 }  
 PURCHASABLE_UNLOCK_MAX_STATS_UNLOCKS = MaxStatUnlockBuilder()
@@ -382,7 +382,7 @@ TACTICALLY_COMPLETE_STAGE_START = 0x654630
 
 function HasCharacterJustCompletedTactical(characterId)
 {
-    return measured(bitcount_5bit_char(TACTICALLY_COMPLETE_STAGE_START, characterId) == 5) && 
+    return bitcount_5bit_char(TACTICALLY_COMPLETE_STAGE_START, characterId) == 5 && 
       prev(bitcount_5bit_char(TACTICALLY_COMPLETE_STAGE_START, characterId)) == 4
 }
 
@@ -448,15 +448,16 @@ NIGHTMARE_MODE_BIT_VALUE_OFFSET = A_STRANGE_RUMOR_NIGHTMARE - A_STRANGE_RUMOR
 
 function JustCompleteCastleStage(CastleStageIndex)
 {
-    return bitOffset(0x65464E, CastleStageIndex) && 
-      !prev(bitOffset(0x65464E, CastleStageIndex))
+    normalBitValue = CastleStageIndex + 2
+    return bitOffset(0x65464E, normalBitValue) == 1 && 
+      prev(bitOffset(0x65464E, normalBitValue)) == 0
 }
 
 function JustCompleteNightmareCastleStage(CastleStageIndex)
 {
-    nightmareBitValue = CastleStageIndex + NIGHTMARE_MODE_BIT_VALUE_OFFSET
-    return bitOffset(0x65464E, nightmareBitValue) && 
-      !prev(bitOffset(0x65464E, nightmareBitValue))
+    nightmareBitValue = CastleStageIndex + NIGHTMARE_MODE_BIT_VALUE_OFFSET + 2
+    return bitOffset(0x65464E, nightmareBitValue) ==  1 && 
+      prev(bitOffset(0x65464E, nightmareBitValue)) == 0
 }
 
 
@@ -502,7 +503,7 @@ function CountofTanukisCollected()
 
 function JustReachedTanukiCount(targetCount)
 {
-    return CountofTanukisCollected() == targetCount && 
+    return measured(CountofTanukisCollected() == targetCount) && 
       prev(CountofTanukisCollected()) <= targetCount - 1 &&
       prev(CountofTanukisCollected()) >= targetCount - 3
 }
@@ -514,7 +515,7 @@ function CountofNightmareTanukisCollected()
 
 function JustReachedNightmareTanukiCount(targetCount)
 {
-    return CountofNightmareTanukisCollected() == targetCount && 
+    return measured(CountofNightmareTanukisCollected() == targetCount) && 
       prev(CountofNightmareTanukisCollected()) <= targetCount - 1 &&
       prev(CountofNightmareTanukisCollected()) >= targetCount - 3
       
@@ -726,7 +727,7 @@ FOURTH_WEAPON_NAME =
     MOTONARI_MORI_PLAYER_ID:"Blackhawk",
     //MASANORI_FUKUSHIMA_PLAYER_ID:
     //AYA_PLAYER_ID:
-    TAKAMURA_PLAYER_ID:"Murasame Blade"
+    TAKAMARU_PLAYER_ID:"Murasame Blade"
 }
 
 // This will require searching all custom players. 
@@ -745,7 +746,7 @@ FOURTH_CUSTOM_WEAPON_TYPES =
 //          0x28 = Sword
 //          0x29 = Spear
 //          0x2a Naginata
-FIRST_CUSTOM_CHARACTER_GENERAL_WEAPON_TYPE_LOCATION = 0x64ADD5
+FIRST_CUSTOM_CHARACTER_GENERAL_WEAPON_TYPE_LOCATION = 0x65ADD5
 
 // $65AE3B: (8-bit) Second Custom Character General Weapon Type
 SECOND_CUSTOM_CHARACTER_GENERAL_WEAPON_TYPE_LOCATION = 0x65AE3B
@@ -849,10 +850,9 @@ ObjectiveStatusForCurrentMissionLocation = 0x6A08E0
 
 function AllObjectivesCompletedForCurrentMission()
 {
-    return tally_of(range(0, 5), 
-                    6, 
-                    i => dword_be(ObjectiveInfoForCurrentMissionLocation + (index * 4)) == 0xffffffff || 
-                         dword_be(ObjectiveStatusForCurrentMissionLocation + (index * 4)) == 1)
+    return all_of(range(0, 5), 
+                    index => once(dword_be(ObjectiveInfoForCurrentMissionLocation + (index * 4)) == 0xffffffff || 
+                         dword_be(ObjectiveStatusForCurrentMissionLocation + (index * 4)) == 1))
 }
 
 // $6A14F8: (Array of 4 32-bit )  Tactical Bonuses Index
@@ -869,13 +869,13 @@ function TacticalBonusStatusForCurrentMission() => dword(0x6A1508)
 
 TacticalBonusIndexForCurrentMissionLocation = 0x6A14F8
 TacticalBonusStatusForCurrentMissionLocation = 0x6A1508
+TACTICAL_BONUS_CLEARED_VALUE = 0x03
 
 function AllTacticalBonusesCompletedForCurrentMission()
 {
-    return tally_of(range(0, 3), 
-                    4, 
-                    index => dword_be(TacticalBonusIndexForCurrentMissionLocation + (index * 4)) == 0xffffffff || 
-                             dword_be(TacticalBonusStatusForCurrentMissionLocation + (index * 4)) == 1)
+    return all_of(range(0, 3), 
+                    index => (dword_be(TacticalBonusStatusForCurrentMissionLocation + (index * 4)) == TACTICAL_BONUS_CLEARED_VALUE))
+
 }
 
 // $787D68: (32-bit BE) Mission results
@@ -894,6 +894,9 @@ MISSION_NORMAL_GAMEPLAY_VALUE = 0x05
 
 function JustWonMission() => MissionResults() == MISSION_WON_VALUE && 
                         prev(MissionResults()) == MISSION_NORMAL_GAMEPLAY_VALUE
+
+function TriggerJustWonMission() => trigger_when( MissionResults() == MISSION_WON_VALUE) && 
+                                                prev(MissionResults()) == MISSION_NORMAL_GAMEPLAY_VALUE
 
 
 function WonMission() => MissionResults() == MISSION_WON_VALUE
@@ -1102,8 +1105,8 @@ RETREAT_FROM_KANEGASAKI_ODA_TOKUGAWA_FORCE_INDEX = 0x0E
 RETREAT_FROM_KANEGASAKI_AZAI_ASAKURA_FORCE_INDEX = 0x0F
 BATTLE_OF_ANEGAWA_ODA_TOKUGAWA_FORCE_INDEX = 0x10
 BATTLE_OF_ANEGAWA_AZAI_ASAKURA_FORCE_INDEX = 0x11
-BATTLE_OF_ODANI_CASTLE_ODA_FORCE_INDEX= 0x12
-BATTLE_OF_ODANI_CASTLE_AZAI_FORCE_INDEX = 0x13
+BATTLE_OF_ODANI_CASTLE_AZAI_FORCE_INDEX = 0x12
+BATTLE_OF_ODANI_CASTLE_ODA_FORCE_INDEX = 0x13
 CONFRONTATION_AT_LAKE_YOGO_AZAI_FORCE_INDEX = 0x14
 BATTLE_OF_TONEGAWA_HOJO_TAKEDA_FORCE_INDEX = 0x15
 BATTLE_OF_MIKATAGAHARA_TAKEDA_FORCE_INDEX = 0x16
@@ -1262,9 +1265,9 @@ CHARACTER_MUSOU_MODE_LIST =
 {
     YUKIMURA_SANADA_PLAYER_ID: { 
         MAIN_MUSOU_ID: 549290,
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Crimson Hero of Sanada",
+        TACTICAL_MUSOU_TITLE: "Last Strategist of Osaka",
+        CHAOS_TACTICAL_TITLE: "Red Demon of the Battlefield",
         FIRST_LEVEL: BATTLE_OF_MIKATAGAHARA_TAKEDA_FORCE_INDEX,
         SECOND_LEVEL: BATTLE_OF_UEDA_CASTLE_SANADA_FORCE_INDEX,
         THIRD_LEVEL: ASSAULT_ON_OSHI_CASTLE_TOYOTOMI_FORCE_INDEX,
@@ -1273,9 +1276,9 @@ CHARACTER_MUSOU_MODE_LIST =
     },
     KEIJI_MAEDA_PLAYER_ID: { 
         MAIN_MUSOU_ID: 549291,
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Peerless Kabukimono",
+        TACTICAL_MUSOU_TITLE: "Unpredictable Wild Card",
+        CHAOS_TACTICAL_TITLE: "Fearless Vanguard",
         FIRST_LEVEL: BATTLE_OF_ANEGAWA_ODA_TOKUGAWA_FORCE_INDEX,
         SECOND_LEVEL: BATTLE_OF_SHIZUGATAKE_SHIBATA_FORCE_INDEX,
         THIRD_LEVEL: ASSAULT_ON_OSHI_CASTLE_TOYOTOMI_FORCE_INDEX,
@@ -1284,9 +1287,9 @@ CHARACTER_MUSOU_MODE_LIST =
     },
     NOBUNAGA_ODA_PLAYER_ID: { 
         MAIN_MUSOU_ID: 549292,
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "The Demon King of Owari",
+        TACTICAL_MUSOU_TITLE: "Architect of Unification",
+        CHAOS_TACTICAL_TITLE: "Ruthless Conquerer",
         FIRST_LEVEL: BATTLE_OF_OKEHAZAMA_ODA_FORCE_INDEX,
         SECOND_LEVEL: RETREAT_FROM_KANEGASAKI_ODA_TOKUGAWA_FORCE_INDEX,
         THIRD_LEVEL: BATTLE_OF_NAGASHINO_ODA_TOKUGAWA_FORCE_INDEX,
@@ -1295,9 +1298,9 @@ CHARACTER_MUSOU_MODE_LIST =
     },
     MITSUHIDE_AKECHI_PLAYER_ID: { 
         MAIN_MUSOU_ID: 549293,
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "The Traitor of Honno-ji",
+        TACTICAL_MUSOU_TITLE: "Calculating Usurper",
+        CHAOS_TACTICAL_TITLE: "Blade of Betrayal",
         FIRST_LEVEL: BATTLE_OF_NAGASHINO_ODA_TOKUGAWA_FORCE_INDEX,
         SECOND_LEVEL: BATTLE_OF_KIZUGAWA_ODA_FORCE_INDEX,
         THIRD_LEVEL: INCIDENT_AT_HONNOJI_AKECHI_FORCE_INDEX,
@@ -1306,9 +1309,9 @@ CHARACTER_MUSOU_MODE_LIST =
     },
     KENSHIN_UESUGI_PLAYER_ID: { 
         MAIN_MUSOU_ID: 549294,
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Dragon of Echigo",
+        TACTICAL_MUSOU_TITLE: "God of War's Mind",
+        CHAOS_TACTICAL_TITLE: "Righteous Storm",
         FIRST_LEVEL: KANTO_CAMPAIGN_UESUGI_FORCE_INDEX,
         SECOND_LEVEL: BATTLE_OF_KAWANAKAJIMA_UESUGI_FORCE_INDEX,
         THIRD_LEVEL: INVASION_OF_SURUGA_UESUGI_FORCE_INDEX,
@@ -1317,9 +1320,9 @@ CHARACTER_MUSOU_MODE_LIST =
     },
     OICHI_PLAYER_ID : { 
         MAIN_MUSOU_ID: 549295,
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Tragic Blossom of Oda",
+        TACTICAL_MUSOU_TITLE: "Noble Heart Amid Chaos",
+        CHAOS_TACTICAL_TITLE: "Unyielding Resolve",
         FIRST_LEVEL: BATTLE_OF_OKEHAZAMA_ODA_FORCE_INDEX,
         SECOND_LEVEL: BATTLE_OF_MT_INABA_CASTLE_ODA_FORCE_INDEX,
         THIRD_LEVEL: BATTLE_OF_ANEGAWA_AZAI_ASAKURA_FORCE_INDEX,
@@ -1328,9 +1331,9 @@ CHARACTER_MUSOU_MODE_LIST =
     },
     KUNOICHI_PLAYER_ID: { 
         MAIN_MUSOU_ID: 549296,
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Shadow Operative",
+        TACTICAL_MUSOU_TITLE: "Master of Espionage",
+        CHAOS_TACTICAL_TITLE: "Silent Assassin",
         FIRST_LEVEL: BATTLE_OF_TONEGAWA_HOJO_TAKEDA_FORCE_INDEX,
         SECOND_LEVEL: BATTLE_OF_UEDA_CASTLE_SANADA_FORCE_INDEX,
         THIRD_LEVEL: ASSAULT_ON_OSHI_CASTLE_TOYOTOMI_FORCE_INDEX,
@@ -1339,9 +1342,9 @@ CHARACTER_MUSOU_MODE_LIST =
     },
     MAGOICHI_SAIKA_PLAYER_ID: { 
         MAIN_MUSOU_ID: 549297,
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Leader of the Gun Monks",
+        TACTICAL_MUSOU_TITLE: "Firearms Innovator",
+        CHAOS_TACTICAL_TITLE: "Thunder of Lead",
         FIRST_LEVEL: BATTLE_OF_UEDA_CASTLE_SANADA_FORCE_INDEX,
         SECOND_LEVEL: THE_KASAI_OSAKI_UPRISING_PEASANT_FORCE_INDEX,
         THIRD_LEVEL: THE_RESCUE_OF_MITSUNARI_ISHIDA_FORCE_INDEX,
@@ -1350,9 +1353,9 @@ CHARACTER_MUSOU_MODE_LIST =
     },
     SHINGEN_TAKEDA_PLAYER_ID: { 
         MAIN_MUSOU_ID: 549298,
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Tiger of Kai",
+        TACTICAL_MUSOU_TITLE: "Supreme Battlefield Commander",
+        CHAOS_TACTICAL_TITLE: "Crushing Avalanche",
         FIRST_LEVEL: SURUGA_SAGAMI_CONFLICT_TAKEDA_FORCE_INDEX,
         SECOND_LEVEL: BATTLE_OF_KAWANAKAJIMA_TAKEDA_FORCE_INDEX,
         THIRD_LEVEL: BATTLE_OF_MIMASE_PASS_TAKEDA_FORCE_INDEX,
@@ -1361,9 +1364,9 @@ CHARACTER_MUSOU_MODE_LIST =
     },
     MASAMUNE_DATE_PLAYER_ID: { 
         MAIN_MUSOU_ID: 549299,
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "One-Eyed Dragon of Oshu",
+        TACTICAL_MUSOU_TITLE: "Ambitious Visionary",
+        CHAOS_TACTICAL_TITLE: "Blazing Ambition",
         FIRST_LEVEL: BATTLE_OF_UEDA_CASTLE_SANADA_FORCE_INDEX,
         SECOND_LEVEL: CONQUEST_OF_ODAWARA_TOYOTOMI_FORCE_INDEX,
         THIRD_LEVEL: THE_KASAI_OSAKI_UPRISING_PEASANT_FORCE_INDEX,
@@ -1372,9 +1375,9 @@ CHARACTER_MUSOU_MODE_LIST =
     },
     HANZO_HATTORI_PLAYER_ID: { 
         MAIN_MUSOU_ID: 549300,
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Devil Ninja of Iga",
+        TACTICAL_MUSOU_TITLE: "Shadow Tactician",
+        CHAOS_TACTICAL_TITLE: "Phantom Blade",
         FIRST_LEVEL: ESCAPE_THROUGH_IGA_TOKUGAWA_FORCE_INDEX,
         SECOND_LEVEL: BATTLE_OF_KOMAKI_NAGAKUTE_TOKUGAWA_FORCE_INDEX,
         THIRD_LEVEL: BATTLE_OF_UEDA_CASTLE_TOKUGAWA_FORCE_INDEX,
@@ -1383,9 +1386,9 @@ CHARACTER_MUSOU_MODE_LIST =
     },
     HIDEYOSHI_TOYOTOMI_PLAYER_ID: { 
         MAIN_MUSOU_ID: 549301,
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "The Peasant Who Rose",
+        TACTICAL_MUSOU_TITLE: "Master of Adaption",
+        CHAOS_TACTICAL_TITLE: "Relentless Climber",
         FIRST_LEVEL: BATTLE_OF_OKEHAZAMA_ODA_FORCE_INDEX,
         SECOND_LEVEL: BATTLE_OF_MT_INABA_CASTLE_ODA_FORCE_INDEX,
         THIRD_LEVEL: RETREAT_FROM_KANEGASAKI_ODA_TOKUGAWA_FORCE_INDEX,
@@ -1394,9 +1397,9 @@ CHARACTER_MUSOU_MODE_LIST =
     },
     TADAKATSU_HONDA_PLAYER_ID: { 
         MAIN_MUSOU_ID: 549302,
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "The Unwounded Warrior",
+        TACTICAL_MUSOU_TITLE: "Living Shield of Tokugawa",
+        CHAOS_TACTICAL_TITLE: "Indestructible Spear",
         FIRST_LEVEL: BATTLE_OF_MIKATAGAHARA_TOKUGAWA_FORCE_INDEX,
         SECOND_LEVEL: ESCAPE_THROUGH_IGA_TOKUGAWA_FORCE_INDEX,
         THIRD_LEVEL: BATTLE_OF_KOMAKI_NAGAKUTE_TOKUGAWA_FORCE_INDEX,
@@ -1405,20 +1408,20 @@ CHARACTER_MUSOU_MODE_LIST =
     },
     INA_PLAYER_ID: { 
         MAIN_MUSOU_ID: 549303,
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Shinobi Princess",
+        TACTICAL_MUSOU_TITLE: "Hidden Protector",
+        CHAOS_TACTICAL_TITLE: "Swift Fang",
         FIRST_LEVEL: BATTLE_OF_MIKATAGAHARA_TOKUGAWA_FORCE_INDEX,
-        SECOND_LEVEL: BATTLE_OF_KOMAKI_NAGAKUTE_TOKUGAWA_FORCE_INDEX,
+        SECOND_LEVEL: BATTLE_OF_UEDA_CASTLE_TOKUGAWA_FORCE_INDEX,
         THIRD_LEVEL: CONQUEST_OF_ODAWARA_TOYOTOMI_FORCE_INDEX,
         FOURTH_LEVEL: BATTLE_OF_NUMATA_CASTLE_TOKUGAWA_FORCE_INDEX,
         FIFTH_LEVEL: THE_OSAKA_CAMPAIGN_TOKUGAWA_FORCE_INDEX
     },
     IEYASU_TOKUGAWA_PLAYER_ID: { 
         MAIN_MUSOU_ID: 549304,
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Founder of the Shogunate",
+        TACTICAL_MUSOU_TITLE: "Ultimate Survivor",
+        CHAOS_TACTICAL_TITLE: "Patient Iron Fist",
         FIRST_LEVEL: BATTLE_OF_ANEGAWA_ODA_TOKUGAWA_FORCE_INDEX,
         SECOND_LEVEL: ESCAPE_THROUGH_IGA_TOKUGAWA_FORCE_INDEX,
         THIRD_LEVEL: BATTLE_OF_KOMAKI_NAGAKUTE_TOKUGAWA_FORCE_INDEX,
@@ -1427,9 +1430,9 @@ CHARACTER_MUSOU_MODE_LIST =
     },
     MITSUNARI_ISHIDA_PLAYER_ID: { 
         MAIN_MUSOU_ID: 549305,
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Loyalist of the West",
+        TACTICAL_MUSOU_TITLE: "Idealistic Strategist",
+        CHAOS_TACTICAL_TITLE: "Burning Conviction",
         FIRST_LEVEL: BATTLE_OF_SHIZUGATAKE_HASHIBA_FORCE_INDEX,
         SECOND_LEVEL: BATTLE_OF_KOMAKI_NAGAKUTE_HASHIBA_FORCE_INDEX,
         THIRD_LEVEL: ASSAULT_ON_OSHI_CASTLE_TOYOTOMI_FORCE_INDEX,
@@ -1438,9 +1441,9 @@ CHARACTER_MUSOU_MODE_LIST =
     },
     NAGAMASA_AZAI_PLAYER_ID: { 
         MAIN_MUSOU_ID: 549306,
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Torn Between Loyalties",
+        TACTICAL_MUSOU_TITLE: "Honorable Commander",
+        CHAOS_TACTICAL_TITLE: "Doomed Resolve",
         FIRST_LEVEL: BATTLE_OF_OKEHAZAMA_ODA_FORCE_INDEX,
         SECOND_LEVEL: BATTLE_OF_MT_INABA_CASTLE_ODA_FORCE_INDEX,
         THIRD_LEVEL: RETREAT_FROM_KANEGASAKI_AZAI_ASAKURA_FORCE_INDEX,
@@ -1449,9 +1452,9 @@ CHARACTER_MUSOU_MODE_LIST =
     },
     SAKON_SHIMA_PLAYER_ID: { 
         MAIN_MUSOU_ID: 549307,
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Devoted Retainer",
+        TACTICAL_MUSOU_TITLE: "Strategist of Sacrifice",
+        CHAOS_TACTICAL_TITLE: "Fierce Loyalty",
         FIRST_LEVEL: BATTLE_OF_MIKATAGAHARA_TAKEDA_FORCE_INDEX,
         SECOND_LEVEL: BATTLE_OF_KOMAKI_NAGAKUTE_HASHIBA_FORCE_INDEX,
         THIRD_LEVEL: ASSAULT_ON_OSHI_CASTLE_TOYOTOMI_FORCE_INDEX,
@@ -1460,9 +1463,9 @@ CHARACTER_MUSOU_MODE_LIST =
     },
     YOSHIHIRO_SHIMAZU_PLAYER_ID: { 
         MAIN_MUSOU_ID: 549308,
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Ogre of Satsuma",
+        TACTICAL_MUSOU_TITLE: "Master of Retreat",
+        CHAOS_TACTICAL_TITLE: "Battlefield Ogre",
         FIRST_LEVEL: CONQUEST_OF_KYUSHU_SHIMAZU_FORCE_INDEX,
         SECOND_LEVEL: CONQUEST_OF_ODAWARA_TOYOTOMI_FORCE_INDEX,
         THIRD_LEVEL: BATTLE_OF_FUSHIMI_CASTLE_WESTERN_FORCE_INDEX,
@@ -1471,9 +1474,9 @@ CHARACTER_MUSOU_MODE_LIST =
     },
     GINCHIYO_TACHIBANA_PLAYER_ID: { 
         MAIN_MUSOU_ID: 549309,
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Warrior Matriarch",
+        TACTICAL_MUSOU_TITLE: "Defend of the Clan",
+        CHAOS_TACTICAL_TITLE: "Iron Will",
         FIRST_LEVEL: CONQUEST_OF_KYUSHU_TACHIBANA_FORCE_INDEX,
         SECOND_LEVEL: CONQUEST_OF_ODAWARA_TOYOTOMI_FORCE_INDEX,
         THIRD_LEVEL: BATTLE_OF_FUSHIMI_CASTLE_WESTERN_FORCE_INDEX,
@@ -1482,9 +1485,9 @@ CHARACTER_MUSOU_MODE_LIST =
     },
     KANETSGU_NAOE_PLAYER_ID: { 
         MAIN_MUSOU_ID: 549310,
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Righteous General",
+        TACTICAL_MUSOU_TITLE: "Strategist of Justice",
+        CHAOS_TACTICAL_TITLE: "Banner of Honor",
         FIRST_LEVEL: BATTLE_OF_TETORIGAWA_UESUGI_FORCE_INDEX,
         SECOND_LEVEL: BATTLE_OF_UEDA_CASTLE_SANADA_FORCE_INDEX,
         THIRD_LEVEL: ASSAULT_ON_OSHI_CASTLE_TOYOTOMI_FORCE_INDEX,
@@ -1492,9 +1495,9 @@ CHARACTER_MUSOU_MODE_LIST =
         FIFTH_LEVEL: BATTLE_OF_HASEDO_UESUGI_FORCE_INDEX
     },
     NENE_PLAYER_ID: { 
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "First Lady of the Toyotomi",
+        TACTICAL_MUSOU_TITLE: "Stabilizing Presence",
+        CHAOS_TACTICAL_TITLE: "Quiet Strength",
         FIRST_LEVEL: ESCAPE_THROUGH_IGA_TOKUGAWA_FORCE_INDEX,
         SECOND_LEVEL: BATTLE_OF_YAMAZAKI_HASHIBA_FORCE_INDEX,
         THIRD_LEVEL: BATTLE_OF_SHIZUGATAKE_HASHIBA_FORCE_INDEX,
@@ -1502,9 +1505,9 @@ CHARACTER_MUSOU_MODE_LIST =
         FIFTH_LEVEL: CONQUEST_OF_ODAWARA_TOYOTOMI_FORCE_INDEX
     },
     MOTOCHIKA_CHOSOKABE_PLAYER_ID: {
-        MAIN_MUSOU_TITLE: "UNNAMED", 
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Unifier of Shikoku", 
+        TACTICAL_MUSOU_TITLE: "Regional Conqueror",
+        CHAOS_TACTICAL_TITLE: "Tidal Force",
         FIRST_LEVEL: BATTLE_OF_KIZUGAWA_ODA_FORCE_INDEX,
         SECOND_LEVEL: BATTLE_OF_TETORIGAWA_ODA_FORCE_INDEX,
         THIRD_LEVEL: INCIDENT_AT_HONNOJI_AKECHI_FORCE_INDEX,
@@ -1512,9 +1515,9 @@ CHARACTER_MUSOU_MODE_LIST =
         FIFTH_LEVEL: CONFRONTATION_AT_ANEGAWA_AKECHI_FORCE_INDEX
     },
     KIYOMASA_KATO_PLAYER_ID: { 
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Tiger of Higo",
+        TACTICAL_MUSOU_TITLE: "Aggressive Commander",
+        CHAOS_TACTICAL_TITLE: "Demon Spearman",
         FIRST_LEVEL: BATTLE_OF_SHIZUGATAKE_HASHIBA_FORCE_INDEX,
         SECOND_LEVEL: BATTLE_OF_KOMAKI_NAGAKUTE_HASHIBA_FORCE_INDEX,
         THIRD_LEVEL: CONQUEST_OF_KYUSHU_TACHIBANA_FORCE_INDEX,
@@ -1522,9 +1525,9 @@ CHARACTER_MUSOU_MODE_LIST =
         FIFTH_LEVEL: THE_OSAKA_CAMPAIGN_TOYOTOMI_FORCE_INDEX
     },
     KANBEI_KURODA_PLAYER_ID: { 
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Master Strategist",
+        TACTICAL_MUSOU_TITLE: "Mind Behind Victories",
+        CHAOS_TACTICAL_TITLE: "Cold Precision",
         FIRST_LEVEL: BATTLE_OF_NAGASHINO_ODA_TOKUGAWA_FORCE_INDEX,
         SECOND_LEVEL: BATTLE_OF_KIZUGAWA_ODA_FORCE_INDEX,
         THIRD_LEVEL: BATTLE_OF_YAMAZAKI_HASHIBA_FORCE_INDEX,
@@ -1532,9 +1535,9 @@ CHARACTER_MUSOU_MODE_LIST =
         FIFTH_LEVEL: THE_OSAKA_CAMPAIGN_TOKUGAWA_FORCE_INDEX
     },
     MUNESHIGE_TACHIBANA_PLAYER_ID: { 
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Paragon of the West",
+        TACTICAL_MUSOU_TITLE: "Peerless Commander",
+        CHAOS_TACTICAL_TITLE: "Unbreakable Blade",
         FIRST_LEVEL: CONQUEST_OF_KYUSHU_TACHIBANA_FORCE_INDEX,
         SECOND_LEVEL: CONQUEST_OF_ODAWARA_TOYOTOMI_FORCE_INDEX,
         THIRD_LEVEL: BATTLE_OF_OTSU_CASTLE_WESTERN_FORCE_INDEX,
@@ -1542,9 +1545,9 @@ CHARACTER_MUSOU_MODE_LIST =
         FIFTH_LEVEL: CONFRONTATION_AT_MIKATAGAHARA_TOYOTOMI_FORCE_INDEX
     },
     KAI_PLAYER_ID: { 
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Fierce Retainer",
+        TACTICAL_MUSOU_TITLE: "Shield of the Takeda",
+        CHAOS_TACTICAL_TITLE: "Wild Fang",
         FIRST_LEVEL: BATTLE_OF_TONEGAWA_HOJO_TAKEDA_FORCE_INDEX,
         SECOND_LEVEL: STRUGGLE_FOR_KAI_PROVINCE_HOJO_FORCE_INDEX,
         THIRD_LEVEL: ASSAULT_ON_OSHI_CASTLE_HOJO_FORCE_INDEX,
@@ -1552,9 +1555,9 @@ CHARACTER_MUSOU_MODE_LIST =
         FIFTH_LEVEL: THE_OSAKA_CAMPAIGN_TOYOTOMI_FORCE_INDEX
     },
     UJIYASU_HOJO_PLAYER_ID: { 
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Lion of Sagami",
+        TACTICAL_MUSOU_TITLE: "Defensive Genius",
+        CHAOS_TACTICAL_TITLE: "Unmovable Wall",
         FIRST_LEVEL: SIEGE_OF_KAWAGOE_CASTLE_HOJO_FORCE_INDEX,
         SECOND_LEVEL: SURUGA_SAGAMI_CONFLICT_HOJO_FORCE_INDEX,
         THIRD_LEVEL: KANTO_CAMPAIGN_HOJO_FORCE_INDEX,
@@ -1562,9 +1565,9 @@ CHARACTER_MUSOU_MODE_LIST =
         FIFTH_LEVEL: GREAT_KANTO_DEFENSE_HOJO_FORCE_INDEX
     },
     HANBEI_TAKENAKA_PLAYER_ID: { 
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Genius in the Shadows",
+        TACTICAL_MUSOU_TITLE: "Brilliant Schemer",
+        CHAOS_TACTICAL_TITLE: "Mind over Might",
         FIRST_LEVEL: BATTLE_OF_MT_INABA_CASTLE_SAITO_FORCE_INDEX,
         SECOND_LEVEL: BATTLE_OF_ANEGAWA_ODA_TOKUGAWA_FORCE_INDEX,
         THIRD_LEVEL: BATTLE_OF_NAGASHINO_ODA_TOKUGAWA_FORCE_INDEX,
@@ -1572,9 +1575,9 @@ CHARACTER_MUSOU_MODE_LIST =
         FIFTH_LEVEL: INVASION_OF_CHUGOKU_ODA_FORCE_INDEX
     },
     MOTONARI_MORI_PLAYER_ID: { 
-        MAIN_MUSOU_TITLE: "UNNAMED",
-        TACTICAL_MUSOU_TITLE: "UNNAMED",
-        CHAOS_TACTICAL_TITLE: "UNNAMED",
+        MAIN_MUSOU_TITLE: "Elder of Three Arrows",
+        TACTICAL_MUSOU_TITLE: "Master of the Long Strategy",
+        CHAOS_TACTICAL_TITLE: "Patient Predator",
         FIRST_LEVEL: MOTONARIS_RETURN_UESUGI_FORCE_INDEX,
         SECOND_LEVEL: BATTLE_OF_KIZUGAWA_MORI_FORCE_INDEX,
         THIRD_LEVEL: BATTLE_OF_KOZUKI_CASTLE_MORI_FORCE_INDEX,
@@ -1583,16 +1586,44 @@ CHARACTER_MUSOU_MODE_LIST =
     }
 }
 
+
+LEVEL = "LEVEL"
+ID = "ID"
 NO_MUSOU_CHARACTERS =
-[
-    OKUNI_PLAYER_ID,
-    NO_PLAYER_ID, // (NOHIME)
-    RANMARU_MORI_PLAYER_ID,
-    YOSHIMOTO_IMAGAWA_PLAYER_ID,
-    KOTARO_FUMA_PLAYER_ID,
-    TOSHIE_MAEDA_PLAYER_ID,
-    KATSUITE_SHIBATA_PLAYER_ID
-]
+{
+    OKUNI_PLAYER_ID: { 
+        CHAOS_TACTICAL_TITLE: "Dancer who Defied Tradition",
+        LEVEL: THE_OSAKA_CAMPAIGN_TOKUGAWA_FORCE_INDEX,
+        ID: 573436
+    },
+    NO_PLAYER_ID: {  // (NOHIME)
+        CHAOS_TACTICAL_TITLE: "Poisoned Smile",
+        LEVEL: INCIDENT_AT_HONNOJI_ODA_FORCE_INDEX,
+        ID: 573563
+    },
+    RANMARU_MORI_PLAYER_ID: { 
+        CHAOS_TACTICAL_TITLE: "Last Stand of Loyalty",
+        LEVEL: BATTLE_OF_MT_INABA_CASTLE_ODA_FORCE_INDEX,
+        ID: 573564
+    },
+    YOSHIMOTO_IMAGAWA_PLAYER_ID: { 
+        CHAOS_TACTICAL_TITLE: "Fallen Lord of Suruga",
+        LEVEL: CONFRONTATION_AT_YAMAZUKI_MORI_FORCE_INDEX,
+        ID: 573565
+    },
+    KOTARO_FUMA_PLAYER_ID: { 
+        CHAOS_TACTICAL_TITLE: "Chaos Incarnate",
+        LEVEL: CONQUEST_OF_ODAWARA_TOYOTOMI_FORCE_INDEX
+    },
+    TOSHIE_MAEDA_PLAYER_ID: { 
+        CHAOS_TACTICAL_TITLE: "Crimson Vanguard",
+        LEVEL: BATTLE_OF_ANEGAWA_ODA_TOKUGAWA_FORCE_INDEX
+    },
+    KATSUITE_SHIBATA_PLAYER_ID: { 
+        CHAOS_TACTICAL_TITLE: "Final Blaze",
+        LEVEL: BATTLE_OF_SHIZUGATAKE_SHIBATA_FORCE_INDEX
+    }
+}
 
 
 // $787D98: (32-bit BE) Murasame Castle Difficulty Index
@@ -1720,7 +1751,7 @@ MurasameCastleStageNameLookup =
 //          0x24 = Motonari Mori
 //          0x25 = Masanori Fukushima (probably not selectable
 //          0x26 = Aya (probably not selectable)
-//          0x27 = Takamura
+//          0x27 = Takamaru
 //          
 //          
 //          <I assume the other characters exist, but I don't have values for them>
@@ -1750,7 +1781,7 @@ function CharacterMissionLevelIndex() => dword_be(0x78B0FC)
 //           +0x8000004c: KO counter   Control, changing this changes the KO count. (If this is ever bellow the current count, it'll count forever, just a comment.)
 function KoPointer() => dword_be(0x107D6F4)
 
-function CurrentKOCounter() => dword_be(KoPointer() + 0x4C)
+function CurrentKOCounter() => dword_be((KoPointer() & 0x7fffffff)+ 0x0000004c)
 
 // $107D950: (32-bit BE) Number of Items Player 1 currently has
 function NumberOfItemsPlayer1CurrentlyHas() => dword_be(0x107D950)
@@ -1760,7 +1791,7 @@ HARD_CODED_NUMBER_OF_ITEMS_PLAYER_1_STARTS_WITH = 6
 function PlayerHasNotUsedAnyItems() => 
     NumberOfItemsPlayer1CurrentlyHas() == HARD_CODED_NUMBER_OF_ITEMS_PLAYER_1_STARTS_WITH
 
-function GeneralProtection() => !IsInMainMenu() && IsInSinglePlayerMode() && !IsInDemoMode()
+function GeneralProtection() => !IsInMainMenu() && IsInSinglePlayerMode() && !IsInDemoMode() && YukimuraSanadaLevel() != 0x00
 
 achievement(
     title = "Your First Battle", points = 1,
@@ -1777,7 +1808,7 @@ achievement(
 )
 
 achievement(
-    title = "Dress Up Your Forces", points = 5,
+    title = "Dress up Your Forces", points = 5,
     description = "Purchase every Customize Appearance from The Dojo",
     id = 549287,
     trigger = IsInDojoMode() && JustPurchasedAllCustomizedCharacters()
@@ -1802,7 +1833,7 @@ function CreateMusouModeAchievement(characterId) {
     if (ContainsKey(CHARACTER_MUSOU_MODE_LIST[characterId], MAIN_MUSOU_ID))
     {
         achievement( title = CHARACTER_MUSOU_MODE_LIST[characterId][MAIN_MUSOU_TITLE],
-            description = "Clear all five of stages of " + CHARACTER_NAME_LOOKUP[characterId] + "'s Musou Mode for the first time",
+            description = "Clear all five of " + CHARACTER_NAME_LOOKUP[characterId] + "'s stages in Story Mode for the first time",
             id = CHARACTER_MUSOU_MODE_LIST[characterId][MAIN_MUSOU_ID],
             points = 5,
             type = "progression",
@@ -1816,7 +1847,7 @@ function CreateMusouModeAchievement(characterId) {
     else
     {
         achievement( title = CHARACTER_MUSOU_MODE_LIST[characterId][MAIN_MUSOU_TITLE],
-            description = "Clear all five of stages of " + CHARACTER_NAME_LOOKUP[characterId] + "'s Musou Mode for the first time",
+            description = "Clear all five of " + CHARACTER_NAME_LOOKUP[characterId] + "'s stages in Story Mode for the first time",
             points = 5,
             trigger = GeneralProtection() &&
                   IsInStoryMode() &&
@@ -1837,7 +1868,7 @@ for characterId in CHARACTER_MUSOU_MODE_LIST
 function CreateTacticalMusouModeAchievement(characterId) {
     
     achievement( title = CHARACTER_MUSOU_MODE_LIST[characterId][TACTICAL_MUSOU_TITLE],
-        description = "Complete all five of stages of " + CHARACTER_NAME_LOOKUP[characterId] + "'s Musou Mode with all Tactical Bonuses",
+        description = "Complete all five of " + CHARACTER_NAME_LOOKUP[characterId] + "'s stages in Story Mode with all Tactical Bonuses",
         points = 5,
         trigger = GeneralProtection() &&
                 IsInStoryMode() &&
@@ -1859,11 +1890,24 @@ CHAPTER_NAMING =
     3: "third"
 }
 
+HISTORICAL_ACHIEVEMENT_NAMES =
+{
+    1: { MAIN_MUSOU_TITLE: "Age of Warring Lords",
+            TACTICAL_MUSOU_TITLE: "Learning Through Defense and Alliance",
+            CHAOS_TACTICAL_TITLE: "Steel Tested in Chaos"},
+    2: { MAIN_MUSOU_TITLE: "The Fall of the Demon",
+            TACTICAL_MUSOU_TITLE: "Endurance Amid Upheaval",
+            CHAOS_TACTICAL_TITLE: "Marching Through the Firestorm"},
+    3: { MAIN_MUSOU_TITLE: "Unification and It's Cost",
+            TACTICAL_MUSOU_TITLE: "Patience Rewarded by Dominion",
+            CHAOS_TACTICAL_TITLE: "Victory that Outlived its Master"}
+}
+
 function HistoricalProgressionAchievement(stageNumber)
 {
-    achievement( title = format("Historical Chapter {0}", stageNumber ),
+    achievement( title = HISTORICAL_ACHIEVEMENT_NAMES[stageNumber][MAIN_MUSOU_TITLE],
                 description = format("Complete the five stages of the {0} Chapter of Historical Mode", CHAPTER_NAMING[stageNumber]) ,
-                points = 5,
+                points = 3,
                 type = "progression",
                 trigger = GeneralProtection() &&
                         IsInHistoricalMode() &&
@@ -1882,20 +1926,11 @@ for index in range(1,3)
     HistoricalProgressionAchievement(index)
 }
 
-
-CHAPTER_NAMING = 
+function HistoricalStoryProgressionAchievement(stageNumber)
 {
-    1: "first",
-    2: "second",
-    3: "third"
-}
-
-function HistoricalProgressionAchievement(stageNumber)
-{
-    achievement( title = format("Story Chapter {0}", stageNumber ),
-                description = format("Complete the five stages of the {0} Chapter of Historical Mode", CHAPTER_NAMING[stageNumber]) ,
-                type = "progression",
-                points = 5,
+    achievement( title = HISTORICAL_ACHIEVEMENT_NAMES[stageNumber][TACTICAL_MUSOU_TITLE],
+                description = format("Fully fill out the {0} chapter of the Historical Mode book", CHAPTER_NAMING[stageNumber]) ,
+                points = 4,
                 trigger = GeneralProtection() &&
                         IsInHistoricalMode() &&
                         WonMission() &&
@@ -1910,22 +1945,46 @@ function HistoricalProgressionAchievement(stageNumber)
 
 for index in range(1,3)
 {
-    HistoricalProgressionAchievement(index)
+    HistoricalStoryProgressionAchievement(index)
 }
 
 
 NORMAL_MURASAME_TITLE = "Normal_Murasame_Title"
 NIGHTMARE_MURASAME_TITLE = "Nightmare_Murasame_Title"
-
+NIGHTMARE_MURASAME_POINTS = "Nightmare_Murasame_Points"
+NIGHTMARE_MURASAME_ID = "NIGHTMARE_MURASAME_ID"
 
 MurasameLevelData = 
 {
-    AOSAME_CASTLE: { NORMAL_MURASAME_TITLE: "Aosame Castle Conquered", NIGHTMARE_MURASAME_TITLE: "Aosame Castle Conquered - Nightmare" },
-    AKASAME_CASTLE: { NORMAL_MURASAME_TITLE: "Akasame Castle Conquered", NIGHTMARE_MURASAME_TITLE: "Akasame Castle Conquered - Nightmare" },
-    RYOKUSAME_CASTLE: { NORMAL_MURASAME_TITLE: "Ryokusame Castle Conquered", NIGHTMARE_MURASAME_TITLE: "Ryokusame Castle Conquered - Nightmare" },
-    MOMOSAME_CASTLE: { NORMAL_MURASAME_TITLE: "Momosame Castle Conquered", NIGHTMARE_MURASAME_TITLE: "Momosame Castle Conquered - Nightmare" },
-    MURASAME_CASTLE: { NORMAL_MURASAME_TITLE: "Murasame Castle Conquered", NIGHTMARE_MURASAME_TITLE: "Murasame Castle Conquered - Nightmare" },
-    CURIOUSER_AND_CURIOUSER: { NORMAL_MURASAME_TITLE: "Takamura in Wonderland", NIGHTMARE_MURASAME_TITLE: "Takamura in Wonderland - Nightmare" }
+    AOSAME_CASTLE: { NORMAL_MURASAME_TITLE: "The Legend of the Five Jewels", 
+                     NIGHTMARE_MURASAME_TITLE: "Night Is Always Darkest Before the Dawn", 
+                     NIGHTMARE_MURASAME_POINTS: 10,
+                     NIGHTMARE_MURASAME_ID: 573583
+                    },
+    AKASAME_CASTLE: { NORMAL_MURASAME_TITLE: "The Stolen Jewel", 
+                      NIGHTMARE_MURASAME_TITLE: "A Thief in the Night", 
+                      NIGHTMARE_MURASAME_POINTS: 10,
+                      NIGHTMARE_MURASAME_ID: 573584
+                      },
+    RYOKUSAME_CASTLE: { NORMAL_MURASAME_TITLE: "Recovered Jewels", 
+                      NIGHTMARE_MURASAME_TITLE: "Danger in the Night", 
+                      NIGHTMARE_MURASAME_POINTS: 10,
+                      NIGHTMARE_MURASAME_ID: 573585 },
+    MOMOSAME_CASTLE: { NORMAL_MURASAME_TITLE: "Possessed Jewels", 
+                      NIGHTMARE_MURASAME_TITLE: "The Dark Night", 
+                      NIGHTMARE_MURASAME_POINTS: 10,
+                      NIGHTMARE_MURASAME_ID: 573586
+                     },
+    MURASAME_CASTLE: { NORMAL_MURASAME_TITLE: "Defeated Jewels", 
+                      NIGHTMARE_MURASAME_TITLE: "Day", 
+                      NIGHTMARE_MURASAME_POINTS: 10,
+                      NIGHTMARE_MURASAME_ID: 573587
+                     },
+    CURIOUSER_AND_CURIOUSER: { NORMAL_MURASAME_TITLE: "Takamaru in Wonderland", 
+                      NIGHTMARE_MURASAME_TITLE: "The Nightmare Is Finally Over", 
+                      NIGHTMARE_MURASAME_POINTS: 25,
+                      NIGHTMARE_MURASAME_ID: 573588
+                      }
 }
 
 for stageId in MurasameLevelData
@@ -1938,12 +1997,12 @@ for stageId in MurasameLevelData
                         IsInMurasameCastleMode() &&
                         IsMurasameCastleNormalMode() &&
                         MurasameCastleStageIndex() == stageId &&
-                        JustWonMission()
+                        JustCompleteCastleStage(stageId)
     )
 }
 
 achievement(
-    title = "Murasame Tanuki Collector", points = 5,
+    title = "Tanuki Suit Not Included", points = 5,
     description = "Collect all Tanuki in Murasame Castle on Normal Difficulty",
     trigger = GeneralProtection() &&
               IsInMurasameCastleMode() &&
@@ -1956,16 +2015,17 @@ for characterId in CHARACTER_MUSOU_MODE_LIST
 {
     achievement(title = format( "{0}", 
                                 CHARACTER_MUSOU_MODE_LIST[characterId][CHAOS_TACTICAL_TITLE]),
-                description = format("Complete all fives of {0}'s Story Mode on Chaos Difficulty with all Tactical Bonuses",
+                description = format("Complete all fives of {0}'s stages in Story Mode on Chaos Difficulty with all Tactical Bonuses",
                                         CHARACTER_NAME_LOOKUP[characterId]),
                 points = 25,
-                trigger = measured(tally_of(LEVEL_IDENTIFIERS, 5, tag=> GeneralProtection() && 
+                trigger = measured(tally_of(LEVEL_IDENTIFIERS, 5, tag=> 
+                                            once(GeneralProtection() && 
                                             IsInStoryMode() &&
                                             IsChaosDifficultySelected() &&
                                             CurrentPlayerID() == characterId &&
                                             StageForceIndex() == CHARACTER_MUSOU_MODE_LIST[characterId][tag] &&
                                             JustWonMission() &&
-                                            AllTacticalBonusesCompletedForCurrentMission()
+                                            AllTacticalBonusesCompletedForCurrentMission())
                         )
                 )
     )
@@ -1976,18 +2036,18 @@ LIST = "LIST"
 HistoricalModeChaosList = 
 {
     1: {
-            TITLE: "UNNAMED", 
+            TITLE: "Steel Tested in Chaos", 
             DESCRIPTION:"Complete all fives of the first chapter in Historical Mode on Chaos Difficulty with all Tactical Bonuses",
             LIST: HISTORICAL_MODE_FIRST_CHAPTER_STAGES
     },
     2: {
-            TITLE: "UNNAMED", 
-            DESCRIPTION:"Complete all fives of the first chapter in Historical Mode on Chaos Difficulty with all Tactical Bonuses",
+            TITLE: "Marching Through the Firestorm", 
+            DESCRIPTION:"Complete all fives of the second chapter in Historical Mode on Chaos Difficulty with all Tactical Bonuses",
             LIST: HISTORICAL_MODE_SECOND_CHAPTER_STAGES
     },
     3: {
-            TITLE: "UNNAMED", 
-            DESCRIPTION:"Complete all fives of the first chapter in Historical Mode on Chaos Difficulty with all Tactical Bonuses",
+            TITLE: "Victory That Outlived its Master", 
+            DESCRIPTION:"Complete all fives of the third chapter in Historical Mode on Chaos Difficulty with all Tactical Bonuses",
             LIST: HISTORICAL_MODE_THIRD_CHAPTER_STAGES
     }
 
@@ -1998,12 +2058,13 @@ function HistoricalModeChaosAchievements(ListIndex)
     achievement( title = HistoricalModeChaosList[ListIndex][TITLE],
                 description = HistoricalModeChaosList[ListIndex][DESCRIPTION],
                 points = 5,
-                trigger = measured(tally_of(HistoricalModeChaosList[ListIndex][LIST], 5, stageId=> GeneralProtection() &&
+                trigger = measured(tally_of(HistoricalModeChaosList[ListIndex][LIST], 5, stageId=> 
+                                    once(GeneralProtection() &&
                                     IsInHistoricalMode() &&
                                     IsChaosDifficultySelected() &&
                                     StageForceIndex() == stageId &&
                                     JustWonMission() &&
-                                    AllTacticalBonusesCompletedForCurrentMission()
+                                    AllTacticalBonusesCompletedForCurrentMission())
             )
         )
     )
@@ -2018,17 +2079,19 @@ for stageId in MurasameLevelData
 {
     achievement( title = MurasameLevelData[stageId][NIGHTMARE_MURASAME_TITLE],
                 description = format("Complete the stage {0} in Murasame Castle on Nightmare Difficulty", MurasameCastleStageNameLookup[stageId]) ,
-                points = 25,
+                points = MurasameLevelData[stageId][NIGHTMARE_MURASAME_POINTS],
+                id = MurasameLevelData[stageId][NIGHTMARE_MURASAME_ID],
                 trigger = GeneralProtection() &&
                         IsInMurasameCastleMode() &&
                         IsMurasameCastleNightmareMode() &&
                         MurasameCastleStageIndex() == stageId &&
-                        JustWonMission()
+                        IsMurasameCastleNightmareMode() &&
+                        JustCompleteNightmareCastleStage(stageId) 
     )
 }
 
 achievement(
-    title = "Murasame Nightmare Tanuki Collector",
+    title = "Stone Tanuki No Longer",
     description = "Collect all Tanuki in Murasame Castle on Nightmare Difficulty",
     points = 5,
     trigger = GeneralProtection() &&
@@ -2036,6 +2099,44 @@ achievement(
               IsMurasameCastleNightmareMode() &&
               JustReachedNightmareTanukiCount(MAX_TANUKI_COUNT)
 )
+
+for playerID in NO_MUSOU_CHARACTERS 
+{
+    if (ContainsKey(NO_MUSOU_CHARACTERS[playerID], ID))
+    {
+        achievement( title = NO_MUSOU_CHARACTERS[playerID][CHAOS_TACTICAL_TITLE],
+                description = format("Complete {0} in Free Mode as {1} on Chaos Difficulty with all Tactical Bonuses", 
+                                    StageNameLookup[NO_MUSOU_CHARACTERS[playerID][LEVEL]], 
+                                    CHARACTER_NAME_LOOKUP[playerID]),
+                points = 10,
+                id = NO_MUSOU_CHARACTERS[playerID][ID],
+                trigger = GeneralProtection() &&
+                          IsInFreeMode() &&
+                          IsChaosDifficultySelected() &&
+                          CurrentPlayerID() == playerID &&
+                          StageForceIndex() == NO_MUSOU_CHARACTERS[playerID][LEVEL] &&
+                          TriggerJustWonMission() &&
+                          AllTacticalBonusesCompletedForCurrentMission()
+        )
+    } 
+    else
+    {
+        achievement( title = NO_MUSOU_CHARACTERS[playerID][CHAOS_TACTICAL_TITLE],
+                description = format("Complete {0} in Free Mode as {1} on Chaos Difficulty with all Tactical Bonuses", 
+                                    StageNameLookup[NO_MUSOU_CHARACTERS[playerID][LEVEL]], 
+                                    CHARACTER_NAME_LOOKUP[playerID]),
+                points = 10,
+                trigger = GeneralProtection() &&
+                          IsInFreeMode() &&
+                          IsChaosDifficultySelected() &&
+                          CurrentPlayerID() == playerID &&
+                          StageForceIndex() == NO_MUSOU_CHARACTERS[playerID][LEVEL] &&
+                          TriggerJustWonMission() &&
+                          AllTacticalBonusesCompletedForCurrentMission()
+        )
+    }
+    
+}
 
 
 for characterID in FOURTH_WEAPON_NAME
@@ -2076,7 +2177,7 @@ for generalWeaponType in FOURTH_CUSTOM_WEAPON_TYPES
 // Each of the six "unused" characters for Musou Mode, have a specific stage to beat on Hard, with all tactical bonuses
 
 
-achievement(title = "A True warrior of the Sengoku Era",
+achievement(title = "A True Warrior of the Sengoku Era",
             description = "Earn 1000 KOs in a single stage",
             points = 3, 
             trigger = GeneralProtection() &&
@@ -2107,7 +2208,7 @@ function leaderboardGenerator( StageFactionID)
     start_condition = 
     (
         GeneralProtection() &&
-        IsInStoryorFreeMode() &&
+        IsInGameplayMode() &&
         StageForceIndex() == StageFactionID &&
         JustWonMission()
     )
