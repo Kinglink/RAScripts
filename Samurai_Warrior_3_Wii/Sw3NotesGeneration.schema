@@ -1,0 +1,140 @@
+{
+  "game": "Samurai Warriors 3",
+
+  "files": {
+    "notes": "D:/DolphinWii/x64/RACache/Data/34694-Notes.json",
+    "user": "D:/DolphinWii/x64/RACache/Data/34694-User.txt"
+  },
+
+  "CharacterNames": {
+    "0x00": "Yukimura Sanada",
+    "0x01": "Keiji Maeda",
+    "0x02": "Nobunaga Oda",
+    "0x03": "Mitsuhide Akechi",
+    "0x04": "Kenshin Uesugi",
+    "0x05": "Oichi",
+    "0x06": "Okuni",
+    "0x07": "Kunoichi",
+    "0x08": "Magoichi Saika",
+    "0x09": "Shingen Takeda",
+    "0x0A": "Masamune Date",
+    "0x0B": "Nohime",
+    "0x0C": "Hanzo Hattori",
+    "0x0D": "Ranmaru Mori",
+    "0x0E": "Hideyoshi Toyotomi",
+    "0x0F": "Yoshimoto Imagawa",
+    "0x10": "Tadakatsu Honda",
+    "0x11": "Ina",
+    "0x12": "Ieyasu Tokugawa",
+    "0x13": "Mitsunari Ishida",
+    "0x14": "Nagamasa Azai",
+    "0x15": "Sakon Shima",
+    "0x16": "Yoshihiro Shimazu",
+    "0x17": "Ginchiyo Tachibana",
+    "0x18": "Kanetsugu Naoe",
+    "0x19": "Nene",
+    "0x1A": "Kotaro Fuma",
+    "0x1B": "Toshiie Maeda",
+    "0x1C": "Motochika Chosokabe",
+    "0x1D": "Katsuie Shibata",
+    "0x1E": "Kiyomasa Kato",
+    "0x1F": "Kanbei Kuroda",
+    "0x20": "Muneshige Tachibana",
+    "0x21": "Kai",
+    "0x22": "Ujiyasu Hojo",
+    "0x23": "Hanbei Takenaka",
+    "0x24": "Motonari Mori",
+    "0x25": "Masanori Fukushima",
+    "0x26": "Aya",
+    "0x27": "Takamura",
+    "0x28": "First Custom Character",
+    "0x29": "Second Custom Character",
+    "0x2A": "Third Custom Character",
+    "0x2B": "Fourth Custom Character",
+    "0x2C": "Fifth Custom Character",
+    "0x2D": "Sixth Custom Character",
+    "0x2E": "Seventh Custom Character",
+    "0x2F": "Eighth Custom Character",
+    "0x30": "Ninth Custom Character",
+    "0x31": "Tenth Custom Character",
+    "0x32": "Eleventh Custom Character",
+    "0x33": "Twelfth Custom Character",
+    "0x34": "Thirteenth Custom Character",
+    "0x35": "Fourteenth Custom Character",
+    "0x36": "Fifteenth Custom Character",
+    "0x37": "Sixteenth Custom Character",
+    "0x38": "Seventeenth Custom Character",
+    "0x39": "Eighteenth Custom Character",
+    "0x3A": "Nineteenth Custom Character",
+    "0x3B": "Twentieth Custom Character"
+  },
+
+  "blocks": [
+    {
+      "start": "0x6546BA",
+      "stride": "0x1B8",
+      "number": "0x3B",
+
+      "note": [
+        "(bitfield) {CharacterNames} Unlock Status",
+        "Original format",
+        "bit 5 = Customize appearance",
+        "bit 6 = Unlock Max Stats",
+        "bit 7 = Selectable (Not set it will not display.  needs to be unlocked elsewhere too)",
+        "Check 0x6546BA for updated data. "
+      ]
+    },
+    {
+      "start": "0x6546BC",
+      "stride": "0x1B8",
+      "inner_repeat": 8,
+      "inner_stride": "0x2C",
+      "number": "0x3B",
+
+      "note": [
+        "(32-bit BE) {CharacterNames} Weapon Type Index: {inner_index_1}",
+        "",
+        "Check 0x6546BC for data.  Weapon will likely be character index*4, with four weapons.",
+        "The Fourth weapon we care about is probably {index} * 4 + 3"
+      ]
+    },
+    {
+      "start": "0x653420",
+      "stride": "0x08",
+      "number": "0x24",
+
+      "note": [
+        "(32-bit BE) {CharacterNames} Complete Stages",
+        "",
+        "0x01 = Beat first stage",
+        "0x05 = Complete Musou Mode"
+      ]
+    },
+    {
+      "start": "0x653420",
+      "stride": "0x08",
+      "number": "0x24",
+
+      "note": [
+        "(32-bit BE) {CharacterNames} Complete Stages",
+        "",
+        "0x01 = Beat first stage",
+        "0x05 = Complete Musou Mode"
+      ]
+    },
+    {
+      "start": "0x65ADD5",
+      "stride": "0x66",
+      "number": "20",
+
+      "note": [
+       "(8-bit) Custom Character {index} General Weapon Type",
+       "",
+       "0x00 = Yukimura Sanada (Rest of the values are the  characters names.",
+       "0x28 = Sword",
+       "0x29 = Spear",
+       "0x2a = Naginata"
+      ]
+    }
+  ]
+}
