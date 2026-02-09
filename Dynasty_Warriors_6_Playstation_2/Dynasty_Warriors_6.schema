@@ -1,0 +1,177 @@
+{
+  "game": "Dynasty Warriors Gundam 2",
+
+  "files": {
+    "notes": "D:/pcsx2/RACache/Data/20788-Notes.json",
+    "user": "D:/pcsx2/RACache/Data/20788-User.txt"
+  },
+
+
+  "Force": {
+    "0x00": "The Yellow Turban Rebellion (Han Forces)",
+    "0x01": "Battle of Hu Lao Gate (Allied Forces)",
+    "0x02": "Battle of Hu Lao Gate (Lu Bu's Forces)",
+    "0x03": "Battle of Xia Pi (Cao Cao's Forces)",
+    "0x04": "Battle of Xia Pi (Sun Jian's Forces)",
+    "0x05": "Battle of Xia Pi (Lu Bu's Forces)",
+    "0x06": "Conquest of Wu (Sun Ce's Forces)",
+    "0x07": "Campaign Against Yuan Shu (Liu Bei's Forces)",
+    "0x08": "Battle of Guan Du (Cao Cao's Forces)",
+    "0x09": "Battle of Guan Du (Lu Bu's Forces)",
+    "0x0a": "Invasion of Xu Chang (Sun Ce's Forces)",
+    "0x0b": "Invasion of Xu Chang (Lu Bu's Forces)",
+    "0x0c": "Invasion of Xu Chang (Sima Yi's Forces)",
+    "0x0d": "Battle of Chang Ban (Cao Cao's Forces)",
+    "0x0e": "Battle of Chang Ban (Liu Bei's Forces)",
+    "0x0f": "Battle of Chi Bi (Cao Cao's Forces)",
+    "0x10": "Battle of Chi Bi (Allied Forces)",
+    "0x11": "Battle of Chi Bi (Lu Bu's Forces)",
+    "0x12": "Pacification of Cheng Du (Liu Bei's Forces)",
+    "0x13": "Battle of Jing Provice (Wu Forces)",
+    "0x14": "Battle of Jing Province (Sun Jian's Forces)",
+    "0x15": "Battle of Jing Province (Lu Bu's Forces",
+    "0x16": "Battle of He Fei (Wei Forces)",
+    "0x17": "Battle of He Fei (Wu Forces)",
+    "0x18": "Battle of He Fei (Sun Jian's Forces)",
+    "0x19": "Battle of He Fei (Lu Bu's Forces)",
+    "0x1a": "Battle of Mt. Ding Jun (Wei Forces)",
+    "0x1b": "Battle of Mt. Ding Jun (Shu Forces)",
+    "0x1c": "Battle of Mt. Ding Jun (Lu Bu's Forces)",
+    "0x1d": "Battle of Fan Castle (Allied Forces)",
+    "0x1e": "Battle of Fan Castle (Sun Jian's Forces)",
+    "0x1f": "Battle of Fan Castle (Shu Forces)",
+    "0x20": "Battle of Fan Castle (Lu Bu's Forces)",
+    "0x21": "Battle of Yi Ling (Wu Forces)",
+    "0x22": "Battle of Yi Ling (Shu Forces)",
+    "0x23": "Battle of Han Zhong (Wei Forces)",
+    "0x24": "Battle of Han Zhong (Shu Forces)",
+    "0x25": "Battle of Han Zhong (Lu Bu's Forces)",
+    "0x26": "Battle of Shi Ting (Wei Forces)",
+    "0x27": "Battle of Shi Ting (Wu Forces)",
+    "0x28": "Battle of Shi Ting (Lu Bu's Forces)",
+    "0x29": "Battle of He Fei Castle (Wei Forces)",
+    "0x2a": "Battle of He Fei Castle (Wu Forces)",
+    "0x2b": "Battle of Wu Zhang Plains (Wei Forces)",
+    "0x2c": "Battle of Wu Zhang Plains (Shu Forces)",
+    "0x2d": "Rampage",
+    "0x2e": "Sudden Death",
+    "0x2f": "Speed Run",
+    "0x30": "Havoc",
+    "0x31": "Gauntlet",
+    "0x32": "Battle of Jiang Dong (Liu Yong's Forces)",
+    "0x33": "Battle of Guan Du (Yuan Shao's Forces)",
+    "0x34": "Struggle at He Bei (Cao Cao's Forces)",
+    "0x35": "Battle of Tong Gate (Allied Forces)",
+    "0x36": "Pacification of Cheng Du (Liu Zhang's Forces)",
+    "0x37": "Battle of Jing Province (Shu Forces)",
+    "0x38": "Battle of Ru Xu Kou (Wu Forces)",
+    "0x39": "Battle of Jie Ting (Wei Forces)",
+    "0x3a": "Battle of Jie Ting (Shu Forces)",
+    "0x3b": "Invasion of Xu Chang (Wei Forces)",
+    "0x3c": "Battle of Shi Ting (Cao Pi's Forces)",
+    "0x3d": "Battle of Wu Zhang Plains (Cao Pi's Forces)",
+    "0x3e": "Battle of Xia Pi (Sun Ce's Forces)"
+  },
+
+  "Character": {
+    "0x00": "Xiahou Dun",
+    "0x01": "Dian Wei",
+    "0x02": "Sima Yi ",
+    "0x03": "Zhang Liao",
+    "0x04": "Cao Cao",
+    "0x05": "Zhou Yu",
+    "0x06": "Lu Xun",
+    "0x07": "Sun Shang Xiang",
+    "0x08": "Gan Ning",
+    "0x09": "Sun Jian",
+    "0x0a": "Zhao Yun",
+    "0x0b": "Guan Yu",
+    "0x0c": "Zhang Fei",
+    "0x0d": "Zhuge Liang",
+    "0x0e": "Liu Bei ",
+    "0x0f": "Diao Chan",
+    "0x10": "Lu Bu",
+    "0x11": "Xu Zhu",
+    "0x12": "Xiahou Yuan",
+    "0x13": "Xu Huang",
+    "0x14": "Zhang He",
+    "0x15": "Cao Ren",
+    "0x16": "Cao Pi",
+    "0x17": "Taishi Ci",
+    "0x18": "Lu Meng",
+    "0x19": "Huang Gai",
+    "0x1a": "Zhou Tai",
+    "0x1b": "Ling Tong",
+    "0x1c": "Sun Ce",
+    "0x1d": "Sun Quan",
+    "0x1e": "Ma Chao",
+    "0x1f": "Huang Zhong",
+    "0x20": "Wei Yan",
+    "0x21": "Guan Ping",
+    "0x22": "Pang Tong",
+    "0x23": "Dong Zhuo",
+    "0x24": "Yuan Shao",
+    "0x25": "Zhang Jiao",
+    "0x26": "Zhen Ji",
+    "0x27": "Xiao Qiao",
+    "0x28": "Yue Ying"
+  },
+
+  "blocks": [
+    {
+      "start": "0x6FB6B0",
+      "stride": "0x1C",
+      "number": "0x3E",
+
+      "note": [
+        "(bitfield) Target completed for {Force}",
+        "",
+        "bit0 = Target 1",
+        "bit1 = Target 2",
+        "bit2 = Target 3",
+        "",
+        "See 0x6FB6B0 to be sure on the latest."
+      ]
+    },
+    {
+      "start": "0x6F9B14",
+      "stride": "0xB0",
+      "number": "0x28",
+
+      "note": [
+        "(32-bit) {Character} Character Selectable",
+        "",
+        "0x00 = Unselectable",
+        "0x01 = Selectable in Free Mode",
+        "",
+        "See 0x6F9B14 to be sure."
+      ]
+    },
+    {
+      "start": "0x6F9B04",
+      "stride": "0xB0",
+      "number": "0x28",
+
+      "note": [
+        "(32-bit) {Character}'s Level",
+        "",
+        "0x00 = Level 1",
+        " 0x18 = Outfit unlock (level 25)",
+        "0x31 = Level 50 (highest possible I believe)",
+        "",
+        "See 0x6F9B04 to be sure."
+      ]
+    },
+    {
+      "start": "0x6FBEAC",
+      "stride": "0x3C",
+      "number": "7",
+
+      "note": [
+        "(32-bit) Horse {index_1} Title",
+        "",
+        "See 0x6FBEAC For the values,  Used for King achievements"
+      ]
+    }
+  ]
+}
