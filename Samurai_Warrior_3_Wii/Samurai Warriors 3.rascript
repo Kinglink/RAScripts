@@ -1976,7 +1976,7 @@ MurasameLevelData =
                       NIGHTMARE_MURASAME_ID: 573586
                      },
     MURASAME_CASTLE: { NORMAL_MURASAME_TITLE: "Defeated Jewels", 
-                      NIGHTMARE_MURASAME_TITLE: "Day", 
+                      NIGHTMARE_MURASAME_TITLE: "Daybreak", 
                       NIGHTMARE_MURASAME_POINTS: 10,
                       NIGHTMARE_MURASAME_ID: 573587
                      },
@@ -1990,7 +1990,7 @@ MurasameLevelData =
 for stageId in MurasameLevelData
 {
     achievement( title = MurasameLevelData[stageId][NORMAL_MURASAME_TITLE],
-                description = format("Complete the stage {0} in Murasame Castle on Normal Difficulty", MurasameCastleStageNameLookup[stageId]),
+                description = format("Complete the stage {0} in Murasame Castle on Normal difficulty", MurasameCastleStageNameLookup[stageId]),
                 type = "progression",
                 points = 5, 
                 trigger = GeneralProtection() &&
@@ -2003,7 +2003,7 @@ for stageId in MurasameLevelData
 
 achievement(
     title = "Tanuki Suit Not Included", points = 5,
-    description = "Collect all Tanuki in Murasame Castle on Normal Difficulty",
+    description = "Collect all Tanuki in Murasame Castle on Normal difficulty",
     trigger = GeneralProtection() &&
               IsInMurasameCastleMode() &&
               IsMurasameCastleNormalMode() &&
@@ -2015,7 +2015,7 @@ for characterId in CHARACTER_MUSOU_MODE_LIST
 {
     achievement(title = format( "{0}", 
                                 CHARACTER_MUSOU_MODE_LIST[characterId][CHAOS_TACTICAL_TITLE]),
-                description = format("Complete all fives of {0}'s stages in Story Mode on Chaos Difficulty with all Tactical Bonuses",
+                description = format("Complete all fives of {0}'s stages in Story Mode on Chaos difficulty with all Tactical Bonuses",
                                         CHARACTER_NAME_LOOKUP[characterId]),
                 points = 25,
                 trigger = measured(tally_of(LEVEL_IDENTIFIERS, 5, tag=> 
@@ -2037,17 +2037,17 @@ HistoricalModeChaosList =
 {
     1: {
             TITLE: "Steel Tested in Chaos", 
-            DESCRIPTION:"Complete all fives of the first chapter in Historical Mode on Chaos Difficulty with all Tactical Bonuses",
+            DESCRIPTION:"Complete all fives of the first chapter in Historical Mode on Chaos difficulty with all Tactical Bonuses",
             LIST: HISTORICAL_MODE_FIRST_CHAPTER_STAGES
     },
     2: {
             TITLE: "Marching Through the Firestorm", 
-            DESCRIPTION:"Complete all fives of the second chapter in Historical Mode on Chaos Difficulty with all Tactical Bonuses",
+            DESCRIPTION:"Complete all fives of the second chapter in Historical Mode on Chaos difficulty with all Tactical Bonuses",
             LIST: HISTORICAL_MODE_SECOND_CHAPTER_STAGES
     },
     3: {
             TITLE: "Victory That Outlived its Master", 
-            DESCRIPTION:"Complete all fives of the third chapter in Historical Mode on Chaos Difficulty with all Tactical Bonuses",
+            DESCRIPTION:"Complete all fives of the third chapter in Historical Mode on Chaos difficulty with all Tactical Bonuses",
             LIST: HISTORICAL_MODE_THIRD_CHAPTER_STAGES
     }
 
@@ -2078,7 +2078,7 @@ for index in HistoricalModeChaosList
 for stageId in MurasameLevelData
 {
     achievement( title = MurasameLevelData[stageId][NIGHTMARE_MURASAME_TITLE],
-                description = format("Complete the stage {0} in Murasame Castle on Nightmare Difficulty", MurasameCastleStageNameLookup[stageId]) ,
+                description = format("Complete the stage {0} in Murasame Castle on Nightmare difficulty", MurasameCastleStageNameLookup[stageId]) ,
                 points = MurasameLevelData[stageId][NIGHTMARE_MURASAME_POINTS],
                 id = MurasameLevelData[stageId][NIGHTMARE_MURASAME_ID],
                 trigger = GeneralProtection() &&
@@ -2092,7 +2092,7 @@ for stageId in MurasameLevelData
 
 achievement(
     title = "Stone Tanuki No Longer",
-    description = "Collect all Tanuki in Murasame Castle on Nightmare Difficulty",
+    description = "Collect all Tanuki in Murasame Castle on Nightmare difficulty",
     points = 5,
     trigger = GeneralProtection() &&
               IsInMurasameCastleMode() &&
@@ -2105,7 +2105,7 @@ for playerID in NO_MUSOU_CHARACTERS
     if (ContainsKey(NO_MUSOU_CHARACTERS[playerID], ID))
     {
         achievement( title = NO_MUSOU_CHARACTERS[playerID][CHAOS_TACTICAL_TITLE],
-                description = format("Complete {0} in Free Mode as {1} on Chaos Difficulty with all Tactical Bonuses", 
+                description = format("Complete {0} in Free Mode as {1} on Chaos difficulty with all Tactical Bonuses", 
                                     StageNameLookup[NO_MUSOU_CHARACTERS[playerID][LEVEL]], 
                                     CHARACTER_NAME_LOOKUP[playerID]),
                 points = 10,
@@ -2122,7 +2122,7 @@ for playerID in NO_MUSOU_CHARACTERS
     else
     {
         achievement( title = NO_MUSOU_CHARACTERS[playerID][CHAOS_TACTICAL_TITLE],
-                description = format("Complete {0} in Free Mode as {1} on Chaos Difficulty with all Tactical Bonuses", 
+                description = format("Complete {0} in Free Mode as {1} on Chaos difficulty with all Tactical Bonuses", 
                                     StageNameLookup[NO_MUSOU_CHARACTERS[playerID][LEVEL]], 
                                     CHARACTER_NAME_LOOKUP[playerID]),
                 points = 10,
