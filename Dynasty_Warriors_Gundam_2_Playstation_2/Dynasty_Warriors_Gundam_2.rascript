@@ -231,10 +231,10 @@ missionNameLookup =
     0x26: "A Unique Man",
     0x27: "A Vision of Lalah",
     0x28: "The Power of a Newtype",
-    0x29: "Char, The Red Comet",
+    0x29: "Char, the Red Comet",
     0x2A: "What’s Wrong with Kamille Being a Man’s Name?",
     0x2B: "This Is Why!",
-    0x2C: "You Aren't So Special!",
+    0x2C: "You Aren't so Special!",
     0x2D: "I'll Show All of You!",
     0x2E: "This Isn’t a Game to Me!",
     0x2F: "Departure",
@@ -493,9 +493,9 @@ missionNameLookup =
     0x12C: "Freedom to Space 1",
     0x12D: "Freedom to Space 2",
     0x12E: "Freedom to Space 3",
-    0x12F: "The Earth is My Birthplace 1",
-    0x130: "The Earth is My Birthplace 2",
-    0x131: "The Earth is My Birthplace 3",
+    0x12F: "The Earth Is My Birthplace 1",
+    0x130: "The Earth Is My Birthplace 2",
+    0x131: "The Earth Is My Birthplace 3",
     0x132: "Cold Machiavellian",
     0x133: "Faith 1",
     0x134: "Faith 2",
@@ -563,7 +563,7 @@ missionNameLookup =
     0x172: "Get Along!",
     0x173: "It’s Not Anime!",
     0x174: "Zeta's First Launch",
-    0x175: "Don't Underestimate it!",
+    0x175: "Don't Underestimate It!",
     0x176: "Scirocco's Utopia",
     0x177: "Giant Red Star",
     0x178: "Great Freedom, Great Responsibility",
@@ -3463,7 +3463,7 @@ function achievementActiveForGallery() => isSaveIndicator1OK() && isSaveIndicato
 // NOTE! don't mark anything missable with this. 
 function singlePlayer() => !isTwoPlayerMode()
 
-achievement( title = "One down, 381 to Go",
+achievement( title = "One Down, 381 to Go",
              description = "Complete your first mission in single player",
              points = 1,
              trigger = achievementActive() &&
