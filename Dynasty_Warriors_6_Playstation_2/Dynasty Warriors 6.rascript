@@ -199,8 +199,8 @@ function YellowTurbanTargetDisplay() => dword(0x6FB6AC)
 // $6FB6B0: (bitfield) Target completed for Yellow Turban Rebellion (Allied Forces)
 //          
 //          bit0 = Target 1
-//          bit1 =Target 2
-//          bit2 =Target 3
+//          bit1 = Target 2
+//          bit2 = Target 3
 function YellowTurbanTargetComplete() => byte(0x6FB6B0)
 
 // $6FB6C8: (32-bit) Target Show for Hu Lao Gate(Han Forces)
@@ -1134,7 +1134,7 @@ function CountMissionTargets() =>  InMissionsTargets1() == 1 && InMissionsTarget
 MusouModeAchievementNames = 
 {   
     XIAHOU_DUN_ID: {BASE_ACHIEVEMENT_TITLE: "One-Eye Fury", MASTER_ACHIEVEMENT_TITLE: "Cao Cao's Right Hand", CHAOS_ACHIEVEMENT_TITLE: "Eye for an Eye"},
-    DIAN_WEI_ID: {BASE_ACHIEVEMENT_TITLE: "Bodyguard Supreme", MASTER_ACHIEVEMENT_TITLE: "Shield Of Wei", CHAOS_ACHIEVEMENT_TITLE: "Blood and Iron"},
+    DIAN_WEI_ID: {BASE_ACHIEVEMENT_TITLE: "Bodyguard Supreme", MASTER_ACHIEVEMENT_TITLE: "Shield of Wei", CHAOS_ACHIEVEMENT_TITLE: "Blood and Iron"},
     SIMA_YI_ID: {BASE_ACHIEVEMENT_TITLE: "The Cunning Strategist", MASTER_ACHIEVEMENT_TITLE: "Jin in the Shadows", CHAOS_ACHIEVEMENT_TITLE: "Architect of Ambition"},
     ZHANG_LIAO_ID: {BASE_ACHIEVEMENT_TITLE: "Hero of Hefei", MASTER_ACHIEVEMENT_TITLE: "Wei's Spearhead", CHAOS_ACHIEVEMENT_TITLE: "Rides of Glory"},
     CAO_CAO_ID: {BASE_ACHIEVEMENT_TITLE: "Hero of Chaos", MASTER_ACHIEVEMENT_TITLE: "Wei Emperor", CHAOS_ACHIEVEMENT_TITLE: "Master of Men"},
@@ -1483,7 +1483,7 @@ for stageId in StageNameLookup
 {
     if IsChallengeMode(stageId) == false
     {
-        achievement ( title = format("{0} - {1} complete", StageNameLookup[stageId], FactionNameLookup[stageId]),
+        achievement ( title = format("{0} - {1} Complete", StageNameLookup[stageId], FactionNameLookup[stageId]),
                       description = format("Earn the three targets for {0} as the {1}", StageNameLookup[stageId], FactionNameLookup[stageId]),
                       points = 3,
                       trigger = GeneralProtection() &&
