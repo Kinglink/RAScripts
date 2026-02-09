@@ -128,3 +128,17 @@ This is great news.  Basically this project went from "This is going to be hard"
 And this requires 0 art changes.   SCOREEEEEEEE 
 
 Honestly exstatic at this news. 
+
+
+2/7/2026.   
+
+A Few failed approaches, before this.  Reached out to Genki, but no response. 
+
+But it looks like the large dat files are the key.  I see the TM2 file headers in there.  
+
+However https://zenhax.com/viewtopic.php@t=16123.html  It sounds like it's compressed.  That sounds like great news, but there's something wrong with 
+the Wangan profile on aluigi's site, AI says it's for PS3.  Fair enough, but it sounds like I can piece out the files (And that does work).  However
+I'm not sure how to decompress.  I'll play more with this in the near future.  I also sent an email to aluigi, hopefully he'll get back and have a 
+quick solutions, other choice is to use that script and figure out how to decompress, OR write my own. 
+
+The bigger concern I have is how do I recompress?   Is there any padding, haven't looked, because I'm afraid what I might find.
