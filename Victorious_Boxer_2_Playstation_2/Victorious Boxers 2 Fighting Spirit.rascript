@@ -1013,7 +1013,7 @@ story_data =
         HARD_TITLE: "The Taste of the First Victory",
         SPECIAL_TITLE: "I'm Starting to Get Used to this",
         SPECIAL_RESET: P1JustDowned(),
-        SPECIAL_DESCRIPTION: "Using a Right Straight to Knock Out Oda",
+        SPECIAL_DESCRIPTION: "without getting knocked down",
         SPECIAL_POINTS: 4
     },
     { 
@@ -1030,7 +1030,8 @@ story_data =
         HARD_TITLE: "Stop Ozuma",
         SPECIAL_TITLE: "Applause for the Defeated",
         SPECIAL_RESET: checkP1CurrentMove(IPPO_JOFRE_UPPER_CUT_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "Without throwing a Jofre Uppercut"
+        SPECIAL_DESCRIPTION: "Without throwing a Jofre Uppercut",
+        SPECIAL_POINTS: 5
     },
     { 
         ID: IPPO_VS_KENTA_KOBASHI, 
@@ -1354,8 +1355,8 @@ story_data =
         EASY_TITLE: "King of Hawk",
         HARD_TITLE: "Treacherous King",
         SPECIAL_TITLE: "Idiot, You Just Have to Glance Away",
-        SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_STRAIGHT_MOVE_VALUE) && once(checkP1CurrentMove(TAKAMURA_LOOK_AWAY_MOVE_VALUE)),
-        SPECIAL_DESCRIPTION: "use a Look Away during the match and then use a Right Hook to Knock out Rally (or Larry) Bernard"
+        SPECIAL_CHECK: (P1UsedMoveToKnockDown(RIGHT_STRAIGHT_MOVE_VALUE) || P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE)) && once(checkP1CurrentMove(TAKAMURA_LOOK_AWAY_MOVE_VALUE)),
+        SPECIAL_DESCRIPTION: "use a Look Away during the match and then use a Right Hook or Right Straight to Knock out Rally (or Larry) Bernard"
     },
     {
         ID: ALEXANDER_VOLG_ZANGIEV_VS_IPPO,
@@ -1426,8 +1427,8 @@ story_data =
         EASY_TITLE: "Fearless Challenger",
         HARD_TITLE: "Going Past The Limits",
         SPECIAL_TITLE: "Ruthless Right Hook",
-        SPECIAL_CHECK: P1UsedMoveToKnockDown(LEFT_HOOK_MOVE_VALUE),
-        SPECIAL_DESCRIPTION: "using a Left Hook to Knock Out Take"
+        SPECIAL_CHECK: P1UsedMoveToKnockDown(RIGHT_HOOK_MOVE_VALUE),
+        SPECIAL_DESCRIPTION: "using a Right Hook to Knock Out Take"
     },
     {
         ID: MIYATA_VS_CHE_JOUNBONG,
@@ -1864,7 +1865,7 @@ achievement(title = "Kimura's Dream",
 // }
 
 achievement(title = "Aoki's Dream",
-            description = format("As Aoki, land a single hit on Takamura in Exhibition Mode"),
+            description = format("As Aoki, land a single hit on Takamura in Exhibition Mode" + EXHIBITION_RULE),
             points = 1,
             trigger = exhibitionModeConfigCheck() && 
                       trigger_when(attackLanded()) && 
