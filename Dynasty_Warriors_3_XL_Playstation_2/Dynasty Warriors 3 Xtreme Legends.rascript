@@ -1831,7 +1831,7 @@ MusouModeData =
 }
 
 
-function saveProtection() => isNotLoading() && !IsLoadingMusouStage() && !isTwoPlayerMode() && IsInGame()
+function saveProtection() => !IsLoadingMusouStage() && !isTwoPlayerMode() && IsInGame() // &&  isNotLoading()  removed to see if this is causing a problem since this is also "Saving" 
 
 
 achievement(title = "Let's Get Xtreme!",
