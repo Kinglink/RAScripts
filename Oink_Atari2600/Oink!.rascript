@@ -102,7 +102,7 @@ function oneLifeAchievement(title, description, points, target)
                 points = points,
                 trigger = requirementsForAllAchievements() &&
                           prevScore() < target &&
-                          actualScore() > target &&
+                          actualScore() >= target &&
                           firstLife()
     )
 }
@@ -114,7 +114,7 @@ function fullGameAchievement(title, description, points, target)
                 points = points,
                 trigger = requirementsForAllAchievements() &&
                           prevScore() < target &&
-                          actualScore() > target
+                          actualScore() >= target
     )
 }
 
@@ -125,7 +125,7 @@ function difficultyAAchievement(title, description, points, target)
                 points = points,
                 trigger = requirementsForAllAchievements() &&
                           trigger_when(prevScore() < target &&
-                                       actualScore() > target) &&
+                                       actualScore() >= target) &&
                           once(actualScore() == 0) &&
                           never(difficultyBDetection()) 
     )
@@ -137,11 +137,11 @@ fullGameAchievement("Swine Savant", "Earn 100,000 points in Game Mode 1", 25, 10
 
 oneLifeAchievement("Even Straw Can Stop A Wolf", "Earn 10,000 points in a single life in Game Mode 1", 3, 10000 ) 
 oneLifeAchievement("Expert Oinkers", "Earn 25,000 points in a single life in Game Mode 1", 10, 25000 ) 
-oneLifeAchievement("Solo Swine Savant", "Earn 100,000 points in a single life in Game Mode 1", 25, 100000 ) 
+//oneLifeAchievement("Solo Swine Savant", "Earn 100,000 points in a single life in Game Mode 1", 25, 100000 ) 
 
 difficultyAAchievement("Hogwall Hero", "Earn 1,000 with both difficulty switches set to A in Game Mode 1", 5, 1000)
-difficultyAAchievement("Superior Swine", "Earn 5,000 with both difficulty switches set to A in Game Mode 1", 10, 5000)
-difficultyAAchievement("Perfect Porker", "Earn 10,000 with both difficulty switches set to A in Game Mode 1", 25, 10000)
+//difficultyAAchievement("Superior Swine", "Earn 5,000 with both difficulty switches set to A in Game Mode 1", 10, 5000)
+//difficultyAAchievement("Perfect Porker", "Earn 10,000 with both difficulty switches set to A in Game Mode 1", 25, 10000)
 
 
 
