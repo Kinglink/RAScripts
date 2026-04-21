@@ -54,7 +54,7 @@ function bitcount_5bit_char(base_addr, char_index) {
 
 function bitcount_variable_bits(base_addr, char_index, bit_length) {
     // Calculate the global starting bit position
-    start = char_index * bit_length
+    start = char_index
     
     bits = []
     // Loop for the specific number of bits requested
@@ -424,27 +424,28 @@ function MurasameCastleCompleteStagesPart2() => byte(0x65464F)
 //          bit 4 = A Strange Rumor (Nightmare)
 function MurasameCastleCompleteStagesPart3() => byte(0x654650)
 
-A_STRANGE_RUMOR = 2
-THE_MYSTERIOUS_SAMURAI = 3
-FOLLOW_TAKAMARU = 4
-AOSAME_CASTLE = 5
-THE_PLOT_THICKENS = 6
-AN_UNEXPECTED_ENCOUNTER = 7
-AKASAME_CASTLE = 8
-THE_MYSTERY_OF_THE_JEWELS = 9
-THE_LEGEND_OF_MURASAME = 10
-RYOKUSAME_CASTLE = 11
-EYE_OF_THE_STORM = 12
-MOMOSAME_CASTLE = 13
-THE_TRUTH_REVEALED = 14
-THE_PETRIFIED_VILLAGE = 15
-MURASAME_CASTLE = 16
-DOWN_THE_RABBIT_HOLE = 17
-THROUGH_THE_LOOKING_GLASS = 18
-CURIOUSER_AND_CURIOUSER = 19
-A_STRANGE_RUMOR_NIGHTMARE = 20
+BIT_A_STRANGE_RUMOR = 2
+BIT_THE_MYSTERIOUS_SAMURAI = 3
+BIT_FOLLOW_TAKAMARU = 4
+BIT_AOSAME_CASTLE = 5
+BIT_THE_PLOT_THICKENS = 6
+BIT_AN_UNEXPECTED_ENCOUNTER = 7
+BIT_AKASAME_CASTLE = 8
+BIT_THE_MYSTERY_OF_THE_JEWELS = 9
+BIT_THE_LEGEND_OF_MURASAME = 10
+BIT_RYOKUSAME_CASTLE = 11
+BIT_EYE_OF_THE_STORM = 12
+BIT_MOMOSAME_CASTLE = 13
+BIT_THE_TRUTH_REVEALED = 14
+BIT_THE_PETRIFIED_VILLAGE = 15
+BIT_MURASAME_CASTLE = 16
+BIT_DOWN_THE_RABBIT_HOLE = 17
+BIT_THROUGH_THE_LOOKING_GLASS = 18
+BIT_CURIOUSER_AND_CURIOUSER = 19
+BIT_A_STRANGE_RUMOR_NIGHTMARE = 20
 
-NIGHTMARE_MODE_BIT_VALUE_OFFSET = A_STRANGE_RUMOR_NIGHTMARE - A_STRANGE_RUMOR
+
+NIGHTMARE_MODE_BIT_VALUE_OFFSET = BIT_A_STRANGE_RUMOR_NIGHTMARE - BIT_A_STRANGE_RUMOR
 
 function JustCompleteCastleStage(CastleStageIndex)
 {
@@ -498,7 +499,7 @@ MAX_TANUKI_COUNT = 54
 
 function CountofTanukisCollected()
 {
-    return bitcount_variable_bits(0x654654, 0, 54) 
+    return bitcount_variable_bits(0x654654, 2, 54) 
 }
 
 function JustReachedTanukiCount(targetCount)
@@ -704,7 +705,7 @@ FOURTH_WEAPON_NAME =
     RANMARU_MORI_PLAYER_ID:"Steel Vengeance",
     HIDEYOSHI_TOYOTOMI_PLAYER_ID:"Serpent Trinity",
     YOSHIMOTO_IMAGAWA_PLAYER_ID:"Meteor",
-    TADAKATSU_HONDA_PLAYER_ID:"Tonbo-giri",
+    TADAKATSU_HONDA_PLAYER_ID:"Tonbo-Giri",
     INA_PLAYER_ID:"Enigma",
     IEYASU_TOKUGAWA_PLAYER_ID:"Earthshaker",
     MITSUNARI_ISHIDA_PLAYER_ID:"Golden Splendor",
@@ -878,6 +879,22 @@ function AllTacticalBonusesCompletedForCurrentMission()
 
 }
 
+function AllTacticalBonusesCompletedForCurrentMissionExceptLast()
+{
+    // The final tactical bonus is EXTREMELY hard, near impossible on Chaos, due to timing, character spawn, and more.  
+    // It's possible on easier difficulties but is hardward/RNG dependent... So let's only count three. 
+    return all_of(range(0, 2), 
+                    index => (dword_be(TacticalBonusStatusForCurrentMissionLocation + (index * 4)) == TACTICAL_BONUS_CLEARED_VALUE))
+         
+}
+
+function AllTacticalBonusesCompletedForCurrentMissionExceptFirst()
+{
+    // The First mission is kill a guy in 30 seconds.  Maybe one day someone will find out how, but it's crazy hard.//  
+    return all_of(range(1, 3), 
+                    index => (dword_be(TacticalBonusStatusForCurrentMissionLocation + (index * 4)) == TACTICAL_BONUS_CLEARED_VALUE))
+}
+
 // $787D68: (32-bit BE) Mission results
 //          
 //          0x00 = Mission won
@@ -933,11 +950,13 @@ FREE_MODE_VALUE = 0x01
 MURASAME_CASTLE_VALUE = 0x02
 HISTORICAL_MODE_VALUE = 0x03
 DOJO_MODE_VALUE = 0x04
+FAKE_NETWORK_MODE_VALUE = 0x05
 function IsInStoryMode() => ModeSelect() == STORY_MODE_VALUE
 function IsInFreeMode() => ModeSelect() == FREE_MODE_VALUE
 function IsInMurasameCastleMode() => ModeSelect() == MURASAME_CASTLE_VALUE
 function IsInHistoricalMode() => ModeSelect() == HISTORICAL_MODE_VALUE
 function IsInDojoMode() => ModeSelect() == DOJO_MODE_VALUE
+function FakeReset() => never(ModeSelect() == FAKE_NETWORK_MODE_VALUE)
 
 function IsInStoryorFreeMode() => IsInStoryMode() || IsInFreeMode()
 function IsInGameplayMode() => IsInHistoricalMode() || IsInFreeMode() || IsInStoryMode() || IsInMurasameCastleMode() 
@@ -950,6 +969,7 @@ function IsInGameplayMode() => IsInHistoricalMode() || IsInFreeMode() || IsInSto
 function TwoPlayerIndicator() => dword_be(0x787D7C)
 
 SINGLE_PLAYER_VALUE = 0x00
+
 
 function IsInSinglePlayerMode() => TwoPlayerIndicator() == SINGLE_PLAYER_VALUE
 
@@ -1105,8 +1125,8 @@ RETREAT_FROM_KANEGASAKI_ODA_TOKUGAWA_FORCE_INDEX = 0x0E
 RETREAT_FROM_KANEGASAKI_AZAI_ASAKURA_FORCE_INDEX = 0x0F
 BATTLE_OF_ANEGAWA_ODA_TOKUGAWA_FORCE_INDEX = 0x10
 BATTLE_OF_ANEGAWA_AZAI_ASAKURA_FORCE_INDEX = 0x11
-BATTLE_OF_ODANI_CASTLE_AZAI_FORCE_INDEX = 0x12
-BATTLE_OF_ODANI_CASTLE_ODA_FORCE_INDEX = 0x13
+BATTLE_OF_ODANI_CASTLE_AZAI_FORCE_INDEX_AZAI_VARIANT = 0x12
+BATTLE_OF_ODANI_CASTLE_AZAI_FORCE_INDEX_OICHI_VARIANT = 0x13
 CONFRONTATION_AT_LAKE_YOGO_AZAI_FORCE_INDEX = 0x14
 BATTLE_OF_TONEGAWA_HOJO_TAKEDA_FORCE_INDEX = 0x15
 BATTLE_OF_MIKATAGAHARA_TAKEDA_FORCE_INDEX = 0x16
@@ -1184,8 +1204,8 @@ StageNameLookup =
     RETREAT_FROM_KANEGASAKI_AZAI_ASAKURA_FORCE_INDEX: "Retreat from Kanegasaki  (Azai-Asakura Army)",
     BATTLE_OF_ANEGAWA_ODA_TOKUGAWA_FORCE_INDEX: "Battle of Anegawa (Oda-Tokugawa Army)",
     BATTLE_OF_ANEGAWA_AZAI_ASAKURA_FORCE_INDEX: "Battle of Anegawa (Azai-Asakura Army)",
-    BATTLE_OF_ODANI_CASTLE_AZAI_FORCE_INDEX: "Battle of Odani Castle (Azai-Asakura Army)",
-    BATTLE_OF_ODANI_CASTLE_ODA_FORCE_INDEX: "Battle of Odani Castle (Oda-Tokugawa Army)",
+    BATTLE_OF_ODANI_CASTLE_AZAI_FORCE_INDEX_AZAI_VARIANT: "Battle of Odani Castle (Azai-Asakura Army)",
+    BATTLE_OF_ODANI_CASTLE_AZAI_FORCE_INDEX_OICHI_VARIANT: "Battle of Odani Castle (Azai-Asakura Army)",
     CONFRONTATION_AT_LAKE_YOGO_AZAI_FORCE_INDEX: "Confrontation at Lake Yogo (Azai Army)",
     BATTLE_OF_TONEGAWA_HOJO_TAKEDA_FORCE_INDEX: "Battle of Tonegawa (Hojo-Takeda Army)",
     BATTLE_OF_MIKATAGAHARA_TAKEDA_FORCE_INDEX: "Battle of Mikatagahara (Takeda Army)",
@@ -1298,7 +1318,7 @@ CHARACTER_MUSOU_MODE_LIST =
     },
     MITSUHIDE_AKECHI_PLAYER_ID: { 
         MAIN_MUSOU_ID: 549293,
-        MAIN_MUSOU_TITLE: "The Traitor of Honno-ji",
+        MAIN_MUSOU_TITLE: "The Traitor of Honno-Ji",
         TACTICAL_MUSOU_TITLE: "Calculating Usurper",
         CHAOS_TACTICAL_TITLE: "Blade of Betrayal",
         FIRST_LEVEL: BATTLE_OF_NAGASHINO_ODA_TOKUGAWA_FORCE_INDEX,
@@ -1326,7 +1346,7 @@ CHARACTER_MUSOU_MODE_LIST =
         FIRST_LEVEL: BATTLE_OF_OKEHAZAMA_ODA_FORCE_INDEX,
         SECOND_LEVEL: BATTLE_OF_MT_INABA_CASTLE_ODA_FORCE_INDEX,
         THIRD_LEVEL: BATTLE_OF_ANEGAWA_AZAI_ASAKURA_FORCE_INDEX,
-        FOURTH_LEVEL: BATTLE_OF_ODANI_CASTLE_AZAI_FORCE_INDEX,
+        FOURTH_LEVEL: BATTLE_OF_ODANI_CASTLE_AZAI_FORCE_INDEX_OICHI_VARIANT,
         FIFTH_LEVEL: CONFRONTATION_AT_LAKE_YOGO_AZAI_FORCE_INDEX
     },
     KUNOICHI_PLAYER_ID: { 
@@ -1448,7 +1468,7 @@ CHARACTER_MUSOU_MODE_LIST =
         SECOND_LEVEL: BATTLE_OF_MT_INABA_CASTLE_ODA_FORCE_INDEX,
         THIRD_LEVEL: RETREAT_FROM_KANEGASAKI_AZAI_ASAKURA_FORCE_INDEX,
         FOURTH_LEVEL: BATTLE_OF_ANEGAWA_AZAI_ASAKURA_FORCE_INDEX,
-        FIFTH_LEVEL: BATTLE_OF_ODANI_CASTLE_AZAI_FORCE_INDEX
+        FIFTH_LEVEL: BATTLE_OF_ODANI_CASTLE_AZAI_FORCE_INDEX_AZAI_VARIANT
     },
     SAKON_SHIMA_PLAYER_ID: { 
         MAIN_MUSOU_ID: 549307,
@@ -1475,7 +1495,7 @@ CHARACTER_MUSOU_MODE_LIST =
     GINCHIYO_TACHIBANA_PLAYER_ID: { 
         MAIN_MUSOU_ID: 549309,
         MAIN_MUSOU_TITLE: "Warrior Matriarch",
-        TACTICAL_MUSOU_TITLE: "Defend of the Clan",
+        TACTICAL_MUSOU_TITLE: "Defender of the Clan",
         CHAOS_TACTICAL_TITLE: "Iron Will",
         FIRST_LEVEL: CONQUEST_OF_KYUSHU_TACHIBANA_FORCE_INDEX,
         SECOND_LEVEL: CONQUEST_OF_ODAWARA_TOYOTOMI_FORCE_INDEX,
@@ -1608,7 +1628,7 @@ NO_MUSOU_CHARACTERS =
     },
     YOSHIMOTO_IMAGAWA_PLAYER_ID: { 
         CHAOS_TACTICAL_TITLE: "Fallen Lord of Suruga",
-        LEVEL: CONFRONTATION_AT_YAMAZUKI_MORI_FORCE_INDEX,
+        LEVEL: SURUGA_SAGAMI_CONFLICT_TAKEDA_FORCE_INDEX,
         ID: 573565
     },
     KOTARO_FUMA_PLAYER_ID: { 
@@ -1684,6 +1704,7 @@ MURASAME_CASTLE = 0x0E
 DOWN_THE_RABBIT_HOLE = 0x0F
 THROUGH_THE_LOOKING_GLASS = 0x10
 CURIOUSER_AND_CURIOUSER = 0x11
+NIGHTMARE_STAGE_ID_OFFSET = CURIOUSER_AND_CURIOUSER + 1
 
 MurasameCastleStageNameLookup =
 {
@@ -1704,7 +1725,25 @@ MurasameCastleStageNameLookup =
     MURASAME_CASTLE: "Murasame Castle",
     DOWN_THE_RABBIT_HOLE: "Down the Rabbit Hole",
     THROUGH_THE_LOOKING_GLASS: "Through the Looking Glass",
-    CURIOUSER_AND_CURIOUSER: "Curiouser and Curiouser"
+    CURIOUSER_AND_CURIOUSER: "Curiouser and Curiouser",
+    NIGHTMARE_STAGE_ID_OFFSET + A_STRANGE_RUMOR: "A Strange Rumor",
+    NIGHTMARE_STAGE_ID_OFFSET + THE_MYSTERIOUS_SAMURAI: "The Mysterious Samurai",
+    NIGHTMARE_STAGE_ID_OFFSET + FOLLOW_TAKAMARU: "Follow Takamaru",
+    NIGHTMARE_STAGE_ID_OFFSET + AOSAME_CASTLE: "Aosame Castle",
+    NIGHTMARE_STAGE_ID_OFFSET + THE_PLOT_THICKENS: "The Plot Thickens",
+    NIGHTMARE_STAGE_ID_OFFSET + AN_UNEXPECTED_ENCOUNTER: "An Unexpected Encounter",
+    NIGHTMARE_STAGE_ID_OFFSET + AKASAME_CASTLE: "Akasame Castle",
+    NIGHTMARE_STAGE_ID_OFFSET + THE_MYSTERY_OF_THE_JEWELS: "The Mystery Of The Jewels",
+    NIGHTMARE_STAGE_ID_OFFSET + THE_LEGEND_OF_MURASAME: "The Legend of Murasame",
+    NIGHTMARE_STAGE_ID_OFFSET + RYOKUSAME_CASTLE: "Ryokusame Castle",
+    NIGHTMARE_STAGE_ID_OFFSET + EYE_OF_THE_STORM: "Eye of the Storm",
+    NIGHTMARE_STAGE_ID_OFFSET + MOMOSAME_CASTLE: "Momosame Castle",
+    NIGHTMARE_STAGE_ID_OFFSET + THE_TRUTH_REVEALED: "The Truth Revealed",
+    NIGHTMARE_STAGE_ID_OFFSET + THE_PETRIFIED_VILLAGE: "The Petrified Village",
+    NIGHTMARE_STAGE_ID_OFFSET + MURASAME_CASTLE: "Murasame Castle",
+    NIGHTMARE_STAGE_ID_OFFSET + DOWN_THE_RABBIT_HOLE: "Down the Rabbit Hole",
+    NIGHTMARE_STAGE_ID_OFFSET + THROUGH_THE_LOOKING_GLASS: "Through the Looking Glass",
+    NIGHTMARE_STAGE_ID_OFFSET + CURIOUSER_AND_CURIOUSER: "Curiouser and Curiouser"
 }
 // $787DA8: (32-bit BE) Current Player
 //          
@@ -1795,35 +1834,35 @@ function GeneralProtection() => !IsInMainMenu() && IsInSinglePlayerMode() && !Is
 
 achievement(
     title = "Your First Battle", points = 1,
-    description = "Win Any Stage",
+    description = "Win any stage for the first time",
     id = 549285,
     trigger = JustWonMission() && GeneralProtection()
 )
 
 achievement(
     title = "Assembled Your Forces", points = 5,
-    description = "Unlock Every Character from the Dojo",
+    description = "Unlock every character from the Dojo",
     id = 549286,
     trigger = IsInDojoMode() && JustPurchasedAllCharacters()
 )
 
 achievement(
     title = "Dress up Your Forces", points = 5,
-    description = "Purchase every Customize Appearance from The Dojo",
+    description = "Purchase every customization option in The Dojo",
     id = 549287,
     trigger = IsInDojoMode() && JustPurchasedAllCustomizedCharacters()
 )
 
 achievement(
     title = "Unleash Your Forces", points = 5,
-    description = "Purchase every Unlock Max Stats from the Dojo",
+    description = "Max out the stats for every character in the Dojo",
     id = 549288,
     trigger = IsInDojoMode() && JustPurchasedAllMaxStatUnlocks()
 )
 
 achievement(
     title = "Equip Your Forces", points = 3,
-    description = "Purchase every Unlock Weapon from the Dojo",
+    description = "Purchase every weapon unlock from the Dojo",
     id = 549289,
     trigger = IsInDojoMode() && JustPurchasedAllWeaponsUnlocks()
 )
@@ -1849,6 +1888,7 @@ function CreateMusouModeAchievement(characterId) {
         achievement( title = CHARACTER_MUSOU_MODE_LIST[characterId][MAIN_MUSOU_TITLE],
             description = "Clear all five of " + CHARACTER_NAME_LOOKUP[characterId] + "'s stages in Story Mode for the first time",
             points = 5,
+            type = "progression",
             trigger = GeneralProtection() &&
                   IsInStoryMode() &&
                   CurrentPlayerID() == characterId &&
@@ -1898,9 +1938,9 @@ HISTORICAL_ACHIEVEMENT_NAMES =
     2: { MAIN_MUSOU_TITLE: "The Fall of the Demon",
             TACTICAL_MUSOU_TITLE: "Endurance Amid Upheaval",
             CHAOS_TACTICAL_TITLE: "Marching Through the Firestorm"},
-    3: { MAIN_MUSOU_TITLE: "Unification and It's Cost",
+    3: { MAIN_MUSOU_TITLE: "Unification and Its Cost",
             TACTICAL_MUSOU_TITLE: "Patience Rewarded by Dominion",
-            CHAOS_TACTICAL_TITLE: "Victory that Outlived its Master"}
+            CHAOS_TACTICAL_TITLE: "Victory that Outlived Its Master"}
 }
 
 function HistoricalProgressionAchievement(stageNumber)
@@ -1916,7 +1956,7 @@ function HistoricalProgressionAchievement(stageNumber)
                                     index => HistoricalModeStageCompleteStatus (stageNumber, index) / 
                                             HistoricalModeStageCompleteStatus (stageNumber, index) ) == 5) &&
                         any_of( range(1,5), 
-                                    index => HistoricalModeStageCompleteStatus (stageNumber, index)  == 1 && 
+                                    index => HistoricalModeStageCompleteStatus (stageNumber, index)  >= 1 && 
                                             prev(HistoricalModeStageCompleteStatus (stageNumber, index) ) == 0)
     )
 }
@@ -1975,7 +2015,7 @@ MurasameLevelData =
                       NIGHTMARE_MURASAME_POINTS: 10,
                       NIGHTMARE_MURASAME_ID: 573586
                      },
-    MURASAME_CASTLE: { NORMAL_MURASAME_TITLE: "Defeated Jewels", 
+    MURASAME_CASTLE: { NORMAL_MURASAME_TITLE: "Jewels Defeated", 
                       NIGHTMARE_MURASAME_TITLE: "Daybreak", 
                       NIGHTMARE_MURASAME_POINTS: 10,
                       NIGHTMARE_MURASAME_ID: 573587
@@ -1990,7 +2030,7 @@ MurasameLevelData =
 for stageId in MurasameLevelData
 {
     achievement( title = MurasameLevelData[stageId][NORMAL_MURASAME_TITLE],
-                description = format("Complete the stage {0} in Murasame Castle on Normal difficulty", MurasameCastleStageNameLookup[stageId]),
+                description = format("Complete the stage \"{0}\" in Murasame Castle on Normal difficulty", MurasameCastleStageNameLookup[stageId]),
                 type = "progression",
                 points = 5, 
                 trigger = GeneralProtection() &&
@@ -2003,22 +2043,88 @@ for stageId in MurasameLevelData
 
 achievement(
     title = "Tanuki Suit Not Included", points = 5,
-    description = "Collect all Tanuki in Murasame Castle on Normal difficulty",
+    description = "Collect every Tanuki in Murasame Castle on Normal difficulty",
     trigger = GeneralProtection() &&
               IsInMurasameCastleMode() &&
               IsMurasameCastleNormalMode() &&
               JustReachedTanukiCount(MAX_TANUKI_COUNT)
 )   
 
+function specialcaseHanbei(LEVEL_ID)
+{
+    if ( LEVEL_ID == THIRD_LEVEL )
+    {
+        return AllTacticalBonusesCompletedForCurrentMissionExceptLast()
+    }
+    else
+    {
+        return AllTacticalBonusesCompletedForCurrentMission()
+    }
+}
+
+function specialcaseMotonari(LEVEL_ID)
+{
+    if ( LEVEL_ID == FOURTH_LEVEL )
+    {
+        return AllTacticalBonusesCompletedForCurrentMissionExceptFirst()
+    }
+    else
+    {
+        return AllTacticalBonusesCompletedForCurrentMission()
+    }
+}
 
 for characterId in CHARACTER_MUSOU_MODE_LIST
 {
-    achievement(title = format( "{0}", 
+    if (characterId == HANBEI_TAKENAKA_PLAYER_ID)
+    {
+        achievement(title = format( "{0}", 
                                 CHARACTER_MUSOU_MODE_LIST[characterId][CHAOS_TACTICAL_TITLE]),
-                description = format("Complete all fives of {0}'s stages in Story Mode on Chaos difficulty with all Tactical Bonuses",
+                description = format("Within a single session, complete five of {0}'s stages in Story Mode on Chaos difficulty with every Tactical Bonus Completed.  On Battle of Nagashino, Nobushige Oyamada's mission is not required.",
                                         CHARACTER_NAME_LOOKUP[characterId]),
                 points = 25,
-                trigger = measured(tally_of(LEVEL_IDENTIFIERS, 5, tag=> 
+                trigger = FakeReset() &&                          
+                          measured(tally_of(LEVEL_IDENTIFIERS, 5, tag=> 
+                                            once(GeneralProtection() && 
+                                            IsInStoryMode() &&
+                                            IsChaosDifficultySelected() &&
+                                            CurrentPlayerID() == characterId &&
+                                            StageForceIndex() == CHARACTER_MUSOU_MODE_LIST[characterId][tag] &&
+                                            JustWonMission() &&
+                                            specialcaseHanbei(tag))
+                        )
+                )
+        )
+    }
+    else if (characterId == MOTONARI_MORI_PLAYER_ID)
+    {
+        achievement(title = format( "{0}", 
+                                CHARACTER_MUSOU_MODE_LIST[characterId][CHAOS_TACTICAL_TITLE]),
+                description = format("Within a single session, complete five of {0}'s stages in Story Mode on Chaos difficulty with every Tactical Bonus Completed.  On The Tachibana Crisis, the mission where you kill Tanezane Akizuki is not required.",
+                                        CHARACTER_NAME_LOOKUP[characterId]),
+                points = 25,
+                trigger = FakeReset() &&                          
+                          measured(tally_of(LEVEL_IDENTIFIERS, 5, tag=> 
+                                            once(GeneralProtection() && 
+                                            IsInStoryMode() &&
+                                            IsChaosDifficultySelected() &&
+                                            CurrentPlayerID() == characterId &&
+                                            StageForceIndex() == CHARACTER_MUSOU_MODE_LIST[characterId][tag] &&
+                                            JustWonMission() &&
+                                            specialcaseMotonari(tag))
+                        )
+                )
+        )   
+    }
+    else
+    {
+        achievement(title = format( "{0}", 
+                                CHARACTER_MUSOU_MODE_LIST[characterId][CHAOS_TACTICAL_TITLE]),
+                description = format("Within a single session, complete all five of {0}'s stages in Story Mode on Chaos difficulty with every Tactical Bonus Completed",
+                                        CHARACTER_NAME_LOOKUP[characterId]),
+                points = 25,
+                trigger = FakeReset() &&                          
+                          measured(tally_of(LEVEL_IDENTIFIERS, 5, tag=> 
                                             once(GeneralProtection() && 
                                             IsInStoryMode() &&
                                             IsChaosDifficultySelected() &&
@@ -2029,6 +2135,7 @@ for characterId in CHARACTER_MUSOU_MODE_LIST
                         )
                 )
     )
+    }
 }
 
 LIST = "LIST"
@@ -2037,17 +2144,17 @@ HistoricalModeChaosList =
 {
     1: {
             TITLE: "Steel Tested in Chaos", 
-            DESCRIPTION:"Complete all fives of the first chapter in Historical Mode on Chaos difficulty with all Tactical Bonuses",
+            DESCRIPTION:"Within a single session, complete all five of the first chapter in Historical Mode on Chaos difficulty with every Tactical Bonus completed",
             LIST: HISTORICAL_MODE_FIRST_CHAPTER_STAGES
     },
     2: {
             TITLE: "Marching Through the Firestorm", 
-            DESCRIPTION:"Complete all fives of the second chapter in Historical Mode on Chaos difficulty with all Tactical Bonuses",
+            DESCRIPTION:"Within a single session, complete all five of the second chapter in Historical Mode on Chaos difficulty with every Tactical Bonus ompleted",
             LIST: HISTORICAL_MODE_SECOND_CHAPTER_STAGES
     },
     3: {
             TITLE: "Victory That Outlived its Master", 
-            DESCRIPTION:"Complete all fives of the third chapter in Historical Mode on Chaos difficulty with all Tactical Bonuses",
+            DESCRIPTION:"Within a single session, complete all five of the third chapter in Historical Mode on Chaos difficulty with every Tactical Bonus completed",
             LIST: HISTORICAL_MODE_THIRD_CHAPTER_STAGES
     }
 
@@ -2058,7 +2165,8 @@ function HistoricalModeChaosAchievements(ListIndex)
     achievement( title = HistoricalModeChaosList[ListIndex][TITLE],
                 description = HistoricalModeChaosList[ListIndex][DESCRIPTION],
                 points = 5,
-                trigger = measured(tally_of(HistoricalModeChaosList[ListIndex][LIST], 5, stageId=> 
+                trigger = FakeReset() &&                          
+                          measured(tally_of(HistoricalModeChaosList[ListIndex][LIST], 5, stageId=> 
                                     once(GeneralProtection() &&
                                     IsInHistoricalMode() &&
                                     IsChaosDifficultySelected() &&
@@ -2078,13 +2186,13 @@ for index in HistoricalModeChaosList
 for stageId in MurasameLevelData
 {
     achievement( title = MurasameLevelData[stageId][NIGHTMARE_MURASAME_TITLE],
-                description = format("Complete the stage {0} in Murasame Castle on Nightmare difficulty", MurasameCastleStageNameLookup[stageId]) ,
+                description = format("Complete the stage \"{0}\" in Murasame Castle on Nightmare difficulty", MurasameCastleStageNameLookup[stageId]) ,
                 points = MurasameLevelData[stageId][NIGHTMARE_MURASAME_POINTS],
                 id = MurasameLevelData[stageId][NIGHTMARE_MURASAME_ID],
                 trigger = GeneralProtection() &&
                         IsInMurasameCastleMode() &&
                         IsMurasameCastleNightmareMode() &&
-                        MurasameCastleStageIndex() == stageId &&
+                        MurasameCastleStageIndex() == stageId + NIGHTMARE_STAGE_ID_OFFSET &&
                         IsMurasameCastleNightmareMode() &&
                         JustCompleteNightmareCastleStage(stageId) 
     )
@@ -2092,7 +2200,7 @@ for stageId in MurasameLevelData
 
 achievement(
     title = "Stone Tanuki No Longer",
-    description = "Collect all Tanuki in Murasame Castle on Nightmare difficulty",
+    description = "Collect every Tanuki in Murasame Castle on Nightmare difficulty",
     points = 5,
     trigger = GeneralProtection() &&
               IsInMurasameCastleMode() &&
@@ -2105,7 +2213,7 @@ for playerID in NO_MUSOU_CHARACTERS
     if (ContainsKey(NO_MUSOU_CHARACTERS[playerID], ID))
     {
         achievement( title = NO_MUSOU_CHARACTERS[playerID][CHAOS_TACTICAL_TITLE],
-                description = format("Complete {0} in Free Mode as {1} on Chaos difficulty with all Tactical Bonuses", 
+                description = format("As {1}, clear \"{0}\" in Free Mode on Chaos difficulty with every Tactical Bonus completed", 
                                     StageNameLookup[NO_MUSOU_CHARACTERS[playerID][LEVEL]], 
                                     CHARACTER_NAME_LOOKUP[playerID]),
                 points = 10,
@@ -2116,13 +2224,13 @@ for playerID in NO_MUSOU_CHARACTERS
                           CurrentPlayerID() == playerID &&
                           StageForceIndex() == NO_MUSOU_CHARACTERS[playerID][LEVEL] &&
                           TriggerJustWonMission() &&
-                          AllTacticalBonusesCompletedForCurrentMission()
+                          AllTacticalBonusesCompletedForCurrentMission() 
         )
     } 
     else
     {
         achievement( title = NO_MUSOU_CHARACTERS[playerID][CHAOS_TACTICAL_TITLE],
-                description = format("Complete {0} in Free Mode as {1} on Chaos difficulty with all Tactical Bonuses", 
+                description = format("As {1}, clear \"{0}\" in Free Mode on Chaos difficulty with all Tactical Bonuses", 
                                     StageNameLookup[NO_MUSOU_CHARACTERS[playerID][LEVEL]], 
                                     CHARACTER_NAME_LOOKUP[playerID]),
                 points = 10,
@@ -2178,7 +2286,7 @@ for generalWeaponType in FOURTH_CUSTOM_WEAPON_TYPES
 
 
 achievement(title = "A True Warrior of the Sengoku Era",
-            description = "Earn 1000 KOs in a single stage",
+            description = "Earn 1,000 KOs in a single stage",
             points = 3, 
             trigger = GeneralProtection() &&
                       (IsInGameplayMode()) &&
