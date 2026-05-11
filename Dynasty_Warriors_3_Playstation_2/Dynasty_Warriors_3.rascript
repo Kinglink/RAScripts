@@ -1,4 +1,4 @@
-// Dynasty Warriors 3
+﻿// Dynasty Warriors 3
 // #ID = 20722
 
 // NOTE all code notes may change, please check RA for the latest code notes. 
@@ -2800,6 +2800,21 @@ MemoryLocationOfFirstStagesKOTotal = 0x5ff7cc
 MemoryLocationOfSecondStagesKOTotal = 0x5ff7ec
 SizeOfPostGameStageData = MemoryLocationOfSecondStagesKOTotal - MemoryLocationOfFirstStagesKOTotal
 
+// $3829c2: (8-bit) Alternate cutscene indicator 
+//
+// Recommend: 0x003659ec instead.
+//
+// 0x00: In Cutscene, or in post game scenes. 
+// 0x01: Cutscene transition. 
+// 0xff: During the gameplay (Gameplay, menu)
+function AlternateCutsceneIndicator() => byte(0x3829c2)
+
+VALUE_FOR_ALTERNATE_CUTSCENE_PLAYING = 0x00
+VALUE_FOR_ALTERNATE_CUTSCENE_TRANSITION = 0x01
+VALUE_FOR_ALTERNATE_CUTSCENE_GAMEPLAY = 0xff
+
+
+
 // $382d90: (8-bit) Cutscene Index for Character Intro/Defeat scene. 
 // 
 // Seems to use 0x003ad10d to determine which stage's cutscenes will play.
@@ -3201,15 +3216,15 @@ function createMusouModeAchievement(musouObject)
     // hardMode: true if this is for hardmode, false otherwise. 
     // TODO : Need to check if two player mode is acceptable to devCompliance. 
     achievement(musouObject["name"],
-                musouObject["description"] + asASinglePlayerString, 
+                musouObject["description"] + asASinglePlayerString,
                 musouObject["points"],
                 trigger = MusouModeOnly() &&
-                          musouComplete(musouObject["index"]) && 
-                          wonStageCheck() && 
+                          musouComplete(musouObject["index"]) &&
+                          wonStageCheck() &&
                           !isTwoPlayerMode() &&
                           saveProtection(),
                 id = musouObject["achievementID"],
-                type = "progression"
+                type = musouObject["progression"]
                 )
 }
 
@@ -3256,15 +3271,15 @@ function createUnlockCharacterAchievement(unlockObject)
     //      points: How many points the achievement is worth
     //      memoryLocation: 8-bit Memory location for the current character target
     achievement(unlockObject["name"],
-                unlockObject["description"], 
-                1,
+                unlockObject["description"],
+                unlockObject["points"],
                 trigger = MusouModeOrFreeMode() &&
                           characterUnlocked(unlockObject["memoryLocation"]) && 
                           wonStageCheck() && 
                           secondPlayerAllowed() &&
                           saveProtection(),
                 id = unlockObject["achievementID"],
-                type = "Progression"
+                type = unlockObject["progression"]
                 )
 }
 
@@ -3293,8 +3308,8 @@ function createUnlockFourthWeaponAchievement(name, description, weaponIndex, ach
                             byte(MemoryLocationOfFirstInStageWeaponCollected + SizeOfInGameWeaponDrop * index) == weaponIndex
                         )
     achievement(name,
-                description + asASinglePlayerString, 
-                5,
+                description + asASinglePlayerString,
+                10,
                 trigger = targetTrigger && possibleHits,
                 id = achievementID,
                 type = "missable"
@@ -3325,8 +3340,8 @@ function createUnlockRareItemAchievement(name, description, itemIndex, achieveme
                         )
     
     achievement(name,
-                description + asASinglePlayerString, 
-                3,
+                description + asASinglePlayerString,
+                5,
                 trigger = targetTrigger && possibleHits,
                 id = achievementID
                 )
@@ -3342,29 +3357,31 @@ function characterDefinition(
                     musouModeAvailable = true,
                     musouModeName = "",
                     musouModeDescription = "",
-                    musouModePoints = 5,
+                    musouModePoints = 10,
                     musouModeAchievementID = 0,
                     hardMusouModeName = "",
                     hardMusouModeDescription = "",
-                    hardMusouModePoints = 10,
+                    hardMusouModePoints = 25,
                     hardMusouModeAchievementID = 0,
                     unlockEnabled = true,
                     unlockName = "",
                     unlockDescription = "",
-                    unlockPoint = 1,
-                    unlockAchievementID = 0
+                    unlockPoint = 3,
+                    unlockAchievementID = 0,
+                    progressionType = ""
                     )
 {
     name = CharacterLookup[characterIndex]
     if (musouModeAvailable == true)
-    {   
-        musouModeObject = 
+    {
+        musouModeObject =
         {
-            "name": musouModeName, 
+            "name": musouModeName,
             "description": musouModeDescription,
             "points": musouModePoints,
             "index": characterIndex,
-            "achievementID": musouModeAchievementID
+            "achievementID": musouModeAchievementID,
+            "progression": progressionType
         }
         
         if(musouModeObject["name"] == "")
@@ -3400,13 +3417,14 @@ function characterDefinition(
 
     if (unlockEnabled == true)
     {   
-        unlockObject = 
+        unlockObject =
         {
-            "name": unlockName, 
+            "name": unlockName,
             "description": unlockDescription,
             "points": unlockPoint,
             "memoryLocation": unlockMemoryLocation,
-            "achievementID": unlockAchievementID
+            "achievementID": unlockAchievementID,
+            "progression": progressionType
         }
         
         if(unlockObject["name"] == "")
@@ -3430,13 +3448,14 @@ characterDefinition( characterIndex = ZhaoYun,
                      musouModeAchievementID = 370292,
                      hardMusouModeName = "The Dragon of Changshan",
                      hardMusouModeAchievementID = 370324)
-characterDefinition( characterIndex = GuanYu, 
-                     unlockMemoryLocation = GuanYuUnlocked(), 
+characterDefinition( characterIndex = GuanYu,
+                     unlockMemoryLocation = GuanYuUnlocked(),
                      unlockEnabled = false,
-                     musouModeAchievementID = 370294, 
+                     musouModeAchievementID = 370294,
                      musouModeName = "Lord of the Magnificent Beard",
-                     hardMusouModeAchievementID = 370325, 
-                     hardMusouModeName = "God of War")
+                     hardMusouModeAchievementID = 370325,
+                     hardMusouModeName = "God of War",
+                     progressionType = "progression")
 characterDefinition( characterIndex = ZhangFei, 
                      unlockMemoryLocation = ZhangFeiUnlocked(), 
                      unlockEnabled = false,
@@ -3444,13 +3463,14 @@ characterDefinition( characterIndex = ZhangFei,
                      musouModeName = "Snake Spear General",
                      hardMusouModeAchievementID = 370326, 
                      hardMusouModeName = "Zhang Yide")
-characterDefinition( characterIndex = XiahouDun, 
-                     unlockMemoryLocation = XiahouDunUnlocked(), 
+characterDefinition( characterIndex = XiahouDun,
+                     unlockMemoryLocation = XiahouDunUnlocked(),
                      unlockEnabled = false,
-                     musouModeAchievementID = 370296, 
+                     musouModeAchievementID = 370296,
                      musouModeName = "One-Eyed Xiahou",
-                     hardMusouModeAchievementID = 370327, 
-                     hardMusouModeName = "Brother Dun")
+                     hardMusouModeAchievementID = 370327,
+                     hardMusouModeName = "Brother Dun",
+                     progressionType = "progression")
 characterDefinition( characterIndex = DianWei, 
                      unlockMemoryLocation = DianWeiUnlocked(), 
                      unlockEnabled = false,
@@ -3500,14 +3520,15 @@ characterDefinition( characterIndex = ZhugeLiang,
                      hardMusouModeName = "The Sleeping Dragon",
                      unlockAchievementID = 370427, 
                      unlockName="")
-characterDefinition( characterIndex = CaoCao, 
-                     unlockMemoryLocation = CaoCaoUnlocked(), 
-                     musouModeAchievementID = 370302, 
+characterDefinition( characterIndex = CaoCao,
+                     unlockMemoryLocation = CaoCaoUnlocked(),
+                     musouModeAchievementID = 370302,
                      musouModeName = "The Hero of Chaos",
-                     hardMusouModeAchievementID = 370334, 
+                     hardMusouModeAchievementID = 370334,
                      hardMusouModeName = "Emperor Wu of Wei",
-                     unlockAchievementID = 370428, 
-                     unlockName="")
+                     unlockAchievementID = 370428,
+                     unlockName = "",
+                     progressionType = "progression")
 characterDefinition( characterIndex = LuBu, 
                      unlockMemoryLocation = LuBuUnlocked(), 
                      musouModeAvailable = false,
@@ -3520,22 +3541,24 @@ characterDefinition( characterIndex = SunShangXiang,
                      musouModeName = "Archer Princess",
                      hardMusouModeAchievementID = 370335, 
                      hardMusouModeName = "Lady Sun")
-characterDefinition( characterIndex = LiuBei, 
-                     unlockMemoryLocation = LiuBeiUnlocked(), 
-                     musouModeAchievementID = 370304, 
+characterDefinition( characterIndex = LiuBei,
+                     unlockMemoryLocation = LiuBeiUnlocked(),
+                     musouModeAchievementID = 370304,
                      musouModeName = "Liu Xuande",
-                     hardMusouModeAchievementID = 370336, 
+                     hardMusouModeAchievementID = 370336,
                      hardMusouModeName = "Emperor Zhaolie",
-                     unlockAchievementID = 370430, 
-                     unlockName="")
-characterDefinition( characterIndex = SunJian, 
-                     unlockMemoryLocation = SunJianUnlocked(), 
-                     musouModeAchievementID = 370305, 
+                     unlockAchievementID = 370430,
+                     unlockName = "",
+                     progressionType = "progression")
+characterDefinition( characterIndex = SunJian,
+                     unlockMemoryLocation = SunJianUnlocked(),
+                     musouModeAchievementID = 370305,
                      musouModeName = "The Tiger of Jiangdong",
-                     hardMusouModeAchievementID = 370337, 
+                     hardMusouModeAchievementID = 370337,
                      hardMusouModeName = "Emperor Wulie",
-                     unlockAchievementID = 370431, 
-                     unlockName="")
+                     unlockAchievementID = 370431,
+                     unlockName = "",
+                     progressionType = "progression")
 characterDefinition( characterIndex = SunQuan, 
                      unlockMemoryLocation = SunQuanUnlocked(), 
                      musouModeAchievementID = 370306, 
@@ -3554,13 +3577,14 @@ characterDefinition( characterIndex = YuanShao,
                      musouModeAvailable = false,
                      unlockAchievementID = 370434, 
                      unlockName="Yuan Benchu")
-characterDefinition( characterIndex = MaChao, 
-                     unlockMemoryLocation = MaChaoUnlocked(), 
+characterDefinition( characterIndex = MaChao,
+                     unlockMemoryLocation = MaChaoUnlocked(),
                      unlockEnabled = false,
-                     musouModeAchievementID = 370307, 
+                     musouModeAchievementID = 370307,
                      musouModeName = "Ma Chao the Splendid",
-                     hardMusouModeAchievementID = 370339, 
-                     hardMusouModeName = "Marquis Wei") // DW2 Unlock
+                     hardMusouModeAchievementID = 370339,
+                     hardMusouModeName = "Marquis Wei", // DW2 Unlock
+                     progressionType = "progression")
 characterDefinition( characterIndex = HuangZhong, 
                      unlockMemoryLocation = HuangZhongUnlocked(), 
                      musouModeAchievementID = 370342, 
@@ -3585,14 +3609,15 @@ characterDefinition( characterIndex = ZhangLiao,
                      hardMusouModeName = "Marquis Gang of Wei",
                      unlockAchievementID = 370437, 
                      unlockName="")
-characterDefinition( characterIndex = SimaYi, 
-                     unlockMemoryLocation = SimaYiUnlocked(), 
-                     musouModeAchievementID = 370311, 
+characterDefinition( characterIndex = SimaYi,
+                     unlockMemoryLocation = SimaYiUnlocked(),
+                     musouModeAchievementID = 370311,
                      musouModeName = "Emperor Xuan of Jin",
                      hardMusouModeAchievementID = 370343,
                      hardMusouModeName = "King Sima Xuan",
-                     unlockAchievementID = 370438, 
-                     unlockName="")
+                     unlockAchievementID = 370438,
+                     unlockName = "",
+                     progressionType = "progression")
 characterDefinition( characterIndex = LuMeng, 
                      unlockMemoryLocation = LuMengUnlocked(), 
                      musouModeAchievementID = 370312, 
@@ -3701,16 +3726,21 @@ characterDefinition( characterIndex = XiaoQiao,
                      unlockName="")
 characterDefinition( characterIndex = FuXi, 
                      unlockMemoryLocation = FuXiUnlocked(), 
-                     unlockPoint = 5, musouModeAvailable = false,
-                     unlockAchievementID = 370449, 
+                     unlockPoint = 3, musouModeAvailable = false,
+                     unlockAchievementID = 370449,
                      unlockName="Lord Fu Xi")
 characterDefinition( characterIndex = NuWa, 
                      unlockMemoryLocation = NuWaUnlocked(), 
-                     unlockPoint = 5, musouModeAvailable = false,
-                     unlockAchievementID = 370450, 
+                     unlockPoint = 3, musouModeAvailable = false,
+                     unlockAchievementID = 370450,
                      unlockName="The Goddess Nu Wa")
 
 
+// Only the three faction leaders (Cao Cao, Liu Bei, Sun Jian) plus Ma Chao, Sima Yi, Guan Yu, and
+// Xiahou Dun are marked as progression. The faction leaders represent the core story paths. The
+// others are included because they have unique stages not shared with other characters (Ma Chao,
+// Sima Yi, and Guan Yu/Xiahou Dun each have Guan Yu's Escape). This allows "beaten" to be earned
+// by playing through the game without grinding every character's Musou Mode. (Updated 2026-05-03)
 for musouObject in musouMode
     createMusouModeAchievement(musouObject = musouObject)
 
@@ -3732,8 +3762,7 @@ achievement("The Gang's All Here",
                           characterNowUnlocked(MaChaoUnlocked()) && 
                           characterNowUnlocked(WeiYanUnlocked()) &&
                           true, // saveProtection(), // We remove the save protection on this achievement intentionally as it will be done by loading a DW2 file
-                id = 370355,
-                type ="progression"
+                id = 370355
                 )
 
 
@@ -3976,15 +4005,15 @@ function createWeaponTierListAchievement(name, description, points, arrayOfWeapo
 // Second tier achievement
 // Note this is EVERY character including Nu Xi and Fu Xi.  It doesn't requiring playing as every character but does require playing many of the characters
 createWeaponTierListAchievement("Get All 2nd Weapons",
-        "Collect every 2nd weapon", 
-        5,
+        "Collect every 2nd weapon",
+        10,
         TierTwoWeapons,
         370356)
 // Tier Three achievement, this requires even more waepons then Tier 2, and it's probably going to needed a harder difficulty, which means more leveling of every character.
 // Though this does allow Second player abuse.  
 createWeaponTierListAchievement("Get All 3rd Weapons",
-        "Collect every 3rd weapon", 
-        5,
+        "Collect every 3rd weapon",
+        10,
         TierThreeWeapons,
         370357)
 
@@ -4008,8 +4037,8 @@ NormalItems =
 
 // 1 Collect minor items (Accesories (Should use Add Hits)) 
 achievement("Collect All Common Items",
-            "Collect all thirteen common (blue) items", 
-            3,
+            "Collect all thirteen common (blue) items",
+            5,
             trigger = MusouModeOrFreeMode() &&
                       didntpreviouslyOwnAllItems(NormalItems) &&   // As long as we don't already have them all 
                       measured(ownAllItems(NormalItems)) &&
@@ -4020,7 +4049,7 @@ achievement("Collect All Common Items",
 )
 
 // This has been replaced, but left the code idea here for subsets. 
-// achievement("[VOID] They Can’t Handle Any More Power",
+// achievement("[VOID] They Can't Handle Any More Power",
 //             "The level of grind on this is insane; collect the strongest version of all common items", 
 //             25,
 //             trigger = MusouModeOrFreeMode() &&
@@ -4043,8 +4072,9 @@ function TestForGuanYuEasterEgg()
     ZLocationForFanCastleWuStart = 0x46b798
     MaximumOffset = 0x100
     
-    return CutsceneIndicator() == VALUE_FOR_CUTSCENE_PLAYING && 
-           CutsceneIndex() == VALUE_FOR_INTRO_SCENE &&  // it's the intro we're looking for. 
+    return (CutsceneIndicator() == VALUE_FOR_CUTSCENE_PLAYING ||
+            AlternateCutsceneIndicator() != VALUE_FOR_ALTERNATE_CUTSCENE_GAMEPLAY) &&
+           CutsceneIndex() == VALUE_FOR_INTRO_SCENE &&  // it's the intro we're looking for.
            firstPlayerXPosition() < XLocationForFanCastleWuStart + MaximumOffset &&  
            firstPlayerXPosition() > XLocationForFanCastleWuStart - MaximumOffset &&  
            firstPlayerYPosition() < YLocationForFanCastleWuStart + MaximumOffset &&  
@@ -4102,8 +4132,9 @@ stageArray =
         "SecondSideAchievementID": 370378,
         "SecondSideKillLeaderboardID": 82288,
         "SecondSideFastestLeaderboardID":82289,
-        "SecondSideID": LiuBiaoForcesFactionID, 
-        "NormalSecondAchievementID": 370379 // creates an achievement for the second faction.
+        "SecondSideID": LiuBiaoForcesFactionID,
+        "NormalSecondAchievementID": 370379, // creates an achievement for the second faction.
+        "NormalSecondPoints": 5
     },
     {
         "ID": BattleAtWanCastleStageID, 
@@ -4326,8 +4357,8 @@ stageArray =
 
 // “Beat a Hard mode level with a rank 16 character”  (Missable, and will guard against 2p being above a rank 16 as well, you need to take a completely fresh character to beat this. ) 
 achievement("Nothing Gonna Stop Me",
-            "Beat a level on Hard as a character with no experience points at Rank 16" + asASinglePlayerString, 
-            3,
+            "Beat a level on Hard as a character with no experience points at Rank 16" + asASinglePlayerString,
+            10,
             trigger = MusouModeOrFreeMode() &&
                       hardModeCheck() &&
                       triggerJustWonStageCheck() &&
@@ -4359,7 +4390,7 @@ function createFeastAchievement()
     }
     achievement("A Feast Fit for Xu Zhu",
         "Enjoy two Dim Sums and two Musou Wines in one stage and complete it" + asASinglePlayerString + "; beware if you're already stuffed (near max Health or Musou), you won't be able to enjoy them",
-        2,
+        3,
         trigger = MusouModeOrFreeMode() &&
                   wonStageCheck() &&
                   !isTwoPlayerMode() &&
@@ -4386,7 +4417,7 @@ achievement("True Legend of the Three Kingdoms",
                       
 )
 
-achievement("All According to Wang Yun’s Plan",
+achievement("All According to Wang Yun's Plan",
             "Kill Dong Zhuo at The Battle of Hu Lao Gate as Lu Bu, but avoid killing your love, Diao Chan" + onePlayerString, 
             2,
             trigger = MusouModeOrFreeMode() &&
@@ -4405,8 +4436,8 @@ achievement("All According to Wang Yun’s Plan",
 // - Complete -Insert Night Time Stage- as Diaochan in Free Mode
 //Diaochan was part of the four great beauties of Ancient China and each had an idiom to their name with her's being "Diaochan eclipses the moon"
 achievement("Diao Chan Eclipses the Moon",
-            "Complete The Battle at Wu Zhang Plains on any side as Diao Chan in Free Mode" + asASinglePlayerString, 
-            3,
+            "Complete The Battle at Wu Zhang Plains on any side as Diao Chan in Free Mode" + asASinglePlayerString,
+            5,
             trigger = MusouModeOrFreeMode() &&
                       checkStageID(BattleAtWuZhangPlainsStageID) &&
                       checkFirstPlayerCharacterIndex(DiaoChan) &&
@@ -4419,8 +4450,8 @@ achievement("Diao Chan Eclipses the Moon",
 // Nanman Jackpot - Defeat 7 Officers as Meng Huo during Battle of Nanman with the last being Zhuge Liang.
 // Meng Huo was famously captured by Zhuge Liang during the Southern Campaign (Battle of Nanman) Seven Times.
 achievement("Nanman Jackpot",
-            "Defeat exactly 7 officers as Meng Huo during The Nanman Campaign with the Nanman Forces"  + asASinglePlayerString + " (Kills must be done by the player, bodyguard and other kills will not count)", 
-            2,
+            "Defeat exactly 7 officers as Meng Huo during The Nanman Campaign with the Nanman Forces"  + asASinglePlayerString + " (Kills must be done by the player, bodyguard and other kills will not count)",
+            5,
             trigger = MusouModeOrFreeMode() &&
                       checkStageID(NanmanCampaignStageID) &&
                       checkFactionID(NanmanForcesFactionID) &&
@@ -4436,8 +4467,8 @@ achievement("Nanman Jackpot",
 // The Fire Deity Incinerates Chi Bi - Trigger the flame attack in The Battle at Chi Bi as Zhurong
 // A key factor of The Battle of Chi Bi is the fire spreading through Cao Cao's ships.
 achievement("The Fire Deity Incinerates Chi Bi",
-            "Ignite Cao Cao's ships as Zhu Rong in Free Mode at The Battle of Chi Bi" + asASinglePlayerString, 
-            1,
+            "Ignite Cao Cao's ships as Zhu Rong in Free Mode at The Battle of Chi Bi" + asASinglePlayerString,
+            3,
             trigger = MusouModeOrFreeMode() &&
                       checkFirstPlayerCharacterIndex(ZhuRong) &&
                       checkStageID(BattleOfChiBiStageID) &&
@@ -4445,8 +4476,10 @@ achievement("The Fire Deity Incinerates Chi Bi",
                         checkFactionID(AlliedForcesFactionID)
                       ) &&
                       trigger_when(
-                        CutsceneIndicator() == VALUE_FOR_CUTSCENE_PLAYING && 
-                        CutsceneIndex() == VALUE_FOR_CHIBI_FIRE_SCENE) &&
+                        CutsceneIndex() == VALUE_FOR_CHIBI_FIRE_SCENE &&
+                        (CutsceneIndicator() == VALUE_FOR_CUTSCENE_PLAYING ||
+                         (prev(AlternateCutsceneIndicator()) == VALUE_FOR_ALTERNATE_CUTSCENE_TRANSITION &&
+                          AlternateCutsceneIndicator() == VALUE_FOR_ALTERNATE_CUTSCENE_PLAYING))) &&
                       !isTwoPlayerMode() &&
                       requireInGame(),
             id = 370367
@@ -4455,8 +4488,8 @@ achievement("The Fire Deity Incinerates Chi Bi",
 // He Dong What? - Complete The Battle of Changban (Liu Bei) as Dong Zhuo
 // Dong Zhuo I've had some trouble thinking of anything for him, so I came up with the idea of playing him during a stage that is the opposite of his personality of being the most evil guy. The Battle of Changban is the battle where Zhao Yun famously rescued Liu Shan from Cao Cao's army.
 achievement("He Dong What?",
-            "Complete The Battle of Chang Ban with Liu Bei's Forces in Free Mode as Dong Zhuo" + asASinglePlayerString, 
-            2,
+            "Complete The Battle of Chang Ban with Liu Bei's Forces in Free Mode as Dong Zhuo" + asASinglePlayerString,
+            5,
             trigger = MusouModeOrFreeMode() &&
                       checkFirstPlayerCharacterIndex(DongZhuo) &&
                       checkStageID(BattleOfChangBanStageID) &&
@@ -4471,8 +4504,8 @@ achievement("He Dong What?",
 // The Way of Peace - Complete The Yellow Turban stage as Zhang Jiao only defeating the necessary enemy generals
 // The book that is said to have inspired Zhang Jiao to start the Yellow Turban rebellion was called The Way of Peace
 achievement("The Way of Peace",
-            "Complete The Yellow Turban Rebellion as Zhang Jiao in Free Mode only killing the necessary enemy officers and no one else" + asASinglePlayerString, 
-            1,
+            "Complete The Yellow Turban Rebellion as Zhang Jiao in Free Mode only killing the necessary enemy officers and no one else" + asASinglePlayerString,
+            5,
             trigger = MusouModeOrFreeMode() &&
                       checkStageID(YellowTurbanRebellionStageID) &&
                       checkFirstPlayerCharacterIndex(ZhangJiao) &&
@@ -4487,9 +4520,9 @@ achievement("The Way of Peace",
             id = 370368
 )
 
-achievement("I Brought You Into This World, Now I’m Taking You Out of It",
-            "In Challenge Mode, kill at least 1000 enemies in Endurance as Fu Xi or Nu Wa" + asASinglePlayerString, 
-            5,  // Grindy but not hard. 
+achievement("I Brought You Into This World, Now I'm Taking You Out of It",
+            "In Challenge Mode, kill at least 1000 enemies in Endurance as Fu Xi or Nu Wa" + asASinglePlayerString,
+            25,  // Grindy but not hard.
             trigger = ChallengeModeOnly() &&
                       CurrentCutsceneLevelIndex() == ChallengeModeEnduranceLevelCutsceneID &&               
                       trigger_when(firstPlayerKills() >= 1000) &&
@@ -4506,7 +4539,7 @@ achievement("I Brought You Into This World, Now I’m Taking You Out of It",
 
 achievement("Raining Death",
             "In Challenge Mode, finish a Time Attack in less than 4 minutes" + asASinglePlayerString, 
-            10, // Time attack time is VERY tight.  If you look up videos, be careful, XL has players gain levels, DW 3 does not.   This could even be 25.
+            25, // Time attack time is VERY tight.  If you look up videos, be careful, XL has players gain levels, DW 3 does not.
             trigger = ChallengeModeOnly() &&
                       CurrentCutsceneLevelIndex() == ChallengeModeTimeAttackLevelCutsceneID &&               
                       triggerJustWonStageCheck() &&
@@ -4516,13 +4549,13 @@ achievement("Raining Death",
             id = 370370
 )
 
-function createNormalPlayStageAchievement(stage, factionID, achievementID)
+function createNormalPlayStageAchievement(stage, factionID, achievementID, points = 3)
 {
     factionName = FactionNameLookup[factionID]
     factionForces = FactionForcesLookup[factionID]
-    achievement( format("{0} ({1})", StageLookup[stage["ID"]], factionName), 
+    achievement( format("{0} ({1})", StageLookup[stage["ID"]], factionName),
                 format("Complete {0} as the {1}{2}", StageLookup[stage["ID"]], factionForces, asASinglePlayerString),
-                1, 
+                points,
                 trigger = FreeModeOnly() &&
                         never(onMainMenu()) &&
                         triggerJustWonStageCheck() &&
@@ -4557,7 +4590,7 @@ function CreateAchievementsForStage(stage, achievementID, killLeaderboardsID, fa
                 id = achievementID
                 )
     
-    // I also intend to create leaderboards for each stage.  There’s 23 stages, 2 sides per stage, (3 stages can only be played 1 way) that’s 43 potential stages/sides pairings .  I’m considering 2 leaderboards per stage.  “Most kills” and “Fastest playthrough”  that’s 86 leaderboards.
+    // I also intend to create leaderboards for each stage.  There's 23 stages, 2 sides per stage, (3 stages can only be played 1 way) that's 43 potential stages/sides pairings .  I'm considering 2 leaderboards per stage.  “Most kills” and “Fastest playthrough”  that's 86 leaderboards.
 
     leaderboard(
         title = format("Most Kills on {0}",  StageLookup[stage["ID"]]),
@@ -4625,7 +4658,7 @@ function CreateAchievementsForStageFaction(stage, factionID, achievementID, kill
                             
                     )
         
-        // I also intend to create leaderboards for each stage.  There’s 23 stages, 2 sides per stage, (3 stages can only be played 1 way) that’s 43 potential stages/sides pairings .  I’m considering 2 leaderboards per stage.  “Most kills” and “Fastest playthrough”  that’s 86 leaderboards.
+        // I also intend to create leaderboards for each stage.  There's 23 stages, 2 sides per stage, (3 stages can only be played 1 way) that's 43 potential stages/sides pairings .  I'm considering 2 leaderboards per stage.  “Most kills” and “Fastest playthrough”  that's 86 leaderboards.
 
         leaderboard(
             title = format("Most Kills in {0} With {1}",  StageLookup[stage["ID"]], factionName),
@@ -4688,22 +4721,31 @@ for stage in stageArray
         CreateAchievementsForStage(stage, stage["AchievementID"], stage["KillLeaderboardID"], stage["FastestLeaderboardID"])
     }
 
-    // 3-4 “Beat a specific free play level on X side”  (These are levels that don’t appear in any musou mode.) 
+    // 3-4 “Beat a specific free play level on X side”  (These are levels that don't appear in any musou mode.) 
     if (ContainsKey(stage, "NormalFirstAchievementID") && stage["NormalFirstAchievementID"] != 0)
     {
-        createNormalPlayStageAchievement(stage, stage["FirstSideID"], stage["NormalFirstAchievementID"])        
+        normalFirstPoints = 3
+        if (ContainsKey(stage, "NormalFirstPoints"))
+            normalFirstPoints = stage["NormalFirstPoints"]
+        createNormalPlayStageAchievement(stage, stage["FirstSideID"], stage["NormalFirstAchievementID"], normalFirstPoints)
     }
     if (ContainsKey(stage, "NormalSecondAchievementID") && stage["NormalSecondAchievementID"] != 0)
     {
-        createNormalPlayStageAchievement(stage, stage["SecondSideID"], stage["NormalSecondAchievementID"])
+        normalSecondPoints = 3
+        if (ContainsKey(stage, "NormalSecondPoints"))
+            normalSecondPoints = stage["NormalSecondPoints"]
+        createNormalPlayStageAchievement(stage, stage["SecondSideID"], stage["NormalSecondAchievementID"], normalSecondPoints)
     }
     if (ContainsKey(stage, "NormalThirdAchievementID") && stage["NormalThirdAchievementID"] != 0)
     {
-        createNormalPlayStageAchievement(stage, stage["ThirdSideID"], stage["NormalThirdAchievementID"])        
+        normalThirdPoints = 3
+        if (ContainsKey(stage, "NormalThirdPoints"))
+            normalThirdPoints = stage["NormalThirdPoints"]
+        createNormalPlayStageAchievement(stage, stage["ThirdSideID"], stage["NormalThirdAchievementID"], normalThirdPoints)
     }
 }
 
-achievement("So That’s What Everyone Else Was Doing", 
+achievement("So That's What Everyone Else Was Doing", 
             "Play the secret ending for independent officers",
             1, 
             // This could be harder, but really if this is playing in any format, this is the video, and I believe it only plays from opening edit. 
@@ -4713,10 +4755,10 @@ achievement("So That’s What Everyone Else Was Doing",
 )
 
 
-// “Beat a level without letting your health drop below 50 percent”  Could be done with UI elements, but considering using a pointer here just to demonstrate that, even if it’s a  less efficent way to do so. 
+// “Beat a level without letting your health drop below 50 percent”  Could be done with UI elements, but considering using a pointer here just to demonstrate that, even if it's a  less efficent way to do so. 
 achievement( format("None of You Are Even Half as Good as Me"), 
              format("Beat a level with no less than 50 percent Health on Normal or Hard without an interim save" + asASinglePlayerString),
-             3, 
+             5,
              trigger = normalOrHardCheck() &&
                        triggerJustWonStageCheck() &&
                        !isTwoPlayerMode() &&
@@ -4997,9 +5039,9 @@ rich_presence_display("In Menus.") //Intentionally slightly different to say "is
 // 1 Collect minor items (Accesories (Should use Add Hits)) 
 // “Beat a Hard mode level with a rank 16 character”  (Missable, and will guard against 2p being above a rank 16 as well, you need to take a completely fresh character to beat this. ) 
 // Secret Ending
-// I also intend to create leaderboards for each stage.  There’s 23 stages, 2 sides per stage, (3 stages can only be played 1 way) that’s 43 potential stages/sides pairings .  I’m considering 2 leaderboards per stage.  “Most kills” and “Fastest playthrough”  that’s 86 leaderboards.
-// “Beat a level without letting your health drop below 50 percent”  Could be done with UI elements, but considering using a pointer here just to demonstrate that, even if it’s a  less efficent way to do so. 
-// 3-4 “Beat a specific free play level on X side”  (These are levels that don’t appear in any musou mode.) 
+// I also intend to create leaderboards for each stage.  There's 23 stages, 2 sides per stage, (3 stages can only be played 1 way) that's 43 potential stages/sides pairings .  I'm considering 2 leaderboards per stage.  “Most kills” and “Fastest playthrough”  that's 86 leaderboards.
+// “Beat a level without letting your health drop below 50 percent”  Could be done with UI elements, but considering using a pointer here just to demonstrate that, even if it's a  less efficent way to do so. 
+// 3-4 “Beat a specific free play level on X side”  (These are levels that don't appear in any musou mode.) 
 
 // Lubu Killing Dong Zhuo (Any point, but I believe it has to be Hu lao gate on the allied side). feels right to show proper history.
 
@@ -5044,7 +5086,7 @@ rich_presence_display("In Menus.") //Intentionally slightly different to say "is
 // Get each of the three timed power ups in a session. 
 // Feels a bit low effort
 
-// “A better version of History”  Kill Shamoke with Gan Ning.  (Shamoke has been a focus of the fan community for a long time, if this can be in the game, well it’ll give true fans a chuckle I think) 
+// “A better version of History”  Kill Shamoke with Gan Ning.  (Shamoke has been a focus of the fan community for a long time, if this can be in the game, well it'll give true fans a chuckle I think) 
 // When I do another and make a special achievement for EVERY character, maybe. 
 
 // Guan Yu At Fan Castle cutscene.  There's a secret cutscene where Guan Yu references fighting himself. 
