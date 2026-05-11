@@ -2164,7 +2164,7 @@ function HistoricalModeChaosAchievements(ListIndex)
 {
     achievement( title = HistoricalModeChaosList[ListIndex][TITLE],
                 description = HistoricalModeChaosList[ListIndex][DESCRIPTION],
-                points = 5,
+                points = 25,
                 trigger = FakeReset() &&                          
                           measured(tally_of(HistoricalModeChaosList[ListIndex][LIST], 5, stageId=> 
                                     once(GeneralProtection() &&
